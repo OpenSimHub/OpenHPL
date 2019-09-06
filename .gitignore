@@ -35,10 +35,12 @@ simulator.log
 #########################
 .DS_Store
 
-# encrypted files for export
+# read-only/encrypted files for export
 ############################
 *.moe
+*.mol
 
 *.
-
 OpenHPL/Resources/Documents/UsersGuide_src/auto/
+
+
