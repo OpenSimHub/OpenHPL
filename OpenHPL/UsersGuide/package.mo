@@ -1,4 +1,4 @@
-﻿within OpenHPL;
+within OpenHPL;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
@@ -37,7 +37,7 @@ possible to model the electrical part for the hydropower system.
 A detailed description of each hydropower unit and their uses are presented below in 
 the <a href=\"modelica://OpenHPL/Resources/Documents/UsersGuide.pdf\">User's Guide PDF</a>
 and the PhD Thesis by Liubomyr Vytvytskyi:
- <a href=\"http://hdl.handle.net/11250/2607645\">http://hdl.handle.net/11250/2607645</a>.
+ <a href=\"http://hdl.handle.net/11250/2608105\">http://hdl.handle.net/11250/2607645</a>.
 </p>
 </html>"));
 end UsersGuide;
