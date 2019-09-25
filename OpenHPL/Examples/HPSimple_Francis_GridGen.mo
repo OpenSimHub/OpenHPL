@@ -68,7 +68,7 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
         origin={-60,20},
         extent={{-6,6},{6,-6}},
         rotation=180)));
-  OpenHPL.Controllers.Governor govenor(Pn = turbine.P_n, Y_gv_ref = 0.1)
+  OpenHPL.Controllers.Governor governor(Pn = turbine.P_n, Y_gv_ref = 0.1)
                                        annotation (Placement(visible=true, transformation(origin = {20, -72}, extent = {{-10, -10}, {10, 10}},
                                                                                                                     rotation=0)));
   //(a = 7.862E-25, c = 1.108E-08, d = -5.344E-02, b = -1.010E-16)
@@ -80,11 +80,11 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
     startTime=200)                                                                                  annotation (
     Placement(visible = true, transformation(origin={-10,-72},  extent={{-8,-8},{8,8}},      rotation = 0)));
 equation
-  connect(fpu_to_fSI.y, govenor.f) annotation (
+  connect(fpu_to_fSI.y, governor.f) annotation (
     Line(points={{-43.4,-90},{4,-90},{4,-76},{8,-76},{8,-76}},          color = {0, 0, 127}));
-  connect(govenor.Y_gv, turbine.u_t) annotation (
+  connect(governor.Y_gv, turbine.u_t) annotation (
     Line(points = {{31, -72}, {32, -72}, {32, -62}}, color = {0, 0, 127}));
-  connect(govenor.P_ref, power.y) annotation (
+  connect(governor.P_ref, power.y) annotation (
     Line(points = {{8, -68}, {4.4, -68}, {4.4, -72}, {-1.2, -72}}, color = {0, 0, 127}));
   connect(surgeTank.n, penstock.p) annotation (
     Line(points={{-16,-50},{-6,-50}},                         color = {28, 108, 200}));

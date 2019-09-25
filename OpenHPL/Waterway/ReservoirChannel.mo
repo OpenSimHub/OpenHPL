@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model ReservoirChannel "Reservoir model based on open channel model"
   extends OpenHPL.Icons.Reservoir;
-  outer Constants Const "using standart class with constants";
+  outer Constants Const "using standard class with constants";
   //// reservoir segmentation
   parameter Integer N = 20 "Number of segments";
   //// geometrical parameters of the reservoir

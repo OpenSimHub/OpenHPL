@@ -1,6 +1,6 @@
 within OpenHPL.ElectroMech.Turbines;
 model Francis "Model of the Francis turbine"
-    outer Constants Const "using standart class with constants";
+    outer Constants Const "using standard class with constants";
     extends Icons.Turbine;
     import Modelica.Constants.pi;
     //// conditions for the geometrical parameters of the turbine
@@ -41,7 +41,7 @@ model Francis "Model of the Francis turbine"
     parameter Real k_ft1_ = 7e5 "Friction shock loss coefficient due to shock" annotation (
         Dialog(group = "Losses in runner")), k_ft2_ = 0 "hydraulic friction loss coefficient due to effluent whirl" annotation (
         Dialog(group = "Losses in runner")), k_ft3_ = 1.63e4 "friction loss coefficient due to wall friction" annotation (
-        Dialog(group = "Losses in runner")), k_fv = 0 "friction loss coefficient from turbine enterance and across guide vanes" annotation (
+        Dialog(group = "Losses in runner")), k_fv = 0 "friction loss coefficient from turbine entrance and across guide vanes" annotation (
         Dialog(tab = "Guide vane")), k_ft4 = k_ft3_ * 100 "friction loss coefficient that is used for low load (under u_min)" annotation (
         Dialog(group = "Parameters for low load"));
     parameter Real u_min = 0.03 "control signal value under which the moodel used k_f4 friction term to balance the model" annotation (
@@ -83,7 +83,7 @@ model Francis "Model of the Francis turbine"
                                 Placement(visible = true, transformation(origin={-120,-80},    extent={{-20,-20},
       {20,20}},                                                                                                                 rotation = 0)));
 equation
-  //// design algotithm for runner
+  //// design algorithm for runner
     if GivenData == true then
         R_1 = R_1_;
         R_2 = R_2_;
@@ -103,7 +103,7 @@ equation
         Modelica.Math.tan(Modelica.SIunits.Conversions.from_deg(_beta1)) = c_m1 / (u_1 - c_u1);
         beta1 = 180 - _beta1;
     end if;
-  //// design algotithm for runner losses
+  //// design algorithm for runner losses
     if Given_losses == true then
         k_ft1 = k_ft1_;
         k_ft2 = k_ft2_;
@@ -113,7 +113,7 @@ equation
         k_ft2 = 0;
         k_ft3 = 7e2 * exp(6.7e-3 * H_n);
     end if;
-  //// design algotithm for servo
+  //// design algorithm for servo
     if GivenServoData == true then
         r_v = r_v_;
         r_Y = r_Y_;
@@ -128,7 +128,7 @@ equation
         u_end = sqrt(r_Y ^ 2 + R_Y ^ 2 - 2 * r_Y * R_Y * Modelica.Math.cos(theta_n));
     //u_start+0.17;
     end if;
-  //// design algotithm for nominal alpha, used for servo design
+  //// design algorithm for nominal alpha, used for servo design
     W_t2_n = Const.rho * V_dot_n_ * n_n * pi / 30 * R_2 * (n_n * pi / 30 * R_2 + V_dot_n_ / A_2 * cot_b2);
     W_t1_n = Const.rho * V_dot_n_ * n_n * pi / 30 * R_1 * V_dot_n_ / A_1 * cot_a1_n;
     Const.rho * V_dot_n_ * H_n * Const.g + 0.5 * Const.rho * V_dot_n_ * V_dot_n_ ^ 2 * (1 / A_0 ^ 2 - 1 / A_2 ^ 2) = W_t_dot_n;
@@ -136,7 +136,7 @@ equation
     alpha1_n = Modelica.Math.atan(1 / cot_a1_n);
     alpha1_n = Modelica.Math.acos(d_n / 2 / l) - Modelica.Math.acos((d_n ^ 2 + R_v ^ 2 - r_v ^ 2) / 2 / d_n / R_v);
     theta_n = theta0 - Modelica.Math.acos((r_v ^ 2 + R_v ^ 2 - d_n ^ 2) / (2 * r_v * R_v));
-  //// design algotithm for velocities, used for runner design
+  //// design algorithm for velocities, used for runner design
     u_2 = 2 * pi * R_2 * n_n / 60;
     c_m2 = u_2 * Modelica.Math.tan(Modelica.SIunits.Conversions.from_deg(180 - beta2));
     c_m1 = c_m2 / 1.1;
@@ -180,7 +180,7 @@ equation
     end if;
   //// losses in the runner
     W_ft_dot = W_ft_dot_s + W_ft_dot_w + W_ft_dot_l;
-  //// servo model, define guide vane openning and alpha1
+  //// servo model, define guide vane opening and alpha1
     Y = u_start + u_t * (u_end - u_start);
     Y ^ 2 = r_Y ^ 2 + R_Y ^ 2 - 2 * r_Y * R_Y * Modelica.Math.cos(theta);
     dtheta = theta - theta0;

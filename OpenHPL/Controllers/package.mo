@@ -4,9 +4,9 @@ package Controllers "Collection of different controllers"
 
   extends Icons.Governor;
 
-  model Governor "Govenor/control model"
+  model Governor "Governor/control model"
     extends OpenHPL.Icons.Governor;
-    outer Constants Const "using standart class with constants";
+    outer Constants Const "using standard class with constants";
     //// control parameters of the governor
     parameter Modelica.SIunits.Time T_p = 0.04 "Pilot servomotor time constant" annotation (
       Dialog(group = "Controller settings"));
@@ -26,9 +26,9 @@ package Controllers "Collection of different controllers"
       Dialog(group = "System settings"));
     parameter Real Y_gv_ref = 0.72151 "Initial guide vane opening rate" annotation (
       Dialog(group = "System settings"));
-    parameter Modelica.SIunits.Frequency f_ref = Const.f "Refference frequency" annotation (
+    parameter Modelica.SIunits.Frequency f_ref = Const.f "Reference frequency" annotation (
       Dialog(group = "System settings"));
-    parameter Modelica.SIunits.Power Pn = 104e6 "Refference frequency" annotation (
+    parameter Modelica.SIunits.Power Pn = 104e6 "Reference frequency" annotation (
       Dialog(group = "System settings"));
     //// connectors
     Modelica.Blocks.Interfaces.RealInput P_ref annotation (
@@ -147,7 +147,7 @@ package Controllers "Collection of different controllers"
     parameter Real K_s = 8 "transient droop";
     parameter Real Y_gv_max = 0.05 "Max guide vane opening rat  e";
     parameter Real Y_gv_min = 0.2 "Max guide vane closing rate";
-    parameter Modelica.SIunits.Frequency f_ref = 50 "Refference frequency";
+    parameter Modelica.SIunits.Frequency f_ref = 50 "Reference frequency";
     Modelica.Blocks.Interfaces.RealInput P_ref annotation (
       Placement(visible = true, transformation(extent = {{-128, -20}, {-88, 20}}, rotation = 0), iconTransformation(extent = {{-120, -20}, {-80, 20}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealOutput Y_gv annotation (
@@ -247,7 +247,7 @@ package Controllers "Collection of different controllers"
     parameter Real delta = 0.04 "transient droop";
     parameter Real Y_gv_max = 0.05 "Max guide vane opening rat  e";
     parameter Real Y_gv_min = 0.2 "Max guide vane closing rate";
-    parameter Modelica.SIunits.Frequency f_ref = 50 "Refference frequency";
+    parameter Modelica.SIunits.Frequency f_ref = 50 "Reference frequency";
     parameter Real deadBand = 0.01;
     Modelica.Blocks.Interfaces.RealInput P annotation (
       Placement(visible = true, transformation(extent = {{-122, -16}, {-90, 16}}, rotation = 0), iconTransformation(extent = {{-120, -20}, {-80, 20}}, rotation = 0)));
@@ -261,7 +261,7 @@ package Controllers "Collection of different controllers"
       Placement(transformation(extent = {{-68, -16}, {-48, 4}})));
     Modelica.Blocks.Sources.Constant losses(k = 0.012086289473684) annotation (
       Placement(transformation(extent = {{-90, -20}, {-80, -10}})));
-    Modelica.Blocks.Math.Add3 errror(k1 = -1, k3 = -1) annotation (
+    Modelica.Blocks.Math.Add3 error(k1 = -1, k3 = -1) annotation (
       Placement(transformation(extent = {{-24, -12}, {-12, 0}})));
     Modelica.Blocks.Math.Division freq_dif annotation (
       Placement(transformation(extent = {{-8, 64}, {-28, 84}})));
@@ -304,13 +304,13 @@ package Controllers "Collection of different controllers"
       Line(points = {{-29, 74}, {-42.8, 74}, {-42.8, 61.4}}, color = {0, 0, 127}));
     connect(one.y, one_freq_dif.u2) annotation (
       Line(points = {{-59, 74}, {-51.2, 74}, {-51.2, 61.4}}, color = {0, 0, 127}));
-    connect(errror.y, TF_control.u) annotation (
+    connect(error.y, TF_control.u) annotation (
       Line(points = {{-11.4, -6}, {-11.4, -6}, {-5.6, -6}}, color = {0, 0, 127}));
     connect(TF_control.y, u.u) annotation (
       Line(points = {{12.8, -6}, {12.8, -6}, {18.8, -6}}, color = {0, 0, 127}));
     connect(add.y, droop_k1.u) annotation (
       Line(points = {{-32, -37}, {-32, -37}, {-32, -28.8}}, color = {0, 0, 127}));
-    connect(droop_k1.y, errror.u2) annotation (
+    connect(droop_k1.y, error.u2) annotation (
       Line(points = {{-32, -19.6}, {-32, -19.6}, {-32, -6}, {-25.2, -6}}, color = {0, 0, 127}));
     connect(Y_gv_ref.y, add.u2) annotation (
       Line(points = {{-47, -6}, {-46, -6}, {-46, -72}, {-38, -72}, {-38, -60}}, color = {0, 0, 127}));
@@ -326,9 +326,9 @@ package Controllers "Collection of different controllers"
       Line(points = {{-26, -60}, {-26, -72}, {92, -72}, {92, 0}, {88.6, 0}}, color = {0, 0, 127}));
     connect(one_freq_dif.y, deadZone.u) annotation (
       Line(points = {{-47, 45.3}, {-47, 39.8}}, color = {0, 0, 127}));
-    connect(deadZone.y, errror.u1) annotation (
+    connect(deadZone.y, error.u1) annotation (
       Line(points = {{-47, 19.1}, {-34, 19.1}, {-34, -1.2}, {-25.2, -1.2}}, color = {0, 0, 127}));
-    connect(TF_mech.y, errror.u3) annotation (
+    connect(TF_mech.y, error.u3) annotation (
       Line(points = {{27, -38}, {6, -38}, {-12, -38}, {-12, -16}, {-30, -16}, {-30, -10.8}, {-25.2, -10.8}}, color = {0, 0, 127}));
     connect(TF_mech.u, limiter.y) annotation (
       Line(points = {{50, -38}, {92, -38}, {92, 0}, {88.6, 0}}, color = {0, 0, 127}));
@@ -344,7 +344,7 @@ package Controllers "Collection of different controllers"
     parameter Real delta = 0.04 "transient droop";
     parameter Real Y_gv_max = 0.05 "Max guide vane opening rate";
     parameter Real Y_gv_min = 0.2 "Max guide vane closing rate";
-    parameter Modelica.SIunits.Frequency f_ref = 50 "Refference frequency";
+    parameter Modelica.SIunits.Frequency f_ref = 50 "Reference frequency";
     parameter Real a = 0.000000009215729, b = 0.012086289473684;
     Real d, x_r, u, e, Y_gv_ref = 0.9;
     Modelica.Blocks.Interfaces.RealInput P_ref annotation (

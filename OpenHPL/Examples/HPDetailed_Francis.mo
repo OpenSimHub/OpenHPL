@@ -1,5 +1,5 @@
 within OpenHPL.Examples;
-model HPDetailed_Francis "Model of the HP system with Francis turbine and simplified models for conduits (connected to the grid generator is also uesd)"
+model HPDetailed_Francis "Model of the HP system with Francis turbine and simplified models for conduits (connected to the grid generator is also used)"
   extends Modelica.Icons.Example;
   Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
         origin={-90,60},

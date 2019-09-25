@@ -15,7 +15,7 @@ equation
   // ghosts cells
   p_ghosts = ghostsCell.p_ + B;
   m_dot_ghosts = ghostsCell.m_dot_;
-  // slove vectore
+  // slove vector
   s = slopeVectoreS.s;
   // pieace wise
   U_mp = transpose([p_ghosts[3:N + 2], m_dot_ghosts[3:N + 2]]) + dx * s[:, 2:N + 1] / 2;

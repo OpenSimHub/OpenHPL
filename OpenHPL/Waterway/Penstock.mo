@@ -49,7 +49,7 @@ equation
   rho_m_end = Const.rho * (1 + Const.beta * ((p_[N - 1] + p_2) / 2 - Const.p_a));
   A_m_end = F_m_end / rho_m_end;
   dx * der(m_dot_V) = (-A_m_end * (p_2 - p_[N - 1])) + F_m_end * Const.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[N], 2 * sqrt(A_m_end / pi), dx, rho_m_end, Const.mu, Const.eps);
-  // mass flow rate vectore with all segments
+  // mass flow rate vector with all segments
   m_exp[1] = m_dot_R;
   m_exp[2:N - 1] = m_dot[:];
   m_exp[N] = m_dot_V;

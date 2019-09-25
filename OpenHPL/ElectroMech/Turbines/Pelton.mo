@@ -1,12 +1,12 @@
 within OpenHPL.ElectroMech.Turbines;
 model Pelton "Model of the Pelton turbine"
-    outer Constants Const "using standart class with constants";
+    outer Constants Const "using standard class with constants";
     extends Icons.Turbine;
     import Modelica.Constants.pi;
     //// geometrical parameters of the turbine
     parameter Modelica.SIunits.Radius R = 3.3 "Radius of the turbine";
     parameter Modelica.SIunits.Diameter D_0 = 3.3 "input diameter of the nuzzle";
-    parameter Real k = 0.8 "friction factor", k_f = 1 "coefficient of friction loss in the nuzzle", K = 0.25 "friction loss coefficient due to power loss", d_u = 1 "deflector machanism coefficient";
+    parameter Real k = 0.8 "friction factor", k_f = 1 "coefficient of friction loss in the nuzzle", K = 0.25 "friction loss coefficient due to power loss", d_u = 1 "deflector mechanism coefficient";
     parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg beta = 165;
     //// condition for inlet water compressibility
     parameter Boolean CompElas = false "If checked the water is compressible and the walls is elastic" annotation (

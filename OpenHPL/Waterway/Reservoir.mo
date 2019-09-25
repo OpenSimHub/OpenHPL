@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
-  outer Constants Const "using standart class with constants";
+  outer Constants Const "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
   //// constant water level in the reservoir
   parameter Modelica.SIunits.Height H_r = 50 "Initial water level above intake" annotation (
@@ -25,7 +25,7 @@ model Reservoir "Model of the reservoir"
   //parameter Boolean TempUse = Const.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   //parameter Modelica.SIunits.Temperature T_i = Const.T_i "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
-  Modelica.SIunits.Area A "vertiacal cros section";
+  Modelica.SIunits.Area A "vertiacal cross section";
   Modelica.SIunits.Mass m "water mass";
   Modelica.SIunits.MassFlowRate m_dot "water mass flow rate";
   Modelica.SIunits.VolumeFlowRate V_o_dot "outlet flow rate", V_i_dot "inlet flow rate", V_dot "vertical flow rate";

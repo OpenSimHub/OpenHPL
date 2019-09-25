@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
-  outer OpenHPL.Constants Const "using standart class with constants";
+  outer OpenHPL.Constants Const "using standard class with constants";
   extends OpenHPL.Icons.Pipe(    vertical=true);
   import Modelica.Constants.pi;
   //// geometrical parameters of the pipe
@@ -66,7 +66,7 @@ equation
   //// state vector
   U[1:N] = p_p[:];
   U[N + 1:2 * N] = m_dot[:];
-  //// Define variables, which are going to be used for souce term S_
+  //// Define variables, which are going to be used for source term S_
   if PipeElasticity == true then
     F_ap = Const.rho * A_atm .* (ones(N) + Const.beta_total * (p_p - Const.p_a * ones(N)));
   else
@@ -118,7 +118,7 @@ equation
   //// diff. equation
   der(U) = KP.diff_eq;
   annotation (
-    Documentation(info = "<html><head></head><body><p>This is a more detailed model fof the pipe that mostly can be used for proper modelling of the penstock or other conduits.</p><p>The model could include the elastic walls and compressible water and use discretization method based on Kurganov-Petrova central upwind scheme (KP). The geometry of the penstock is described due to figure:</p>
+    Documentation(info = "<html><head></head><body><p>This is a more detailed model for the pipe that mostly can be used for proper modelling of the penstock or other conduits.</p><p>The model could include the elastic walls and compressible water and use discretization method based on Kurganov-Petrova central upwind scheme (KP). The geometry of the penstock is described due to figure:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/penstock.png\"></p>
 <p>Conservation laws are usually solved by Finite-volume methods. With the Finite volume method, we divide the grid into small control volumes or control cells and then apply the conservation laws. Here the pipe is divided in <i>N</i> segments, with input and output pressure as a boundary conditions. The given cell is denoted by <i>j</i> i.e. it is the <i>j</i> th cell. Cell average is calculated at the center of the cell and <i>U</i> denotes the average values of the conserved variables. The left and the right interfaces of the cell are denoted by <i>j-1/2</i> and <i>j+1/2</i> respectively. At each cell interface, the right(+)/left(-) point values are reconstructed. <i>a </i>denotes the right and the left sided local speeds of propagation at the left/right interface of the cell.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/kp.png\"></p>

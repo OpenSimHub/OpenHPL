@@ -42,7 +42,7 @@ model HPElasticKPPenstockFrancisGov "HP system model with Francis turbine and el
         origin={40,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Controllers.Governor govenor(
+  Controllers.Governor governor(
     a=7.862E-25,
     c=1.108E-08,
     d=-5.344E-02,
@@ -51,7 +51,7 @@ model HPElasticKPPenstockFrancisGov "HP system model with Francis turbine and el
     Placement(visible = true, transformation(origin = {90, 78}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Waterway.Fitting fitting(D_1=3, D_2=1.632) annotation (Placement(transformation(extent={{4,30},{24,50}})));
 equation
-  connect(govenor.f, generator.f) annotation (
+  connect(governor.f, generator.f) annotation (
     Line(points = {{64, 88}, {64, 98}, {78, 98}, {78, 10}, {50, 10}}, color = {0, 0, 127}));
   connect(generator.P_in, francis.P_out) annotation (
     Line(points = {{34, 20}, {36, 20}, {36, 30}}, color = {0, 0, 127}));
@@ -67,9 +67,9 @@ equation
     Line(points = {{76.1, 39.9}, {80, 39.9}, {80, 45.9}, {83.9, 45.9}}, color = {28, 108, 200}));
   connect(surgeTank.n, penstockKP.p) annotation (
     Line(points = {{-23.9, 69.9}, {-21.9, 69.9}, {-21.9, 53.9}}, color = {28, 108, 200}));
-  connect(govenor.Y_gv, francis.u_t) annotation (
+  connect(governor.Y_gv, francis.u_t) annotation (
     Line(points = {{54, 78}, {54, 78}, {40, 78}, {40, 50.8}}, color = {0, 0, 127}));
-  connect(Power.y, govenor.P_ref) annotation (
+  connect(Power.y, governor.P_ref) annotation (
     Line(points = {{79, 78}, {74, 78}}, color = {0, 0, 127}));
   connect(penstockKP.n, fitting.p) annotation (
     Line(points = {{-1.9, 53.9}, {2, 53.9}, {2, 39.9}, {4.1, 39.9}}, color = {28, 108, 200}));

@@ -1,5 +1,5 @@
 within OpenHPL.Icons;
-partial class OpenChannel "Open chanel icon"
+partial class OpenChannel "Open channel icon"
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}),
                                                         graphics={

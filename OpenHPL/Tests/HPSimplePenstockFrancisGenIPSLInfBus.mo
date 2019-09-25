@@ -60,7 +60,7 @@ model HPSimplePenstockFrancisGenIPSLInfBus "Synergy with OpenIPSL library(genera
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {52, 10})));
   inner OpenIPSL.Electrical.SystemBase SysData annotation (
     Placement(transformation(extent = {{-100, -100}, {-76, -80}})));
-  Controllers.Governor govenor(droop=0.2) annotation (Placement(transformation(extent={{54,62},{34,82}})));
+  Controllers.Governor governor(droop=0.2) annotation (Placement(transformation(extent={{54,62},{34,82}})));
   Modelica.Blocks.Math.Gain Frequency(k = 50) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {60, 86})));
   Modelica.Blocks.Sources.Ramp power(duration = 1, height = 1.3e6, offset = 12e6, startTime = 1500) annotation (
@@ -110,13 +110,13 @@ equation
     Line(points = {{9, -26}, {24, -26}, {24, -25}}, color = {0, 0, 127}));
   connect(order2_1.w, RealizerAng.u) annotation (
     Line(points = {{47, -11}, {54, -11}, {54, -8}, {72, -8}, {72, 10}, {64, 10}}, color = {0, 0, 127}));
-  connect(govenor.Y_gv, turbine.u_t) annotation (
+  connect(governor.Y_gv, turbine.u_t) annotation (
     Line(points = {{34, 72}, {34, 72}, {28, 72}, {28, 46.8}}, color = {0, 0, 127}));
-  connect(Frequency.y, govenor.f) annotation (
+  connect(Frequency.y, governor.f) annotation (
     Line(points = {{49, 86}, {49, 86}, {44, 86}, {44, 82}}, color = {0, 0, 127}));
   connect(Frequency.u, RealizerAng.u) annotation (
     Line(points = {{72, 86}, {100, 86}, {100, -8}, {72, -8}, {72, 10}, {64, 10}}, color = {0, 0, 127}));
-  connect(govenor.P_ref, power.y) annotation (
+  connect(governor.P_ref, power.y) annotation (
     Line(points = {{54, 72}, {64, 72}, {64, 70}, {75, 70}}, color = {0, 0, 127}));
   connect(penstock.n, turbine.p) annotation (
     Line(points = {{-10.1, 37.9}, {4.95, 37.9}, {4.95, 35.9}, {18.1, 35.9}}, color = {28, 108, 200}));

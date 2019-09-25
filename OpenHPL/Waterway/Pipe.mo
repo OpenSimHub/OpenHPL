@@ -86,9 +86,9 @@ equation
     <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.png\"> </p>
     <p>In this pipe model, the flow rate changes simultaniusly in the whole pipe
     (an information about the speed of wave propagation is not included here).
-    Water pressures can be shown just in the boudaries of pipe
+    Water pressures can be shown just in the boundaries of pipe
     (inlet and outlet pressure from connectors).&nbsp;</p>
-    <p>It should be noted that this pipe model provides posibilities for modelling
+    <p>It should be noted that this pipe model provides possibilities for modelling
     of pipes with both a positive and a negative slopes (positive or negative height diference).</p>
     <p>More info about the pipe model:&nbsp;<a href=\"http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=\">http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=</a>
     and <a href=\"http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=\">http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=</a>

@@ -36,7 +36,7 @@ model HPSimplePenstockGeneratorTest "Generator testing for HP"
   inner OpenHPL.Constants Const annotation (
     Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   ElectroMech.Generators.SynchGen generator(k_b=1000, J=850000) annotation (Placement(transformation(extent={{18,-4},{38,16}})));
-  Controllers.Governor govenor(
+  Controllers.Governor governor(
     delta=0.04,
     droop=0.1,
     T_g=0.2,
@@ -46,7 +46,7 @@ model HPSimplePenstockGeneratorTest "Generator testing for HP"
   Modelica.Blocks.Sources.RealExpression Power(y = generator.Pe) annotation (
     Placement(transformation(extent = {{92, 70}, {72, 90}})));
 equation
-  connect(govenor.Y_gv, turbine.u_t) annotation (
+  connect(governor.Y_gv, turbine.u_t) annotation (
     Line(points = {{44, 86}, {36, 86}, {36, 78}, {26, 78}, {26, 47}}, color = {0, 0, 127}));
   connect(turbine.p, penstock.n) annotation (
     Line(points = {{16, 36}, {9, 36}, {9, 35.9}, {-0.1, 35.9}}));
@@ -62,9 +62,9 @@ equation
     Line(points = {{-43.9, 61.9}, {-40, 61.9}, {-40, 65.9}, {-31.9, 65.9}}));
   connect(surgeTank.n, penstock.p) annotation (
     Line(points = {{-11.9, 65.9}, {-0.1, 65.9}, {-0.1, 55.9}}));
-  connect(govenor.P_ref, load.y) annotation (
+  connect(governor.P_ref, load.y) annotation (
     Line(points = {{64, 86}, {82, 86}, {100, 86}, {100, -18}, {73, -18}}, color = {0, 0, 127}));
-  connect(govenor.f, frequency.y) annotation (
+  connect(governor.f, frequency.y) annotation (
     Line(points = {{54, 76}, {54, 64}, {63, 64}}, color = {0, 0, 127}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));

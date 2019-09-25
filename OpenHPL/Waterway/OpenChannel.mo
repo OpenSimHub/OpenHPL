@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model OpenChannel "Open channel model (use KP scheme)"
-  outer Constants Const "using standart class with constants";
+  outer Constants Const "using standard class with constants";
   extends OpenHPL.Icons.OpenChannel;
   //// geometrical parameters of the open channel
   parameter Integer N = 100 "Number of discretization units" annotation (Dialog(group = "Geometry"));
@@ -14,7 +14,7 @@ model OpenChannel "Open channel model (use KP scheme)"
   parameter Boolean BoundaryCondition[2,2] = [false, true; false, true] "Boundary conditions. Choose options for the boundaries in a matrix table, i.e., if the matrix element = true, this element is used as boundary. The element represent the following quantities: [inlet depth, inlet flow; outlet depth, outlet flow]" annotation (Dialog(group = "Boundary condition"));
   //// variables
   Modelica.SIunits.VolumeFlowRate V_out "outlet flow", V_in "inlet flow";
-  Modelica.SIunits.Height h[N] "Water depth in each unit of the chanel";
+  Modelica.SIunits.Height h[N] "Water depth in each unit of the channel";
   //// conector
   extends OpenHPL.Interfaces.TwoContact;
   //// using open channel example from KP method class

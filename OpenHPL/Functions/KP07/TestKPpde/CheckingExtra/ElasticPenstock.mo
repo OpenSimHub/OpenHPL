@@ -34,7 +34,7 @@ equation
   /////  define state vector
   U[1:N, 1] = p_p[:, 1];
   U[N + 1:2 * N, 1] = m_dot[:, 1];
-  // Define variables intrested vol. flow rate
+  // Define variables interested vol. flow rate
   V_dot = basic.V_dot;
   ////// Define the piecewise linear reconstruction of states.
   U_ = kP.U_;

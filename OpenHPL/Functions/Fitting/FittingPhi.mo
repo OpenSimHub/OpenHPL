@@ -4,7 +4,7 @@ function FittingPhi
   input Modelica.SIunits.Diameter D_1 "Pipe diameter from left hand side";
   input Modelica.SIunits.Diameter D_2 "Pipe diameter from right hand side";
   input Modelica.SIunits.Length L "Fitting length";
-  input Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 90 "Angle of teh tapered reduction/expansion";
+  input Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 90 "Angle of the tapered reduction/expansion";
   input Modelica.SIunits.Density rho "Density";
   input Modelica.SIunits.DynamicViscosity mu "Dynamic viscosity of water";
   input Modelica.SIunits.Height eps "Pipe roughness height";

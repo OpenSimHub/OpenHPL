@@ -32,7 +32,7 @@ equation
   /////  define state vector
   U[1:N] = p_p[:];
   U[N + 1:2 * N] = m_dot[:];
-  ///// Define variables, which are going to be used for souce term S_
+  ///// Define variables, which are going to be used for source term S_
   F_ap = Const.rho * A_atm * (ones(N) + Const.beta_total * (p_p - Const.p_a * ones(N)));
   v = m_dot ./ F_ap;
   rho = Const.rho * (ones(N) + Const.beta * (p_p - Const.p_a * ones(N)));

@@ -8,7 +8,7 @@ model Fitting "Different pipes fitting"
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_2 = 3.3 "Pipe diameter from right hand side" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 45 "Angle of teh tapered reduction/expansion" annotation (
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 45 "Angle of the tapered reduction/expansion" annotation (
     Dialog(group = "Geometry", enable = TaperedReduction or TaperedExpansion));
   parameter Modelica.SIunits.Length L(max = 5 * D_2) = 1 "Length of the thick orifice, condition L/D_2<=5. If condition is not stitisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
     Dialog(group = "Geometry", enable = ThickOrifice));

@@ -29,21 +29,21 @@ model HPSimplePenstockControl "Model of HP system with governor"
         origin={26,36},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  OpenHPL.Controllers.Governor govenor annotation (Placement(visible = true, transformation(origin = {44, 84}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  OpenHPL.Controllers.Governor governor annotation (Placement(visible = true, transformation(origin = {44, 84}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -3e6, offset = 80e6, startTime = 4000) annotation (
     Placement(visible = true, transformation(extent = {{-16, -10}, {4, 10}}, rotation = 0)));
   OpenHPL.ElectroMech.Generators.SimpleGen simpleGen annotation (
     Placement(visible = true, transformation(origin = {26, 8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  connect(simpleGen.f, govenor.f) annotation (
+  connect(simpleGen.f, governor.f) annotation (
     Line(points = {{38, 8}, {98, 8}, {98, 80}, {56, 80}, {56, 80}, {56, 80}}, color = {0, 0, 127}));
   connect(load.y, simpleGen.u) annotation (
     Line(points = {{6, 0}, {10, 0}, {10, 8}, {16, 8}, {16, 8}}, color = {0, 0, 127}));
   connect(turbine.P_out, simpleGen.P_in) annotation (
     Line(points = {{26, 26}, {26, 26}, {26, 20}, {26, 20}}, color = {0, 0, 127}));
-  connect(load.y, govenor.P_ref) annotation (
+  connect(load.y, governor.P_ref) annotation (
     Line(points = {{6, 0}, {100, 0}, {100, 88}, {56, 88}}, color = {0, 0, 127}));
-  connect(govenor.Y_gv, turbine.u_t) annotation (
+  connect(governor.Y_gv, turbine.u_t) annotation (
     Line(points = {{33, 84}, {26, 84}, {26, 48}}, color = {0, 0, 127}));
   connect(discharge.n, tail.n) annotation (
     Line(points = {{68, 36}, {72, 36}, {72, 42}, {76, 42}}));
