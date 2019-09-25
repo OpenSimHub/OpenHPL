@@ -3,8 +3,8 @@ package OpenHPL
   import C = Modelica.Constants;
 
   annotation (
-    version="1.0.1",
-    versionDate="2019-09-06",
+    version="1.0.2",
+    versionDate="2019-09-25",
     Protection(access = Access.packageDuplicate),
     uses(OpenIPSL(version="2.0.0-dev"), Modelica(version="3.2.3")),
     Documentation(info="<html>
