@@ -1,5 +1,5 @@
 within OpenHPL;
-package ElectroMech "Package of electro mechnical components"
+package ElectroMech "Package of electro mechanical components"
   extends Modelica.Icons.Package;
 
   extends Icons.ElectroMech;
