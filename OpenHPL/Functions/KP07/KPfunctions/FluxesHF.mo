@@ -1,5 +1,6 @@
 within OpenHPL.Functions.KP07.KPfunctions;
 function FluxesHF
+  extends Modelica.Icons.Function;
   input Integer N "number of segments";
   input Real U_[8, N], A_[N, 4], F_[2 * N, 4];
   output Real H[2 * N, 2];

@@ -1,5 +1,6 @@
 within OpenHPL.Functions.Fitting.DifferentFitting;
 function RoundedReduction
+  extends Modelica.Icons.Function;
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynold number";
   input Modelica.SIunits.Diameter D_1, D_2;
   //Pipe diameters

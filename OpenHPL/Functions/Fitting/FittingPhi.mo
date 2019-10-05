@@ -1,5 +1,6 @@
 within OpenHPL.Functions.Fitting;
 function FittingPhi
+  extends Modelica.Icons.Function;
   input Modelica.SIunits.Velocity v "Flow velocity";
   input Modelica.SIunits.Diameter D_1 "Pipe diameter from left hand side";
   input Modelica.SIunits.Diameter D_2 "Pipe diameter from right hand side";

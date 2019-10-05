@@ -1,5 +1,6 @@
 within OpenHPL.Functions.DarcyFriction;
 function Friction "Friction force with Darcy friction factor"
+  extends Modelica.Icons.Function;
   import Modelica.Constants.pi;
   input Modelica.SIunits.Velocity v "Flow velocity";
   input Modelica.SIunits.Diameter D "Pipe diameter";

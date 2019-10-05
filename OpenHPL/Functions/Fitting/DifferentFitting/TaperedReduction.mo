@@ -1,5 +1,6 @@
 within OpenHPL.Functions.Fitting.DifferentFitting;
 function TaperedReduction
+  extends Modelica.Icons.Function;
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynold number";
   input Modelica.SIunits.Height eps "Pipe roughness height";
   input Modelica.SIunits.Diameter D_1, D_2;
