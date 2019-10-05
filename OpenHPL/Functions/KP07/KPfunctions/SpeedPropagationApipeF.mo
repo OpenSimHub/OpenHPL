@@ -1,5 +1,6 @@
 within OpenHPL.Functions.KP07.KPfunctions;
 function SpeedPropagationApipeF
+  extends Modelica.Icons.Function;
   input Integer N "number of segments";
   input Real lamda1[N, 4];
   input Real lamda2[N, 4];

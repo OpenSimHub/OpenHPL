@@ -1,5 +1,6 @@
 within OpenHPL.Functions.DarcyFriction;
 function fDarcy "Darcy friction factor"
+  extends Modelica.Icons.Function;
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynold number";
   input Modelica.SIunits.Diameter D "Pipe diameter";
   input Modelica.SIunits.Height epsilon "Pipe roughness height";
