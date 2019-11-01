@@ -1,6 +1,7 @@
 package OpenHPL
   extends Icons.Logo;
   import C = Modelica.Constants;
+  import SI = Modelica.SIunits;
 
   annotation (
     version="1.0.2",
