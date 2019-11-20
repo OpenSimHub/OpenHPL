@@ -33,9 +33,9 @@ model Reservoir "Model of the reservoir"
   Modelica.SIunits.Momentum M "water momentum";
   Modelica.SIunits.Force F_f "friction force";
   Modelica.SIunits.Height H "water height";
-  Modelica.SIunits.Pressure p_2 "outside pressure";
+  Modelica.SIunits.Pressure p_o "outlet pressure";
   //// conectors
-  OpenHPL.Interfaces.Contact n(p=p_2) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
+  OpenHPL.Interfaces.Contact o(p=p_o) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealInput V_in = V_i_dot if UseInFlow "Conditional input inflow of the reservoir"
     annotation (Placement(transformation(origin={-120,0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput Level_in = H if Input_level "Conditional input water level of the reservoir"
@@ -67,16 +67,16 @@ equation
   //// condition for input water level use
   if Input_level == false then
     //// define derivatives of momentum and mass
-    der(M) = A * (Const.p_a - p_2) + Const.g * Const.rho * A * H - F_f + Const.rho / A * (V_i_dot ^ 2 - V_o_dot ^ 2);
+    der(M) = A * (Const.p_a - p_o) + Const.g * Const.rho * A * H - F_f + Const.rho / A * (V_i_dot ^ 2 - V_o_dot ^ 2);
     der(m) = m_dot;
   else
     //// define output pressure
-    p_2 = Const.p_a + Const.g * Const.rho * H;
+    p_o = Const.p_a + Const.g * Const.rho * H;
   end if;
   //// output flow conector
-  n.m_dot = -Const.rho * V_o_dot;
+  o.m_dot = -Const.rho * V_o_dot;
   //// output temperature conector
-  //n.T = T_i;
+  //o.T = T_i;
   annotation (
     Icon(coordinateSystem(initialScale = 0.1)),
     Documentation(info = "<html><head></head><body><p>Simple model of the reservoir, which depending on depth of the outlet from reservoir, calculate the outlet pressure.</p>

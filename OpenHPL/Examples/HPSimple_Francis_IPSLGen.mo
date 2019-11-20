@@ -2,13 +2,13 @@ within OpenHPL.Examples;
 model HPSimple_Francis_IPSLGen "Synergy with OpenIPSL library(generator)"
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
-        origin={-48,48},
+        origin={-90,50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-34,38},{-14,58}}, rotation=0)));
-  OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{50,22},{70,42}}, rotation=0)));
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,40},{-50,60}}, rotation=0)));
+  OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{50,20},{70,40}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
-        origin={86,28},
+        origin={90,30},
         extent={{-10,10},{10,-10}},
         rotation=180)));
   OpenHPL.Waterway.PenstockKP penstock(
@@ -16,11 +16,11 @@ model HPSimple_Francis_IPSLGen "Synergy with OpenIPSL library(generator)"
     H=428.5,
     D_i=3,
     D_o=3) annotation (Placement(visible=true, transformation(
-        origin={12,40},
+        origin={0,40},
         extent={{-10,-10},{10,10}},
-        rotation=-90)));
+        rotation=180)));
   OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(visible=true, transformation(
-        origin={0,54},
+        origin={-30,50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   OpenHPL.ElectroMech.Turbines.Francis turbine(
@@ -47,7 +47,7 @@ model HPSimple_Francis_IPSLGen "Synergy with OpenIPSL library(generator)"
     r_v_=1.1,
     w_1_=0.2,
     w_v_=0.2) annotation (Placement(visible=true, transformation(
-        origin={28,28},
+        origin={30,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   inner OpenHPL.Constants Const(V_0 = 4.49) annotation (
@@ -61,15 +61,15 @@ model HPSimple_Francis_IPSLGen "Synergy with OpenIPSL library(generator)"
   Modelica.Blocks.Math.Gain Normilizer(k = 1 / 100e6) annotation (
     Placement(visible = true, transformation(origin = {-33, -15}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
   Modelica.Blocks.Math.Gain RealizerAng(k = 50 * Modelica.Constants.pi / 3) annotation (
-    Placement(visible = true, transformation(origin = {49, 11}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+    Placement(visible = true, transformation(origin={50,8},     extent={{-6,-6},{6,6}},      rotation = 180)));
   inner OpenIPSL.Electrical.SystemBase SysData annotation (
     Placement(visible = true, transformation(extent = {{-60, -60}, {-36, -40}}, rotation = 0)));
-  OpenHPL.Controllers.Governor governor annotation (Placement(visible=true, transformation(extent={{54,42},{34,62}}, rotation=0)));
+  OpenHPL.Controllers.Governor governor annotation (Placement(visible=true, transformation(extent={{60,60},{40,80}}, rotation=0)));
   //(a = 7.862E-25, c = 1.108E-08, d = -5.344E-02, b = -1.010E-16)
   Modelica.Blocks.Math.Gain Frequency(k = 50) annotation (
-    Placement(visible = true, transformation(origin = {60, 70}, extent = {{-8, -8}, {8, 8}}, rotation = 180)));
+    Placement(visible = true, transformation(origin={83,61},    extent={{-5,-5},{5,5}},      rotation = 180)));
   Modelica.Blocks.Sources.Ramp power(duration = 1, height = +1e6, offset = 12e6, startTime = 15000) annotation (
-    Placement(visible = true, transformation(origin = {78, 52}, extent = {{8, -8}, {-8, 8}}, rotation = 0)));
+    Placement(visible = true, transformation(origin={86,86},    extent = {{8, -8}, {-8, 8}}, rotation = 0)));
   OpenIPSL.Electrical.Branches.PwLine pwLine1(X = 0.1, R = 0.01, G = 0, B = 0.0005) annotation (
     Placement(visible = true, transformation(origin = {16, -58}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
   OpenIPSL.Electrical.Branches.PwLine pwLinewithOpening1(B = 0.0005, G = 0, R = 0.01, X = 0.1, opening = 1, t1 = 600, t2 = 600.15) annotation (
@@ -102,14 +102,6 @@ equation
     Line(points={{8.6,-34},{2,-34},{2,-46},{-4,-46}},        color = {0, 0, 255}));
   connect(pwLine2.n, bus1.p) annotation (
     Line(points={{19.4,-34},{30,-34},{30,-46},{36,-46}},        color = {0, 0, 255}));
-  connect(surgeTank.n, penstock.p) annotation (
-    Line(points={{10,54},{12,54},{12,50}},                    color = {28, 108, 200}));
-  connect(surgeTank.p, intake.n) annotation (
-    Line(points={{-10,54},{-11.8,54},{-11.8,48},{-14,48}},               color = {28, 108, 200}));
-  connect(penstock.n, turbine.p) annotation (
-    Line(points={{12,30},{12.85,30},{12.85,28},{18,28}},              color = {28, 108, 200}));
-  connect(reservoir.n, intake.p) annotation (
-    Line(points={{-38,48},{-36.8,48},{-36.8,48},{-34,48}},                      color = {28, 108, 200}));
   connect(bus1.p, pwLinewithOpening1.p) annotation (
     Line(points = {{36, -46}, {40, -46}, {40, -22}, {44, -22}, {44, -34}, {50.6, -34}}, color = {0, 0, 255}));
   connect(pwLine4.p, bus1.p) annotation (
@@ -133,28 +125,31 @@ equation
   connect(bus.p, pwLine1.p) annotation (
     Line(points = {{-4, -46}, {-2.5, -46}, {-2.5, -46}, {-1, -46}, {-1, -46}, {2, -46}, {2, -58}, {6.3, -58}, {6.3, -58}, {8.45, -58}, {8.45, -58}, {10.6, -58}}, color = {0, 0, 255}));
   connect(Frequency.u, RealizerAng.u) annotation (
-    Line(points={{69.6,70},{100,70},{100,0},{72,0},{72,11},{57.4,11}},          color = {0, 0, 127}));
+    Line(points={{89,61},{100,61},{100,8},{57.2,8}},                            color = {0, 0, 127}));
   connect(order2_1.w, RealizerAng.u) annotation (
-    Line(points={{7,-1},{72,-1},{72,11},{57.4,11}},        color = {0, 0, 127}));
+    Line(points={{7,-1},{72,-1},{72,8},{57.2,8}},          color = {0, 0, 127}));
   connect(Normilizer.u, turbine.P_out) annotation (
-    Line(points={{-41.4,-15},{-48,-15},{-48,12},{28,12},{28,17}},          color = {0, 0, 127}));
+    Line(points={{-41.4,-15},{-48,-15},{-48,14},{30,14},{30,19}},          color = {0, 0, 127}));
   connect(Normilizer.y, order2_1.pm) annotation (
     Line(points={{-25.3,-15},{-16,-15}},        color = {0, 0, 127}));
   connect(order2_1.vf, order2_1.vf0) annotation (
     Line(points = {{-16, -5}, {-24, -5}, {-24, 4}, {-12, 4}, {-12, 1}}, color = {0, 0, 127}));
   connect(RealizerAng.y, turbine.w_in) annotation (
-    Line(points={{41.3,11},{16,11},{16,20}},      color = {0, 0, 127}));
+    Line(points={{43.4,8},{8,8},{8,22},{18,22}},  color = {0, 0, 127}));
   connect(Frequency.y, governor.f) annotation (
-    Line(points={{51.2,70},{56,70},{56,48}},      color = {0, 0, 127}));
+    Line(points={{77.5,61},{70,61},{70,66},{62,66}},
+                                                  color = {0, 0, 127}));
   connect(governor.P_ref, power.y) annotation (
-    Line(points={{56,56},{62,56},{62,52},{69.2,52}},
+    Line(points={{62,74},{72,74},{72,86},{77.2,86}},
                                         color = {0, 0, 127}));
   connect(governor.Y_gv, turbine.u_t) annotation (
-    Line(points={{33,52},{28,52},{28,40}},        color = {0, 0, 127}));
-  connect(turbine.n, discharge.p) annotation (
-    Line(points={{38,28},{41.05,28},{41.05,27.9},{44,27.9},{44,32},{50,32}},                          color = {28, 108, 200}));
-  connect(tail.n, discharge.n) annotation (
-    Line(points={{76,28},{76,31.8},{72.95,31.8},{72.95,32},{70,32}},                      color = {28, 108, 200}));
+    Line(points={{39,70},{30,70},{30,42}},        color = {0, 0, 127}));
+  connect(reservoir.o, intake.i) annotation (Line(points={{-80,50},{-70,50}}, color={28,108,200}));
+  connect(intake.o, surgeTank.i) annotation (Line(points={{-50,50},{-40,50}}, color={28,108,200}));
+  connect(surgeTank.o, penstock.o) annotation (Line(points={{-20,50},{-14,50},{-14,40},{-10,40}}, color={28,108,200}));
+  connect(penstock.i, turbine.i) annotation (Line(points={{10,40},{16,40},{16,30},{20,30}}, color={28,108,200}));
+  connect(turbine.o, discharge.i) annotation (Line(points={{40,30},{50,30}}, color={28,108,200}));
+  connect(discharge.o, tail.o) annotation (Line(points={{70,30},{80,30}}, color={28,108,200}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end HPSimple_Francis_IPSLGen;

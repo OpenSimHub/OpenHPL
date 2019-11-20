@@ -29,7 +29,7 @@ equation
     if CompElas == false then
         V_dot = m_dot / Const.rho;
     else
-        V_dot = m_dot / (Const.rho * (1 + Const.beta * (p.p - Const.p_a)));
+        V_dot = m_dot / (Const.rho * (1 + Const.beta * (i.p - Const.p_a)));
     end if;
   //// nuzzel pressure drop
     dp_n = 0.5 * m_dot * (V_dot * (1 / A_1 ^ 2 - 1 / A_0 ^ 2) + k_f);
@@ -42,9 +42,9 @@ equation
     dp_tr * V_dot = W_s_dot;
     dp_tr = p_tr1 - p_tr2;
   //// connectors pressures
-    p_tr1 = p.p;
+    p_tr1 = i.p;
   // + dp_n;
-    p_tr2 = n.p;
+    p_tr2 = o.p;
   //// output mechanical power
     P_out = W_s_dot;
     annotation (

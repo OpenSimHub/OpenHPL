@@ -57,27 +57,27 @@ model HPSimple_Francis "Model of the HP system with Francis turbine and simplifi
         rotation=0)));
   inner OpenHPL.Constants Const(V_0 = 4.54) annotation (
     Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Waterway.Fitting fitting(D_1=3, D_2=1.63) annotation (Placement(transformation(extent={{-4,20},{16,40}})));
+  Waterway.Fitting fitting(D_i=3, D_o=1.63, fit_type = OpenHPL.Functions.Fitting.FittingType.SquareReduction) annotation (Placement(transformation(extent={{-4,20},{16,40}})));
 equation
   connect(generator.w_out, turbine.w_in) annotation (
     Line(points={{16.8,3.2},{12,3.2},{12,24},{18,24}},      color = {0, 0, 127}));
   connect(turbine.P_out, generator.P_in) annotation (
     Line(points={{30,21},{30,10.4}},                        color = {0, 0, 127}));
-  connect(reservoir.n, intake.p) annotation (
+  connect(reservoir.o, intake.i) annotation (
     Line(points={{-82,62},{-78,62},{-78,62},{-76,62}},                      color = {28, 108, 200}));
-  connect(surgeTank.p, intake.n) annotation (
+  connect(surgeTank.i, intake.o) annotation (
     Line(points={{-46,66},{-48,66},{-48,62},{-56,62}},                      color = {28, 108, 200}));
-  connect(surgeTank.n, penstock.p) annotation (
+  connect(surgeTank.o, penstock.i) annotation (
     Line(points={{-26,66},{-16.95,66},{-16.95,58},{-10,58}},                      color = {28, 108, 200}));
-  connect(turbine.n, discharge.p) annotation (
+  connect(turbine.o, discharge.i) annotation (
     Line(points={{40,32},{48,32},{48,40},{54,40}},                      color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
     Line(points={{21,84},{30,84},{30,44}},          color = {0, 0, 127}));
-  connect(turbine.p, fitting.n) annotation (
+  connect(turbine.i, fitting.o) annotation (
     Line(points={{20,32},{20,30},{16,30}},                    color = {28, 108, 200}));
-  connect(tail.n, discharge.n) annotation (
+  connect(tail.o, discharge.o) annotation (
     Line(points={{84,44},{84,41.95},{80,41.95},{80,40},{74,40}},                        color = {28, 108, 200}));
-  connect(penstock.n, fitting.p) annotation (
+  connect(penstock.o, fitting.i) annotation (
     Line(points={{-10,38},{-6,38},{-6,30},{-4,30}},                      color = {28, 108, 200}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));

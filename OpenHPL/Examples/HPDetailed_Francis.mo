@@ -60,23 +60,23 @@ model HPDetailed_Francis "Model of the HP system with Francis turbine and simpli
         extent={{-10,-10},{10,10}},
         rotation=0)));
 equation
-  connect(penstockKP.n, turbine.p) annotation (
+  connect(penstockKP.o, turbine.i) annotation (
     Line(points = {{-2, 48}, {-2, 48}, {-2, 36}, {18, 36}, {18, 36}}, color = {28, 108, 200}));
-  connect(surgeTank.n, penstockKP.p) annotation (
+  connect(surgeTank.o, penstockKP.i) annotation (
     Line(points = {{-26, 66}, {-22, 66}, {-22, 48}, {-22, 48}}, color = {28, 108, 200}));
   connect(generator.w_out, turbine.w_in) annotation (
-    Line(points={{35.2,20},{32,20},{32,30},{16,30}},        color = {0, 0, 127}));
+    Line(points={{41.2,15.2},{32,15.2},{32,28},{16,28}},    color = {0, 0, 127}));
   connect(turbine.P_out, generator.P_in) annotation (
-    Line(points={{28,25},{22,25},{22,20},{20.8,20}},        color = {0, 0, 127}));
-  connect(reservoir.n, intake.p) annotation (
+    Line(points={{28,25},{22,25},{22,22.4},{28,22.4}},      color = {0, 0, 127}));
+  connect(reservoir.o, intake.i) annotation (
     Line(points={{-80,60},{-76,60}},                                        color = {28, 108, 200}));
-  connect(surgeTank.p, intake.n) annotation (
+  connect(surgeTank.i, intake.o) annotation (
     Line(points={{-46,66},{-48,66},{-48,60},{-56,60}},                      color = {28, 108, 200}));
-  connect(turbine.n, discharge.p) annotation (
+  connect(turbine.o, discharge.i) annotation (
     Line(points={{38,36},{48,36},{48,40},{54,40}},                      color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
     Line(points={{21,84},{28,84},{28,48}},          color = {0, 0, 127}));
-  connect(tail.n, discharge.n) annotation (
+  connect(tail.o, discharge.o) annotation (
     Line(points={{84,44},{84,41.95},{80,41.95},{80,40},{74,40}},                        color = {28, 108, 200}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4),

@@ -35,23 +35,23 @@ model HPSimple_generator "Model of waterway and aggregate of the HP system with 
   inner OpenHPL.Constants Const annotation (
     Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  connect(penstock.n, turbine.p) annotation (
+  connect(penstock.o, turbine.i) annotation (
     Line(points={{-16,40},{-11.05,40},{-11.05,34},{-2,34}},                color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
     Line(points={{-5,86},{8,86},{8,46}},        color = {0, 0, 127}));
-  connect(turbine.n, discharge.p) annotation (
+  connect(turbine.o, discharge.i) annotation (
     Line(points = {{18, 34}, {32, 34}, {32, 32}, {36, 32}}, color = {28, 108, 200}));
   connect(turbine.P_out,generator. P_in) annotation (
     Line(points={{8,23},{8,16}},                            color = {0, 0, 127}));
-  connect(discharge.n, tail.n) annotation (
+  connect(discharge.o, tail.o) annotation (
     Line(points={{56,32},{56,36.95},{70,36.95},{70,40}},                color = {28, 108, 200}));
   connect(load.y,generator. u) annotation (
     Line(points={{-19,4},{-2,4}},                              color = {0, 0, 127}));
-  connect(reservoir.n, intake.p) annotation (
+  connect(reservoir.o, intake.i) annotation (
     Line(points={{-84,64},{-79.95,64},{-79.95,60},{-76,60}},                      color = {28, 108, 200}));
-  connect(intake.n, surgeTank.p) annotation (
+  connect(intake.o, surgeTank.i) annotation (
     Line(points={{-56,60},{-50.95,60},{-50.95,66},{-48,66}},                      color = {28, 108, 200}));
-  connect(surgeTank.n, penstock.p) annotation (
+  connect(surgeTank.o, penstock.i) annotation (
     Line(points={{-28,66},{-21.95,66},{-21.95,60},{-16,60}},                      color = {28, 108, 200}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));

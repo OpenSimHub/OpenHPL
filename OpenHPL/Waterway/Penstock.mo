@@ -19,7 +19,7 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
     Dialog(group = "Discretization"));
   Modelica.SIunits.Diameter dD = 0.5 * (D_i + D_o), D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N), D_[N + 1] = linspace(D_i, D_o, N + 1);
   Modelica.SIunits.Area A[N] = D .^ 2 * pi / 4, A_[N + 1] = D_ .^ 2 * pi / 4, A_m[N - 2], A_m_end, A_m_first;
-  Modelica.SIunits.Pressure p_1, p_2, p_[N - 1], dp = Const.rho * Const.g * H / N, p_m[N - 2];
+  Modelica.SIunits.Pressure p_i, p_o, p_[N - 1], dp = Const.rho * Const.g * H / N, p_m[N - 2];
   Modelica.SIunits.Length dx = L / N, Per_m[N - 2];
   Modelica.SIunits.MassFlowRate m_dot_R, m_dot_V, m_dot[N - 2], m_exp[N];
   Real F_ap[N - 1], F_m[N - 2], F_exp[N], eps_m[N - 2], Ap_m[3, N - 2], F_m_end, F_m_first;
@@ -32,23 +32,23 @@ initial equation
   m_dot_R = Const.rho * V_dot0;
   m_dot_V = Const.rho * V_dot0;
   m_dot = Const.rho * V_dot0 * ones(N - 2);
-  p_ = p_1 + dp:dp:p_1 + dp * (N - 1);
+  p_ = p_i + dp:dp:p_i + dp * (N - 1);
 equation
   // Pipe flow rate
-  m_dot_R = p.m_dot;
-  m_dot_V = -n.m_dot;
+  m_dot_R = i.m_dot;
+  m_dot_V = -o.m_dot;
   // pipe presurre
-  p_1 = p.p;
-  p_2 = n.p;
+  p_i = i.p;
+  p_o = o.p;
   // momentum balance for the first and last segment
-  F_m_first = Const.rho * A[1] * (1 + Const.beta_total * ((p_[1] + p_1) / 2 - Const.p_a));
-  rho_m_first = Const.rho * (1 + Const.beta * ((p_[1] + p_1) / 2 - Const.p_a));
+  F_m_first = Const.rho * A[1] * (1 + Const.beta_total * ((p_[1] + p_i) / 2 - Const.p_a));
+  rho_m_first = Const.rho * (1 + Const.beta * ((p_[1] + p_i) / 2 - Const.p_a));
   A_m_first = F_m_first / rho_m_first;
-  dx * der(m_dot_R) = A_m_first * (p_1 - p_[1]) + F_m_first * Const.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[1], 2 * sqrt(A_m_first / pi), dx, rho_m_first, Const.mu, Const.eps);
-  F_m_end = Const.rho * A[N] * (1 + Const.beta_total * ((p_[N - 1] + p_2) / 2 - Const.p_a));
-  rho_m_end = Const.rho * (1 + Const.beta * ((p_[N - 1] + p_2) / 2 - Const.p_a));
+  dx * der(m_dot_R) = A_m_first * (p_i - p_[1]) + F_m_first * Const.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[1], 2 * sqrt(A_m_first / pi), dx, rho_m_first, Const.mu, Const.eps);
+  F_m_end = Const.rho * A[N] * (1 + Const.beta_total * ((p_[N - 1] + p_o) / 2 - Const.p_a));
+  rho_m_end = Const.rho * (1 + Const.beta * ((p_[N - 1] + p_o) / 2 - Const.p_a));
   A_m_end = F_m_end / rho_m_end;
-  dx * der(m_dot_V) = (-A_m_end * (p_2 - p_[N - 1])) + F_m_end * Const.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[N], 2 * sqrt(A_m_end / pi), dx, rho_m_end, Const.mu, Const.eps);
+  dx * der(m_dot_V) = (-A_m_end * (p_o - p_[N - 1])) + F_m_end * Const.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[N], 2 * sqrt(A_m_end / pi), dx, rho_m_end, Const.mu, Const.eps);
   // mass flow rate vector with all segments
   m_exp[1] = m_dot_R;
   m_exp[2:N - 1] = m_dot[:];
@@ -58,10 +58,10 @@ equation
   // define middle pressures, densities and areas
   F_ap = Const.rho * A_[2:N] .* (ones(N - 1) + Const.beta_total * (p_ - Const.p_a * ones(N - 1)));
   F_m = (F_ap[1:N - 2] + F_ap[2:N - 1]) / 2;
-  F_exp[1] = Const.rho * A_[1] * (1 + Const.beta_total * (p_1 - Const.p_a));
+  F_exp[1] = Const.rho * A_[1] * (1 + Const.beta_total * (p_i - Const.p_a));
   //F_m_first;
   F_exp[2:N - 1] = F_m[:];
-  F_exp[N] = Const.rho * A_[N + 1] * (1 + Const.beta_total * (p_2 - Const.p_a));
+  F_exp[N] = Const.rho * A_[N + 1] * (1 + Const.beta_total * (p_o - Const.p_a));
   //F_m_end;
   v_exp = m_exp ./ F_exp;
   p_m = (p_[1:N - 2] + p_[2:N - 1]) / 2;
@@ -82,7 +82,7 @@ equation
   dx * der(m_dot) = Ap_m[1, :] .* v_exp[2:N - 1] + Ap_m[2, :] .* v_exp[1:N - 2] + Ap_m[3, :] .* v_exp[3:N] + F_g + F_p;
   // volumetric flow rates for all cells
   V_p_out = m_dot ./ rho_m;
-  V_p_out_end = m_dot_V / (Const.rho * (1 + Const.beta * (p_2 - Const.p_a)));
+  V_p_out_end = m_dot_V / (Const.rho * (1 + Const.beta * (p_o - Const.p_a)));
   annotation (
     Documentation(info = "<html><head></head><body><p>This is a more detaied model of the pipe that can be use for proper modeling of penstock. (This model does not work well. Instead PenstockKP model can be used.)</p><p>The model for the penstock with the elastic walls and compressible water with simple discretization method (Staggered grid). The geometry of the penstock is described due to figure:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/penstock.png\"></p>

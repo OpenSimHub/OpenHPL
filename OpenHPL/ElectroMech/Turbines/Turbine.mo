@@ -29,9 +29,9 @@ model Turbine "Simple turbine model"
   parameter Boolean WaterCompress = false "If checked the water is compressible in the penstock" annotation (
     choices(checkBox = true));
   //// variables
-  Modelica.SIunits.Pressure p_tr1 "Inlet pressure", dp "Turbine pressure drop", p_tr2 "Outlet pressure";
+  Modelica.SIunits.Pressure p_i_tr "Inlet pressure", dp "Turbine pressure drop", p_o_tr "Outlet pressure";
   //Modelica.SIunits.Area A_d = D_o ^ 2 * pi / 4, A_p = D_i ^ 2 * pi / 4;
-  Modelica.SIunits.EnergyFlowRate K_tr1_dot "Kinetic energy";
+  Modelica.SIunits.EnergyFlowRate K_i_tr_dot "Kinetic energy";
   Modelica.SIunits.VolumeFlowRate V_dot "Flow rate";
   Real C_v_ "Guide vane 'valve capacity'";
   output Modelica.SIunits.EnergyFlowRate W_s_dot "Shaft power";
@@ -40,28 +40,28 @@ model Turbine "Simple turbine model"
   Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table);
 equation
   //// checking water compressibility
-  V_dot = if WaterCompress then m_dot / (Const.rho * (1 + Const.beta * (p.p - Const.p_a))) else m_dot / Const.rho;
+  V_dot = if WaterCompress then m_dot / (Const.rho * (1 + Const.beta * (i.p - Const.p_a))) else m_dot / Const.rho;
   //// define turbine efficiency
   look_up_table.u[1] = u_t;
   //// define guide vane 'valve capacity' base on the turbine nominal parameters
   C_v_ = if ValveCapacity then C_v else V_dot_n/sqrt(H_n*Const.g*Const.rho/Const.p_a)/u_n;
   //// turbine valve equation for pressure drop
   dp = V_dot ^ 2 * Const.p_a / (C_v_ * u_t) ^ 2;
-  dp = p_tr1 - p_tr2;
+  dp = p_i_tr - p_o_tr;
   //// turbine energy balance
-  K_tr1_dot = dp * V_dot;
+  K_i_tr_dot = dp * V_dot;
   if ConstEfficiency == true then
-    W_s_dot = theta_h * K_tr1_dot;
+    W_s_dot = theta_h * K_i_tr_dot;
   else
-    W_s_dot = look_up_table.y[1] * K_tr1_dot;
+    W_s_dot = look_up_table.y[1] * K_i_tr_dot;
   end if;
   //// turbine pressures
-  p_tr1 = p.p;
-  p_tr2 = n.p;
+  p_i_tr = i.p;
+  p_o_tr = o.p;
   //// output mechanical power
   P_out = W_s_dot;
   //// for temperature variation, not finished...
-  //n.T = p.T;
+  //i.T = o.T;
   ////
   annotation (
     Documentation(info= "<html><p>

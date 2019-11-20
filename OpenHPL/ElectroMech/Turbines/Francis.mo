@@ -148,14 +148,14 @@ equation
         dp_v = 0.5 * Const.rho * (V_dot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
     else
         V_dot = m_dot / (Const.rho * (1 + Const.beta * (p_r1 - Const.p_a)));
-        dp_v = 0.5 * Const.rho * (1 + Const.beta * (p.p - Const.p_a)) * (V_dot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
+        dp_v = 0.5 * Const.rho * (1 + Const.beta * (i.p - Const.p_a)) * (V_dot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
     end if;
   //// condition for guide vane pressure drop (does not work well, better to skip guide vane pressure drop)
     if dp_v_condition == true then
-        p_r1 = p.p - dp_v;
+        p_r1 = i.p - dp_v;
         dp_tr = dp_r + dp_v;
     else
-        p_r1 = p.p;
+        p_r1 = i.p;
         dp_tr = dp_r;
     end if;
   //// define areas
@@ -201,7 +201,7 @@ equation
   //// turbine efficiency
     coef = W_s_dot / W_t_dot;
   //// conectors
-    p_tr2 = n.p;
+    p_tr2 = o.p;
   //// output mechanical power
     P_out = W_s_dot;
     annotation (

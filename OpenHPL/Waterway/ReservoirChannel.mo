@@ -15,7 +15,7 @@ model ReservoirChannel "Reservoir model based on open channel model"
   //// variables
   Real q "flow rate";
   //// conector
-  OpenHPL.Interfaces.Contact n annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{68,-32},{134,34}})));
+  OpenHPL.Interfaces.Contact o annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{68,-32},{134,34}})));
   //// using the open channel exampel from the KP method class
   Internal.KPOpenChannel openChannel(
     N=N,
@@ -27,8 +27,8 @@ model ReservoirChannel "Reservoir model based on open channel model"
     SteadyState=SteadyState) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   //// boundaries
-  n.m_dot = -q * w * Const.rho;
-  n.p = Const.p_a + Const.rho * Const.g * openChannel.h[N];
+  o.m_dot = -q * w * Const.rho;
+  o.p = Const.p_a + Const.rho * Const.g * openChannel.h[N];
   annotation (
     Documentation(info="<html>This is a model for the reservoir, based on the open channel (river) model.</p>
 <p><em>Has not been tested properly.</em></p>

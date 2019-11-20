@@ -28,21 +28,21 @@ model HPDetailed_generator "Model of waterway and aggregate of the HP system wit
     Placement(visible = true, transformation(extent = {{-22, 0}, {-2, 20}}, rotation = 0)));
   ElectroMech.Generators.SimpleGen generator annotation (Placement(visible=true, transformation(extent={{8,0},{28,20}}, rotation=0)));
 equation
-  connect(turbine.p, penstockKP.n) annotation (
+  connect(turbine.i, penstockKP.o) annotation (
     Line(points={{10,42},{4,42},{4,54},{0,54}},                color = {28, 108, 200}));
-  connect(turbine.n, discharge.p) annotation (
+  connect(turbine.o, discharge.i) annotation (
     Line(points={{30,42},{34,42},{34,40},{38,40}},                color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
     Line(points={{11,84},{20,84},{20,54}},        color = {0, 0, 127}));
   connect(turbine.P_out,generator. P_in) annotation (
     Line(points={{20,31},{20,25.5},{18,25.5},{18,22}},          color = {0, 0, 127}));
-  connect(discharge.n, tail.n) annotation (
+  connect(discharge.o, tail.o) annotation (
     Line(points={{58,40},{70,40},{70,46},{80,46}},                      color = {28, 108, 200}));
-  connect(surgeTank.n, penstockKP.p) annotation (
+  connect(surgeTank.o, penstockKP.i) annotation (
     Line(points={{-22,70},{-20,70},{-20,54}},                    color = {28, 108, 200}));
-  connect(intake.n, surgeTank.p) annotation (
+  connect(intake.o, surgeTank.i) annotation (
     Line(points={{-52,64},{-46,64},{-46,70},{-42,70}},                      color = {28, 108, 200}));
-  connect(reservoir.n, intake.p) annotation (
+  connect(reservoir.o, intake.i) annotation (
     Line(points={{-82,66},{-76,66},{-76,64},{-72,64}},                      color = {28, 108, 200}));
   connect(load.y,generator. u) annotation (
     Line(points = {{-1, 10}, {-1, 10}, {8, 10}}, color = {0, 0, 127}));

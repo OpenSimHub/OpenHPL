@@ -33,9 +33,9 @@ model Pipe "Model of the pipe"
   Modelica.SIunits.Velocity v "Water velocity";
   Modelica.SIunits.Force F_f "Friction force";
   Modelica.SIunits.Momentum M "Water momentum";
-  Modelica.SIunits.Pressure p_1 "Inlet pressure";
-  Modelica.SIunits.Pressure p_2 "Outlet pressure";
-  Modelica.SIunits.Pressure dp=p_2-p_1 "Pressure difference p_2-p_1";
+  Modelica.SIunits.Pressure p_i "Inlet pressure";
+  Modelica.SIunits.Pressure p_o "Outlet pressure";
+  Modelica.SIunits.Pressure dp=p_o-p_i "Pressure difference across the pipe";
   Modelica.SIunits.VolumeFlowRate V_dot(start = V_dot0) "Flow rate";
 
   //// variables for temperature. Not in use for now...
@@ -62,13 +62,13 @@ equation
   //// Friction force
   F_f = Functions.DarcyFriction.Friction(v, D_, L, Const.rho, Const.mu, eps);
   //// momentum balance
-  der(M) = Const.rho * V_dot ^ 2 * (1 / A_i - 1 / A_o) + p_1 * A_i - p_2 * A_o - F_f + m * Const.g * cos_theta;
+  der(M) = Const.rho * V_dot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * Const.g * cos_theta;
   //// pipe presurre
-  p_1 = p.p;
-  p_2 = n.p;
+  p_i = i.p;
+  p_o = o.p;
   //// possible temperature variation implementation. Not finished...
   //W_f = -F_f * v;
-  //W_e = V_dot * (p_1 - p_2);
+  //W_e = V_dot * (p_i- p_o);
   //if TempUse == true then
   //Const.c_p * m * der(T) = V_dot * Const.rho * Const.c_p * (p.T - T) + W_e - W_f;
   //0 = V_dot * Const.rho * Const.c_p * (p.T - n.T) + W_e - W_f;

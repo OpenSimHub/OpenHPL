@@ -32,11 +32,11 @@ equation
 //// define a vector of the water depth in the channel
   h = openChannel.h;
 //// flow rate boundaries
-  p.m_dot = V_in * Const.rho;
-  n.m_dot = -V_out*Const.rho;
+  i.m_dot = V_in * Const.rho;
+  o.m_dot = -V_out * Const.rho;
 //// presurre boundaries
-  p.p = h[1] * Const.g * Const.rho + Const.p_a;
-  n.p = h[N]*Const.g*Const.rho + Const.p_a;
+  i.p = h[1] * Const.g * Const.rho + Const.p_a;
+  o.p = h[N] * Const.g * Const.rho + Const.p_a;
   annotation (
     Documentation(info="<html>
 <p>

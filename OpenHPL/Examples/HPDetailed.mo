@@ -30,17 +30,17 @@ model HPDetailed "Model of waterway of the HP system with detailed model for the
 equation
   connect(control.y, turbine.u_t) annotation (
     Line(points={{11,84},{18,84},{18,54}},          color = {0, 0, 127}));
-  connect(discharge.n, tail.n) annotation (
+  connect(discharge.o, tail.o) annotation (
     Line(points={{58,40},{70,40},{70,46},{80,46}},                      color = {28, 108, 200}));
-  connect(turbine.n, discharge.p) annotation (
+  connect(turbine.o, discharge.i) annotation (
     Line(points={{28,42},{34,42},{34,40},{38,40}},                      color = {28, 108, 200}));
-  connect(turbine.p, penstockKP.n) annotation (
+  connect(turbine.i, penstockKP.o) annotation (
     Line(points={{8,42},{4,42},{4,54},{0,54}},                      color = {28, 108, 200}));
-  connect(surgeTank.n, penstockKP.p) annotation (
+  connect(surgeTank.o, penstockKP.i) annotation (
     Line(points={{-22,70},{-20,70},{-20,54}},                    color = {28, 108, 200}));
-  connect(intake.n, surgeTank.p) annotation (
+  connect(intake.o, surgeTank.i) annotation (
     Line(points={{-52,64},{-46,64},{-46,70},{-42,70}},                      color = {28, 108, 200}));
-  connect(reservoir.n, intake.p) annotation (
+  connect(reservoir.o, intake.i) annotation (
     Line(points={{-82,66},{-76,66},{-76,64},{-72,64}},                      color = {28, 108, 200}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));

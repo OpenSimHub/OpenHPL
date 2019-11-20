@@ -6,7 +6,7 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
         origin={-80,-50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-64,-60},{-44,-40}},
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-60,-60},{-40,-40}},
                                                                                                                     rotation=0)));
   OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{48,-60},{68,-40}},
                                                                                                                              rotation=0)));
@@ -23,7 +23,7 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
         extent={{-10,-10},{10,10}},
         rotation=0)));
   OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(visible=true, transformation(
-        origin={-26,-50},
+        origin={-24,-50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   OpenHPL.ElectroMech.Turbines.Francis turbine(
@@ -86,14 +86,6 @@ equation
     Line(points = {{31, -72}, {32, -72}, {32, -62}}, color = {0, 0, 127}));
   connect(governor.P_ref, power.y) annotation (
     Line(points = {{8, -68}, {4.4, -68}, {4.4, -72}, {-1.2, -72}}, color = {0, 0, 127}));
-  connect(surgeTank.n, penstock.p) annotation (
-    Line(points={{-16,-50},{-6,-50}},                         color = {28, 108, 200}));
-  connect(surgeTank.p, intake.n) annotation (
-    Line(points={{-36,-50},{-44,-50}},                                   color = {28, 108, 200}));
-  connect(penstock.n, turbine.p) annotation (
-    Line(points={{14,-50},{22,-50}},                                  color = {28, 108, 200}));
-  connect(reservoir.n, intake.p) annotation (
-    Line(points={{-70,-50},{-64,-50}},                                          color = {28, 108, 200}));
   connect(fpu_to_fSI.u, wpu_to_wSI.u) annotation (Line(points={{-57.2,-90},{-94,-90},{-94,30},{-48,30},{-48,20},{-52.8,20}}, color={0,0,127}));
   connect(order2_1.w, wpu_to_wSI.u) annotation (Line(points={{-19,9},{-14,9},{-14,20},{-52.8,20}}, color={0,0,127}));
   connect(PSI_to_Ppu.u, turbine.P_out) annotation (
@@ -104,8 +96,12 @@ equation
     Line(points={{-42,5},{-46,5},{-46,14},{-38,14},{-38,11}},           color = {0, 0, 127}));
   connect(wpu_to_wSI.y, turbine.w_in) annotation (Line(points={{-66.6,20},{-80,20},{-80,-32},{16,-32},{16,-42},{20,-42}}, color={0,0,127}));
   connect(order2_1.p, bus1.p) annotation (Line(points={{-20,0},{0,0}}, color={0,0,255}));
-  connect(discharge.n, tail.n) annotation (Line(points={{68,-50},{74,-50}}, color={28,108,200}));
-  connect(turbine.n, discharge.p) annotation (Line(points={{42,-50},{48,-50}}, color={28,108,200}));
+  connect(discharge.o, tail.o) annotation (Line(points={{68,-50},{74,-50}}, color={28,108,200}));
+  connect(turbine.o, discharge.i) annotation (Line(points={{42,-50},{48,-50}}, color={28,108,200}));
+  connect(turbine.i, penstock.o) annotation (Line(points={{22,-50},{14,-50}}, color={28,108,200}));
+  connect(penstock.i, surgeTank.o) annotation (Line(points={{-6,-50},{-14,-50}}, color={28,108,200}));
+  connect(surgeTank.i, intake.o) annotation (Line(points={{-34,-50},{-40,-50}}, color={28,108,200}));
+  connect(intake.i, reservoir.o) annotation (Line(points={{-60,-50},{-70,-50}}, color={28,108,200}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end HPSimple_Francis_GridGen;

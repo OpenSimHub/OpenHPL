@@ -35,7 +35,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   //// variables
   Modelica.SIunits.Diameter dD = (D_i - D_o) / N "step in diameter change", D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N) "centered diameter vector in atm. p.", D_[N + 1] = linspace(D_i, D_o, N + 1) "boundary diameter vector in atm. p.";
   Modelica.SIunits.Area A_atm[N] = D .* D * pi / 4 "centered cross are vector in atm. p.", A_atm_[N + 1] = D_ .* D_ * pi / 4 "boundary cross are vector in atm. p.", A[N] "centered cross are vector", A_[N, 4] "boundary cross are vector", _A_atm[N, 4] "boundary cross are matrix in atm. p.";
-  Modelica.SIunits.Pressure p_p[N] "centered pressure", dp = Const.rho * Const.g * H / N "initial p. step", p_1 "left bound p.", p_2 "right bound p.", p_[N, 4] "boundary p. matrix";
+  Modelica.SIunits.Pressure p_p[N] "centered pressure", dp = Const.rho * Const.g * H / N "initial p. step", p_i "Inlet pressure (LHS)", p_o "Outlet Pressure (RHS)", p_[N, 4] "boundary p. matrix";
   Modelica.SIunits.Length dx = L / N "length step", dh = H / N "height step";
   Modelica.SIunits.MassFlowRate m_dot[N](start = Const.rho * V_dot0) "centered mass flow", m_dot_R "left bound m_dot", m_dot_V "right bound m_dot", m_dot_[N, 4] "boundary m_dot matrix";
   Real U[2 * N] "centered states", U_[8, N] "boundary states", F_ap[N] "centered A*rho", F_ap_[N, 4] "bounddary A*rho", S_[2 * N] "source term", F_[2 * N, 4] "F matrix", lam1[N, 4] "eigenvalue '+'", lam2[N, 4] "eigenvalue '-'";
@@ -46,7 +46,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   Real theta = 1.3 "parameter for slope limiter";
   extends OpenHPL.Interfaces.TwoContact;
 public
-  Functions.KP07.KPmethod KP(N = N, U = U, dx = dx, theta = theta, B = zeros(N + 4), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_1, 0; p_2, 0], boundaryCon = [true, false; true, false]);
+  Functions.KP07.KPmethod KP(N = N, U = U, dx = dx, theta = theta, B = zeros(N + 4), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_i, 0; p_o, 0], boundaryCon = [true, false; true, false]);
   // specify all variables which is needed for using KP method for solve PDE
 initial equation
   if SteadyState == true then
@@ -58,11 +58,11 @@ initial equation
   end if;
 equation
   //// Pipe flow rate
-  m_dot_R = p.m_dot;
-  m_dot_V = -n.m_dot;
+  m_dot_R = i.m_dot;
+  m_dot_V = -o.m_dot;
   //// pipe presurre
-  p_1 = p.p;
-  p_2 = n.p;
+  p_i = i.p;
+  p_o = o.p;
   //// state vector
   U[1:N] = p_p[:];
   U[N + 1:2 * N] = m_dot[:];
@@ -118,11 +118,11 @@ equation
   //// diff. equation
   der(U) = KP.diff_eq;
   annotation (
-    Documentation(info = "<html><head></head><body><p>This is a more detailed model for the pipe that mostly can be used for proper modelling of the penstock or other conduits.</p><p>The model could include the elastic walls and compressible water and use discretization method based on Kurganov-Petrova central upwind scheme (KP). The geometry of the penstock is described due to figure:</p>
+    Documentation(info="<html><head></head><body><p>This is a more detailed model for the pipe that mostly can be used for proper modelling of the penstock or other conduits.</p><p>The model could include the elastic walls and compressible water and use discretization method based on Kurganov-Petrova central upwind scheme (KP). The geometry of the penstock is described due to figure:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/penstock.png\"></p>
 <p>Conservation laws are usually solved by Finite-volume methods. With the Finite volume method, we divide the grid into small control volumes or control cells and then apply the conservation laws. Here the pipe is divided in <i>N</i> segments, with input and output pressure as a boundary conditions. The given cell is denoted by <i>j</i> i.e. it is the <i>j</i> th cell. Cell average is calculated at the center of the cell and <i>U</i> denotes the average values of the conserved variables. The left and the right interfaces of the cell are denoted by <i>j-1/2</i> and <i>j+1/2</i> respectively. At each cell interface, the right(+)/left(-) point values are reconstructed. <i>a </i>denotes the right and the left sided local speeds of propagation at the left/right interface of the cell.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/kp.png\"></p>
 <p>In order to determine the fluxes at the cell interface <i>H </i>and the source term <i>S</i> the KP scheme is used, which is a second order scheme which is well balanced.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/eq.png\"></p><p><span style=\"font-size: 12px;\">More info about the KP pipe model:&nbsp;</span><a href=\"http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=\" style=\"font-size: 12px;\">http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=</a><span style=\"font-size: 12px;\">&nbsp;</span></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/eq.png\"></p><p>More info about the KP pipe model: <a href=\"http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=\">http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=</a></p>
 </body></html>"));
 end PenstockKP;
