@@ -17,7 +17,7 @@ model Fitting "Different pipes fitting"
     Dialog(group = "Type of fitting"));
   //// variables
   Modelica.SIunits.Velocity v "Water velocity";
-  Modelica.SIunits.Area A = pi * D_1 / 4 "Cross section area";
+  Modelica.SIunits.Area A = pi * D_1^2 / 4 "Cross section area";
   Modelica.SIunits.Pressure dp "Pressure drop of fitting";
   Real phi "Dimensionless factor";
   //// Conector
