@@ -1,9 +1,9 @@
 within OpenHPL.Functions.Fitting;
-function FittingPhi
+function FittingPhi "Calculates the dimension factor phi based in the fitting type"
   extends Modelica.Icons.Function;
   input Modelica.SIunits.Velocity v "Flow velocity";
-  input Modelica.SIunits.Diameter D_1 "Pipe diameter from left hand side";
-  input Modelica.SIunits.Diameter D_2 "Pipe diameter from right hand side";
+  input Modelica.SIunits.Diameter D_i "Pipe diameter of inlet (LHS)";
+  input Modelica.SIunits.Diameter D_o "Pipe diameter of outlet (RHS)";
   input Modelica.SIunits.Length L "Fitting length";
   input Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 90 "Angle of the tapered reduction/expansion";
   input Modelica.SIunits.Density rho "Density";
@@ -14,23 +14,17 @@ function FittingPhi
 protected
   Modelica.SIunits.ReynoldsNumber N_Re;
 algorithm
-  N_Re := rho * abs(v) * D_1 / mu;
-  if fit_type == Fitting.FittingType.SquareReduction then
-    phi := DifferentFitting.SquareReduction(N_Re, eps, D_1, D_2);
-  elseif fit_type == Fitting.FittingType.SquareExpansion then
-    phi := DifferentFitting.SquareExpansion(N_Re, eps, D_1, D_2);
-  elseif fit_type == Fitting.FittingType.TaperedReduction then
-    phi := DifferentFitting.TaperedReduction(N_Re, eps, D_1, D_2, theta);
-  elseif fit_type == Fitting.FittingType.TaperedExpansion then
-    phi := DifferentFitting.TaperedExpansion(N_Re, eps, D_1, D_2, theta);
-  elseif fit_type == Fitting.FittingType.RoundReduction then
-    phi := DifferentFitting.RoundedReduction(N_Re, D_1, D_2);
-  elseif fit_type == Fitting.FittingType.RoundExpansion then
-    phi := DifferentFitting.SquareExpansion(N_Re, eps, D_1, D_2);
-  elseif fit_type == Fitting.FittingType.SharpOrifice then
-    phi := DifferentFitting.SharpOrifice(N_Re, eps, D_1, D_2);
-  elseif fit_type == Fitting.FittingType.ThickOrifice then
-    phi := DifferentFitting.ThickOrifice(N_Re, eps, D_1, D_2, L);
+  N_Re := rho * abs(v) * D_i / mu;
+  if fit_type == FittingType.Square then
+    phi := DifferentFitting.Square(N_Re, eps, D_i, D_o);
+  elseif fit_type == FittingType.Tapered then
+    phi := DifferentFitting.Tapered(N_Re, eps, D_i, D_o, theta);
+  elseif fit_type == FittingType.Rounded then
+    phi := DifferentFitting.Rounded(N_Re, eps, D_i, D_o);
+  elseif fit_type == FittingType.SharpOrifice then
+    phi := DifferentFitting.SharpOrifice(N_Re, eps, D_i, D_o);
+  elseif fit_type == FittingType.ThickOrifice then
+    phi := DifferentFitting.ThickOrifice(N_Re, eps, D_i, D_o, L);
   end if;
   annotation (
     Documentation(info = "<html>

@@ -4,16 +4,16 @@ model Fitting "Different pipes fitting"
   extends OpenHPL.Icons.Fitting;
   import Modelica.Constants.pi;
   /* conditions for different fitting type */
-  parameter Functions.Fitting.FittingType fit_type = Functions.Fitting.FittingType.SquareReduction "Type of pipe fitting";
+  parameter Functions.Fitting.FittingType fit_type=OpenHPL.Functions.Fitting.FittingType.Square "Type of pipe fitting";
   /* geometrical parameters for fitting */
   parameter Modelica.SIunits.Diameter D_i = 5.8 "Pipe diameter of the inlet (LHS)" annotation (
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_o = 3.3 "Pipe diameter of the outlet (RHS)" annotation (
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 45 "If Tapered fitting: angle of the tapered reduction/expansion"
-  annotation (Dialog(group = "Geometry", enable = fit_type==3 or fit_type==4));
+  annotation (Dialog(group = "Geometry", enable = fit_type==OpenHPL.Functions.Fitting.FittingType.Tapered));
   parameter Modelica.SIunits.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
-    Dialog(group = "Geometry", enable = fit_type==8));
+    Dialog(group = "Geometry", enable = fit_type==OpenHPL.Functions.Fitting.FittingType.ThickOrifice));
   /* variables */
   Modelica.SIunits.Velocity v "Water velocity";
   Modelica.SIunits.Area A = pi * D_i^2 / 4 "Cross section area";
@@ -23,7 +23,16 @@ model Fitting "Different pipes fitting"
   extends OpenHPL.Interfaces.ContactPort;
 equation
   v = m_dot / Const.rho / A;
-  phi = Functions.Fitting.FittingPhi(v, D_i, D_o, L, theta, Const.rho, Const.mu, Const.eps, fit_type);
+  phi =Functions.Fitting.FittingPhi(
+    v,
+    D_i,
+    D_o,
+    L,
+    theta,
+    Const.rho,
+    Const.mu,
+    Const.eps,
+    fit_type);
   dp = phi * 0.5 * Const.rho * abs(v) * v;
   o.p = i.p - dp "Pressure of the output connector";
   annotation (
