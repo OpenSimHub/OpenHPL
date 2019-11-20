@@ -1,7 +1,7 @@
 within OpenHPL.Functions.DarcyFriction;
 function fDarcy "Darcy friction factor"
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.ReynoldsNumber N_Re "Reynold number";
+  input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
   input Modelica.SIunits.Diameter D "Pipe diameter";
   input Modelica.SIunits.Height epsilon "Pipe roughness height";
   // Function output (response) value
@@ -28,7 +28,7 @@ algorithm
   end if;
   annotation (
     Documentation(info = "<html>
-<p>Function for defining the Darcy friction factor using the <code>Reynold&nbsp;number</code>. Has different equations for laminar (Reynold number &LT; 2100) and turbulent (Reynold number &GT; 2300) flows and also for transitional zone (2100 &LT; Reynold number &LT; 2300).</p>
+<p>Function for defining the Darcy friction factor using the <code>Reynolds&nbsp;number</code>. Has different equations for laminar (Reynolds number &LT; 2100) and turbulent (Reynolds number &GT; 2300) flows and also for transitional zone (2100 &LT; Reynolds number &LT; 2300).</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/darcyf.png\"/></p>
 <p>Transitional zone is define with a cubic polynomial fitting and looks as follows:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/darcyf_zoomed.png\"/></p>

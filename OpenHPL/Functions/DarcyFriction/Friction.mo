@@ -12,10 +12,8 @@ function Friction "Friction force with Darcy friction factor"
   output Modelica.SIunits.Force F_f "Friction force";
   // Local (protected) quantities
 protected
-  Modelica.SIunits.ReynoldsNumber N_Re;
-  // Reynold number
-  Real f;
-  // friction factor
+  Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
+  Real f "friction factor";
 algorithm
   N_Re := rho * abs(v) * D / mu;
   f := fDarcy(N_Re, D, eps);

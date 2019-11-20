@@ -1,9 +1,8 @@
 within OpenHPL.Functions.Fitting.DifferentFitting;
 function RoundedReduction
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.ReynoldsNumber N_Re "Reynold number";
-  input Modelica.SIunits.Diameter D_1, D_2;
-  //Pipe diameters
+  input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
+  input Modelica.SIunits.Diameter D_1, D_2 "Pipe diameters";
   output Real phi;
 algorithm
   phi := (0.1 + 50 / N_Re) * ((D_1 / D_2) ^ 4 - 1);
