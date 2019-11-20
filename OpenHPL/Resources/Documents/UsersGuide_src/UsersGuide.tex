@@ -389,21 +389,21 @@ Based on the presented equations and figures for the calculation of the dimensio
 function SquareReduction
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
   input Modelica.SIunits.Height eps "Pipe roughness height";
-  input Modelica.SIunits.Diameter D_1, D_2; //Pipe diameters
+  input Modelica.SIunits.Diameter D_i, D_o "Pipe diameters";
   output Real phi;
 protected
   Real f_D "friction factor";
 algorithm
   f_D := Functions.DarcyFriction.fDarcy(N_Re, D_1, eps);
   if N_Re < 2500 then
-    phi := (1.2 + 160 / N_Re) * ((D_1 / D_2) ^ 4 - 1);
+    phi := (1.2 + 160 / N_Re) * ((D_i / D_o) ^ 4 - 1);
   else
-    phi := (0.6 + 0.48 * f_D) * (D_1 / D_2) ^ 2 * ((D_1 / D_2) ^ 2 - 1);
+    phi := (0.6 + 0.48 * f_D) * (D_i / D_o) ^ 2 * ((D_i / D_o) ^ 2 - 1);
   end if;
 end SquareReduction;
 \end{lstlisting}
 
-Another function, \emph{FittingPhi} also provides the dimensionless factor $\phi$ as an output. This function calls the presented above functions with a specific type of the fitting in order to get value for the factor $\phi$. This function has the following inputs: the linear velocity $v$, the pipe length $L$, diameters of first and second pipes $D_1$ and $D_2$, liquid density and viscosity $\rho$ and $\mu$, the pipe roughness height $\epsilon$. The last input for this function is a variable with the specific type \emph{FittingType} that holds information about the fitting type.
+Another function, \emph{FittingPhi} also provides the dimensionless factor $\phi$ as an output. This function calls the presented above functions with a specific type of the fitting in order to get value for the factor $\phi$. This function has the following inputs: the linear velocity $v$, the pipe length $L$, diameters of first and second pipes $D_i$ and $D_o$, liquid density and viscosity $\rho$ and $\mu$, the pipe roughness height $\epsilon$. The last input for this function is a variable with the specific type \emph{FittingType} that holds information about the fitting type.
 
 \section{Waterway}
 
@@ -468,7 +468,7 @@ Here, the momentum of the water in the pipe is $M_\mathrm{c}=m_\mathrm{c}v_\math
 
 The main defined variable is the volumetric flow rate. In this \emph{Pipe} unit, the flow rate changes simultaneously in the whole pipe (information about the speed of wave propagation is not included here). Water pressures can be shown just in the boundaries of pipe (inlet and outlet pressure from connectors). This unit uses the \emph{ContactPort} connector model and can be connected to other waterway units.
 
-When the \emph{Pipe} unit is in use, the user can specify the required geometry parameters for this pipe: length $L_\mathrm{c}$, height difference $H_\mathrm{c}$, inlet and outlet diameters $D_\mathrm{c,1}$ and $D_\mathrm{c,2}$, and pipe roughness height $\epsilon_\mathrm{c}$. In order to define the friction force $F_\mathrm{f,c}$ the \emph{Friction} function is used here. It should be noted that this unit provides possibilities for the modelling of pipes with both positive and negative slopes (positive or negative height difference). This unit can be initialized by the initial value of the flow rate $\dot{V}_\mathrm{c,0}$. Otherwise, user can choose to an option when the simulation starts from steady-state and the OpenModelica handles automatically initial steady-state values (does not work properly in OpenModelica).
+When the \emph{Pipe} unit is in use, the user can specify the required geometry parameters for this pipe: length $L_\mathrm{c}$, height difference $H_\mathrm{c}$, inlet and outlet diameters $D_\mathrm{c,i}$ and $D_\mathrm{c,o}$, and pipe roughness height $\epsilon_\mathrm{c}$. In order to define the friction force $F_\mathrm{f,c}$ the \emph{Friction} function is used here. It should be noted that this unit provides possibilities for the modelling of pipes with both positive and negative slopes (positive or negative height difference). This unit can be initialized by the initial value of the flow rate $\dot{V}_\mathrm{c,0}$. Otherwise, user can choose to an option when the simulation starts from steady-state and the OpenModelica handles automatically initial steady-state values (does not work properly in OpenModelica).
 
 \subsection{Surge Tank}
 
