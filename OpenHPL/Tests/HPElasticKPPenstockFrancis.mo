@@ -7,8 +7,10 @@ model HPElasticKPPenstockFrancis "HP system model with Francis turbine and elast
         rotation=0)));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.6, startTime = 600) annotation (
     Placement(visible = true, transformation(origin = {18, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Constants Const annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-74,54},{-54,74}}, rotation=0)));
   Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{56,30},{76,50}}, rotation=0)));
   Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(

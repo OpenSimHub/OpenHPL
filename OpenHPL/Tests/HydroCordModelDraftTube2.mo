@@ -95,8 +95,10 @@ model HydroCordModelDraftTube2 "Model of HP system with simplified models for pe
     Placement(visible = true, transformation(origin = {90, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Blocks.Sources.Constant const_level(k = 22.6) annotation (
     Placement(visible = true, transformation(origin = {58, -88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Constants Const(V_0 = 1.82225) annotation (
-    Placement(visible = true, transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const(V_0=1.82225) annotation (Placement(visible=true, transformation(
+        origin={-90,90},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   OpenHPL.Waterway.Pipe pipe1(
     D_i=2.2,
     D_o=3.04,

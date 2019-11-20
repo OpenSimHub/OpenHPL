@@ -28,8 +28,10 @@ model HPSimplePenstockResKP "Model of HP system with using reservoir model based
         origin={28,36},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   Waterway.ReservoirChannel reservoir(
     N=20,
     w=1000,

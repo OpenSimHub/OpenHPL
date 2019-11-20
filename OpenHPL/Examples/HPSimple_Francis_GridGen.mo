@@ -53,8 +53,10 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
         origin={32,-50},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  inner OpenHPL.Constants Const(V_0 = 4.49) annotation (
-    Placement(visible = true, transformation(origin={-90,70},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const(V_0=4.49) annotation (Placement(visible=true, transformation(
+        origin={-90,70},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   OpenIPSL.Electrical.Machines.PSAT.Order2 order2_1(D = 0, M = 10,
     P_0=16035269.869201,
     Q_0=11859436.505981,

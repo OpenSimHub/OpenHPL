@@ -41,8 +41,10 @@ model HydroCordModelFrancis2 "Model of HP system with simplified models for pens
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const(V_0 = 1.925) annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const(V_0=1.925) annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   OpenHPL.Waterway.Pipe intake2(
     D_i=6.3,
     D_o=6.3,

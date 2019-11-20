@@ -1,5 +1,5 @@
 within OpenHPL;
-record Constants "Constants for this library"
+record Parameters "Provides a set of base parameters for this library"
   extends Modelica.Icons.Record;
   parameter Modelica.SIunits.Acceleration g = Modelica.Constants.g_n "gravity" annotation (
     Dialog(enable=false, group = "Constants"));
@@ -29,8 +29,7 @@ record Constants "Constants for this library"
   annotation (
     Documentation(info = "<html><head></head><body><p>Here, common parameters&nbsp;are determined for this library. </p><p>It is possible to insert this class to models and use the common parameters for whole library.&nbsp;</p>
   </body></html>"),
-    defaultComponentName = "Const",
+    defaultComponentName = "para",
     defaultComponentPrefixes = "inner",
-    missingInnerMessage = "No 'Const' component is defined. A default component will be used, and generate constants",
-    defaultComponentPrefixes = "inner");
-end Constants;
+    missingInnerMessage = "No 'para' component is defined. A default component will be used and provide system parameters");
+end Parameters;

@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07.TestKPpde;
 model ElasticPenstock
   extends Modelica.Icons.Example;
-  outer Constants Const;
+  outer Parameters Const;
   import Modelica.Constants.pi;
   parameter Modelica.SIunits.Height H = 420 "Height over which water fall in the pipe, m" annotation (
     Dialog(group = "Geometry"));

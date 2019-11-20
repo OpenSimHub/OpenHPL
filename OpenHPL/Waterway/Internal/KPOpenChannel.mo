@@ -1,6 +1,6 @@
 within OpenHPL.Waterway.Internal;
 model KPOpenChannel "Implementation of the KP functions for an open channel"
-  outer Constants Const;
+  outer Parameters Const;
   parameter Integer N = 100;
   parameter Modelica.SIunits.Length w = 194 "Channel width", L = 5000 "Channel length";
   parameter Modelica.SIunits.Height H[2] = {16.7, 0} "Channel height, left and right side", b[N + 1] = linspace(H[1], H[2], N + 1) "Riverbed", h0[N] = vector([ones(5) * 0.4; linspace(H[1] - 0.4 - 0.5 * (b[6] + b[7]), H[1] - 0.4 - 0.5* (b[N] + b[N + 1]), N - 5)]) "Initial depth";

@@ -29,8 +29,10 @@ model HydroCordModelKP "Model of HP system with simplified models for penstock, 
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const(V_0 = 0.000400824, beta_total = 1 / 997 / 1422 ^ 2) annotation (
-    Placement(visible = true, transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const(V_0=0.000400824, beta_total=1/997/1422^2) annotation (Placement(visible=true, transformation(
+        origin={-90,90},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   OpenHPL.ElectroMech.Turbines.Turbine turbine(
     C_v=6.5,
     ConstEfficiency=false,

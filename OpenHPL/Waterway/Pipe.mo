@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Pipe "Model of the pipe"
-  outer Constants Const "Using standard class with constants";
+  outer Parameters Const "Using standard class with constants";
   extends OpenHPL.Icons.Pipe;
   import Modelica.Constants.pi;
   //// geometrical parameters of the pipe

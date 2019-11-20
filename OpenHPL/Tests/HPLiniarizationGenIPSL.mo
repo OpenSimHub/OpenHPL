@@ -55,8 +55,10 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
         origin={28,36},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const(V_0 = 4.49) annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const(V_0=4.49) annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   OpenIPSL.Electrical.Machines.PSAT.Order2 order2_1(D = 0, M = 10, P_0 = 16.0352698692006 * 5, Q_0 = 11.859436505981 * 5, Sn = 20 * 5, Vn = 400, ra = 0.001, w(fixed = true), x1d = 0.302) annotation (
     Placement(transformation(extent = {{26, -30}, {46, -10}})));
   Modelica.Blocks.Math.Gain Normilizer(k = 1 / 100e6) annotation (

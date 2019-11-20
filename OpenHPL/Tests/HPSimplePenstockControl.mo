@@ -5,8 +5,10 @@ model HPSimplePenstockControl "Model of HP system with governor"
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   Waterway.Pipe intake annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
   Waterway.Pipe discharge(H=5, L=600) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
   Waterway.Reservoir tail(H_r=10) annotation (Placement(visible=true, transformation(

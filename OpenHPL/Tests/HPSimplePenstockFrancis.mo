@@ -53,8 +53,10 @@ model HPSimplePenstockFrancis "HP system model with Francis turbine"
         origin={28,38},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
 equation
   connect(aggregate.w_out, turbine.w_in) annotation (
     Line(points = {{32, 16}, {32, 16}, {32, 28}, {32, 28}}, color = {0, 0, 127}));

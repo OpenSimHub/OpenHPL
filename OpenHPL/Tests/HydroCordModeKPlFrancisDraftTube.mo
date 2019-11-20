@@ -32,8 +32,10 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const(V_0 = 0.0058466) annotation (
-    Placement(visible = true, transformation(origin = {-86, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const(V_0=0.0058466) annotation (Placement(visible=true, transformation(
+        origin={-86,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   OpenHPL.Waterway.Pipe intake2(
     D_i=6.3,
     D_o=6.3,

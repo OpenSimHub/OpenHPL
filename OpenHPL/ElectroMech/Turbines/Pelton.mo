@@ -1,6 +1,6 @@
 within OpenHPL.ElectroMech.Turbines;
 model Pelton "Model of the Pelton turbine"
-    outer Constants Const "using standard class with constants";
+  outer Parameters Const "using standard class with constants";
     extends Icons.Turbine;
     import Modelica.Constants.pi;
     //// geometrical parameters of the turbine

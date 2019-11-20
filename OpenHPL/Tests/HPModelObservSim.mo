@@ -1,6 +1,6 @@
 within OpenHPL.Tests;
 model HPModelObservSim
-  inner OpenHPL.Constants Const;
+  inner OpenHPL.Parameters Const;
   //HPModel hpmod;
   //HPLiniarization hpreal;
   HPLiniarizationKP hprealkp;

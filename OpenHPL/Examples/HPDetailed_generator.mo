@@ -7,8 +7,10 @@ model HPDetailed_generator "Model of waterway and aggregate of the HP system wit
         rotation=0)));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
     Placement(visible = true, transformation(origin={50,30},   extent={{10,-10},{-10,10}},      rotation = 0)));
-  inner OpenHPL.Constants Const(V_0 = 19.12, rho(displayUnit = "kg/m3") = 997) annotation (
-    Placement(visible = true, transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const(V_0=19.12, rho(displayUnit="kg/m3") = 997) annotation (Placement(visible=true, transformation(
+        origin={-90,90},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,0},{-50,20}},  rotation=0)));
   Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}},rotation=0)));
   Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(

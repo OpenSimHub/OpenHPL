@@ -7,8 +7,10 @@ model HPElasticKPPenstockHalfSurgeD "Similar to previous HP system, but with twi
         rotation=0)));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 1200) annotation (
     Placement(visible = true, transformation(origin = {0, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Constants Const annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 1200) annotation (
     Placement(visible = true, transformation(extent = {{-20, 2}, {0, 22}}, rotation = 0)));
   Waterway.Pipe intake(V_dot0=19) annotation (Placement(visible=true, transformation(extent={{-74,56},{-54,76}}, rotation=0)));

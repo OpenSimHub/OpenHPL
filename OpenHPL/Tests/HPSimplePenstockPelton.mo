@@ -28,8 +28,10 @@ model HPSimplePenstockPelton "HP system model with Pelton turbine"
         origin={-30,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   ElectroMech.Turbines.Pelton turbine(R=1.74/2, D_0=1) annotation (Placement(visible=true, transformation(
         origin={10,34},
         extent={{-10,-10},{10,10}},

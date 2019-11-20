@@ -49,8 +49,10 @@ model HPSimplePenstockFrancis2 "HP system model with Francis turbine and generat
         origin={28,36},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const(V_0 = 4.54) annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const(V_0=4.54) annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   Waterway.Fitting fitting(D_1=3, D_2=1.63) annotation (Placement(transformation(extent={{-4,20},{16,40}})));
 equation
   connect(generator.w_out, turbine.w_in) annotation (

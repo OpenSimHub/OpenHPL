@@ -1,6 +1,6 @@
 within OpenHPL.Tests;
 model HPModelObserv
-  inner OpenHPL.Constants Const;
+  inner OpenHPL.Parameters Const;
   import Modelica.Constants.pi;
   parameter Real H_r = 48, H_i = 23, H_p = 428.5, H_s = 120, H_d = 0.5, H_t = 5;
   parameter Real L_i = 6600, L_p = 600, L_s = 140, L_d = 600;

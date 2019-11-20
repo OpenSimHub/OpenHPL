@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model Penstock "Model of the penstock with elastic walls and compressible water. Simple Staggered grid scheme"
   extends Modelica.Icons.UnderConstruction;
-  outer Constants Const;
+  outer Parameters Const;
   extends OpenHPL.Icons.Pipe(    vertical=true);
   import Modelica.Constants.pi;
   // Penstock

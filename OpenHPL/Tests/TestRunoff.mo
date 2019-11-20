@@ -34,8 +34,10 @@ model TestRunoff
         origin={40,12},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
 equation
   connect(reservoir1.V_in, runOff.V_dot_runoff) annotation (
     Line(points = {{-68, 40}, {-76, 40}, {-76, 50}, {-82, 50}}, color = {0, 0, 127}));

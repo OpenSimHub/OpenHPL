@@ -30,8 +30,10 @@ model HPLiniarizationFranGen "HP system model for liniarization with Francis tur
         origin={-30,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Constants Const annotation (
-    Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+        origin={-90,92},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   ElectroMech.Turbines.Francis turbine(
     GivenData=false,
     GivenServoData=false,

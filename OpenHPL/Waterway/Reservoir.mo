@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
-  outer Constants Const "using standard class with constants";
+  outer Parameters Const "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
   //// constant water level in the reservoir
   parameter Modelica.SIunits.Height H_r = 50 "Initial water level above intake" annotation (
