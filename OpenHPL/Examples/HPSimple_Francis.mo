@@ -59,7 +59,10 @@ model HPSimple_Francis "Model of the HP system with Francis turbine and simplifi
         rotation=0)));
   inner OpenHPL.Constants Const(V_0 = 4.54) annotation (
     Placement(visible = true, transformation(origin = {-90, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Waterway.Fitting fitting(D_i=3, D_o=1.63, fit_type = OpenHPL.Functions.Fitting.FittingType.SquareReduction) annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
+  Waterway.Fitting fitting(
+    D_i=3,
+    D_o=1.63,
+    fit_type=OpenHPL.Types.Fitting.SquareReduction) annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
 equation
   connect(generator.w_out, turbine.w_in) annotation (
     Line(points={{19,-24},{12,-24},{12,-8},{18,-8}},        color = {0, 0, 127}));
