@@ -1,4 +1,4 @@
-within OpenHPL.Functions.Fitting.DifferentFitting;
+within OpenHPL.Functions.Fitting.FittingVariants;
 function Rounded "Calculation of phi for rounded reduction/expansion"
   extends Modelica.Icons.Function;
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";

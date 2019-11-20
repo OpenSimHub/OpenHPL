@@ -4,16 +4,16 @@ model Fitting "Different pipes fitting"
   extends OpenHPL.Icons.Fitting;
   import Modelica.Constants.pi;
   /* conditions for different fitting type */
-  parameter Functions.Fitting.FittingType fit_type=OpenHPL.Functions.Fitting.FittingType.Square "Type of pipe fitting";
+  parameter Types.Fitting fit_type=OpenHPL.Types.Fitting.Square "Type of pipe fitting";
   /* geometrical parameters for fitting */
   parameter Modelica.SIunits.Diameter D_i = 5.8 "Pipe diameter of the inlet (LHS)" annotation (
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_o = 3.3 "Pipe diameter of the outlet (RHS)" annotation (
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 45 "If Tapered fitting: angle of the tapered reduction/expansion"
-  annotation (Dialog(group = "Geometry", enable = fit_type==OpenHPL.Functions.Fitting.FittingType.Tapered));
+  annotation (Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.Tapered));
   parameter Modelica.SIunits.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
-    Dialog(group = "Geometry", enable = fit_type==OpenHPL.Functions.Fitting.FittingType.ThickOrifice));
+    Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.ThickOrifice));
   /* variables */
   Modelica.SIunits.Velocity v "Water velocity";
   Modelica.SIunits.Area A = pi * D_i^2 / 4 "Cross section area";

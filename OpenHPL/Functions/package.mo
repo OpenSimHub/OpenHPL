@@ -1,6 +1,6 @@
 within OpenHPL;
 package Functions "Functions and methods"
-  extends Modelica.Icons.UtilitiesPackage;
+  extends Modelica.Icons.FunctionsPackage;
 
   annotation (
     Documentation(info = "<html>

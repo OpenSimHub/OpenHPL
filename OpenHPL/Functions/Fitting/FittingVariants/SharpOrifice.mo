@@ -1,4 +1,4 @@
-within OpenHPL.Functions.Fitting.DifferentFitting;
+within OpenHPL.Functions.Fitting.FittingVariants;
 function SharpOrifice "Calculation of phi for a Sharp Orifice"
   extends Modelica.Icons.Function;
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";

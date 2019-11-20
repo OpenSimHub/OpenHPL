@@ -1,4 +1,4 @@
-within OpenHPL.Functions.Fitting.DifferentFitting;
+within OpenHPL.Functions.Fitting.FittingVariants;
 function ThickOrifice
   extends Modelica.Icons.Function;
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";

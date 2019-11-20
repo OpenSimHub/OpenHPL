@@ -1,4 +1,4 @@
-within OpenHPL.Functions.Fitting.DifferentFitting;
+within OpenHPL.Functions.Fitting.FittingVariants;
 function Square "Calculation of phi for Square reduction/expansion"
   extends Modelica.Icons.Function;
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";

@@ -9,22 +9,44 @@ function FittingPhi "Calculates the dimension factor phi based in the fitting ty
   input Modelica.SIunits.Density rho "Density";
   input Modelica.SIunits.DynamicViscosity mu "Dynamic viscosity of water";
   input Modelica.SIunits.Height eps "Pipe roughness height";
-  input Fitting.FittingType fit_type "Type of pipe fitting";
+  input Types.Fitting fit_type "Type of pipe fitting";
   output Real phi;
 protected
   Modelica.SIunits.ReynoldsNumber N_Re;
 algorithm
   N_Re := rho * abs(v) * D_i / mu;
-  if fit_type == FittingType.Square then
-    phi := DifferentFitting.Square(N_Re, eps, D_i, D_o);
-  elseif fit_type == FittingType.Tapered then
-    phi := DifferentFitting.Tapered(N_Re, eps, D_i, D_o, theta);
-  elseif fit_type == FittingType.Rounded then
-    phi := DifferentFitting.Rounded(N_Re, eps, D_i, D_o);
-  elseif fit_type == FittingType.SharpOrifice then
-    phi := DifferentFitting.SharpOrifice(N_Re, eps, D_i, D_o);
-  elseif fit_type == FittingType.ThickOrifice then
-    phi := DifferentFitting.ThickOrifice(N_Re, eps, D_i, D_o, L);
+  if fit_type == Types.Fitting.Square then
+    phi :=FittingVariants.Square(
+      N_Re,
+      eps,
+      D_i,
+      D_o);
+  elseif fit_type == Types.Fitting.Tapered then
+    phi :=FittingVariants.Tapered(
+      N_Re,
+      eps,
+      D_i,
+      D_o,
+      theta);
+  elseif fit_type == Types.Fitting.Rounded then
+    phi :=FittingVariants.Rounded(
+      N_Re,
+      eps,
+      D_i,
+      D_o);
+  elseif fit_type == Types.Fitting.SharpOrifice then
+    phi :=FittingVariants.SharpOrifice(
+      N_Re,
+      eps,
+      D_i,
+      D_o);
+  elseif fit_type == Types.Fitting.ThickOrifice then
+    phi :=FittingVariants.ThickOrifice(
+      N_Re,
+      eps,
+      D_i,
+      D_o,
+      L);
   end if;
   annotation (
     Documentation(info = "<html>

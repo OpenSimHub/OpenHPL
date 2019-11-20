@@ -63,7 +63,7 @@ model HydroCordModelDraftTube2 "Model of HP system with simplified models for pe
   OpenHPL.Waterway.Fitting fitting1(
     D_1=4.7,
     D_2=3.3,
-    fit_type=OpenHPL.Functions.Fitting.FittingType.SquareReduction) annotation (Placement(visible=true, transformation(
+    fit_type=OpenHPL.Types.Fitting.SquareReduction) annotation (Placement(visible=true, transformation(
         origin={14,30},
         extent={{-10,-10},{10,10}},
         rotation=-90)));

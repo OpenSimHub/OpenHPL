@@ -1,6 +1,6 @@
 within OpenHPL.Functions;
 package DarcyFriction "Functions to define the Darcy friction factor and friction Force"
-  extends Modelica.Icons.FunctionsPackage;
+  extends Modelica.Icons.UtilitiesPackage;
 
   annotation (
     Icon(coordinateSystem(initialScale = 0.1)),
