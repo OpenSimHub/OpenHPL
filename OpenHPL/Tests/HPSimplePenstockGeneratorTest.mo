@@ -33,7 +33,7 @@ model HPSimplePenstockGeneratorTest "Generator testing for HP"
         origin={26,36},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Parameters para annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));

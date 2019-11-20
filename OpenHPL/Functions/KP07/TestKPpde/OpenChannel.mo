@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07.TestKPpde;
 model OpenChannel
   extends Modelica.Icons.Example;
-  outer Parameters Const;
+  outer Parameters para;
   parameter Integer N = 100;
   parameter Modelica.SIunits.Length w = 194 "Channel width", L = 5000 "Channel length";
   parameter Modelica.SIunits.Height H[2] = {16.7, 0} "Channel height, left and right side", b[N + 1] = linspace(H[1], H[2], N + 1) "Riverbed", h0[N] = vector([ones(5) * 0.4; linspace(H[1] - 0.4 - 0.5 * (b[6] + b[7]), H[1] - 0.4 - 0.5* (b[N] + b[N + 1]), N - 5)]) "Initial depth";
@@ -71,13 +71,13 @@ equation
     u_[i, 4] = 2 * h_[i, 4] * q_[i, 4] / (h_[i, 4] ^ 2 + max(h_[i, 4] ^ 2, 1e-10));
   end for;
   /// eigenvalues
-  lam1 = u_ + sqrt(h_ * Const.g);
-  lam2 = u_ - sqrt(h_ * Const.g);
+  lam1 = u_ + sqrt(h_ * para.g);
+  lam2 = u_ - sqrt(h_ * para.g);
   /// F vector
-  F_ = [q_; q_ .* q_ ./ h_ + Const.g * h_ .* h_ / 2];
+  F_ = [q_; q_ .* q_ ./ h_ + para.g * h_ .* h_ / 2];
   /// source term of friction and gravity forces
   for i in 1:N loop
-    F_f[i] = (-Const.g * h[i] * (b[i + 1] - b[i]) / dx) - f_n ^ 2 * Const.g * q[i] * abs(q[i]) * (w + 2 * h[i] ^ (4 / 3)) / w ^ (4 / 3) * (2 * h[i] / (h[i] ^ 2 + max(h_[i, 4] ^ 2, 1e-10))) ^ (7 / 3);
+    F_f[i] = (-para.g * h[i] * (b[i + 1] - b[i]) / dx) - f_n ^ 2 * para.g * q[i] * abs(q[i]) * (w + 2 * h[i] ^ (4 / 3)) / w ^ (4 / 3) * (2 * h[i] / (h[i] ^ 2 + max(h_[i, 4] ^ 2, 1e-10))) ^ (7 / 3);
   end for;
   S_[1:N] = zeros(N);
   S_[N + 1:2 * N] = F_f;

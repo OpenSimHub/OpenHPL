@@ -24,15 +24,17 @@
 \usepackage{listings}
 \input{listings-modelica.cfg}
 
+\title{User's guide for the Open Hydropower Library (OpenHPL)}
+\author{Liubomyr Vytvytskyi (original version 1.0.0)\\
+  Porsgrunn, \nth{6} September 2019}
+\date{Last updated: \today\\ by TMCC/USN }
+
 \begin{document}
 
 %% Create title page with the parameters given in the preamble above
-%\USNtitlepage%
-\chapter*{User's guide for the Open Hydropower Library (OpenHPL)}
+\maketitle
 
-Liubomyr Vytvytskyi
 
-Porsgrunn, \nth{6} September 2019
 
 \tableofcontents
 %\addcontentsline{toc}{chapter}{\contentsname}
@@ -61,27 +63,39 @@ In addition, Modelica models in OpenModelica can be simulated within a scripting
 
 \chapter{OpenHPL elements}
 
-An overview of each element of the hydropower library \emph{OpenHPL} is provided in this section. A screenshot of \emph{OpenHPL} in OpenModelica is shown in Figure~\ref{fig:fig1}.
+An overview of each element of the hydropower library \emph{OpenHPL} is provided in this section. A screenshot of \emph{OpenHPL} in OpenModelica is shown in Figure~\ref{fig:Library}.
+
 \begin{figure}[!ht]
   \centering
- \includegraphics[width=0.7\textwidth]{fig/Bilde1}
+ \includegraphics[width=0.7\textwidth]{Library}
  \caption{Screen shot of OpenModelica with the hydropower library.}
-  \label{fig:fig1}
+  \label{fig:Library}
 \end{figure}
 
-It is visible from Figure~\ref{fig:fig1} that the library is divided into various components and classes. Each of these components and classes is listed below with a short description:
-\begin{itemize}
-    \item First, the \emph{Copyright} element provides a reference to the license for this library.
-    \item Next, the \emph{Constants} element is a record's model that determines the common parameters for this library. It is possible to insert this class to models and use the common parameters for the whole library.
-    \item Then, the \emph{Examples} class provides various examples of using the library for hydropower system as well as examples of using \emph{OpenHPL} together with power system library --- \emph{OpenIPSL}.
-    \item The \emph{Waterway} class consists of various unit models for the waterway of the hydropower system, such as reservoirs, conduits, surge tank, pipe fittings, etc.
-    \item The \emph{ElectroMech} class provides the electro-mechanical components of the hydropower system and consists of two main sub-classes: \emph{Turbines} with various turbine unit models and \emph{Generators} with models for a synchronise generator.
-    \item Then, the \emph{Controllers} class holds a simple model for a governor of the hydropower system.
-    \item The \emph{Tests} class provides various testing models for all library components.
-    \item Next, the \emph{Interfaces} class gives connector models for the library components.
-    \item The \emph{Functions class} consists of three sub-classes that define functions for the calculation of a friction term in the pipe --- \emph{DarcyFriction}, for solving PDEs using Kurganov-Petrova (KP) scheme --- \emph{KP07}, and for pressure drop calculation in various pipe fitting --- \emph{Fitting}.
-    \item Finally, the \emph{Icons} class holds icons for all library components.
-\end{itemize}
+The library is divided into various packages:
+\begin{description}
+\item[\texttt{Copyright}] A documentation class that  provides a reference to the license for this library.
+\item[\texttt{UsersGuide}] A documentation class that  provides the user's guide of this library.
+\item[\texttt{Parameters}] A record that determines the common parameters for this library. It is possible to insert this class into models and use the common parameters for the whole model.
+    \item[\texttt{Examples}] A package that provides various examples of using the library for hydropower system as well as examples of using \emph{OpenHPL} together with power system library --- \emph{OpenIPSL}.
+    \item[\texttt{Waterway}] A package that consists of various unit models for the waterway of the hydropower system, such as reservoirs, conduits, surge tank, pipe fittings, etc.
+    \item[\texttt{ElectroMech}] A package that provides the electro-mechanical components of the hydropower system and consists of two main sub-packages:
+      \begin{description}
+      \item[\texttt{Turbines}] with various turbine unit models
+      \item[\texttt{Generators}] with simplified models of a generator
+      \end{description}
+    \item[\texttt{Controllers}] A package that holds a simple model for a governor of the hydropower system.
+    \item[\texttt{Interfaces}] A package of gives connector interfaces for the library components.
+    \item[\texttt{Functions}] A package of functions that consists of three sub-packages:
+      \begin{itemize}
+      \item[\texttt{Fitting}] Functions for calculation of pressure drop for various pipe fittings.
+      \item[\texttt{DarcyFriction}] Functions to calculate the friction term in the pipe.
+      \item[\texttt{KP07}] Functions for PDEs using Kurganov-Petrova (KP) scheme.
+      \end{itemize}
+    \item[\texttt{Icons}] Package of icons used in the library.
+    \item[\texttt{Types}] Package of types used in the library.
+    \item[\texttt{Tests}] Package of various testing models. Not guaranteed to work and meant for development only.
+    \end{description}
 Below, a detailed description of each unit model of the \emph{OpenHPL} is provided.
 
 \section{Interfaces}
@@ -103,8 +117,8 @@ In addition, some extensions of this water flow connector are developed for the 
     \begin{lstlisting}[language = modelica]
     partial model TwoContact "Model of two connectors"
       // Specifying connectors and their placement in diagram
-      Contact p "Inlet contact" annotation(Placement(transformation(extent={{-110,-10},{-90,10}})));
-      Contact n "Outlet contact" annotation(Placement(transformation(extent={{90,-10},{110,10}})));
+      Contact i "Inlet contact" annotation(Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Contact o "Outlet contact" annotation(Placement(transformation(extent={{90,-10},{110,10}})));
     end TwoContact;
     \end{lstlisting}
     \item \emph{ContactPort} is an extension from the \emph{TwoContact} model which also provides information about a mass flow rate between these two connectors. The mass flow rate that flows through the inlet connector is equal to the mass flow through the outlet connector. This model is used for the pipe modelling. A Modelica code for this \emph{ContactPort} model looks as follows:
@@ -113,8 +127,8 @@ In addition, some extensions of this water flow connector are developed for the 
       Modelica.SIunits.MassFlowRate m_dot "Mass flow rate";
       extends TwoContact;
     equation
-      0 = p.m_dot + n.m_dot;
-      m_dot = p.m_dot;
+      0 = i.m_dot + o.m_dot;
+      m_dot = i.m_dot;
     end ContactPort;
     \end{lstlisting}
     \item \emph{ContactNode} is an extension from the \emph{TwoContact} model and provides a node pressure that is equal to the pressures from these two connectors. This model also defines the mass flow rate that is the sum of the mass flow rates through the inlet and outlet connectors. This model is used for the surge tank modelling. A Modelica code for this \emph{ContactNode} model looks as follows:
@@ -124,9 +138,9 @@ In addition, some extensions of this water flow connector are developed for the 
       Modelica.SIunits.MassFlowRate m_dot "Mass flow rate";
       extends TwoContact;
     equation
-      p_n = p.p;
-      p.p = n.p;
-      m_dot = p.m_dot + n.m_dot;
+      p_n = i.p;
+      i.p = o.p;
+      m_dot = i.m_dot + o.m_dot;
     end ContactNode;
     \end{lstlisting}
     \item \emph{TurbineContacts} is an extension from \emph{ContactPort} model and provides the real input and output connectors, additionally. This model is used for turbine modelling. A Modelica code for this \emph{TurbineContacts} model looks as follows:

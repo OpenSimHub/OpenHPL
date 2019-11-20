@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model ReservoirChannel "Reservoir model based on open channel model"
   extends OpenHPL.Icons.Reservoir;
-  outer Parameters Const "using standard class with constants";
+  outer Parameters para "using standard class with constants";
   //// reservoir segmentation
   parameter Integer N = 20 "Number of segments";
   //// geometrical parameters of the reservoir
@@ -11,7 +11,7 @@ model ReservoirChannel "Reservoir model based on open channel model"
   //// initialization
   parameter Modelica.SIunits.Height h0 = 50 "Initial depth of the reservoir";
   //// condition of steady state
-  parameter Boolean SteadyState = Const.Steady "if true - starts from Steady State";
+  parameter Boolean SteadyState = para.Steady "if true - starts from Steady State";
   //// variables
   Real q "flow rate";
   //// conector
@@ -27,8 +27,8 @@ model ReservoirChannel "Reservoir model based on open channel model"
     SteadyState=SteadyState) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   //// boundaries
-  o.m_dot = -q * w * Const.rho;
-  o.p = Const.p_a + Const.rho * Const.g * openChannel.h[N];
+  o.m_dot = -q * w * para.rho;
+  o.p = para.p_a + para.rho * para.g * openChannel.h[N];
   annotation (
     Documentation(info="<html>This is a model for the reservoir, based on the open channel (river) model.</p>
 <p><em>Has not been tested properly.</em></p>

@@ -47,7 +47,7 @@ model HPLiniarizationGenIPSLKP "Synergy with OpenIPSL library(generator + govern
         origin={26,42},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters Const(V_0=4.49) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Parameters para(V_0=4.49) annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));

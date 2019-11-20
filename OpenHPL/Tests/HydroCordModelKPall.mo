@@ -27,7 +27,7 @@ model HydroCordModelKPall "Model of HP system with simplified models for penstoc
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters Const(V_0=0.000429934) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Parameters para(V_0=0.000429934) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));

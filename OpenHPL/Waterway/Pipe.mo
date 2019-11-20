@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Pipe "Model of the pipe"
-  outer Parameters Const "Using standard class with constants";
+  outer Parameters para "Using standard class with constants";
   extends OpenHPL.Icons.Pipe;
   import Modelica.Constants.pi;
   //// geometrical parameters of the pipe
@@ -12,17 +12,17 @@ model Pipe "Model of the pipe"
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_o = D_i "Diameter of the outlet side" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height eps = Const.eps "Pipe roughness height" annotation (
+  parameter Modelica.SIunits.Height eps = para.eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   //// condition of steady state
-  parameter Boolean SteadyState = Const.Steady "if true - starts from Steady State" annotation (
+  parameter Boolean SteadyState = para.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// staedy state value for flow rate
-  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = Const.V_0 "Initial flow rate in the pipe" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = para.V_0 "Initial flow rate in the pipe" annotation (
     Dialog(group = "Initialization"));
   //// possible parameters for temperature variation. Not finished...
-  //parameter Boolean TempUse = Const.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = Const.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter Boolean TempUse = para.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
+  //parameter Modelica.SIunits.Temperature T_i = para.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
   Modelica.SIunits.Mass m "water mass";
@@ -53,16 +53,16 @@ initial equation
   end if;
 equation
   //// Water volumetric flow rate through the pipe
-  V_dot = m_dot / Const.rho;
+  V_dot = m_dot / para.rho;
   //// Water velocity
   v = V_dot / A_;
   //// Momentum and mass of water
-  M = Const.rho * L * V_dot;
-  m = Const.rho * A_ * L;
+  M = para.rho * L * V_dot;
+  m = para.rho * A_ * L;
   //// Friction force
-  F_f = Functions.DarcyFriction.Friction(v, D_, L, Const.rho, Const.mu, eps);
+  F_f = Functions.DarcyFriction.Friction(v, D_, L, para.rho, para.mu, eps);
   //// momentum balance
-  der(M) = Const.rho * V_dot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * Const.g * cos_theta;
+  der(M) = para.rho * V_dot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * para.g * cos_theta;
   //// pipe presurre
   p_i = i.p;
   p_o = o.p;
@@ -70,8 +70,8 @@ equation
   //W_f = -F_f * v;
   //W_e = V_dot * (p_i- p_o);
   //if TempUse == true then
-  //Const.c_p * m * der(T) = V_dot * Const.rho * Const.c_p * (p.T - T) + W_e - W_f;
-  //0 = V_dot * Const.rho * Const.c_p * (p.T - n.T) + W_e - W_f;
+  //para.c_p * m * der(T) = V_dot * para.rho * para.c_p * (p.T - T) + W_e - W_f;
+  //0 = V_dot * para.rho * para.c_p * (p.T - n.T) + W_e - W_f;
   //else
   //der(n.T) = 0;
   //end if;

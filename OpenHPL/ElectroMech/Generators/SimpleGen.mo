@@ -1,6 +1,6 @@
 within OpenHPL.ElectroMech.Generators;
 model SimpleGen "Model of a simple generator"
-  outer Parameters Const "Using standard class with constants";
+  outer Parameters para "Using standard class with constants";
   import Modelica.Constants.pi;
   extends OpenHPL.Icons.Generator;
   //// geometrical parameters of the agreggate
@@ -9,10 +9,10 @@ model SimpleGen "Model of a simple generator"
   parameter Real k_b = 1000 "Friction factor in the aggregate bearing box [W-s3/rad3]";
   parameter Integer p = 12 "Number of poles";
   //// condition of steady state
-  parameter Boolean SteadyState = Const.Steady "If true - starts from Steady State" annotation (
+  parameter Boolean SteadyState = para.Steady "If true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// staedy state value for angular velocity
-  parameter Modelica.SIunits.AngularVelocity w_0 = Const.f * 4 * pi / p "Initial angular velocity" annotation (
+  parameter Modelica.SIunits.AngularVelocity w_0 = para.f * 4 * pi / p "Initial angular velocity" annotation (
     Dialog(group = "Initialization"));
   //// condition for output
   parameter Boolean UseFrequencyOutput = true "If checked - get a connector for frequency output" annotation (

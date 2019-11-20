@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Fitting "Different pipes fitting"
-  outer Parameters Const "Using standard class with constants";
+  outer Parameters para "Using standard class with constants";
   extends OpenHPL.Icons.Fitting;
   import Modelica.Constants.pi;
   /* conditions for different fitting type */
@@ -22,18 +22,18 @@ model Fitting "Different pipes fitting"
   /* Connector */
   extends OpenHPL.Interfaces.ContactPort;
 equation
-  v = m_dot / Const.rho / A;
+  v = m_dot / para.rho / A;
   phi =Functions.Fitting.FittingPhi(
     v,
     D_i,
     D_o,
     L,
     theta,
-    Const.rho,
-    Const.mu,
-    Const.eps,
+    para.rho,
+    para.mu,
+    para.eps,
     fit_type);
-  dp = phi * 0.5 * Const.rho * abs(v) * v;
+  dp = phi * 0.5 * para.rho * abs(v) * v;
   o.p = i.p - dp "Pressure of the output connector";
   annotation (
     Documentation(info = "<html>

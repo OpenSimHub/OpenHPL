@@ -1,6 +1,6 @@
 within OpenHPL.ElectroMech.Turbines;
 model Pelton "Model of the Pelton turbine"
-  outer Parameters Const "using standard class with constants";
+  outer Parameters para "using standard class with constants";
     extends Icons.Turbine;
     import Modelica.Constants.pi;
     //// geometrical parameters of the turbine
@@ -27,9 +27,9 @@ model Pelton "Model of the Pelton turbine"
 equation
   //// Condition for inlet water compressibility
     if CompElas == false then
-        V_dot = m_dot / Const.rho;
+        V_dot = m_dot / para.rho;
     else
-        V_dot = m_dot / (Const.rho * (1 + Const.beta * (i.p - Const.p_a)));
+        V_dot = m_dot / (para.rho * (1 + para.beta * (i.p - para.p_a)));
     end if;
   //// nuzzel pressure drop
     dp_n = 0.5 * m_dot * (V_dot * (1 / A_1 ^ 2 - 1 / A_0 ^ 2) + k_f);

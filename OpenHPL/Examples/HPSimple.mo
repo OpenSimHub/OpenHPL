@@ -30,7 +30,7 @@ model HPSimple "Model of waterway of the HP system with simplified models for co
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Parameters para annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));

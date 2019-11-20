@@ -53,7 +53,7 @@ model HPSimplePenstockFrancis "HP system model with Francis turbine"
         origin={28,38},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Parameters para annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));

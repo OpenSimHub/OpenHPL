@@ -50,7 +50,7 @@ model HPDetailed_Francis "Model of the HP system with Francis turbine and simpli
         origin={30,0},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters Const(V_0=4.5199) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Parameters para(V_0=4.5199) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));

@@ -1,6 +1,6 @@
 within OpenHPL.ElectroMech.Turbines;
 model Francis "Model of the Francis turbine"
-  outer Parameters Const "using standard class with constants";
+  outer Parameters para "using standard class with constants";
     extends Icons.Turbine;
     import Modelica.Constants.pi;
     //// conditions for the geometrical parameters of the turbine
@@ -129,9 +129,9 @@ equation
     //u_start+0.17;
     end if;
   //// design algorithm for nominal alpha, used for servo design
-    W_t2_n = Const.rho * V_dot_n_ * n_n * pi / 30 * R_2 * (n_n * pi / 30 * R_2 + V_dot_n_ / A_2 * cot_b2);
-    W_t1_n = Const.rho * V_dot_n_ * n_n * pi / 30 * R_1 * V_dot_n_ / A_1 * cot_a1_n;
-    Const.rho * V_dot_n_ * H_n * Const.g + 0.5 * Const.rho * V_dot_n_ * V_dot_n_ ^ 2 * (1 / A_0 ^ 2 - 1 / A_2 ^ 2) = W_t_dot_n;
+    W_t2_n = para.rho * V_dot_n_ * n_n * pi / 30 * R_2 * (n_n * pi / 30 * R_2 + V_dot_n_ / A_2 * cot_b2);
+    W_t1_n = para.rho * V_dot_n_ * n_n * pi / 30 * R_1 * V_dot_n_ / A_1 * cot_a1_n;
+    para.rho * V_dot_n_ * H_n * para.g + 0.5 * para.rho * V_dot_n_ * V_dot_n_ ^ 2 * (1 / A_0 ^ 2 - 1 / A_2 ^ 2) = W_t_dot_n;
     W_t_dot_n = W_t1_n - W_t2_n + k_ft3 * V_dot_n_ ^ 2;
     alpha1_n = Modelica.Math.atan(1 / cot_a1_n);
     alpha1_n = Modelica.Math.acos(d_n / 2 / l) - Modelica.Math.acos((d_n ^ 2 + R_v ^ 2 - r_v ^ 2) / 2 / d_n / R_v);
@@ -140,15 +140,15 @@ equation
     u_2 = 2 * pi * R_2 * n_n / 60;
     c_m2 = u_2 * Modelica.Math.tan(Modelica.SIunits.Conversions.from_deg(180 - beta2));
     c_m1 = c_m2 / 1.1;
-    u_1 = 0.725 * sqrt(2 * Const.g * H_n);
-    c_u1 = 0.48 / 0.725 * sqrt(2 * Const.g * H_n);
+    u_1 = 0.725 * sqrt(2 * para.g * H_n);
+    c_u1 = 0.48 / 0.725 * sqrt(2 * para.g * H_n);
   //// condition for inlet water compressability
     if WaterCompress == false then
-        V_dot = m_dot / Const.rho;
-        dp_v = 0.5 * Const.rho * (V_dot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
+        V_dot = m_dot / para.rho;
+        dp_v = 0.5 * para.rho * (V_dot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
     else
-        V_dot = m_dot / (Const.rho * (1 + Const.beta * (p_r1 - Const.p_a)));
-        dp_v = 0.5 * Const.rho * (1 + Const.beta * (i.p - Const.p_a)) * (V_dot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
+        V_dot = m_dot / (para.rho * (1 + para.beta * (p_r1 - para.p_a)));
+        dp_v = 0.5 * para.rho * (1 + para.beta * (i.p - para.p_a)) * (V_dot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
     end if;
   //// condition for guide vane pressure drop (does not work well, better to skip guide vane pressure drop)
     if dp_v_condition == true then

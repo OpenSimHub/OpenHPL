@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
-  outer Parameters Const "using standard class with constants";
+  outer Parameters para "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
   //// constant water level in the reservoir
   parameter Modelica.SIunits.Height H_r = 50 "Initial water level above intake" annotation (
@@ -22,8 +22,8 @@ model Reservoir "Model of the reservoir"
     Dialog(group = "Structure"),
     choices(checkBox = true));
   //// possible parameters for temperature variation. Not finished...
-  //parameter Boolean TempUse = Const.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = Const.T_i "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter Boolean TempUse = para.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
+  //parameter Modelica.SIunits.Temperature T_i = para.T_i "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Area A "vertiacal cross section";
   Modelica.SIunits.Mass m "water mass";
@@ -48,17 +48,17 @@ equation
   //// Define vertiacal cross section of the reservoir
   A = H * (w + 2 * H * Modelica.Math.tan(Modelica.SIunits.Conversions.from_deg(alpha)));
   //// Define water mass
-  m = Const.rho * A * L;
+  m = para.rho * A * L;
   //// Define volumetric water flow rate
   V_dot = V_i_dot - V_o_dot;
   //// Define mass water flow rate
-  m_dot = Const.rho * V_dot;
+  m_dot = para.rho * V_dot;
   //// Define water velocity
-  v = m_dot / Const.rho / A;
+  v = m_dot / para.rho / A;
   //// Define momentrumn
   M = L * m_dot;
   //// Define friction term
-  F_f = 1 / 8 * Const.rho * f * L * (w + 2 * H / Modelica.Math.cos(alpha)) * v * abs(v);
+  F_f = 1 / 8 * para.rho * f * L * (w + 2 * H / Modelica.Math.cos(alpha)) * v * abs(v);
   //// condition for inflow use
   if UseInFlow == false then
     //// condition for constant water level, inflow = outflow
@@ -67,14 +67,14 @@ equation
   //// condition for input water level use
   if Input_level == false then
     //// define derivatives of momentum and mass
-    der(M) = A * (Const.p_a - p_o) + Const.g * Const.rho * A * H - F_f + Const.rho / A * (V_i_dot ^ 2 - V_o_dot ^ 2);
+    der(M) = A * (para.p_a - p_o) + para.g * para.rho * A * H - F_f + para.rho / A * (V_i_dot ^ 2 - V_o_dot ^ 2);
     der(m) = m_dot;
   else
     //// define output pressure
-    p_o = Const.p_a + Const.g * Const.rho * H;
+    p_o = para.p_a + para.g * para.rho * H;
   end if;
   //// output flow conector
-  o.m_dot = -Const.rho * V_o_dot;
+  o.m_dot = -para.rho * V_o_dot;
   //// output temperature conector
   //o.T = T_i;
   annotation (

@@ -1,7 +1,7 @@
 within OpenHPL.ElectroMech.Generators;
 model SynchGen "Simple model of the generator connected to the grid"
   extends OpenHPL.Icons.Generator;
-  outer Parameters Const "Using standard class with constants";
+  outer Parameters para "Using standard class with constants";
   import Modelica.Constants.pi;
   //// parameters of the generator
   parameter Modelica.SIunits.Power P_op = 80e6 "Active power drawn from generator at Steady State operating condition" annotation (
@@ -29,7 +29,7 @@ model SynchGen "Simple model of the generator connected to the grid"
     Dialog(group = "Stablizer"));
   parameter Integer np = 12 "Number of poles" annotation (
     Dialog(group = "Nominal parameters"));
-  parameter Modelica.SIunits.AngularVelocity Wm_op = Const.f * pi / 3 "Grid angular velocity" annotation (
+  parameter Modelica.SIunits.AngularVelocity Wm_op = para.f * pi / 3 "Grid angular velocity" annotation (
     Dialog(group = "Network"));
   parameter Modelica.SIunits.MomentOfInertia J = 2e5 "Moment of inertia of the generator" annotation (
     Dialog(group = "Mechanical part"));

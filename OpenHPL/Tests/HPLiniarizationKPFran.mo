@@ -32,7 +32,7 @@ model HPLiniarizationKPFran "HP system model for liniarization with elastic pens
         origin={-30,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters Const annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Parameters para annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));

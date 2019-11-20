@@ -7,7 +7,7 @@ model HPElasticKPPenstock "Model of HP system with elastic penctock (KP), but si
         rotation=0)));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
     Placement(visible = true, transformation(origin = {0, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Parameters Const(V_0=19.12, rho(displayUnit="kg/m3") = 997) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Parameters para(V_0=19.12, rho(displayUnit="kg/m3") = 997) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -26,14 +26,14 @@ model HPElasticKPPenstock "Model of HP system with elastic penctock (KP), but si
     N=10,
     PipeElasticity=false,
     h_s0=69.9,
-    p_p0=997*Const.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N/2):997*Const.g*penstockKP.H/penstockKP.N:997*Const.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N*(penstockKP.N - 1/2))) annotation (Placement(transformation(extent={{-20,44},{0,64}})));
+    p_p0=997*para.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N/2):997*para.g*penstockKP.H/penstockKP.N:997*para.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N*(penstockKP.N - 1/2))) annotation (Placement(transformation(extent={{-20,44},{0,64}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
     Placement(visible = true, transformation(extent = {{-22, 0}, {-2, 20}}, rotation = 0)));
   ElectroMech.Generators.SimpleGen aggregate annotation (Placement(visible=true, transformation(extent={{8,0},{28,20}}, rotation=0)));
 equation
   //19.077 * ones(10)
   //, H = 428.5, h_s0 = 69.9, N = 10, p_p0 = 997 * 9.81 * (69.9 + 428.5 / 10 / 2):997 * 9.81 * 428.5 / 10:9.81 * 997 * (69.9 + 428.5 / 10 * (10 - 1 / 2))
-  //997 * Const.g
+  //997 * para.g
   connect(turbine.P_out, aggregate.P_in) annotation (
     Line(points = {{18, 32}, {18, 32}, {18, 22}, {18, 22}, {18, 20}}, color = {0, 0, 127}));
   connect(control.y, turbine.u_t) annotation (

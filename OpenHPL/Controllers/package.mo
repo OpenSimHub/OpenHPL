@@ -6,7 +6,7 @@ package Controllers "Collection of different controllers"
 
   model Governor "Governor/control model"
     extends OpenHPL.Icons.Governor;
-  outer Parameters Const "using standard class with constants";
+  outer Parameters para "using standard class with constants";
     //// control parameters of the governor
     parameter Modelica.SIunits.Time T_p = 0.04 "Pilot servomotor time constant" annotation (
       Dialog(group = "Controller settings"));
@@ -26,7 +26,7 @@ package Controllers "Collection of different controllers"
       Dialog(group = "System settings"));
     parameter Real Y_gv_ref = 0.72151 "Initial guide vane opening rate" annotation (
       Dialog(group = "System settings"));
-    parameter Modelica.SIunits.Frequency f_ref = Const.f "Reference frequency" annotation (
+    parameter Modelica.SIunits.Frequency f_ref = para.f "Reference frequency" annotation (
       Dialog(group = "System settings"));
     parameter Modelica.SIunits.Power Pn = 104e6 "Reference frequency" annotation (
       Dialog(group = "System settings"));
@@ -136,7 +136,7 @@ package Controllers "Collection of different controllers"
 
   block GovernorPI
     extends Modelica.Icons.UnderConstruction;
-  outer Parameters Const;
+  outer Parameters para;
     parameter Modelica.SIunits.Time T_d = 0.3 "pilot servomotor time constant";
     parameter Modelica.SIunits.Time T_i = 5 "main servomotor integration time";
     parameter Modelica.SIunits.Time T_s = 0.05 "transient droop time constant";
@@ -239,7 +239,7 @@ package Controllers "Collection of different controllers"
 
   block GovernorP
     extends Modelica.Icons.UnderConstruction;
-  outer Parameters Const;
+  outer Parameters para;
     parameter Modelica.SIunits.Time T_p = 0.04 "pilot servomotor time constant";
     parameter Modelica.SIunits.Time T_g = 0.2 "main servomotor integration time";
     parameter Modelica.SIunits.Time T_r = 1.75 "transient droop time constant";
@@ -336,7 +336,7 @@ package Controllers "Collection of different controllers"
 
   model GovernorPower
     extends Modelica.Icons.UnderConstruction;
-  outer Parameters Const;
+  outer Parameters para;
     parameter Modelica.SIunits.Time T_p = 0.04 "pilot servomotor time constant";
     parameter Modelica.SIunits.Time T_g = 0.2 "main servomotor integration time";
     parameter Modelica.SIunits.Time T_r = 1.75 "transient droop time constant";
