@@ -72,9 +72,9 @@ equation
   F_f = Functions.DarcyFriction.Friction(v, D, l, para.rho, para.mu, eps);
   F_g = m * para.g * cos_theta;
  annotation (
-    Documentation(info="<html>
+    Documentation(info= "<html>
 <p>The simple model of the air-cushion surge tank, which is described by the momentum and mass balance differential equations. The mass balance depends on inlet and outlet mass flow rates. The momentum balance depends on inlet momentum and pressure dorp through the surge pipe together with gravity and friction forces. The main defined variable are <i>V_dot</i> and <i>h  </i>(the flow rate and water level in the surge tank). The air in the surge tank is taken at inital pressure of <i>p_c0.</i></p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/air_cushion_surge_tank.png\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/AirCushionSurgeTank.png\" style=\"width:100%\"/></p>
 <p>The simple surge tank model can be found in this link:&nbsp;<a href=\"http://www.ep.liu.se/ecp/article.asp?article=049&issue=138&volume=\">http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=</a></p>
 </html>"));
 end AirCushionSurgeTank;
