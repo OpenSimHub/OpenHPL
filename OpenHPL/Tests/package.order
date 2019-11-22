@@ -1,5 +1,6 @@
 Fittings
 HPSimplePenstock
+HPAirCushionSurgeTank
 HPSimplePenstockWithoutSurge
 HPSimpleElasticPenstock
 HPSimpleElasticPenstockWithoutSurge
@@ -61,3 +62,4 @@ HydroCordModelKPDraftTube
 HydroCordModelFrancisDraftTube
 HydroCordModeKPlFrancisDraftTube
 HydroCordModelDraftTube3
+HPSimple_FranciSurc
