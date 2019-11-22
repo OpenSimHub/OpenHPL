@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model AirCushionSurgeTank "Model of air-cushion surge tank"
-  outer Parameters para "Using standard class with constants";
+  outer Parameters para "Parameters";
   extends OpenHPL.Icons.Surge;
   import Modelica.Constants.pi;
   //// geometrical parameters of air-cushion surge tank
