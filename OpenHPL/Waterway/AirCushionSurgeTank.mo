@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model AirCushionSurgeTank "Model of air-cushion surge tank"
-  outer Parameters para "using standard class with constants";
+  outer Parameters para "Using standard class with constants";
   extends OpenHPL.Icons.Surge;
   import Modelica.Constants.pi;
   //// geometrical parameters of air-cushion surge tank
@@ -13,7 +13,7 @@ model AirCushionSurgeTank "Model of air-cushion surge tank"
   parameter Modelica.SIunits.Height eps = para.eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   //// condition for steady state
-  parameter Boolean SteadyState = para.Steady "if true - starts from Steady State" annotation (
+  parameter Boolean SteadyState = para.Steady "If true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// steady state values for flow rate and water level in surge tank
   parameter Modelica.SIunits.VolumeFlowRate V_dot0 = 0 "Initial flow rate in the surge tank" annotation (
@@ -26,21 +26,21 @@ model AirCushionSurgeTank "Model of air-cushion surge tank"
   //parameter Boolean TempUse = para.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   //parameter Modelica.SIunits.Temperature T_i = para.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
-  Modelica.SIunits.Mass m "water mass";
-  Modelica.SIunits.Momentum M "water momuntum";
-  Modelica.SIunits.Force M_dot "difference in influent and effulent momentum";
-  Modelica.SIunits.Force F "total force acting in the surge tank";
-  Modelica.SIunits.Area A = (pi*D ^ 2) / 4 "cross sectional area of the surge tank";
-  Modelica.SIunits.Length l = h / cos_theta "length of water in the surge tank";
+  Modelica.SIunits.Mass m "Water mass";
+  Modelica.SIunits.Momentum M "Water momuntum";
+  Modelica.SIunits.Force M_dot "Difference in influent and effulent momentum";
+  Modelica.SIunits.Force F "Total force acting in the surge tank";
+  Modelica.SIunits.Area A = (pi*D ^ 2) / 4 "Cross sectional area of the surge tank";
+  Modelica.SIunits.Length l = h / cos_theta "Length of water in the surge tank";
   Real cos_theta = H / L "slope ratio";
-  Modelica.SIunits.Velocity v "water velocity";
-  Modelica.SIunits.Force F_p "pressure force";
-  Modelica.SIunits.Force F_f "friction force";
-  Modelica.SIunits.Force F_g "friction force";
-  Modelica.SIunits.Pressure p_c "air-cushion force";
+  Modelica.SIunits.Velocity v "Water velocity";
+  Modelica.SIunits.Force F_p "Pressure force";
+  Modelica.SIunits.Force F_f "Friction force";
+  Modelica.SIunits.Force F_g "Gravity force";
+  Modelica.SIunits.Pressure p_c "Air-cushion pressure";
   //// initial values for differential variables
-  Modelica.SIunits.Height h(start = h_0, fixed = true) "water height in the surge tank";
-  Modelica.SIunits.VolumeFlowRate V_dot(start = V_dot0, fixed = true) "water flow rate";
+  Modelica.SIunits.Height h(start = h_0, fixed = true) "Water height in the surge tank";
+  Modelica.SIunits.VolumeFlowRate V_dot(start = V_dot0, fixed = true) "Water flow rate";
   //// variables for temperature. Not in use for now...
   //Real W_f, W_e;
   //// conector (acquisition of algebraic variable, mass flow rate m_dot, and node pressure (manifold pressure) p_n)
@@ -68,12 +68,13 @@ equation
   M_dot = m_dot*v;
   F = F_p-F_f-F_g;
   F_p = (p_n - p_c)*A;
+  p_c = p_c0*((L-h_0/cos_theta)/(L-l))^para.gamma_air;
   F_f = Functions.DarcyFriction.Friction(v, D, l, para.rho, para.mu, eps);
   F_g = m * para.g * cos_theta;
  annotation (
     Documentation(info="<html>
-<p>The simple model of the air cushion surge tank, which described by the momentum and mass differential equations. The mass balance depends on inlet and outlet mass flow rates. The momentum balance depends on inlet momentum and pressure dorp through the surge pipe together with gravity and friction forces. The main defined variable are <i>V_dot_s</i> and <i>h_s&nbsp;</i>(the flow rate and water level in the surge tank). The air in the surge tank is taken at inital pressure of <i>p_2</i></p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/surgepic.png\"/></p>
-<p>More details about the surge tank model:&nbsp;<a href=\"http://www.ep.liu.se/ecp/article.asp?article=049&issue=138&volume=\">http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=</a></p>
+<p>The simple model of the air-cushion surge tank, which is described by the momentum and mass balance differential equations. The mass balance depends on inlet and outlet mass flow rates. The momentum balance depends on inlet momentum and pressure dorp through the surge pipe together with gravity and friction forces. The main defined variable are <i>V_dot</i> and <i>h  </i>(the flow rate and water level in the surge tank). The air in the surge tank is taken at inital pressure of <i>p_c0.</i></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/air_cushion_surge_tank.png\"/></p>
+<p>The simple surge tank model can be found in this link:&nbsp;<a href=\"http://www.ep.liu.se/ecp/article.asp?article=049&issue=138&volume=\">http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=</a></p>
 </html>"));
 end AirCushionSurgeTank;
