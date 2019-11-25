@@ -15,9 +15,9 @@ protected
   Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
   Real f "friction factor";
 algorithm
-  N_Re := rho * max(-v,v) * D / mu;
+  N_Re := rho * abs(v) * D / mu;
   f := fDarcy(N_Re, D, eps);
-  F_f := 0.5 * pi * f * rho * L * v * max(-v,v) * D / 4;
+  F_f := 0.5 * pi * f * rho * L * v * abs(v) * D / 4;
   annotation (
     Documentation(info = "<html>
 <p>Function for defining the friction forces using the Darcy friction factor.</p>
