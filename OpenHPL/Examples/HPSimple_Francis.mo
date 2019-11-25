@@ -64,7 +64,7 @@ model HPSimple_Francis "Model of the HP system with Francis turbine and simplifi
   Waterway.Fitting fitting(
     D_i=3,
     D_o=1.63,
-    fit_type=OpenHPL.Types.Fitting.SquareReduction) annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
+    fit_type=OpenHPL.Types.Fitting.Square) annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
 equation
   connect(generator.w_out, turbine.w_in) annotation (
     Line(points={{19,-24},{12,-24},{12,-8},{18,-8}},        color = {0, 0, 127}));
