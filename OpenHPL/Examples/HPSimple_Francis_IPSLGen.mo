@@ -51,7 +51,7 @@ model HPSimple_Francis_IPSLGen "Synergy with OpenIPSL library(generator)"
         extent={{-10,-10},{10,10}},
         rotation=0)));
   inner OpenHPL.Data data(V_0=4.49) annotation (Placement(visible=true, transformation(
-        origin={-90,92},
+        origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   OpenIPSL.Electrical.Machines.PSAT.Order2 order2_1(D = 0, M = 10,

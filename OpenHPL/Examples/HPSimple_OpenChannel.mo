@@ -29,7 +29,7 @@ model HPSimple_OpenChannel "Example with the open channel"
         extent={{-10,10},{10,-10}},
         rotation=0)));
   inner OpenHPL.Data data(V_0=18.9979) annotation (Placement(visible=true, transformation(
-        origin={-90,92},
+        origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Waterway.Pipe pipe            annotation (Placement(transformation(extent={{-70,40},{-50,60}})));

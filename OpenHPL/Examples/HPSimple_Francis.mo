@@ -58,7 +58,7 @@ model HPSimple_Francis "Model of the HP system with Francis turbine and simplifi
         extent={{-10,-10},{10,10}},
         rotation=0)));
   inner OpenHPL.Data data(V_0=4.54) annotation (Placement(visible=true, transformation(
-        origin={-90,92},
+        origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Waterway.Fitting fitting(
