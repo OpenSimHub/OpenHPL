@@ -131,7 +131,11 @@ package Controllers "Collection of different controllers"
     //  der(Y_gv) = u / T_g;
     //end if;
     annotation (
-      Documentation(info = "<html><head></head><body>This is a simple model of the governor that controls the guide vane oppening in the turbine based on the reference power production.<div><br></div><div>The model is taken from:&nbsp;<a href=\"Resources/Report/Generator_model.pdf\" style=\"font-size: 12px;\">Resources/Report/Generator_model.pdf</a></div></body></html>"));
+      Documentation(info="<html>
+<p>This is a simple model of the governor that controls the guide vane
+ opening in the turbine based on the reference power production.</p>
+<p>The model is taken from <a href=\"modelica://OpenHPL.UsersGuide.References\">[Sharefi2011]</a>.
+</html>"));
   end Governor;
 
   block GovernorPI

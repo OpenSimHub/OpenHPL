@@ -218,7 +218,7 @@ and also output as the turbine shaft power and input as angular velocity.
 </p>
 <p>There is also available the runner design algorithm that can define all geometrical
 parameters based on the nominal parameters.</p><p>The turbine losses coefficients
-(<i>k_ft1</i>, <i>k_ft2</i>, <i>k_ft3</i>) can be also defined automatically.
+(<code>k_ft1</code>, <code>k_ft2</code>, <code>k_ft3</code>) can be also defined automatically.
 However, if some dynamic data from real turbine is available it is better to tune
 these parameters a bit more and use the defined values as a starting point.
 </p>
@@ -229,10 +229,12 @@ Furthermore it is possible to automatically generate all need parameters for the
 <p>
 This mechanistic turbine model does not work really well for low loads (&lt;10% guide vane opening).
 However there is parameters that could be tuned for low load regimes.
-These are <i>u_min</i> and <i>k_ft4</i>.</p>
-<h5>References</h5>
-<p>More info about the mechanistic turbine model can be found in: <a href=\"https://www.sciencedirect.com/science/article/pii/S2405896318300181\">https://www.sciencedirect.com/science/article/pii/S2405896318300181</a></p>
-<p>More info about the servo (also turbine model) can be found in: <a href=\"modelica://OpenHPL/Resources/Report/Turbines_model.pdf\">Resources/Report/Turbines_model.pdf</a></p>
+These are <code>u_min</code> and <code>k_ft4</code>.</p>
+
+<p>More info about the mechanistic turbine model can be found in: 
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2018]</a> and about 
+the servo (also turbine model) in:
+<a href=\"modelica://OpenHPL/Resources/Documents/Turbines_model.pdf\">Resources/Documents/Turbines_model.pdf</a>.</p>
 </html>"),
         Icon(                                                                                                                                                      coordinateSystem(initialScale = 0.1)));
 end Francis;

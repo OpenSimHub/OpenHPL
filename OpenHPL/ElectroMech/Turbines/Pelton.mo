@@ -53,9 +53,9 @@ equation
 This model is based on the Euler turbine equation.
 </p>
 <p>
-The model has not been tested.</p>
-<h5>References</h5>
-<p>More info about the model can be found in: <a href=\"modelica://OpenHPL/Resources/Report/Turbines_model.pdf\">Resources/Report/Turbines_model.pdf</a>
+<em>The model has not been tested.</em></p>
+<p>More info about the model can be found in: 
+<a href=\"modelica://OpenHPL/Resources/Documents/Turbines_model.pdf\">Resources/Documents/Turbines_model.pdf</a>
 </p>
 </html>"),
         Icon(                                                                                                                                   coordinateSystem(initialScale = 0.1)));

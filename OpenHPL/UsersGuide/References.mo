@@ -10,10 +10,18 @@ model References "References"
         runoff/inflow forecasting to hydropower system&quot;,
         Master's thesis, Telemark University College,
         Porsgrunn, Norway, 2013. 
-        (<a href=\"modelica://OpenHPL/Resources/Documents/Hydrology_model.pdf\">view PDF</a>)
+        (<a href=\"modelica://OpenHPL/Resources/Documents/Shafiee2013.pdf\">view PDF</a>)
 </td>
 </tr>
-
+<tr>
+<td>[Sharefi2011]</td>
+<td>Behzad Rahimi Sharefi
+        &quot;Modeling for Control of Hydropower Systems&quot;,
+        Master's thesis, Telemark University College,
+        Porsgrunn, Norway, 2011. 
+        (<a href=\"modelica://OpenHPL/Resources/Documents/Sharefi2011.pdf\">view PDF</a>)
+</td>
+</tr>
 <tr>
 <td><p>[Splavska2017]</p></td>
 <td><p>Valentyna Splavska, Liubomyr Vytvytskyi, Bernt Lie: 
@@ -39,6 +47,15 @@ model References "References"
       <em>The 58th Conference on Simulation and Modelling (SIMS 58)</em>,
       Reykjavik, Iceland, pp. 20–28, September 2017,
         <a href=\"https://doi.org/10.3384/ecp1713820\">doi:10.3384/ecp1713820</a>.</p>
+</td>
+</tr>
+<tr>
+<td><p>[Vytvytskyi2018]</p></td>
+<td><p>Liubomyr Vytvytskyi, Bernt Lie: 
+         &quot;Mechanistic model for Francis turbines in OpenModelica&quot;,
+      <em>9th Vienna International Conference on Mathematical Modelling</em>,
+      IFAC-PapersOnLine, Vienna, Volume 51, Issue 2, pp. 103-108, 2018,
+        <a href=\"https://doi.org/10.1016/j.ifacol.2018.03.018\">doi:10.1016/j.ifacol.2018.03.018</a>.</p>
 </td>
 </tr>
 <tr>
