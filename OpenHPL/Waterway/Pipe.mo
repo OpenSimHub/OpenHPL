@@ -78,7 +78,7 @@ equation
   //n.T = T;
   ////
   annotation (
-    Documentation(info = "<html><p>The simple model of the pipe gives possibilities
+    Documentation(info="<html><p>The simple model of the pipe gives possibilities
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
     <p>This model is described by the momentum differential equation, which depends
     on pressure drop through the pipe together with friction and gravity forces.
@@ -90,8 +90,8 @@ equation
     (inlet and outlet pressure from connectors).&nbsp;</p>
     <p>It should be noted that this pipe model provides possibilities for modelling
     of pipes with both a positive and a negative slopes (positive or negative height diference).</p>
-    <p>More info about the pipe model:&nbsp;<a href=\"http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=\">http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=</a>
-    and <a href=\"http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=\">http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=</a>
-    </p>
+    <p>More info about the pipe model can be found in 
+	<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
+    and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
 </html>"));
 end Pipe;

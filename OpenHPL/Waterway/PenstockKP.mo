@@ -118,11 +118,30 @@ equation
   //// diff. equation
   der(U) = KP.diff_eq;
   annotation (
-    Documentation(info="<html><head></head><body><p>This is a more detailed model for the pipe that mostly can be used for proper modelling of the penstock or other conduits.</p><p>The model could include the elastic walls and compressible water and use discretization method based on Kurganov-Petrova central upwind scheme (KP). The geometry of the penstock is described due to figure:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/penstock.png\"></p>
-<p>Conservation laws are usually solved by Finite-volume methods. With the Finite volume method, we divide the grid into small control volumes or control cells and then apply the conservation laws. Here the pipe is divided in <i>N</i> segments, with input and output pressure as a boundary conditions. The given cell is denoted by <i>j</i> i.e. it is the <i>j</i> th cell. Cell average is calculated at the center of the cell and <i>U</i> denotes the average values of the conserved variables. The left and the right interfaces of the cell are denoted by <i>j-1/2</i> and <i>j+1/2</i> respectively. At each cell interface, the right(+)/left(-) point values are reconstructed. <i>a </i>denotes the right and the left sided local speeds of propagation at the left/right interface of the cell.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/kp.png\"></p>
-<p>In order to determine the fluxes at the cell interface <i>H </i>and the source term <i>S</i> the KP scheme is used, which is a second order scheme which is well balanced.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/eq.png\"></p><p>More info about the KP pipe model: <a href=\"http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=\">http://www.ep.liu.se/ecp/article.asp?issue=138&amp;article=002&amp;volume=</a></p>
-</body></html>"));
+    Documentation(info="<html><p>This is a more detailed model for the pipe that mostly can be 
+used for proper modelling of the penstock or other conduits.</p>
+<p>The model could include the elastic walls and compressible water 
+and use discretization method based on Kurganov-Petrova central upwind scheme (KP). 
+The geometry of the penstock is described due to figure:</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/penstock.png\" style=\"width:50%\"></p>
+<p>Conservation laws are usually solved by Finite-volume methods. 
+With the Finite volume method, we divide the grid into small control 
+volumes or control cells and then apply the conservation laws. 
+Here the pipe is divided in <code>N</code> segments, with input and 
+output pressure as a boundary conditions. 
+The given cell is denoted by <code>j</code>, i.e., it is the <code>j</code><sup>th</sup> cell. 
+Cell average is calculated at the center of the cell and <code>U</code> denotes the 
+average values of the conserved variables. The left and the right interfaces of the 
+cell are denoted by <code>j-1/2</code> and <code>j+1/2</code> respectively.
+ At each cell interface, the right(+)/left(-) point values are reconstructed. 
+The letter <code>a</code>denotes the right and the left sided local speeds of propagation 
+at the left/right interface of the cell.</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/kp.png\" style=\"width:50%\"></p>
+<p>In order to determine the fluxes at the cell interface <code>H</code> and the 
+source term <code>S</code>, the KP scheme is used, which is a second order scheme that is well balanced.</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/eq.png\"></p>
+<p>More info about the KP pipe model can be found in can be found in 
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>.
+</p>
+</html>"));
 end PenstockKP;

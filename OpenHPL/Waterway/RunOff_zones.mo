@@ -109,5 +109,13 @@ equation
   R2 = 1 - F_e / F_o;
   V_dot_runoff = V_doT_tot;
   annotation (
-    Documentation(info = "<html><head></head><body>This is the hydrology model that is based on the HBV hydrological model. This model can be used to define the inflow (runoff) to the reservoir.<div><br></div><div>Here, the input data are used for the model and this data is in: <a href=\"Resources/Tables/\">Resources/Tables/...</a><br><div><br></div><div>More info about model:&nbsp;<a href=\"Resources/Report/Hydrology_model.pdf\">Resources/Report/Hydrology_model.pdf</a></div></div></body></html>"));
+    Documentation(info="<html>
+<p>
+This is the hydrology model that is based on the HBV hydrological model. 
+This model can be used to define the inflow (runoff) to the reservoir.</p>
+<p>Here, the input data are used for the model and this data is in: 
+<a href=\"modelica://OpenHPL/Resources/Tables/\">Resources/Tables/...</a></p>
+<p>More info about model can be found in 
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Shafiee2013]</a>.</p>
+</html>"));
 end RunOff_zones;

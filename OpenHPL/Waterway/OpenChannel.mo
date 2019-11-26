@@ -60,6 +60,7 @@ As boundary conditions, at least two of the four quentities
 <p>Perhaps, this structure is not really useful and some modification should be done.
 This is still under discussion and has not been tested properly.
 </p>
-<h5>References</h5>
-<p>More info about the original model can be found in:&nbsp;<a href=\"http://www.mic-journal.no/ABS/MIC-2015-4-4.asp\">http://www.mic-journal.no/ABS/MIC-2015-4-4.asp</a></p></html>"));
+<p>More info about the original model can be found in
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2015]</a>.</p>
+</html>"));
 end OpenChannel;

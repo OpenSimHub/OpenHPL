@@ -77,7 +77,14 @@ equation
   //end if;
   ////
   annotation (
-    Documentation(info = "<html><head></head><body><p>The simple model of the surge tank, which described by the momentum and mass differential equations. The mass balance depends on inlet and outlet mass flow rates. The momentum balance depends on inlet momentum to and pressure dorp through the surge pipe together with gravity and friction forces. The main defined variable are <i>V_dot_s</i> and <i>h_s&nbsp;</i>(the flow rate and water level in the surge tank).</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/surgepic.png\"></p><p>More details about the surge tank model:&nbsp;<a href=\"http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=\">http://www.ep.liu.se/ecp/article.asp?article=049&amp;issue=138&amp;volume=</a></p>
-</body></html>"));
+    Documentation(info="<html>
+<p>The simple model of the surge tank, which described by the momentum and mass 
+differential equations. The mass balance depends on inlet and outlet mass flow rates. 
+The momentum balance depends on inlet momentum to and pressure dorp through the surge 
+pipe together with gravity and friction forces. The main defined variable are <code>V_dot_s</code> 
+and <code>h_s</code> (the flow rate and water level in the surge tank).</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/surgepic.png\"></p>
+<p>More details about the surge tank model can be found in 
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
+</html>"));
 end SurgeTank;
