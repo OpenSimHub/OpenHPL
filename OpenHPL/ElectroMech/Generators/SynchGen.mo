@@ -1,7 +1,7 @@
 within OpenHPL.ElectroMech.Generators;
 model SynchGen "Simple model of the generator connected to the grid"
   extends OpenHPL.Icons.Generator;
-  outer Parameters para "Using standard class with constants";
+  outer Data data "Using standard class with constants";
   import Modelica.Constants.pi;
   //// parameters of the generator
   parameter Modelica.SIunits.Power P_op = 80e6 "Active power drawn from generator at Steady State operating condition" annotation (

@@ -1,6 +1,6 @@
 within OpenHPL.Tests;
 model HPModelObservSim
-  inner OpenHPL.Parameters para;
+  inner OpenHPL.Data data;
   //HPModel hpmod;
   //HPLiniarization hpreal;
   HPLiniarizationKP hprealkp;

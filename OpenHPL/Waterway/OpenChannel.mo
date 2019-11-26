@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model OpenChannel "Open channel model (use KP scheme)"
-  outer Parameters para "using standard class with constants";
+  outer Data data "using standard class with constants";
   extends OpenHPL.Icons.OpenChannel;
   //// geometrical parameters of the open channel
   parameter Integer N = 100 "Number of discretization units" annotation (Dialog(group = "Geometry"));

@@ -6,7 +6,7 @@ model Fittings "Test for comparing fitting behaviour"
   OpenHPL.Waterway.Pipe head(D_i=2) annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
   OpenHPL.Waterway.Pipe tail(D_i=1) annotation (Placement(transformation(extent={{40,40},{60,60}})));
   OpenHPL.Waterway.Reservoir tailw(H_r=10) annotation (Placement(transformation(extent={{100,40},{80,60}})));
-  inner OpenHPL.Parameters para(Steady=true) annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
+  inner OpenHPL.Data data(Steady=true) annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   OpenHPL.Waterway.Reservoir headw1(H_r=10) annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   OpenHPL.Waterway.Fitting fitting1(fit_type=OpenHPL.Types.Fitting.Rounded, L=5) annotation (Placement(transformation(extent={{10,-10},{-10,10}})));
   OpenHPL.Waterway.Pipe head1(D_i=2) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));

@@ -29,7 +29,7 @@ model HydroCordModelKP2 "Model of HP system with simplified models for penstock,
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters para(V_0=1.82328) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(V_0=1.82328) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));

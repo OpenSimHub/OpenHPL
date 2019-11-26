@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Fitting "Different pipes fitting"
-  outer Parameters para "Using standard class with constants";
+  outer Data data "Using standard class with constants";
   extends OpenHPL.Icons.Fitting;
   import Modelica.Constants.pi;
   /* conditions for different fitting type */

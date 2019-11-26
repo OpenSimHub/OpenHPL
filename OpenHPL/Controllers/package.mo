@@ -6,7 +6,7 @@ package Controllers "Collection of different controllers"
 
   model Governor "Governor/control model"
     extends OpenHPL.Icons.Governor;
-  outer Parameters para "using standard class with constants";
+  outer Data data "using standard class with constants";
     //// control parameters of the governor
     parameter Modelica.SIunits.Time T_p = 0.04 "Pilot servomotor time constant" annotation (
       Dialog(group = "Controller settings"));
@@ -140,7 +140,7 @@ package Controllers "Collection of different controllers"
 
   block GovernorPI
     extends Modelica.Icons.UnderConstruction;
-  outer Parameters para;
+  outer Data data;
     parameter Modelica.SIunits.Time T_d = 0.3 "pilot servomotor time constant";
     parameter Modelica.SIunits.Time T_i = 5 "main servomotor integration time";
     parameter Modelica.SIunits.Time T_s = 0.05 "transient droop time constant";
@@ -243,7 +243,7 @@ package Controllers "Collection of different controllers"
 
   block GovernorP
     extends Modelica.Icons.UnderConstruction;
-  outer Parameters para;
+  outer Data data;
     parameter Modelica.SIunits.Time T_p = 0.04 "pilot servomotor time constant";
     parameter Modelica.SIunits.Time T_g = 0.2 "main servomotor integration time";
     parameter Modelica.SIunits.Time T_r = 1.75 "transient droop time constant";
@@ -340,7 +340,7 @@ package Controllers "Collection of different controllers"
 
   model GovernorPower
     extends Modelica.Icons.UnderConstruction;
-  outer Parameters para;
+  outer Data data;
     parameter Modelica.SIunits.Time T_p = 0.04 "pilot servomotor time constant";
     parameter Modelica.SIunits.Time T_g = 0.2 "main servomotor integration time";
     parameter Modelica.SIunits.Time T_r = 1.75 "transient droop time constant";

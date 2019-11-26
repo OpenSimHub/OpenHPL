@@ -23,7 +23,7 @@ model HPBjarneBorresen "Model of HP system with simplified models for penstock, 
         origin={46,-8},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  inner OpenHPL.Parameters para(V_0=2.4) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(V_0=2.4) annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));

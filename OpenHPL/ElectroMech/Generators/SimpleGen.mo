@@ -1,6 +1,6 @@
 within OpenHPL.ElectroMech.Generators;
 model SimpleGen "Model of a simple generator"
-  outer Parameters para "Using standard class with constants";
+  outer Data data "Using standard class with constants";
   import Modelica.Constants.pi;
   extends OpenHPL.Icons.Generator;
   //// geometrical parameters of the agreggate

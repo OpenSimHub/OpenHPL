@@ -7,7 +7,7 @@ model HPSimpleElasticPenstockWithoutSurge "Model of HP system without surge tank
         rotation=0)));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.03, offset = 0.5, startTime = 500) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {10, 84})));
-  inner OpenHPL.Parameters para annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));

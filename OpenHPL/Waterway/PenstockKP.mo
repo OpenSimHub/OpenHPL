@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
-  outer OpenHPL.Parameters para "using standard class with constants";
+  outer OpenHPL.Data data "using standard class with constants";
   extends OpenHPL.Icons.Pipe(    vertical=true);
   import Modelica.Constants.pi;
   //// geometrical parameters of the pipe

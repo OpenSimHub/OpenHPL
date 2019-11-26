@@ -53,7 +53,7 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
         origin={32,-50},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  inner OpenHPL.Parameters para(V_0=4.49) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(V_0=4.49) annotation (Placement(visible=true, transformation(
         origin={-90,70},
         extent={{-10,-10},{10,10}},
         rotation=0)));

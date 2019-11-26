@@ -1,6 +1,6 @@
 within OpenHPL.ElectroMech.Turbines;
 model Francis "Model of the Francis turbine"
-  outer Parameters para "using standard class with constants";
+  outer Data data "using standard class with constants";
     extends Icons.Turbine;
     import Modelica.Constants.pi;
     //// conditions for the geometrical parameters of the turbine

@@ -1,6 +1,6 @@
 within OpenHPL.ElectroMech.Turbines;
 model Turbine "Simple turbine model"
-  outer Parameters para "Using standard class with constants";
+  outer Data data "Using standard class with constants";
   extends Icons.Turbine;
   import Modelica.Constants.pi;
   //// parameters of the turbine

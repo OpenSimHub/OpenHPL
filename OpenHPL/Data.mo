@@ -1,5 +1,5 @@
 within OpenHPL;
-record Parameters "Provides a set of base parameters for this library"
+record Data "Provides a data set of most common used settings"
   extends Modelica.Icons.Record;
   parameter Modelica.SIunits.Acceleration g = Modelica.Constants.g_n "gravity" annotation (
     Dialog(enable=false, group = "Constants"));
@@ -27,9 +27,9 @@ record Parameters "Provides a set of base parameters for this library"
   parameter Modelica.SIunits.SpecificHeatCapacity c_p = 4200 annotation (
     Dialog(group = "Constants"));
   annotation (
-    Documentation(info = "<html><head></head><body><p>Here, common parameters&nbsp;are determined for this library. </p><p>It is possible to insert this class to models and use the common parameters for whole library.&nbsp;</p>
-  </body></html>"),
-    defaultComponentName = "para",
+    Documentation(info = "<html><p>Here, common parameters&nbsp;are determined for this library. </p>
+    <p>It is possible to insert this class to models and use the common parameters for whole library.</p></html>"),
+    defaultComponentName = "data",
     defaultComponentPrefixes = "inner",
     missingInnerMessage = "No 'para' component is defined. A default component will be used and provide system parameters");
-end Parameters;
+end Data;

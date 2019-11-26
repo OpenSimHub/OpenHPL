@@ -32,7 +32,7 @@ model HydroCordModelKPDraftTube "Model of HP system with simplified models for p
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters para(V_0=0.000400824, beta_total=1/997/1422^2) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(V_0=0.000400824, beta_total=1/997/1422^2) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));

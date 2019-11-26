@@ -54,7 +54,7 @@ model HPSimple_Francis_IPSLGenGov "Synergy with OpenIPSL library(generator + gov
         origin={30,40},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters para(V_0=4.49671) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(V_0=4.49671) annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));
