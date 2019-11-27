@@ -79,9 +79,10 @@ equation
   //o.T = T_i;
   annotation (
     Icon(coordinateSystem(initialScale = 0.1)),
-    Documentation(info = "<html><head></head><body><p>Simple model of the reservoir, which depending on depth of the outlet from reservoir, calculate the outlet pressure.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/reservoir.png\"></p>
-<p><br>Can also make a more complicated model and add the inflow to the reservoir and specify the reservoir geometry.</p>
+    Documentation(info="<html>
+<p>Simple model of the reservoir, which depending on depth of the outlet from reservoir, calculate the outlet pressure.</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/Reservoir.svg\"></p>
+<p>Can also make a more complicated model and add the inflow to the reservoir and specify the reservoir geometry.</p>
 <p>Also, it is possible to connect an input signal with varying water level in the reservoir.</p>
 </body></html>"),
     experiment(StartTime = 0, StopTime = 3600, Tolerance = 0.0001, Interval = 1));
