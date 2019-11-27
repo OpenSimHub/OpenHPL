@@ -31,6 +31,15 @@ algorithm
     Documentation(info="<html>
 <p>Calulates the dimension factor &phi; for Tapered reduction/expansion.
  The tapered angle &theta; should be specified.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/taperedredexp.png\"/></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\">
+<tr>
+<td><p><em>Tapered Reduction:</em></p></td>
+<td><p><em>Tapered Expansion:</em></p></td>
+</tr>
+<tr>
+<td><img src=\"modelica://OpenHPL/Resources/Images/TaperedReduction.svg\"/></td>
+<td><img src=\"modelica://OpenHPL/Resources/Images/TaperedExpansion.svg\"/></td>
+</tr>
+</table>
 </html>"));
 end Tapered;

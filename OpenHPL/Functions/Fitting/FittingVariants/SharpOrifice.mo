@@ -15,8 +15,15 @@ algorithm
     phi := (2.72 + (D_o / D_i) ^ 2 * 4000 / N_Re) * phi_0;
   end if;
   annotation (
-    Documentation(info = "<html>
+    Documentation(info="<html>
     <p>Calculates the dimension factor &phi; for Sharp Orifice.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/orifices.png\"/></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\">
+<tr>
+<td><p><em>Sharp Orifice:</em></p></td>
+</tr>
+<tr>
+<td><img src=\"modelica://OpenHPL/Resources/Images/OrificeSharp.svg\"/></td>
+</tr>
+</table>
 </html>"));
 end SharpOrifice;

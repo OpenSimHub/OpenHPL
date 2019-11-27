@@ -14,9 +14,16 @@ algorithm
     phi := (0.584 + 0.0936 / ((L / D_o) ^ 1.5 + 0.225)) * phi_0;
   end if;
   annotation (
-    Documentation(info = "<html>
+    Documentation(info="<html>
     <p>Define dimension factor &phi; for Thick Orifice.  
     Orifice length should be provided and this length should not be greater than 5D<sub>o</sub>.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/orifices.png\"/></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\">
+<tr>
+<td><p><em>Thick Orifice:</em></p></td>
+</tr>
+<tr>
+<td><img src=\"modelica://OpenHPL/Resources/Images/OrificeThick.svg\"/></td>
+</tr>
+</table>
 </html>"));
 end ThickOrifice;

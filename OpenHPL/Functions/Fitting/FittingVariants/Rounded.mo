@@ -15,6 +15,15 @@ algorithm
   end if;
   annotation (Documentation(info="<html>
 <p>Define dimension factor &phi; for Rounded Reduction. Rounded Expansion is the same as Squared Expansion.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/roundedredexp.png\"/> </p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\">
+<tr>
+<td><p><em>Rounded Reduction:</em></p></td>
+<td><p><em>Rounded Expansion:</em></p></td>
+</tr>
+<tr>
+<td><img src=\"modelica://OpenHPL/Resources/Images/RoundedReduction.svg\"/></td>
+<td><img src=\"modelica://OpenHPL/Resources/Images/RoundedExpansion.svg\"/></td>
+</tr>
+</table>
 </html>"));
 end Rounded;

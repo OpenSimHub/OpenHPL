@@ -26,6 +26,14 @@ algorithm
   end if;
   annotation (Documentation(info="<html>
 <p>Caluclates the dimension factor <strong>&phi;</strong> for square reduction/expansion.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/squareredexp.png\"/></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\"><tr>
+<td><p><em>Squared Reduction:</em></p></td>
+<td><p><em>Squared Expansion:</em></p></td>
+</tr>
+<tr>
+<td><img src=\"modelica://OpenHPL/Resources/Images/SquaredReduction.svg\"/></td>
+<td><img src=\"modelica://OpenHPL/Resources/Images/SquaredExpansion.svg\"/></td>
+</tr>
+</table>
 </html>"));
 end Square;
