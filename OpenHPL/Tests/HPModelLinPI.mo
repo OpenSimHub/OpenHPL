@@ -22,6 +22,6 @@ equation
   dotVs1 = hplin.x[3];
   ms1 = hplin.x[4];
   dotVp2 = hp.dotV;
-  dotVs2 = hp.surgeTank.V_dot;
+  dotVs2 = hp.surgeTank.Vdot;
   ms2 = hp.surgeTank.m;
 end HPModelLinPI;

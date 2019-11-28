@@ -105,7 +105,7 @@ model HydroCordModelKPFran "Model of HP system with simplified models for pensto
     H_n=371,
     P_n=130,
     R_Y_=3.2,
-    V_dot_n=37,
+    Vdot_n=37,
     WaterCompress=true,
     k_ft1_=2e5,
     k_ft2_=1e2,

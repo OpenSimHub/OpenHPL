@@ -18,7 +18,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// staedy state values for flow rate in all segments of the pipe
-  parameter Modelica.SIunits.VolumeFlowRate V_dot0[N] = data.V_0 * ones(N) "Initial flow rate in the pipe vector, m3/s" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot0[N] = data.V_0 * ones(N) "Initial flow rate in the pipe vector, m3/s" annotation (
     Dialog(group = "Initialization"));
   //// staedy state values for pressure in all segments of the pipe
   parameter Modelica.SIunits.Height h_s0 = 69 "Initial water head before the pipe, m" annotation (
@@ -37,11 +37,11 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   Modelica.SIunits.Area A_atm[N] = D .* D * pi / 4 "centered cross are vector in atm. p.", A_atm_[N + 1] = D_ .* D_ * pi / 4 "boundary cross are vector in atm. p.", A[N] "centered cross are vector", A_[N, 4] "boundary cross are vector", _A_atm[N, 4] "boundary cross are matrix in atm. p.";
   Modelica.SIunits.Pressure p_p[N] "centered pressure", dp = data.rho * data.g * H / N "initial p. step", p_i "Inlet pressure (LHS)", p_o "Outlet Pressure (RHS)", p_[N, 4] "boundary p. matrix";
   Modelica.SIunits.Length dx = L / N "length step", dh = H / N "height step";
-  Modelica.SIunits.MassFlowRate m_dot[N](start = data.rho * V_dot0) "centered mass flow", m_dot_R "left bound m_dot", m_dot_V "right bound m_dot", m_dot_[N, 4] "boundary m_dot matrix";
+  Modelica.SIunits.MassFlowRate mdot[N](start = data.rho * Vdot0) "centered mass flow", mdot_R "left bound mdot", mdot_V "right bound mdot", mdot_[N, 4] "boundary mdot matrix";
   Real U[2 * N] "centered states", U_[8, N] "boundary states", F_ap[N] "centered A*rho", F_ap_[N, 4] "bounddary A*rho", S_[2 * N] "source term", F_[2 * N, 4] "F matrix", lam1[N, 4] "eigenvalue '+'", lam2[N, 4] "eigenvalue '-'";
   Modelica.SIunits.Density rho[N] "centered density", rho_[N, 4] "boundary density";
   Modelica.SIunits.Velocity v_[N, 4] "bounds velocity", v[N] "centered velocity";
-  Modelica.SIunits.VolumeFlowRate V_dot[N] "centered volumetric flow";
+  Modelica.SIunits.VolumeFlowRate Vdot[N] "centered volumetric flow";
   Modelica.SIunits.Force F_f[N] "centered friction force vector";
   Real theta = 1.3 "parameter for slope limiter";
   extends OpenHPL.Interfaces.TwoContact;
@@ -53,37 +53,37 @@ initial equation
     der(U[1:N]) = zeros(N);
     der(U[N + 2:2 * N - 1]) = zeros(N - 2);
   else
-    m_dot[2:N - 1] = data.rho * V_dot0[2:N - 1];
+    mdot[2:N - 1] = data.rho * Vdot0[2:N - 1];
     p_p = p_p0;
   end if;
 equation
   //// Pipe flow rate
-  m_dot_R = i.m_dot;
-  m_dot_V = -o.m_dot;
+  mdot_R = i.mdot;
+  mdot_V = -o.mdot;
   //// pipe presurre
   p_i = i.p;
   p_o = o.p;
   //// state vector
   U[1:N] = p_p[:];
-  U[N + 1:2 * N] = m_dot[:];
+  U[N + 1:2 * N] = mdot[:];
   //// Define variables, which are going to be used for source term S_
   if PipeElasticity == true then
     F_ap = data.rho * A_atm .* (ones(N) + data.beta_total * (p_p - data.p_a * ones(N)));
   else
     F_ap = data.rho * A_atm .* (ones(N) + data.beta * (p_p - data.p_a * ones(N)));
   end if;
-  v = m_dot ./ F_ap;
+  v = mdot ./ F_ap;
   rho = data.rho * (ones(N) + data.beta * (p_p - data.p_a * ones(N)));
   A = F_ap ./ rho;
-  V_dot = m_dot ./ rho;
+  Vdot = mdot ./ rho;
   //// piece wise linear reconstruction of vector U
   U_ = KP.U_;
-  U_[6, 1] = m_dot_R;
-  U_[4, N] = m_dot_V;
+  U_[6, 1] = mdot_R;
+  U_[4, N] = mdot_V;
   //// presure states
   p_ = transpose(matrix(U_[1:2:8, :]));
   //// mass flow rate states
-  m_dot_ = transpose(matrix(U_[2:2:8, :]));
+  mdot_ = transpose(matrix(U_[2:2:8, :]));
   //// define variables, which are going to be used for F matrix and eigenvalues
   _A_atm = [A_atm_[2:N + 1], A_atm_[2:N + 1], A_atm_[1:N], A_atm_[1:N]];
   rho_ = data.rho * (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
@@ -93,7 +93,7 @@ equation
     F_ap_ = data.rho * _A_atm .* (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
   end if;
   A_ = F_ap_ ./ rho_;
-  v_ = m_dot_ ./ F_ap_;
+  v_ = mdot_ ./ F_ap_;
   //// eigenvalues
   if PipeElasticity == true then
     lam1 = (v_ + sqrt(v_ .* v_ + 4 * A_ / data.rho ./ _A_atm / data.beta_total)) / 2;
@@ -104,9 +104,9 @@ equation
   end if;
   //// F vector
   if PipeElasticity == true then
-    F_ = [m_dot_ ./ data.rho ./ _A_atm ./ data.beta_total; m_dot_ .* v_ + A_ .* p_];
+    F_ = [mdot_ ./ data.rho ./ _A_atm ./ data.beta_total; mdot_ .* v_ + A_ .* p_];
   else
-    F_ = [m_dot_ ./ data.rho ./ _A_atm ./ data.beta; m_dot_ .* v_ + A_ .* p_];
+    F_ = [mdot_ ./ data.rho ./ _A_atm ./ data.beta; mdot_ .* v_ + A_ .* p_];
   end if;
   //// define friction force in each segment using Darcy friction factor
   for i in 1:N loop

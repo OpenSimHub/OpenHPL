@@ -8,11 +8,11 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  OpenHPL.Waterway.Pipe intake(H=23, V_dot0=18.5381) annotation (Placement(visible=true, transformation(extent={{-76,52},{-56,72}}, rotation=0)));
+  OpenHPL.Waterway.Pipe intake(H=23, Vdot0=18.5381) annotation (Placement(visible=true, transformation(extent={{-76,52},{-56,72}}, rotation=0)));
   Waterway.Pipe discharge(
     L=600,
     H=0.5,
-    V_dot0=18.5381) annotation (Placement(visible=true, transformation(extent={{50,30},{70,50}}, rotation=0)));
+    Vdot0=18.5381) annotation (Placement(visible=true, transformation(extent={{50,30},{70,50}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
         origin={90,36},
         extent={{-10,10},{10,-10}},
@@ -22,7 +22,7 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
     H=428.5,
     D_i=3,
     D_o=3,
-    V_dot0=18.5381) annotation (Placement(visible=true, transformation(
+    Vdot0=18.5381) annotation (Placement(visible=true, transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
@@ -39,7 +39,7 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
     R_2_=1.55/2,
     R_v_=2.89/2,
     Reduction=0.1,
-    V_dot_n=24.3,
+    Vdot_n=24.3,
     beta1_=110,
     beta2_=162.5,
     dp_v_condition=false,
@@ -97,7 +97,7 @@ equation
   connect(infiniteBus.p, order2_1.p) annotation (
     Line(points = {{-42, -54}, {36, -54}, {36, -36}, {62, -36}, {62, -20}, {46, -20}, {46, -20}}, color = {0, 0, 255}));
   turbine.u_t = u;
-  dotV = turbine.V_dot;
+  dotV = turbine.Vdot;
   P = order2_1.P;
   w = turbine.w;
   connect(reservoir.n, intake.p) annotation (

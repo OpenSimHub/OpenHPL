@@ -22,7 +22,7 @@ model Fitting "Different pipes fitting"
   /* Connector */
   extends OpenHPL.Interfaces.ContactPort;
 equation
-  v = m_dot / data.rho / A;
+  v = mdot / data.rho / A;
   phi =Functions.Fitting.FittingPhi(
     v,
     D_i,

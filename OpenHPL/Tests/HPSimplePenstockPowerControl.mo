@@ -9,11 +9,11 @@ model HPSimplePenstockPowerControl
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Pipe intake(V_dot0=19) annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
+  Waterway.Pipe intake(Vdot0=19) annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
   Waterway.Pipe discharge(
     H=5,
     L=600,
-    V_dot0=19) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
+    Vdot0=19) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
   Waterway.Reservoir tail(H_r=10) annotation (Placement(visible=true, transformation(
         origin={86,42},
         extent={{-10,10},{10,-10}},
@@ -24,7 +24,7 @@ model HPSimplePenstockPowerControl
     L=600,
     D_i=3.3,
     D_o=3.3,
-    V_dot0=19) annotation (Placement(visible=true, transformation(
+    Vdot0=19) annotation (Placement(visible=true, transformation(
         origin={-2,46},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -39,7 +39,7 @@ model HPSimplePenstockPowerControl
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -3e6, offset = 80e6, startTime = 400) annotation (
     Placement(visible = true, transformation(extent = {{-20, -4}, {0, 16}}, rotation = 0)));
   Controllers.GovernorPower govenorPower annotation (Placement(transformation(extent={{56,86},{36,66}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y = aggregate.W_ts_dot) annotation (
+  Modelica.Blocks.Sources.RealExpression realExpression(y = aggregate.Wdot_ts) annotation (
     Placement(transformation(extent = {{92, 72}, {72, 92}})));
 equation
   connect(turbine.P_out, aggregate.P_in) annotation (

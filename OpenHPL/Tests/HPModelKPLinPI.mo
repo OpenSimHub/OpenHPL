@@ -14,6 +14,6 @@ equation
   der(xi1) = Ki * err1;
   u1 = min(1.0, Kp * err1 + xi1);
   dotVp2 = hpKP.dotV;
-  dotVs2 = hpKP.surgeTank.V_dot;
+  dotVs2 = hpKP.surgeTank.Vdot;
   ms2 = hpKP.surgeTank.m;
 end HPModelKPLinPI;

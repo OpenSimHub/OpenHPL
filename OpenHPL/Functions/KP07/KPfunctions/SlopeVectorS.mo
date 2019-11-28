@@ -6,13 +6,13 @@ model SlopeVectorS
   output Real s[2, N + 2];
 protected
   Real s_m[2 * (N + 2), 1], s_c[2 * (N + 2), 1], s_p[2 * (N + 2), 1], s1[2 * (N + 2), 1];
-  Real p_[N + 4], m_dot_[N + 4];
+  Real p_[N + 4], mdot_[N + 4];
 equation
   p_ = U_[1:N + 4];
-  m_dot_ = U_[N + 5:2 * (N + 4)];
-  s_m = theta * ([p_[2:N + 3]; m_dot_[2:N + 3]] - [p_[1:N + 2]; m_dot_[1:N + 2]]) / dx;
-  s_c = ([p_[3:N + 4]; m_dot_[3:N + 4]] - [p_[1:N + 2]; m_dot_[1:N + 2]]) / 2 / dx;
-  s_p = theta * ([p_[3:N + 4]; m_dot_[3:N + 4]] - [p_[2:N + 3]; m_dot_[2:N + 3]]) / dx;
+  mdot_ = U_[N + 5:2 * (N + 4)];
+  s_m = theta * ([p_[2:N + 3]; mdot_[2:N + 3]] - [p_[1:N + 2]; mdot_[1:N + 2]]) / dx;
+  s_c = ([p_[3:N + 4]; mdot_[3:N + 4]] - [p_[1:N + 2]; mdot_[1:N + 2]]) / 2 / dx;
+  s_p = theta * ([p_[3:N + 4]; mdot_[3:N + 4]] - [p_[2:N + 3]; mdot_[2:N + 3]]) / dx;
   for i in 1:N + 2 loop
     s1[i, 1] = 0.5 * (sign(s_m[i, 1]) + sign(s_c[i, 1])) * min(abs(s_m[i, 1]), abs(s_c[i, 1]));
     s1[N + 2 + i, 1] = 0.5 * (sign(s_m[N + 2 + i, 1]) + sign(s_c[N + 2 + i, 1])) * min(abs(s_m[N + 2 + i, 1]), abs(s_c[N + 2 + i, 1]));

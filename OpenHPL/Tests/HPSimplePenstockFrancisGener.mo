@@ -36,7 +36,7 @@ model HPSimplePenstockFrancisGener "HP system model with Francis turbine and gen
     R_2_=1.55/2,
     R_v_=2.89/2,
     Reduction=0.1,
-    V_dot_n=24.3,
+    Vdot_n=24.3,
     beta1_=110,
     beta2_=162.5,
     dp_v_condition=false,
@@ -61,7 +61,7 @@ equation
     Line(points = {{34, 16}, {32, 16}, {32, 28}, {32, 28}}, color = {0, 0, 127}));
   connect(turbine.P_out, aggregate.P_in) annotation (
     Line(points = {{24, 28}, {22, 28}, {22, 16}, {22, 16}}, color = {0, 0, 127}));
-  coef = turbine.W_s_dot / (495 * 997 * 9.81 * turbine.V_dot - (intake.F_f + discharge.F_f + penstock.F_f));
+  coef = turbine.Wdot_s / (495 * 997 * 9.81 * turbine.Vdot - (intake.F_f + discharge.F_f + penstock.F_f));
   connect(discharge.n, tail.n) annotation (
     Line(points = {{66.1, 35.9}, {76, 35.9}, {76, 41.9}, {81.9, 41.9}}));
   connect(turbine.n, discharge.p) annotation (

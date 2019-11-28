@@ -7,11 +7,11 @@ model HPLiniarizationKP "HP system model for liniarization with elastic penstock
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Pipe intake(H=23, V_dot0=19.0777) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
+  Waterway.Pipe intake(H=23, Vdot0=19.0777) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    V_dot0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
+    Vdot0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
         origin={72,40},
         extent={{-10,10},{10,-10}},
@@ -23,7 +23,7 @@ model HPLiniarizationKP "HP system model for liniarization with elastic penstock
     L=600,
     N=10,
     PipeElasticity=true,
-    V_dot0=19.0777*ones(10),
+    Vdot0=19.0777*ones(10),
     h_s0=69,
     p_p0=997*9.81*(69 + 428.5/10/2):997*9.81*428.5/10:997*9.81*(69 + 428.5/10*(10 - 1/2))) annotation (Placement(visible=true, transformation(
         origin={-10,48},
@@ -55,7 +55,7 @@ equation
   connect(turbine.n, discharge.p) annotation (
     Line(points={{20,34},{25.05,34},{30,34}},                  color = {28, 108, 200}));
   turbine.u_t = u;
-  dotV = turbine.V_dot;
+  dotV = turbine.Vdot;
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end HPLiniarizationKP;

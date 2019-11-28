@@ -27,8 +27,8 @@ model Reservoir "Model of the reservoir"
   //// variables
   Modelica.SIunits.Area A "vertiacal cross section";
   Modelica.SIunits.Mass m "water mass";
-  Modelica.SIunits.MassFlowRate m_dot "water mass flow rate";
-  Modelica.SIunits.VolumeFlowRate V_o_dot "outlet flow rate", V_i_dot "inlet flow rate", V_dot "vertical flow rate";
+  Modelica.SIunits.MassFlowRate mdot "water mass flow rate";
+  Modelica.SIunits.VolumeFlowRate Vdot_o "outlet flow rate", Vdot_i "inlet flow rate", Vdot "vertical flow rate";
   Modelica.SIunits.Velocity v "water velosity";
   Modelica.SIunits.Momentum M "water momentum";
   Modelica.SIunits.Force F_f "friction force";
@@ -36,7 +36,7 @@ model Reservoir "Model of the reservoir"
   Modelica.SIunits.Pressure p_o "outlet pressure";
   //// conectors
   OpenHPL.Interfaces.Contact o(p=p_o) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
-  Modelica.Blocks.Interfaces.RealInput V_in = V_i_dot if UseInFlow "Conditional input inflow of the reservoir"
+  Modelica.Blocks.Interfaces.RealInput V_in = Vdot_i if UseInFlow "Conditional input inflow of the reservoir"
     annotation (Placement(transformation(origin={-120,0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput Level_in = H if Input_level "Conditional input water level of the reservoir"
     annotation (Placement(transformation(origin={-120,50}, extent = {{-20, -20}, {20, 20}}, rotation=0)));
@@ -50,31 +50,31 @@ equation
   //// Define water mass
   m = data.rho * A * L;
   //// Define volumetric water flow rate
-  V_dot = V_i_dot - V_o_dot;
+  Vdot = Vdot_i - Vdot_o;
   //// Define mass water flow rate
-  m_dot = data.rho * V_dot;
+  mdot = data.rho * Vdot;
   //// Define water velocity
-  v = m_dot / data.rho / A;
+  v = mdot / data.rho / A;
   //// Define momentrumn
-  M = L * m_dot;
+  M = L * mdot;
   //// Define friction term
   F_f = 1 / 8 * data.rho * f * L * (w + 2 * H / Modelica.Math.cos(alpha)) * v * abs(v);
   //// condition for inflow use
   if UseInFlow == false then
     //// condition for constant water level, inflow = outflow
-    V_i_dot - V_o_dot = 0;
+    Vdot_i - Vdot_o = 0;
   end if;
   //// condition for input water level use
   if Input_level == false then
     //// define derivatives of momentum and mass
-    der(M) = A * (data.p_a - p_o) + data.g * data.rho * A * H - F_f + data.rho / A * (V_i_dot ^ 2 - V_o_dot ^ 2);
-    der(m) = m_dot;
+    der(M) = A * (data.p_a - p_o) + data.g * data.rho * A * H - F_f + data.rho / A * (Vdot_i ^ 2 - Vdot_o ^ 2);
+    der(m) = mdot;
   else
     //// define output pressure
     p_o = data.p_a + data.g * data.rho * H;
   end if;
   //// output flow conector
-  o.m_dot = -data.rho * V_o_dot;
+  o.mdot = -data.rho * Vdot_o;
   //// output temperature conector
   //o.T = T_i;
   annotation (

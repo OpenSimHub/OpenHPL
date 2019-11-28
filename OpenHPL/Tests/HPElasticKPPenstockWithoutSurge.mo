@@ -14,7 +14,7 @@ model HPElasticKPPenstockWithoutSurge "Model of HP system without surge tank and
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    V_dot0=19.06) annotation (Placement(visible=true, transformation(extent={{56,24},{76,44}}, rotation=0)));
+    Vdot0=19.06) annotation (Placement(visible=true, transformation(extent={{56,24},{76,44}}, rotation=0)));
   Waterway.Reservoir tail(H_r=5) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
@@ -25,12 +25,12 @@ model HPElasticKPPenstockWithoutSurge "Model of HP system without surge tank and
     H=428.5,
     N=10,
     PipeElasticity=true,
-    V_dot0=19.06*ones(10)) annotation (Placement(visible=true, transformation(
+    Vdot0=19.06*ones(10)) annotation (Placement(visible=true, transformation(
         origin={-6,50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompres=true) annotation (Placement(transformation(extent={{22,26},{42,46}})));
-  Waterway.Pipe condiut(H=23, V_dot0=19.06) annotation (Placement(visible=true, transformation(
+  Waterway.Pipe condiut(H=23, Vdot0=19.06) annotation (Placement(visible=true, transformation(
         origin={-48,64},
         extent={{-10,-10},{10,10}},
         rotation=0)));

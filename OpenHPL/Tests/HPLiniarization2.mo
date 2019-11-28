@@ -7,11 +7,11 @@ model HPLiniarization2 "Simple HP system model for liniarization"
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Pipe intake(H=23, V_dot0=19.0777) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
+  Waterway.Pipe intake(H=23, Vdot0=19.0777) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
   OpenHPL.Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    V_dot0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
+    Vdot0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
         origin={72,40},
         extent={{-10,10},{10,-10}},
@@ -21,7 +21,7 @@ model HPLiniarization2 "Simple HP system model for liniarization"
     D_o=3,
     H=428.5,
     L=600,
-    V_dot0=19.0777) annotation (Placement(visible=true, transformation(
+    Vdot0=19.0777) annotation (Placement(visible=true, transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
@@ -51,7 +51,7 @@ equation
   connect(penstock.n, turbine.p) annotation (
     Line(points = {{-10.1, 37.9}, {-10.1, 33.9}, {0.1, 33.9}}, color = {28, 108, 200}));
   turbine.u_t = u;
-  dotV = turbine.V_dot;
+  dotV = turbine.Vdot;
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end HPLiniarization2;

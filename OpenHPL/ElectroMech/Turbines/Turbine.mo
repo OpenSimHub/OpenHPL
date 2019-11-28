@@ -10,7 +10,7 @@ model Turbine "Simple turbine model"
     Dialog(group = "Turbine nominal parameters", enable = ValveCapacity));
   parameter Modelica.SIunits.Height H_n = 460 "Turbine nominal net head" annotation (
     Dialog(group = "Turbine nominal parameters", enable = not ValveCapacity));
-  parameter Modelica.SIunits.VolumeFlowRate V_dot_n = 23.4 "Turbine nominal flow rate" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_n = 23.4 "Turbine nominal flow rate" annotation (
     Dialog(group = "Turbine nominal parameters", enable = not ValveCapacity));
   parameter Real u_n = 0.95 "Turbine guide vane nominal opening, pu" annotation (
     Dialog(group = "Turbine nominal parameters", enable = not ValveCapacity));
@@ -31,35 +31,35 @@ model Turbine "Simple turbine model"
   //// variables
   Modelica.SIunits.Pressure p_i_tr "Inlet pressure", dp "Turbine pressure drop", p_o_tr "Outlet pressure";
   //Modelica.SIunits.Area A_d = D_o ^ 2 * pi / 4, A_p = D_i ^ 2 * pi / 4;
-  Modelica.SIunits.EnergyFlowRate K_i_tr_dot "Kinetic energy flow";
-  Modelica.SIunits.VolumeFlowRate V_dot "Flow rate";
+  Modelica.SIunits.EnergyFlowRate Kdot_i_tr "Kinetic energy flow";
+  Modelica.SIunits.VolumeFlowRate Vdot "Flow rate";
   Real C_v_ "Guide vane 'valve capacity'";
-  output Modelica.SIunits.EnergyFlowRate W_s_dot "Shaft power";
+  output Modelica.SIunits.EnergyFlowRate Wdot_s "Shaft power";
   //// connectors
   extends OpenHPL.Interfaces.TurbineContacts;
   Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table);
 equation
   //// checking water compressibility
-  V_dot = if WaterCompress then m_dot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else m_dot / data.rho;
+  Vdot = if WaterCompress then mdot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else mdot / data.rho;
   //// define turbine efficiency
   look_up_table.u[1] = u_t;
   //// define guide vane 'valve capacity' base on the turbine nominal parameters
-  C_v_ = if ValveCapacity then C_v else V_dot_n/sqrt(H_n*data.g*data.rho/data.p_a)/u_n;
+  C_v_ = if ValveCapacity then C_v else Vdot_n/sqrt(H_n*data.g*data.rho/data.p_a)/u_n;
   //// turbine valve equation for pressure drop
-  dp = V_dot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2;
+  dp = Vdot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2;
   dp = p_i_tr - p_o_tr;
   //// turbine energy balance
-  K_i_tr_dot = dp * V_dot;
+  Kdot_i_tr = dp * Vdot;
   if ConstEfficiency == true then
-    W_s_dot = theta_h * K_i_tr_dot;
+    Wdot_s = theta_h * Kdot_i_tr;
   else
-    W_s_dot = look_up_table.y[1] * K_i_tr_dot;
+    Wdot_s = look_up_table.y[1] * Kdot_i_tr;
   end if;
   //// turbine pressures
   p_i_tr = i.p;
   p_o_tr = o.p;
   //// output mechanical power
-  P_out = W_s_dot;
+  P_out = Wdot_s;
   //// for temperature variation, not finished...
   //i.T = o.T;
   ////
@@ -75,7 +75,7 @@ This model is baseed on the energy balance and a simple valve-like expression.
 The guide vane 'valve capacity' should be used for this valve-like expression and can either be specified
 directly by the user by specifying <code>C_v</code> or it will be calculated from
 the turbine nominal net head <code>H_n</code> and nominal flow rate
-<code>V_dot_n</code>.
+<code>Vdot_n</code>.
 </p>
 <p>
 The turbine efficiency is in per-unit values from 0 to 1, where 1 means that there are no losses in the turbine.

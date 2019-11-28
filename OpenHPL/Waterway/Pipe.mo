@@ -18,7 +18,7 @@ model Pipe "Model of the pipe"
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// staedy state value for flow rate
-  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = data.V_0 "Initial flow rate in the pipe" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = data.V_0 "Initial flow rate in the pipe" annotation (
     Dialog(group = "Initialization"));
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
@@ -36,7 +36,7 @@ model Pipe "Model of the pipe"
   Modelica.SIunits.Pressure p_i "Inlet pressure";
   Modelica.SIunits.Pressure p_o "Outlet pressure";
   Modelica.SIunits.Pressure dp=p_o-p_i "Pressure difference across the pipe";
-  Modelica.SIunits.VolumeFlowRate V_dot(start = V_dot0) "Flow rate";
+  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot0) "Flow rate";
 
   //// variables for temperature. Not in use for now...
   //Real W_f, W_e;
@@ -48,30 +48,30 @@ initial equation
     der(M) = 0;
     //der(n.T) = 0;
   else
-    V_dot = V_dot0;
+    Vdot = Vdot0;
     //n.T = p.T;
   end if;
 equation
   //// Water volumetric flow rate through the pipe
-  V_dot = m_dot / data.rho;
+  Vdot = mdot / data.rho;
   //// Water velocity
-  v = V_dot / A_;
+  v = Vdot / A_;
   //// Momentum and mass of water
-  M = data.rho * L * V_dot;
+  M = data.rho * L * Vdot;
   m = data.rho * A_ * L;
   //// Friction force
   F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, eps);
   //// momentum balance
-  der(M) = data.rho * V_dot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * data.g * cos_theta;
+  der(M) = data.rho * Vdot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * data.g * cos_theta;
   //// pipe presurre
   p_i = i.p;
   p_o = o.p;
   //// possible temperature variation implementation. Not finished...
   //W_f = -F_f * v;
-  //W_e = V_dot * (p_i- p_o);
+  //W_e = Vdot * (p_i- p_o);
   //if TempUse == true then
-  //data.c_p * m * der(T) = V_dot * data.rho * data.c_p * (p.T - T) + W_e - W_f;
-  //0 = V_dot * data.rho * data.c_p * (p.T - n.T) + W_e - W_f;
+  //data.c_p * m * der(T) = Vdot * data.rho * data.c_p * (p.T - T) + W_e - W_f;
+  //0 = Vdot * data.rho * data.c_p * (p.T - n.T) + W_e - W_f;
   //else
   //der(n.T) = 0;
   //end if;
@@ -82,7 +82,7 @@ equation
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
     <p>This model is described by the momentum differential equation, which depends
     on pressure drop through the pipe together with friction and gravity forces.
-    The main defined variable is volumetric flow rate <i>V_dot</i>.</p>
+    The main defined variable is volumetric flow rate <i>Vdot</i>.</p>
     <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.png\"> </p>
     <p>In this pipe model, the flow rate changes simultaniusly in the whole pipe
     (an information about the speed of wave propagation is not included here).

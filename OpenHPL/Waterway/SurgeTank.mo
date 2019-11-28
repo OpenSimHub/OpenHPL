@@ -16,7 +16,7 @@ model SurgeTank "Model of the surge tank/shaft"
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// steady state values for flow rate and water level in surge tank
-  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = 0 "Initial flow rate in the surge tank" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = 0 "Initial flow rate in the surge tank" annotation (
     Dialog(group = "Initialization"));
   parameter Modelica.SIunits.Height h_0 = 75 "Initial water height in the surge tank" annotation (
     Dialog(group = "Initialization"));
@@ -35,7 +35,7 @@ model SurgeTank "Model of the surge tank/shaft"
   Modelica.SIunits.Force F_f "friction force";
   Modelica.SIunits.Momentum M "water momuntum";
   Modelica.SIunits.Height h(start = h_0) "water height in the surge tank";
-  Modelica.SIunits.VolumeFlowRate V_dot(start = V_dot0) "water flow rate";
+  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot0) "water flow rate";
   //// variables for temperature. Not in use for now...
   //Real W_f, W_e;
   //// conector
@@ -47,30 +47,30 @@ initial equation
     //der(T_n) = 0;
   else
     h = h_0;
-    V_dot = V_dot0;
+    Vdot = Vdot0;
     //T_n = T_i;
   end if;
 equation
   //// volumetric and mass flow rate through the surge tank
-  V_dot = m_dot / data.rho;
+  Vdot = mdot / data.rho;
   //// mass of water in the surge tank
   m = data.rho * A * l;
   //// mass balance
-  der(m) = m_dot;
+  der(m) = mdot;
   //// velocity and momentum of the water
-  v = V_dot / A;
+  v = Vdot / A;
   M = m * v;
   //// friction force
   F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, eps);
   //F_f = 0.5*pi*1/(2*log10(eps/3.7/D + 5.74/(data.rho*abs(v)*D/data.mu + 1e-3)^0.9))^2*data.rho*l*v*abs(v)*D/4;
   //// momentum balance
-  der(M) = data.rho * V_dot ^ 2 / A + (p_n - p_2) * A - F_f - m * data.g * cos_theta;
+  der(M) = data.rho * Vdot ^ 2 / A + (p_n - p_2) * A - F_f - m * data.g * cos_theta;
   //// possible temperature variation implementation. Not finished...
   //W_f = -F_f * v;
-  //W_e = V_dot * (p_n - p_2);
+  //W_e = Vdot * (p_n - p_2);
   //if TempUse == true then
-  //data.c_p * m * der(T_n) = V_dot * data.rho * data.c_p * (T_n - T_i)+ W_e - W_f;
-  //0 = V_dot * data.rho * data.c_p * (T_n - T_i)+ W_e - W_f;
+  //data.c_p * m * der(T_n) = Vdot * data.rho * data.c_p * (T_n - T_i)+ W_e - W_f;
+  //0 = Vdot * data.rho * data.c_p * (T_n - T_i)+ W_e - W_f;
   //der(T_n)=0;
   //else
   //der(T_n)=0;
@@ -81,7 +81,7 @@ equation
 <p>The simple model of the surge tank, which described by the momentum and mass 
 differential equations. The mass balance depends on inlet and outlet mass flow rates. 
 The momentum balance depends on inlet momentum to and pressure dorp through the surge 
-pipe together with gravity and friction forces. The main defined variable are <code>V_dot_s</code> 
+pipe together with gravity and friction forces. The main defined variable are <code>Vdot_s</code> 
 and <code>h_s</code> (the flow rate and water level in the surge tank).</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/surgepic.png\"></p>
 <p>More details about the surge tank model can be found in 

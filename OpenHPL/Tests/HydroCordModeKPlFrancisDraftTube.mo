@@ -98,7 +98,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     H_n=371,
     P_n=130,
     R_Y_=3.2,
-    V_dot_n=37,
+    Vdot_n=37,
     k_ft1_=2e5,
     k_ft2_=1e2,
     k_ft3_=8e3,

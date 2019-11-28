@@ -11,16 +11,16 @@ model HPSimpleElasticPenstockWithoutSurge "Model of HP system without surge tank
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Pipe intake(V_dot0=20.6) annotation (Placement(visible=true, transformation(extent={{-58,52},{-38,72}}, rotation=0)));
+  Waterway.Pipe intake(Vdot0=20.6) annotation (Placement(visible=true, transformation(extent={{-58,52},{-38,72}}, rotation=0)));
   Waterway.Pipe discharge(
     H=5,
     L=600,
-    V_dot0=20.6) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
+    Vdot0=20.6) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
   Waterway.Reservoir tail(H_r=10) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={92,42})));
-  Waterway.Penstock penstock1(N=10, V_dot0=20.6) annotation (Placement(visible=true, transformation(
+  Waterway.Penstock penstock1(N=10, Vdot0=20.6) annotation (Placement(visible=true, transformation(
         origin={-6,48},
         extent={{-10,-10},{10,10}},
         rotation=0)));

@@ -27,7 +27,7 @@ model ReservoirChannel "Reservoir model based on open channel model"
     SteadyState=SteadyState) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   //// boundaries
-  o.m_dot = -q * w * data.rho;
+  o.mdot = -q * w * data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
   annotation (
     Documentation(info="<html>This is a model for the reservoir, based on the open channel (river) model.</p>

@@ -105,7 +105,7 @@ First, a detailed description of the interface connectors is provided here. In t
 \begin{lstlisting}[language = modelica]
 connector Contact "Water flow connector"
   Modelica.SIunits.Pressure p "Contact pressure";
-  flow Modelica.SIunits.MassFlowRate m_dot "Mass flow rate through the contact";
+  flow Modelica.SIunits.MassFlowRate mdot "Mass flow rate through the contact";
   // Creating an icon for connector
   annotation (Icon(graphics={  Ellipse(extent={{-100,-100},{100,100}}, lineColor = {28, 108, 200}, fillColor = {0, 128, 255}, fillPattern = FillPattern.Solid)}));
 end Contact;
@@ -124,23 +124,23 @@ In addition, some extensions of this water flow connector are developed for the 
     \item \emph{ContactPort} is an extension from the \emph{TwoContact} model which also provides information about a mass flow rate between these two connectors. The mass flow rate that flows through the inlet connector is equal to the mass flow through the outlet connector. This model is used for the pipe modelling. A Modelica code for this \emph{ContactPort} model looks as follows:
     \begin{lstlisting}[language = modelica]
     partial model ContactPort "Model of two connectors with mass flow rate"
-      Modelica.SIunits.MassFlowRate m_dot "Mass flow rate";
+      Modelica.SIunits.MassFlowRate mdot "Mass flow rate";
       extends TwoContact;
     equation
-      0 = i.m_dot + o.m_dot;
-      m_dot = i.m_dot;
+      0 = i.mdot + o.mdot;
+      mdot = i.mdot;
     end ContactPort;
     \end{lstlisting}
     \item \emph{ContactNode} is an extension from the \emph{TwoContact} model and provides a node pressure that is equal to the pressures from these two connectors. This model also defines the mass flow rate that is the sum of the mass flow rates through the inlet and outlet connectors. This model is used for the surge tank modelling. A Modelica code for this \emph{ContactNode} model looks as follows:
     \begin{lstlisting}[language = modelica]
     partial model ContactNode "Model of two connectors and node pressure"
       Modelica.SIunits.Pressure p_n "Node pressure";
-      Modelica.SIunits.MassFlowRate m_dot "Mass flow rate";
+      Modelica.SIunits.MassFlowRate mdot "Mass flow rate";
       extends TwoContact;
     equation
       p_n = i.p;
       i.p = o.p;
-      m_dot = i.m_dot + o.m_dot;
+      mdot = i.mdot + o.mdot;
     end ContactNode;
     \end{lstlisting}
     \item \emph{TurbineContacts} is an extension from \emph{ContactPort} model and provides the real input and output connectors, additionally. This model is used for turbine modelling. A Modelica code for this \emph{TurbineContacts} model looks as follows:
@@ -1118,7 +1118,7 @@ In order to run the simulations of the developed example hydropower model from P
     \begin{lstlisting}[language = Python]
     hps_s.simulate() # run simulation
     hps_s.getSolutions() # get list of solution variables
-    time, Vdot, p_tr1, p_tr2 = hps_s.getSolutions("time", "turbine.V_dot", "turbine.p_tr1", "turbine.p_tr2") # get results of simulation time variable, and the turbine flow rate, inlet and outlet pressures.
+    time, Vdot, p_tr1, p_tr2 = hps_s.getSolutions("time", "turbine.Vdot", "turbine.p_tr1", "turbine.p_tr2") # get results of simulation time variable, and the turbine flow rate, inlet and outlet pressures.
     \end{lstlisting}
     These simulation results can be then plotted using \emph{matplotlib} package. See the plots of the turbine flow rate and the pressures in Figure~\ref{fig:fig21}.
     \begin{figure}[ht]

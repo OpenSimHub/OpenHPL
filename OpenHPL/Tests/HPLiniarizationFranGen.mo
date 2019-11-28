@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HPLiniarizationFranGen "HP system model for liniarization with Francis turbine + generator"
   extends Modelica.Icons.Example;
-  Waterway.Pipe intake(H=23, V_dot0=18.5952) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
+  Waterway.Pipe intake(H=23, Vdot0=18.5952) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
   input Real u = 0.576313;
   output Real P;
   //, f;
@@ -12,7 +12,7 @@ model HPLiniarizationFranGen "HP system model for liniarization with Francis tur
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    V_dot0=18.5952) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
+    Vdot0=18.5952) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
   Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
         origin={94,40},
         extent={{-10,10},{10,-10}},
@@ -22,7 +22,7 @@ model HPLiniarizationFranGen "HP system model for liniarization with Francis tur
     D_o=3,
     H=428.5,
     L=600,
-    V_dot0=18.5952) annotation (Placement(visible=true, transformation(
+    Vdot0=18.5952) annotation (Placement(visible=true, transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));

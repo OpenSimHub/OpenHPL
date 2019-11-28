@@ -13,7 +13,7 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_o = D_i "Diametr from the output side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = 20 "initial flow rate in the pipe, m3/s" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = 20 "initial flow rate in the pipe, m3/s" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20 "Number of segments" annotation (
     Dialog(group = "Discretization"));
@@ -21,7 +21,7 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
   Modelica.SIunits.Area A[N] = D .^ 2 * pi / 4, A_[N + 1] = D_ .^ 2 * pi / 4, A_m[N - 2], A_m_end, A_m_first;
   Modelica.SIunits.Pressure p_i, p_o, p_[N - 1], dp = data.rho * data.g * H / N, p_m[N - 2];
   Modelica.SIunits.Length dx = L / N, Per_m[N - 2];
-  Modelica.SIunits.MassFlowRate m_dot_R, m_dot_V, m_dot[N - 2], m_exp[N];
+  Modelica.SIunits.MassFlowRate mdot_R, mdot_V, mdot[N - 2], m_exp[N];
   Real F_ap[N - 1], F_m[N - 2], F_exp[N], eps_m[N - 2], Ap_m[3, N - 2], F_m_end, F_m_first;
   Modelica.SIunits.Force F_g[N - 2], F_p[N - 2];
   Modelica.SIunits.Density rho_m[N - 2], rho_m_end, rho_m_first;
@@ -29,14 +29,14 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
   Modelica.SIunits.VolumeFlowRate V_p_out[N - 2], V_p_out_end;
   extends OpenHPL.Interfaces.TwoContact;
 initial equation
-  m_dot_R = data.rho * V_dot0;
-  m_dot_V = data.rho * V_dot0;
-  m_dot = data.rho * V_dot0 * ones(N - 2);
+  mdot_R = data.rho * Vdot0;
+  mdot_V = data.rho * Vdot0;
+  mdot = data.rho * Vdot0 * ones(N - 2);
   p_ = p_i + dp:dp:p_i + dp * (N - 1);
 equation
   // Pipe flow rate
-  m_dot_R = i.m_dot;
-  m_dot_V = -o.m_dot;
+  mdot_R = i.mdot;
+  mdot_V = -o.mdot;
   // pipe presurre
   p_i = i.p;
   p_o = o.p;
@@ -44,15 +44,15 @@ equation
   F_m_first = data.rho * A[1] * (1 + data.beta_total * ((p_[1] + p_i) / 2 - data.p_a));
   rho_m_first = data.rho * (1 + data.beta * ((p_[1] + p_i) / 2 - data.p_a));
   A_m_first = F_m_first / rho_m_first;
-  dx * der(m_dot_R) = A_m_first * (p_i - p_[1]) + F_m_first * data.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[1], 2 * sqrt(A_m_first / pi), dx, rho_m_first, data.mu, data.eps);
+  dx * der(mdot_R) = A_m_first * (p_i - p_[1]) + F_m_first * data.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[1], 2 * sqrt(A_m_first / pi), dx, rho_m_first, data.mu, data.eps);
   F_m_end = data.rho * A[N] * (1 + data.beta_total * ((p_[N - 1] + p_o) / 2 - data.p_a));
   rho_m_end = data.rho * (1 + data.beta * ((p_[N - 1] + p_o) / 2 - data.p_a));
   A_m_end = F_m_end / rho_m_end;
-  dx * der(m_dot_V) = (-A_m_end * (p_o - p_[N - 1])) + F_m_end * data.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[N], 2 * sqrt(A_m_end / pi), dx, rho_m_end, data.mu, data.eps);
+  dx * der(mdot_V) = (-A_m_end * (p_o - p_[N - 1])) + F_m_end * data.g * dx * H / L - Functions.DarcyFriction.Friction(v_exp[N], 2 * sqrt(A_m_end / pi), dx, rho_m_end, data.mu, data.eps);
   // mass flow rate vector with all segments
-  m_exp[1] = m_dot_R;
-  m_exp[2:N - 1] = m_dot[:];
-  m_exp[N] = m_dot_V;
+  m_exp[1] = mdot_R;
+  m_exp[2:N - 1] = mdot[:];
+  m_exp[N] = mdot_V;
   // mass balance for pressure
   dx * data.rho * A_[2:N] .* data.beta_total .* der(p_) = m_exp[1:N - 1] - m_exp[2:N];
   // define middle pressures, densities and areas
@@ -79,10 +79,10 @@ equation
     Ap_m[3, i] = -(m_exp[i + 1] + m_exp[i + 2]) / 4;
   end for;
   // momentum balance
-  dx * der(m_dot) = Ap_m[1, :] .* v_exp[2:N - 1] + Ap_m[2, :] .* v_exp[1:N - 2] + Ap_m[3, :] .* v_exp[3:N] + F_g + F_p;
+  dx * der(mdot) = Ap_m[1, :] .* v_exp[2:N - 1] + Ap_m[2, :] .* v_exp[1:N - 2] + Ap_m[3, :] .* v_exp[3:N] + F_g + F_p;
   // volumetric flow rates for all cells
-  V_p_out = m_dot ./ rho_m;
-  V_p_out_end = m_dot_V / (data.rho * (1 + data.beta * (p_o - data.p_a)));
+  V_p_out = mdot ./ rho_m;
+  V_p_out_end = mdot_V / (data.rho * (1 + data.beta * (p_o - data.p_a)));
   annotation (
     Documentation(info = "<html><head></head><body><p>This is a more detaied model of the pipe that can be use for proper modeling of penstock. (This model does not work well. Instead PenstockKP model can be used.)</p><p>The model for the penstock with the elastic walls and compressible water with simple discretization method (Staggered grid). The geometry of the penstock is described due to figure:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/penstock.png\"></p>

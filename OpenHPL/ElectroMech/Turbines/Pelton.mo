@@ -14,8 +14,8 @@ model Pelton "Model of the Pelton turbine"
     //// variables
     Modelica.SIunits.Pressure p_tr1 "inlet pressure", dp_tr "turbine pressure drop", p_tr2 "outlet pressure", dp_n "nuzzel pressure drop";
     Modelica.SIunits.Area A_1, A_0 = pi * D_0 ^ 2 / 4;
-    Modelica.SIunits.EnergyFlowRate W_s_dot "shaft power";
-    Modelica.SIunits.VolumeFlowRate V_dot "flow rate";
+    Modelica.SIunits.EnergyFlowRate Wdot_s "shaft power";
+    Modelica.SIunits.VolumeFlowRate Vdot "flow rate";
     Modelica.SIunits.Velocity v_R, v_1;
     Modelica.SIunits.AngularVelocity w "angular velocity";
     Real cos_b = Modelica.Math.cos(Modelica.SIunits.Conversions.from_deg(beta));
@@ -27,26 +27,26 @@ model Pelton "Model of the Pelton turbine"
 equation
   //// Condition for inlet water compressibility
     if CompElas == false then
-        V_dot = m_dot / data.rho;
+        Vdot = mdot / data.rho;
     else
-        V_dot = m_dot / (data.rho * (1 + data.beta * (i.p - data.p_a)));
+        Vdot = mdot / (data.rho * (1 + data.beta * (i.p - data.p_a)));
     end if;
   //// nuzzel pressure drop
-    dp_n = 0.5 * m_dot * (V_dot * (1 / A_1 ^ 2 - 1 / A_0 ^ 2) + k_f);
+    dp_n = 0.5 * mdot * (Vdot * (1 / A_1 ^ 2 - 1 / A_0 ^ 2) + k_f);
   //// Euler equation for shaft power
-    W_s_dot = m_dot * v_R * (d_u * v_1 - (1 + K) * v_R) * (1 - k * cos_b);
+    Wdot_s = mdot * v_R * (d_u * v_1 - (1 + K) * v_R) * (1 - k * cos_b);
     v_R = w * R;
-    v_1 = V_dot / A_1;
+    v_1 = Vdot / A_1;
     A_1 = u_t;
   //// turbine pressure drop
-    dp_tr * V_dot = W_s_dot;
+    dp_tr * Vdot = Wdot_s;
     dp_tr = p_tr1 - p_tr2;
   //// connectors pressures
     p_tr1 = i.p;
   // + dp_n;
     p_tr2 = o.p;
   //// output mechanical power
-    P_out = W_s_dot;
+    P_out = Wdot_s;
     annotation (
         Documentation(info="<html>
 <p>This is a model of the Pelton turbine.

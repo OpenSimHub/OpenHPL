@@ -32,13 +32,13 @@ equation
   //x3 = hpmod.h_s;
   //x2_real = hpmod.Vdot_s;
   //hpreal.u = u;
-  //x1 = hpreal.turbine.V_dot;
+  //x1 = hpreal.turbine.Vdot;
   //x3 = hpreal.surgeTank.h;
-  //x2_real = hpreal.surgeTank.V_dot;
+  //x2_real = hpreal.surgeTank.Vdot;
   hprealkp.u = u;
-  x1 = hprealkp.turbine.V_dot;
+  x1 = hprealkp.turbine.Vdot;
   x3 = hprealkp.surgeTank.h;
-  x2_real = hprealkp.surgeTank.V_dot;
+  x2_real = hprealkp.surgeTank.Vdot;
   K_dp = Z_d / (Z_d + Z_p);
   K_z = K_dp / Z_d;
   K_p = Z_i * Z_d / (Z_i * Z_d + Z_s * Z_d + Z_p * Z_d - Z_p ^ 2 * K_dp);

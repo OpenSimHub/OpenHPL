@@ -8,51 +8,51 @@ model ElasticPenstock
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D = 3.3 "Diametr of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = 20 "initial flow rate in the pipe, m3/s" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = 20 "initial flow rate in the pipe, m3/s" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20 "Number of segments";
   Modelica.SIunits.Area A_atm = D ^ 2 * pi / 4 "pipe are at atm. p.", A[N] "center pipe A", A_[N, 4] "bounds pipe A";
   Modelica.SIunits.Pressure p_p[N] "center pressure", dp = data.rho * data.g * H / N "initial p. step", p_1 = 8e5 "input p.", p_2 = 48e5 "output p.", p_[N, 4] "bounds p.";
   Modelica.SIunits.Length dx = L / N "length step", B[N + 4] = zeros(N + 4) "additional for open channel";
-  Modelica.SIunits.MassFlowRate m_dot[N] "center mass flow", m_dot_[N, 4] "bounds mass flow", m_dot_R = V_dot0 * data.rho "input m_dot", m_dot_V = V_dot0 * data.rho "output m_dot";
+  Modelica.SIunits.MassFlowRate mdot[N] "center mass flow", mdot_[N, 4] "bounds mass flow", mdot_R = Vdot0 * data.rho "input mdot", mdot_V = Vdot0 * data.rho "output mdot";
   Real F_ap[N] "centered A*rho", S_[2 * N] "source term", F_[2 * N, 4] "F matrix", lam1[N, 4] "eigenvalue '+'", lam2[N, 4] "eigenvalue '-'", F_ap_[N, 4] "bounds A*rho";
   Modelica.SIunits.Density rho[N] "centered density", rho_[N, 4] "bounds density";
   Modelica.SIunits.Velocity v_[N, 4] "bounds velocity", v[N] "centered velocity";
-  Modelica.SIunits.VolumeFlowRate V_dot[N] "centered volumetric flow";
+  Modelica.SIunits.VolumeFlowRate Vdot[N] "centered volumetric flow";
   Real theta = 1.3 "parameter for slope limiter";
   Real U_[8, N] "bounds states", U[2 * N] "center states", F_d[N] "friction";
 public
-  Functions.KP07.KPmethod kP(N = N, U = U, dx = dx, S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_1, m_dot_R; p_2, m_dot_V], boundaryCon = [true, true; false, true]);
+  Functions.KP07.KPmethod kP(N = N, U = U, dx = dx, S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_1, mdot_R; p_2, mdot_V], boundaryCon = [true, true; false, true]);
   // specify all variables which is needed for using KP method for solve PDE
   inner Data data annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 initial equation
-  m_dot = data.rho * V_dot0 * ones(N);
+  mdot = data.rho * Vdot0 * ones(N);
   p_p = p_1 + dp / 2:dp:p_1 + dp / 2 + dp * (N - 1);
 equation
   /////  define state vector
   U[1:N] = p_p[:];
-  U[N + 1:2 * N] = m_dot[:];
+  U[N + 1:2 * N] = mdot[:];
   ///// Define variables, which are going to be used for source term S_
   F_ap = data.rho * A_atm * (ones(N) + data.beta_total * (p_p - data.p_a * ones(N)));
-  v = m_dot ./ F_ap;
+  v = mdot ./ F_ap;
   rho = data.rho * (ones(N) + data.beta * (p_p - data.p_a * ones(N)));
   A = F_ap ./ rho;
-  V_dot = m_dot ./ rho;
+  Vdot = mdot ./ rho;
   ///// Define the piecewise linear reconstruction of states.
   U_ = kP.U_;
   ///// decompose matrix U into state matrix
   p_ = transpose(matrix(U_[1:2:8, :]));
-  m_dot_ = transpose(matrix(U_[2:2:8, :]));
+  mdot_ = transpose(matrix(U_[2:2:8, :]));
   ///// define variables, which are going to be used for F matrix and eigenvalues
   rho_ = data.rho * (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
   F_ap_ = data.rho * A_atm * (ones(N, 4) + data.beta_total * (p_ - data.p_a * ones(N, 4)));
   A_ = F_ap_ ./ rho_;
-  v_ = m_dot_ ./ F_ap_;
+  v_ = mdot_ ./ F_ap_;
   ///// define eigenvalues
   lam1 = (v_ + sqrt(v_ .* v_ + 4 * A_ / data.rho ./ A_atm / data.beta_total)) / 2;
   lam2 = (v_ - sqrt(v_ .* v_ + 4 * A_ / data.rho ./ A_atm / data.beta_total)) / 2;
   ///// F vector
-  F_ = [m_dot_ ./ data.rho ./ A_atm ./ data.beta_total; m_dot_ .* v_ + A_ .* p_];
+  F_ = [mdot_ ./ data.rho ./ A_atm ./ data.beta_total; mdot_ .* v_ + A_ .* p_];
   ///// source term of friction and gravity forces
   for i in 1:N loop
     // define friction force in each segment using Darcy friction factor

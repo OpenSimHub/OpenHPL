@@ -20,7 +20,7 @@ model SimpleGen "Model of a simple generator"
   //// variables
   Modelica.SIunits.AngularVelocity w(start = w_0) "Angular velocity";
   Modelica.SIunits.Energy K_a "Kinetic energy";
-  Modelica.SIunits.EnergyFlowRate W_ts_dot "Shaft power";
+  Modelica.SIunits.EnergyFlowRate Wdot_ts "Shaft power";
   Modelica.SIunits.EnergyFlowRate W_fa "Friction losses";
   Modelica.SIunits.EnergyFlowRate W_g = u / theta_e "Electrical power";
   //// conectors
@@ -29,7 +29,7 @@ model SimpleGen "Model of a simple generator"
   Modelica.Blocks.Interfaces.RealOutput f if UseFrequencyOutput "Output of generator frequency"
                                                                                              annotation (
     Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealInput P_in = W_ts_dot "Input of mechanical power" annotation (
+  Modelica.Blocks.Interfaces.RealInput P_in = Wdot_ts "Input of mechanical power" annotation (
     Placement(visible = true, transformation(origin={3.55271e-15,120},
                                                                   extent={{-20,-20},{20,20}},      rotation = 270)));
   Modelica.Blocks.Interfaces.RealOutput w_out = w "Output angular velocity of the generator"
@@ -48,7 +48,7 @@ equation
   //// generator energy balance
   K_a = 0.5 * J * w ^ 2;
   W_fa = 0.5 * k_b * w ^ 2;
-  der(K_a) = W_ts_dot - W_fa - W_g;
+  der(K_a) = Wdot_ts - W_fa - W_g;
   annotation (
     Documentation(info="<html><p>Simple model of an ideal generator with friction.</p>
 <p>This model has inputs as electric power available on the grid and the turbine shaft power.

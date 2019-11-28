@@ -40,7 +40,7 @@ model CaseStudingValentynasCase "HP system model for Valentyna's Master case"
     R_Y=2.5,
     R_v_=2.23/2,
     Reduction=0.1,
-    V_dot_n=20.76,
+    Vdot_n=20.76,
     beta1_=107,
     beta2_=163.2,
     dp_v_condition=false,
@@ -99,8 +99,8 @@ equation
     Line(points={{70,14},{76,14},{76,18},{84,18},{84,18}},                        color = {28, 108, 200}));
   connect(penstock1.p, fitting1.n) annotation (
     Line(points={{-10,28},{-14,28},{-14,30},{-16,30}},                      color = {28, 108, 200}));
-  coef2 = turbine.W_s_dot / turbine.V_dot / turbine.dp_tr;
-  coef3 = turbine.W_s_dot / turbine.V_dot / turbine.dp_r;
+  coef2 = turbine.Wdot_s / turbine.Vdot / turbine.dp_tr;
+  coef3 = turbine.Wdot_s / turbine.Vdot / turbine.dp_r;
   connect(penstock.n, fitting1.p) annotation (
     Line(points={{-26,52},{-26,49.9},{-16,49.9},{-16,50}},                    color = {28, 108, 200}));
   connect(penstock.p, surgeTank.n) annotation (

@@ -31,7 +31,7 @@ model HPDetailed_Francis "Model of the HP system with Francis turbine and simpli
     R_Y_=3,
     R_v_=2.89/2,
     Reduction=0.1,
-    V_dot_n=24.3,
+    Vdot_n=24.3,
     WaterCompress=false,
     beta1_=110,
     beta2_=162.5,
