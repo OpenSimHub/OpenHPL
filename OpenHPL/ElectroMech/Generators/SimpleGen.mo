@@ -20,7 +20,7 @@ model SimpleGen "Model of a simple generator"
   //// variables
   Modelica.SIunits.AngularVelocity w(start = w_0) "Mechanical angular velocity";
   Modelica.SIunits.Energy K_a "Kinetic energy";
-  Modelica.SIunits.EnergyFlowRate Wdot_ts "Shaft power";
+  Modelica.SIunits.EnergyFlowRate Wdot_ts = P_in "Shaft power";
   Modelica.SIunits.EnergyFlowRate W_fa "Friction losses";
   Modelica.SIunits.EnergyFlowRate W_g = u / theta_e "Electrical power";
   //// conectors
@@ -29,7 +29,7 @@ model SimpleGen "Model of a simple generator"
   Modelica.Blocks.Interfaces.RealOutput f= p/2 * w/(2*pi) if UseFrequencyOutput "Output of generator frequency"
                                                                                              annotation (
     Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealInput P_in = Wdot_ts "Input of mechanical power" annotation (
+  Modelica.Blocks.Interfaces.RealInput P_in "Input of mechanical power" annotation (
     Placement(visible = true, transformation(origin={3.55271e-15,120},
                                                                   extent={{-20,-20},{20,20}},      rotation = 270)));
   Modelica.Blocks.Interfaces.RealOutput w_out = w "Output angular velocity of the generator"

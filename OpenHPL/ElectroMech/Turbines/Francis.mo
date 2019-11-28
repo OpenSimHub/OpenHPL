@@ -62,7 +62,7 @@ model Francis "Model of the Francis turbine"
     Modelica.SIunits.Area A_1 "runner inlet croos section", A_0 "turbine inlet croos section", A_v "guide vane croos section", A_2 "runner outlet croos section";
     Modelica.SIunits.EnergyFlowRate Wdot_s "shaft power", Wdot_ft "total runner losses", W_t1 "Euler first term", W_t2 "Euler second term", Wdot_ft_s "shock losses", Wdot_ft_w "whirl losses", Wdot_ft_l "friction losses", Wdot_t "total power";
     Modelica.SIunits.VolumeFlowRate Vdot "flow rate";
-    Modelica.SIunits.AngularVelocity w "angular velocity";
+    Modelica.SIunits.AngularVelocity w=w_in "angular velocity";
     Modelica.SIunits.Velocity u_2 "outlet reference velocity", c_m2 "outlet meridional velocity", c_m1 "inlet meridional velocity", u_1 "inlet reference velocity", c_u1 "inlet tangential velocity";
     Modelica.SIunits.Conversions.NonSIunits.Angle_deg beta1 "inlet blade angle", beta2 "outlet blade angle", _beta1;
     Modelica.SIunits.Angle alpha1 "inlet guide vane angle", phi "one of servo angles", psi "one of servo angles", theta "one of servo angles", dtheta "one of servo angles";
@@ -79,7 +79,7 @@ model Francis "Model of the Francis turbine"
     Modelica.SIunits.Angle alpha1_n "nominal inlet guide vane angle";
     //// conectors
     extends OpenHPL.Interfaces.TurbineContacts;
-    Modelica.Blocks.Interfaces.RealInput w_in = w "Input angular velocity from the generator" annotation (
+    Modelica.Blocks.Interfaces.RealInput w_in  "Input angular velocity from the generator" annotation (
                                 Placement(visible = true, transformation(origin={-120,-80},    extent={{-20,-20},
       {20,20}},                                                                                                                 rotation = 0)));
 equation
