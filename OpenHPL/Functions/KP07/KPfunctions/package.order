@@ -1,6 +1,6 @@
-GhostsCell
-SlopeVectoreS
-WiseU
+GhostCells
+SlopeVectorS
+PieceWiseU
 SpeedPropagationApipe
 FluxesH
 SpeedPropagationApipeF

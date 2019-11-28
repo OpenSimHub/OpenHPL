@@ -1,5 +1,5 @@
 within OpenHPL.Functions.KP07.KPfunctions;
-model SlopeVectoreS
+model SlopeVectorS
   extends Icons.Method;
   parameter Integer N "number of segments";
   input Real U_[2 * (N + 4)], theta, dx;
@@ -38,4 +38,4 @@ equation
 <p>The model for defining the slope <i>s<sub>j</i></sub>  of the reconstructed function in each cell, which is computed using a limiter function to obtain a non-oscillatory nature of the reconstruction. The KP07 scheme utilizes the generalized minmod limiter:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_slope.svg\"/></p>
 </html>"));
-end SlopeVectoreS;
+end SlopeVectorS;

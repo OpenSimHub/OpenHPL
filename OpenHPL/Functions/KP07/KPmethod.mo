@@ -9,7 +9,14 @@ model KPmethod
 protected
   Real H_[2 * N, 2] "matrix of fluxes", A_speed[N, 4] "matrix of one-side local speeds propagation";
 public
-  KPfunctions.WiseU wiseU(N = N, theta = theta, U = U, B = B, dx = dx, boun = boundary, bounCon = boundaryCon) "use function for defing the piece wise linear reconstruction of vector U";
+  KPfunctions.PieceWiseU wiseU(
+    N=N,
+    theta=theta,
+    U=U,
+    B=B,
+    dx=dx,
+    boun=boundary,
+    bounCon=boundaryCon) "use function for defing the piece wise linear reconstruction of vector U";
   KPfunctions.SpeedPropagationApipe speedA(N = N, lamda1 = lam1, lamda2 = lam2) "use function for defing the one-side local speeds propagation";
   KPfunctions.FluxesH fluxesH(N = N, U_ = U_, A_ = A_speed, F_ = F_) "use function for defing the central upwind numerical fluxes";
 equation

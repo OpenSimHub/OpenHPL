@@ -1,5 +1,5 @@
 within OpenHPL.Functions.KP07.KPfunctions;
-model WiseU
+model PieceWiseU
   extends Icons.Method;
   parameter Integer N "number of segments";
   input Real dx, boun[2, 2], theta;
@@ -9,8 +9,12 @@ model WiseU
 protected
   Real U_mm[2, N], U_mp[2, N], U_pm[2, N], U_pp[2, N], p_ghosts[N + 4], m_dot_ghosts[N + 4], s[2, N + 2];
 public
-  KPfunctions.GhostsCell ghostsCell(N = N, U = U);
-  KPfunctions.SlopeVectoreS slopeVectoreS(N = N, U_ = vector([p_ghosts; m_dot_ghosts]), theta = theta, dx = dx);
+  GhostCells ghostsCell(N=N, U=U);
+  SlopeVectorS slopeVectoreS(
+    N=N,
+    U_=vector([p_ghosts; m_dot_ghosts]),
+    theta=theta,
+    dx=dx);
 equation
   // ghosts cells
   p_ghosts = ghostsCell.p_ + B;
@@ -33,4 +37,4 @@ equation
 <p>The piecewise linear reconstruction model, where the values of the left and the right interfaces of the cell (j-1/2 and j+1/2) at the right(+)/left(-) point values are defined.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_piecewise.svg\"/></p>
 </html>"));
-end WiseU;
+end PieceWiseU;
