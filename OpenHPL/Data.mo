@@ -5,9 +5,9 @@ record Data "Provides a data set of most common used settings"
     Dialog(enable=false, group = "Constants"));
   parameter Modelica.SIunits.Pressure p_a = 1.013e5 "Atmospheric pressure"
     annotation (Dialog(group = "Constants"));
-  parameter Modelica.SIunits.Density rho = 997.0 "Water density"
+  parameter Modelica.SIunits.Density rho = 999.65 "Water density at T_0"
     annotation (Dialog(group = "Waterway properties"));
-  parameter Modelica.SIunits.DynamicViscosity mu = 0.89e-3 "dynamic viscosity of water"
+  parameter Modelica.SIunits.DynamicViscosity mu = 1.3076e-3 "Dynamic viscosity of water at T_0"
     annotation (Dialog(group = "Waterway properties"));
   parameter Modelica.SIunits.Height eps = 5e-2 "Pipe roughness height"
     annotation (Dialog(group = "Waterway properties"));
