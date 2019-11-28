@@ -11,7 +11,7 @@ model HPSimplePenstockPelton "HP system model with Pelton turbine"
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    Vdot0=0) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
+    Vdot_0=0) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
   Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
         origin={94,40},
         extent={{-10,10},{10,-10}},

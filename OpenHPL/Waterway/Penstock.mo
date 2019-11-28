@@ -13,7 +13,7 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_o = D_i "Diametr from the output side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = 20 "initial flow rate in the pipe, m3/s" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe, m3/s" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20 "Number of segments" annotation (
     Dialog(group = "Discretization"));
@@ -29,9 +29,9 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
   Modelica.SIunits.VolumeFlowRate V_p_out[N - 2], V_p_out_end;
   extends OpenHPL.Interfaces.TwoContact;
 initial equation
-  mdot_R = data.rho * Vdot0;
-  mdot_V = data.rho * Vdot0;
-  mdot = data.rho * Vdot0 * ones(N - 2);
+  mdot_R = data.rho * Vdot_0;
+  mdot_V = data.rho * Vdot_0;
+  mdot = data.rho * Vdot_0 * ones(N - 2);
   p_ = p_i + dp:dp:p_i + dp * (N - 1);
 equation
   // Pipe flow rate

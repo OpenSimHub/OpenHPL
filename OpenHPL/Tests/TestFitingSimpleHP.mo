@@ -4,7 +4,7 @@ model TestFitingSimpleHP "Model of HP system with pipe fitting"
   Waterway.Pipe conduit(
     H=25,
     L=6600,
-    Vdot0=19.06) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.06) annotation (Placement(visible=true, transformation(
         origin={-66,14},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -15,7 +15,7 @@ model TestFitingSimpleHP "Model of HP system with pipe fitting"
   Waterway.Pipe discharge(
     H=5,
     L=600,
-    Vdot0=19.06) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.06) annotation (Placement(visible=true, transformation(
         origin={64,-30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -38,7 +38,7 @@ model TestFitingSimpleHP "Model of HP system with pipe fitting"
     L=600,
     D_i=3.3,
     D_o=3.3,
-    Vdot0=19.06) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.06) annotation (Placement(visible=true, transformation(
         origin={10,-4},
         extent={{-10,-10},{10,10}},
         rotation=0)));

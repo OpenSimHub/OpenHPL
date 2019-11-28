@@ -9,11 +9,11 @@ model HPSimplePenstockPowerControl
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Pipe intake(Vdot0=19) annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
+  Waterway.Pipe intake(Vdot_0=19) annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
   Waterway.Pipe discharge(
     H=5,
     L=600,
-    Vdot0=19) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
+    Vdot_0=19) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
   Waterway.Reservoir tail(H_r=10) annotation (Placement(visible=true, transformation(
         origin={86,42},
         extent={{-10,10},{10,-10}},
@@ -24,7 +24,7 @@ model HPSimplePenstockPowerControl
     L=600,
     D_i=3.3,
     D_o=3.3,
-    Vdot0=19) annotation (Placement(visible=true, transformation(
+    Vdot_0=19) annotation (Placement(visible=true, transformation(
         origin={-2,46},
         extent={{-10,-10},{10,10}},
         rotation=0)));

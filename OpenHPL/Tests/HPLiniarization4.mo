@@ -7,11 +7,11 @@ model HPLiniarization4 "Simple HP system model for liniarization"
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Pipe intake(H=23, Vdot0=19.0777) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
+  Waterway.Pipe intake(H=23, Vdot_0=19.0777) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
   OpenHPL.Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    Vdot0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
+    Vdot_0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
         origin={72,40},
         extent={{-10,10},{10,-10}},
@@ -21,7 +21,7 @@ model HPLiniarization4 "Simple HP system model for liniarization"
     D_o=3,
     H=428.5,
     L=600,
-    Vdot0=19.0777) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.0777) annotation (Placement(visible=true, transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));

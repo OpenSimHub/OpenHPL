@@ -9,13 +9,13 @@ model ElasticPenstock
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D = 3.3 "Diametr from the input side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = 20 "initial flow rate in the pipe, m3/s" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe, m3/s" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20;
   Modelica.SIunits.Area A_atm = D ^ 2 * pi / 4;
   Modelica.SIunits.Pressure p_p[N], dp = data.rho * data.g * H / N, p_1 = 8e5, p_2 = 48e5, p_[N, 4];
   Modelica.SIunits.Length dx = L / N, B[N + 4] = zeros(N + 4);
-  Modelica.SIunits.MassFlowRate mdot[N], mdot_[N, 4], mdot_R = Vdot0 * data.rho, mdot_V = Vdot0 * data.rho;
+  Modelica.SIunits.MassFlowRate mdot[N], mdot_[N, 4], mdot_R = Vdot_0 * data.rho, mdot_V = Vdot_0 * data.rho;
   Real U_[8, N], S_[2 * N], F_[2 * N, 4], lam1[N, 4], lam2[N, 4];
   Modelica.SIunits.VolumeFlowRate Vdot[N];
   Real theta = 1.3;
@@ -28,7 +28,7 @@ public
   BasicEquation basicMid(N = N, U = transpose([U_[1:2:8, :], U_[2:2:8, :]]), rho_atm = data.rho, A_atm = A_atm * ones(N, 4), beta_total = data.beta_total, beta = data.beta, p_a = data.p_a);
   // Use the model for main equations, but not with state vector, but with the piecewise linear reconstruction of it.
 initial equation
-  mdot = data.rho * Vdot0 * ones(N, 1);
+  mdot = data.rho * Vdot_0 * ones(N, 1);
   p_p = [p_1 + dp / 2:dp:p_1 + dp / 2 + dp * (N - 1)];
 equation
   /////  define state vector

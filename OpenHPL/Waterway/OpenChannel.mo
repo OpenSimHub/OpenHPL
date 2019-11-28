@@ -10,7 +10,7 @@ model OpenChannel "Open channel model (use KP scheme)"
   parameter Real f_n = 0.04 "Manning's roughness coefficient [s/m^1/3]" annotation (Dialog(group = "Geometry"));
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (Dialog(group = "Initialization"));
   parameter Modelica.SIunits.Height h0[N] = ones(N)*5 "Initial depth" annotation (Dialog(group = "Initialization"));
-  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = data.V_0 "Initial flow rate" annotation (Dialog(group = "Initialization"));
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = data.V_0 "Initial flow rate" annotation (Dialog(group = "Initialization"));
   parameter Boolean BoundaryCondition[2,2] = [false, true; false, true] "Boundary conditions. Choose options for the boundaries in a matrix table, i.e., if the matrix element = true, this element is used as boundary. The element represent the following quantities: [inlet depth, inlet flow; outlet depth, outlet flow]" annotation (Dialog(group = "Boundary condition"));
   //// variables
   Modelica.SIunits.VolumeFlowRate V_out "outlet flow", V_in "inlet flow";
@@ -22,7 +22,7 @@ model OpenChannel "Open channel model (use KP scheme)"
     N=N,
     w=w,
     L=L,
-    Vdot0=Vdot0,
+    Vdot_0=Vdot_0,
     f_n=f_n,
     h0=h0,
     boundaryValues=[h0[1] + H[1],V_in/w; h0[N] + H[2],V_out/w],

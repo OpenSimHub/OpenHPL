@@ -5,15 +5,15 @@ model OpenChannel
   parameter Integer N = 100;
   parameter Modelica.SIunits.Length w = 194 "Channel width", L = 5000 "Channel length";
   parameter Modelica.SIunits.Height H[2] = {16.7, 0} "Channel height, left and right side", b[N + 1] = linspace(H[1], H[2], N + 1) "Riverbed", h0[N] = vector([ones(5) * 0.4; linspace(H[1] - 0.4 - 0.5 * (b[6] + b[7]), H[1] - 0.4 - 0.5* (b[N] + b[N + 1]), N - 5)]) "Initial depth";
-  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = 120 "Initial flow rate";
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 120 "Initial flow rate";
   parameter Real f_n = 0.04 "Manning's roughness coefficient [s/m^1/3]";
   parameter Boolean boundaryCondition[2, 2] = [false, true; false, true] "boundary conditions considiratiion [z_left, q_left; z_right, q_right]", SteadyState = false "if true - starts from Steady State";
-  input Real boundaryValues[2, 2] = [h0[1] + b[1], Vdot0 / w; h0[N] + b[N + 1], Vdot0 / w] "values for the boundary conditions [z_left, q_left; z_right, q_right]";
+  input Real boundaryValues[2, 2] = [h0[1] + b[1], Vdot_0 / w; h0[N] + b[N + 1], Vdot_0 / w] "values for the boundary conditions [z_left, q_left; z_right, q_right]";
   Modelica.SIunits.Length dx = L / N;
   Modelica.SIunits.VolumeFlowRate Vdot[N];
   Modelica.SIunits.Height z[N], B[N], z_[N, 4], h_[N, 4], h[N](start = h0);
   Modelica.SIunits.Velocity u_[N, 4];
-  Real q0 = Vdot0 / w, q[N](start = ones(N) * Vdot0 / w), q_[N, 4], q_t;
+  Real q0 = Vdot_0 / w, q[N](start = ones(N) * Vdot_0 / w), q_[N, 4], q_t;
   Real S_[2 * N], theta = 1.3, F_[2 * N, 4], lam1[N, 4], lam2[N, 4], F_f[N];
   Real U[2 * N], U_[8, N], U_mp[N], U_pm[N];
 public

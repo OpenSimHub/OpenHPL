@@ -8,11 +8,11 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  OpenHPL.Waterway.Pipe intake(H=23, Vdot0=18.5381) annotation (Placement(visible=true, transformation(extent={{-76,52},{-56,72}}, rotation=0)));
+  OpenHPL.Waterway.Pipe intake(H=23, Vdot_0=18.5381) annotation (Placement(visible=true, transformation(extent={{-76,52},{-56,72}}, rotation=0)));
   Waterway.Pipe discharge(
     L=600,
     H=0.5,
-    Vdot0=18.5381) annotation (Placement(visible=true, transformation(extent={{50,30},{70,50}}, rotation=0)));
+    Vdot_0=18.5381) annotation (Placement(visible=true, transformation(extent={{50,30},{70,50}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
         origin={90,36},
         extent={{-10,10},{10,-10}},
@@ -22,7 +22,7 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
     H=428.5,
     D_i=3,
     D_o=3,
-    Vdot0=18.5381) annotation (Placement(visible=true, transformation(
+    Vdot_0=18.5381) annotation (Placement(visible=true, transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));

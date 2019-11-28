@@ -16,7 +16,7 @@ model SurgeTank "Model of the surge tank/shaft"
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// steady state values for flow rate and water level in surge tank
-  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = 0 "Initial flow rate in the surge tank" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 0 "Initial flow rate in the surge tank" annotation (
     Dialog(group = "Initialization"));
   parameter Modelica.SIunits.Height h_0 = 75 "Initial water height in the surge tank" annotation (
     Dialog(group = "Initialization"));
@@ -35,7 +35,7 @@ model SurgeTank "Model of the surge tank/shaft"
   Modelica.SIunits.Force F_f "friction force";
   Modelica.SIunits.Momentum M "water momuntum";
   Modelica.SIunits.Height h(start = h_0) "water height in the surge tank";
-  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot0) "water flow rate";
+  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0) "water flow rate";
   //// variables for temperature. Not in use for now...
   //Real W_f, W_e;
   //// conector
@@ -47,7 +47,7 @@ initial equation
     //der(T_n) = 0;
   else
     h = h_0;
-    Vdot = Vdot0;
+    Vdot = Vdot_0;
     //T_n = T_i;
   end if;
 equation

@@ -18,7 +18,7 @@ model Pipe "Model of the pipe"
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// staedy state value for flow rate
-  parameter Modelica.SIunits.VolumeFlowRate Vdot0 = data.V_0 "Initial flow rate in the pipe" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = data.V_0 "Initial flow rate in the pipe" annotation (
     Dialog(group = "Initialization"));
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
@@ -36,7 +36,7 @@ model Pipe "Model of the pipe"
   Modelica.SIunits.Pressure p_i "Inlet pressure";
   Modelica.SIunits.Pressure p_o "Outlet pressure";
   Modelica.SIunits.Pressure dp=p_o-p_i "Pressure difference across the pipe";
-  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot0) "Flow rate";
+  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0) "Flow rate";
 
   //// variables for temperature. Not in use for now...
   //Real W_f, W_e;
@@ -48,7 +48,7 @@ initial equation
     der(M) = 0;
     //der(n.T) = 0;
   else
-    Vdot = Vdot0;
+    Vdot = Vdot_0;
     //n.T = p.T;
   end if;
 equation

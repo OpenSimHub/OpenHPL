@@ -18,7 +18,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// staedy state values for flow rate in all segments of the pipe
-  parameter Modelica.SIunits.VolumeFlowRate Vdot0[N] = data.V_0 * ones(N) "Initial flow rate in the pipe vector, m3/s" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_0[N] = data.V_0 * ones(N) "Initial flow rate in the pipe vector, m3/s" annotation (
     Dialog(group = "Initialization"));
   //// staedy state values for pressure in all segments of the pipe
   parameter Modelica.SIunits.Height h_s0 = 69 "Initial water head before the pipe, m" annotation (
@@ -37,7 +37,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   Modelica.SIunits.Area A_atm[N] = D .* D * pi / 4 "centered cross are vector in atm. p.", A_atm_[N + 1] = D_ .* D_ * pi / 4 "boundary cross are vector in atm. p.", A[N] "centered cross are vector", A_[N, 4] "boundary cross are vector", _A_atm[N, 4] "boundary cross are matrix in atm. p.";
   Modelica.SIunits.Pressure p_p[N] "centered pressure", dp = data.rho * data.g * H / N "initial p. step", p_i "Inlet pressure (LHS)", p_o "Outlet Pressure (RHS)", p_[N, 4] "boundary p. matrix";
   Modelica.SIunits.Length dx = L / N "length step", dh = H / N "height step";
-  Modelica.SIunits.MassFlowRate mdot[N](start = data.rho * Vdot0) "centered mass flow", mdot_R "left bound mdot", mdot_V "right bound mdot", mdot_[N, 4] "boundary mdot matrix";
+  Modelica.SIunits.MassFlowRate mdot[N](start = data.rho * Vdot_0) "centered mass flow", mdot_R "left bound mdot", mdot_V "right bound mdot", mdot_[N, 4] "boundary mdot matrix";
   Real U[2 * N] "centered states", U_[8, N] "boundary states", F_ap[N] "centered A*rho", F_ap_[N, 4] "bounddary A*rho", S_[2 * N] "source term", F_[2 * N, 4] "F matrix", lam1[N, 4] "eigenvalue '+'", lam2[N, 4] "eigenvalue '-'";
   Modelica.SIunits.Density rho[N] "centered density", rho_[N, 4] "boundary density";
   Modelica.SIunits.Velocity v_[N, 4] "bounds velocity", v[N] "centered velocity";
@@ -53,7 +53,7 @@ initial equation
     der(U[1:N]) = zeros(N);
     der(U[N + 2:2 * N - 1]) = zeros(N - 2);
   else
-    mdot[2:N - 1] = data.rho * Vdot0[2:N - 1];
+    mdot[2:N - 1] = data.rho * Vdot_0[2:N - 1];
     p_p = p_p0;
   end if;
 equation
