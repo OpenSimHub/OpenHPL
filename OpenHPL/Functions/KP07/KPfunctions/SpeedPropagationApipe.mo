@@ -15,8 +15,8 @@ equation
   end for;
   A = [a_mp, a_pp, a_mm, a_pm];
   annotation (
-    Documentation(info = "<html>
+    Documentation(info="<html>
 <p>The mode lfor defining the the one-sided local speed of propagations. Estimated as the largest and the smallest eigen values of the Jacobian of the system.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/eq_speed_propag.png\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_speed.svg\"/></p>
 </html>"));
 end SpeedPropagationApipe;

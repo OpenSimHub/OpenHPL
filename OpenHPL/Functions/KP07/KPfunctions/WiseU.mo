@@ -29,8 +29,8 @@ equation
   // output vector U_
   U_ = [U_mp; U_pp; U_mm; U_pm];
   annotation (
-    Documentation(info = "<html>
+    Documentation(info="<html>
 <p>The piecewise linear reconstruction model, where the values of the left and the right interfaces of the cell (j-1/2 and j+1/2) at the right(+)/left(-) point values are defined.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/piece_wise_eq.png\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_piecewise.svg\"/></p>
 </html>"));
 end WiseU;

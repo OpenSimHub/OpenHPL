@@ -34,8 +34,8 @@ equation
     //      end if;
   end for;
   annotation (
-    Documentation(info = "<html>
+    Documentation(info="<html>
 <p>The model for defining the slope <i>s<sub>j</i></sub>  of the reconstructed function in each cell, which is computed using a limiter function to obtain a non-oscillatory nature of the reconstruction. The KP07 scheme utilizes the generalized minmod limiter:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/slope_eq.png\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_slope.svg\"/></p>
 </html>"));
 end SlopeVectoreS;

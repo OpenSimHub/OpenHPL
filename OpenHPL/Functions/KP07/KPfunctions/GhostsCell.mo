@@ -28,10 +28,10 @@ equation
   m_dot_[3:N + 2] = m_dot;
   U_ = vector([p_; m_dot_]);
   annotation (
-    Documentation(info = "<html>
+    Documentation(info="<html>
 <p>The model for defining the ghosts cells. It can be observed that for a given <i>j<sup>th</i></sup> cell, information from the neighbouring cells <i>j-1</i> and <i>j-2</i> (to the left) and <i>j+1</i> and<i> j+2</i> (to the right) are required for calculating the flux integrals.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/ghosts.png\"/></p>
 <p>Here is the equations that are used in this function:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/ghost_eq.png\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_ghost.svg\"/></p>
 </html>"));
 end GhostsCell;
