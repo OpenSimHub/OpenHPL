@@ -1,7 +1,6 @@
 within OpenHPL.Functions.KP07.TestKPpde;
 model ElasticPenstock
   extends Modelica.Icons.Example;
-  outer Data data;
   import Modelica.Constants.pi;
   parameter Modelica.SIunits.Height H = 420 "Height over which water fall in the pipe, m" annotation (
     Dialog(group = "Geometry"));
@@ -25,6 +24,7 @@ model ElasticPenstock
 public
   Functions.KP07.KPmethod kP(N = N, U = U, dx = dx, S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_1, m_dot_R; p_2, m_dot_V], boundaryCon = [true, true; false, true]);
   // specify all variables which is needed for using KP method for solve PDE
+  inner Data data annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 initial equation
   m_dot = data.rho * V_dot0 * ones(N);
   p_p = p_1 + dp / 2:dp:p_1 + dp / 2 + dp * (N - 1);

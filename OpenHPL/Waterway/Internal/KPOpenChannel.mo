@@ -81,9 +81,7 @@ equation
   S_[N + 1:2 * N] = F_f;
   /// diff. equation
   der(U) = KP.diff_eq;
-  annotation (
-    experiment(StopTime = 5000),
-    Documentation(info = "<html>
+  annotation(Documentation(info = "<html>
 <p>Here is example of using the KP function to solve hyperbolic PDE (here, model for openchannel is used).</p>
 <p>All calculation of the variables that is used for defining eigenvalues, source term S and vector F are implemented inside this model.</p>
 </html>"));
