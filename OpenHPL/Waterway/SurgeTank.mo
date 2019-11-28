@@ -25,7 +25,7 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Geometry"));
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter Modelica.SIunits.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Mass m "water mass";
   Modelica.SIunits.Velocity v "water velocity";
@@ -48,7 +48,7 @@ initial equation
   else
     h = h_0;
     Vdot = Vdot_0;
-    //T_n = T_i;
+    //T_n = T_0;
   end if;
 equation
   //// volumetric and mass flow rate through the surge tank
@@ -69,8 +69,8 @@ equation
   //W_f = -F_f * v;
   //W_e = Vdot * (p_n - p_2);
   //if TempUse == true then
-  //data.c_p * m * der(T_n) = Vdot * data.rho * data.c_p * (T_n - T_i)+ W_e - W_f;
-  //0 = Vdot * data.rho * data.c_p * (T_n - T_i)+ W_e - W_f;
+  //data.c_p * m * der(T_n) = Vdot * data.rho * data.c_p * (T_n - T_0)+ W_e - W_f;
+  //0 = Vdot * data.rho * data.c_p * (T_n - T_0)+ W_e - W_f;
   //der(T_n)=0;
   //else
   //der(T_n)=0;

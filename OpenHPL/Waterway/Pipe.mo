@@ -22,7 +22,7 @@ model Pipe "Model of the pipe"
     Dialog(group = "Initialization"));
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter Modelica.SIunits.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
   Modelica.SIunits.Mass m "water mass";
@@ -40,7 +40,7 @@ model Pipe "Model of the pipe"
 
   //// variables for temperature. Not in use for now...
   //Real W_f, W_e;
-  //Modelica.SIunits.Temperature T( start = T_i);
+  //Modelica.SIunits.Temperature T( start = T_0);
   //// connectors
   extends OpenHPL.Interfaces.ContactPort;
 initial equation

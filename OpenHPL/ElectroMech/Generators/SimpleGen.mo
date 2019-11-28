@@ -12,7 +12,7 @@ model SimpleGen "Model of a simple generator"
   parameter Boolean SteadyState = data.Steady "If true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// staedy state value for angular velocity
-  parameter Modelica.SIunits.AngularVelocity w_0 = data.f * 4 * pi / p "Initial mechanical angular velocity" annotation (
+  parameter Modelica.SIunits.AngularVelocity w_0 = data.f_0 * 4 * pi / p "Initial mechanical angular velocity" annotation (
     Dialog(group = "Initialization"));
   //// condition for output
   parameter Boolean UseFrequencyOutput = true "If checked - get a connector for frequency output" annotation (

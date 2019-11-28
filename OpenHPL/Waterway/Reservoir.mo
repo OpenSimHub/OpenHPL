@@ -23,7 +23,7 @@ model Reservoir "Model of the reservoir"
     choices(checkBox = true));
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = data.T_i "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter Modelica.SIunits.Temperature T_0 = data.T_0 "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Area A "vertiacal cross section";
   Modelica.SIunits.Mass m "water mass";
@@ -76,7 +76,7 @@ equation
   //// output flow conector
   o.mdot = -data.rho * Vdot_o;
   //// output temperature conector
-  //o.T = T_i;
+  //o.T = T_0;
   annotation (
     Icon(coordinateSystem(initialScale = 0.1)),
     Documentation(info="<html>

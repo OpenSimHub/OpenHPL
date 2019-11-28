@@ -21,7 +21,7 @@ outer Data data "using standard class with constants";
     Dialog(group = "System settings"));
   parameter Real Y_gv_ref = 0.72151 "Initial guide vane opening rate" annotation (
     Dialog(group = "System settings"));
-  parameter Modelica.SIunits.Frequency f_ref = data.f "Reference frequency" annotation (
+  parameter Modelica.SIunits.Frequency f_ref = data.f_0 "Reference frequency" annotation (
     Dialog(group = "System settings"));
   parameter Modelica.SIunits.Power Pn = 104e6 "Reference frequency" annotation (
     Dialog(group = "System settings"));
