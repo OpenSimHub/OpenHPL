@@ -29,7 +29,7 @@ model SynchGen "Simple model of the generator connected to the grid"
     Dialog(group = "Stablizer"));
   parameter Integer np = 12 "Number of poles" annotation (
     Dialog(group = "Nominal parameters"));
-  parameter Modelica.SIunits.AngularVelocity Wm_op = para.f * pi / 3 "Grid angular velocity" annotation (
+  parameter Modelica.SIunits.AngularVelocity Wm_op = data.f * pi / 3 "Grid angular velocity" annotation (
     Dialog(group = "Network"));
   parameter Modelica.SIunits.MomentOfInertia J = 2e5 "Moment of inertia of the generator" annotation (
     Dialog(group = "Mechanical part"));

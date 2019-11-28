@@ -25,7 +25,7 @@ model HPLiniarization2 "Simple HP system model for liniarization"
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank(h_0=69.908, p_2=para.p_a) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank(h_0=69.908, p_2=data.p_a) annotation (Placement(visible=true, transformation(
         origin={-30,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));

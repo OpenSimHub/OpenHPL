@@ -22,8 +22,8 @@ model Reservoir "Model of the reservoir"
     Dialog(group = "Structure"),
     choices(checkBox = true));
   //// possible parameters for temperature variation. Not finished...
-  //parameter Boolean TempUse = para.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = para.T_i "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
+  //parameter Modelica.SIunits.Temperature T_i = data.T_i "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Area A "vertiacal cross section";
   Modelica.SIunits.Mass m "water mass";
@@ -48,17 +48,17 @@ equation
   //// Define vertiacal cross section of the reservoir
   A = H * (w + 2 * H * Modelica.Math.tan(Modelica.SIunits.Conversions.from_deg(alpha)));
   //// Define water mass
-  m = para.rho * A * L;
+  m = data.rho * A * L;
   //// Define volumetric water flow rate
   V_dot = V_i_dot - V_o_dot;
   //// Define mass water flow rate
-  m_dot = para.rho * V_dot;
+  m_dot = data.rho * V_dot;
   //// Define water velocity
-  v = m_dot / para.rho / A;
+  v = m_dot / data.rho / A;
   //// Define momentrumn
   M = L * m_dot;
   //// Define friction term
-  F_f = 1 / 8 * para.rho * f * L * (w + 2 * H / Modelica.Math.cos(alpha)) * v * abs(v);
+  F_f = 1 / 8 * data.rho * f * L * (w + 2 * H / Modelica.Math.cos(alpha)) * v * abs(v);
   //// condition for inflow use
   if UseInFlow == false then
     //// condition for constant water level, inflow = outflow
@@ -67,14 +67,14 @@ equation
   //// condition for input water level use
   if Input_level == false then
     //// define derivatives of momentum and mass
-    der(M) = A * (para.p_a - p_o) + para.g * para.rho * A * H - F_f + para.rho / A * (V_i_dot ^ 2 - V_o_dot ^ 2);
+    der(M) = A * (data.p_a - p_o) + data.g * data.rho * A * H - F_f + data.rho / A * (V_i_dot ^ 2 - V_o_dot ^ 2);
     der(m) = m_dot;
   else
     //// define output pressure
-    p_o = para.p_a + para.g * para.rho * H;
+    p_o = data.p_a + data.g * data.rho * H;
   end if;
   //// output flow conector
-  o.m_dot = -para.rho * V_o_dot;
+  o.m_dot = -data.rho * V_o_dot;
   //// output temperature conector
   //o.T = T_i;
   annotation (

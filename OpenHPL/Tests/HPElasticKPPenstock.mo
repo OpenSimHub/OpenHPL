@@ -26,14 +26,14 @@ model HPElasticKPPenstock "Model of HP system with elastic penctock (KP), but si
     N=10,
     PipeElasticity=false,
     h_s0=69.9,
-    p_p0=997*para.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N/2):997*para.g*penstockKP.H/penstockKP.N:997*para.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N*(penstockKP.N - 1/2))) annotation (Placement(transformation(extent={{-20,44},{0,64}})));
+    p_p0=997*data.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N/2):997*data.g*penstockKP.H/penstockKP.N:997*data.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N*(penstockKP.N - 1/2))) annotation (Placement(transformation(extent={{-20,44},{0,64}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
     Placement(visible = true, transformation(extent = {{-22, 0}, {-2, 20}}, rotation = 0)));
   ElectroMech.Generators.SimpleGen aggregate annotation (Placement(visible=true, transformation(extent={{8,0},{28,20}}, rotation=0)));
 equation
   //19.077 * ones(10)
   //, H = 428.5, h_s0 = 69.9, N = 10, p_p0 = 997 * 9.81 * (69.9 + 428.5 / 10 / 2):997 * 9.81 * 428.5 / 10:9.81 * 997 * (69.9 + 428.5 / 10 * (10 - 1 / 2))
-  //997 * para.g
+  //997 * data.g
   connect(turbine.P_out, aggregate.P_in) annotation (
     Line(points = {{18, 32}, {18, 32}, {18, 22}, {18, 22}, {18, 20}}, color = {0, 0, 127}));
   connect(control.y, turbine.u_t) annotation (

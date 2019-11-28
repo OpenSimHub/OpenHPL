@@ -71,13 +71,13 @@ equation
     u_[i, 4] = 2 * h_[i, 4] * q_[i, 4] / (h_[i, 4] ^ 2 + max(h_[i, 4] ^ 2, 1e-10));
   end for;
   /// eigenvalues
-  lam1 = u_ + sqrt(h_ * para.g);
-  lam2 = u_ - sqrt(h_ * para.g);
+  lam1 = u_ + sqrt(h_ * data.g);
+  lam2 = u_ - sqrt(h_ * data.g);
   /// F vector
-  F_ = [q_; q_ .* q_ ./ h_ + para.g * h_ .* h_ / 2];
+  F_ = [q_; q_ .* q_ ./ h_ + data.g * h_ .* h_ / 2];
   /// source term of friction and gravity forces
   for i in 1:N loop
-    F_f[i] = (-para.g * h[i] * (b[i + 1] - b[i]) / dx) - f_n ^ 2 * para.g * q[i] * abs(q[i]) * (w + 2 * h[i] ^ (4 / 3)) / w ^ (4 / 3) * (2 * h[i] / (h[i] ^ 2 + max(h_[i, 4] ^ 2, 1e-10))) ^ (7 / 3);
+    F_f[i] = (-data.g * h[i] * (b[i + 1] - b[i]) / dx) - f_n ^ 2 * data.g * q[i] * abs(q[i]) * (w + 2 * h[i] ^ (4 / 3)) / w ^ (4 / 3) * (2 * h[i] / (h[i] ^ 2 + max(h_[i, 4] ^ 2, 1e-10))) ^ (7 / 3);
   end for;
   S_[1:N] = zeros(N);
   S_[N + 1:2 * N] = F_f;

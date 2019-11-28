@@ -13,9 +13,9 @@ model ElasticPenstock
     Dialog(group = "Initialization"));
   parameter Integer N = 20 "Number of segments";
   Modelica.SIunits.Area A_atm = D ^ 2 * pi / 4 "pipe are at atm. p.", A[N] "center pipe A", A_[N, 4] "bounds pipe A";
-  Modelica.SIunits.Pressure p_p[N] "center pressure", dp = para.rho * para.g * H / N "initial p. step", p_1 = 8e5 "input p.", p_2 = 48e5 "output p.", p_[N, 4] "bounds p.";
+  Modelica.SIunits.Pressure p_p[N] "center pressure", dp = data.rho * data.g * H / N "initial p. step", p_1 = 8e5 "input p.", p_2 = 48e5 "output p.", p_[N, 4] "bounds p.";
   Modelica.SIunits.Length dx = L / N "length step", B[N + 4] = zeros(N + 4) "additional for open channel";
-  Modelica.SIunits.MassFlowRate m_dot[N] "center mass flow", m_dot_[N, 4] "bounds mass flow", m_dot_R = V_dot0 * para.rho "input m_dot", m_dot_V = V_dot0 * para.rho "output m_dot";
+  Modelica.SIunits.MassFlowRate m_dot[N] "center mass flow", m_dot_[N, 4] "bounds mass flow", m_dot_R = V_dot0 * data.rho "input m_dot", m_dot_V = V_dot0 * data.rho "output m_dot";
   Real F_ap[N] "centered A*rho", S_[2 * N] "source term", F_[2 * N, 4] "F matrix", lam1[N, 4] "eigenvalue '+'", lam2[N, 4] "eigenvalue '-'", F_ap_[N, 4] "bounds A*rho";
   Modelica.SIunits.Density rho[N] "centered density", rho_[N, 4] "bounds density";
   Modelica.SIunits.Velocity v_[N, 4] "bounds velocity", v[N] "centered velocity";
@@ -26,16 +26,16 @@ public
   Functions.KP07.KPmethod kP(N = N, U = U, dx = dx, S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_1, m_dot_R; p_2, m_dot_V], boundaryCon = [true, true; false, true]);
   // specify all variables which is needed for using KP method for solve PDE
 initial equation
-  m_dot = para.rho * V_dot0 * ones(N);
+  m_dot = data.rho * V_dot0 * ones(N);
   p_p = p_1 + dp / 2:dp:p_1 + dp / 2 + dp * (N - 1);
 equation
   /////  define state vector
   U[1:N] = p_p[:];
   U[N + 1:2 * N] = m_dot[:];
   ///// Define variables, which are going to be used for source term S_
-  F_ap = para.rho * A_atm * (ones(N) + para.beta_total * (p_p - para.p_a * ones(N)));
+  F_ap = data.rho * A_atm * (ones(N) + data.beta_total * (p_p - data.p_a * ones(N)));
   v = m_dot ./ F_ap;
-  rho = para.rho * (ones(N) + para.beta * (p_p - para.p_a * ones(N)));
+  rho = data.rho * (ones(N) + data.beta * (p_p - data.p_a * ones(N)));
   A = F_ap ./ rho;
   V_dot = m_dot ./ rho;
   ///// Define the piecewise linear reconstruction of states.
@@ -44,22 +44,22 @@ equation
   p_ = transpose(matrix(U_[1:2:8, :]));
   m_dot_ = transpose(matrix(U_[2:2:8, :]));
   ///// define variables, which are going to be used for F matrix and eigenvalues
-  rho_ = para.rho * (ones(N, 4) + para.beta * (p_ - para.p_a * ones(N, 4)));
-  F_ap_ = para.rho * A_atm * (ones(N, 4) + para.beta_total * (p_ - para.p_a * ones(N, 4)));
+  rho_ = data.rho * (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
+  F_ap_ = data.rho * A_atm * (ones(N, 4) + data.beta_total * (p_ - data.p_a * ones(N, 4)));
   A_ = F_ap_ ./ rho_;
   v_ = m_dot_ ./ F_ap_;
   ///// define eigenvalues
-  lam1 = (v_ + sqrt(v_ .* v_ + 4 * A_ / para.rho ./ A_atm / para.beta_total)) / 2;
-  lam2 = (v_ - sqrt(v_ .* v_ + 4 * A_ / para.rho ./ A_atm / para.beta_total)) / 2;
+  lam1 = (v_ + sqrt(v_ .* v_ + 4 * A_ / data.rho ./ A_atm / data.beta_total)) / 2;
+  lam2 = (v_ - sqrt(v_ .* v_ + 4 * A_ / data.rho ./ A_atm / data.beta_total)) / 2;
   ///// F vector
-  F_ = [m_dot_ ./ para.rho ./ A_atm ./ para.beta_total; m_dot_ .* v_ + A_ .* p_];
+  F_ = [m_dot_ ./ data.rho ./ A_atm ./ data.beta_total; m_dot_ .* v_ + A_ .* p_];
   ///// source term of friction and gravity forces
   for i in 1:N loop
     // define friction force in each segment using Darcy friction factor
-    F_d[i] = DarcyFriction.Friction(v[i], 2 * sqrt(A[i] / pi), dx, rho[i], para.mu, para.eps) / dx;
+    F_d[i] = DarcyFriction.Friction(v[i], 2 * sqrt(A[i] / pi), dx, rho[i], data.mu, data.eps) / dx;
   end for;
   S_[1:N] = vector(zeros(N));
-  S_[N + 1:2 * N] = vector(F_ap * para.g * H / L - F_d);
+  S_[N + 1:2 * N] = vector(F_ap * data.g * H / L - F_d);
   ///// defferential equation
   der(U) = kP.diff_eq;
   annotation (

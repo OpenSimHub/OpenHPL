@@ -27,9 +27,9 @@ model Pelton "Model of the Pelton turbine"
 equation
   //// Condition for inlet water compressibility
     if CompElas == false then
-        V_dot = m_dot / para.rho;
+        V_dot = m_dot / data.rho;
     else
-        V_dot = m_dot / (para.rho * (1 + para.beta * (i.p - para.p_a)));
+        V_dot = m_dot / (data.rho * (1 + data.beta * (i.p - data.p_a)));
     end if;
   //// nuzzel pressure drop
     dp_n = 0.5 * m_dot * (V_dot * (1 / A_1 ^ 2 - 1 / A_0 ^ 2) + k_f);

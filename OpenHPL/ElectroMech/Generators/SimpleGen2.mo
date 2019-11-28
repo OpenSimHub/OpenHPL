@@ -5,10 +5,10 @@ model SimpleGen2 "Model of a simple generator"
   extends OpenHPL.Icons.Generator;
   parameter Modelica.SIunits.MomentOfInertia Jg = 2e5 "Moment of inertia of the generator";
   parameter Modelica.SIunits.MomentOfInertia Jt = 2e5 "Moment of inertia of the turbine";
-  parameter Modelica.Electrical.Machines.Losses.FrictionParameters Ploss(PRef=1000, wRef=para.f*4*pi/p)
+  parameter Modelica.Electrical.Machines.Losses.FrictionParameters Ploss(PRef=1000, wRef=data.f*4*pi/p)
                                                                          "Friction losses of generator and turbine combined";
   parameter Integer p = 12 "Number of poles";
-  parameter Modelica.SIunits.AngularVelocity w_0 = para.f * 4 * pi / p "Initial angular velocity" annotation (
+  parameter Modelica.SIunits.AngularVelocity w_0 = data.f * 4 * pi / p "Initial angular velocity" annotation (
     Dialog(group = "Initialization"));
   parameter Boolean UseFrequencyOutput = true "If checked - get a connector for frequency output" annotation (
     choices(checkBox = true));

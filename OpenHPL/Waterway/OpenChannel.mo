@@ -8,9 +8,9 @@ model OpenChannel "Open channel model (use KP scheme)"
   parameter Modelica.SIunits.Length L = 5000 "Channel length" annotation (Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Height H[2] = {17.5, 0} "Channel bed geometry, height from the left and right sides" annotation (Dialog(group = "Geometry"));
   parameter Real f_n = 0.04 "Manning's roughness coefficient [s/m^1/3]" annotation (Dialog(group = "Geometry"));
-  parameter Boolean SteadyState = para.Steady "if true - starts from Steady State" annotation (Dialog(group = "Initialization"));
+  parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (Dialog(group = "Initialization"));
   parameter Modelica.SIunits.Height h0[N] = ones(N)*5 "Initial depth" annotation (Dialog(group = "Initialization"));
-  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = para.V_0 "Initial flow rate" annotation (Dialog(group = "Initialization"));
+  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = data.V_0 "Initial flow rate" annotation (Dialog(group = "Initialization"));
   parameter Boolean BoundaryCondition[2,2] = [false, true; false, true] "Boundary conditions. Choose options for the boundaries in a matrix table, i.e., if the matrix element = true, this element is used as boundary. The element represent the following quantities: [inlet depth, inlet flow; outlet depth, outlet flow]" annotation (Dialog(group = "Boundary condition"));
   //// variables
   Modelica.SIunits.VolumeFlowRate V_out "outlet flow", V_in "inlet flow";
@@ -32,11 +32,11 @@ equation
 //// define a vector of the water depth in the channel
   h = openChannel.h;
 //// flow rate boundaries
-  i.m_dot = V_in * para.rho;
-  o.m_dot = -V_out * para.rho;
+  i.m_dot = V_in * data.rho;
+  o.m_dot = -V_out * data.rho;
 //// presurre boundaries
-  i.p = h[1] * para.g * para.rho + para.p_a;
-  o.p = h[N] * para.g * para.rho + para.p_a;
+  i.p = h[1] * data.g * data.rho + data.p_a;
+  o.p = h[N] * data.g * data.rho + data.p_a;
   annotation (
     Documentation(info="<html>
 <p>

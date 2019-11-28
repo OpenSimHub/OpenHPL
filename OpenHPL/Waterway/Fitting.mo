@@ -22,18 +22,18 @@ model Fitting "Different pipes fitting"
   /* Connector */
   extends OpenHPL.Interfaces.ContactPort;
 equation
-  v = m_dot / para.rho / A;
+  v = m_dot / data.rho / A;
   phi =Functions.Fitting.FittingPhi(
     v,
     D_i,
     D_o,
     L,
     theta,
-    para.rho,
-    para.mu,
-    para.eps,
+    data.rho,
+    data.mu,
+    data.eps,
     fit_type);
-  dp = phi * 0.5 * para.rho * abs(v) * v;
+  dp = phi * 0.5 * data.rho * abs(v) * v;
   o.p = i.p - dp "Pressure of the output connector";
   annotation (
     Documentation(info="<html>

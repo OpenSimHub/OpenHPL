@@ -40,13 +40,13 @@ model Turbine "Simple turbine model"
   Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table);
 equation
   //// checking water compressibility
-  V_dot = if WaterCompress then m_dot / (para.rho * (1 + para.beta * (i.p - para.p_a))) else m_dot / para.rho;
+  V_dot = if WaterCompress then m_dot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else m_dot / data.rho;
   //// define turbine efficiency
   look_up_table.u[1] = u_t;
   //// define guide vane 'valve capacity' base on the turbine nominal parameters
-  C_v_ = if ValveCapacity then C_v else V_dot_n/sqrt(H_n*para.g*para.rho/para.p_a)/u_n;
+  C_v_ = if ValveCapacity then C_v else V_dot_n/sqrt(H_n*data.g*data.rho/data.p_a)/u_n;
   //// turbine valve equation for pressure drop
-  dp = V_dot ^ 2 * para.p_a / (C_v_ * u_t) ^ 2;
+  dp = V_dot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2;
   dp = p_i_tr - p_o_tr;
   //// turbine energy balance
   K_i_tr_dot = dp * V_dot;

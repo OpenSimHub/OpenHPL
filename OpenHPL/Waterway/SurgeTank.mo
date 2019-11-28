@@ -10,10 +10,10 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D = 3.4 "Diameter of the surge shaft" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height eps = para.eps "Pipe roughness height" annotation (
+  parameter Modelica.SIunits.Height eps = data.eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   //// condition for steady state
-  parameter Boolean SteadyState = para.Steady "if true - starts from Steady State" annotation (
+  parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// steady state values for flow rate and water level in surge tank
   parameter Modelica.SIunits.VolumeFlowRate V_dot0 = 0 "Initial flow rate in the surge tank" annotation (
@@ -21,11 +21,11 @@ model SurgeTank "Model of the surge tank/shaft"
   parameter Modelica.SIunits.Height h_0 = 75 "Initial water height in the surge tank" annotation (
     Dialog(group = "Initialization"));
   //// output pressure in surge tank (atmpspheric pressure for open surge tank)
-  input Modelica.SIunits.Pressure p_2 = para.p_a "Pressure in the top of the surge tank" annotation (
+  input Modelica.SIunits.Pressure p_2 = data.p_a "Pressure in the top of the surge tank" annotation (
     Dialog(group = "Geometry"));
   //// possible parameters for temperature variation. Not finished...
-  //parameter Boolean TempUse = para.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = para.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
+  //parameter Modelica.SIunits.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Mass m "water mass";
   Modelica.SIunits.Velocity v "water velocity";
@@ -52,25 +52,25 @@ initial equation
   end if;
 equation
   //// volumetric and mass flow rate through the surge tank
-  V_dot = m_dot / para.rho;
+  V_dot = m_dot / data.rho;
   //// mass of water in the surge tank
-  m = para.rho * A * l;
+  m = data.rho * A * l;
   //// mass balance
   der(m) = m_dot;
   //// velocity and momentum of the water
   v = V_dot / A;
   M = m * v;
   //// friction force
-  F_f = Functions.DarcyFriction.Friction(v, D, l, para.rho, para.mu, eps);
-  //F_f = 0.5*pi*1/(2*log10(eps/3.7/D + 5.74/(para.rho*abs(v)*D/para.mu + 1e-3)^0.9))^2*para.rho*l*v*abs(v)*D/4;
+  F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, eps);
+  //F_f = 0.5*pi*1/(2*log10(eps/3.7/D + 5.74/(data.rho*abs(v)*D/data.mu + 1e-3)^0.9))^2*data.rho*l*v*abs(v)*D/4;
   //// momentum balance
-  der(M) = para.rho * V_dot ^ 2 / A + (p_n - p_2) * A - F_f - m * para.g * cos_theta;
+  der(M) = data.rho * V_dot ^ 2 / A + (p_n - p_2) * A - F_f - m * data.g * cos_theta;
   //// possible temperature variation implementation. Not finished...
   //W_f = -F_f * v;
   //W_e = V_dot * (p_n - p_2);
   //if TempUse == true then
-  //para.c_p * m * der(T_n) = V_dot * para.rho * para.c_p * (T_n - T_i)+ W_e - W_f;
-  //0 = V_dot * para.rho * para.c_p * (T_n - T_i)+ W_e - W_f;
+  //data.c_p * m * der(T_n) = V_dot * data.rho * data.c_p * (T_n - T_i)+ W_e - W_f;
+  //0 = V_dot * data.rho * data.c_p * (T_n - T_i)+ W_e - W_f;
   //der(T_n)=0;
   //else
   //der(T_n)=0;
