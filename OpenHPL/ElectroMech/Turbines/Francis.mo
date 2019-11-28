@@ -70,7 +70,7 @@ model Francis "Model of the Francis turbine"
     //"losses coefficients"
     Real cot_a1, cot_a2, cot_b1, cot_b2, cot_g1, sin_a1, coef;
     // cotants, cosines and sines of angles
-    Modelica.SIunits.Length l = 1.8 * sqrt((R_v - r_v) ^ 2 / 2) "servo term", d "servo term", R_1 "inlet runner radius", R_2 "outlet runner radius", R_v "gude vane radius", w_1 "inlet runner width/geight", w_v "guide vane width/geight", r_Y "servo term", R_Y "servo term", r_v "servo term";
+    Modelica.SIunits.Length l = 1.8 * sqrt((R_v - r_v) ^ 2 / 2) "servo term", d "servo term", R_1 "inlet runner radius", R_2 "outlet runner radius", R_v "guide vane radius", w_1 "inlet runner width/geight", w_v "guide vane width/geight", r_Y "servo term", R_Y "servo term", r_v "servo term";
     Real Y "servo position", Y0 = sqrt(R_Y ^ 2 - r_Y ^ 2) "initial servo position", theta0 = Modelica.Math.acos(r_Y / R_Y) "initial servo angle";
     Real d0_2 = l * (r_v ^ 2 - R_v ^ 2) / (l - R_v) "initial servo term d";
     Real theta_0 = theta0 - Modelica.Math.acos((r_v ^ 2 + R_v ^ 2 - d0_2) / (2 * r_v * R_v)) "servo angle for fully close guide vane";

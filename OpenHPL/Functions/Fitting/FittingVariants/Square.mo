@@ -25,7 +25,7 @@ algorithm
     end if;
   end if;
   annotation (Documentation(info="<html>
-<p>Caluclates the dimension factor <strong>&phi;</strong> for square reduction/expansion.</p>
+<p>Calculates the dimension factor <strong>&phi;</strong> for square reduction/expansion.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\"><tr>
 <td><p><em>Squared Reduction:</em></p></td>
 <td><p><em>Squared Expansion:</em></p></td>

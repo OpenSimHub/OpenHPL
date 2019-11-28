@@ -53,7 +53,7 @@ equation
   end for;
   S_[1:N, 1] = vector(zeros(N, 1));
   S_[N + 1:2 * N, 1] = vector(basic.F_ap * data.g * H / L - F_d);
-  // define defferential equation
+  // define differential equation
   der(U) = kP.diff_eq;
   annotation (
     experiment(StopTime = 100),

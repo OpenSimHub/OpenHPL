@@ -29,7 +29,7 @@ algorithm
   end if;
   annotation (
     Documentation(info="<html>
-<p>Calulates the dimension factor &phi; for Tapered reduction/expansion.
+<p>Calculates the dimension factor &phi; for Tapered reduction/expansion.
  The tapered angle &theta; should be specified.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\">
 <tr>

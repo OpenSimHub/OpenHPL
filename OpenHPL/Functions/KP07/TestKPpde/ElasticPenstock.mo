@@ -60,7 +60,7 @@ equation
   end for;
   S_[1:N] = vector(zeros(N));
   S_[N + 1:2 * N] = vector(F_ap * data.g * H / L - F_d);
-  ///// defferential equation
+  ///// differential equation
   der(U) = kP.diff_eq;
   annotation (
     experiment(StopTime = 100),
