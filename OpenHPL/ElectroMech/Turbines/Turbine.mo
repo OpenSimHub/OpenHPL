@@ -31,11 +31,11 @@ model Turbine "Simple turbine model"
   //// variables
   Modelica.SIunits.Pressure p_i_tr "Inlet pressure", dp "Turbine pressure drop", p_o_tr "Outlet pressure";
   //Modelica.SIunits.Area A_d = D_o ^ 2 * pi / 4, A_p = D_i ^ 2 * pi / 4;
-  Modelica.SIunits.EnergyFlowRate K_i_tr_dot "Kinetic energy";
+  Modelica.SIunits.EnergyFlowRate K_i_tr_dot "Kinetic energy flow";
   Modelica.SIunits.VolumeFlowRate V_dot "Flow rate";
   Real C_v_ "Guide vane 'valve capacity'";
   output Modelica.SIunits.EnergyFlowRate W_s_dot "Shaft power";
-  //// conectors
+  //// connectors
   extends OpenHPL.Interfaces.TurbineContacts;
   Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table);
 equation
