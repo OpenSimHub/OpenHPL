@@ -291,7 +291,7 @@ It can be observed that for a given $j^\mathrm{th}$ cell, the information from t
   \label{fig:fig2_2}
 \end{figure}
 
-These imaginary cells denoted by $j=0$ and $j=-1$ on the left, and $j=N+1$ and $j=N+2$ on the right are called the ghost cells. The average value of the conserved variables at the centre of these ghost cells depends on the nature of the physical boundary taken into account. These ghosts cells can be defined in the following way:
+These imaginary cells denoted by $j=0$ and $j=-1$ on the left, and $j=N+1$ and $j=N+2$ on the right are called the ghost cells. The average value of the conserved variables at the centre of these ghost cells depends on the nature of the physical boundary taken into account. These ghost cells can be defined in the following way:
 \begin{equation}\label{eq:eq11}
 \begin{array}{c}
 \bar{U}_{j=0}=2\bar{U}_{j=1}-\bar{U}_{j=2}\\
@@ -313,16 +313,16 @@ Lastly, the source term $\bar{S}_j\left(t\right)$ has to be appropriately discre
 \end{equation}
 Hence, the separate functions for each of these elements defining in Eqs.~\ref{eq:eq8}-\ref{eq:eq12} are modelled and encoded in \emph{OpenHPL}. These functions are assembled in the \emph{KPfunctions} folder in class \emph{KP07}, and look as follows:
 \begin{itemize}
-\item \emph{GhostsCell} function provides values of the conserved variables at the centre of the ghost cells, using Eq.~\ref{eq:eq11}. As an input piece of information this function receives the number of cells $N$, and the state vector with the cell centre average values $\bar{U}_{j=1..N}$. Then, the \emph{GhostsCell} function returns a state vector with the cell centre average values for all (including ghost) cells $\bar{U}_{j=-1..N+2}$.
-\item \emph{SlopeVectoreS} function returns the slope vector $s_{j=0..N+1}$ of the reconstructed function for each cell, using Eq.~\ref{eq:eq10}. This function has the following inputs: the number of cells $N$, parameters $\theta$ and $\Delta x$, and the state vector with the cell centre average values $\bar{U}_{j=-1..N+2}$.
-\item Then, function \emph{WiseU} is created to define the values of states $U^\pm_{j\pm\frac{1}{2}}$ as the endpoints of a piecewise linearly reconstructed function from Eq.~\ref{eq:eq9} using the two previous functions. This function has the following inputs: the number of cells $N$, parameters $\theta$ and $\Delta x$, condition and values for the boundaries, and the state vector with the cell centre average values $\bar{U}_{j=1..N}$.
+\item \emph{GhostCells} function provides values of the conserved variables at the centre of the ghost cells, using Eq.~\ref{eq:eq11}. As an input piece of information this function receives the number of cells $N$, and the state vector with the cell centre average values $\bar{U}_{j=1..N}$. Then, the \emph{GhostCells} function returns a state vector with the cell centre average values for all (including ghost) cells $\bar{U}_{j=-1..N+2}$.
+\item \emph{SlopeVectorS} function returns the slope vector $s_{j=0..N+1}$ of the reconstructed function for each cell, using Eq.~\ref{eq:eq10}. This function has the following inputs: the number of cells $N$, parameters $\theta$ and $\Delta x$, and the state vector with the cell centre average values $\bar{U}_{j=-1..N+2}$.
+\item Then, function \emph{PieceWiseU} is created to define the values of states $U^\pm_{j\pm\frac{1}{2}}$ as the endpoints of a piecewise linearly reconstructed function from Eq.~\ref{eq:eq9} using the two previous functions. This function has the following inputs: the number of cells $N$, parameters $\theta$ and $\Delta x$, condition and values for the boundaries, and the state vector with the cell centre average values $\bar{U}_{j=1..N}$.
 \item Another function as the \emph{SpeedPropagationApipe} provides the one-sided local speeds of propagation $a^\pm_{j\pm\frac{1}{2}}$, using Eq.~\ref{eq:eq12}. As an input information this function receives the number of cells $N$ and vectors of eigenvalues $\lambda^\pm_{1,j\pm\frac{1}{2}}$ and $\lambda^\pm_{2,j\pm\frac{1}{2}}$ of the Jacobian of the system.
 \item The last function \emph{FluxesH} in the \emph{KPfunctions} folder, defines the central upwind numerical fluxes at the cell interfaces  $H_{j\pm\frac{1}{2}}$, using Eq.~\ref{eq:eq8}. This function has the following inputs: the number of cells $N$, the values of states at the cell interfaces $U^\pm_{j\pm\frac{1}{2}}$, the one-sided local speeds of propagation $a^\pm_{j\pm\frac{1}{2}}$, and the vector of fluxes $F\left(U^\pm_{j\pm\frac{1}{2}}\right)$.
 \end{itemize}
 
 Then, the primary function for the KP scheme \emph{KPmethod} is created which uses the last three presented functions to define the right-hand side of Eq.~\ref{eq:eq7} (discretization solution of PDE).  As an input piece of information, this function receives the number of cells $N$, parameters $\theta$ and $\Delta x$, the state vector with the cell centre average values $\bar{U}_{j=1..N}$, vectors of eigenvalues $\lambda^\pm_{1,j\pm\frac{1}{2}}$ and $\lambda^\pm_{2,j\pm\frac{1}{2}}$ of the Jacobian of the system, the vector of fluxes $F\left(U^\pm_{j\pm\frac{1}{2}}\right)$ and source terms $\bar{S}_j$, and condition and values for the boundaries. It should be noted that the \emph{KPmethod} function is encoded for the cases of systems with two states (state vector $\bar{U}_{j=1..N}$ consists of two states) that is common for the detailed model of the pipe or open channel model (see those unit models below). The boundaries are specified with the inlet and outlet state values: either inlet (or: outlet) values for both states, or inlet and outlet values for one of the states.
 
-In the case with the use of the KP scheme for the open channel model \cite{Sha:15,Vyt:15}, one of the states should be processed through the scheme with some additional vector that is ensured in this \emph{KPmethod} function ($B_{j=-1..N+2}$ vector is also input to the functions \emph{KPmethod} and \emph{WiseU}).
+In the case with the use of the KP scheme for the open channel model \cite{Sha:15,Vyt:15}, one of the states should be processed through the scheme with some additional vector that is ensured in this \emph{KPmethod} function ($B_{j=-1..N+2}$ vector is also input to the functions \emph{KPmethod} and \emph{PieceWiseU}).
 
 It should be noted that due to the issues of the simulation speed, all of the presented functions in class \emph{KP07} are implemented as the \emph{model} type in OpenModelica instead of the \emph{function} type. An example of a Modelica code for defining the \emph{KPmethod} function looks as follows:
 
@@ -346,7 +346,7 @@ protected
   Real H_[2 * N, 2] "matrix of fluxes",
        A_speed[N, 4] "matrix of one-side local speeds propagation";
 public
-  KPfunctions.WiseU wiseU(N = N, theta = theta, U = U, B = B, dx = dx, boun = boundary, bounCon = boundaryCon) "use function for defing the piece wise linear reconstruction of vector U";
+  KPfunctions.PieceWiseU wiseU(N = N, theta = theta, U = U, B = B, dx = dx, boun = boundary, bounCon = boundaryCon) "use function for defing the piece wise linear reconstruction of vector U";
   KPfunctions.SpeedPropagationApipe speedA(N = N, lamda1 = lam1, lamda2 = lam2) "use function for defing the one-side local speeds propagation";
   KPfunctions.FluxesH fluxesH(N = N, U_ = U_, A_ = A_speed, F_ = F_) "use function for defing the central upwind numerical fluxes";
 equation

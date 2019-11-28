@@ -9,19 +9,19 @@ model PieceWiseU
 protected
   Real U_mm[2, N], U_mp[2, N], U_pm[2, N], U_pp[2, N], p_ghosts[N + 4], m_dot_ghosts[N + 4], s[2, N + 2];
 public
-  GhostCells ghostsCell(N=N, U=U);
-  SlopeVectorS slopeVectoreS(
+  GhostCells ghostCells(N=N, U=U);
+  SlopeVectorS slopeVectorS(
     N=N,
     U_=vector([p_ghosts; m_dot_ghosts]),
     theta=theta,
     dx=dx);
 equation
-  // ghosts cells
-  p_ghosts = ghostsCell.p_ + B;
-  m_dot_ghosts = ghostsCell.m_dot_;
-  // slove vector
-  s = slopeVectoreS.s;
-  // pieace wise
+  // ghost cells
+  p_ghosts = ghostCells.p_ + B;
+  m_dot_ghosts = ghostCells.m_dot_;
+  // slope vector
+  s = slopeVectorS.s;
+  // piece wise
   U_mp = transpose([p_ghosts[3:N + 2], m_dot_ghosts[3:N + 2]]) + dx * s[:, 2:N + 1] / 2;
   U_pp[:, 1:N - 1] = transpose([p_ghosts[4:N + 2], m_dot_ghosts[4:N + 2]]) - dx * s[:, 3:N + 1] / 2;
   U_mm[:, 2:N] = transpose([p_ghosts[3:N + 1], m_dot_ghosts[3:N + 1]]) + dx * s[:, 2:N] / 2;
