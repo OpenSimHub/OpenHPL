@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07.KPfunctions;
 model GhostCells
   extends Icons.Method;
-  parameter Integer N "number of segments";
+  parameter Integer N(start=2) "number of segments";
   input Real U[2 * N];
   //, 1];
   output Real U_[2 * (N + 4)];

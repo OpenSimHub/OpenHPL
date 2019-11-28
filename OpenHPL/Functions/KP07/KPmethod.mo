@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07;
 model KPmethod
   extends Icons.Method;
-  parameter Integer N "number of segments";
+  parameter Integer N(start=2) "number of segments";
   input Real U[2 * N] "state vector", dx "length step", theta = 1.3 "parameter for slope limiter", S_[2 * N] "source term vector S", F_[2 * N, 4] "vector F", lam1[N, 4] "matrix of eigenvalues '+'", lam2[N, 4] "matrix of eigenvalues '-'", B[N + 4] = zeros(N + 4) "additional for open channel", boundary[2, 2] "values for boundary conditions";
   input Boolean boundaryCon[2, 2] "boundary conditions consideration";
   output Real diff_eq[2 * N] "right hand side for KP solution";
