@@ -139,7 +139,7 @@ at the left/right interface of the cell.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/kp.png\" style=\"width:50%\"></p>
 <p>In order to determine the fluxes at the cell interface <code>H</code> and the 
 source term <code>S</code>, the KP scheme is used, which is a second order scheme that is well balanced.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/eq.png\"></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/equations/KPScheme.svg\"></p>
 <p>More info about the KP pipe model can be found in can be found in 
 <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>.
 </p>
