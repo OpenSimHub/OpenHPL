@@ -12,13 +12,13 @@ model SimpleGen "Model of a simple generator"
   parameter Boolean SteadyState = data.Steady "If true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   //// staedy state value for angular velocity
-  parameter Modelica.SIunits.AngularVelocity w_0 = data.f * 4 * pi / p "Initial angular velocity" annotation (
+  parameter Modelica.SIunits.AngularVelocity w_0 = data.f * 4 * pi / p "Initial mechanical angular velocity" annotation (
     Dialog(group = "Initialization"));
   //// condition for output
   parameter Boolean UseFrequencyOutput = true "If checked - get a connector for frequency output" annotation (
     choices(checkBox = true));
   //// variables
-  Modelica.SIunits.AngularVelocity w(start = w_0) "Angular velocity";
+  Modelica.SIunits.AngularVelocity w(start = w_0) "Mechanical angular velocity";
   Modelica.SIunits.Energy K_a "Kinetic energy";
   Modelica.SIunits.EnergyFlowRate Wdot_ts "Shaft power";
   Modelica.SIunits.EnergyFlowRate W_fa "Friction losses";
@@ -26,7 +26,7 @@ model SimpleGen "Model of a simple generator"
   //// conectors
   Modelica.Blocks.Interfaces.RealInput u "Electrical demand"    annotation (
     Placement(visible = true, transformation(extent={{-140,-20},{-100,20}},     rotation = 0), iconTransformation(extent = {{-120, -20}, {-80, 20}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealOutput f if UseFrequencyOutput "Output of generator frequency"
+  Modelica.Blocks.Interfaces.RealOutput f= p/2 * w/(2*pi) if UseFrequencyOutput "Output of generator frequency"
                                                                                              annotation (
     Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput P_in = Wdot_ts "Input of mechanical power" annotation (
@@ -43,8 +43,6 @@ initial equation
     w = w_0;
   end if;
 equation
-  //// frequency
-  f = p / 120 * 30 * w / pi;
   //// generator energy balance
   K_a = 0.5 * J * w ^ 2;
   W_fa = 0.5 * k_b * w ^ 2;
