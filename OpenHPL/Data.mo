@@ -31,5 +31,5 @@ record Data "Provides a data set of most common used settings"
     <p>It is possible to insert this class to models and use the common parameters for whole library.</p></html>"),
     defaultComponentName = "data",
     defaultComponentPrefixes = "inner",
-    missingInnerMessage = "No 'para' component is defined. A default component will be used and provide system parameters");
+    missingInnerMessage = "No 'data' component is defined. A default component will be used and provide system parameters");
 end Data;

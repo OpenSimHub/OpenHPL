@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model SurgeTank "Model of the surge tank/shaft"
-  outer Data data "using standard class with constants";
+  outer Data data "Using standard data set";
   extends OpenHPL.Icons.Surge;
   import Modelica.Constants.pi;
   //// geometrical parameters of surge tank

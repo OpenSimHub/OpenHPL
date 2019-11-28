@@ -1,6 +1,6 @@
 within OpenHPL.Waterway.Internal;
 model KPOpenChannel "Implementation of the KP functions for an open channel"
-  outer Data data;
+  outer Data data "Using standard data set";
   parameter Integer N = 100;
   parameter Modelica.SIunits.Length w = 194 "Channel width", L = 5000 "Channel length";
   parameter Modelica.SIunits.Height H[2] = {16.7, 0} "Channel height, left and right side", b[N + 1] = linspace(H[1], H[2], N + 1) "Riverbed", h0[N] = vector([ones(5) * 0.4; linspace(H[1] - 0.4 - 0.5 * (b[6] + b[7]), H[1] - 0.4 - 0.5* (b[N] + b[N + 1]), N - 5)]) "Initial depth";
@@ -15,9 +15,8 @@ model KPOpenChannel "Implementation of the KP functions for an open channel"
   Real q0 = V_dot0 / w, q[N](start = ones(N) * V_dot0 / w), q_[N, 4], q_t;
   Real S_[2 * N], theta = 1.3, F_[2 * N, 4], lam1[N, 4], lam2[N, 4], F_f[N];
   Real U[2 * N], U_[8, N], U_mp[N], U_pm[N];
-public
-  Functions.KP07.KPmethod KP(N = N, U = vector([h; q]), dx = dx, theta = theta, B = vector([b[1] + 3 / 2 * (b[1] - b[2]); b[1] + 1 / 2 * (b[1] - b[2]); B; b[N + 1] - 1 / 2 * (b[N] - b[N+1]); b[N + 1] - 3 / 2 * (b[N] - b[N+1])]), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = boundaryValues, boundaryCon = boundaryCondition);
-  // specify all variables which is needed for using KP method for solve PDE
+  Functions.KP07.KPmethod KP(N = N, U = vector([h; q]), dx = dx, theta = theta, B = vector([b[1] + 3 / 2 * (b[1] - b[2]); b[1] + 1 / 2 * (b[1] - b[2]); B; b[N + 1] - 1 / 2 * (b[N] - b[N+1]); b[N + 1] - 3 / 2 * (b[N] - b[N+1])]), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = boundaryValues, boundaryCon = boundaryCondition)
+  "Specify all variables which is needed for using KP method for solve PDE";
 initial equation
   if SteadyState == true then
     der(U) = zeros(2 * N);
