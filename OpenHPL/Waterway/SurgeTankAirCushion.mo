@@ -27,6 +27,7 @@ model SurgeTankAirCushion "Model of air-cushion surge tank"
   //parameter Modelica.SIunits.Temperature T_i = para.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Mass m "Water mass";
+  Modelica.SIunits.Mass m_a = p_c0*A*(L-h_0/cos_theta)*para.M_a/(para.R*para.T_0) "Air mass inside surge tank";
   Modelica.SIunits.Momentum M "Water momuntum";
   Modelica.SIunits.Force M_dot "Difference in influent and effulent momentum";
   Modelica.SIunits.Force F "Total force acting in the surge tank";
@@ -59,7 +60,7 @@ equation
   der(m) = m_dot "Mass balance";
   der(M) = M_dot+F "Momentum balance";
 
-  m = para.rho * A * l;
+  m = para.rho * A * l+m_a;
   m_dot = para.rho*V_dot;
 
   M = m * v;
