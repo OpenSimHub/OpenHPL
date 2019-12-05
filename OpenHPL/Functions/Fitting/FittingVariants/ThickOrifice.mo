@@ -2,7 +2,7 @@ within OpenHPL.Functions.Fitting.FittingVariants;
 function ThickOrifice
   extends Modelica.Icons.Function;
   input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
-  input Modelica.SIunits.Height eps "Pipe roughness height";
+  input Modelica.SIunits.Height p_eps "Pipe roughness height";
   input Modelica.SIunits.Diameter D_i, D_o "Pipe diameters";
   input Modelica.SIunits.Length L;
   output Real phi;

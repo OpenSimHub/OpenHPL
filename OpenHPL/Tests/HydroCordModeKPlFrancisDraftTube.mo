@@ -12,13 +12,13 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     D_o=6.3,
     H=9,
     L=81.5,
-    eps=0.1) annotation (Placement(visible=true, transformation(extent={{-80,50},{-60,70}}, rotation=0)));
+    p_eps=0.1) annotation (Placement(visible=true, transformation(extent={{-80,50},{-60,70}}, rotation=0)));
   OpenHPL.Waterway.Pipe discharge1(
     D_i=6.3,
     D_o=6.3,
     H=3.5,
     L=601,
-    eps=0.075) annotation (Placement(visible=true, transformation(extent={{44,-24},{64,-4}}, rotation=0)));
+    p_eps=0.075) annotation (Placement(visible=true, transformation(extent={{44,-24},{64,-4}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(H_r=2, Input_level=true) annotation (Placement(visible=true, transformation(
         origin={94,0},
         extent={{-10,10},{10,-10}},
@@ -28,7 +28,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     H=75.5,
     L=87,
     h_0=62.5,
-    eps=0.1) annotation (Placement(visible=true, transformation(
+    p_eps=0.1) annotation (Placement(visible=true, transformation(
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -41,7 +41,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     D_o=6.3,
     H=-2,
     L=395,
-    eps=0.1) annotation (Placement(visible=true, transformation(
+    p_eps=0.1) annotation (Placement(visible=true, transformation(
         origin={-48,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -50,7 +50,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     D_o=6.3,
     H=9,
     L=4020,
-    eps=0.5) annotation (Placement(visible=true, transformation(
+    p_eps=0.5) annotation (Placement(visible=true, transformation(
         origin={-26,60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -65,7 +65,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     L=363,
     N=5,
     PipeElasticity=false,
-    eps=0.0005,
+    p_eps=0.0005,
     h_s0=62.5) annotation (Placement(visible=true, transformation(
         origin={18,52},
         extent={{-10,-10},{10,10}},
@@ -77,7 +77,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     L=145,
     N=5,
     PipeElasticity=false,
-    eps=0.0005,
+    p_eps=0.0005,
     h_s0=62.5 + 233) annotation (Placement(visible=true, transformation(
         origin={8,4},
         extent={{-10,-10},{10,10}},
@@ -87,7 +87,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     D_o=6.3,
     H=-8.5,
     L=21,
-    eps=0.05) annotation (Placement(visible=true, transformation(
+    p_eps=0.05) annotation (Placement(visible=true, transformation(
         origin={74,-8},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -134,7 +134,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     D_o=3.04,
     H=12,
     L=draftTube.H,
-    eps=0.001) annotation (Placement(visible=true, transformation(extent={{44,4},{64,24}}, rotation=0)));
+    p_eps=0.001) annotation (Placement(visible=true, transformation(extent={{44,4},{64,24}}, rotation=0)));
 equation
   connect(penstock2.n, Francis.p) annotation (
     Line(points={{18,4},{20,4},{20,0},{22,0}},

@@ -56,7 +56,7 @@ equation
   ///// source term of friction and gravity forces
   for i in 1:N loop
     // define friction force in each segment using Darcy friction factor
-    F_d[i] = DarcyFriction.Friction(v[i], 2 * sqrt(A[i] / pi), dx, rho[i], data.mu, data.eps) / dx;
+    F_d[i] = DarcyFriction.Friction(v[i], 2 * sqrt(A[i] / pi), dx, rho[i], data.mu, data.p_eps) / dx;
   end for;
   S_[1:N] = vector(zeros(N));
   S_[N + 1:2 * N] = vector(F_ap * data.g * H / L - F_d);

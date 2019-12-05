@@ -31,7 +31,7 @@ equation
     theta,
     data.rho,
     data.mu,
-    data.eps,
+    data.p_eps,
     fit_type);
   dp = phi * 0.5 * data.rho * abs(v) * v;
   o.p = i.p - dp "Pressure of the output connector";

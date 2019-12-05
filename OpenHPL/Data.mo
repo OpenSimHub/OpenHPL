@@ -1,15 +1,19 @@
 within OpenHPL;
 record Data "Provides a data set of most common used settings"
   extends Modelica.Icons.Record;
-  parameter Modelica.SIunits.Acceleration g = Modelica.Constants.g_n "gravity" annotation (
-    Dialog(enable=false, group = "Constants"));
+  parameter Modelica.SIunits.Acceleration g = Modelica.Constants.g_n "Gravity constant"
+    annotation (Dialog(enable=false, group = "Constants"));
+  parameter Real gamma_air = 1.4 "Specific heat capacity ratio for air"
+    annotation (Dialog(enable=false, group = "Constants"));
   parameter Modelica.SIunits.Pressure p_a = 1.013e5 "Atmospheric pressure"
+    annotation (Dialog(group = "Constants"));
+  parameter Modelica.SIunits.MolarMass M_a = 28.97e-3 "Molar mass of air"
     annotation (Dialog(group = "Constants"));
   parameter Modelica.SIunits.Density rho = 999.65 "Water density at T_0"
     annotation (Dialog(group = "Waterway properties"));
   parameter Modelica.SIunits.DynamicViscosity mu = 1.3076e-3 "Dynamic viscosity of water at T_0"
     annotation (Dialog(group = "Waterway properties"));
-  parameter Modelica.SIunits.Height eps = 5e-2 "Pipe roughness height"
+  parameter Modelica.SIunits.Height p_eps = 5e-2 "Pipe roughness height"
     annotation (Dialog(group = "Waterway properties"));
   parameter Modelica.SIunits.Compressibility beta = 4.5e-10 "Water compressibility"
     annotation (Dialog(group = "Waterway properties"));
