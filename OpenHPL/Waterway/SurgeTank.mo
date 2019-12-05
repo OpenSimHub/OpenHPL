@@ -4,7 +4,7 @@ model SurgeTank "Model of the surge tank/shaft"
   extends OpenHPL.Icons.Surge;
   import Modelica.Constants.pi;
 
-  parameter Types.SurgeTank surge_tank_type = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank" annotation (
+  parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank" annotation (
     Dialog(group = "Surge tank types"));
   // Geometrical parameters of the surge tank
   parameter Modelica.SIunits.Height H = 120 "Vertical component of the length of the surge shaft" annotation (
@@ -16,30 +16,32 @@ model SurgeTank "Model of the surge tank/shaft"
   parameter Modelica.SIunits.Height eps = data.eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_so = 1.7 "If Sharp orifice type: Diameter of sharp orifice" annotation (
-    Dialog(group = "Geometry",enable=surge_tank_type == OpenHPL.Types.SurgeTank.STSharpOrifice));
+    Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
   parameter Modelica.SIunits.Diameter D_t = 1.7 "If Throttle value type: Diameter of throat" annotation (
-    Dialog(group = "Geometry",enable=surge_tank_type == OpenHPL.Types.SurgeTank.STThrottleValve));
+    Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
   parameter Modelica.SIunits.Diameter L_t = 5 "If Throttle Value type: Diameter of throat" annotation (
-    Dialog(group = "Geometry",enable=surge_tank_type == OpenHPL.Types.SurgeTank.STThrottleValve));
+    Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
 
   // Condition for steady state
-  parameter Boolean SteadyState = para.Steady "If true - starts from Steady State" annotation (
+  parameter Boolean SteadyState = data.Steady "If true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
   // steady state values for flow rate and water level in surge tank
-  parameter Modelica.SIunits.VolumeFlowRate V_dot0 = 0 "Initial flow rate in the surge tank" annotation (
+  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 0 "Initial flow rate in the surge tank" annotation (
     Dialog(group = "Initialization"));
   parameter Modelica.SIunits.Height h_0 = 69.9 "Initial water height in the surge tank" annotation (
     Dialog(group = "Initialization"));
-  parameter Modelica.SIunits.Pressure p_ac = 4*para.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
-    Dialog(group = "Initialization",enable=surge_tank_type == OpenHPL.Types.SurgeTank.STAirCushion));
+  parameter Modelica.SIunits.Pressure p_ac = 4*data.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
+    Dialog(group = "Initialization",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
+  parameter Modelica.SIunits.Temperature T_ac(displayUnit="degC") = 298.15 "Initial air-cushion temperature"
+    annotation (Dialog(group = "Initialization", enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
   //possible parameters for temperature variation. Not finished...
-  //parameter Boolean TempUse = para.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = para.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
+  //parameter Modelica.SIunits.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
   Modelica.SIunits.Mass m "Water mass";
-  Modelica.SIunits.Mass m_a = p_ac*A*(L-h_0/cos_theta)*para.M_a/(para.R*para.T_0) "Air mass inside surge tank";
+  Modelica.SIunits.Mass m_a = p_ac*A*(L-h_0/cos_theta)*data.M_a/(Modelica.Constants.R*T_ac) "Air mass inside surge tank";
   Modelica.SIunits.Momentum M "Water momuntum";
-  Modelica.SIunits.Force M_dot "Difference in influent and effulent momentum";
+  Modelica.SIunits.Force Mdot "Difference in influent and effulent momentum";
   Modelica.SIunits.Force F "Total force acting in the surge tank";
   Modelica.SIunits.Area A = (pi*D ^ 2) / 4 "Cross sectional area of the surge tank";
   Modelica.SIunits.Area A_t = (pi*D_t ^ 2) / 4 "Cross sectional area of the throttle valve surge tank";
@@ -54,10 +56,10 @@ model SurgeTank "Model of the surge tank/shaft"
   Real phiSO "Dimensionless factor based on the type of fitting ";
   // initial values for differential variables
   Modelica.SIunits.Height h(start = h_0, fixed = true) "Water height in the surge tank";
-  Modelica.SIunits.VolumeFlowRate V_dot(start = V_dot0, fixed = true) "Water flow rate";
+  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0, fixed = true) "Water flow rate";
   // variables for temperature. Not in use for now...
   // Real W_f, W_e;
-  // conector (acquisition of algebraic variable, mass flow rate m_dot, and node pressure (manifold pressure) p_n)
+  // connector (acquisition of algebraic variable, mass flow rate mdot, and node pressure (manifold pressure) p_n)
   extends OpenHPL.Interfaces.ContactNode;
 initial equation
   if SteadyState == true then
@@ -70,55 +72,55 @@ initial equation
     //T_n = T_0;
   end if;
 equation
-  der(m) = m_dot "Mass balance";
-  der(M) = M_dot+F "Momentum balance";
+  der(m) = mdot "Mass balance";
+  der(M) = Mdot+F "Momentum balance";
 
-  if surge_tank_type == OpenHPL.Types.SurgeTank.STSimple then
-    m = para.rho * A * l;
-    p_t = para.p_a;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, para.rho, para.mu, eps)+A*phiSO*0.5 * para.rho * abs(v) * v;
+  if SurgeTankType == OpenHPL.Types.SurgeTank.STSimple then
+    m = data.rho * A * l;
+    p_t = data.p_a;
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, eps)+A*phiSO*0.5 * data.rho * abs(v) * v;
     phiSO = 0;
-  elseif  surge_tank_type == OpenHPL.Types.SurgeTank.STAirCushion then
-    m = para.rho * A * l+m_a;
-    p_t = p_ac*((L-h_0/cos_theta)/(L-l))^para.gamma_air;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, para.rho, para.mu, eps)+A*phiSO*0.5 * para.rho * abs(v) * v;
+  elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion then
+    m = data.rho * A * l+m_a;
+    p_t = p_ac*((L-h_0/cos_theta)/(L-l))^data.gamma_air;
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, eps)+A*phiSO*0.5 * data.rho * abs(v) * v;
     phiSO = 0;
-  elseif  surge_tank_type == OpenHPL.Types.SurgeTank.STSharpOrifice then
-    m = para.rho * A * l;
-    p_t = para.p_a;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, para.rho, para.mu, eps)+ A*phiSO*0.5 * para.rho * abs(v) * v;
+  elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice then
+    m = data.rho * A * l;
+    p_t = data.p_a;
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, eps)+ A*phiSO*0.5 * data.rho * abs(v) * v;
     if v>=0 then
-      phiSO = Functions.Fitting.FittingPhi(v,D,D_so,L,90,para.rho,para.mu,para.eps,OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v,D,D_so,L,90,data.rho,data.mu,data.eps,OpenHPL.Types.Fitting.SharpOrifice);
     else
-      phiSO = Functions.Fitting.FittingPhi(v,D_so,D,L,90,para.rho,para.mu,para.eps,OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v,D_so,D,L,90,data.rho,data.mu,data.eps,OpenHPL.Types.Fitting.SharpOrifice);
     end if;
-  elseif  surge_tank_type == OpenHPL.Types.SurgeTank.STThrottleValve then
+  elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve then
     if l<=L_t then
-      m = para.rho*A_t*l;
-      F_f = Functions.DarcyFriction.Friction(v, D_t, l, para.rho, para.mu, eps)+ A_t*phiSO*0.5 * para.rho * abs(v) * v;
+      m = data.rho*A_t*l;
+      F_f = Functions.DarcyFriction.Friction(v, D_t, l, data.rho, data.mu, eps)+ A_t*phiSO*0.5 * data.rho * abs(v) * v;
       phiSO = 0;
     else
-      m = para.rho*(A_t*L_t+A*(l-L_t));
+      m = data.rho*(A_t*L_t+A*(l-L_t));
       if v>=0 then
-        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, para.rho, para.mu, eps)
-            +Functions.DarcyFriction.Friction(v, D, l-L_t, para.rho, para.mu, eps)+ A_t*phiSO*0.5 * para.rho * abs(v) * v;
-        phiSO = Functions.Fitting.FittingPhi(v,D_t,D,L,90,para.rho,para.mu,para.eps,OpenHPL.Types.Fitting.Square);
+        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, data.rho, data.mu, eps)
+            +Functions.DarcyFriction.Friction(v, D, l-L_t, data.rho, data.mu, eps)+ A_t*phiSO*0.5 * data.rho * abs(v) * v;
+        phiSO = Functions.Fitting.FittingPhi(v,D_t,D,L,90,data.rho,data.mu,data.eps,OpenHPL.Types.Fitting.Square);
       else
-        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, para.rho, para.mu, eps)
-            +Functions.DarcyFriction.Friction(v, D, l-L_t, para.rho, para.mu, eps)+ A*phiSO*0.5 * para.rho * abs(v) * v;
-        phiSO = Functions.Fitting.FittingPhi(v,D,D_t,L,90,para.rho,para.mu,para.eps,OpenHPL.Types.Fitting.Square);
+        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, data.rho, data.mu, eps)
+            +Functions.DarcyFriction.Friction(v, D, l-L_t, data.rho, data.mu, eps)+ A*phiSO*0.5 * data.rho * abs(v) * v;
+        phiSO = Functions.Fitting.FittingPhi(v,D,D_t,L,90,data.rho,data.mu,data.eps,OpenHPL.Types.Fitting.Square);
       end if;
     end if;
-    p_t = para.p_a;
+    p_t = data.p_a;
   end if;
-  m_dot = para.rho*V_dot;
+  mdot = data.rho*Vdot;
   M = m * v;
-  v = V_dot / A;
-  M_dot = m_dot*v;
+  v = Vdot / A;
+  Mdot = mdot*v;
   F = F_p-F_f-F_g;
   F_p = (p_b - p_t)*A;
   p_b = p_n "Linking bottom node pressure to connector";
-  F_g = m * para.g * cos_theta;
+  F_g = m * data.g * cos_theta;
  annotation (
     Documentation(info="<html>
 <p>The four different surge tank models can be choosen. </p>
