@@ -44,6 +44,7 @@ model SurgeTanks "Model of surge tanks"
   Modelica.SIunits.Force F_f "Friction force";
   Modelica.SIunits.Force F_g "Gravity force";
   Modelica.SIunits.Pressure p_t "Pressure at top of the surge tank";
+  Modelica.SIunits.Pressure p_b "Pressure at bottom of the surge tank";
   Real phi "Dimensionless factor based on the type of fitting ";
   //// initial values for differential variables
   Modelica.SIunits.Height h(start = h_0, fixed = true) "Water height in the surge tank";
@@ -77,16 +78,17 @@ equation
   /*elseif  surge_tank_type == OpenHPL.Types.SurgeTank.ThrottleValveST then
     m = para.rho * A * l+m_a;
     p_t = p_t0*((L-h_0/cos_theta)/(L-l))^para.gamma_air;
-    */
+    
   elseif  surge_tank_type == OpenHPL.Types.SurgeTank.SharpOrificeST then
     m = para.rho * A * l;
     p_t = para.p_a;
     F_f = Functions.DarcyFriction.Friction(v, D, l, para.rho, para.mu, eps)+ phi*0.5 * para.rho * abs(v) * v;
     if v>=0 then
-      phi = Functions.Fitting.FittingPhi(v,D,D_so,L,theta,para.rho,para.mu,para.eps,SharpOrifice);
+      phi = Functions.Fitting.FittingPhi(v,D,D_so,L,90,para.rho,para.mu,para.eps,OpenHPL.Types.Fitting.SharpOrifice);
     else
-      phi = Functions.Fitting.FittingPhi(v,D_so,D,L,theta,para.rho,para.mu,para.eps,SharpOrifice);
-    end if;
+      phi = Functions.Fitting.FittingPhi(v,D_so,D,L,90,para.rho,para.mu,para.eps,OpenHPL.Types.Fitting.SharpOrifice);
+      end if;
+      */
 
   end if;
 

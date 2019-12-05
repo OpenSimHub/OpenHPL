@@ -61,7 +61,5 @@ HydroCordModelKPDraftTube
 HydroCordModelFrancisDraftTube
 HydroCordModeKPlFrancisDraftTube
 HydroCordModelDraftTube3
-HPSTSimple
-HPSTAirCushion
-HPSTSharpOrifice
-HPSTThrottleValve
+HPSimpleSurgeTanks
+HPSimpleSurgeTank

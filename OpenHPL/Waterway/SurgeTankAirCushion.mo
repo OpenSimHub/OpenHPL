@@ -1,6 +1,6 @@
-within OpenHPL.Waterway;
-model SurgeTank "Model of the surge tank/shaft"
-  outer Data data "Using standard data set";
+﻿within OpenHPL.Waterway;
+model SurgeTankAirCushion "Model of surge tanks"
+  outer Parameters para "Parameters";
   extends OpenHPL.Icons.Surge;
   import Modelica.Constants.pi;
 
@@ -13,7 +13,7 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D = 3.4 "Diameter of the surge shaft" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height eps = data.eps "Pipe roughness height" annotation (
+  parameter Modelica.SIunits.Height eps = para.eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_so = 1.7 "If Sharp orifice type: Diameter of sharp orifice" annotation (
     Dialog(group = "Geometry",enable=surge_tank_type == OpenHPL.Types.SurgeTank.STSharpOrifice));
@@ -66,8 +66,8 @@ initial equation
     //der(T_n) = 0;
   else
     h = h_0;
-    Vdot = Vdot_0;
-    //T_n = T_0;
+    V_dot = V_dot0;
+    //T_n = T_i;
   end if;
 equation
   der(m) = m_dot "Mass balance";
@@ -121,8 +121,7 @@ equation
   F_g = m * para.g * cos_theta;
  annotation (
     Documentation(info="<html>
-<p>The four different surge tank models can be choosen. </p>
-<p>These surge tanks are:</p>
+<p>The four different surge tank models can be choosen. These surge tanks are:</p>
 <ol>
 <li>Simple surge tank</li>
 <li>Air cushion surge tank</li>
@@ -130,11 +129,12 @@ equation
 <li>Sharp orifice surge tank</li>
 </ol>
 <p>All of the surge tanks are modeled using mass and momemtum balance. </p>
-<p>The air cushion surge tank is shown below: </p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/SurgeTankAirCushion.png\" width=\"500\"/></p>
+<p>The air cushion surge tank is shown below:</p>
+<p><span style=\"font-family: Courier New;\">￼</span></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/SurgeTankAirCushion.svg\"/></p>
 <p>The throttle valve surge tank and sharp orifice type surge tank are shown below:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/ThrottleValveSurgeTank.png\" width=\"500\"/></p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/SharpOrificeSurgeTank.png\" width=\"500\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/ThrottleValveSurgeTank.png\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/SharpOrificeSurgeTank.png\"/></p>
 <p>The simple surge tank model can be found in this link: <a href=\"modelica://OpenHPL.UsersGuide.References\">OpenHPL.UsersGuide.References&gt;[Valen2017]</a> </p>
 </html>"));
-end SurgeTank;
+end SurgeTankAirCushion;
