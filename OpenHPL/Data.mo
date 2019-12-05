@@ -1,7 +1,7 @@
 within OpenHPL;
 record Data "Provides a data set of most common used settings"
   extends Modelica.Icons.Record;
-  parameter Modelica.SIunits.Acceleration g = Modelica.Constants.g_n "gravity"
+  parameter Modelica.SIunits.Acceleration g = Modelica.Constants.g_n "Gravity constant"
     annotation (Dialog(enable=false, group = "Constants"));
   parameter Real gamma_air = 1.4 "Specific heat capacity ratio for air"
     annotation (Dialog(enable=false, group = "Constants"));
