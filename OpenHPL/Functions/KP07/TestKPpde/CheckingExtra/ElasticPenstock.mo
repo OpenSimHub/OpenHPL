@@ -49,7 +49,7 @@ equation
   F_ = [mdot_ ./ data.rho ./ A_atm ./ data.beta_total; mdot_ .* basicMid.v + basicMid.A .* p_];
   //// source term of friction and gravity forces
   for i in 1:N loop
-    F_d[i, 1] = DarcyFriction.Friction(basic.v[i, 1], 2 * sqrt(basic.A[i, 1] / pi), dx, basic.rho[i, 1], data.mu, data.eps) / dx;
+    F_d[i, 1] = DarcyFriction.Friction(basic.v[i, 1], 2 * sqrt(basic.A[i, 1] / pi), dx, basic.rho[i, 1], data.mu, data.p_eps) / dx;
   end for;
   S_[1:N, 1] = vector(zeros(N, 1));
   S_[N + 1:2 * N, 1] = vector(basic.F_ap * data.g * H / L - F_d);

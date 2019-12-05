@@ -7,7 +7,7 @@ function Friction "Friction force with Darcy friction factor"
   input Modelica.SIunits.Length L "Pipe length";
   input Modelica.SIunits.Density rho "Density";
   input Modelica.SIunits.DynamicViscosity mu "Dynamic viscosity of water";
-  input Modelica.SIunits.Height eps "Pipe roughness height";
+  input Modelica.SIunits.Height p_eps "Pipe roughness height";
   // Function output (response) value
   output Modelica.SIunits.Force F_f "Friction force";
   // Local (protected) quantities
@@ -16,7 +16,7 @@ protected
   Real f "friction factor";
 algorithm
   N_Re := rho * abs(v) * D / mu;
-  f := fDarcy(N_Re, D, eps);
+  f := fDarcy(N_Re, D, p_eps);
   F_f := 0.5 * pi * f * rho * L * v * abs(v) * D / 4;
   annotation (
     Documentation(info = "<html>

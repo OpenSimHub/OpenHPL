@@ -8,7 +8,7 @@ function FittingPhi "Calculates the dimension factor phi based in the fitting ty
   input Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 90 "Angle of the tapered reduction/expansion";
   input Modelica.SIunits.Density rho "Density";
   input Modelica.SIunits.DynamicViscosity mu "Dynamic viscosity of water";
-  input Modelica.SIunits.Height eps "Pipe roughness height";
+  input Modelica.SIunits.Height p_eps "Pipe roughness height";
   input Types.Fitting fit_type "Type of pipe fitting";
   output Real phi;
 protected
@@ -18,32 +18,32 @@ algorithm
   if fit_type == Types.Fitting.Square then
     phi :=FittingVariants.Square(
       N_Re,
-      eps,
+      p_eps,
       D_i,
       D_o);
   elseif fit_type == Types.Fitting.Tapered then
     phi :=FittingVariants.Tapered(
       N_Re,
-      eps,
+      p_eps,
       D_i,
       D_o,
       theta);
   elseif fit_type == Types.Fitting.Rounded then
     phi :=FittingVariants.Rounded(
       N_Re,
-      eps,
+      p_eps,
       D_i,
       D_o);
   elseif fit_type == Types.Fitting.SharpOrifice then
     phi :=FittingVariants.SharpOrifice(
       N_Re,
-      eps,
+      p_eps,
       D_i,
       D_o);
   elseif fit_type == Types.Fitting.ThickOrifice then
     phi :=FittingVariants.ThickOrifice(
       N_Re,
-      eps,
+      p_eps,
       D_i,
       D_o,
       L);

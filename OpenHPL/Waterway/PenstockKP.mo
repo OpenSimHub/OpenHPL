@@ -12,7 +12,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_o = D_i "Diametr from the outlet side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height eps = data.eps "Pipe roughness height" annotation (
+  parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   //// condition of steady state
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
@@ -110,7 +110,7 @@ equation
   end if;
   //// define friction force in each segment using Darcy friction factor
   for i in 1:N loop
-    F_f[i] = Functions.DarcyFriction.Friction(v[i], 2 * sqrt(A[i] / pi), dx, rho[i], data.mu, eps);
+    F_f[i] = Functions.DarcyFriction.Friction(v[i], 2 * sqrt(A[i] / pi), dx, rho[i], data.mu, p_eps);
   end for;
   //// source term of friction and gravity forces
   S_[1:N] = zeros(N);

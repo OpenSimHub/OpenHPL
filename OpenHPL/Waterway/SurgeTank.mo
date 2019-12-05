@@ -13,7 +13,7 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D = 3.4 "Diameter of the surge shaft" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height eps = data.eps "Pipe roughness height" annotation (
+  parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_so = 1.7 "If Sharp orifice type: Diameter of sharp orifice" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
@@ -78,37 +78,37 @@ equation
   if SurgeTankType == OpenHPL.Types.SurgeTank.STSimple then
     m = data.rho * A * l;
     p_t = data.p_a;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, eps)+A*phiSO*0.5 * data.rho * abs(v) * v;
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps)+A*phiSO*0.5 * data.rho * abs(v) * v;
     phiSO = 0;
   elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion then
     m = data.rho * A * l+m_a;
     p_t = p_ac*((L-h_0/cos_theta)/(L-l))^data.gamma_air;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, eps)+A*phiSO*0.5 * data.rho * abs(v) * v;
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps)+A*phiSO*0.5 * data.rho * abs(v) * v;
     phiSO = 0;
   elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice then
     m = data.rho * A * l;
     p_t = data.p_a;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, eps)+ A*phiSO*0.5 * data.rho * abs(v) * v;
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps)+ A*phiSO*0.5 * data.rho * abs(v) * v;
     if v>=0 then
-      phiSO = Functions.Fitting.FittingPhi(v,D,D_so,L,90,data.rho,data.mu,data.eps,OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v,D,D_so,L,90,data.rho,data.mu,data.p_eps,OpenHPL.Types.Fitting.SharpOrifice);
     else
-      phiSO = Functions.Fitting.FittingPhi(v,D_so,D,L,90,data.rho,data.mu,data.eps,OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v,D_so,D,L,90,data.rho,data.mu,data.p_eps,OpenHPL.Types.Fitting.SharpOrifice);
     end if;
   elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve then
     if l<=L_t then
       m = data.rho*A_t*l;
-      F_f = Functions.DarcyFriction.Friction(v, D_t, l, data.rho, data.mu, eps)+ A_t*phiSO*0.5 * data.rho * abs(v) * v;
+      F_f = Functions.DarcyFriction.Friction(v, D_t, l, data.rho, data.mu, p_eps)+ A_t*phiSO*0.5 * data.rho * abs(v) * v;
       phiSO = 0;
     else
       m = data.rho*(A_t*L_t+A*(l-L_t));
       if v>=0 then
-        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, data.rho, data.mu, eps)
-            +Functions.DarcyFriction.Friction(v, D, l-L_t, data.rho, data.mu, eps)+ A_t*phiSO*0.5 * data.rho * abs(v) * v;
-        phiSO = Functions.Fitting.FittingPhi(v,D_t,D,L,90,data.rho,data.mu,data.eps,OpenHPL.Types.Fitting.Square);
+        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, data.rho, data.mu, p_eps)
+            +Functions.DarcyFriction.Friction(v, D, l-L_t, data.rho, data.mu, p_eps)+ A_t*phiSO*0.5 * data.rho * abs(v) * v;
+        phiSO = Functions.Fitting.FittingPhi(v,D_t,D,L,90,data.rho,data.mu,data.p_eps,OpenHPL.Types.Fitting.Square);
       else
-        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, data.rho, data.mu, eps)
-            +Functions.DarcyFriction.Friction(v, D, l-L_t, data.rho, data.mu, eps)+ A*phiSO*0.5 * data.rho * abs(v) * v;
-        phiSO = Functions.Fitting.FittingPhi(v,D,D_t,L,90,data.rho,data.mu,data.eps,OpenHPL.Types.Fitting.Square);
+        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, data.rho, data.mu, p_eps)
+            +Functions.DarcyFriction.Friction(v, D, l-L_t, data.rho, data.mu, p_eps)+ A*phiSO*0.5 * data.rho * abs(v) * v;
+        phiSO = Functions.Fitting.FittingPhi(v,D,D_t,L,90,data.rho,data.mu,data.p_eps,OpenHPL.Types.Fitting.Square);
       end if;
     end if;
     p_t = data.p_a;

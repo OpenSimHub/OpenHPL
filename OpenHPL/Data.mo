@@ -13,7 +13,7 @@ record Data "Provides a data set of most common used settings"
     annotation (Dialog(group = "Waterway properties"));
   parameter Modelica.SIunits.DynamicViscosity mu = 1.3076e-3 "Dynamic viscosity of water at T_0"
     annotation (Dialog(group = "Waterway properties"));
-  parameter Modelica.SIunits.Height eps = 5e-2 "Pipe roughness height"
+  parameter Modelica.SIunits.Height p_eps = 5e-2 "Pipe roughness height"
     annotation (Dialog(group = "Waterway properties"));
   parameter Modelica.SIunits.Compressibility beta = 4.5e-10 "Water compressibility"
     annotation (Dialog(group = "Waterway properties"));

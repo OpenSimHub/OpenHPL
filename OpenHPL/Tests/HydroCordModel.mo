@@ -12,13 +12,13 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     D_o=6.3,
     H=372 - 363,
     L=81.5,
-    eps=0.05) annotation (Placement(visible=true, transformation(extent={{-80,50},{-60,70}}, rotation=0)));
+    p_eps=0.05) annotation (Placement(visible=true, transformation(extent={{-80,50},{-60,70}}, rotation=0)));
   OpenHPL.Waterway.Pipe discharge1(
     D_i=6.3,
     D_o=6.3,
     H=17.5 - 14,
     L=601,
-    eps=0.05) annotation (Placement(visible=true, transformation(extent={{44,-24},{64,-4}}, rotation=0)));
+    p_eps=0.05) annotation (Placement(visible=true, transformation(extent={{44,-24},{64,-4}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(
     Input_level=true,
     H_r=24.5 - 22.6,
@@ -31,7 +31,7 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     D_o=4.7,
     H=356 - 123,
     L=363,
-    eps=0.05) annotation (Placement(visible=true, transformation(
+    p_eps=0.05) annotation (Placement(visible=true, transformation(
         origin={10,50},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
@@ -40,7 +40,7 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     H=431.5 - 356,
     L=87,
     h_0=62.5,
-    eps=0.05) annotation (Placement(visible=true, transformation(
+    p_eps=0.05) annotation (Placement(visible=true, transformation(
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -53,7 +53,7 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     D_o=6.3,
     H=363 - 365,
     L=395,
-    eps=0.05) annotation (Placement(visible=true, transformation(
+    p_eps=0.05) annotation (Placement(visible=true, transformation(
         origin={-48,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -62,7 +62,7 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     D_o=6.3,
     H=365 - 356,
     L=4020,
-    eps=0.05) annotation (Placement(visible=true, transformation(
+    p_eps=0.05) annotation (Placement(visible=true, transformation(
         origin={-26,60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -78,7 +78,7 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     D_o=3.3,
     H=123 - 20.5 + 2.5,
     L=145,
-    eps=0.05) annotation (Placement(visible=true, transformation(
+    p_eps=0.05) annotation (Placement(visible=true, transformation(
         origin={18,10},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
@@ -87,7 +87,7 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     D_o=6.3,
     H=14 - 22.6,
     L=21,
-    eps=0.05) annotation (Placement(visible=true, transformation(
+    p_eps=0.05) annotation (Placement(visible=true, transformation(
         origin={74,-8},
         extent={{-10,-10},{10,10}},
         rotation=0)));

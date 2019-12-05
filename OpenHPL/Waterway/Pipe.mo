@@ -12,7 +12,7 @@ model Pipe "Model of the pipe"
     Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Diameter D_o = D_i "Diameter of the outlet side" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height eps = data.eps "Pipe roughness height" annotation (
+  parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   //// condition of steady state
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
@@ -60,7 +60,7 @@ equation
   M = data.rho * L * Vdot;
   m = data.rho * A_ * L;
   //// Friction force
-  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, eps);
+  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps);
   //// momentum balance
   der(M) = data.rho * Vdot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * data.g * cos_theta;
   //// pipe presurre
