@@ -16,7 +16,7 @@ algorithm
   X := [N_Re_lam ^ 3, N_Re_lam ^ 2, N_Re_lam, 1; N_Re_tur ^ 3, N_Re_tur ^ 2, N_Re_tur, 1; 3 * N_Re_lam ^ 2, 2 * N_Re_lam, 1, 0; 3 * N_Re_tur ^ 2, 2 * N_Re_tur, 1, 0];
   Y := {64 / N_Re_lam, 1 / (2 * log10(epsilon / 3.7 / D + 5.74 / N_Re_tur ^ 0.9)) ^ 2, -64 / N_Re_lam ^ 2, -0.25 * 0.316 / N_Re_tur ^ 1.25};
   K := Modelica.Math.Matrices.inv(X) * Y;
-  arg := epsilon / 3.7 / D + 5.74 / (N_Re + 1e-3) ^ 0.9;
+  arg := epsilon / 3.7 / D + 5.74 / (N_Re + Modelica.Constants.eps) ^ 0.9;
   if N_Re <= 0 then
     fD := 0;
   elseif N_Re <= 2100 then
