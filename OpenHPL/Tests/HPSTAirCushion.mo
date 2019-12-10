@@ -26,11 +26,7 @@ model HPSTAirCushion "Test for Air cushion surge tank"
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Parameters para annotation (Placement(visible=true, transformation(
-        origin={-90,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.SurgeTank STAirCushion(surge_tank_type=OpenHPL.Types.SurgeTank.STAirCushion)
+  Waterway.SurgeTank STAirCushion(SurgeTankType=OpenHPL.Types.SurgeTank.STAirCushion)
     annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
 equation
   connect(turbine.o, discharge.i) annotation (
