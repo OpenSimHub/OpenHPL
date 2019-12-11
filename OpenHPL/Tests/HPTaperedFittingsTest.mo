@@ -1,15 +1,13 @@
 within OpenHPL.Tests;
-model Fittings "Test for comparing fitting behaviour"
+model HPTaperedFittingsTest "Test for comparing fitting behaviour"
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir Resorvoir1(H_r=10)
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
-  OpenHPL.Waterway.Fitting fittingSquareExpansion(
-    fit_type=OpenHPL.Types.Fitting.Square,
+  OpenHPL.Waterway.Fitting SquareExpansion1(
+    fit_type=OpenHPL.Types.Fitting.Tapered,
     D_i=2,
     D_o=4,
-    L=4)
-    "dp = p_i - p_o; So, dp should be positive when the type is expansion."
-    annotation (Placement(transformation(extent={{-10,40},{10,60}})));
+    L=4) annotation (Placement(transformation(extent={{-10,40},{10,60}})));
   OpenHPL.Waterway.Pipe pipe1(
     H=5,
     L=100,
@@ -35,13 +33,12 @@ model Fittings "Test for comparing fitting behaviour"
             {60,32}})));
   Waterway.Reservoir tailwater2(H_r=10)
     annotation (Placement(transformation(extent={{100,12},{80,32}})));
-  Waterway.Fitting         fittingSquareExpansion1(
-    fit_type=OpenHPL.Types.Fitting.Square,
+  Waterway.Fitting SquareReduction1(
+    fit_type=OpenHPL.Types.Fitting.Tapered,
     D_i=4,
     D_o=2,
-    L=4)
-    "dp = p_i - p_o; So, dp should be positive when the type is expansion."
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    L=4) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,22})));
   Waterway.Reservoir Resorvoir3(H_r=10)
@@ -62,13 +59,11 @@ model Fittings "Test for comparing fitting behaviour"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-90,-20})));
-  Waterway.Fitting         fittingSquareExpansion3(
-    fit_type=OpenHPL.Types.Fitting.Square,
+  Waterway.Fitting SquareExapnsion2(
+    fit_type=OpenHPL.Types.Fitting.Tapered,
     D_i=2,
     D_o=4,
-    L=4)
-    "dp = p_i - p_o; So, dp should be positive when the type is expansion."
-    annotation (Placement(transformation(extent={{-12,-30},{8,-10}})));
+    L=4) annotation (Placement(transformation(extent={{-12,-30},{8,-10}})));
   Waterway.Reservoir Resorvoir4(H_r=10)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
@@ -87,21 +82,22 @@ model Fittings "Test for comparing fitting behaviour"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-90,-58})));
-  Waterway.Fitting         fittingSquareExpansion2(
-    fit_type=OpenHPL.Types.Fitting.Square,
+  Waterway.Fitting SquareReduction2(
+    fit_type=OpenHPL.Types.Fitting.Tapered,
     D_i=4,
     D_o=2,
     L=4)
     "dp = p_i - p_o; So, dp should be positive when the type is expansion."
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,-58})));
 equation
   connect(Resorvoir1.o, pipe1.i)
     annotation (Line(points={{-80,50},{-60,50}}, color={28,108,200}));
-  connect(pipe1.o, fittingSquareExpansion.i)
+  connect(pipe1.o, SquareExpansion1.i)
     annotation (Line(points={{-40,50},{-10,50}}, color={28,108,200}));
-  connect(fittingSquareExpansion.o, tail1.i)
+  connect(SquareExpansion1.o, tail1.i)
     annotation (Line(points={{10,50},{40,50}}, color={28,108,200}));
   connect(tail1.o, tailwater1.o)
     annotation (Line(points={{60,50},{80,50}}, color={28,108,200}));
@@ -113,21 +109,21 @@ equation
     annotation (Line(points={{60,-20},{80,-20}}, color={28,108,200}));
   connect(pipe3.i, tailwater3.o)
     annotation (Line(points={{-60,-20},{-80,-20}}, color={28,108,200}));
-  connect(pipe2.o, fittingSquareExpansion1.o)
+  connect(pipe2.o, SquareReduction1.o)
     annotation (Line(points={{-40,22},{-10,22}}, color={28,108,200}));
-  connect(tail2.i, fittingSquareExpansion1.i)
+  connect(tail2.i, SquareReduction1.i)
     annotation (Line(points={{40,22},{10,22}}, color={28,108,200}));
-  connect(pipe3.o, fittingSquareExpansion3.i)
+  connect(pipe3.o, SquareExapnsion2.i)
     annotation (Line(points={{-40,-20},{-12,-20}}, color={28,108,200}));
-  connect(tail3.i, fittingSquareExpansion3.o)
+  connect(tail3.i, SquareExapnsion2.o)
     annotation (Line(points={{40,-20},{8,-20}}, color={28,108,200}));
   connect(tail4.o, Resorvoir4.o)
     annotation (Line(points={{60,-58},{80,-58}}, color={28,108,200}));
   connect(pipe4.i, tailwater4.o)
     annotation (Line(points={{-60,-58},{-80,-58}}, color={28,108,200}));
-  connect(pipe4.o, fittingSquareExpansion2.o)
+  connect(pipe4.o, SquareReduction2.o)
     annotation (Line(points={{-40,-58},{-10,-58}}, color={28,108,200}));
-  connect(tail4.i, fittingSquareExpansion2.i)
+  connect(tail4.i, SquareReduction2.i)
     annotation (Line(points={{40,-58},{10,-58}}, color={28,108,200}));
   annotation (experiment(StopTime=100));
-end Fittings;
+end HPTaperedFittingsTest;

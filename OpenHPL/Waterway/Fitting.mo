@@ -15,8 +15,8 @@ model Fitting "Different pipes fitting"
   parameter Modelica.SIunits.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
     Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.ThickOrifice));
   /* variables */
-  Modelica.SIunits.Velocity v "Water velocity";
-  Modelica.SIunits.Area A(start=Modelica.Constants.eps) "Cross section area";
+  Modelica.SIunits.Velocity v(start=Modelica.Constants.eps) "Water velocity";
+  Modelica.SIunits.Area A "Cross section area";
   Modelica.SIunits.Pressure dp "Pressure drop of fitting";
   Real phi "Dimensionless factor based on the type of fitting ";
   /* Connector */
