@@ -26,7 +26,8 @@ model HPSTThrottleValve "Test for throttle valve surge tank"
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.SurgeTank STThrottleValve(surge_tank_type=OpenHPL.Types.SurgeTank.STThrottleValve)
+  Waterway.SurgeTank STThrottleValve(SurgeTankType=OpenHPL.Types.SurgeTank.STThrottleValve,
+      D_t=1)
     annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
   inner Data data
     annotation (Placement(transformation(extent={{-96,80},{-76,100}})));
