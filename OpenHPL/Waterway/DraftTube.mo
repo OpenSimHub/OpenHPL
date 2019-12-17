@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model DraftTube "Model of a draft tube for reaction turbines"
   outer Data data "Using standard data set";
-  extends OpenHPL.Icons.Pipe;
+  extends OpenHPL.Icons.DraftTube;
   import Modelica.Constants.pi;
   // geometrical parameters of the draft tube
   parameter Modelica.SIunits.Length H = 10 "Vertical height of draft tube" annotation (
@@ -54,10 +54,9 @@ initial equation
     //n.T = p.T;
   end if;
 equation
-  der(m) = mdot "Mass balance";
   m = data.rho*V "Mass of water inside the draft tube";
   V = 1/3*pi*H/4*(D_i^2+D_o^2+D_i*D_o) "Volume of water inside the draft tube";
-
+  mdot = data.rho*Vdot;
   der(M) = Mdot + F;
   M = m*v;
   v = Vdot/A_;
@@ -66,7 +65,7 @@ equation
   F_p = p_i * A_i - p_o * A_o;
   F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps);
   F_g = m*data.g;
-  // connectors
+  // connector
   p_i = i.p;
   p_o = o.p;
   annotation (

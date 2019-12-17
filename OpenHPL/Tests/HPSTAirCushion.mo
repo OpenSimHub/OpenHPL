@@ -28,6 +28,8 @@ model HPSTAirCushion "Test for Air cushion surge tank"
         rotation=0)));
   Waterway.SurgeTank STAirCushion(SurgeTankType=OpenHPL.Types.SurgeTank.STAirCushion)
     annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
+  inner Data data
+    annotation (Placement(transformation(extent={{-100,74},{-80,94}})));
 equation
   connect(turbine.o, discharge.i) annotation (
     Line(points={{40,10},{44,10},{44,0},{50,0}},            color = {28, 108, 200}));
