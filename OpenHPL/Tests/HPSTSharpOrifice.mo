@@ -26,8 +26,7 @@ model HPSTSharpOrifice "Test for sharp orifice surge tank"
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.SurgeTank STSharpOrifice(SurgeTankType=OpenHPL.Types.SurgeTank.STSharpOrifice,
-                                    surge_tank_type=OpenHPL.Types.SurgeTank.STSharpOrifice)
+  Waterway.SurgeTank STSharpOrifice(SurgeTankType=OpenHPL.Types.SurgeTank.STSharpOrifice)
     annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
   inner Data data
     annotation (Placement(transformation(extent={{-98,82},{-78,102}})));
