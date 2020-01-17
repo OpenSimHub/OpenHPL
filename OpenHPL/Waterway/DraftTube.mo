@@ -23,12 +23,12 @@ model DraftTube "Model of a draft tube for reaction turbines"
   parameter Modelica.SIunits.Length L_b2 = 10.15 "Length of Branch-2 of Moody spreading pipe" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
   parameter Modelica.SIunits.Diameter D = 13.52 "Diameter of the Moody spreading pipe" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipes));
+    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
 
   parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 5 "Angle at which conical diffuser is inclined" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
   parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta_moody = 30 "Angle at which moody's spreading pipes are branched" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipes));
+    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
   parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   // condition of steady state
@@ -139,8 +139,8 @@ equation
 <li><b>Conical diffuser:</b> It is the most well-know draft tube which has efficiency of around 90&percnt;  and mostly used for low head reaction turbines.</li>
 <li><b>Moody spreading draft tubes:</b> When conical diffuser length exceeds beyond its stability for high head reaction turbines, either a elbow type draft tube is used which has around 70&percnt; of efficiency. However, other choice is to use Moody spreading draft tube that has efficiency of around 80&percnt;. The construction and design of Moody spreading draft tube is daunting and time consuming but it is mostly choosen for handling water whril at turbine&apos;s outlet.</li>
 </ul>
-<p>The conical diffuser and Moody spreading draft tubes are shown below:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/conicalDiffuser.svg\" style=\"width:60%\"></p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/moodySpreadingDT.svg\" style=\"width:60%\"></p>
+<p><br>The conical diffuser and Moody spreading draft tubes are shown below:</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/conicalDiffuser.svg\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/moodySpreadingDT.svg\"/></p>
 </html>"));
 end DraftTube;
