@@ -17,11 +17,11 @@ model DraftTube "Model of a draft tube for reaction turbines"
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
 
   parameter Modelica.SIunits.Length L_m = 10.15 "Length of Main section of Moody spreading pipe" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipes));
+    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
   parameter Modelica.SIunits.Length L_b1 = 10.15 "Length of Branch-1 of Moody spreading pipe" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipes));
+    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
   parameter Modelica.SIunits.Length L_b2 = 10.15 "Length of Branch-2 of Moody spreading pipe" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipes));
+    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
   parameter Modelica.SIunits.Diameter D = 13.52 "Diameter of the Moody spreading pipe" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipes));
 
@@ -65,7 +65,7 @@ model DraftTube "Model of a draft tube for reaction turbines"
   Modelica.SIunits.Velocity v "Water velocity";
   Modelica.SIunits.Pressure p_i "Inlet pressure";
   Modelica.SIunits.Pressure p_o "Outlet pressure";
-  Modelica.SIunits.Pressure dp = p_o-p_i "Pressure drop in and out of draft tube";
+  //Modelica.SIunits.Pressure dp = p_o-p_i "Pressure drop in and out of draft tube";
   Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0, fixed = true) "Volumeteric flow rate";
 
   Real cos_theta = Modelica.Math.cos(Modelica.SIunits.Conversions.from_deg(theta))
@@ -103,10 +103,11 @@ equation
     // connector
     p_i = i.p; p_o1=0; p_o2=0;
     p_o = o.p;
-  elseif DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser then
+  elseif DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe then
     // Taking momentum balance only on y-direction
 
     M = m_m*v+m_b1*v/2*cos_theta_moody+m_b2*v/2*cos_theta_moody;
+    V = 0;
 
     m = 0;
     m_m = data.rho*A*L_m;
@@ -116,6 +117,7 @@ equation
 
     // Mdot = mdot_m*v+mdot_b1*v/2*cos_theta_moody+mdot_b2*v/2*cos_theta
     // mdot_m = data.rho*Vdot_m = data.rho*A*v; mdot_b1 = data.rho*Vdot_b1 = data.rho*A/2*v/2
+    mdot = data.rho*Vdot;//data.rho*A*v+data.rho*A*v/4+data.rho*A*v/4;
     Mdot = data.rho*A*v^2*(1+cos_theta_moody);
 
     F = F_p - F_f - F_g;
@@ -127,7 +129,7 @@ equation
 
     // connector
     p_i = i.p; p_o = 0;
-    //p_o1 = p_o2;
+    p_o1 = p_o2;
     p_o1 + p_o2 = o.p;
   end if;
   annotation (
