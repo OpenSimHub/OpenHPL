@@ -141,6 +141,6 @@ equation
 </ul>
 <p><br>The conical diffuser and Moody spreading draft tubes are shown below:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/conicalDiffuser.svg\"/></p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/moodySpreadingDT.svg\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/moodySpreadingDT.svg\" style=\"width:60%\"></p>
 </html>"));
 end DraftTube;
