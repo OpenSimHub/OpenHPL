@@ -30,6 +30,10 @@ model HPSimple "Model of waterway of the HP system with simplified models for co
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
+  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        origin={-90,90},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
 equation
   connect(turbine.o, discharge.i) annotation (
     Line(points={{40,10},{44,10},{44,0},{50,0}},            color = {28, 108, 200}));
