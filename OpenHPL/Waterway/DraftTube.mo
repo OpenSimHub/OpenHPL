@@ -44,9 +44,6 @@ model DraftTube "Model of a draft tube for reaction turbines"
   Modelica.SIunits.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
   Modelica.SIunits.Mass m "Mass of water inside draft tube";
 
-  Modelica.SIunits.Mass m_m "Mass of water inside Main section of Moody spreading pipe ";
-  Modelica.SIunits.Mass m_b1 "Mass of water inside Branch-1 of Moody spreading pipe";
-  Modelica.SIunits.Mass m_b2 "Mass of water inside Branch-2 of Moody spreading pipe";
   Modelica.SIunits.Pressure p_o1 "Outlet pressure at Branch-1 of Moody spreading pipe";
   Modelica.SIunits.Pressure p_o2 "Outlet pressure at Branch-1 of Moody spreading pipe";
 
@@ -88,7 +85,7 @@ equation
   if DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser then
 
     M = m*v;
-    m = data.rho*V "Mass of water inside the draft tube"; m_m=0;m_b1=0;m_b2=0;
+    m = data.rho*V "Mass of water inside the draft tube";
     V = 1/3*pi*H/4*(D_i^2+D_o^2+D_i*D_o) "Volume of water inside the draft tube";
     v = Vdot/A_;
 
@@ -105,28 +102,23 @@ equation
     p_o = o.p;
   elseif DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe then
     // Taking momentum balance only on y-direction
+    M = m*v;
+    m = data.rho*A*(L_m+1/4*cos_theta_moody*(L_b1+L_b2));
+    v = Vdot/A;  V = 0;//Volume is not useful for this type draft tube
 
-    M = m_m*v+m_b1*v/2*cos_theta_moody+m_b2*v/2*cos_theta_moody;
-    V = 0;
-
-    m = 0;
-    m_m = data.rho*A*L_m;
-    m_b1 = data.rho*A/2*L_b1;
-    m_b2 = data.rho*A/2*L_b2;
-    v = Vdot/A;
-
-    // Mdot = mdot_m*v+mdot_b1*v/2*cos_theta_moody+mdot_b2*v/2*cos_theta
-    // mdot_m = data.rho*Vdot_m = data.rho*A*v; mdot_b1 = data.rho*Vdot_b1 = data.rho*A/2*v/2
-    mdot = data.rho*Vdot;//data.rho*A*v+data.rho*A*v/4+data.rho*A*v/4;
-    Mdot = data.rho*A*v^2*(1+cos_theta_moody);
+    Mdot = mdot*v;
+    mdot = data.rho*Vdot;
 
     F = F_p - F_f - F_g;
-    F_p = p_i*A - p_o1*A/2 - p_o2*A/2;
+    F_p = p_i*A - (p_o1-p_o2)*A/4*cos_theta_moody;
     F_f = Functions.DarcyFriction.Friction(v, D, L_m, data.rho, data.mu, p_eps)+
           Functions.DarcyFriction.Friction(v/2, D/2, L_b1, data.rho, data.mu, p_eps)*cos_theta_moody+
           Functions.DarcyFriction.Friction(v/2, D/2, L_b2, data.rho, data.mu, p_eps)*cos_theta_moody;
-    F_g = (m_m + (m_b1+m_b2)*cos_theta_moody)*data.g;
 
+
+
+    F_g = data.rho*A*data.g*(L_m+1/4*cos_theta_moody*(L_b1+L_b2));
+    //F_g = data.rho*A*L_m*data.g+data.rho*A/4*L_b1*cos_theta_moody*data.g+data.rho*A/4*L_b2*cos_theta_moody*data.g;
     // connector
     p_i = i.p; p_o = 0;
     p_o1 = p_o2;
