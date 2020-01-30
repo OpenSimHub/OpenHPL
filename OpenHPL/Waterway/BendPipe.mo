@@ -22,41 +22,9 @@ equation
   o.p = i.p - dp "Pressure of the output connector";
   annotation (
     Documentation(info="<html>
-    <p>Various possibilities of the fittings for the pipes with different diameters 
-    and also the orifices in the pipe. 
-    Here, the pressure drop due to these constrictions is defined.</p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\"><tr>
-<td><p><em>Squared Reduction:</em></p></td>
-<td><p><em>Squared Expansion:</em></p></td>
-</tr>
-<tr>
-<td><img src=\"modelica://OpenHPL/Resources/Images/SquaredReduction.svg\"/></td>
-<td><img src=\"modelica://OpenHPL/Resources/Images/SquaredExpansion.svg\"/></td>
-</tr>
-<tr>
-<td><p><em>Tapered Reduction:</em></p></td>
-<td><p><em>Tapered Expansion:</em></p></td>
-</tr>
-<tr>
-<td><img src=\"modelica://OpenHPL/Resources/Images/TaperedReduction.svg\"/></td>
-<td><img src=\"modelica://OpenHPL/Resources/Images/TaperedExpansion.svg\"/></td>
-</tr>
-<tr>
-<td><p><em>Rounded Reduction:</em></p></td>
-<td><p><em>Rounded Expansion:</em></p></td>
-</tr>
-<tr>
-<td><img src=\"modelica://OpenHPL/Resources/Images/RoundedReduction.svg\"/></td>
-<td><img src=\"modelica://OpenHPL/Resources/Images/RoundedExpansion.svg\"/></td>
-</tr>
-<tr>
-<td><p><em>Sharp Orifice:</em></p></td>
-<td><p><em>Thick Orifice:</em></p></td>
-</tr>
-<tr>
-<td><img src=\"modelica://OpenHPL/Resources/Images/OrificeSharp.svg\"/></td>
-<td><img src=\"modelica://OpenHPL/Resources/Images/OrificeThick.svg\"/></td>
-</tr>
-</table>
+<p>Usually minor head losses in pipes are cosidered to be due to fittings, diffusers, nozzles, bend in pipes, etc. We are more interested in head loss due to bend pipes for this model.</p>
+<p>A typical loss coefficient values for flanged and threaded elbows, tees, gates, valves, etc., can be taken as,</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/MinorLoss.PNG\"/></p>
+<p>Note: This is page excerpt taken from<i> Fluid Mechanics</i> by Frank M. White from page 422, edition-6th. </p>
 </html>"));
 end BendPipe;
