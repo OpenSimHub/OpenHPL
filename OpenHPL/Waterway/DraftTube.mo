@@ -122,7 +122,7 @@ equation
     // connector
     p_i = i.p; p_o = 0;
     p_o1 = p_o2;
-    p_o1 + p_o2 = o.p;
+    p_o1  = o.p;//=p_o2
   end if;
   annotation (
     Documentation(info="<html>
