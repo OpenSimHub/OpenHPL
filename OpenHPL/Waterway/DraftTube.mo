@@ -132,7 +132,7 @@ equation
 <li><b>Moody spreading draft tubes:</b> When conical diffuser length exceeds beyond its stability for high head reaction turbines, either a elbow type draft tube is used which has around 70&percnt; of efficiency. However, other choice is to use Moody spreading draft tube that has efficiency of around 80&percnt;. The construction and design of Moody spreading draft tube is daunting and time consuming but it is mostly choosen for handling water whril at turbine&apos;s outlet.</li>
 </ul>
 <p><br>The conical diffuser and Moody spreading draft tubes are shown below:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/conicalDiffuser.svg\"/></p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/moodySpreadingDT.svg\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/conicalDiffuser.svg\" width=\"500\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/moodySpreadingDT.svg\" width=\"500\"/></p>
 </html>"));
 end DraftTube;
