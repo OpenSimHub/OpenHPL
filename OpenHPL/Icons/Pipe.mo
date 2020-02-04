@@ -28,7 +28,7 @@ partial class Pipe "Pipe icon"
         Ellipse(
           extent={{-27.8931,37.7122},{27.8931,-37.7122}},
           lineColor={0,0,0},
-          fillColor={28,108,200},
+          fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           startAngle=0,
           endAngle=360,
@@ -57,7 +57,7 @@ partial class Pipe "Pipe icon"
         Ellipse(
           extent={{-19.5,24},{19.5,-24}},
           lineColor={0,0,0},
-          fillColor={28,108,200},
+          fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           startAngle=0,
           endAngle=360,

@@ -1,56 +1,61 @@
 within OpenHPL.Icons;
 partial class BendPipe "Bend pipes icon."
-  parameter Boolean vertical=false "Display vertical icon instead"
-    annotation(Dialog(group = "Icon"),
-    choices(checkBox = true));
+
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}), graphics={
-        Text(lineColor={28,108,200},
-          extent={{-145,111},{155,71}},
-          textString="%name",
-          textStyle={TextStyle.Bold}),
         Rectangle(
-          extent={{-76,50},{28,1}},
+          extent={{-70,50},{34,0}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={175,175,175}),
-        Rectangle(
-          extent={{-54.75,24.75},{54.75,-24.75}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={175,175,175},
-          origin={51.75,-4.25},
-          rotation=90),
         Ellipse(
-          extent={{-89,52},{-54,0}},
+          extent={{-90,50},{-50,0}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={175,175,175},
           startAngle=0,
           endAngle=360),
         Ellipse(
-          extent={{-15.5,25.5},{15.5,-25.5}},
+          extent={{-86,45},{-55,5}},
           lineColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          fillColor={175,175,175},
-          origin={51.5,-60.5},
-          rotation=90),
-        Ellipse(
-          extent={{-85,46},{-59,6}},
-          lineColor={0,0,0},
-          fillColor={28,108,200},
+          fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           startAngle=0,
           endAngle=360,
           closure=EllipseClosure.Chord),
+        Text(lineColor={28,108,200},
+          extent={{-150,100},{150,60}},
+          textString="%name",
+          textStyle={TextStyle.Bold}),
         Ellipse(
-          extent={{-13,20},{13,-20}},
+          extent={{10,50},{60,0}},
           lineColor={0,0,0},
-          fillColor={28,108,200},
+          fillPattern=FillPattern.Sphere,
+          fillColor={175,175,175},
+          startAngle=0,
+          endAngle=360),
+        Rectangle(
+          extent={{-45.5,25},{45.5,-25}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={175,175,175},
+          origin={35,-19.5},
+          rotation=90),
+        Ellipse(
+          extent={{-25,25},{25,-25}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          fillColor={175,175,175},
+          origin={35,-65},
+          rotation=90),
+        Ellipse(
+          extent={{-19.5,20},{19.5,-20}},
+          lineColor={0,0,0},
+          fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           startAngle=0,
           endAngle=360,
           closure=EllipseClosure.Chord,
-          origin={52,-61},
+          origin={35,-65.5},
           rotation=90)}));
 end BendPipe;

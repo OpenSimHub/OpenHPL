@@ -1,8 +1,6 @@
 within OpenHPL.Icons;
 partial class DraftTube "Draft tube icon"
-  parameter Boolean vertical=false "Display vertical icon instead"
-    annotation(Dialog(group = "Icon"),
-    choices(checkBox = true));
+
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}), graphics={
         Polygon(
@@ -19,23 +17,24 @@ partial class DraftTube "Draft tube icon"
           smooth=Smooth.Bezier,
           fillColor={175,175,175}),
         Ellipse(
-          extent={{-50,-74},{51,-87}},
+          extent={{-50,-70},{50,-90}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={175,175,175}),
         Ellipse(
-          extent={{-31,78},{30,63}},
+          extent={{-30,80},{30,60}},
           lineColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          fillColor={175,175,175}),
+          fillPattern=FillPattern.Forward,
+          fillColor={175,175,175},
+          pattern=LinePattern.Dash),
         Ellipse(
-          extent={{-25,75},{25,66}},
+          extent={{-26,77},{26,63}},
           lineColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          fillColor={28,108,200}),
+          fillPattern=FillPattern.Forward,
+          fillColor={0,128,255}),
         Ellipse(
-          extent={{-35,-76},{37,-85}},
+          extent={{-44,-73},{45,-87}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          fillColor={28,108,200})}));
+          fillColor={0,128,255})}));
 end DraftTube;
