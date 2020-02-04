@@ -24,7 +24,7 @@ equation
     Documentation(info="<html>
 <p>Usually minor head losses in pipes are cosidered to be due to fittings, diffusers, nozzles, bend in pipes, etc. We are more interested in head loss due to bend pipes for this model.</p>
 <p>A typical loss coefficient values for flanged and threaded elbows, tees, gates, valves, etc., can be taken as,</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/MinorLoss.PNG\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/MinorLoss.png\"/></p>
 <p>Note: This is page excerpt taken from<i> Fluid Mechanics</i> by Frank M. White from page 422, edition-6th. </p>
 </html>"));
 end BendPipe;
