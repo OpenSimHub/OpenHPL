@@ -1,5 +1,5 @@
 within OpenHPL.Tests;
-model HPSTAirCushion "Test for Air cushion surge tank"
+model TorpaHPPAirCushionTest2 "Test case for air cushion surge tank from Torpa hydro power plant."
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
         origin={-90,30},
@@ -22,28 +22,28 @@ model HPSTAirCushion "Test for Air cushion surge tank"
         origin={0,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(visible=true, transformation(
-        origin={30,10},
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(
+        origin={-30,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.SurgeTank STAirCushion(SurgeTankType=OpenHPL.Types.SurgeTank.STAirCushion)
-    annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
-  inner Data data
-    annotation (Placement(transformation(extent={{-100,74},{-80,94}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(visible=true, transformation(
+        origin={44,50},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
 equation
   connect(turbine.o, discharge.i) annotation (
-    Line(points={{40,10},{44,10},{44,0},{50,0}},            color = {28, 108, 200}));
+    Line(points={{54,50},{44,50},{44,0},{50,0}},            color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{1,70},{30,70},{30,22}},         color = {0, 0, 127}));
+    Line(points={{1,70},{44,70},{44,62}},         color = {0, 0, 127}));
   connect(penstock.o, turbine.i) annotation (
-    Line(points={{10,30},{14.95,30},{14.95,10},{20,10}},                         color = {28, 108, 200}));
+    Line(points={{10,30},{14.95,30},{14.95,50},{34,50}},                         color = {28, 108, 200}));
   connect(reservoir.o, intake.i) annotation (
     Line(points={{-80,30},{-70,30}},                                              color = {28, 108, 200}));
+  connect(intake.o, surgeTank.i) annotation (
+    Line(points={{-50,30},{-40,30}},                                              color = {28, 108, 200}));
+  connect(surgeTank.o, penstock.i) annotation (
+    Line(points={{-20,30},{-10,30}},                                              color = {28, 108, 200}));
   connect(discharge.o, tail.o) annotation (Line(points={{70,0},{80,0}}, color={28,108,200}));
-  connect(intake.o, STAirCushion.i)
-    annotation (Line(points={{-50,30},{-42,30}}, color={28,108,200}));
-  connect(penstock.i, STAirCushion.o)
-    annotation (Line(points={{-10,30},{-22,30}}, color={28,108,200}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
-end HPSTAirCushion;
+end TorpaHPPAirCushionTest2;

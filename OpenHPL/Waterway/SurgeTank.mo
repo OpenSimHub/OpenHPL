@@ -55,8 +55,8 @@ model SurgeTank "Model of the surge tank/shaft"
   Modelica.SIunits.Pressure p_b "Pressure at bottom of the surge tank";
   Real phiSO "Dimensionless factor based on the type of fitting ";
   // initial values for differential variables
-  Modelica.SIunits.Height h(start = h_0, fixed = true) "Water height in the surge tank";
-  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0, fixed = true) "Water flow rate";
+  Modelica.SIunits.Height h(start = h_0) "Water height in the surge tank";
+  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0) "Water flow rate";
   // variables for temperature. Not in use for now...
   // Real W_f, W_e;
   // connector (acquisition of algebraic variable, mass flow rate mdot, and node pressure (manifold pressure) p_n)
@@ -65,11 +65,8 @@ initial equation
   if SteadyState == true then
     der(M) = 0;
     der(m) = 0;
-    //der(T_n) = 0;
   else
     h = h_0;
-    Vdot = Vdot_0;
-    //T_n = T_0;
   end if;
 equation
   der(m) = mdot "Mass balance";
@@ -133,7 +130,7 @@ equation
 </ol>
 <p>All of the surge tanks are modeled using mass and momemtum balance. </p>
 <p>The air cushion surge tank is shown below: </p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/SurgeTankAirCushion.png\" width=\"500\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/SurgeTankAirCushion.svg\" width=\"600\"/></p>
 <p>The throttle valve surge tank and sharp orifice type surge tank are shown below:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/ThrottleValveSurgeTank.png\" width=\"500\"/></p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/SharpOrificeSurgeTank.png\" width=\"500\"/></p>

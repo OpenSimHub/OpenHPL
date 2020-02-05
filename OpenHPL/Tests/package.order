@@ -1,3 +1,6 @@
+HydroCordModelTest
+TorpaHPPAirCushionTest
+TorpaHPPAirCushionTest2
 HPTaperedFittingsTest
 HPSquareFittingsTest
 HPAllTypeFittingsTest
@@ -67,3 +70,4 @@ HPSTSimple
 HPSTAirCushion
 HPSTSharpOrifice
 HPSTThrottleValve
+HPDraftTube

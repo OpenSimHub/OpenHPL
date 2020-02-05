@@ -2,9 +2,11 @@ Logo
 Water
 Reservoir
 Pipe
-OpenChannel
+BendPipe
 Surge
 Fitting
+DraftTube
+OpenChannel
 ElectroMech
 Turbine
 Generator

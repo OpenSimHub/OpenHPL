@@ -46,10 +46,6 @@ model Pipe "Model of the pipe"
 initial equation
   if SteadyState == true then
     der(M) = 0;
-    //der(n.T) = 0;
-  else
-    Vdot = Vdot_0;
-    //n.T = p.T;
   end if;
 equation
   //// Water volumetric flow rate through the pipe

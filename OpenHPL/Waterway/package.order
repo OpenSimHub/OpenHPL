@@ -2,9 +2,11 @@ Internal
 Reservoir
 Fitting
 Pipe
+BendPipe
 SurgeTank
 Penstock
 PenstockKP
+DraftTube
 OpenChannel
 ReservoirChannel
 RunOff_zones

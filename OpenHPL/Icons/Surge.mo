@@ -23,7 +23,7 @@ partial class Surge "Surge tank/shaft icon"
         Ellipse(
           extent={{-21.4428,28.0419},{21.4428,-28.0419}},
           lineColor={0,0,0},
-          fillColor={28,108,200},
+          fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           startAngle=0,
           endAngle=360,
@@ -49,7 +49,7 @@ partial class Surge "Surge tank/shaft icon"
         Ellipse(
           extent={{-17.6328,18.9409},{17.6328,-18.9409}},
           lineColor={0,0,0},
-          fillColor={28,108,200},
+          fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           startAngle=0,
           endAngle=360,
@@ -75,7 +75,7 @@ partial class Surge "Surge tank/shaft icon"
         Ellipse(
           extent={{-20.0161,24.1519},{20.0161,-24.1519}},
           lineColor={0,0,0},
-          fillColor={28,108,200},
+          fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           startAngle=0,
           endAngle=360,

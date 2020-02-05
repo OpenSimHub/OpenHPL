@@ -40,7 +40,7 @@ partial class Fitting "Pipe fitting icon"
         Ellipse(
           extent={{-17.5173,23.3007},{17.5173,-23.3007}},
           lineColor={0,0,0},
-          fillColor={28,108,200},
+          fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           startAngle=0,
           endAngle=360,
