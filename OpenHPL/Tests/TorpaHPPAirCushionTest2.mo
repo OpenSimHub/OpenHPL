@@ -1,6 +1,5 @@
-within OpenHPL.Examples;
-model TorpaHPPAirCushionTest2
-  "Test case for air cushion surge tank from Torpa hydro power plant."
+within OpenHPL.Tests;
+model TorpaHPPAirCushionTest2 "Test case for air cushion surge tank from Torpa hydro power plant."
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
         origin={-90,30},

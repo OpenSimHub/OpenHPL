@@ -1,5 +1,5 @@
-within OpenHPL.Examples;
-model HydroCordModel "Model of Trollheim hydro power plant."
+within OpenHPL.Tests;
+model HydroCordModelTest "Model of Trollheim hydro power plant."
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir reservoir(H_r=418.5 - 372, UseInFlow=false) annotation (Placement(visible=true, transformation(
         origin={-94,64},
@@ -147,4 +147,4 @@ equation
   annotation (
     experiment(StopTime = 3600, StartTime = 0, Tolerance = 0.0001, Interval = 1),
     Diagram(graphics={  Rectangle(origin = {17, 10}, extent = {{1, -2}, {-1, 2}})}));
-end HydroCordModel;
+end HydroCordModelTest;
