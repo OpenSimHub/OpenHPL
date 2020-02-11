@@ -142,11 +142,20 @@ equation
 <li>Sharp orifice surge tank</li>
 </ol>
 <p>All of the surge tanks are modeled using mass and momemtum balance. </p>
-<p>The air cushion surge tank is shown below: </p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/SurgeTankAirCushion.svg\" width=\"600\"/></p>
-<p>The throttle valve surge tank and sharp orifice type surge tank are shown below:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/ThrottleValveSurgeTank.png\" width=\"500\"/></p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/SharpOrificeSurgeTank.png\" width=\"500\"/></p>
+<p>All of the surge tank can be shown below. </p>
+
+<p>This simple surge tank is shown below.</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/STSimple.svg\"/></p>
+
+<p>The air cushion surge tank is shown below:</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/STAirCushion.svg\"/></p>
+
+<p>This sharp orifice surge tank is shown below.</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/STSharpOrifice.svg\"/></p>
+
+<p>The throttle valve surge tank is shown below:</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/STThrottleValve.svg\"/></p>
+
 <p>The simple surge tank model can be found in this link: <a href=\"modelica://OpenHPL.UsersGuide.References\">OpenHPL.UsersGuide.References&gt;[Valen2017]</a> </p>
 </html>"));
 end SurgeTank;
