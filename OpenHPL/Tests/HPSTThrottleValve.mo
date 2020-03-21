@@ -1,34 +1,56 @@
 within OpenHPL.Tests;
-model HPSTThrottleValve "Test for throttle valve surge tank"
+model HPSTThrottleValve
+  "Model of waterway of the HP system with simplified models for conduits, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_r=50) annotation (Placement(visible=true, transformation(
         origin={-90,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
+  Modelica.Blocks.Sources.Ramp control(
+    duration=0,
+    height=0.9,
+    offset=0,
+    startTime=0)                                                                                          annotation (
     Placement(visible = true, transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,20},{-50,40}}, rotation=0)));
-  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
+  OpenHPL.Waterway.Pipe intake(
+    H=20,
+    L=4500,
+    D_i=6,
+    D_o=6)                           annotation (Placement(visible=true, transformation(extent={{-70,20},{-50,40}}, rotation=0)));
+  OpenHPL.Waterway.Pipe discharge(
+    H=0,
+    L=700,
+    D_i=6,
+    D_o=6)                                      annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(H_r=5, Input_level=false) annotation (Placement(visible=true, transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
   OpenHPL.Waterway.Pipe penstock(
-    D_i=3,
-    D_o=3,
-    H=428.5,
-    L=600,
+    D_i=4,
+    D_o=4,
+    H=300,
+    L=500,
     vertical=true) annotation (Placement(visible=true, transformation(
         origin={0,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(visible=true, transformation(
+  ElectroMech.Turbines.Turbine turbine(
+    ValveCapacity=false,               C_v=3.7,
+    H_n=370,
+    Vdot_n=40,                                  ConstEfficiency=false) annotation (Placement(visible=true, transformation(
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.SurgeTank STThrottleValve(SurgeTankType=OpenHPL.Types.SurgeTank.STThrottleValve,
-      D_t=1)
-    annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
+  Waterway.SurgeTank STThrottleValve(
+    SurgeTankType=OpenHPL.Types.SurgeTank.STThrottleValve,
+    H=80,
+    L=80,
+    D=4,
+    D_so=2,
+    D_t=1,
+    L_t=20,
+    h_0=50) annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
   inner Data data
     annotation (Placement(transformation(extent={{-96,80},{-76,100}})));
 equation
