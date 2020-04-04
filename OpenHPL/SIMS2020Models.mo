@@ -9,7 +9,7 @@ extends Modelica.Icons.ExamplesPackage;
           extent={{-10,-10},{10,10}},
           rotation=0)));
     Modelica.Blocks.Sources.Ramp control(
-      duration=300,
+      duration=0,
       height=0.45,
       offset=0.5,
       startTime=0)                                                                                          annotation (
@@ -84,7 +84,7 @@ extends Modelica.Icons.ExamplesPackage;
           extent={{-10,-10},{10,10}},
           rotation=0)));
     Modelica.Blocks.Sources.Ramp control(
-      duration=300,
+      duration=0,
       height=0.45,
       offset=0.5,
       startTime=0)                                                                                          annotation (
@@ -124,7 +124,7 @@ extends Modelica.Icons.ExamplesPackage;
       H=80,
       L=80,
       D=4,
-      D_so=1.5,
+      D_so=1,
       D_t=2,
       L_t=20,
       h_0=50) annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
@@ -158,7 +158,7 @@ extends Modelica.Icons.ExamplesPackage;
           extent={{-10,-10},{10,10}},
           rotation=0)));
     Modelica.Blocks.Sources.Ramp control(
-      duration=300,
+      duration=0,
       height=0.45,
       offset=0.5,
       startTime=0)                                                                                          annotation (
@@ -232,7 +232,7 @@ extends Modelica.Icons.ExamplesPackage;
           extent={{-10,-10},{10,10}},
           rotation=0)));
     Modelica.Blocks.Sources.Ramp control(
-      duration=300,
+      duration=0,
       height=0.45,
       offset=0.5,
       startTime=0)                                                                                          annotation (
