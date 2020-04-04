@@ -150,7 +150,7 @@ extends Modelica.Icons.ExamplesPackage;
         __Dymola_Algorithm="Dassl"));
   end TrollheimSTSharpOrifice;
 
-  model TrollheimSTThrottleValveST
+  model TrollheimSTThrottleValve
     "Model of Trollheim HPP with throttle valve type surge tank."
     extends Modelica.Icons.Example;
     OpenHPL.Waterway.Reservoir reservoir(H_r=50) annotation (Placement(visible=true, transformation(
@@ -222,7 +222,7 @@ extends Modelica.Icons.ExamplesPackage;
         StopTime=1000,
         Interval=0.4,
         __Dymola_Algorithm="Dassl"));
-  end TrollheimSTThrottleValveST;
+  end TrollheimSTThrottleValve;
 
   model TorpaSTAirCushion "Model of Torpa HPP with air-cushion surge tank."
     extends Modelica.Icons.Example;
