@@ -45,7 +45,7 @@ extends Modelica.Icons.ExamplesPackage;
           extent={{-10,-10},{10,10}},
           rotation=0)));
     Waterway.SurgeTank STSimple(
-      SurgeTankType=OpenHPL.Types.SurgeTank.STSimple,
+      SurgeTankType=OpenHPL.Types.SurgeTank.STSharpOrifice,
       H=80,
       L=80,
       D=4,
@@ -57,8 +57,6 @@ extends Modelica.Icons.ExamplesPackage;
   equation
     connect(turbine.o, discharge.i) annotation (
       Line(points={{40,10},{44,10},{44,0},{50,0}},            color = {28, 108, 200}));
-    connect(control.y, turbine.u_t) annotation (
-      Line(points={{1,70},{30,70},{30,22}},         color = {0, 0, 127}));
     connect(penstock.o, turbine.i) annotation (
       Line(points={{10,30},{14.95,30},{14.95,10},{20,10}},                         color = {28, 108, 200}));
     connect(reservoir.o, intake.i) annotation (
@@ -68,6 +66,8 @@ extends Modelica.Icons.ExamplesPackage;
       annotation (Line(points={{-50,30},{-42,30}}, color={28,108,200}));
     connect(penstock.i, STSimple.o)
       annotation (Line(points={{-10,30},{-22,30}}, color={28,108,200}));
+    connect(turbine.u_t, control.y)
+      annotation (Line(points={{30,22},{30,70},{1,70}}, color={0,0,127}));
     annotation (
       experiment(
         StartTime=-2000,
