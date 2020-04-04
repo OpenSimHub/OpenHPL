@@ -266,7 +266,7 @@ extends Modelica.Icons.ExamplesPackage;
           origin={30,10},
           extent={{-10,-10},{10,10}},
           rotation=0)));
-    Waterway.SurgeTank STSimple(
+    Waterway.SurgeTank STAirCushion(
       SurgeTankType=OpenHPL.Types.SurgeTank.STAirCushion,
       H=25,
       L=25,
@@ -274,8 +274,7 @@ extends Modelica.Icons.ExamplesPackage;
       D_so=1,
       D_t=1.5,
       L_t=20,
-      h_0=5)
-      annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
+      h_0=5) annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
   equation
     connect(turbine.o, discharge.i) annotation (
       Line(points={{40,10},{44,10},{44,0},{50,0}},            color = {28, 108, 200}));
@@ -286,9 +285,9 @@ extends Modelica.Icons.ExamplesPackage;
     connect(reservoir.o, intake.i) annotation (
       Line(points={{-80,30},{-70,30}},                                              color = {28, 108, 200}));
     connect(discharge.o, tail.o) annotation (Line(points={{70,0},{80,0}}, color={28,108,200}));
-    connect(intake.o, STSimple.i)
+    connect(intake.o, STAirCushion.i)
       annotation (Line(points={{-50,30},{-42,30}}, color={28,108,200}));
-    connect(penstock.i, STSimple.o)
+    connect(penstock.i, STAirCushion.o)
       annotation (Line(points={{-10,30},{-22,30}}, color={28,108,200}));
     annotation (
       experiment(
