@@ -51,8 +51,6 @@ model TorpaSTAirCushion "Model of Torpa HPP with air-cushion surge tank."
     L_t=20,
     h_0=5)
     annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
-  inner Data data
-    annotation (Placement(transformation(extent={{-94,76},{-74,96}})));
 equation
   connect(turbine.o, discharge.i) annotation (
     Line(points={{40,10},{44,10},{44,0},{50,0}},            color = {28, 108, 200}));
