@@ -9,11 +9,11 @@ model DraftTube "Model of a draft tube for reaction turbines"
   // geometrical parameters of the draft tube
   parameter Modelica.SIunits.Length H = 7 "Vertical height of conical diffuser" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
-  parameter Modelica.SIunits.Length L = 7.017 "Slant height of conical diffuser, for conical diffuser L=H/cos(diffusion_angle/2), diffusion_anlge=8" annotation (
+  parameter Modelica.SIunits.Length L = 10.15 "Slant height of conical diffuser, for conical diffuser L=H/cos(diffusion_angle/2), diffusion_anlge=8" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
   parameter Modelica.SIunits.Diameter D_i = 4 "Diameter of the inlet side" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_o = 4.978 "Diameter of the outlet side, for conical diffuser D_o=D_i+2*H*tan(diffusion_angle/2)" annotation (
+  parameter Modelica.SIunits.Diameter D_o = 13.52 "Diameter of the outlet side, for conical diffuser D_o=D_i+2*H*tan(diffusion_angle/2)" annotation (
     Dialog(group = "Geometry"));
 
   parameter Modelica.SIunits.Length L_m = 4 "Length of Main section of Moody spreading pipe" annotation (
