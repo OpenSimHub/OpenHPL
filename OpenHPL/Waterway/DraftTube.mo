@@ -23,7 +23,7 @@ model DraftTube "Model of a draft tube for reaction turbines"
 
   parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 5 "Angle at which conical diffuser is inclined" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta_moody = 30 "Angle at which Moody spreading pipes are branched" annotation (
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta_moody = 30 "Angle at which Moody spreading pipes are branched possible value is 15,30,45,60 or 90)" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
   parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
@@ -45,6 +45,9 @@ model DraftTube "Model of a draft tube for reaction turbines"
   Modelica.SIunits.Mass m "Mass of water inside conical diffuser";
   Modelica.SIunits.Mass m_m "Mass of water inside Main section Moody spreading pipes";
   Modelica.SIunits.Mass m_b "Mass of water inside Branch section Moody spreading pipes";
+  
+  Modelica.SIunits.MassFlowRate mdot_m "Mass flow rate inside Main section of Moody spreading pipes";
+  Modelica.SIunits.MassFlowRate mdot_b "Mass flow rate inside Branch section of Moody spreading pipes";
 
   Modelica.SIunits.Volume V "Volume of water inside the draft tube";
   Modelica.SIunits.Momentum M "Momentum of water inside the draft tube";
@@ -53,6 +56,8 @@ model DraftTube "Model of a draft tube for reaction turbines"
   Modelica.SIunits.Force F_p "Pressure force";
   Modelica.SIunits.Force F_f "Fluid frictional force";
   Modelica.SIunits.Force F_g "Weight of water";
+  Modelica.SIunits.Force F_fm "Fluid frictional force in the Main section of Moody spreading pipe";
+  Modelica.SIunits.Force F_fb "Fluid frictional force in the Branch section of Moody spreading pipe";
   
   //Real cos_theta = H / L "slope ratio";
   Modelica.SIunits.Velocity v "Water velocity for conical diffuser";
@@ -99,10 +104,12 @@ equation
 
     Mdot = mdot*v;
     mdot = data.rho*Vdot;
+    mdot_m=0; mdot_b=0; // Unimportant for conical diffuser
 
     F = F_p-F_g-F_f;
     F_p = p_i * A_i - p_o * A_o;
     F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)+1/2*data.rho*v*abs(v)*A_i*phi_d;
+    F_fm=0;F_fb=0;
     phi_d = 0.23*(1-D_i/D_o)^2;
     phi_d_o=0; // Unimportant for conical diffuser
     F_g = m*data.g*cos_theta;
@@ -111,19 +118,20 @@ equation
     // Taking momentum balance only on y-direction
     M = m_m*v_m+2*m_b*v_b*cos_theta_moody_by_2; 
     m_m=data.rho*A_i*L_m; m_b=data.rho*A_o*L_m;
-    v_m = Vdot/A_i; v_b=A_i/(2*A_o)*v_m; 
+    m = m_m+2*m_b;
+    v_m = Vdot/A_i; v_b=A_i/(2*A_o)*v_m; v=v_m;
     V = A_i*L_m+2*A_o*L_b;
     
     Mdot = mdot_m*v_m+2*mdot_b*cos_theta_moody_by_2;
     mdot_m=data.rho*Vdot; mdot_b=data.rho*Vdot_b; Vdot_b=A_o*v_b;
-    mdot = data.rho*Vdot;
+    mdot = mdot_m;
     
     F = F_p-F_g-F_f;
     F_p = p_i*A_i-2*p_o*A_o*cos_theta_moody_by_2;
     F_g = m_m*data.g+2*m_b*data.g*cos_theta_moody_by_2;
     F_f = F_fm+2*F_fb*cos_theta_moody_by_2+data.rho*v_m*abs(v_m)*A_i*phi_d;
     F_fm = Functions.DarcyFriction.Friction(v_m, D_i, L_m, data.rho, data.mu, p_eps);
-    F_fm = Functions.DarcyFriction.Friction(v_b, D_o, L_b, data.rho, data.mu, p_eps);
+    F_fb = Functions.DarcyFriction.Friction(v_b, D_o, L_b, data.rho, data.mu, p_eps);
     
     // calculating phi_d
     phi_d = 1+(v_b/v_m)^2-2*v_b/v_m*cos_theta_moody-phi_d_o*(v_b/v_m)^2;
