@@ -341,16 +341,16 @@ extends Modelica.Icons.ExamplesPackage;
           extent={{-10,-10},{10,10}},
           rotation=0)));
     Waterway.SurgeTank STSimple(
-      SurgeTankType=OpenHPL.Types.SurgeTank.STSharpOrifice,
-      H=80,
-      L=80,
+      
       D=4,
       D_so=1,
       D_t=1.5,
-      L_t=20,
+      H=80,
+      L=80,
+      L_t=20,SurgeTankType=OpenHPL.Types.SurgeTank.STSimple,
       h_0=50)
       annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
-    Waterway.DraftTube draftTube
+    Waterway.DraftTube draftTube(D_i = 4, D_o = 4.978, H = 7, L = 7.017) 
       annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
   equation
     connect(penstock.o, turbine.i) annotation (
