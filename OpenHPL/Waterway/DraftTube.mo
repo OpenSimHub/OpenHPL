@@ -11,23 +11,19 @@ model DraftTube "Model of a draft tube for reaction turbines"
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
   parameter Modelica.SIunits.Length L = 10.15 "Slant height of conical diffuser" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
-  parameter Modelica.SIunits.Diameter D_i = 5 "Diameter of the inlet side of conical diffuser" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
-  parameter Modelica.SIunits.Diameter D_o = 13.52 "Diameter of the outlet side of conical diffuser" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
+  parameter Modelica.SIunits.Diameter D_i = 5 "Diameter of the inlet side" annotation (
+    Dialog(group = "Geometry"));
+  parameter Modelica.SIunits.Diameter D_o = 13.52 "Diameter of the outlet side" annotation (
+    Dialog(group = "Geometry"));
 
   parameter Modelica.SIunits.Length L_m = 10.15 "Length of Main section of Moody spreading pipe" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
-  parameter Modelica.SIunits.Length L_b1 = 10.15 "Length of Branch-1 of Moody spreading pipe" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
-  parameter Modelica.SIunits.Length L_b2 = 10.15 "Length of Branch-2 of Moody spreading pipe" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
-  parameter Modelica.SIunits.Diameter D = 13.52 "Diameter of the Moody spreading pipe" annotation (
+  parameter Modelica.SIunits.Length L_b = 10.15 "Length of Branch section of Moody spreading pipe" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
 
   parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 5 "Angle at which conical diffuser is inclined" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta_moody = 30 "Angle at which moody's spreading pipes are branched" annotation (
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta_moody = 30 "Angle at which Moody spreading pipes are branched" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
   parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
@@ -42,33 +38,43 @@ model DraftTube "Model of a draft tube for reaction turbines"
   // parameter Modelica.SIunits.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   // variables
   Modelica.SIunits.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
-  Modelica.SIunits.Mass m "Mass of water inside draft tube";
+  Modelica.SIunits.Area A_i = D_i ^ 2 * pi / 4 "Inlet cross-section area of draft tube";
+  Modelica.SIunits.Area A_o = D_o ^ 2 * pi / 4 "Outlet cross-section area of draft tube";
+  Modelica.SIunits.Area A_ = D_ ^ 2 * pi / 4 "Average cross-section area of conical diffuser";
+  
+  Modelica.SIunits.Mass m "Mass of water inside conical diffuser";
+  Modelica.SIunits.Mass m_m "Mass of water inside Main section Moody spreading pipes";
+  Modelica.SIunits.Mass m_b "Mass of water inside Branch section Moody spreading pipes";
 
-  Modelica.SIunits.Pressure p_o1 "Outlet pressure at Branch-1 of Moody spreading pipe";
-  Modelica.SIunits.Pressure p_o2 "Outlet pressure at Branch-1 of Moody spreading pipe";
-
-  Modelica.SIunits.Volume V "Volume of water inside draft tube";
+  Modelica.SIunits.Volume V "Volume of water inside the draft tube";
   Modelica.SIunits.Momentum M "Momentum of water inside the draft tube";
   Modelica.SIunits.Force Mdot "Rate of change of water momentum";
   Modelica.SIunits.Force F "Total force acting in the tube";
   Modelica.SIunits.Force F_p "Pressure force";
   Modelica.SIunits.Force F_f "Fluid frictional force";
   Modelica.SIunits.Force F_g "Weight of water";
-  Modelica.SIunits.Area A_i = D_i ^ 2 * pi / 4 "Inlet cross section area of conical diffuser";
-  Modelica.SIunits.Area A_o = D_o ^ 2 * pi / 4 "Outlet cross section area of conical diffuser";
-  Modelica.SIunits.Area A_ = D_ ^ 2 * pi / 4 "Average cross section area of conical diffuser";
-  Modelica.SIunits.Area A = D ^ 2 * pi / 4 "Crossection area of Main section of Moody spreading pipe";
+  
   //Real cos_theta = H / L "slope ratio";
-  Modelica.SIunits.Velocity v "Water velocity";
+  Modelica.SIunits.Velocity v "Water velocity for conical diffuser";
+  Modelica.SIunits.Velocity v_m "Water velocity inside Main section of Moody spreading pipes";
+  Modelica.SIunits.Velocity v_b "Water velocity inside Branch section of Moody spreading pipes";
   Modelica.SIunits.Pressure p_i "Inlet pressure";
   Modelica.SIunits.Pressure p_o "Outlet pressure";
   //Modelica.SIunits.Pressure dp = p_o-p_i "Pressure drop in and out of draft tube";
+  Real phi_d "Generalized friction factor for draft tube";
+  Real phi_d_o "Initial generalized friction factor for Moody spreading pipes";
+  
   Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0, fixed = true) "Volumeteric flow rate";
+  Modelica.SIunits.VolumeFlowRate Vdot_b "Volumeteric flow rate for Branch section of Moody spreading pipes";
 
   Real cos_theta = Modelica.Math.cos(Modelica.SIunits.Conversions.from_deg(theta))
                                                                                   "Calculating cos_theta";
   Real cos_theta_moody = Modelica.Math.cos(Modelica.SIunits.Conversions.from_deg(theta_moody))
                                                                                               "Calculating cos_theta_moody";
+                                                                                  
+                                                                                  
+  Real cos_theta_moody_by_2 = Modelica.Math.cos(Modelica.SIunits.Conversions.from_deg(theta_moody/2))
+                                                                                              "Calculating cos_theta_moody_by_2";
 
  // connectors
   extends OpenHPL.Interfaces.ContactPort;
@@ -83,47 +89,61 @@ initial equation
 equation
   der(M) = Mdot + F "Momentum balance";
   if DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser then
-
     M = m*v;
     m = data.rho*V "Mass of water inside the draft tube";
-    V = 1/3*pi*H/4*(D_i^2+D_o^2+D_i*D_o) "Volume of water inside the draft tube";
-    v = Vdot/A_;
+    m_m=0;m_b=0; // Unimportant for conical diffuser
+    V = pi*H/12*(D_i^2+D_o^2+D_i*D_o) "Volume of water inside the draft tube";
+    v = Vdot/A_; 
+    Vdot_b = 0; // Unimportant for conical diffuser
+    v_m=0;v_b=0; // Unimportant for conical diffuser
 
     Mdot = mdot*v;
     mdot = data.rho*Vdot;
 
     F = F_p-F_g-F_f;
     F_p = p_i * A_i - p_o * A_o;
-    F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps);
+    F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)+1/2*data.rho*v*abs(v)*A_i*phi_d;
+    phi_d = 0.23*(1-D_i/D_o)^2;
+    phi_d_o=0; // Unimportant for conical diffuser
     F_g = m*data.g*cos_theta;
 
-    // connector
-    p_i = i.p; p_o1=0; p_o2=0;
-    p_o = o.p;
   elseif DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe then
     // Taking momentum balance only on y-direction
-    M = m*v;
-    m = data.rho*A*(L_m+1/4*cos_theta_moody*(L_b1+L_b2));
-    v = Vdot/A;  V = 0;//Volume is not useful for this type draft tube
-
-    Mdot = mdot*v;
+    M = m_m*v_m+2*m_b*v_b*cos_theta_moody_by_2; 
+    m_m=data.rho*A_i*L_m; m_b=data.rho*A_o*L_m;
+    v_m = Vdot/A_i; v_b=A_i/(2*A_o)*v_m; 
+    V = A_i*L_m+2*A_o*L_b;
+    
+    Mdot = mdot_m*v_m+2*mdot_b*cos_theta_moody_by_2;
+    mdot_m=data.rho*Vdot; mdot_b=data.rho*Vdot_b; Vdot_b=A_o*v_b;
     mdot = data.rho*Vdot;
-
-    F = F_p - F_f - F_g;
-    F_p = p_i*A - (p_o1-p_o2)*A/4*cos_theta_moody;
-    F_f = Functions.DarcyFriction.Friction(v, D, L_m, data.rho, data.mu, p_eps)+
-          Functions.DarcyFriction.Friction(v/2, D/2, L_b1, data.rho, data.mu, p_eps)*cos_theta_moody+
-          Functions.DarcyFriction.Friction(v/2, D/2, L_b2, data.rho, data.mu, p_eps)*cos_theta_moody;
-
-
-
-    F_g = data.rho*A*data.g*(L_m+1/4*cos_theta_moody*(L_b1+L_b2));
-    //F_g = data.rho*A*L_m*data.g+data.rho*A/4*L_b1*cos_theta_moody*data.g+data.rho*A/4*L_b2*cos_theta_moody*data.g;
-    // connector
-    p_i = i.p; p_o = 0;
-    p_o1 = p_o2;
-    p_o1  = o.p;//=p_o2
+    
+    F = F_p-F_g-F_f;
+    F_p = p_i*A_i-2*p_o*A_o*cos_theta_moody_by_2;
+    F_g = m_m*data.g+2*m_b*data.g*cos_theta_moody_by_2;
+    F_f = F_fm+2*F_fb*cos_theta_moody_by_2+data.rho*v_m*abs(v_m)*A_i*phi_d;
+    F_fm = Functions.DarcyFriction.Friction(v_m, D_i, L_m, data.rho, data.mu, p_eps);
+    F_fm = Functions.DarcyFriction.Friction(v_b, D_o, L_b, data.rho, data.mu, p_eps);
+    
+    // calculating phi_d
+    phi_d = 1+(v_b/v_m)^2-2*v_b/v_m*cos_theta_moody-phi_d_o*(v_b/v_m)^2;
+    // phi_d_o is calculated based on theta_moody
+    if theta_moody == 15 then 
+      phi_d_o = 0.04;
+    elseif theta_moody == 30 then 
+      phi_d_o = 0.16;
+    elseif theta_moody == 45 then 
+      phi_d_o = 0.36;
+    elseif theta_moody == 60 then 
+      phi_d_o = 0.64;
+    elseif theta_moody == 90 then 
+      phi_d_o = 1;
+    end if;
+    
   end if;
+  // connector
+    p_i = i.p; 
+    p_o = o.p;
   annotation (
     Documentation(info="<html>
 <p>Two of the draft tubes are modeled using <i>Momentum balance . </i>They are:</p>
