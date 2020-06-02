@@ -127,11 +127,8 @@ equation
     p_t = data.p_a;
   end if;
   mdot = data.rho * Vdot;
-  //M = m * v;
-//v = Vdot / A;
   Mdot = mdot * v;
   F = F_p - F_f - F_g;
-  //F_p = (p_b - p_t) * A;
   p_b = p_n "Linking bottom node pressure to connector";
   F_g = m * data.g * cos_theta;
  annotation (
