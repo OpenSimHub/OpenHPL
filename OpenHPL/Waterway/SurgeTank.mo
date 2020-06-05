@@ -73,57 +73,62 @@ equation
   der(M) = Mdot+F "Momentum balance";
 
   if SurgeTankType == OpenHPL.Types.SurgeTank.STSimple then
-    v = Vdot/A;
+    v = Vdot / A;
     m = data.rho * A * l;
+    M = m * v;
     p_t = data.p_a;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps)+A*phiSO*0.5 * data.rho * abs(v) * v;
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
     phiSO = 0;
-  elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion then
-    v = Vdot/A;
-    m = data.rho * A * l+m_a;
-    p_t = p_ac*((L-h_0/cos_theta)/(L-l))^data.gamma_air;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps)+A*phiSO*0.5 * data.rho * abs(v) * v;
+    F_p = (p_b - p_t) * A;
+  elseif SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion then
+    v = Vdot / A;
+    m = data.rho * A * l + m_a;
+    M = m * v;
+    p_t = p_ac * ((L - h_0 / cos_theta) / (L - l)) ^ data.gamma_air;
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
     phiSO = 0;
-  elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice then
-    v = Vdot/A;
+    F_p = (p_b - p_t) * A;
+  elseif SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice then
+    v = Vdot / A;
     m = data.rho * A * l;
+    M = m * v;
     p_t = data.p_a;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps)+ A*phiSO*0.5 * data.rho * abs(v) * v;
-    if v>=0 then
-      phiSO = Functions.Fitting.FittingPhi(v,D,D_so,L,90,data.rho,data.mu,data.p_eps,OpenHPL.Types.Fitting.SharpOrifice);
+    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
+    F_p = (p_b - p_t) * A;
+    if v >= 0 then
+      phiSO = Functions.Fitting.FittingPhi(v, D, D_so, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.SharpOrifice);
     else
-      phiSO = Functions.Fitting.FittingPhi(v,D_so,D,L,90,data.rho,data.mu,data.p_eps,OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v, D_so, D, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.SharpOrifice);
     end if;
-  elseif  SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve then
-    if l<=L_t then
-      v = Vdot/A_t;
-      m = data.rho*A_t*l;
-      F_f = Functions.DarcyFriction.Friction(v, D_t, l, data.rho, data.mu, p_eps)+ A_t*phiSO*0.5 * data.rho * abs(v) * v;
+  elseif SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve then
+    if l <= L_t then
+      v = Vdot / A_t;
+      m = data.rho * A_t * l;
+      M = m * v;
+      F_f = Functions.DarcyFriction.Friction(v, D_t, l, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(v) * v;
       phiSO = 0;
+      F_p = (p_b - p_t) * A;
     else
-      v = Vdot*(1/A_t+1/A)/2;
-      m = data.rho*(A_t*L_t+A*(l-L_t));
-      if v>0 then
-        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, data.rho, data.mu, p_eps)
-            +Functions.DarcyFriction.Friction(v, D, l-L_t, data.rho, data.mu, p_eps)+ A_t*phiSO*0.5 * data.rho * abs(v) * v;
-        phiSO = Functions.Fitting.FittingPhi(v,D_t,D,L,90,data.rho,data.mu,data.p_eps,OpenHPL.Types.Fitting.Square);
-      elseif v<0 then
-        F_f = Functions.DarcyFriction.Friction(v, D_t, L_t, data.rho, data.mu, p_eps)
-            +Functions.DarcyFriction.Friction(v, D, l-L_t, data.rho, data.mu, p_eps)+ A*phiSO*0.5 * data.rho * abs(v) * v;
-        phiSO = Functions.Fitting.FittingPhi(v,D,D_t,L,90,data.rho,data.mu,data.p_eps,OpenHPL.Types.Fitting.Square);
+      v = Vdot * (1 / A_t + 1 / A) / 2;
+      m = data.rho * (A_t * L_t + A * (l - L_t));
+      M = data.rho * (A_t * L_t*Vdot/A_t + A * (l - L_t)*Vdot/A);
+      if v > 0 then
+        F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D, l - L_t, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(Vdot/A_t) * Vdot/A_t;
+        phiSO = Functions.Fitting.FittingPhi(Vdot/A_t, D_t, D, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.Square);
+      elseif v < 0 then
+        F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D, l - L_t, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(Vdot/A) * Vdot/A;
+        phiSO = Functions.Fitting.FittingPhi(Vdot/A, D, D_t, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.Square);
       else
-        F_f=0;
+        F_f = 0;
         phiSO = 0;
       end if;
+      F_p = (p_b - (p_t+data.rho*data.g*(l-L_t))) * A_t+(p_t+data.rho*data.g*(l-L_t)-p_t)*A;
     end if;
     p_t = data.p_a;
   end if;
-  mdot = data.rho*Vdot;
-  M = m * v;
-  //v = Vdot / A;
-  Mdot = mdot*v;
-  F = F_p-F_f-F_g;
-  F_p = (p_b - p_t)*A;
+  mdot = data.rho * Vdot;
+  Mdot = mdot * v;
+  F = F_p - F_f - F_g;
   p_b = p_n "Linking bottom node pressure to connector";
   F_g = m * data.g * cos_theta;
  annotation (
