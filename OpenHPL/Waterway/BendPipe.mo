@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model BendPipe "Bend in pipes"
-  outer Data data "Using standard class with constants";
+  outer Data data "Using standard data set";
   extends OpenHPL.Icons.BendPipe;
   import Modelica.Constants.pi;
   /* conditions for different fitting type */
