@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
   outer OpenHPL.Data data "Using standard data set";
-  extends OpenHPL.Icons.Pipe(    vertical=true);
+  extends OpenHPL.Icons.Pipe;
   import Modelica.Constants.pi;
   //// geometrical parameters of the pipe
   parameter Modelica.SIunits.Height H = 420 "Height difference from the inlet to the outlet of the pipe" annotation (
