@@ -1,8 +1,7 @@
 within OpenHPL.Waterway;
 model Penstock "Model of the penstock with elastic walls and compressible water. Simple Staggered grid scheme"
-  extends Modelica.Icons.UnderConstruction;
   outer Data data "Using standard data set";
-  extends OpenHPL.Icons.Pipe(    vertical=true);
+  extends OpenHPL.Icons.Pipe(vertical=true);
   import Modelica.Constants.pi;
   // Penstock
   parameter Modelica.SIunits.Height H = 420 "Height over which water fall in the pipe, m" annotation (
@@ -37,7 +36,7 @@ equation
   // Pipe flow rate
   mdot_R = i.mdot;
   mdot_V = -o.mdot;
-  // pipe presurre
+  // pipe pressure
   p_i = i.p;
   p_o = o.p;
   // momentum balance for the first and last segment
