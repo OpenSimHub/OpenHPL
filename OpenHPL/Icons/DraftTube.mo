@@ -36,5 +36,10 @@ partial class DraftTube "Draft tube icon"
           extent={{-44,-73},{45,-87}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          fillColor={0,128,255})}));
+          fillColor={0,128,255}),
+                     Text(
+          lineColor={28,108,200},
+          extent={{-150,140},{150,100}},
+          textString="%name",
+          textStyle={TextStyle.Bold})}));
 end DraftTube;
