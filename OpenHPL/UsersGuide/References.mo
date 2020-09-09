@@ -65,6 +65,13 @@ model References "References"
         <a href=\"http://hdl.handle.net/11250/2608105\">http://hdl.handle.net/11250/2607645</a>.</p>
 </td>
 </tr>
+<tr>
+<td><p>[White2009]</p></td>
+<td><p>Frank M. White, &quot;Fluid mechanics&quot;,
+        Book, Mcgraw-Hill series in mechanical engineering, 2009, 
+        6th Edition, ISBN 978-0-07-352934-9.</p>
+</td>
+</tr>
 </table>
 </html>"));
 end References;
