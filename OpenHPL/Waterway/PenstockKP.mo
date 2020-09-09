@@ -136,7 +136,7 @@ cell are denoted by <code>j-1/2</code> and <code>j+1/2</code> respectively.
  At each cell interface, the right(+)/left(-) point values are reconstructed. 
 The letter <code>a</code>denotes the right and the left sided local speeds of propagation 
 at the left/right interface of the cell.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/kp.png\" style=\"width:50%\"></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/kp.svg\" style=\"width:50%\"></p>
 <p>In order to determine the fluxes at the cell interface <code>H</code> and the 
 source term <code>S</code>, the KP scheme is used, which is a second order scheme that is well balanced.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/equations/KPScheme.svg\"></p>
