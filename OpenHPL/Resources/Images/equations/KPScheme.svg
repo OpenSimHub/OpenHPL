@@ -10,9 +10,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="204.98813mm"
-   height="27.245928mm"
-   viewBox="0 0 61.496437 8.1737781"
+   width="445.39487"
+   height="67.870361"
+   viewBox="0 0 62.908865 8.978683"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
@@ -24,22 +24,24 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.8301597"
-     inkscape:cx="163.97769"
-     inkscape:cy="52.964245"
+     inkscape:zoom="0.94631876"
+     inkscape:cx="61.950169"
+     inkscape:cy="-88.385141"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1919"
-     inkscape:window-height="1021"
-     inkscape:window-x="1"
-     inkscape:window-y="152"
+     inkscape:window-width="1920"
+     inkscape:window-height="1173"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     scale-x="0.3" />
+     fit-margin-top="5"
+     fit-margin-left="5"
+     fit-margin-right="5"
+     fit-margin-bottom="5"
+     scale-x="0.5"
+     units="px"
+     viewbox-width="62.6" />
   <defs
      id="defs2" />
   <metadata
@@ -58,7 +60,7 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1"
-     transform="translate(-82.537137,-92.830092)">
+     transform="translate(-81.830922,-92.42764)">
     <g
        id="g1759"
        ns1:jacobian_sqrt="0.352778"
