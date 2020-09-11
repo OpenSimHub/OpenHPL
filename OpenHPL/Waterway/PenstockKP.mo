@@ -123,7 +123,7 @@ used for proper modelling of the penstock or other conduits.</p>
 <p>The model could include the elastic walls and compressible water 
 and use discretization method based on Kurganov-Petrova central upwind scheme (KP). 
 The geometry of the penstock is described due to figure:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/penstock.png\" style=\"width:50%\"></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/penstock.svg\" style=\"width:50%\"></p>
 <p>Conservation laws are usually solved by Finite-volume methods. 
 With the Finite volume method, we divide the grid into small control 
 volumes or control cells and then apply the conservation laws. 
