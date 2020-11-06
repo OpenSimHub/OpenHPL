@@ -80,9 +80,9 @@ model HPSimple_Francis_IPSLGenGov "Synergy with OpenIPSL library(generator + gov
     Placement(visible = true, transformation(origin = {58, -90}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
   OpenIPSL.Electrical.Branches.PwLine pwLine4(G = 0, R = 0.01, X = 0.1, B = 0.0005) annotation (
     Placement(visible = true, transformation(origin = {56, -40}, extent = {{-5.99999, -5.99998}, {5.99999, 6}}, rotation = 0)));
-  OpenIPSL.Electrical.Loads.PSAT.LOADPQ pwLoadPQ1(P_0=8000000, Q_0=6000000)               annotation (
+  OpenIPSL.Electrical.Loads.PSAT.PQ     pwLoadPQ1(P_0=8000000, Q_0=6000000)               annotation (
     Placement(visible = true, transformation(origin = {90, -52}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
-  OpenIPSL.Electrical.Loads.PSAT.LOADPQ_variation pwLoadPQ2(
+  OpenIPSL.Electrical.Loads.PSAT.PQvar            pwLoadPQ2(
     P_0=8000000,
     Q_0=6000000,
     dP1(displayUnit="MW") = 1000000,                                                                                                    t_end_1 = 1100, t_end_2 = 1e10, t_start_1 = 1000, t_start_2 = 1e10) annotation (
