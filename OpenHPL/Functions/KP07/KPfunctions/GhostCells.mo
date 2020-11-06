@@ -30,7 +30,7 @@ equation
   annotation (
     Documentation(info="<html>
 <p>The model for defining the ghost cells. It can be observed that for a given <code>j<sup>th</code></sup> cell, information from the neighbouring cells <i>j-1</i> and <i>j-2</i> (to the left) and <i>j+1</i> and<i> j+2</i> (to the right) are required for calculating the flux integrals.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/ghosts.png\"/></p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/ghosts.svg\"/></p>
 <p>Here is the equations that are used in this function:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_ghost.svg\"/></p>
 </html>"));

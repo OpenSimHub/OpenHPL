@@ -10,12 +10,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="57.623817mm"
-   height="46.276802mm"
-   viewBox="0 0 57.623817 46.276802"
+   width="372.98468"
+   height="301.50742"
+   viewBox="0 0 59.211318 47.864302"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="KP_pde.svg">
   <sodipodi:namedview
      id="base"
@@ -24,21 +24,23 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4.5605623"
-     inkscape:cx="6.0712758"
-     inkscape:cy="94.164873"
+     inkscape:zoom="4.8026224"
+     inkscape:cx="113.06207"
+     inkscape:cy="268.18999"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g2373"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1172"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
+     inkscape:window-width="1919"
+     inkscape:window-height="1021"
+     inkscape:window-x="1"
+     inkscape:window-y="152"
      inkscape:window-maximized="1"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-top="5"
+     fit-margin-left="5"
+     fit-margin-right="5"
+     fit-margin-bottom="5"
+     units="px"
+     scale-x="0.6" />
   <defs
      id="defs2" />
   <metadata
@@ -57,7 +59,7 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1"
-     transform="translate(-86.409757,-54.72707)">
+     transform="translate(-85.616007,-53.93332)">
     <g
        id="g2610"
        ns1:jacobian_sqrt="0.352778"

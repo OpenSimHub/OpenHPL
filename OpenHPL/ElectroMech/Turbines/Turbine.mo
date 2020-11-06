@@ -64,7 +64,7 @@ equation
   //i.T = o.T;
   ////
   annotation (
-    Documentation(info= "<html><p>
+    Documentation(info="<html><p>
 This is a simple model of the turbine that give possibilities for simplified
 modelling of the turbine unit. The model can use a constant efficiency or varying
 efficiency from a lookup-table.
@@ -89,7 +89,7 @@ there are inputs as the control signal for the valve opening and also output as 
 </p>
 
 <p align=\"center\">
-<img src=\"modelica://OpenHPL/Resources/Images/turbinepic.png\">
+<img src=\"modelica://OpenHPL/Resources/Images/turbinepic.svg\">
 </p><h5>References</h5><p>More info about the model can be found in:&nbsp;<a href=\"Resources/Report/Report.docx\">Resources/Report/Report.docx</a></p>
 </html>"),
     Icon(      coordinateSystem(initialScale = 0.1)));

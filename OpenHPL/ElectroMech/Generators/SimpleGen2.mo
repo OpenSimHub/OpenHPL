@@ -62,7 +62,7 @@ equation
 This model based on the angular momentum balance, which depends on the turbine shaft power,
  the friction loss in the aggregate rotation and the power taken up by the generator.</p>
 <p align=\"center\">
-<img src=\"modelica://OpenHPL/Resources/Images/simplegen.png\">
+<img src=\"modelica://OpenHPL/Resources/Images/simplegen.svg\">
 </p>
 </html>"));
 end SimpleGen2;
