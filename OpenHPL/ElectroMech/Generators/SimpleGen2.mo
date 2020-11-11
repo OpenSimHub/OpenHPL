@@ -12,7 +12,9 @@ model SimpleGen2 "Model of a simple generator with mechanical connectors"
     annotation (Dialog(group = "Mechanical"));
   parameter SI.AngularVelocity w_0 = data.f_0 * 4 * C.pi / p "Initial angular velocity" annotation (
     Dialog(group = "Initialization"));
-  parameter Boolean UseFrequencyOutput = false "If checked - get a connector for frequency output" annotation (
+  parameter Boolean enable_w = false "If checked, get a connector for angular velocity output" annotation (
+    choices(checkBox = true));
+  parameter Boolean enable_f = false "If checked, get a connector for frequency output" annotation (
     choices(checkBox = true));
 
   Modelica.Blocks.Interfaces.RealInput Pload(unit="W") "Electrical load power demand" annotation (Placement(
@@ -21,13 +23,12 @@ model SimpleGen2 "Model of a simple generator with mechanical connectors"
         origin={0,120}),
       iconTransformation(extent={{-20,-20},{20,20}},   rotation=270,
         origin={0,120})));
-  Modelica.Blocks.Interfaces.RealOutput f(unit="Hz") if UseFrequencyOutput "Output of generator frequency"
-                                                                                             annotation (
-    Placement(transformation(extent={{100,-50},{120,-30}}), iconTransformation(extent={{100,-50},{120,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput w "Angular velocity of the generator"         annotation (
-    Placement(visible = true, transformation(origin={110,40},    extent={{-10,-10},
-            {10,10}},                                                                             rotation=0),
-      iconTransformation(extent={{-10,-10},{10,10}}, origin={110,40})));
+  Modelica.Blocks.Interfaces.RealOutput f(unit="Hz") if enable_f "Output of generator frequency"
+    annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
+                iconTransformation(extent={{100,-50},{120,-30}})));
+  Modelica.Blocks.Interfaces.RealOutput w if enable_w "Angular velocity of the generator"
+    annotation (Placement(transformation(extent={{100,30},{120,50}},                                                                             rotation=0),
+      iconTransformation(extent={{100,30},{120,50}})));
   Modelica.Blocks.Math.Division loadPtoT annotation (Placement(transformation(extent={{-80,16},{-60,36}})));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
@@ -83,11 +84,12 @@ This model based on the angular momentum balance, which depends on the turbine s
 <img src=\"modelica://OpenHPL/Resources/Images/simplegen.svg\">
 </p>
 </html>"), Icon(graphics={Text(
-          extent={{80,50},{100,30}},
+          extent={{70,50},{90,30}},
           lineColor={0,0,0},
-          textString="w"), Text(
-          extent={{80,-30},{100,-50}},
+          textString="w",
+          visible=enable_w),
+          Text(extent={{70,-30},{90,-50}},
           lineColor={0,0,0},
           textString="f",
-          visible=UseFrequencyOutput)}));
+          visible=enable_f)}));
 end SimpleGen2;
