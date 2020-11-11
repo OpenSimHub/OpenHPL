@@ -19,7 +19,7 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
   parameter Modelica.SIunits.Diameter D_t = 1.7 "If Throttle value type: Diameter of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
-  parameter Modelica.SIunits.Diameter L_t = 5 "If Throttle Value type: Diameter of throat" annotation (
+  parameter Modelica.SIunits.Diameter L_t = 5 "If Throttle value type: Diameter of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
 
   // Condition for steady state
