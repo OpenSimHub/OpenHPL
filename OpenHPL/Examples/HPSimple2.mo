@@ -41,11 +41,13 @@ model HPSimple2 "Model of waterway of the HP system with simplified models for c
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  ElectroMech.Generators.SimpleGen2 simpleGen2 annotation (Placement(transformation(extent={{20,40},{40,60}})));
+  ElectroMech.Generators.SimpleGen2 simpleGen2(enable_w=false, enable_f=false)
+                                               annotation (Placement(transformation(extent={{20,40},{40,60}})));
   Modelica.Blocks.Math.Gain loadLevel(k=1) annotation (Placement(transformation(extent={{72,60},{52,80}})));
 equation
   connect(turbine2.o, discharge.i) annotation (Line(points={{40,10},{44,10},{44,0},{50,0}}, color={28,108,200}));
-  connect(control.y, turbine2.u_t) annotation (Line(points={{1,70},{22,70},{22,22}}, color={0,0,127}));
+  connect(control.y, turbine2.u_t) annotation (Line(points={{1,70},{14,70},{14,36},{22,36},{22,22}},
+                                                                                     color={0,0,127}));
   connect(penstock.o, turbine2.i) annotation (Line(points={{10,30},{14.95,30},{14.95,10},{20,10}}, color={28,108,200}));
   connect(reservoir.o, intake.i) annotation (
     Line(points={{-80,30},{-70,30}},                                              color = {28, 108, 200}));
@@ -54,9 +56,12 @@ equation
   connect(surgeTank.o, penstock.i) annotation (
     Line(points={{-20,30},{-10,30}},                                              color = {28, 108, 200}));
   connect(discharge.o, tail.o) annotation (Line(points={{70,0},{80,0}}, color={28,108,200}));
-  connect(turbine2.flange, simpleGen2.flange) annotation (Line(points={{30,19.8},{30,40.2}}, color={0,0,0}));
   connect(turbine2.P_out, loadLevel.u) annotation (Line(points={{34,21},{34,30},{80,30},{80,70},{74,70}}, color={0,0,127}));
   connect(loadLevel.y, simpleGen2.Pload) annotation (Line(points={{51,70},{30,70},{30,62}}, color={0,0,127}));
+  connect(simpleGen2.flange, turbine2.flange) annotation (Line(
+      points={{29.8,47},{29.8,13},{30,13}},
+      color={0,0,0},
+      smooth=Smooth.Bezier));
   annotation (
     experiment(StopTime=600, Interval=0.4));
 end HPSimple2;

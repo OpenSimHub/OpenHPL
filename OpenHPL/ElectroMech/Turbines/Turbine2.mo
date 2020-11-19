@@ -64,7 +64,7 @@ model Turbine2 "Simple turbine model with mechanical connectors"
         rotation=90,
         origin={-60,-70})));
   Modelica.Blocks.Sources.RealExpression turbinePower(y=Wdot_s) annotation (Placement(transformation(extent={{-90,-34},{-70,-14}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_b flange "Flange of turbine shaft" annotation (Placement(transformation(extent={{-10,90},{10,110}}), iconTransformation(extent={{-10,88},{10,108}})));
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b flange "Flange of turbine shaft" annotation (Placement(transformation(extent={{-10,90},{10,110}}), iconTransformation(extent={{-10,20},{10,40}})));
 equation
   Vdot = if WaterCompress then mdot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else mdot / data.rho
     "Checking for water compressibility";
@@ -92,14 +92,19 @@ equation
                                                                                              color={0,0,127}));
   connect(limiter.y, turbinePtoT.u2) annotation (Line(points={{-60,-63.4},{-60,-36},{-52,-36}},
                                                                                              color={0,0,127}));
-  connect(turbinePower.y, turbinePtoT.u1) annotation (Line(points={{-69,-24},{-52,-24}},
-                                                                                       color={0,0,127}));
   connect(turbineIntertia.flange_a, turbineTorque.flange) annotation (Line(points={{-4.44089e-16,-10},{0,-10},{0,-30}},
                                                                                                    color={0,0,0}));
   connect(speedSensor.flange, turbineTorque.flange) annotation (Line(points={{-18,-80},{0,-80},{0,-30}}, color={0,0,0}));
   connect(turbineIntertia.flange_b, flange) annotation (Line(points={{0,10},{0,10},{0,100}}, color={0,0,0}));
-  connect(P_out, turbinePower.y) annotation (Line(points={{40,110},{40,80},{-60,80},{-60,-24},{-69,-24}}, color={0,0,127}));
+  connect(P_out, turbinePower.y) annotation (Line(points={{40,110},{40,80},{-60,80},{-60,-24},{-69,-24}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(friction.flange, flange) annotation (Line(points={{10,20},{0,20},{0,100}}, color={0,0,0}));
+  connect(turbinePower.y, turbinePtoT.u1) annotation (Line(points={{-69,-24},{-52,-24}},
+                                                                                       color={0,0,127}));
+  connect(P_out, P_out) annotation (Line(
+      points={{40,110},{40,105},{40,105},{40,110}},
+      color={0,0,127},
+      smooth=Smooth.Bezier));
   annotation (
     Documentation(info="<html><p>
 This is a simple model of the turbine that give possibilities for simplified
@@ -128,5 +133,16 @@ there are inputs as the control signal for the valve opening and also output as 
 <p align=\"center\">
 <img src=\"modelica://OpenHPL/Resources/Images/turbinepic.svg\">
 </p><h5>References</h5><p>More info about the model can be found in:&nbsp;<a href=\"Resources/Report/Report.docx\">Resources/Report/Report.docx</a></p>
-</html>"));
+</html>"), Icon(graphics={Text(
+          visible=enableP_out,
+          extent={{30,100},{50,80}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="P"), Text(
+          extent={{-96,100},{-60,80}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="GVO")}));
 end Turbine2;
