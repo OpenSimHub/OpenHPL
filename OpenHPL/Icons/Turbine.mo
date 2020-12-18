@@ -3,17 +3,17 @@ partial class Turbine "Turbine icon"
   annotation (
     Icon(graphics={
         Text(lineColor={28,108,200},
-          extent={{-100,-60},{100,-100}},
+          extent={{-100,-100},{100,-140}},
           textString="%name",
           textStyle={TextStyle.Bold}),
         Ellipse(
-          extent={{-40,72},{40,-8}},
+          extent={{-40,40},{40,-40}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.None),
         Ellipse(
-          extent={{-20,92},{20,52}},
+          extent={{-20,60},{20,20}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
@@ -22,7 +22,7 @@ partial class Turbine "Turbine icon"
           endAngle=270,
           pattern=LinePattern.None),
         Ellipse(
-          extent={{-20,12},{20,-28}},
+          extent={{-20,-20},{20,-60}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
@@ -31,7 +31,7 @@ partial class Turbine "Turbine icon"
           endAngle=90,
           pattern=LinePattern.None),
         Ellipse(
-          extent={{20,52},{60,12}},
+          extent={{20,20},{60,-20}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
@@ -40,7 +40,7 @@ partial class Turbine "Turbine icon"
           endAngle=360,
           pattern=LinePattern.None),
         Ellipse(
-          extent={{-60,52},{-20,12}},
+          extent={{-60,20},{-20,-20}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
@@ -49,7 +49,7 @@ partial class Turbine "Turbine icon"
           endAngle=180,
           pattern=LinePattern.None),
         Ellipse(
-          extent={{8,80},{48,40}},
+          extent={{8,48},{48,8}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
@@ -58,7 +58,7 @@ partial class Turbine "Turbine icon"
           endAngle=315,
           pattern=LinePattern.None),
         Ellipse(
-          extent={{8,24},{48,-16}},
+          extent={{8,-8},{48,-48}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
@@ -67,7 +67,7 @@ partial class Turbine "Turbine icon"
           endAngle=45,
           pattern=LinePattern.None),
         Ellipse(
-          extent={{-48,80},{-8,40}},
+          extent={{-48,48},{-8,8}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
@@ -76,7 +76,7 @@ partial class Turbine "Turbine icon"
           endAngle=225,
           pattern=LinePattern.None),
         Ellipse(
-          extent={{-48,24},{-8,-16}},
+          extent={{-48,-8},{-8,-48}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
@@ -85,12 +85,16 @@ partial class Turbine "Turbine icon"
           endAngle=135,
           pattern=LinePattern.None),
         Line(
-          points={{-50,-40},{-40,-30},{-20,-50},{0,-30},{20,-50},{40,-28},{52,-40}},
+          points={{-50,-72},{-40,-62},{-20,-82},{0,-62},{20,-82},{40,-60},{52,-72}},
           color={0,128,255},
           smooth=Smooth.Bezier),
         Line(
-          points={{-50,-50},{-40,-40},{-20,-60},{0,-40},{20,-60},{40,-38},{52,-50}},
+          points={{-50,-82},{-40,-72},{-20,-92},{0,-72},{20,-92},{40,-70},{52,-82}},
           color={0,128,255},
           smooth=Smooth.Bezier),
-        Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0})}));
+        Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
+        Text(
+          extent={{-80,90},{80,68}},
+          lineColor={0,0,0},
+          textString="Turbine")}));
 end Turbine;

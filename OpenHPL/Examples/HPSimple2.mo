@@ -31,7 +31,7 @@ model HPSimple2 "Model of waterway of the HP system with simplified models for c
         extent={{-10,-10},{10,10}},
         rotation=0)));
   ElectroMech.Turbines.Turbine2 turbine2(
-    enableP_out=true,
+    enable_P_out=true,
     C_v=3.7,
     ConstEfficiency=true) annotation (Placement(visible=true, transformation(
         origin={30,10},
@@ -41,8 +41,7 @@ model HPSimple2 "Model of waterway of the HP system with simplified models for c
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  ElectroMech.Generators.SimpleGen2 simpleGen2(enable_w=false, enable_f=false)
-                                               annotation (Placement(transformation(extent={{20,40},{40,60}})));
+  ElectroMech.Generators.SimpleGen2 simpleGen2 annotation (Placement(transformation(extent={{20,40},{40,60}})));
   Modelica.Blocks.Math.Gain loadLevel(k=1) annotation (Placement(transformation(extent={{72,60},{52,80}})));
 equation
   connect(turbine2.o, discharge.i) annotation (Line(points={{40,10},{44,10},{44,0},{50,0}}, color={28,108,200}));
@@ -56,10 +55,10 @@ equation
   connect(surgeTank.o, penstock.i) annotation (
     Line(points={{-20,30},{-10,30}},                                              color = {28, 108, 200}));
   connect(discharge.o, tail.o) annotation (Line(points={{70,0},{80,0}}, color={28,108,200}));
-  connect(turbine2.P_out, loadLevel.u) annotation (Line(points={{34,21},{34,30},{80,30},{80,70},{74,70}}, color={0,0,127}));
-  connect(loadLevel.y, simpleGen2.Pload) annotation (Line(points={{51,70},{30,70},{30,62}}, color={0,0,127}));
+  connect(turbine2.P_out, loadLevel.u) annotation (Line(points={{34,21},{34,30},{86,30},{86,70},{74,70}}, color={0,0,127}));
+  connect(loadLevel.y, simpleGen2.P_load) annotation (Line(points={{51,70},{30,70},{30,62}}, color={0,0,127}));
   connect(simpleGen2.flange, turbine2.flange) annotation (Line(
-      points={{29.8,47},{29.8,13},{30,13}},
+      points={{30,50},{30,10},{30,10}},
       color={0,0,0},
       smooth=Smooth.Bezier));
   annotation (

@@ -1,33 +1,34 @@
 within OpenHPL.Icons;
 partial class Generator "Generator icon"
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio = false), graphics={
-        Text(lineColor={28,108,200},
-          extent={{-90,90},{90,30}},
+    Icon(graphics={
+        Text(
+          lineColor={28,108,200},
+          extent={{-100,-110},{100,-150}},
           textString="%name",
           textStyle={TextStyle.Bold}),
-        Polygon(
-          points={{6,-38},{-14,-62},{1.375,-62},{-14,-80},{14,-56},{0,-56},{20,-38},{6,-38}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{-60,30},{60,-90}},
+          extent={{-80,80},{80,-80}},
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
-        Line(
-          points={{-20,-62},{-8,-50},{10,-72},{20,-62}},
-          color={238,46,47},
-          smooth=Smooth.Bezier),
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
           pattern=LinePattern.None),
         Text(
-          extent={{-30,22},{30,-18}},
+          extent={{-40,70},{40,10}},
           lineColor={0,0,0},
           textString="G"),
-        Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0})}),
+        Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
+        Line(
+          points={{-40,-40},{-20,-20},{20,-60},{40,-40}},
+          color={238,46,47},
+          smooth=Smooth.Bezier),
+        Polygon(
+          points={{6,-20},{-14,-44},{1.375,-44},{-14,-62},{14,-38},{0,-38},{20,-20},{6,-20}},
+          lineColor={0,0,0},
+          fillColor={238,46,47},
+          fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(preserveAspectRatio = false)));
 end Generator;
