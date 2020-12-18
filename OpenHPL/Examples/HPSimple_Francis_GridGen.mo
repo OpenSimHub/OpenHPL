@@ -1,7 +1,7 @@
 within OpenHPL.Examples;
 model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
-  extends OpenIPSL.Examples.BaseTest(pwLine2(displayPF=true), pwLine1(displayPF=true));
   extends Modelica.Icons.Example;
+  extends OpenIPSL.Examples.BaseClasses.MachineTestBase(pwLine2(displayPF=true), pwLine1(displayPF=true));
   OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
         origin={-80,-50},
         extent={{-10,-10},{10,10}},
