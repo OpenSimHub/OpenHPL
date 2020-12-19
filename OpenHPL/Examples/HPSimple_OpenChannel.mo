@@ -7,7 +7,7 @@ model HPSimple_OpenChannel "Example with the open channel"
         rotation=0)));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493,
     startTime=600)                                                                                        annotation (
-    Placement(visible = true, transformation(origin={-80,-30},  extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin={-90,-30},  extent={{-10,-10},{10,10}},      rotation = 0)));
   Waterway.Pipe discharge(     L=600, H=-5)
                                       annotation (Placement(visible=true, transformation(extent={{-40,-10},{-20,10}},
                                                                                                                    rotation=0)));
@@ -45,8 +45,6 @@ model HPSimple_OpenChannel "Example with the open channel"
   Waterway.Pipe pipe1(H=0, L=10)
                                 annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 equation
-  connect(control.y, turbine.u_t) annotation (
-    Line(points={{-69,-30},{-60,-30},{-60,-12}},    color = {0, 0, 127}));
   connect(reservoir.o, pipe.i) annotation (Line(points={{-80,50},{-70,50}}, color={28,108,200}));
   connect(pipe.o, surgeTank.i) annotation (Line(points={{-50,50},{-40,50}}, color={28,108,200}));
   connect(surgeTank.o, penstock.o) annotation (Line(points={{-20,50},{-16,50},{-16,40},{-10,40}}, color={28,108,200}));
@@ -55,6 +53,7 @@ equation
   connect(turbine.o, discharge.i) annotation (Line(points={{-50,0},{-40,0}}, color={28,108,200}));
   connect(pipe1.o, tail.o) annotation (Line(points={{60,0},{70,0},{70,7.21645e-16},{80,7.21645e-16}}, color={28,108,200}));
   connect(penstock.i, turbine.i) annotation (Line(points={{10,40},{18,40},{18,20},{-80,20},{-80,0},{-70,0}}, color={28,108,200}));
+  connect(control.y, turbine.u_t) annotation (Line(points={{-79,-30},{-68,-30},{-68,-12}}, color={0,0,127}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end HPSimple_OpenChannel;
