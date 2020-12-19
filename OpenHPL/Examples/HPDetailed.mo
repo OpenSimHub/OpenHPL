@@ -17,7 +17,7 @@ model HPDetailed "Model of waterway of the HP system with detailed model for the
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Turbines.Turbine2 turbine(
+  ElectroMech.Turbines.Turbine turbine(
     C_v=3.7,
     ConstEfficiency=false,
     WaterCompress=true) annotation (Placement(visible=true, transformation(extent={{20,-10},{40,10}}, rotation=0)));

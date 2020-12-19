@@ -1,68 +1,70 @@
 within OpenHPL.ElectroMech.Turbines;
-model Turbine "Simple turbine model"
-  outer Data data "Using standard class with constants";
+model Turbine "Simple turbine model with mechanical connectors"
+  outer Data data "Using standard class with global parameters";
   extends Icons.Turbine;
-  import Modelica.Constants.pi;
-  //// parameters of the turbine
-  parameter Boolean ValveCapacity =  true "If checked the guide vane capacity C_v should be specified, otherwise specify the nominal turbine parameters (net head and flow rate)" annotation (
-    Dialog(group = "Turbine nominal parameters"), choices(checkBox = true));
-  parameter Real C_v = 3.7 "Guide vane 'valve capacity'" annotation (
-    Dialog(group = "Turbine nominal parameters", enable = ValveCapacity));
-  parameter Modelica.SIunits.Height H_n = 460 "Turbine nominal net head" annotation (
-    Dialog(group = "Turbine nominal parameters", enable = not ValveCapacity));
-  parameter Modelica.SIunits.VolumeFlowRate Vdot_n = 23.4 "Turbine nominal flow rate" annotation (
-    Dialog(group = "Turbine nominal parameters", enable = not ValveCapacity));
-  parameter Real u_n = 0.95 "Turbine guide vane nominal opening, pu" annotation (
-    Dialog(group = "Turbine nominal parameters", enable = not ValveCapacity));
-  //// condition for efficiency
-  parameter Boolean ConstEfficiency = true "If checked the constant efficiency theta_h is used,
+
+  parameter Boolean ValveCapacity =  true "If checked the guide vane capacity C_v should be specified, 
+    otherwise specify the nominal turbine parameters (net head and flow rate)"
+    annotation (Dialog(group = "Nominal turbine parameters"), choices(checkBox = true));
+  parameter Real C_v = 3.7 "Guide vane 'valve capacity'"
+    annotation (Dialog(group = "Nominal turbine parameters", enable = ValveCapacity));
+  parameter SI.Height H_n = 460 "Nominal net head"
+    annotation (Dialog(group = "Nominal turbine parameters", enable = not ValveCapacity));
+  parameter SI.VolumeFlowRate Vdot_n = 23.4 "Nominal flow rate"
+    annotation (Dialog(group = "Nominal turbine parameters", enable = not ValveCapacity));
+  parameter SI.PerUnit u_n = 0.95 "Nominal guide vane opening"
+    annotation (Dialog(group = "Nominal turbine parameters", enable = not ValveCapacity));
+  parameter Boolean ConstEfficiency = true "If checked the constant efficiency eta_h is used,
     otherwise specify lookup table for efficiency"
-    annotation (
-    Dialog(group = "Efficiency data"),
-    choices(checkBox = true));
-  //// turbine efficiency, either constant theta_h or varying with flow (control signal) from lookup-table.
-  parameter Modelica.SIunits.Efficiency theta_h = 0.9 "Turbine hydraulic efficiency" annotation (
-    Dialog(group = "Efficiency data", enable = ConstEfficiency));
-  parameter Real lookup_table[:, :] = [0, 0.4; 0.2, 0.7; 0.5, 0.9; 0.95, 0.95; 1.0, 0.93] "Look-up table for the turbine efficiency, described by a table matrix, where the first column is a pu value of the guide vane opening, and the second column is a pu value of the turbine efficiency" annotation (
-    Dialog(group = "Efficiency data", enable = not ConstEfficiency));
-  //// condition for inlet water compressibility
-  parameter Boolean WaterCompress = false "If checked the water is compressible in the penstock" annotation (
-    choices(checkBox = true));
-  //// variables
-  Modelica.SIunits.Pressure p_i_tr "Inlet pressure", dp "Turbine pressure drop", p_o_tr "Outlet pressure";
-  //Modelica.SIunits.Area A_d = D_o ^ 2 * pi / 4, A_p = D_i ^ 2 * pi / 4;
-  Modelica.SIunits.EnergyFlowRate Kdot_i_tr "Kinetic energy flow";
-  Modelica.SIunits.VolumeFlowRate Vdot "Flow rate";
+    annotation (Dialog(group = "Efficiency data"), choices(checkBox = true));
+  parameter SI.Efficiency eta_h = 0.9 "Turbine hydraulic efficiency"
+    annotation (Dialog(group = "Efficiency data", enable = ConstEfficiency));
+  parameter Real lookup_table[:, :] = [0, 0.4; 0.2, 0.7; 0.5, 0.9; 0.95, 0.95; 1.0, 0.93]
+    "Look-up table for the turbine efficiency, described by a table matrix, 
+     where the first column is a pu value of the guide vane opening,
+     and the second column is a pu value of the turbine efficiency."
+    annotation (Dialog(group = "Efficiency data", enable = not ConstEfficiency));
+  parameter Boolean WaterCompress = false "If checked the water is compressible in the penstock"
+    annotation (Dialog(tab = "Advanced"),  choices(checkBox = true));
+
+  extends BaseClasses.ConvertToRotational;
+  extends OpenHPL.Interfaces.TurbineContacts2;
+
+  SI.Pressure dp "Turbine pressure drop";
+  SI.EnergyFlowRate Kdot_i_tr "Kinetic energy flow";
+  SI.VolumeFlowRate Vdot "Flow rate";
   Real C_v_ "Guide vane 'valve capacity'";
-  output Modelica.SIunits.EnergyFlowRate Wdot_s "Shaft power";
-  //// connectors
-  extends OpenHPL.Interfaces.TurbineContacts;
+
+  output SI.EnergyFlowRate Wdot_s "Shaft power";
   Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table);
 equation
-  //// checking water compressibility
-  Vdot = if WaterCompress then mdot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else mdot / data.rho;
-  //// define turbine efficiency
-  look_up_table.u[1] = u_t;
-  //// define guide vane 'valve capacity' base on the turbine nominal parameters
-  C_v_ = if ValveCapacity then C_v else Vdot_n/sqrt(H_n*data.g*data.rho/data.p_a)/u_n;
-  //// turbine valve equation for pressure drop
-  dp = Vdot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2;
-  dp = p_i_tr - p_o_tr;
-  //// turbine energy balance
-  Kdot_i_tr = dp * Vdot;
+  Vdot = if WaterCompress then mdot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else mdot / data.rho
+    "Checking for water compressibility";
+  look_up_table.u[1] = u_t "Link the guide vane opening";
+  C_v_ = if ValveCapacity then C_v else Vdot_n/sqrt(H_n*data.g*data.rho/data.p_a)/u_n
+    "Define guide vane 'valve capacity' base on the Nominal turbine parameters";
+  dp = Vdot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2 "turbine valve equation for pressure drop";
+  dp = i.p - o.p "Link the pressure drop to the ports";
+  Kdot_i_tr = dp * Vdot "Turbine energy balance";
   if ConstEfficiency == true then
-    Wdot_s = theta_h * Kdot_i_tr;
+    Wdot_s = eta_h * Kdot_i_tr;
   else
     Wdot_s = look_up_table.y[1] * Kdot_i_tr;
   end if;
-  //// turbine pressures
-  p_i_tr = i.p;
-  p_o_tr = o.p;
-  //// output mechanical power
-  P_out = Wdot_s;
-  //// for temperature variation, not finished...
-  //i.T = o.T;
-  ////
+
+  //P_out = Wdot_s "Link the output power";
+
+  /* // for temperature variation, not finished...
+  i.T = o.T; */
+
+  connect(P_out, power.y) annotation (Line(
+      points={{40,110},{40,80},{-90,80},{-90,30},{-81,30}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(P_out, P_out) annotation (Line(
+      points={{40,110},{40,105},{40,105},{40,110}},
+      color={0,0,127},
+      smooth=Smooth.Bezier));
   annotation (
     Documentation(info="<html><p>
 This is a simple model of the turbine that give possibilities for simplified
@@ -74,7 +76,7 @@ This model does not include any information about rotational speed of the runner
 This model is baseed on the energy balance and a simple valve-like expression.
 The guide vane 'valve capacity' should be used for this valve-like expression and can either be specified
 directly by the user by specifying <code>C_v</code> or it will be calculated from
-the turbine nominal net head <code>H_n</code> and nominal flow rate
+the Nominal turbinenet head <code>H_n</code> and nominal flow rate
 <code>Vdot_n</code>.
 </p>
 <p>
@@ -91,6 +93,16 @@ there are inputs as the control signal for the valve opening and also output as 
 <p align=\"center\">
 <img src=\"modelica://OpenHPL/Resources/Images/turbinepic.svg\">
 </p><h5>References</h5><p>More info about the model can be found in:&nbsp;<a href=\"Resources/Report/Report.docx\">Resources/Report/Report.docx</a></p>
-</html>"),
-    Icon(      coordinateSystem(initialScale = 0.1)));
+</html>"), Icon(graphics={Text(
+          visible=enable_P_out,
+          extent={{30,100},{50,80}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="P"), Text(
+          extent={{-96,100},{-60,80}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="GVO")}));
 end Turbine;

@@ -24,7 +24,7 @@ model HPSimple_OpenChannel "Example with the open channel"
         origin={0,40},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  ElectroMech.Turbines.Turbine2 turbine(C_v=3.7) annotation (Placement(visible=true, transformation(
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(visible=true, transformation(
         origin={-60,0},
         extent={{-10,10},{10,-10}},
         rotation=0)));

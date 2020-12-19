@@ -17,7 +17,7 @@ model HPDetailed_generator "Model of waterway and aggregate of the HP system wit
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Turbines.Turbine2 turbine(C_v=3.7, WaterCompress=true) annotation (Placement(visible=true, transformation(extent={{20,-10},{40,10}}, rotation=0)));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(visible=true, transformation(extent={{20,-10},{40,10}}, rotation=0)));
   Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(extent={{-40,0},{-20,20}},  rotation=0)));
   Waterway.PenstockKP penstockKP(
     D_i=3,
@@ -28,9 +28,7 @@ model HPDetailed_generator "Model of waterway and aggregate of the HP system wit
     vertical=true) annotation (Placement(transformation(extent={{-10,0},{10,20}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -4.9e6, offset = 80.3e6, startTime = 600) annotation (
     Placement(visible = true, transformation(extent={{60,60},{40,80}},      rotation = 0)));
-  ElectroMech.Generators.SimpleGen2 generator
-                                             annotation (Placement(visible=true, transformation(extent={{20,30},{40,50}},
-                                                                                                                        rotation=0)));
+  ElectroMech.Generators.SimpleGen generator annotation (Placement(visible=true, transformation(extent={{20,30},{40,50}}, rotation=0)));
 equation
   connect(turbine.i, penstockKP.o) annotation (Line(points={{20,0},{14,0},{14,10},{10,10}}, color={28,108,200}));
   connect(turbine.o, discharge.i) annotation (Line(points={{40,0},{50,0}}, color={28,108,200}));

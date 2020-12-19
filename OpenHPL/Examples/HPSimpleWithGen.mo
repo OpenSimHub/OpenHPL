@@ -1,5 +1,5 @@
 within OpenHPL.Examples;
-model HPSimple2 "Model of waterway of the HP system with simplified models for conduits, turbine, etc."
+model HPSimpleWithGen "Model of waterway of the HP system with simplified models for conduits, turbine, etc."
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
         origin={-90,30},
@@ -30,7 +30,7 @@ model HPSimple2 "Model of waterway of the HP system with simplified models for c
         origin={-30,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  ElectroMech.Turbines.Turbine2 turbine2(
+  ElectroMech.Turbines.Turbine turbine2(
     enable_P_out=true,
     C_v=3.7,
     ConstEfficiency=true) annotation (Placement(visible=true, transformation(
@@ -41,7 +41,7 @@ model HPSimple2 "Model of waterway of the HP system with simplified models for c
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  ElectroMech.Generators.SimpleGen2 simpleGen2 annotation (Placement(transformation(extent={{20,40},{40,60}})));
+  ElectroMech.Generators.SimpleGen simpleGen2 annotation (Placement(transformation(extent={{20,40},{40,60}})));
   Modelica.Blocks.Math.Gain loadLevel(k=1) annotation (Placement(transformation(extent={{72,60},{52,80}})));
 equation
   connect(turbine2.o, discharge.i) annotation (Line(points={{40,10},{44,10},{44,0},{50,0}}, color={28,108,200}));
@@ -63,4 +63,4 @@ equation
       smooth=Smooth.Bezier));
   annotation (
     experiment(StopTime=600, Interval=0.4));
-end HPSimple2;
+end HPSimpleWithGen;
