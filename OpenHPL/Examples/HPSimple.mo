@@ -26,7 +26,7 @@ model HPSimple "Model of waterway of the HP system with simplified models for co
         origin={-30,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(visible=true, transformation(
+  ElectroMech.Turbines.Turbine2 turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(visible=true, transformation(
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -35,12 +35,9 @@ model HPSimple "Model of waterway of the HP system with simplified models for co
         extent={{-10,-10},{10,10}},
         rotation=0)));
 equation
-  connect(turbine.o, discharge.i) annotation (
-    Line(points={{40,10},{44,10},{44,0},{50,0}},            color = {28, 108, 200}));
-  connect(control.y, turbine.u_t) annotation (
-    Line(points={{1,70},{30,70},{30,22}},         color = {0, 0, 127}));
-  connect(penstock.o, turbine.i) annotation (
-    Line(points={{10,30},{14.95,30},{14.95,10},{20,10}},                         color = {28, 108, 200}));
+  connect(turbine.o, discharge.i) annotation (Line(points={{40,10},{44,10},{44,0},{50,0}}, color={28,108,200}));
+  connect(control.y, turbine.u_t) annotation (Line(points={{1,70},{22,70},{22,22}}, color={0,0,127}));
+  connect(penstock.o, turbine.i) annotation (Line(points={{10,30},{14.95,30},{14.95,10},{20,10}}, color={28,108,200}));
   connect(reservoir.o, intake.i) annotation (
     Line(points={{-80,30},{-70,30}},                                              color = {28, 108, 200}));
   connect(intake.o, surgeTank.i) annotation (
