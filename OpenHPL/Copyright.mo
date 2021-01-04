@@ -1,7 +1,7 @@
 within OpenHPL;
 class Copyright "Disclaimer<html>
 <h5>OpenHPL:</h5>
-<p>Copyright &copy; 2020</p>
+<p>Copyright &copy; 2019-2021</p>
 <ul>
 <li>TMCC research group at <a href=\"https://www.usn.no/english/\">USN</a> (Norway)</li>
 </ul>
