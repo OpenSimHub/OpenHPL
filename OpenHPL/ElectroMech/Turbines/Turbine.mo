@@ -27,7 +27,7 @@ model Turbine "Simple turbine model with mechanical connectors"
   parameter Boolean WaterCompress = false "If checked the water is compressible in the penstock"
     annotation (Dialog(tab = "Advanced"),  choices(checkBox = true));
 
-  extends BaseClasses.ConvertToRotational;
+  extends BaseClasses.ConvertToRotational(power(y=Wdot_s));
   extends OpenHPL.Interfaces.TurbineContacts2;
 
   SI.Pressure dp "Turbine pressure drop";
@@ -51,8 +51,6 @@ equation
   else
     Wdot_s = look_up_table.y[1] * Kdot_i_tr;
   end if;
-
-  //P_out = Wdot_s "Link the output power";
 
   /* // for temperature variation, not finished...
   i.T = o.T; */
