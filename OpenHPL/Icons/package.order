@@ -5,7 +5,9 @@ Pipe
 BendPipe
 Surge
 Fitting
-DraftTube
+Drafttube
+Cone
+Elbow
 OpenChannel
 ElectroMech
 Turbine
