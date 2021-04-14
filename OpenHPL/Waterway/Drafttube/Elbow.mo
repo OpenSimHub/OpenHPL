@@ -86,20 +86,9 @@ equation
   p_i = i.p;
   p_o = o.p;
   annotation (
-    Documentation(info= "<html><p>The simple model of the pipe gives possibilities
-    for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
-    <p>This model is described by the momentum differential equation, which depends
-    on pressure drop through the pipe together with friction and gravity forces.
-    The main defined variable is volumetric flow rate <i>Vdot</i>.</p>
-    <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"> </p>
-    <p>In this pipe model, the flow rate changes simultaniusly in the whole pipe
-    (an information about the speed of wave propagation is not included here).
-    Water pressures can be shown just in the boundaries of pipe
-    (inlet and outlet pressure from connectors).&nbsp;</p>
-    <p>It should be noted that this pipe model provides possibilities for modelling
-    of pipes with both a positive and a negative slopes (positive or negative height diference).</p>
-    <p>More info about the pipe model can be found in 
-        <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
-    and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
+    Documentation(info="<html>
+<p>This is model of an elbow used in a drafttube of a hydro power system. </p>
+<p>The model is based on DAEs obtained from the momentum balance through the center of mass of the fluid inside the elbow.</p>
+<p><img src=\"modelica://OpenHPL/Resources/Images/elbowForDoc.svg\"/></p>
 </html>"));
 end Elbow;

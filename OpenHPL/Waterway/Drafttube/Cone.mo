@@ -77,26 +77,16 @@ equation
   end if;
   p1_delta = 0.014*delta^2 - 0.213*delta + 1.105;
   p2_delta = 1.1e-16*delta^8 + 1.05e-13*delta^7 + 4.21e-11*delta^6+9.13e-9*delta^5 + 1.16e-6*delta^4 + 8.90e-5*delta^3+4.14e-3*delta^2 + 0.12*delta - 0.46;
-  
+
 
   // link with the pressure connector
   p_i = i.p;
   p_o = o.p;
   annotation (
-    Documentation(info= "<html><p>The simple model of the pipe gives possibilities
-    for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
-    <p>This model is described by the momentum differential equation, which depends
-    on pressure drop through the pipe together with friction and gravity forces.
-    The main defined variable is volumetric flow rate <i>Vdot</i>.</p>
-    <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"> </p>
-    <p>In this pipe model, the flow rate changes simultaniusly in the whole pipe
-    (an information about the speed of wave propagation is not included here).
-    Water pressures can be shown just in the boundaries of pipe
-    (inlet and outlet pressure from connectors).&nbsp;</p>
-    <p>It should be noted that this pipe model provides possibilities for modelling
-    of pipes with both a positive and a negative slopes (positive or negative height diference).</p>
-    <p>More info about the pipe model can be found in 
-        <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
-    and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
+    Documentation(info="<html>
+<p>This is model of a cone used in a drafttube of a hydro power system. </p>
+<p>The model is based on DAEs obtained from the momentum balance through the center of mass of the fluid inside the cone.</p>
+<p align=\"center\"><br><img src=\"modelica://OpenHPL/Resources/Images/coneForDoc.svg\"/></p>
+</html>", revisions="<html>
 </html>"));
 end Cone;
