@@ -66,6 +66,6 @@ equation
     experiment(StopTime = 100),
     Documentation(info = "<html>
 <p>Here is example of using the KP function to solve hyperbolic PDE (here, model for penstock with compressible water and elastic walls is used).</p>
-<p>All calculation of the variables that is used for defining eigenvalues, source term <i>S</i> and vector <i>F</i> are implemented inside this model.</p>
+<p>All calculation of the variables that is used for defining eigenvalues, source term <em>S</em> and vector <em>F</em> are implemented inside this model.</p>
 </html>"));
 end ElasticPenstock;
