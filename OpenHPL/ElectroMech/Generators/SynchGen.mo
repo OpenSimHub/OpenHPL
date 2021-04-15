@@ -109,5 +109,7 @@ equation
   // - W_fa;
   ////
   annotation (
-    Documentation(info="<html>This is a model of the generator that is connected to the grid. This model could give some transient results. However, it is better to use generator models from IPSL.<div><br></div><div>More info about this model:&nbsp;<a href=\"Resources/Report/Generator_model.pdf\">Resources/Report/Generator_model.pdf</a></div></body></html>"));
+    Documentation(info="<html><p>This is a model of the generator that is connected to the grid. This model could give some transient results.
+However, it is better to use generator models from IPSL.</p>
+<p>More info about this model:&nbsp;<a href=\"Resources/Report/Generator_model.pdf\">Resources/Report/Generator_model.pdf</a></p></html>"));
 end SynchGen;

@@ -129,6 +129,6 @@ equation
     Documentation(info="<html>
 <p>This is a simple model of the governor that controls the guide vane
  opening in the turbine based on the reference power production.</p>
-<p>The model is taken from <a href=\"modelica://OpenHPL.UsersGuide.References\">[Sharefi2011]</a>.
+<p>The model is taken from <a href=\"modelica://OpenHPL.UsersGuide.References\">[Sharefi2011]</a>.</p>
 </html>"));
 end Governor;
