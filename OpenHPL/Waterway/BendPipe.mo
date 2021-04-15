@@ -32,9 +32,9 @@ equation
            alt=\"MinorLoss.png\">
     </td>
   </tr>
-  <caption align=\"bottom\">Note: This is page excerpt is taken from 
-  <a href=modelica://OpenHPL.UsersGuide.References>[White2009]</a>, page 422.</caption>
-</table> 
+  <caption align=\"bottom\">Note: This is page excerpt is taken from
+  <a href=\"modelica://OpenHPL.UsersGuide.References\">[White2009]</a>, page 422.</caption>
+</table>
 
 </html>"));
 end BendPipe;
