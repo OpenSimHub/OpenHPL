@@ -30,7 +30,7 @@ equation
   o.mdot = -q * w * data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
   annotation (
-    Documentation(info="<html>This is a model for the reservoir, based on the open channel (river) model.</p>
+    Documentation(info="<html><p>This is a model for the reservoir, based on the open channel (river) model.</p>
 <p><em>Has not been tested properly.</em></p>
 </html>"));
 end ReservoirChannel;

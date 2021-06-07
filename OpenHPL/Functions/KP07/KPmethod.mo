@@ -66,7 +66,7 @@ equation
 <li>matrix with values for boundary conditions [2,2]</li>
 </ul>
 <p>In order to calculate matrix <code>F</code> and eigenvalues, it is possible to take out of the 
-function the piecewise linear reconstruction of states matrix <code>U<sup>&plusmn;</sup><sub>i&plusmn;&frac12;</code>.
+function the piecewise linear reconstruction of states matrix <code>U<sup>&plusmn;</sup><sub>i&plusmn;&frac12;</sub></code>.
  This matrix consists of following vectors <code>U<sup>&plusmn;</sup><sub>i&plusmn;&frac12;</sub>
   = [U<sup>-</sup><sub>i+&frac12;</sub> U<sup>+</sup><sub>i+&frac12;</sub>
      U<sup>-</sup><sub>i-&frac12;</sub> U<sup>+</sup><sub>i-&frac12;</sub>]</code>.</p>
