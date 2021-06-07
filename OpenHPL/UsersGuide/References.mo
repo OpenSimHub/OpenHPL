@@ -1,4 +1,4 @@
-﻿within OpenHPL.UsersGuide;
+within OpenHPL.UsersGuide;
 model References "References"
   extends Modelica.Icons.References;
   annotation (Documentation(info="<html>

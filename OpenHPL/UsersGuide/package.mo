@@ -1,4 +1,4 @@
-﻿within OpenHPL;
+within OpenHPL;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
