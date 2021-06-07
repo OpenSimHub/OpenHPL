@@ -154,10 +154,10 @@ equation
     p_o = o.p;
   annotation (
     Documentation(info="<html>
-<p>Two of the draft tubes are modeled using <i>Momentum balance . </i>They are:</p>
+<p>Two of the draft tubes are modeled using <em>Momentum balance . </em>They are:</p>
 <ul>
-<li><b>Conical diffuser:</b> It is the most well-know draft tube which has efficiency of around 90&percnt;  and mostly used for low head reaction turbines.</li>
-<li><b>Moody spreading draft tubes:</b> When conical diffuser length exceeds beyond its stability for high head reaction turbines, either a elbow type draft tube is used which has around 70&percnt; of efficiency. However, other choice is to use Moody spreading draft tube that has efficiency of around 80&percnt;. The construction and design of Moody spreading draft tube is daunting and time consuming but it is mostly choosen for handling water whril at turbine&apos;s outlet.</li>
+<li><strong>Conical diffuser:</strong> It is the most well-know draft tube which has efficiency of around 90&percnt;  and mostly used for low head reaction turbines.</li>
+<li><strong>Moody spreading draft tubes:</strong> When conical diffuser length exceeds beyond its stability for high head reaction turbines, either a elbow type draft tube is used which has around 70&percnt; of efficiency. However, other choice is to use Moody spreading draft tube that has efficiency of around 80&percnt;. The construction and design of Moody spreading draft tube is daunting and time consuming but it is mostly choosen for handling water whril at turbine&apos;s outlet.</li>
 </ul>
 <p><br>The conical diffuser and Moody spreading draft tubes are shown below:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/conicalDiffuser.svg\" width=\"500\"/></p>

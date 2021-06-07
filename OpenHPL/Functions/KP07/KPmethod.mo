@@ -41,7 +41,7 @@ equation
 <p>Here, in this function, the right hand side of the previous equation for the solution of KP07 scheme is calculated and returns as a output.</p>
 <p>The central upwind numerical fluxes at the cell interfaces are given by:</p>
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_fluxes.svg\"/></p>
-<p>For calculating the numerical fluxes <i>H<sub>i&plusmn;&frac12;</sub>(t)</i> and the values of U<sub>i&plusmn;&frac12;</sub> are needed. These can be calculated as the end points of a piecewise linearly reconstructed function: </p>
+<p>For calculating the numerical fluxes <em>H<sub>i&plusmn;&frac12;</sub>(t)</em> and the values of U<sub>i&plusmn;&frac12;</sub> are needed. These can be calculated as the end points of a piecewise linearly reconstructed function: </p>
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_piecewise.svg\"/></p>
 <p>The slope <em>s<sub>i</sub></em> of the reconstructed function in each cell is computed using a limiter function to obtain a non-oscillatory nature of the reconstruction. The KP07 scheme utilizes the generalized minmod limiter as: </p>
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_slope.svg\"/></p>

@@ -84,6 +84,6 @@ equation
 <p><img src=\"modelica://OpenHPL/Resources/Images/Reservoir.svg\"></p>
 <p>Can also make a more complicated model and add the inflow to the reservoir and specify the reservoir geometry.</p>
 <p>Also, it is possible to connect an input signal with varying water level in the reservoir.</p>
-</body></html>"),
+</html>"),
     experiment(StartTime = 0, StopTime = 3600, Tolerance = 0.0001, Interval = 1));
 end Reservoir;

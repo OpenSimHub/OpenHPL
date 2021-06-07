@@ -78,7 +78,7 @@ equation
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
     <p>This model is described by the momentum differential equation, which depends
     on pressure drop through the pipe together with friction and gravity forces.
-    The main defined variable is volumetric flow rate <i>Vdot</i>.</p>
+    The main defined variable is volumetric flow rate <em>Vdot</em>.</p>
     <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"> </p>
     <p>In this pipe model, the flow rate changes simultaniusly in the whole pipe
     (an information about the speed of wave propagation is not included here).
