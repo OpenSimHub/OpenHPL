@@ -65,7 +65,7 @@ model SynchGen "Simple model of the generator connected to the grid"
   Modelica.Blocks.Interfaces.RealInput P_in  "Input of mechanical power" annotation (
     Placement(transformation(extent={{-20,-20},{20,20}},      rotation = 270, origin={0,120})));
 initial equation
-  if SelfInitialization == false then
+  if not SelfInitialization then
     EEd = EEd_op;
     EEq = EEq_op;
     DELTA = DELTA_op;

@@ -41,7 +41,7 @@ model Reservoir "Model of the reservoir"
   Modelica.Blocks.Interfaces.RealInput Level_in = H if Input_level "Conditional input water level of the reservoir"
     annotation (Placement(transformation(origin={-120,50}, extent = {{-20, -20}, {20, 20}}, rotation=0)));
 initial equation
-  if Input_level == false then
+  if not Input_level then
     H = H_r;
   end if;
 equation
@@ -60,12 +60,12 @@ equation
   //// Define friction term
   F_f = 1 / 8 * data.rho * f * L * (w + 2 * H / Modelica.Math.cos(alpha)) * v * abs(v);
   //// condition for inflow use
-  if UseInFlow == false then
+  if not UseInFlow then
     //// condition for constant water level, inflow = outflow
     Vdot_i - Vdot_o = 0;
   end if;
   //// condition for input water level use
-  if Input_level == false then
+  if not Input_level then
     //// define derivatives of momentum and mass
     der(M) = A * (data.p_a - p_o) + data.g * data.rho * A * H - F_f + data.rho / A * (Vdot_i ^ 2 - Vdot_o ^ 2);
     der(m) = mdot;

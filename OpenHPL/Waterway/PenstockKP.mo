@@ -49,7 +49,7 @@ public
   Functions.KP07.KPmethod KP(N = N, U = U, dx = dx, theta = theta, B = zeros(N + 4), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_i, 0; p_o, 0], boundaryCon = [true, false; true, false]);
   // specify all variables which is needed for using KP method for solve PDE
 initial equation
-  if SteadyState == true then
+  if SteadyState then
     der(U[1:N]) = zeros(N);
     der(U[N + 2:2 * N - 1]) = zeros(N - 2);
   else
@@ -67,7 +67,7 @@ equation
   U[1:N] = p_p[:];
   U[N + 1:2 * N] = mdot[:];
   //// Define variables, which are going to be used for source term S_
-  if PipeElasticity == true then
+  if PipeElasticity then
     F_ap = data.rho * A_atm .* (ones(N) + data.beta_total * (p_p - data.p_a * ones(N)));
   else
     F_ap = data.rho * A_atm .* (ones(N) + data.beta * (p_p - data.p_a * ones(N)));
@@ -87,7 +87,7 @@ equation
   //// define variables, which are going to be used for F matrix and eigenvalues
   _A_atm = [A_atm_[2:N + 1], A_atm_[2:N + 1], A_atm_[1:N], A_atm_[1:N]];
   rho_ = data.rho * (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
-  if PipeElasticity == true then
+  if PipeElasticity then
     F_ap_ = data.rho * _A_atm .* (ones(N, 4) + data.beta_total * (p_ - data.p_a * ones(N, 4)));
   else
     F_ap_ = data.rho * _A_atm .* (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
@@ -95,7 +95,7 @@ equation
   A_ = F_ap_ ./ rho_;
   v_ = mdot_ ./ F_ap_;
   //// eigenvalues
-  if PipeElasticity == true then
+  if PipeElasticity then
     lam1 = (v_ + sqrt(v_ .* v_ + 4 * A_ / data.rho ./ _A_atm / data.beta_total)) / 2;
     lam2 = (v_ - sqrt(v_ .* v_ + 4 * A_ / data.rho ./ _A_atm / data.beta_total)) / 2;
   else
@@ -103,7 +103,7 @@ equation
     lam2 = (v_ - sqrt(v_ .* v_ + 4 * A_ / data.rho ./ _A_atm / data.beta)) / 2;
   end if;
   //// F vector
-  if PipeElasticity == true then
+  if PipeElasticity then
     F_ = [mdot_ ./ data.rho ./ _A_atm ./ data.beta_total; mdot_ .* v_ + A_ .* p_];
   else
     F_ = [mdot_ ./ data.rho ./ _A_atm ./ data.beta; mdot_ .* v_ + A_ .* p_];

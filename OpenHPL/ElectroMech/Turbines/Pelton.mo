@@ -26,7 +26,7 @@ model Pelton "Model of the Pelton turbine"
             {20,20}},                                                                                                           rotation = 0)));
 equation
   //// Condition for inlet water compressibility
-    if CompElas == false then
+    if not CompElas then
         Vdot = mdot / data.rho;
     else
         Vdot = mdot / (data.rho * (1 + data.beta * (i.p - data.p_a)));

@@ -44,7 +44,7 @@ model Pipe "Model of the pipe"
   //// connectors
   extends OpenHPL.Interfaces.ContactPort;
 initial equation
-  if SteadyState == true then
+  if SteadyState then
     der(M) = 0;
   end if;
 equation
@@ -65,7 +65,7 @@ equation
   //// possible temperature variation implementation. Not finished...
   //W_f = -F_f * v;
   //W_e = Vdot * (p_i- p_o);
-  //if TempUse == true then
+  //if TempUse then
   //data.c_p * m * der(T) = Vdot * data.rho * data.c_p * (p.T - T) + W_e - W_f;
   //0 = Vdot * data.rho * data.c_p * (p.T - n.T) + W_e - W_f;
   //else

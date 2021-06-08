@@ -84,7 +84,7 @@ model Francis "Model of the Francis turbine"
       {20,20}},                                                                                                                 rotation = 0)));
 equation
   //// design algorithm for runner
-    if GivenData == true then
+    if GivenData then
         R_1 = R_1_;
         R_2 = R_2_;
         R_v = R_v_;
@@ -104,7 +104,7 @@ equation
         beta1 = 180 - _beta1;
     end if;
   //// design algorithm for runner losses
-    if Given_losses == true then
+    if Given_losses then
         k_ft1 = k_ft1_;
         k_ft2 = k_ft2_;
         k_ft3 = k_ft3_;
@@ -114,7 +114,7 @@ equation
         k_ft3 = 7e2 * exp(6.7e-3 * H_n);
     end if;
   //// design algorithm for servo
-    if GivenServoData == true then
+    if GivenServoData then
         r_v = r_v_;
         r_Y = r_Y_;
         R_Y = R_Y_;
@@ -143,7 +143,7 @@ equation
     u_1 = 0.725 * sqrt(2 * data.g * H_n);
     c_u1 = 0.48 / 0.725 * sqrt(2 * data.g * H_n);
   //// condition for inlet water compressability
-    if WaterCompress == false then
+    if not WaterCompress then
         Vdot = mdot / data.rho;
         dp_v = 0.5 * data.rho * (Vdot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
     else
@@ -151,7 +151,7 @@ equation
         dp_v = 0.5 * data.rho * (1 + data.beta * (i.p - data.p_a)) * (Vdot ^ 2 * (A_0 ^ 2 - A_v ^ 2 * sin_a1 ^ 2) / (A_0 ^ 2 * A_v ^ 2 * sin_a1 ^ 2) + k_fv) * Reduction;
     end if;
   //// condition for guide vane pressure drop (does not work well, better to skip guide vane pressure drop)
-    if dp_v_condition == true then
+    if dp_v_condition then
         p_r1 = i.p - dp_v;
         dp_tr = dp_r + dp_v;
     else

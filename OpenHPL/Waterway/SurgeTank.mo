@@ -62,7 +62,7 @@ model SurgeTank "Model of the surge tank/shaft"
   // connector (acquisition of algebraic variable, mass flow rate mdot, and node pressure (manifold pressure) p_n)
   extends OpenHPL.Interfaces.ContactNode;
 initial equation
-  if SteadyState == true then
+  if SteadyState then
     der(M) = 0;
     der(m) = 0;
   else

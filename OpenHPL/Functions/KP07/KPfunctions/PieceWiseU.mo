@@ -26,10 +26,10 @@ equation
   U_pp[:, 1:N - 1] = transpose([p_ghosts[4:N + 2], mdot_ghosts[4:N + 2]]) - dx * s[:, 3:N + 1] / 2;
   U_mm[:, 2:N] = transpose([p_ghosts[3:N + 1], mdot_ghosts[3:N + 1]]) + dx * s[:, 2:N] / 2;
   U_pm = transpose([p_ghosts[3:N + 2], mdot_ghosts[3:N + 2]]) - dx * s[:, 2:N + 1] / 2;
-  U_mm[1, 1] = if bounCon[1, 1] == true then boun[1, 1] else p_ghosts[2] + dx * s[1, 1] / 2;
-  U_pp[1, N] = if bounCon[2, 1] == true then boun[2, 1] else p_ghosts[N + 3] - dx * s[1, N + 2] / 2;
-  U_mm[2, 1] = if bounCon[1, 2] == true then boun[1, 2] else mdot_ghosts[2] + dx * s[2, 1] / 2;
-  U_pp[2, N] = if bounCon[2, 2] == true then boun[2, 2] else mdot_ghosts[N + 3] - dx * s[2, N + 2] / 2;
+  U_mm[1, 1] = if bounCon[1, 1] then boun[1, 1] else p_ghosts[2] + dx * s[1, 1] / 2;
+  U_pp[1, N] = if bounCon[2, 1] then boun[2, 1] else p_ghosts[N + 3] - dx * s[1, N + 2] / 2;
+  U_mm[2, 1] = if bounCon[1, 2] then boun[1, 2] else mdot_ghosts[2] + dx * s[2, 1] / 2;
+  U_pp[2, N] = if bounCon[2, 2] then boun[2, 2] else mdot_ghosts[N + 3] - dx * s[2, N + 2] / 2;
   // output vector U_
   U_ = [U_mp; U_pp; U_mm; U_pm];
   annotation (

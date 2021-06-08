@@ -18,7 +18,7 @@ model KPOpenChannel "Implementation of the KP functions for an open channel"
   Functions.KP07.KPmethod KP(N = N, U = vector([h; q]), dx = dx, theta = theta, B = vector([b[1] + 3 / 2 * (b[1] - b[2]); b[1] + 1 / 2 * (b[1] - b[2]); B; b[N + 1] - 1 / 2 * (b[N] - b[N+1]); b[N + 1] - 3 / 2 * (b[N] - b[N+1])]), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = boundaryValues, boundaryCon = boundaryCondition)
   "Specify all variables which is needed for using KP method for solve PDE";
 initial equation
-  if SteadyState == true then
+  if SteadyState then
     der(U) = zeros(2 * N);
   else
     q = ones(N) * q0;

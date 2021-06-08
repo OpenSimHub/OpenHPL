@@ -84,7 +84,7 @@ model DraftTube "Model of a draft tube for reaction turbines"
  // connectors
   extends OpenHPL.Interfaces.ContactPort;
 initial equation
-  if SteadyState == true then
+  if SteadyState then
     der(M) = 0;
     //der(n.T) = 0;
   else

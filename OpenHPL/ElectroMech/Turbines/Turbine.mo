@@ -46,7 +46,7 @@ equation
   dp = Vdot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2 "turbine valve equation for pressure drop";
   dp = i.p - o.p "Link the pressure drop to the ports";
   Kdot_i_tr = dp * Vdot "Turbine energy balance";
-  if ConstEfficiency == true then
+  if ConstEfficiency then
     Wdot_s = eta_h * Kdot_i_tr;
   else
     Wdot_s = look_up_table.y[1] * Kdot_i_tr;
