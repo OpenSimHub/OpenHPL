@@ -59,10 +59,6 @@ equation
       points={{40,110},{40,80},{-90,80},{-90,30},{-81,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(P_out, P_out) annotation (Line(
-      points={{40,110},{40,105},{40,105},{40,110}},
-      color={0,0,127},
-      smooth=Smooth.Bezier));
   annotation (
     Documentation(info="<html><p>
 This is a simple model of the turbine that give possibilities for simplified
