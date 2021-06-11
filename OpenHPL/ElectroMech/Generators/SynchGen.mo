@@ -57,7 +57,7 @@ model SynchGen "Simple model of the generator connected to the grid"
   Modelica.SIunits.Resistance Temp[2, 2];
   Modelica.SIunits.Power Pe, Qe;
   Modelica.SIunits.EnergyFlowRate Wdot_ts = P_in, W_fa;
-  //// conectors
+  //// connectors
   Modelica.Blocks.Interfaces.RealOutput f = np / 120 * 30 * w / pi if UseFrequencyOutput "Output generator frequency" annotation (
     Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput w_out = w "Output of the generator's angular velocity" annotation (Placement(visible = true, transformation(origin={110,60}, extent={{-10,-10},

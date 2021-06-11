@@ -34,7 +34,7 @@ model Reservoir "Model of the reservoir"
   Modelica.SIunits.Force F_f "friction force";
   Modelica.SIunits.Height H "water height";
   Modelica.SIunits.Pressure p_o "outlet pressure";
-  //// conectors
+  //// connectors
   OpenHPL.Interfaces.Contact o(p=p_o) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealInput V_in = Vdot_i if UseInFlow "Conditional input inflow of the reservoir"
     annotation (Placement(transformation(origin={-120,0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
@@ -73,9 +73,9 @@ equation
     //// define output pressure
     p_o = data.p_a + data.g * data.rho * H;
   end if;
-  //// output flow conector
+  //// output flow connector
   o.mdot = -data.rho * Vdot_o;
-  //// output temperature conector
+  //// output temperature connector
   //o.T = T_0;
   annotation (
     Icon(coordinateSystem(initialScale = 0.1)),

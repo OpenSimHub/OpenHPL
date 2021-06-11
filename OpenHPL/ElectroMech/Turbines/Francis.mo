@@ -77,7 +77,7 @@ model Francis "Model of the Francis turbine"
     Real u_end "servo position for fully open guide vane", u_start "servo position for fully close guide vane";
     Real W_t2_n "Euler second term, nominal", W_t1_n "Euler first term, nominal", Wdot_t_n "total power, nominal", cot_a1_n "cotant nominal alpha", Vdot_n_ = Vdot_n / 0.99 "flow rate for fully open guide vane", d_n(start = 0.67) "nominal servo term", theta_n "servo angle for fully open guide vane";
     Modelica.SIunits.Angle alpha1_n "nominal inlet guide vane angle";
-    //// conectors
+    //// connectors
     extends OpenHPL.Interfaces.TurbineContacts;
     Modelica.Blocks.Interfaces.RealInput w_in  "Input angular velocity from the generator" annotation (
                                 Placement(visible = true, transformation(origin={-120,-80},    extent={{-20,-20},
@@ -200,7 +200,7 @@ equation
     dp_r = p_r1 - p_tr2;
   //// turbine efficiency
     coef = Wdot_s / Wdot_t;
-  //// conectors
+  //// connectors
     p_tr2 = o.p;
   //// output mechanical power
     P_out = Wdot_s;

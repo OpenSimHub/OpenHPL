@@ -51,7 +51,7 @@ model RunOff_zones "Run off model. (with 10 height zones)"
   //Vdot_w2d[N] "Freezing rate from water snow form to dry snow form";
   Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T[N] "Ambient temperature";
   Modelica.SIunits.Velocity Vdot_p[N] "Precipitation";
-  Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Smal error, m";
+  Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Small error, m";
   //// using  data
   Modelica.Blocks.Sources.CombiTimeTable temp_var(tableOnFile = true, columns = columns_temp, tableName = tableName_temp, fileName = fileName_temp);
   Modelica.Blocks.Sources.CombiTimeTable prec_var(tableOnFile = true, fileName = fileName_prec, columns = columns_prec, tableName = tableName_prec);

@@ -133,7 +133,7 @@ equation
   F_g = m * data.g * cos_theta;
  annotation (
     Documentation(info="<html>
-<p>The four different surge tank models can be choosen. </p>
+<p>The four different surge tank models can be chosen. </p>
 <p>These surge tanks are:</p>
 <ol>
 <li>Simple surge tank</li>

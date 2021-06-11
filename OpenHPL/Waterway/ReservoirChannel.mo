@@ -14,9 +14,9 @@ model ReservoirChannel "Reservoir model based on open channel model"
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State";
   //// variables
   Real q "flow rate";
-  //// conector
+  //// connector
   OpenHPL.Interfaces.Contact o annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{68,-32},{134,34}})));
-  //// using the open channel exampel from the KP method class
+  //// using the open channel example from the KP method class
   Internal.KPOpenChannel openChannel(
     N=N,
     w=w,

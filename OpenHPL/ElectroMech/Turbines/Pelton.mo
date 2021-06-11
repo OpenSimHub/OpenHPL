@@ -19,7 +19,7 @@ model Pelton "Model of the Pelton turbine"
     Modelica.SIunits.Velocity v_R, v_1;
     Modelica.SIunits.AngularVelocity w=w_in "angular velocity";
     Real cos_b = Modelica.Math.cos(Modelica.SIunits.Conversions.from_deg(beta));
-    //// conectors
+    //// connectors
     extends OpenHPL.Interfaces.TurbineContacts;
     Modelica.Blocks.Interfaces.RealInput w_in "Input angular velocity from the generator" annotation (
                                 Placement(visible = true, transformation(origin={-120,-80},    extent={{-20,-20},

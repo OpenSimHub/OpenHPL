@@ -1,5 +1,5 @@
 within OpenHPL;
-package Interfaces "Basic inerface components"
+package Interfaces "Basic interface components"
   extends Modelica.Icons.InterfacesPackage;
 
 

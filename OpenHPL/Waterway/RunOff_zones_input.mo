@@ -28,7 +28,7 @@ model RunOff_zones_input "Run off model without input data (inputs could be spec
   //Vdot_w2d[N] "Freezing rate from water snow form to dry snow form";
   Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T[N] "Ambient temperature";
   Modelica.SIunits.Velocity Vdot_p[N] "Precipitation";
-  Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Smal error, m";
+  Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Small error, m";
   Modelica.Blocks.Interfaces.RealOutput Vdot_runoff annotation (
     Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{80, -20}, {120, 20}})));
 initial equation

@@ -15,7 +15,7 @@ model OpenChannel "Open channel model (use KP scheme)"
   //// variables
   Modelica.SIunits.VolumeFlowRate V_out "outlet flow", V_in "inlet flow";
   Modelica.SIunits.Height h[N] "Water depth in each unit of the channel";
-  //// conector
+  //// connector
   extends OpenHPL.Interfaces.TwoContact;
   //// using open channel example from KP method class
   Internal.KPOpenChannel openChannel(
