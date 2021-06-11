@@ -1,12 +1,16 @@
 within OpenHPL.ElectroMech.BaseClasses;
-partial model ConvertToRotational "Converts a power signal to the rotational domain"
+partial model Power2Torque "Converts a power signal to a torque in the rotational domain"
   outer Data data "Using standard class with global parameters";
 
-  parameter SI.Power Pmax = 100e6 "Maximum power (for torque limiting)"
+  parameter Boolean useH= false "if checked, calculate the inertia from a given H value"
+   annotation (Dialog(group = "Mechanical"), choices(checkBox=true));
+  parameter SI.Power Pmax = 100e6 "Maximum rated power (for torque limiting and H calculation)"
    annotation (Dialog(group = "Mechanical"));
-  parameter SI.MomentOfInertia J = 2e5 "Moment of inertia of the turbine or generator"
-    annotation (Dialog(group = "Mechanical"));
-  parameter Integer p = 12 "Number of poles (for speed calculation)"
+  parameter SI.Time H = 2.75 "Inertia constant H, typical 2s (high-head hydro) to 6s (gas or low-head hydro) production units"
+    annotation (Dialog(group = "Mechanical", enable=useH));
+  parameter SI.MomentOfInertia J = 2e5 "Moment of inertia of the unit"
+    annotation (Dialog(group = "Mechanical", enable=not useH));
+  parameter Integer p = 12 "Number of poles (for speed and inertia calculation)"
    annotation (Dialog(group = "Mechanical"));
   parameter SI.Power Ploss = 0 "Friction losses of generator at nominal speed"
     annotation (Dialog(group = "Mechanical"));
@@ -22,7 +26,7 @@ partial model ConvertToRotational "Converts a power signal to the rotational dom
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={40,-20})));
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=J,  w(start=w_0, fixed=true)) annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=if useH then 2*H*Pmax/w_0^2 else J,  w(start=w_0, fixed=true)) annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Modelica.Electrical.Machines.Losses.Friction friction(frictionParameters(PRef=Ploss, wRef=data.f_0*4*C.pi/p))
                                                         annotation (Placement(transformation(extent={{30,40},{50,20}})));
   Modelica.Mechanics.Rotational.Components.Fixed fixed annotation (Placement(transformation(extent={{10,30},{30,50}})));
@@ -83,4 +87,4 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="f")}));
-end ConvertToRotational;
+end Power2Torque;
