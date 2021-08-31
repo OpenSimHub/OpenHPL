@@ -4,8 +4,8 @@ package OpenHPL
   import SI = Modelica.SIunits;
 
   annotation (
-    version="1.3.1",
-    versionDate="2021-01-05",
+    version="1.3.2",
+    versionDate="2021-08-31",
     Protection(access = Access.packageDuplicate),
     uses(OpenIPSL(version="2.0.0-beta.1"), Modelica(version="3.2.3")),
     preferredView="info",
