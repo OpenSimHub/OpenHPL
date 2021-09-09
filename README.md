@@ -23,4 +23,4 @@ This Source Code Form is subject to the terms of the [ACADEMIC PUBLIC LICENSE](L
 
 ## Contact
 
-The group can be contacted by email: [OpenHPL@simulati.no](mailto:OpenHPL@opensimhub.org)
+The group can be contacted by email: [OpenHPL@opensimhub.org](mailto:OpenHPL@opensimhub.org)
