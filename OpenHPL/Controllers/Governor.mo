@@ -23,7 +23,7 @@ outer Data data "using standard class with constants";
     Dialog(group = "System settings"));
   parameter Modelica.SIunits.Frequency f_ref = data.f_0 "Reference frequency" annotation (
     Dialog(group = "System settings"));
-  parameter Modelica.SIunits.Power Pn = 104e6 "Reference frequency" annotation (
+  parameter Modelica.SIunits.Power Pn = 104e6 "Reference power" annotation (
     Dialog(group = "System settings"));
   //// connectors
   Modelica.Blocks.Interfaces.RealInput P_ref annotation (
