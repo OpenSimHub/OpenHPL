@@ -16,9 +16,9 @@ public
     B=B,
     dx=dx,
     boun=boundary,
-    bounCon=boundaryCon) "use function for defing the piece wise linear reconstruction of vector U";
-  KPfunctions.SpeedPropagationApipe speedA(N = N, lamda1 = lam1, lamda2 = lam2) "use function for defing the one-side local speeds propagation";
-  KPfunctions.FluxesH fluxesH(N = N, U_ = U_, A_ = A_speed, F_ = F_) "use function for defing the central upwind numerical fluxes";
+    bounCon=boundaryCon) "use function for defining the piece wise linear reconstruction of vector U";
+  KPfunctions.SpeedPropagationApipe speedA(N = N, lamda1 = lam1, lamda2 = lam2) "use function for defining the one-side local speeds propagation";
+  KPfunctions.FluxesH fluxesH(N = N, U_ = U_, A_ = A_speed, F_ = F_) "use function for defining the central upwind numerical fluxes";
 equation
   ///// piece wise linear reconstruction of vector U
   U_ = pieceWiseU.U_;
@@ -59,7 +59,7 @@ equation
 <li>matrix: <code>F(U<sup>&plusmn;</sup><sub>i&plusmn;&frac12;</sub>)[2N,4]</code></li>
 <li>vector: <code>S(U)[2N,1]</code> </li>
 <li>matrix of eigenvalues: <code>&lambda;<sub>1,2</sub>(U<sup>&plusmn;</sup><sub>i&plusmn;&frac12;</sub>)[N,4];</code></li>
-<li>vector B which is additional for defing ghost cells and can be used for, e.g., an open channel 
+<li>vector B which is additional for defining ghost cells and can be used for, e.g., an open channel 
   (state <code>z=h+B</code>). In this case the input state vector <code>U</code> should include <code>h</code>,
   but the piecewise linear reconstruction of states will be done with <code>z</code></li>
 <li>information about boundary conditions, as a matrix [2,2] of booleans true/false - depend on, which variable should be used</li>

@@ -7,7 +7,7 @@ model OpenChannel
   parameter Modelica.SIunits.Height H[2] = {16.7, 0} "Channel height, left and right side", b[N + 1] = linspace(H[1], H[2], N + 1) "Riverbed", h0[N] = vector([ones(5) * 0.4; linspace(H[1] - 0.4 - 0.5 * (b[6] + b[7]), H[1] - 0.4 - 0.5* (b[N] + b[N + 1]), N - 5)]) "Initial depth";
   parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 120 "Initial flow rate";
   parameter Real f_n = 0.04 "Manning's roughness coefficient [s/m^1/3]";
-  parameter Boolean boundaryCondition[2, 2] = [false, true; false, true] "boundary conditions considiratiion [z_left, q_left; z_right, q_right]", SteadyState = false "if true - starts from Steady State";
+  parameter Boolean boundaryCondition[2, 2] = [false, true; false, true] "boundary conditions consideration [z_left, q_left; z_right, q_right]", SteadyState = false "if true - starts from Steady State";
   input Real boundaryValues[2, 2] = [h0[1] + b[1], Vdot_0 / w; h0[N] + b[N + 1], Vdot_0 / w] "values for the boundary conditions [z_left, q_left; z_right, q_right]";
   Modelica.SIunits.Length dx = L / N;
   Modelica.SIunits.VolumeFlowRate Vdot[N];
@@ -18,7 +18,7 @@ model OpenChannel
   Real U[2 * N], U_[8, N], U_mp[N], U_pm[N];
 public
   Functions.KP07.KPmethod KP(N = N, U = vector([h; q]), dx = dx, theta = theta, B = vector([b[1] + 3 / 2 * (b[1] - b[2]); b[1] + 1 / 2 * (b[1] - b[2]); B; b[N + 1] - 1 / 2 * (b[N] - b[N+1]); b[N + 1] - 3 / 2 * (b[N] - b[N+1])]), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = boundaryValues, boundaryCon = boundaryCondition);
-  // specify all variables which is needed for using KP method for solve PDE
+  // specify all variables which are needed for using KP method for solve PDE
 initial equation
   if SteadyState then
     der(U) = zeros(2 * N);
@@ -86,7 +86,7 @@ equation
   annotation (
     experiment(StopTime = 5000),
     Documentation(info = "<html>
-<p>Here is example of using the KP function to solve hyperbolic PDE (here, model for openchannel is used).</p>
+<p>This is an example of using the KP function to solve the hyperbolic PDE (here, model for openchannel is used).</p>
 <p>All calculation of the variables that is used for defining eigenvalues, source term S and vector F are implemented inside this model.</p>
 </html>"));
 end OpenChannel;
