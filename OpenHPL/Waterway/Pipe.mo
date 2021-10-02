@@ -17,7 +17,7 @@ model Pipe "Model of the pipe"
   //// condition of steady state
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State" annotation (
     Dialog(group = "Initialization"));
-  //// staedy state value for flow rate
+  //// steady state value for flow rate
   parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = data.V_0 "Initial flow rate in the pipe" annotation (
     Dialog(group = "Initialization"));
   //// possible parameters for temperature variation. Not finished...
@@ -59,7 +59,7 @@ equation
   F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps);
   //// momentum balance
   der(M) = data.rho * Vdot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * data.g * cos_theta;
-  //// pipe presurre
+  //// pipe pressure
   p_i = i.p;
   p_o = o.p;
   //// possible temperature variation implementation. Not finished...
@@ -80,12 +80,12 @@ equation
     on pressure drop through the pipe together with friction and gravity forces.
     The main defined variable is volumetric flow rate <em>Vdot</em>.</p>
     <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"> </p>
-    <p>In this pipe model, the flow rate changes simultaniusly in the whole pipe
+    <p>In this pipe model, the flow rate changes simultaneously in the whole pipe
     (an information about the speed of wave propagation is not included here).
     Water pressures can be shown just in the boundaries of pipe
     (inlet and outlet pressure from connectors).&nbsp;</p>
     <p>It should be noted that this pipe model provides possibilities for modelling
-    of pipes with both a positive and a negative slopes (positive or negative height diference).</p>
+    of pipes with both a positive and a negative slopes (positive or negative height difference).</p>
     <p>More info about the pipe model can be found in 
 	<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
     and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>

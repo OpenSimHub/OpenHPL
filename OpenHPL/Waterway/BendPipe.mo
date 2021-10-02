@@ -22,8 +22,8 @@ equation
   o.p = i.p - dp "Pressure of the output connector";
   annotation (
     Documentation(info="<html>
-<p>Usually minor head losses in pipes are cosidered to be due to fittings, diffusers, nozzles, bend in pipes, etc. We are more interested in head loss due to bend pipes for this model.</p>
-<p>A typical loss coefficient values for flanged and threaded elbows, tees, gates, valves, etc., can be taken as,</p>
+<p>Usually minor head losses in pipes are considered to be due to fittings, diffusers, nozzles, bend in pipes, etc. We are more interested in head loss due to bend pipes for this model.</p>
+<p>A typical loss coefficient value for flanged and threaded elbows, tees, gates, valves, etc., can be taken as,</p>
 
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>

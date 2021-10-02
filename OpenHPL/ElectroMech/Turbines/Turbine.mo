@@ -67,7 +67,7 @@ efficiency from a lookup-table.
 This model does not include any information about rotational speed of the runner.
 </p>
 <p>
-This model is baseed on the energy balance and a simple valve-like expression.
+This model is based on the energy balance and a simple valve-like expression.
 The guide vane 'valve capacity' should be used for this valve-like expression and can either be specified
 directly by the user by specifying <code>C_v</code> or it will be calculated from
 the Nominal turbinenet head <code>H_n</code> and nominal flow rate
