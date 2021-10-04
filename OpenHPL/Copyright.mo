@@ -5,7 +5,7 @@ class Copyright "Disclaimer<html>
 <ul>
 <li>TMCC research group at <a href=\"https://www.usn.no/english/\">USN</a> (Norway)</li>
 </ul>
-<p>The group can be contacted by email: <a href=\"mailto:OpenHPL@simulati.no\">OpenHPL@simulati.no</a></p>
+<p>The group can be contacted by email: <a href=\"mailto:OpenHPL@opensimhub.org\">OpenHPL@opensimhub.org</a></p>
 <p>This Source Code Form is subject to the terms of the
 <a href=\"modelica://OpenHPL/Resources/LICENSE\">ACADEMIC PUBLIC LICENSE</a>.</p>
 </html>"
