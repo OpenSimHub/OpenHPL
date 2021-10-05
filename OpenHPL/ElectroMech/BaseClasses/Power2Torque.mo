@@ -12,7 +12,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
     annotation (Dialog(group = "Mechanical", enable=not useH));
   parameter Integer p = 12 "Number of poles (for speed and inertia calculation)"
    annotation (Dialog(group = "Mechanical"));
-  parameter SI.Power Ploss = 0 "Friction losses of generator at nominal speed"
+  parameter SI.Power Ploss = 0 "Friction losses of the unit at nominal speed"
     annotation (Dialog(group = "Mechanical"));
   parameter SI.AngularVelocity w_0 = data.f_0 * 4 * C.pi / p "Initial angular velocity"
     annotation (Dialog(group = "Initialization"));
