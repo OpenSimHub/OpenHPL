@@ -2,7 +2,6 @@ within OpenHPL.Waterway;
 model BendPipe "Bend in pipes"
   outer Data data "Using standard class with constants";
   extends OpenHPL.Icons.BendPipe;
-  import Modelica.Constants.pi;
   /* conditions for different fitting type */
   parameter Real K_L = 0.5 "Loss coefficient for pipe bends (Guess or from manufacturer's design)" annotation (
     Dialog(group = "Manufacturer's design"));
@@ -12,7 +11,7 @@ model BendPipe "Bend in pipes"
   parameter Modelica.SIunits.Diameter D_o = D_i "Pipe diameter of the outlet (RHS)" annotation (
     Dialog(group = "Geometry"));
   Modelica.SIunits.Velocity v(start=Modelica.Constants.eps) "Water velocity";
-  Modelica.SIunits.Area A = pi*D_i^2/4 "Cross section area";
+  Modelica.SIunits.Area A = C.pi*D_i^2/4 "Cross-sectional area";
   Modelica.SIunits.Pressure dp "Pressure drop of fitting";
   /* Connector */
   extends OpenHPL.Interfaces.ContactPort;

@@ -2,22 +2,22 @@ within OpenHPL.Waterway;
 model Fitting "Different pipes fitting"
   outer Data data "Using standard class with constants";
   extends OpenHPL.Icons.Fitting;
-  import Modelica.Constants.pi;
+
   /* conditions for different fitting type */
   parameter Types.Fitting fit_type=OpenHPL.Types.Fitting.Square "Type of pipe fitting";
   /* geometrical parameters for fitting */
-  parameter Modelica.SIunits.Diameter D_i = 5.8 "Pipe diameter of the inlet (LHS)" annotation (
+  parameter SI.Diameter D_i = 5.8 "Pipe diameter of the inlet (LHS)" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_o = 3.3 "Pipe diameter of the outlet (RHS)" annotation (
+  parameter SI.Diameter D_o = 3.3 "Pipe diameter of the outlet (RHS)" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 45 "If Tapered fitting: angle of the tapered reduction/expansion"
+  parameter SI.Conversions.NonSIunits.Angle_deg theta = 45 "If Tapered fitting: angle of the tapered reduction/expansion"
   annotation (Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.Tapered));
-  parameter Modelica.SIunits.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
+  parameter SI.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
     Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.ThickOrifice));
   /* variables */
-  Modelica.SIunits.Velocity v(start=Modelica.Constants.eps) "Water velocity";
-  Modelica.SIunits.Area A "Cross section area";
-  Modelica.SIunits.Pressure dp "Pressure drop of fitting";
+  SI.Velocity v(start=Modelica.Constants.eps) "Water velocity";
+  SI.Area A "Cross-sectional area";
+  SI.Pressure dp "Pressure drop of fitting";
   Real phi "Dimensionless factor based on the type of fitting ";
   /* Connector */
   extends OpenHPL.Interfaces.ContactPort;
@@ -34,7 +34,7 @@ equation
     data.mu,
     data.p_eps,
     fit_type);
-    A = pi * D_i^2 / 4;
+    A = C.pi * D_i^2 / 4;
     dp = phi * 0.5 * data.rho * v^2;
   else
     phi =Functions.Fitting.FittingPhi(
@@ -47,7 +47,7 @@ equation
     data.mu,
     data.p_eps,
     fit_type);
-    A = pi * D_o^2 / 4;
+    A = C.pi * D_o^2 / 4;
     dp = - phi * 0.5 * data.rho * v^2;
   end if;
   o.p = i.p - dp "Pressure of the output connector";

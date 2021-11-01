@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
-  outer Data data "using standard class with constants";
+  outer Data data "Using global parameters";
   extends OpenHPL.Icons.Reservoir;
   //// constant water level in the reservoir
   parameter Boolean useLevel=false "If checked, the \"level\" connector controls the water level of the reservoir"
