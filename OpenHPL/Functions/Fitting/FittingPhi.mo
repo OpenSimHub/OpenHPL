@@ -1,18 +1,18 @@
 within OpenHPL.Functions.Fitting;
 function FittingPhi "Calculates the dimension factor phi based in the fitting type"
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.Velocity v "Flow velocity";
-  input Modelica.SIunits.Diameter D_i "Pipe diameter of inlet (LHS)";
-  input Modelica.SIunits.Diameter D_o "Pipe diameter of outlet (RHS)";
-  input Modelica.SIunits.Length L "Fitting length";
-  input Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 90 "Angle of the tapered reduction/expansion";
-  input Modelica.SIunits.Density rho "Density";
-  input Modelica.SIunits.DynamicViscosity mu "Dynamic viscosity of water";
-  input Modelica.SIunits.Height p_eps "Pipe roughness height";
+  input SI.Velocity v "Flow velocity";
+  input SI.Diameter D_i "Pipe diameter of inlet (LHS)";
+  input SI.Diameter D_o "Pipe diameter of outlet (RHS)";
+  input SI.Length L "Fitting length";
+  input SI.Conversions.NonSIunits.Angle_deg theta = 90 "Angle of the tapered reduction/expansion";
+  input SI.Density rho "Density";
+  input SI.DynamicViscosity mu "Dynamic viscosity of water";
+  input SI.Height p_eps "Pipe roughness height";
   input Types.Fitting fit_type "Type of pipe fitting";
   output Real phi;
 protected
-  Modelica.SIunits.ReynoldsNumber N_Re;
+  SI.ReynoldsNumber N_Re;
 algorithm
   N_Re := rho * abs(v) * D_i / mu;
   if fit_type == Types.Fitting.Square then

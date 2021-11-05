@@ -1,9 +1,9 @@
 within OpenHPL.Functions.Fitting.FittingVariants;
 function Square "Calculation of phi for Square reduction/expansion"
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
-  input Modelica.SIunits.Height p_eps "Pipe roughness height";
-  input Modelica.SIunits.Diameter D_i, D_o "Pipe diameters";
+  input SI.ReynoldsNumber N_Re "Reynolds number";
+  input SI.Height p_eps "Pipe roughness height";
+  input SI.Diameter D_i, D_o "Pipe diameters";
   output Real phi "Dimension factor";
 protected
   Real f_D "Friction factor";

@@ -1,8 +1,8 @@
 within OpenHPL.Interfaces;
 partial model ContactNode "Model of two connectors and node pressure"
-  Modelica.SIunits.Pressure p_n "Node pressure";
-  //Modelica.SIunits.Temperature T_n "Node temperature";
-  Modelica.SIunits.MassFlowRate mdot "Mass flow rate";
+  SI.Pressure p_n "Node pressure";
+  //SI.Temperature T_n "Node temperature";
+  SI.MassFlowRate mdot "Mass flow rate";
   extends TwoContact;
 equation
   p_n = i.p;

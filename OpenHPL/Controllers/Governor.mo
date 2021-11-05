@@ -3,11 +3,11 @@ model Governor "Governor/control model"
   extends OpenHPL.Icons.Governor;
 outer Data data "using standard class with constants";
   //// control parameters of the governor
-  parameter Modelica.SIunits.Time T_p = 0.04 "Pilot servomotor time constant" annotation (
+  parameter SI.Time T_p = 0.04 "Pilot servomotor time constant" annotation (
     Dialog(group = "Controller settings"));
-  parameter Modelica.SIunits.Time T_g = 0.2 "Main servomotor integration time" annotation (
+  parameter SI.Time T_g = 0.2 "Main servomotor integration time" annotation (
     Dialog(group = "Controller settings"));
-  parameter Modelica.SIunits.Time T_r = 1.75 "Transient droop time constant" annotation (
+  parameter SI.Time T_r = 1.75 "Transient droop time constant" annotation (
     Dialog(group = "Controller settings"));
   parameter Real lookup_table[:, :] = [0.0, 0.0; 0.01, 0.06; 0.22, 0.25; 0.53, 0.5; 0.8, 0.75; 1.0, 0.95; 1.05, 1.0] "Table matrix (grid = first column; e.g., table=[0, 0; 1, 1; 2, 4])" annotation (
     Dialog(group = "System settings"));
@@ -21,9 +21,9 @@ outer Data data "using standard class with constants";
     Dialog(group = "System settings"));
   parameter Real Y_gv_ref = 0.72151 "Initial guide vane opening rate" annotation (
     Dialog(group = "System settings"));
-  parameter Modelica.SIunits.Frequency f_ref = data.f_0 "Reference frequency" annotation (
+  parameter SI.Frequency f_ref = data.f_0 "Reference frequency" annotation (
     Dialog(group = "System settings"));
-  parameter Modelica.SIunits.Power Pn = 104e6 "Reference power" annotation (
+  parameter SI.Power Pn = 104e6 "Reference power" annotation (
     Dialog(group = "System settings"));
   //// connectors
   Modelica.Blocks.Interfaces.RealInput P_ref annotation (

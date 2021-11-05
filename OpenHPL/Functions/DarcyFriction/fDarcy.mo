@@ -1,16 +1,16 @@
 within OpenHPL.Functions.DarcyFriction;
 function fDarcy "Darcy friction factor"
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
-  input Modelica.SIunits.Diameter D "Pipe diameter";
-  input Modelica.SIunits.Height p_eps "Pipe roughness height";
+  input SI.ReynoldsNumber N_Re "Reynolds number";
+  input SI.Diameter D "Pipe diameter";
+  input SI.Height p_eps "Pipe roughness height";
   // Function output (response) value
   output Real fD "Darcy friction factor";
   // Local (protected) quantities
 protected
   Real arg;
   // Algorithm for computing specific enthalpy
-  Modelica.SIunits.ReynoldsNumber N_Re_lam = 2100, N_Re_tur = 2300;
+  SI.ReynoldsNumber N_Re_lam = 2100, N_Re_tur = 2300;
   Real X[4, 4], Y[4], K[4];
 algorithm
   X := [N_Re_lam ^ 3, N_Re_lam ^ 2, N_Re_lam, 1; N_Re_tur ^ 3, N_Re_tur ^ 2, N_Re_tur, 1; 3 * N_Re_lam ^ 2, 2 * N_Re_lam, 1, 0; 3 * N_Re_tur ^ 2, 2 * N_Re_tur, 1, 0];

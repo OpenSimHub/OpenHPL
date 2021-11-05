@@ -10,6 +10,7 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Geometry"));
   parameter SI.Length L = 140 "Length of the surge shaft" annotation (
     Dialog(group = "Geometry"));
+  final parameter Real cos_theta = H/L "Slope ratio";
   parameter SI.Diameter D = 3.4 "Diameter of the surge shaft" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
@@ -45,7 +46,6 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.Area A = (C.pi*D ^ 2) / 4 "Cross-sectional area of the surge tank";
   SI.Area A_t = (C.pi*D_t ^ 2) / 4 "Cross-sectional area of the throttle valve surge tank";
   SI.Length l = h / cos_theta "Length of water in the surge tank";
-  Real cos_theta = H / L "Slope ratio";
   SI.Velocity v "Water velocity";
   SI.Force F_p "Pressure force";
   SI.Force F_f "Friction force";

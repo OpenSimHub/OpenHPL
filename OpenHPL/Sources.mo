@@ -42,15 +42,15 @@ package Sources "Library of signal source blocks generating Real, Integer and Bo
     parameter Modelica.Blocks.Types.Extrapolation extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints
       "Extrapolation of data outside the definition range"
       annotation (Dialog(group="Table data interpretation"));
-    parameter Modelica.SIunits.Time timeScale(
+    parameter SI.Time timeScale(
       min=Modelica.Constants.eps)=1 "Time scale of first table column"
       annotation (Dialog(group="Table data interpretation"), Evaluate=true);
     parameter Real offset[:]={0} "Offsets of output signals"
       annotation (Dialog(group="Table data interpretation"));
-    parameter Modelica.SIunits.Time startTime=0
+    parameter SI.Time startTime=0
       "Output = offset for time < startTime"
       annotation (Dialog(group="Table data interpretation"));
-    parameter Modelica.SIunits.Time shiftTime=startTime
+    parameter SI.Time shiftTime=startTime
       "Shift time of first table column"
       annotation (Dialog(group="Table data interpretation"));
     parameter Modelica.Blocks.Types.TimeEvents timeEvents=Modelica.Blocks.Types.TimeEvents.Always
@@ -59,9 +59,9 @@ package Sources "Library of signal source blocks generating Real, Integer and Bo
     parameter Boolean verboseExtrapolation=false
       "= true, if warning messages are to be printed if time is outside the table definition range"
       annotation (Dialog(group="Table data interpretation", enable=extrapolation == Modelica.Blocks.Types.Extrapolation.LastTwoPoints or extrapolation == Modelica.Blocks.Types.Extrapolation.HoldLastPoint));
-    final parameter Modelica.SIunits.Time t_min=t_minScaled*timeScale
+    final parameter SI.Time t_min=t_minScaled*timeScale
       "Minimum abscissa value defined in table";
-    final parameter Modelica.SIunits.Time t_max=t_maxScaled*timeScale
+    final parameter SI.Time t_max=t_maxScaled*timeScale
       "Maximum abscissa value defined in table";
     final parameter Real t_minScaled=Internal.getTimeTableTmin(tableID)
       "Minimum (scaled) abscissa value defined in table";
@@ -84,7 +84,7 @@ package Sources "Library of signal source blocks generating Real, Integer and Bo
           if tableOnFile then verboseRead else false,
           delimiter,
           nHeaderLines) "External table object";
-    discrete Modelica.SIunits.Time nextTimeEvent(start=0, fixed=true)
+    discrete SI.Time nextTimeEvent(start=0, fixed=true)
       "Next time event instant";
     discrete Real nextTimeEventScaled(start=0, fixed=true)
       "Next scaled time event instant";

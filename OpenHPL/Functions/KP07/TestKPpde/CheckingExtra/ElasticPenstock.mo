@@ -3,21 +3,21 @@ model ElasticPenstock
   extends Modelica.Icons.Example;
   outer Data data;
   import Modelica.Constants.pi;
-  parameter Modelica.SIunits.Height H = 420 "Height over which water fall in the pipe, m" annotation (
+  parameter SI.Height H = 420 "Height over which water fall in the pipe, m" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Length L = 600 "length of the pipe, m" annotation (
+  parameter SI.Length L = 600 "length of the pipe, m" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D = 3.3 "Diametr from the input side of the pipe" annotation (
+  parameter SI.Diameter D = 3.3 "Diametr from the input side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe, m3/s" annotation (
+  parameter SI.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe, m3/s" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20;
-  Modelica.SIunits.Area A_atm = D ^ 2 * pi / 4;
-  Modelica.SIunits.Pressure p_p[N], dp = data.rho * data.g * H / N, p_1 = 8e5, p_2 = 48e5, p_[N, 4];
-  Modelica.SIunits.Length dx = L / N, B[N + 4] = zeros(N + 4);
-  Modelica.SIunits.MassFlowRate mdot[N], mdot_[N, 4], mdot_R = Vdot_0 * data.rho, mdot_V = Vdot_0 * data.rho;
+  SI.Area A_atm = D ^ 2 * pi / 4;
+  SI.Pressure p_p[N], dp = data.rho * data.g * H / N, p_1 = 8e5, p_2 = 48e5, p_[N, 4];
+  SI.Length dx = L / N, B[N + 4] = zeros(N + 4);
+  SI.MassFlowRate mdot[N], mdot_[N, 4], mdot_R = Vdot_0 * data.rho, mdot_V = Vdot_0 * data.rho;
   Real U_[8, N], S_[2 * N], F_[2 * N, 4], lam1[N, 4], lam2[N, 4];
-  Modelica.SIunits.VolumeFlowRate Vdot[N];
+  SI.VolumeFlowRate Vdot[N];
   Real theta = 1.3;
   Real U[2 * N], F_d[N];
 public
