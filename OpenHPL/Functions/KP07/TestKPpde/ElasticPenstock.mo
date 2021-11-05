@@ -2,13 +2,13 @@ within OpenHPL.Functions.KP07.TestKPpde;
 model ElasticPenstock
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
-  parameter SI.Height H = 420 "Height over which water fall in the pipe, m" annotation (
+  parameter SI.Height H = 420 "Height over which water fall in the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Length L = 600 "length of the pipe, m" annotation (
+  parameter SI.Length L = 600 "Length of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Diameter D = 3.3 "Diametr of the pipe" annotation (
+  parameter SI.Diameter D = 3.3 "Diameter of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe, m3/s" annotation (
+  parameter SI.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20 "Number of segments";
   SI.Area A_atm = D ^ 2 * pi / 4 "pipe are at atm. p.", A[N] "center pipe A", A_[N, 4] "bounds pipe A";

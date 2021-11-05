@@ -63,9 +63,7 @@ model DraftTube "Model of a draft tube for reaction turbines"
   SI.Velocity v "Water velocity for conical diffuser";
   SI.Velocity v_m "Water velocity inside Main section of Moody spreading pipes";
   SI.Velocity v_b "Water velocity inside Branch section of Moody spreading pipes";
-  SI.Pressure p_i "Inlet pressure";
-  SI.Pressure p_o "Outlet pressure";
-  //SI.Pressure dp = p_o-p_i "Pressure drop in and out of draft tube";
+  SI.PressureDifference dp = o.p-i.p "Pressure difference across the draft tube";
   Real phi_d "Generalized friction factor for draft tube";
   Real phi_d_o "Initial generalized friction factor for Moody spreading pipes";
 

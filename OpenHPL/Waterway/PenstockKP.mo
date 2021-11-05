@@ -1,8 +1,8 @@
 within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
   outer OpenHPL.Data data "Using standard data set";
-  extends OpenHPL.Icons.Pipe(    vertical=true);
-  import Modelica.Constants.pi;
+  extends OpenHPL.Icons.Pipe(vertical=true);
+
   //// geometrical parameters of the pipe
   parameter SI.Height H = 420 "Height difference from the inlet to the outlet of the pipe" annotation (
     Dialog(group = "Geometry"));
@@ -33,11 +33,23 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
     choices(checkBox = true),
     Dialog(group = "Properties"));
   //// variables
-  SI.Diameter dD = (D_i - D_o) / N "step in diameter change", D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N) "centered diameter vector in atm. p.", D_[N + 1] = linspace(D_i, D_o, N + 1) "boundary diameter vector in atm. p.";
-  SI.Area A_atm[N] = D .* D * pi / 4 "centered cross are vector in atm. p.", A_atm_[N + 1] = D_ .* D_ * pi / 4 "boundary cross are vector in atm. p.", A[N] "centered cross are vector", A_[N, 4] "boundary cross are vector", _A_atm[N, 4] "boundary cross are matrix in atm. p.";
-  SI.Pressure p_p[N] "centered pressure", dp = data.rho * data.g * H / N "initial p. step", p_i "Inlet pressure (LHS)", p_o "Outlet Pressure (RHS)", p_[N, 4] "boundary p. matrix";
-  SI.Length dx = L / N "length step", dh = H / N "height step";
-  SI.MassFlowRate mdot[N](start = data.rho * Vdot_0) "centered mass flow", mdot_R "left bound mdot", mdot_V "right bound mdot", mdot_[N, 4] "boundary mdot matrix";
+  SI.Diameter dD = (D_i - D_o) / N "Diameter step";
+  SI.Diameter D_b[N + 1] = linspace(D_i, D_o, N + 1) "Boundary diameter vector at atm. p";
+  SI.Diameter D_c[N] = linspace(D_i + dD / 2, D_o - dD / 2, N) "Centered diameter vector at atm. p";
+  SI.Area Ac[N] "Centered cross-sectional area vector";
+  SI.Area Ab_a[N + 1] = D_b .* D_b * C.pi / 4 "Boundary cross-sectional area vector at atm. p";
+  SI.Area Ac_a[N] = D_c .* D_c * C.pi / 4 "Centered cross-sectional area vector at atm. p";
+  SI.Area Ab_a_[N, 4] "Boundary cross-sectional area matrix at atm. p";
+  SI.Area Ab_[N, 4] "Boundary cross-sectional area matrix";
+  SI.Pressure p_p[N] "centered pressure";
+  SI.PressureDifference dp = i.p - o.p "Pressure difference across the pipe";
+  SI.Pressure p_[N, 4] "Boundary pressure matrix";
+  SI.Length dx = L / N "Length step";
+  SI.Length dh = H / N "Height step";
+  SI.MassFlowRate mdot[N](start = data.rho * Vdot_0) "centered mass flow";
+  SI.MassFlowRate mdot_R "left bound mdot";
+  SI.MassFlowRate mdot_V "right bound mdot";
+  SI.MassFlowRate mdot_[N, 4] "Boundary mdot matrix";
   Real U[2 * N] "centered states", U_[8, N] "boundary states", F_ap[N] "centered A*rho", F_ap_[N, 4] "bounddary A*rho", S_[2 * N] "source term", F_[2 * N, 4] "F matrix", lam1[N, 4] "eigenvalue '+'", lam2[N, 4] "eigenvalue '-'";
   SI.Density rho[N] "centered density", rho_[N, 4] "boundary density";
   SI.Velocity v_[N, 4] "bounds velocity", v[N] "centered velocity";
@@ -46,7 +58,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   Real theta = 1.3 "parameter for slope limiter";
   extends OpenHPL.Interfaces.TwoContact;
 public
-  Functions.KP07.KPmethod KP(N = N, U = U, dx = dx, theta = theta, B = zeros(N + 4), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_i, 0; p_o, 0], boundaryCon = [true, false; true, false]);
+  Functions.KP07.KPmethod KP(N = N, U = U, dx = dx, theta = theta, B = zeros(N + 4), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [i.p, 0; o.p, 0], boundaryCon = [true, false; true, false]);
   // specify all variables which is needed for using KP method for solve PDE
 initial equation
   if SteadyState then
@@ -60,21 +72,18 @@ equation
   //// Pipe flow rate
   mdot_R = i.mdot;
   mdot_V = -o.mdot;
-  //// pipe presurre
-  p_i = i.p;
-  p_o = o.p;
   //// state vector
   U[1:N] = p_p[:];
   U[N + 1:2 * N] = mdot[:];
   //// Define variables, which are going to be used for source term S_
   if PipeElasticity then
-    F_ap = data.rho * A_atm .* (ones(N) + data.beta_total * (p_p - data.p_a * ones(N)));
+    F_ap = data.rho * Ac_a .* (ones(N) + data.beta_total * (p_p - data.p_a * ones(N)));
   else
-    F_ap = data.rho * A_atm .* (ones(N) + data.beta * (p_p - data.p_a * ones(N)));
+    F_ap = data.rho * Ac_a .* (ones(N) + data.beta * (p_p - data.p_a * ones(N)));
   end if;
   v = mdot ./ F_ap;
   rho = data.rho * (ones(N) + data.beta * (p_p - data.p_a * ones(N)));
-  A = F_ap ./ rho;
+  Ac = F_ap ./ rho;
   Vdot = mdot ./ rho;
   //// piece wise linear reconstruction of vector U
   U_ = KP.U_;
@@ -85,32 +94,32 @@ equation
   //// mass flow rate states
   mdot_ = transpose(matrix(U_[2:2:8, :]));
   //// define variables, which are going to be used for F matrix and eigenvalues
-  _A_atm = [A_atm_[2:N + 1], A_atm_[2:N + 1], A_atm_[1:N], A_atm_[1:N]];
+  Ab_a_ = [Ab_a[2:N + 1], Ab_a[2:N + 1], Ab_a[1:N], Ab_a[1:N]];
   rho_ = data.rho * (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
   if PipeElasticity then
-    F_ap_ = data.rho * _A_atm .* (ones(N, 4) + data.beta_total * (p_ - data.p_a * ones(N, 4)));
+    F_ap_ = data.rho * Ab_a_ .* (ones(N, 4) + data.beta_total * (p_ - data.p_a * ones(N, 4)));
   else
-    F_ap_ = data.rho * _A_atm .* (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
+    F_ap_ = data.rho * Ab_a_ .* (ones(N, 4) + data.beta * (p_ - data.p_a * ones(N, 4)));
   end if;
-  A_ = F_ap_ ./ rho_;
+  Ab_ = F_ap_ ./ rho_;
   v_ = mdot_ ./ F_ap_;
   //// eigenvalues
   if PipeElasticity then
-    lam1 = (v_ + sqrt(v_ .* v_ + 4 * A_ / data.rho ./ _A_atm / data.beta_total)) / 2;
-    lam2 = (v_ - sqrt(v_ .* v_ + 4 * A_ / data.rho ./ _A_atm / data.beta_total)) / 2;
+    lam1 = (v_ + sqrt(v_ .* v_ + 4 * Ab_ / data.rho ./ Ab_a_ / data.beta_total)) / 2;
+    lam2 = (v_ - sqrt(v_ .* v_ + 4 * Ab_ / data.rho ./ Ab_a_ / data.beta_total)) / 2;
   else
-    lam1 = (v_ + sqrt(v_ .* v_ + 4 * A_ / data.rho ./ _A_atm / data.beta)) / 2;
-    lam2 = (v_ - sqrt(v_ .* v_ + 4 * A_ / data.rho ./ _A_atm / data.beta)) / 2;
+    lam1 = (v_ + sqrt(v_ .* v_ + 4 * Ab_ / data.rho ./ Ab_a_ / data.beta)) / 2;
+    lam2 = (v_ - sqrt(v_ .* v_ + 4 * Ab_ / data.rho ./ Ab_a_ / data.beta)) / 2;
   end if;
   //// F vector
   if PipeElasticity then
-    F_ = [mdot_ ./ data.rho ./ _A_atm ./ data.beta_total; mdot_ .* v_ + A_ .* p_];
+    F_ = [mdot_ ./ data.rho ./ Ab_a_ ./ data.beta_total; mdot_ .* v_ + Ab_ .* p_];
   else
-    F_ = [mdot_ ./ data.rho ./ _A_atm ./ data.beta; mdot_ .* v_ + A_ .* p_];
+    F_ = [mdot_ ./ data.rho ./ Ab_a_ ./ data.beta; mdot_ .* v_ + Ab_ .* p_];
   end if;
   //// define friction force in each segment using Darcy friction factor
   for i in 1:N loop
-    F_f[i] = Functions.DarcyFriction.Friction(v[i], 2 * sqrt(A[i] / pi), dx, rho[i], data.mu, p_eps);
+    F_f[i] = Functions.DarcyFriction.Friction(v[i], 2 * sqrt(Ac[i] / C.pi), dx, rho[i], data.mu, p_eps);
   end for;
   //// source term of friction and gravity forces
   S_[1:N] = zeros(N);

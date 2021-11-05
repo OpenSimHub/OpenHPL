@@ -28,9 +28,10 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
   SI.Pressure p_i;
   SI.Pressure p_o;
   SI.Pressure p_[N - 1];
-  SI.Pressure dp = data.rho * data.g * H / N;
+  SI.PressureDifference dp = o.p - i.p "Pressure difference across the pipe";
+  SI.Pressure dp_N = data.rho * data.g * H / N "Pressure drop per step";
   SI.Pressure p_m[N - 2];
-  SI.Length dx = L / N;
+  SI.Length dx = L / N "Length step";
   SI.Length Per_m[N - 2];
   SI.MassFlowRate mdot_R;
   SI.MassFlowRate mdot_V;
@@ -56,7 +57,7 @@ initial equation
   mdot_R = data.rho * Vdot_0;
   mdot_V = data.rho * Vdot_0;
   mdot = data.rho * Vdot_0 * ones(N - 2);
-  p_ = p_i + dp:dp:p_i + dp * (N - 1);
+  p_ = p_i + dp_N:dp_N:p_i + dp_N * (N - 1);
 equation
   // Pipe flow rate
   mdot_R = i.mdot;

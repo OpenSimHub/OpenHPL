@@ -3,11 +3,11 @@ model ElasticPenstock
   extends Modelica.Icons.Example;
   outer Data data;
   import Modelica.Constants.pi;
-  parameter SI.Height H = 420 "Height over which water fall in the pipe, m" annotation (
+  parameter SI.Height H = 420 "Height over which water fall in the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Length L = 600 "length of the pipe, m" annotation (
+  parameter SI.Length L = 600 "length of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Diameter D = 3.3 "Diametr from the input side of the pipe" annotation (
+  parameter SI.Diameter D = 3.3 "Diameter from the input side of the pipe" annotation (
     Dialog(group = "Geometry"));
   parameter SI.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe, m3/s" annotation (
     Dialog(group = "Initialization"));
