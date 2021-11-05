@@ -17,8 +17,8 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
     Dialog(group = "Initialization"));
   parameter Integer N = 20 "Number of segments" annotation (
     Dialog(group = "Discretization"));
-  SI.Diameter dD = 0.5 * (D_i + D_o);
-  SI.Diameter D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N);
+  final parameter SI.Diameter D_av = 0.5 * (D_i + D_o) "Average Diameter";
+  SI.Diameter D[N] = linspace(D_i + D_av / 2, D_o - D_av / 2, N);
   SI.Diameter D_[N + 1] = linspace(D_i, D_o, N + 1);
   SI.Area A[N] = D .^ 2 * C.pi / 4;
   SI.Area A_[N + 1] = D_ .^ 2 * C.pi / 4;

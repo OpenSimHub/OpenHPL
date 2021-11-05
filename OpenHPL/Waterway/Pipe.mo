@@ -26,11 +26,11 @@ model Pipe "Model of the pipe"
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   //parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
-  SI.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
+  SI.Diameter D_av = 0.5 * (D_i + D_o) "Average diameter";
   SI.Mass m "water mass";
   SI.Area A_i = D_i ^ 2 * C.pi / 4 "Cross-sectional area of inlet";
   SI.Area A_o = D_o ^ 2 * C.pi / 4 "Cross-sectional area of outlet";
-  SI.Area A_av = D_ ^ 2 * C.pi / 4 "Average cross-sectional area";
+  SI.Area A_av = D_av ^ 2 * C.pi / 4 "Average cross-sectional area";
 
   SI.Velocity v "Water velocity";
   SI.Force F_f "Friction force";
@@ -52,7 +52,7 @@ equation
   v = Vdot / A_av "Water velocity";
   M = data.rho * L * Vdot "Momentum and mass of water";
   m = data.rho * A_av * L "Mass of water";
-  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps) "Friction force";
+  F_f = Functions.DarcyFriction.Friction(v, D_av, L, data.rho, data.mu, p_eps) "Friction force";
   der(M) = data.rho * Vdot ^ 2 * (1 / A_i - 1 / A_o) + i.p * A_i - o.p * A_o - F_f + m * data.g * cos_theta
     "Momentum balance";
   /* possible temperature variation implementation. Not finished...

@@ -37,10 +37,10 @@ model DraftTube "Model of a draft tube for reaction turbines"
   // parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   // parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   // variables
-  SI.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
+  SI.Diameter D_av = 0.5 * (D_i + D_o) "Average diameter";
   SI.Area A_i = D_i ^ 2 * C.pi / 4 "Cross-sectional area of inlet";
   SI.Area A_o = D_o ^ 2 * C.pi / 4 "Cross-sectional area of outlet";
-  SI.Area A_av = D_ ^ 2 * C.pi / 4 "Average cross-sectional area";
+  SI.Area A_av = D_av ^ 2 * C.pi / 4 "Average cross-sectional area";
 
   SI.Mass m "Mass of water inside conical diffuser";
   SI.Mass m_m "Mass of water inside Main section Moody spreading pipes";
@@ -105,7 +105,7 @@ equation
 
     F = F_p-F_g-F_f;
     F_p = p_i * A_i - p_o * A_o;
-    F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)+1/2*data.rho*v*abs(v)*A_i*phi_d;
+    F_f = Functions.DarcyFriction.Friction(v, D_av, L, data.rho, data.mu, p_eps)+1/2*data.rho*v*abs(v)*A_i*phi_d;
     F_fm=0;F_fb=0;
     phi_d = 0.23*(1-D_i/D_o)^2;
     phi_d_o=0; // Unimportant for conical diffuser
