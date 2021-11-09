@@ -37,6 +37,7 @@ model Turbine "Simple turbine model with mechanical connectors"
 
   output SI.EnergyFlowRate Wdot_s "Shaft power";
   Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table);
+  Modelica.Blocks.Math.Feedback lossCorrection annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 equation
   Vdot = if WaterCompress then mdot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else mdot / data.rho
     "Checking for water compressibility";
@@ -55,10 +56,12 @@ equation
   /* // for temperature variation, not finished...
   i.T = o.T; */
 
-  connect(P_out, power.y) annotation (Line(
-      points={{40,110},{40,80},{-90,80},{-90,30},{-81,30}},
+  connect(P_out, lossCorrection.y) annotation (Line(
+      points={{40,110},{40,80},{9,80}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+  connect(lossCorrection.u1, power.y) annotation (Line(points={{-8,80},{-90,80},{-90,30},{-81,30}}, color={0,0,127}));
+  connect(frictionLoss.power, lossCorrection.u2) annotation (Line(points={{29,28},{0,28},{0,72}}, color={0,0,127}));
   annotation (
     Documentation(info="<html><p>
 This is a simple model of the turbine that give possibilities for simplified
