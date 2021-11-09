@@ -61,7 +61,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(lossCorrection.u1, power.y) annotation (Line(points={{-8,80},{-90,80},{-90,30},{-81,30}}, color={0,0,127}));
-  connect(frictionLoss.power, lossCorrection.u2) annotation (Line(points={{29,28},{0,28},{0,72}}, color={0,0,127}));
+  connect(frictionLoss.power, lossCorrection.u2) annotation (Line(points={{29,12},{0,12},{0,72}}, color={0,0,127}));
   annotation (
     Documentation(info="<html><p>
 This is a simple model of the turbine that give possibilities for simplified

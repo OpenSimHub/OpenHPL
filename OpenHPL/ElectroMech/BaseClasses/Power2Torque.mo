@@ -50,7 +50,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
   Modelica.Mechanics.Rotational.Interfaces.Flange_b flange "Flange of right shaft" annotation (Placement(transformation(extent={{70,-10},{90,10}}),  iconTransformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.RealExpression power annotation (Placement(transformation(extent={{-60,20},{-80,40}})));
   Modelica.Mechanics.Rotational.Sensors.PowerSensor frictionLoss annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{10,-10},{-10,10}},
         rotation=270,
         origin={40,20})));
 equation
@@ -75,8 +75,8 @@ equation
   connect(torque.flange, inertia.flange_a) annotation (Line(points={{0,0},{10,0}}, color={0,0,0}));
   connect(w, w) annotation (Line(points={{110,40},{105,40},{105,40},{110,40}}, color={0,0,127}));
   connect(power.y, power2torque.u1) annotation (Line(points={{-81,30},{-90,30},{-90,6},{-82,6}}, color={0,0,127}));
-  connect(friction.flange, frictionLoss.flange_a) annotation (Line(points={{40,40},{40,30}}, color={0,0,0}));
-  connect(frictionLoss.flange_b, inertia.flange_b) annotation (Line(points={{40,10},{40,0},{30,0}}, color={0,0,0}));
+  connect(frictionLoss.flange_a, inertia.flange_b) annotation (Line(points={{40,10},{40,0},{30,0}}, color={0,0,0}));
+  connect(frictionLoss.flange_b, friction.flange) annotation (Line(points={{40,30},{40,40}}, color={0,0,0}));
   annotation (Icon(graphics={
         Text(
           visible=enable_w,
