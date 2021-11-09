@@ -26,7 +26,8 @@ model HPSimple "Model of waterway of the HP system with simplified models for co
         origin={-30,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(visible=true, transformation(
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false, enable_nomSpeed=true)
+    annotation (Placement(transformation(
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));

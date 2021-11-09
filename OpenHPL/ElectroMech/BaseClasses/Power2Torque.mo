@@ -16,6 +16,8 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
     annotation (Dialog(group = "Mechanical"));
   parameter SI.AngularVelocity w_0 = data.f_0 * 4 * C.pi / p "Initial angular velocity"
     annotation (Dialog(group = "Initialization"));
+  parameter Boolean enable_nomSpeed = false "If checked, turbine runs at nominal speed w_0"
+    annotation (choices(checkBox = true), Dialog(group = "Initialization"));
   parameter Boolean enable_w = false "If checked, get a connector for angular velocity output"
     annotation (choices(checkBox = true), Dialog(group = "Outputs"));
   parameter Boolean enable_f = false "If checked, get a connector for frequency output"
@@ -47,19 +49,20 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
     annotation (Placement(transformation(extent={{100,30},{120,50}},                                                                             rotation=0),
       iconTransformation(extent={{100,30},{120,50}})));
 
-  Modelica.Mechanics.Rotational.Interfaces.Flange_b flange "Flange of right shaft" annotation (Placement(transformation(extent={{70,-10},{90,10}}),  iconTransformation(extent={{-10,-10},{10,10}})));
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b flange "Flange of right shaft" annotation (Placement(transformation(extent={{50,-10},{70,10}}),  iconTransformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.RealExpression power annotation (Placement(transformation(extent={{-60,20},{-80,40}})));
   Modelica.Mechanics.Rotational.Sensors.PowerSensor frictionLoss annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={40,20})));
+  Modelica.Mechanics.Rotational.Sources.ConstantSpeed nomSpeed(w_fixed = w_0) if  enable_nomSpeed annotation (Placement(transformation(extent={{86,-6},{74,6}})));
 equation
   connect(toHz.u, speedSensor.w) annotation (Line(
       points={{72.8,-40},{40,-40},{40,-31}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(w, speedSensor.w) annotation (Line(
-      points={{110,40},{60,40},{60,-40},{40,-40},{40,-31}},
+      points={{110,40},{52,40},{52,-40},{40,-40},{40,-31}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(div0protect.y, power2torque.u2) annotation (Line(points={{-46.6,-40},{-90,-40},{-90,-6},{-82,-6}}, color={0,0,127}));
@@ -71,12 +74,14 @@ equation
                                                                                          color={0,0,127}));
   connect(inertia.flange_b, speedSensor.flange) annotation (Line(points={{30,0},{40,0},{40,-10}}, color={0,0,0}));
   connect(friction.support, fixed.flange) annotation (Line(points={{40,60},{40,70},{60,70},{60,60}}, color={0,0,0}));
-  connect(flange, inertia.flange_b) annotation (Line(points={{80,0},{30,0}},  color={0,0,0}));
+  connect(flange, inertia.flange_b) annotation (Line(points={{60,0},{30,0}},  color={0,0,0}));
   connect(torque.flange, inertia.flange_a) annotation (Line(points={{0,0},{10,0}}, color={0,0,0}));
   connect(w, w) annotation (Line(points={{110,40},{105,40},{105,40},{110,40}}, color={0,0,127}));
   connect(power.y, power2torque.u1) annotation (Line(points={{-81,30},{-90,30},{-90,6},{-82,6}}, color={0,0,127}));
   connect(frictionLoss.flange_a, inertia.flange_b) annotation (Line(points={{40,10},{40,0},{30,0}}, color={0,0,0}));
   connect(frictionLoss.flange_b, friction.flange) annotation (Line(points={{40,30},{40,40}}, color={0,0,0}));
+  connect(nomSpeed.flange, flange) annotation (Line(points={{74,0},{60,0}}, color={0,0,0},
+      pattern=LinePattern.Dash));
   annotation (Icon(graphics={
         Text(
           visible=enable_w,
