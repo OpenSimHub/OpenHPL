@@ -1,6 +1,7 @@
 within OpenHPL.ElectroMech.Generators;
 model SimpleGen "Model of a simple generator with mechanical connectors"
-  extends BaseClasses.Power2Torque(power(y=-P_load));
+  extends BaseClasses.Power2Torque(final enable_nomSpeed=false,
+                                   power(y=-P_load));
   extends OpenHPL.Icons.Generator;
 
   Modelica.Blocks.Interfaces.RealInput P_load(unit="W") "Electrical load power demand" annotation (Placement(
