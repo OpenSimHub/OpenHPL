@@ -1,4 +1,4 @@
-within OpenHPL.ElectroMech.Generators;
+within OpenHPL.ElectroMech.Grid;
 model MCB "Mechanical equivalent of an electrical Main Circuit Breaker"
   parameter SI.Time t_close = 100 "Time at which the MCB should close";
   parameter SI.Time t_open = 300 "Time at which the MCB should open";
