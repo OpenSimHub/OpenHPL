@@ -1,5 +1,5 @@
 within OpenHPL.ElectroMech;
-package Grid "Components used in combination with simulation in the grid"
+package PowerSystem "Components used in combination with simulation in the grid"
   extends Modelica.Icons.Package;
 
   annotation (Icon(graphics={
@@ -8,4 +8,4 @@ package Grid "Components used in combination with simulation in the grid"
         Line(points={{-20,70},{-52,50},{52,50},{20,70},{-20,70}}, color={0,0,0}),
         Line(points={{-20,10},{-72,-10},{72,-10},{20,10},{-20,10}},
                                                                 color={0,0,0})}));
-end Grid;
+end PowerSystem;
