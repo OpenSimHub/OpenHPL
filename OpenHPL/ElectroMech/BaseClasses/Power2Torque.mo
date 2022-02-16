@@ -44,7 +44,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={20,-20})));
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=if useH then 2*H*Pmax/w_0^2 else J,  w(start=w_0, fixed=true)) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=if useH then 2*H*Pmax/w_0^2 else J,  w(start=w_0, fixed=not enable_nomSpeed)) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Electrical.Machines.Losses.Friction friction(frictionParameters(PRef=Ploss, wRef=data.f_0*4*C.pi/p))
                                                         annotation (Placement(transformation(extent={{10,60},{30,40}})));
   Modelica.Mechanics.Rotational.Components.Fixed fixed annotation (Placement(transformation(extent={{30,50},{50,70}})));
