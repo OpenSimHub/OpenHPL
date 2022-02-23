@@ -1,8 +1,10 @@
 within OpenHPL.Interfaces;
 partial model TwoContact "Model of two connectors"
-  Contact i "Inlet contact" annotation (
+  Contact_i i "Inlet contact (positive design flow direction is from i to o)"
+                              annotation (
     Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Contact o "Outlet contact" annotation (
+  Contact_o o "Outlet contact (positive design flow direction is from i to o)"
+                               annotation (
     Placement(transformation(extent={{90,-10},{110,10}})));
   annotation (
     Documentation(info = "<html>
