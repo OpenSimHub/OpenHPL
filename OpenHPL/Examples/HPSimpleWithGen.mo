@@ -55,7 +55,7 @@ equation
     Line(points={{-20,30},{-10,30}},                                              color = {28, 108, 200}));
   connect(discharge.o, tail.o) annotation (Line(points={{70,0},{80,0}}, color={28,108,200}));
   connect(turbine.P_out, loadLevel.u) annotation (Line(points={{34,21},{34,30},{86,30},{86,70},{74,70}}, color={0,0,127}));
-  connect(loadLevel.y, simpleGen.P_load) annotation (Line(points={{51,70},{30,70},{30,62}}, color={0,0,127}));
+  connect(loadLevel.y, simpleGen.Pload) annotation (Line(points={{51,70},{30,70},{30,62}}, color={0,0,127}));
   connect(simpleGen.flange, turbine.flange) annotation (Line(
       points={{30,50},{30,10},{30,10}},
       color={0,0,0},

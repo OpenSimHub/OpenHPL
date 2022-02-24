@@ -1,10 +1,9 @@
 within OpenHPL.ElectroMech.Generators;
 model SimpleGen "Model of a simple generator with mechanical connectors"
-  extends BaseClasses.Power2Torque(final enable_nomSpeed=false,
-                                   power(y=-P_load));
+  extends BaseClasses.Power2Torque(final enable_nomSpeed=false, power(y=-Pload));
   extends OpenHPL.Icons.Generator;
 
-  Modelica.Blocks.Interfaces.RealInput P_load(unit="W") "Electrical load power demand" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput Pload(unit="W") "Electrical load power demand" annotation (Placement(
       visible=true,
       transformation(
         extent={{-20,-20},{20,20}},
@@ -16,7 +15,9 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
         origin={0,120})));
 
   annotation (
-    Documentation(info="<html><p>Simple model of an ideal generator with friction.</p>
+    Documentation(info="<html>
+<h4>Simple model of an ideal generator with friction.</h4>
+
 <p>This model based on the angular momentum balance, which depends on the turbine shaft power,
  the friction loss in the aggregate rotation and the power taken up by the generator.</p>
 <p>

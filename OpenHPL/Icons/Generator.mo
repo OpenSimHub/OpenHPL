@@ -3,10 +3,10 @@ partial class Generator "Generator icon"
   annotation (
     Icon(graphics={
         Text(
-          lineColor={28,108,200},
+          lineColor={127,0,0},
           extent={{-100,-110},{100,-150}},
-          textString="%name",
-          textStyle={TextStyle.Bold}),
+          textStyle={TextStyle.Bold},
+          textString="%name"),
         Ellipse(
           extent={{-80,80},{80,-80}},
           lineColor={0,0,0},

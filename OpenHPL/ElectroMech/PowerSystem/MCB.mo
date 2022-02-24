@@ -50,10 +50,10 @@ equation
         Line(points={{-90,0},{-40,0},{32,60}}, color={0,0,0}),
         Line(points={{38,0},{88,0}}),
         Text(
-          lineColor={28,108,200},
+          lineColor={127,0,0},
           extent={{-100,-110},{100,-150}},
-          textString="%name",
-          textStyle={TextStyle.Bold}),
+          textStyle={TextStyle.Bold},
+          textString="%name"),
         Text(
           extent={{-90,30},{-50,8}},
           lineColor={0,0,0},

@@ -41,7 +41,7 @@ equation
     Line(points={{-50,10},{-40,10}},                                        color = {28, 108, 200}));
   connect(reservoir.o, intake.i) annotation (
     Line(points={{-80,10},{-70,10}},                                        color = {28, 108, 200}));
-  connect(load.y, generator.P_load) annotation (Line(points={{39,70},{30,70},{30,52}}, color={0,0,127}));
+  connect(load.y, generator.Pload) annotation (Line(points={{39,70},{30,70},{30,52}}, color={0,0,127}));
   connect(generator.flange, turbine.flange) annotation (Line(points={{30,40},{30,0}}, color={0,0,0}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));

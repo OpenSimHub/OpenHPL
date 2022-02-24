@@ -2,7 +2,7 @@ within OpenHPL.ElectroMech.BaseClasses;
 partial model Power2Torque "Converts a power signal to a torque in the rotational domain"
   outer Data data "Using standard class with global parameters";
 
-  parameter Boolean useH= false "if checked, calculate the inertia from a given H value"
+  parameter Boolean useH= false "If checked, calculate the inertia from a given H value"
    annotation (Dialog(group = "Mechanical"), choices(checkBox=true));
   parameter SI.Power Pmax = 100e6 "Maximum rated power (for torque limiting and H calculation)"
    annotation (Dialog(group = "Mechanical"));
@@ -32,7 +32,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
     annotation (Dialog(group = "Mechanical"));
   parameter SI.AngularVelocity w_0 = data.f_0 * 4 * C.pi / p "Initial mechanical angular velocity"
     annotation (Dialog(group = "Initialization"));
-  parameter Boolean enable_nomSpeed = false "If checked, turbine runs with nominal angular velocity w_0"
+  parameter Boolean enable_nomSpeed = false "If checked, unit runs at angular velocity w_0 constantly"
     annotation (choices(checkBox = true), Dialog(group = "Initialization"));
   parameter Boolean enable_w = false "If checked, get a connector for angular velocity output"
     annotation (choices(checkBox = true), Dialog(group = "Outputs"));
@@ -86,7 +86,8 @@ equation
   connect(div0protect.y, power2torque.u2) annotation (Line(points={{-46.6,-40},{-80,-40},{-80,-3.6},{-67.2,-3.6}},
                                                                                                              color={0,0,127}));
   connect(f,toHz. y) annotation (Line(points={{110,-40},{88.6,-40}},
-                                                               color={0,0,127}));
+                                                               color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(power2torque.y, torqueLimit.u) annotation (Line(points={{-53.4,0},{-54,0},{-54,8.88178e-16},{-47.2,8.88178e-16}},
                                                                                                                           color={0,0,127}));
   connect(torqueLimit.y, torque.tau) annotation (Line(points={{-33.4,-6.66134e-16},{-32,-6.66134e-16},{-32,0},{-27.2,0}},
