@@ -16,11 +16,11 @@ Download [OpenHPL v1.0.1 (2019-09-06)](../../releases/tag/v1.0.1)
 
 ## License
 
-Copyright &copy; 2019
-* TMCC research group at [USN](https://www.usn.no/english/) (Norway)
+Copyright &copy; 2019-2022
+* [University of South-Eastern Norway](https://www.usn.no/english/) (USN)
 
-This Source Code Form is subject to the terms of the [ACADEMIC PUBLIC LICENSE](LICENSE).
+This Source Code Form is subject to the terms of the [Mozilla Public License, v. 2.0](LICENSE).
 
 ## Contact
 
-The group can be contacted by email: [OpenHPL@opensimhub.org](mailto:OpenHPL@opensimhub.org)
+The maintainers can be contacted by email: [OpenHPL@opensimhub.org](mailto:OpenHPL@opensimhub.org)

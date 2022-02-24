@@ -4,10 +4,10 @@ package OpenHPL
   import SI = Modelica.SIunits;
 
   annotation (
-    version="1.3.5",
-    versionDate="2021-11-09",
+    version="1.4.0",
+    versionDate="2022-02-24",
     Protection(access = Access.packageDuplicate),
-    uses(OpenIPSL(version="2.0.0-beta.1"), Modelica(version="3.2.3")),
+    uses(Modelica(version="3.2.3"), OpenIPSL(version="2.0.0-beta.1")),
     preferredView="info",
     Documentation(info="<html>
 <p>The OpenHPL is an open-source hydropower library that
