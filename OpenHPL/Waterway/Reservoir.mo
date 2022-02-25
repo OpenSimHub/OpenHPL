@@ -35,7 +35,7 @@ model Reservoir "Model of the reservoir"
   Modelica.SIunits.Height H "water height";
   Modelica.SIunits.Pressure p_o "outlet pressure";
   //// connectors
-  OpenHPL.Interfaces.Contact o(p=p_o) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
+  OpenHPL.Interfaces.Contact_o o(p=p_o) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealInput V_in = Vdot_i if UseInFlow "Conditional input inflow of the reservoir"
     annotation (Placement(transformation(origin={-120,0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput Level_in = H if Input_level "Conditional input water level of the reservoir"
