@@ -58,7 +58,7 @@ equation
 <img src=\"modelica://OpenHPL/Resources/Images/equations/NetworkPowerFreqChar_lambda.svg\">
 </p>
 <h5>Self-regulation</h5>
-<p>Inductive loads like motors cause the system load to be slightly frequency dependent.</>
+<p>Inductive loads like motors cause the system load to be slightly frequency dependent.</p>
 <p align=\"center\">
 <img src=\"modelica://OpenHPL/Resources/Images/equations/NetworkPowerFreqChar_mu.svg\">
 </p>
