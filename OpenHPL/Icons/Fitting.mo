@@ -21,7 +21,7 @@ partial class Fitting "Pipe fitting icon"
           fillPattern=FillPattern.Solid),
                      Text(
           lineColor={28,108,200},
-          extent={{-150,140},{150,100}},
+          extent={{-150,110},{150,70}},
           textString="%name",
           textStyle={TextStyle.Bold}),
         Rectangle(

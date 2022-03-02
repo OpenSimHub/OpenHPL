@@ -38,9 +38,16 @@ partial class Pipe "Pipe icon"
           origin={0,0},
           rotation=-45,
           visible=vertical),
-                     Text(
+        Text(
           lineColor={28,108,200},
           extent={{-150,140},{150,100}},
           textString="%name",
-          textStyle={TextStyle.Bold})}));
+          textStyle={TextStyle.Bold},
+          visible=vertical),
+        Text(
+          lineColor={28,108,200},
+          extent={{-150,90},{150,50}},
+          textString="%name",
+          textStyle={TextStyle.Bold},
+          visible=not vertical)}));
 end Pipe;
