@@ -15,7 +15,7 @@ model ReservoirChannel "Reservoir model based on open channel model"
   //// variables
   Real q "flow rate";
   //// connector
-  OpenHPL.Interfaces.Contact o annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{68,-32},{134,34}})));
+  Interfaces.Contact_o       o annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{68,-32},{134,34}})));
   //// using the open channel example from the KP method class
   Internal.KPOpenChannel openChannel(
     N=N,
