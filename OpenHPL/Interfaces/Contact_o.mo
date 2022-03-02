@@ -15,7 +15,8 @@ connector Contact_o "Outlet contact"
        Icon(graphics={Ellipse(
           extent={{-100,100},{100,-100}},
           fillColor={0,128,255},
-          fillPattern=FillPattern.Solid),
+          fillPattern=FillPattern.Solid,
+          lineColor={0,128,255}),
         Ellipse(
           extent={{-80,80},{80,-80}},
           lineColor={0,127,255},

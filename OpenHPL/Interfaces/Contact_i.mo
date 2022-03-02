@@ -10,5 +10,6 @@ connector Contact_i "Inlet contact"
        Icon(graphics={Ellipse(
           extent={{-100,100},{100,-100}},
           fillColor={0,128,255},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid,
+          lineColor={0,128,255})}));
 end Contact_i;
