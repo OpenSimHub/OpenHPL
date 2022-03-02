@@ -41,7 +41,7 @@ the frequency difference &Delta;F (see <code>grid.dF.y</code>) to settle down at
 <p>
 Changing the setting of the self-regulation to <code>grid.mu=2</code> should now 
 result in a frequency difference &Delta;f (see <code>grid.dF.y</code>) that settles down at
-a slighly lower &Delta;f &approx; -0.496 Hz.
+a slighly lower &Delta;f &asymp; -0.496 Hz.
 </p>
 <p>
 Note: When doing the calculation based by hand and calculating the new &lambda; which includes 
