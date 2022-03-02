@@ -18,7 +18,6 @@ HPElasticKPPenstockHalfSurgeD
 TestFitingSimpleHP
 HPSimplePenstockControl
 HPSimplePenstockAutoRefGate
-HPSimplePenstockPowerControl
 HPSimplePenstockResKP
 HPSimplePenstockOpenChannel
 HPSimplePenstockGeneratorTest
