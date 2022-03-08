@@ -1,13 +1,10 @@
 TestMCB
 TestTables
-HydroCordModelTest
 TorpaHPPAirCushionTest
 TorpaHPPAirCushionTest2
 HPTaperedFittingsTest
 HPSquareFittingsTest
 HPAllTypeFittingsTest
-HPSimplePenstock
-HPSimplePenstockWithoutSurge
 HPSimpleElasticPenstock
 HPSimpleElasticPenstockWithoutSurge
 HPElasticKPPenstock

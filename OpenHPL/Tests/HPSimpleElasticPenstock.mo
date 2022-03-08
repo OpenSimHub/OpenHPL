@@ -6,7 +6,7 @@ model HPSimpleElasticPenstock "Model of HP system with elastic penctock (Stagard
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {10, 84})));
+    Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin={10,82})));
   inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
@@ -46,12 +46,10 @@ equation
     Line(points = {{11, 6}, {20, 6}}, color = {0, 0, 127}));
   connect(turbine.P_out, aggregate.P_in) annotation (
     Line(points = {{26, 25}, {26, 16}}, color = {0, 0, 127}));
-  connect(turbine.n, discharge.p) annotation (
-    Line(points = {{40, 36}, {48.1, 36}, {48.1, 35.9}, {54.1, 35.9}}, color = {28, 108, 200}));
   connect(penstock.n, turbine.p) annotation (
     Line(points = {{10.1, 53.9}, {10.1, 43.95}, {20, 43.95}, {20, 36}}, color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points = {{21, 84}, {30, 84}, {30, 47}}, color = {0, 0, 127}));
+    Line(points={{21,82},{22,82},{22,48}},        color = {0, 0, 127}));
   connect(reservoir.n, intake.p) annotation (
     Line(points = {{-79.9, 61.9}, {-72.95, 61.9}, {-72.95, 61.9}, {-65.9, 61.9}}, color = {28, 108, 200}));
   connect(intake.n, surgeTank1.p) annotation (
@@ -60,6 +58,7 @@ equation
     Line(points = {{-15.9, 61.9}, {-11.95, 61.9}, {-9.9, 61.9}, {-9.9, 53.9}}, color = {28, 108, 200}));
   connect(discharge.n, tail.n) annotation (
     Line(points = {{74.1, 35.9}, {78.05, 35.9}, {78.05, 41.9}, {81.9, 41.9}}, color = {28, 108, 200}));
+  connect(turbine.o, discharge.i) annotation (Line(points={{40,36},{54,36}}, color={0,128,255}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end HPSimpleElasticPenstock;
