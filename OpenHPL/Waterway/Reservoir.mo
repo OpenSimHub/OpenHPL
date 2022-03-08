@@ -88,6 +88,5 @@ to simulate evaporation.</li>
 <p>
 <img src=\"modelica://OpenHPL/Resources/Images/Reservoir.svg\">
 </p>
-</html>"),
-    experiment(StartTime = 0, StopTime = 3600, Tolerance = 0.0001, Interval = 1));
+</html>"));
 end Reservoir;
