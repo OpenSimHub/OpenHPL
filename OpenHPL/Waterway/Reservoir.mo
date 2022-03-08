@@ -3,11 +3,11 @@ model Reservoir "Model of the reservoir"
   outer Data data "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
   //// constant water level in the reservoir
-  parameter Boolean useLevel=false "If checked, input Level_in controls the water level of the reservoir"
+  parameter Boolean useLevel=false "If checked, the \"level\" connector controls the water level of the reservoir"
     annotation (
     Dialog(group="Setup", enable=not useInflow),
     choices(checkBox = true));
-  parameter Boolean useInflow=false "If checked, the inlet flow connector is used"   annotation (
+  parameter Boolean useInflow=false "If checked, the \"inflow\" connector is used"   annotation (
     Dialog(group="Setup", enable=not useLevel),
     choices(checkBox = true));
   parameter SI.Height H_0=50 "Initial water level above intake"
