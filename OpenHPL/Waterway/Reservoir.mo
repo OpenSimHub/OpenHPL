@@ -80,7 +80,7 @@ equation
 <ul>
 <li><em>Default</em>: Container with an initial water level of <code>H_0</code>. 
  The water level will vary according to the outlet volume flow rate.</li>
-<li><code>useLevel</code>: The water level is determined by the <code>level</code> input.
+<li><code>useLevel</code>: The water level is determined by the <code>level</code> input.</li>
 <li><code>useInflow</code>: Reservoir starts with an initial water level of <code>H_0</code>
  but uses the <code>inflow</code> input as additional water source (can also be negative 
 to simulate evaporation.</li>
