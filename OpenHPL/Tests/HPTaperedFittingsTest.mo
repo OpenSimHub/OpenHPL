@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HPTaperedFittingsTest "Test for comparing fitting behaviour"
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir headWater(H_r=10) annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+  OpenHPL.Waterway.Reservoir headWater(H_0=10) annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   OpenHPL.Waterway.Fitting TaperedExpansion(
     fit_type=OpenHPL.Types.Fitting.Tapered,
     D_i=2,
@@ -16,7 +16,7 @@ model HPTaperedFittingsTest "Test for comparing fitting behaviour"
     H=0,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{40,50},{60,70}})));
-  OpenHPL.Waterway.Reservoir tailWater(H_r=10) annotation (Placement(transformation(extent={{100,-10},{80,10}})));
+  OpenHPL.Waterway.Reservoir tailWater(H_0=10) annotation (Placement(transformation(extent={{100,-10},{80,10}})));
   inner OpenHPL.Data data(Steady=true) annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   Waterway.Pipe         pipe2(
     H=5,

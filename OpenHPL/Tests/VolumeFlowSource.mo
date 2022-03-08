@@ -1,14 +1,14 @@
 within OpenHPL.Tests;
 model VolumeFlowSource
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir tail1(H_r=10) annotation (Placement(transformation(extent={{60,30},{40,50}})));
+  OpenHPL.Waterway.Reservoir tail1(H_0=10) annotation (Placement(transformation(extent={{60,30},{40,50}})));
   inner OpenHPL.Data data annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=volumeFlowSource1.o.mdot) annotation (Placement(transformation(extent={{28,-66},{48,-46}})));
   Modelica.Blocks.Continuous.Integrator integrator annotation (Placement(transformation(extent={{58,-66},{78,-46}})));
   OpenHPL.Waterway.VolumeFlowSource volumeFlowSource1 annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
   Waterway.Pipe pipe1(H=0) annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Waterway.Pipe pipe2(H=0) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  OpenHPL.Waterway.Reservoir tail2(H_r=100)
+  OpenHPL.Waterway.Reservoir tail2(H_0=100)
                                            annotation (Placement(transformation(extent={{60,-10},{40,10}})));
   OpenHPL.Waterway.VolumeFlowSource volumeFlowSource2(useInput=true) annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
   Modelica.Blocks.Sources.Sine sine(amplitude=100, freqHz=0.001) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));

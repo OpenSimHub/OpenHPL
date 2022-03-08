@@ -2,8 +2,8 @@ within OpenHPL.Tests;
 model TestRunoff
   extends Modelica.Icons.Example;
   Waterway.Reservoir reservoir1(
-    H_r=48,
-    L=5000,
+    H_0=48,
+    l=5000,
     UseInFlow=true,
     w=1000) annotation (Placement(visible=true, transformation(
         origin={-58,40},
@@ -14,7 +14,7 @@ model TestRunoff
     Placement(visible = true, transformation(origin = {24, 62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-36,26},{-16,46}}, rotation=0)));
   Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{56,-2},{76,18}}, rotation=0)));
-  Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
         origin={94,16},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -39,8 +39,7 @@ model TestRunoff
         extent={{-10,-10},{10,10}},
         rotation=0)));
 equation
-  connect(reservoir1.V_in, runOff.Vdot_runoff) annotation (
-    Line(points = {{-68, 40}, {-76, 40}, {-76, 50}, {-82, 50}}, color = {0, 0, 127}));
+  connect(reservoir1.inflow, runOff.Vdot_runoff) annotation (Line(points={{-68,40},{-76,40},{-76,50},{-82,50}}, color={0,0,127}));
   connect(control.y, turbine.u_t) annotation (
     Line(points={{35,62},{40,62},{40,24}},          color = {0, 0, 127}));
   connect(intake.n, surgeTank.p) annotation (

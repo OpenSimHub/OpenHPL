@@ -1,19 +1,19 @@
 within OpenHPL.Tests;
 model HPElasticKPPenstock "Model of HP system with elastic penctock (KP), but simplified models for turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-92,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin = {0, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin={0,84},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   inner OpenHPL.Data data(V_0=19.12, rho(displayUnit="kg/m3") = 997) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-72,54},{-52,74}}, rotation=0)));
   Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{38,30},{58,50}}, rotation=0)));
-  Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
         origin={90,46},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -37,7 +37,7 @@ equation
   connect(turbine.P_out, aggregate.P_in) annotation (
     Line(points = {{18, 32}, {18, 32}, {18, 22}, {18, 22}, {18, 20}}, color = {0, 0, 127}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points = {{11, 84}, {18, 84}, {18, 52.8}}, color = {0, 0, 127}));
+    Line(points={{11,84},{10,84},{10,54}},          color = {0, 0, 127}));
   connect(discharge.n, tail.n) annotation (
     Line(points = {{58.1, 39.9}, {70, 39.9}, {70, 45.9}, {79.9, 45.9}}, color = {28, 108, 200}));
   connect(turbine.n, discharge.p) annotation (

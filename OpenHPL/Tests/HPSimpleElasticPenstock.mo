@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HPSimpleElasticPenstock "Model of HP system with elastic penctock (StagardGrid), but simplified models for turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-90,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -20,7 +20,7 @@ model HPSimpleElasticPenstock "Model of HP system with elastic penctock (Stagard
     L=600,
     SteadyState=false,
     Vdot_0=19.06) annotation (Placement(visible=true, transformation(extent={{54,26},{74,46}}, rotation=0)));
-  Waterway.Reservoir tail(H_r=10) annotation (Placement(transformation(
+  Waterway.Reservoir tail(H_0=10) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={92,42})));

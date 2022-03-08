@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model TorpaHPPAirCushionTest2 "Test case for air cushion surge tank from Torpa hydro power plant."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-90,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -9,7 +9,7 @@ model TorpaHPPAirCushionTest2 "Test case for air cushion surge tank from Torpa h
     Placement(visible = true, transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,20},{-50,40}}, rotation=0)));
   OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_r=5, Input_level=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(H_0=5, Input_level=false) annotation (Placement(visible=true, transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -34,7 +34,7 @@ equation
   connect(turbine.o, discharge.i) annotation (
     Line(points={{54,50},{44,50},{44,0},{50,0}},            color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{1,70},{44,70},{44,62}},         color = {0, 0, 127}));
+    Line(points={{1,70},{36,70},{36,62}},         color = {0, 0, 127}));
   connect(penstock.o, turbine.i) annotation (
     Line(points={{10,30},{14.95,30},{14.95,50},{34,50}},                         color = {28, 108, 200}));
   connect(reservoir.o, intake.i) annotation (

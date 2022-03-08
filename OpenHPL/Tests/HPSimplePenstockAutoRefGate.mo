@@ -16,7 +16,7 @@ model HPSimplePenstockAutoRefGate
     H=5,
     L=600,
     Vdot_0=19) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
-  Waterway.Reservoir tail(H_r=10) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(H_0=10) annotation (Placement(visible=true, transformation(
         origin={90,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));

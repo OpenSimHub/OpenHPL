@@ -1,7 +1,7 @@
 within OpenHPL.Examples;
 model HPSimple "Model of waterway of the HP system with simplified models for conduits, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-90,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -9,7 +9,7 @@ model HPSimple "Model of waterway of the HP system with simplified models for co
     Placement(visible = true, transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,20},{-50,40}}, rotation=0)));
   OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_r=5, Input_level=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(H_0=5)                    annotation (Placement(visible=true, transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));

@@ -2,13 +2,13 @@ within OpenHPL.Tests;
 model HPSimplePenstockFrancisGenIPSLGov "Synergy with OpenIPSL library(generator + governor)"
   //input Real u;
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-88,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-72,52},{-52,72}}, rotation=0)));
   Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,30},{70,50}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
         origin={90,36},
         extent={{-10,10},{10,-10}},
         rotation=180)));

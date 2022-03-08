@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HPBjarneBorresen "Model of HP system with simplified models for penstock, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=503 - 499.5) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_0=503 - 499.5) annotation (Placement(visible=true, transformation(
         origin={-94,64},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -10,7 +10,7 @@ model HPBjarneBorresen "Model of HP system with simplified models for penstock, 
     D_o=1.4,
     H=499.5 - 470,
     L=3372) annotation (Placement(visible=true, transformation(extent={{-76,50},{-56,70}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_r=218 - 217) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(H_0=218 - 217) annotation (Placement(visible=true, transformation(
         origin={88,-20},
         extent={{-10,10},{10,-10}},
         rotation=180)));

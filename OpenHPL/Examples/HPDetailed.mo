@@ -1,7 +1,7 @@
 within OpenHPL.Examples;
 model HPDetailed "Model of waterway of the HP system with detailed model for the penstock (using KP scheme) and simplified models for others conduits, turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-90,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -13,7 +13,7 @@ model HPDetailed "Model of waterway of the HP system with detailed model for the
         rotation=0)));
   Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,0},{-50,20}},  rotation=0)));
   Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}},rotation=0)));
-  Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));

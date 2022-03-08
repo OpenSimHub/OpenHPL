@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HydroCordModelFrancis "Model of HP system with simplified models for penstock, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=46.5, UseInFlow=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_0=46.5, UseInFlow=false) annotation (Placement(visible=true, transformation(
         origin={-94,64},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -17,7 +17,7 @@ model HydroCordModelFrancis "Model of HP system with simplified models for penst
     D_o=6.3,
     H=3.5,
     L=601) annotation (Placement(visible=true, transformation(extent={{44,-24},{64,-4}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_r=2, Input_level=true) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(H_0=2, Input_level=true) annotation (Placement(visible=true, transformation(
         origin={94,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -115,8 +115,7 @@ model HydroCordModelFrancis "Model of HP system with simplified models for penst
   Modelica.Blocks.Sources.Constant const_level(k = 22.6) annotation (
     Placement(visible = true, transformation(origin = {58, -88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  connect(add1.y, tail.Level_in) annotation (
-    Line(points={{90,-33},{88,-33},{88,5},{106,5}},             color = {0, 0, 127}));
+  connect(add1.y, tail.level) annotation (Line(points={{90,-33},{88,-33},{88,5},{106,5}}, color={0,0,127}));
   connect(rotation.y[1], rot_gain.u) annotation (
     Line(points = {{-69, -44}, {-63, -44}, {-63, -42}, {-58, -42}}, color = {0, 0, 127}, thickness = 0.5));
   connect(const_level.y, add1.u2) annotation (

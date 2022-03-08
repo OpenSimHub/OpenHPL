@@ -2,7 +2,7 @@ within OpenHPL.Tests;
 model CaseStudingValentynasCase "HP system model for Valentyna's Master case"
   extends Modelica.Icons.Example;
   Real coef2, coef3;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-92,68},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -18,7 +18,7 @@ model CaseStudingValentynasCase "HP system model for Valentyna's Master case"
     D_o=5,
     H=0.5,
     L=600) annotation (Placement(visible=true, transformation(extent={{50,4},{70,24}}, rotation=0)));
-  Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
         origin={94,18},
         extent={{-10,10},{10,-10}},
         rotation=180)));

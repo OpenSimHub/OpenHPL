@@ -11,7 +11,7 @@ model HPSimplePenstockOpenChannel "testing open channel"
   Waterway.Pipe discharge(     L=600, H=-5)
                                       annotation (Placement(visible=true, transformation(extent={{6,0},{
             26,20}},                                                                                               rotation=0)));
-  Waterway.Reservoir tail(H_r=5)  annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(H_0=5)  annotation (Placement(visible=true, transformation(
         origin={90,10},
         extent={{-10,10},{10,-10}},
         rotation=180)));

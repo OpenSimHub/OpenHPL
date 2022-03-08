@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HPDraftTube "Testing the draft tube models."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-88,64},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -15,7 +15,7 @@ model HPDraftTube "Testing the draft tube models."
     D_i=3,
     D_o=4.73)                                   annotation (Placement(visible=true, transformation(extent={{54,44},
             {74,64}},                                                                                                         rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_r=5, Input_level=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(H_0=5, Input_level=false) annotation (Placement(visible=true, transformation(
         origin={90,54},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -40,7 +40,7 @@ model HPDraftTube "Testing the draft tube models."
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Reservoir         reservoir1(H_r=48)
+  Waterway.Reservoir         reservoir1(H_0=48)
                                                annotation (Placement(visible=true, transformation(
         origin={-88,6},
         extent={{-10,-10},{10,10}},
@@ -54,7 +54,7 @@ model HPDraftTube "Testing the draft tube models."
   Waterway.Pipe         intake1(H=23)
                                      annotation (Placement(visible=true, transformation(extent={{-68,-4},
             {-48,16}},                                                                                              rotation=0)));
-  Waterway.Reservoir         tail1(H_r=5, Input_level=false)
+  Waterway.Reservoir         tail1(H_0=5, Input_level=false)
                                                             annotation (Placement(visible=true, transformation(
         origin={90,-4},
         extent={{-10,10},{10,-10}},
@@ -83,7 +83,7 @@ model HPDraftTube "Testing the draft tube models."
     L=5,
     D_i=3,
     D_o=4.73) annotation (Placement(transformation(extent={{54,-18},{74,2}})));
-  Waterway.Reservoir         reservoir2(H_r=48)
+  Waterway.Reservoir         reservoir2(H_0=48)
                                                annotation (Placement(visible=true, transformation(
         origin={-88,-50},
         extent={{-10,-10},{10,10}},
@@ -97,7 +97,7 @@ model HPDraftTube "Testing the draft tube models."
   Waterway.Pipe         intake2(H=23)
                                      annotation (Placement(visible=true, transformation(extent={{-68,-60},
             {-48,-40}},                                                                                             rotation=0)));
-  Waterway.Reservoir         tail2(H_r=5, Input_level=false)
+  Waterway.Reservoir         tail2(H_0=5, Input_level=false)
                                                             annotation (Placement(visible=true, transformation(
         origin={90,-60},
         extent={{-10,10},{10,-10}},

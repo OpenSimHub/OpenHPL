@@ -1,13 +1,13 @@
 within OpenHPL.Examples;
 model HPSimple_Francis_IPSLGen "Synergy with OpenIPSL library(generator)"
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_r=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
         origin={-90,50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,40},{-50,60}}, rotation=0)));
   OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{50,20},{70,40}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_r=5) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
         origin={90,30},
         extent={{-10,10},{10,-10}},
         rotation=180)));

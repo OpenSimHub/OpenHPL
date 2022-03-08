@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HPAllTypeFittingsTest "Test for comparing fitting behaviour"
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir headWater(H_r=10) annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+  OpenHPL.Waterway.Reservoir headWater(H_0=10) annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   OpenHPL.Waterway.Fitting SquareExpansion(
     fit_type=OpenHPL.Types.Fitting.Square,
     D_i=2,
@@ -15,7 +15,7 @@ model HPAllTypeFittingsTest "Test for comparing fitting behaviour"
     H=0,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{40,70},{60,90}})));
-  OpenHPL.Waterway.Reservoir tailWater(H_r=10) annotation (Placement(transformation(extent={{100,-10},{80,10}})));
+  OpenHPL.Waterway.Reservoir tailWater(H_0=10) annotation (Placement(transformation(extent={{100,-10},{80,10}})));
   inner OpenHPL.Data data(Steady=true) annotation (Placement(transformation(extent={{-100,80},
             {-80,100}})));
   Waterway.Pipe         pipe2(

@@ -16,7 +16,7 @@ model HPSimpleElasticPenstockWithoutSurge "Model of HP system without surge tank
     H=5,
     L=600,
     Vdot_0=20.6) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
-  Waterway.Reservoir tail(H_r=10) annotation (Placement(transformation(
+  Waterway.Reservoir tail(H_0=10) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={92,42})));

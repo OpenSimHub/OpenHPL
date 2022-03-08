@@ -6,10 +6,10 @@ model ReservoirChannel "Reservoir model based on open channel model"
   parameter Integer N = 20 "Number of segments";
   //// geometrical parameters of the reservoir
   parameter Modelica.SIunits.Length w = 1000 "Reservoir width";
-  parameter Modelica.SIunits.Length L = 5000 "Reservoir length";
+  parameter SI.Length l=5000 "Reservoir length";
   parameter Modelica.SIunits.Height H[2] = {2, 2} "Reservoir bed height from left and right side";
   //// initialization
-  parameter Modelica.SIunits.Height h0 = 50 "Initial depth of the reservoir";
+  parameter SI.Height H_0=50 "Initial depth of the reservoir";
   //// condition of steady state
   parameter Boolean SteadyState = data.Steady "if true - starts from Steady State";
   //// variables
@@ -21,8 +21,8 @@ model ReservoirChannel "Reservoir model based on open channel model"
     N=N,
     w=w,
     H=H,
-    h0=ones(N)*h0,
-    boundaryValues=[h0 + H[1],q; h0 + H[2],q],
+    h0=ones(N)*H_0,
+    boundaryValues=[H_0 + H[1],q; H_0 + H[2],q],
     boundaryCondition=[true,true; false,true],
     SteadyState=SteadyState) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
