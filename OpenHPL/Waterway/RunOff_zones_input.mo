@@ -3,9 +3,9 @@ model RunOff_zones_input "Run off model without input data (inputs could be spec
   extends OpenHPL.Icons.RunOff;
   parameter Integer N = 10 "# of height zones" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_t = 1 "Threshold temperature" annotation (
+  parameter SI.Conversions.NonSIunits.Temperature_degC T_t = 1 "Threshold temperature" annotation (
     Dialog(group = "Physically-based parameters"));
-  parameter Modelica.SIunits.Area A[N] = ones(N) * 41.3e6 "Catchment area" annotation (
+  parameter SI.Area A[N] = ones(N) * 41.3e6 "Catchment area" annotation (
     Dialog(group = "Geometry"));
   parameter Real s_T = 20e-3 "Soil zone saturation threshold, m" annotation (
     Dialog(group = "Empirical parameters")), a_1 = 0.547 / 86400 "Discharge frequency for surface runoff, 1/sec" annotation (
@@ -21,13 +21,13 @@ model RunOff_zones_input "Run off model without input data (inputs could be spec
     Dialog(group = "Empirical parameters")), CE = 0.04 "Model parameter for adjusted evapotranspiration, 1/deg" annotation (
     Dialog(group = "Empirical parameters"));
   input Real temp_var[N], prec_var[N], evap_var, month_temp[N], flow_var;
-  Modelica.SIunits.Height V_s_w[N] "Water content in soil zone", V_b_w[N] "Water content in base zone", V_g_w[N] "Water content in ground zone", V_s_d[N] "Dry snow";
+  SI.Height V_s_w[N] "Water content in soil zone", V_b_w[N] "Water content in base zone", V_g_w[N] "Water content in ground zone", V_s_d[N] "Dry snow";
   //V_s_s[N] "Soggy snow";
-  Modelica.SIunits.VolumeFlowRate Vdot_tot "Total runoff";
-  Modelica.SIunits.Velocity Vdot_s2b[N] "Runoff rate from soil zone to base zone", Vdot_pl[N] "Precipitation in lake", Vdot_b2br[N] "Runoff rate from base zone t obase runoff", Vdot_l_e[N] "Rate of evapotranspiration from lake", Vdot_g2s[N] "Runoff rate from ground zone to soil zone", Vdot_s2sr[N] "Runoff rate from soil zone to surface runoff", Vdot_s2fr[N] "Runoff rate from soil zone to fast runoff", Vdot_s2g[N] "Runoff rate from snow zone to ground zone", Vdot_g_e[N] "Evapotranspiration rate from ground zone", Vdot_p_r[N] "Precipitation in mainland in the form of snow", Vdot_d2w[N] "Melting rate from dry snow form to water snow form", Vdot_p_s[N] "Precipitation in mainland in the form of snow", Vdot_epot[N] "Evapotranspiration";
+  SI.VolumeFlowRate Vdot_tot "Total runoff";
+  SI.Velocity Vdot_s2b[N] "Runoff rate from soil zone to base zone", Vdot_pl[N] "Precipitation in lake", Vdot_b2br[N] "Runoff rate from base zone t obase runoff", Vdot_l_e[N] "Rate of evapotranspiration from lake", Vdot_g2s[N] "Runoff rate from ground zone to soil zone", Vdot_s2sr[N] "Runoff rate from soil zone to surface runoff", Vdot_s2fr[N] "Runoff rate from soil zone to fast runoff", Vdot_s2g[N] "Runoff rate from snow zone to ground zone", Vdot_g_e[N] "Evapotranspiration rate from ground zone", Vdot_p_r[N] "Precipitation in mainland in the form of snow", Vdot_d2w[N] "Melting rate from dry snow form to water snow form", Vdot_p_s[N] "Precipitation in mainland in the form of snow", Vdot_epot[N] "Evapotranspiration";
   //Vdot_w2d[N] "Freezing rate from water snow form to dry snow form";
-  Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T[N] "Ambient temperature";
-  Modelica.SIunits.Velocity Vdot_p[N] "Precipitation";
+  SI.Conversions.NonSIunits.Temperature_degC T[N] "Ambient temperature";
+  SI.Velocity Vdot_p[N] "Precipitation";
   Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Small error, m";
   Modelica.Blocks.Interfaces.RealOutput Vdot_runoff annotation (
     Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{80, -20}, {120, 20}})));

@@ -4,41 +4,41 @@ model Pipe "Model of the pipe"
   extends OpenHPL.Icons.Pipe;
   import Modelica.Constants.pi;
   //// geometrical parameters of the pipe
-  parameter Modelica.SIunits.Length H = 25 "Height difference from the inlet to the outlet" annotation (
+  parameter SI.Length H = 25 "Height difference from the inlet to the outlet" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Length L = 6600 "Length of the pipe" annotation (
+  parameter SI.Length L = 6600 "Length of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_i = 5.8 "Diameter of the inlet side" annotation (
+  parameter SI.Diameter D_i = 5.8 "Diameter of the inlet side" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_o = D_i "Diameter of the outlet side" annotation (
+  parameter SI.Diameter D_o = D_i "Diameter of the outlet side" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
+  parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   //// condition of steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   //// steady state value for flow rate
-  parameter Modelica.SIunits.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate in the pipe" annotation (Dialog(group="Initialization"));
+  parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate in the pipe" annotation (Dialog(group="Initialization"));
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
-  Modelica.SIunits.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
-  Modelica.SIunits.Mass m "water mass";
-  Modelica.SIunits.Area A_i = D_i ^ 2 * pi / 4 "Inlet cross section area";
-  Modelica.SIunits.Area A_o = D_o ^ 2 * pi / 4 "Outlet cross section area";
-  Modelica.SIunits.Area A_ = D_ ^ 2 * pi / 4 "Average cross section area";
+  SI.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
+  SI.Mass m "water mass";
+  SI.Area A_i = D_i ^ 2 * pi / 4 "Inlet cross section area";
+  SI.Area A_o = D_o ^ 2 * pi / 4 "Outlet cross section area";
+  SI.Area A_ = D_ ^ 2 * pi / 4 "Average cross section area";
   Real cos_theta = H / L "slope ratio";
-  Modelica.SIunits.Velocity v "Water velocity";
-  Modelica.SIunits.Force F_f "Friction force";
-  Modelica.SIunits.Momentum M "Water momentum";
-  Modelica.SIunits.Pressure p_i "Inlet pressure";
-  Modelica.SIunits.Pressure p_o "Outlet pressure";
-  Modelica.SIunits.Pressure dp=p_o-p_i "Pressure difference across the pipe";
-  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
+  SI.Velocity v "Water velocity";
+  SI.Force F_f "Friction force";
+  SI.Momentum M "Water momentum";
+  SI.Pressure p_i "Inlet pressure";
+  SI.Pressure p_o "Outlet pressure";
+  SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
+  SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
 
   //// variables for temperature. Not in use for now...
   //Real W_f, W_e;
-  //Modelica.SIunits.Temperature T( start = T_0);
+  //SI.Temperature T( start = T_0);
   //// connectors
   extends OpenHPL.Interfaces.ContactPort;
 initial equation

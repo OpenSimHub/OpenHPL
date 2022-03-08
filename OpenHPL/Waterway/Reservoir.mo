@@ -17,7 +17,7 @@ model Reservoir "Model of the reservoir"
     Dialog(group="Geometry"));
   parameter SI.Length W=100 "Bed width of the reservoir"                 annotation (
     Dialog(group="Geometry"));
-  parameter Modelica.SIunits.Angle alpha = 0 "The angle of the reservoir walls (zero angle corresponds to vertical walls)" annotation (
+  parameter SI.Angle alpha = 0 "The angle of the reservoir walls (zero angle corresponds to vertical walls)" annotation (
     Dialog(group = "Geometry"));
   parameter Real f = 0.0008 "Friction factor of the reservoir" annotation (
     Dialog(group = "Geometry"));
@@ -26,19 +26,19 @@ model Reservoir "Model of the reservoir"
 
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_0 = data.T_0 "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter SI.Temperature T_0 = data.T_0 "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
 
-  Modelica.SIunits.Area A "Vertical cross section";
-  Modelica.SIunits.Mass m "Water mass";
-  Modelica.SIunits.MassFlowRate mdot "Water mass flow rate";
-  Modelica.SIunits.VolumeFlowRate Vdot_i "Inlet flow rate";
-  Modelica.SIunits.VolumeFlowRate Vdot_o "Outlet flow rate";
-  Modelica.SIunits.VolumeFlowRate Vdot "Flow rate through the reservoir";
-  Modelica.SIunits.Velocity v "Water velocity";
-  Modelica.SIunits.Momentum M "Water momentum";
-  Modelica.SIunits.Force F_f "Friction force";
+  SI.Area A "Vertical cross section";
+  SI.Mass m "Water mass";
+  SI.MassFlowRate mdot "Water mass flow rate";
+  SI.VolumeFlowRate Vdot_i "Inlet flow rate";
+  SI.VolumeFlowRate Vdot_o "Outlet flow rate";
+  SI.VolumeFlowRate Vdot "Flow rate through the reservoir";
+  SI.Velocity v "Water velocity";
+  SI.Momentum M "Water momentum";
+  SI.Force F_f "Friction force";
   SI.Height h "Water level";
-  Modelica.SIunits.Pressure p_o "Outlet pressure";
+  SI.Pressure p_o "Outlet pressure";
 
   OpenHPL.Interfaces.Contact_o o(p=p_o) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealInput inflow=Vdot_i if useInflow "Conditional input inflow of the reservoir" annotation (Placement(transformation(

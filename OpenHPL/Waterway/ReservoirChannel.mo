@@ -7,7 +7,7 @@ model ReservoirChannel "Reservoir model based on open channel model"
   //// geometrical parameters of the reservoir
   parameter SI.Length W=1000 "Reservoir width";
   parameter SI.Length l=5000 "Reservoir length";
-  parameter Modelica.SIunits.Height H[2] = {2, 2} "Reservoir bed height from left and right side";
+  parameter SI.Height H[2] = {2, 2} "Reservoir bed height from left and right side";
   //// initialization
   parameter SI.Height h_0=50 "Initial water level of the reservoir";
   //// condition of steady state

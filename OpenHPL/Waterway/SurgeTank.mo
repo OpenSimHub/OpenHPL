@@ -7,55 +7,55 @@ model SurgeTank "Model of the surge tank/shaft"
   parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank" annotation (
     Dialog(group = "Surge tank types"));
   // Geometrical parameters of the surge tank
-  parameter Modelica.SIunits.Height H = 120 "Vertical component of the length of the surge shaft" annotation (
+  parameter SI.Height H = 120 "Vertical component of the length of the surge shaft" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Length L = 140 "Length of the surge shaft" annotation (
+  parameter SI.Length L = 140 "Length of the surge shaft" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D = 3.4 "Diameter of the surge shaft" annotation (
+  parameter SI.Diameter D = 3.4 "Diameter of the surge shaft" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
+  parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_so = 1.7 "If Sharp orifice type: Diameter of sharp orifice" annotation (
+  parameter SI.Diameter D_so = 1.7 "If Sharp orifice type: Diameter of sharp orifice" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
-  parameter Modelica.SIunits.Diameter D_t = 1.7 "If Throttle value type: Diameter of throat" annotation (
+  parameter SI.Diameter D_t = 1.7 "If Throttle value type: Diameter of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
-  parameter Modelica.SIunits.Length L_t = 5 "If Throttle value type: Length of throat" annotation (
+  parameter SI.Length L_t = 5 "If Throttle value type: Length of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
 
   // Condition for steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   // steady state values for flow rate and water level in surge tank
-  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 0 "Initial volume flow rate in the surge tank" annotation (
+  parameter SI.VolumeFlowRate Vdot_0 = 0 "Initial volume flow rate in the surge tank" annotation (
     Dialog(group = "Initialization"));
-  parameter Modelica.SIunits.Height h_0 = 69.9 "Initial water height in the surge tank" annotation (
+  parameter SI.Height h_0 = 69.9 "Initial water height in the surge tank" annotation (
     Dialog(group = "Initialization"));
-  parameter Modelica.SIunits.Pressure p_ac = 4*data.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
+  parameter SI.Pressure p_ac = 4*data.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
     Dialog(group = "Initialization",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
-  parameter Modelica.SIunits.Temperature T_ac(displayUnit="degC") = 298.15 "Initial air-cushion temperature"
+  parameter SI.Temperature T_ac(displayUnit="degC") = 298.15 "Initial air-cushion temperature"
     annotation (Dialog(group = "Initialization", enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
   //possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter Modelica.SIunits.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  //parameter SI.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   //// variables
-  Modelica.SIunits.Mass m "Water mass";
-  Modelica.SIunits.Mass m_a = p_ac*A*(L-h_0/cos_theta)*data.M_a/(Modelica.Constants.R*T_ac) "Air mass inside surge tank";
-  Modelica.SIunits.Momentum M "Water momuntum";
-  Modelica.SIunits.Force Mdot "Difference in influent and effulent momentum";
-  Modelica.SIunits.Force F "Total force acting in the surge tank";
-  Modelica.SIunits.Area A = (pi*D ^ 2) / 4 "Cross sectional area of the surge tank";
-  Modelica.SIunits.Area A_t = (pi*D_t ^ 2) / 4 "Cross sectional area of the throttle valve surge tank";
-  Modelica.SIunits.Length l = h / cos_theta "Length of water in the surge tank";
+  SI.Mass m "Water mass";
+  SI.Mass m_a = p_ac*A*(L-h_0/cos_theta)*data.M_a/(Modelica.Constants.R*T_ac) "Air mass inside surge tank";
+  SI.Momentum M "Water momuntum";
+  SI.Force Mdot "Difference in influent and effulent momentum";
+  SI.Force F "Total force acting in the surge tank";
+  SI.Area A = (pi*D ^ 2) / 4 "Cross sectional area of the surge tank";
+  SI.Area A_t = (pi*D_t ^ 2) / 4 "Cross sectional area of the throttle valve surge tank";
+  SI.Length l = h / cos_theta "Length of water in the surge tank";
   Real cos_theta = H / L "Slope ratio";
-  Modelica.SIunits.Velocity v "Water velocity";
-  Modelica.SIunits.Force F_p "Pressure force";
-  Modelica.SIunits.Force F_f "Friction force";
-  Modelica.SIunits.Force F_g "Gravity force";
-  Modelica.SIunits.Pressure p_t "Pressure at top of the surge tank";
-  Modelica.SIunits.Pressure p_b "Pressure at bottom of the surge tank";
+  SI.Velocity v "Water velocity";
+  SI.Force F_p "Pressure force";
+  SI.Force F_f "Friction force";
+  SI.Force F_g "Gravity force";
+  SI.Pressure p_t "Pressure at top of the surge tank";
+  SI.Pressure p_b "Pressure at bottom of the surge tank";
   Real phiSO "Dimensionless factor based on the type of fitting ";
   // initial values for differential variables
-  Modelica.SIunits.Height h(start = h_0) "Water height in the surge tank";
-  Modelica.SIunits.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
+  SI.Height h(start = h_0) "Water height in the surge tank";
+  SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
   // variables for temperature. Not in use for now...
   // Real W_f, W_e;
   // connector (acquisition of algebraic variable, mass flow rate mdot, and node pressure (manifold pressure) p_n)

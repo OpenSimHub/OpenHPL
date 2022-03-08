@@ -4,24 +4,24 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   extends OpenHPL.Icons.Pipe(    vertical=true);
   import Modelica.Constants.pi;
   //// geometrical parameters of the pipe
-  parameter Modelica.SIunits.Height H = 420 "Height difference from the inlet to the outlet of the pipe" annotation (
+  parameter SI.Height H = 420 "Height difference from the inlet to the outlet of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Length L = 600 "length of the pipe" annotation (
+  parameter SI.Length L = 600 "length of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_i = 3.3 "Diametr from the inlet side of the pipe" annotation (
+  parameter SI.Diameter D_i = 3.3 "Diametr from the inlet side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_o = D_i "Diametr from the outlet side of the pipe" annotation (
+  parameter SI.Diameter D_o = D_i "Diametr from the outlet side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Height p_eps = data.p_eps "Pipe roughness height" annotation (
+  parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   //// condition of steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   //// staedy state values for flow rate in all segments of the pipe
-  parameter Modelica.SIunits.VolumeFlowRate Vdot_0[N]=data.Vdot_0*ones(N) "Initial flow rate in the pipe vector" annotation (Dialog(group="Initialization"));
+  parameter SI.VolumeFlowRate Vdot_0[N]=data.Vdot_0*ones(N) "Initial flow rate in the pipe vector" annotation (Dialog(group="Initialization"));
   //// staedy state values for pressure in all segments of the pipe
-  parameter Modelica.SIunits.Height h_s0 = 69 "Initial water head before the pipe, m" annotation (
+  parameter SI.Height h_s0 = 69 "Initial water head before the pipe, m" annotation (
     Dialog(group = "Initialization"));
-  parameter Modelica.SIunits.Pressure p_p0[N]=  1.013e5 + 997 * 9.81 * (h_s0 + H / N / 2):997 * 9.81 * H / N:1.013e5 + 997 * 9.81 * (h_s0 + H / N * (N - 1 / 2)) "Initial presure vector, bar" annotation (
+  parameter SI.Pressure p_p0[N]=  1.013e5 + 997 * 9.81 * (h_s0 + H / N / 2):997 * 9.81 * H / N:1.013e5 + 997 * 9.81 * (h_s0 + H / N * (N - 1 / 2)) "Initial presure vector, bar" annotation (
     Dialog(group = "Initialization"));
   //// segmentation of the pipe
   parameter Integer N = 10 "Number of segments" annotation (
@@ -31,16 +31,16 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
     choices(checkBox = true),
     Dialog(group = "Properties"));
   //// variables
-  Modelica.SIunits.Diameter dD = (D_i - D_o) / N "step in diameter change", D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N) "centered diameter vector in atm. p.", D_[N + 1] = linspace(D_i, D_o, N + 1) "boundary diameter vector in atm. p.";
-  Modelica.SIunits.Area A_atm[N] = D .* D * pi / 4 "centered cross are vector in atm. p.", A_atm_[N + 1] = D_ .* D_ * pi / 4 "boundary cross are vector in atm. p.", A[N] "centered cross are vector", A_[N, 4] "boundary cross are vector", _A_atm[N, 4] "boundary cross are matrix in atm. p.";
-  Modelica.SIunits.Pressure p_p[N] "centered pressure", dp = data.rho * data.g * H / N "initial p. step", p_i "Inlet pressure (LHS)", p_o "Outlet Pressure (RHS)", p_[N, 4] "boundary p. matrix";
-  Modelica.SIunits.Length dx = L / N "length step", dh = H / N "height step";
-  Modelica.SIunits.MassFlowRate mdot[N](start = data.rho * Vdot_0) "centered mass flow", mdot_R "left bound mdot", mdot_V "right bound mdot", mdot_[N, 4] "boundary mdot matrix";
+  SI.Diameter dD = (D_i - D_o) / N "step in diameter change", D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N) "centered diameter vector in atm. p.", D_[N + 1] = linspace(D_i, D_o, N + 1) "boundary diameter vector in atm. p.";
+  SI.Area A_atm[N] = D .* D * pi / 4 "centered cross are vector in atm. p.", A_atm_[N + 1] = D_ .* D_ * pi / 4 "boundary cross are vector in atm. p.", A[N] "centered cross are vector", A_[N, 4] "boundary cross are vector", _A_atm[N, 4] "boundary cross are matrix in atm. p.";
+  SI.Pressure p_p[N] "centered pressure", dp = data.rho * data.g * H / N "initial p. step", p_i "Inlet pressure (LHS)", p_o "Outlet Pressure (RHS)", p_[N, 4] "boundary p. matrix";
+  SI.Length dx = L / N "length step", dh = H / N "height step";
+  SI.MassFlowRate mdot[N](start = data.rho * Vdot_0) "centered mass flow", mdot_R "left bound mdot", mdot_V "right bound mdot", mdot_[N, 4] "boundary mdot matrix";
   Real U[2 * N] "centered states", U_[8, N] "boundary states", F_ap[N] "centered A*rho", F_ap_[N, 4] "bounddary A*rho", S_[2 * N] "source term", F_[2 * N, 4] "F matrix", lam1[N, 4] "eigenvalue '+'", lam2[N, 4] "eigenvalue '-'";
-  Modelica.SIunits.Density rho[N] "centered density", rho_[N, 4] "boundary density";
-  Modelica.SIunits.Velocity v_[N, 4] "bounds velocity", v[N] "centered velocity";
-  Modelica.SIunits.VolumeFlowRate Vdot[N] "centered volumetric flow";
-  Modelica.SIunits.Force F_f[N] "centered friction force vector";
+  SI.Density rho[N] "centered density", rho_[N, 4] "boundary density";
+  SI.Velocity v_[N, 4] "bounds velocity", v[N] "centered velocity";
+  SI.VolumeFlowRate Vdot[N] "centered volumetric flow";
+  SI.Force F_f[N] "centered friction force vector";
   Real theta = 1.3 "parameter for slope limiter";
   extends OpenHPL.Interfaces.TwoContact;
 public
