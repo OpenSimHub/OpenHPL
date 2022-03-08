@@ -2,7 +2,7 @@ within OpenHPL.Tests;
 model HPSTSharpOrifice
   "Model of waterway of the HP system with simplified models for conduits, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_0=50) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=50) annotation (Placement(visible=true, transformation(
         origin={-90,30},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -22,7 +22,7 @@ model HPSTSharpOrifice
     L=700,
     D_i=6,
     D_o=6)                                      annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_0=5, Input_level=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=5, Input_level=false) annotation (Placement(visible=true, transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));

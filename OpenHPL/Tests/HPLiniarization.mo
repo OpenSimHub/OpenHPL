@@ -3,7 +3,7 @@ model HPLiniarization "Simple HP system model for liniarization"
   extends Modelica.Icons.Example;
   input Real u(start = 0.7493);
   output Real dotV;
-  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -12,7 +12,7 @@ model HPLiniarization "Simple HP system model for liniarization"
     H=0.5,
     L=600,
     Vdot_0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
         origin={72,40},
         extent={{-10,10},{10,-10}},
         rotation=180)));

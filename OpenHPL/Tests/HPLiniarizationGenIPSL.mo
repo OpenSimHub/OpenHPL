@@ -4,7 +4,7 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
   input Real u = 0.574;
   output Real w, dotV, P;
   //, P;
-  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -13,7 +13,7 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
     L=600,
     H=0.5,
     Vdot_0=18.5381) annotation (Placement(visible=true, transformation(extent={{50,30},{70,50}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
         origin={90,36},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -55,7 +55,7 @@ model HPLiniarizationGenIPSL "Synergy with OpenIPSL library(generator + governor
         origin={28,36},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Data data(V_0=4.49) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=4.49) annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));

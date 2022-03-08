@@ -1,6 +1,6 @@
 within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
-  outer Data data "Using global parameters";
+  outer Data data "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
   //// constant water level in the reservoir
   parameter Boolean useLevel=false "If checked, the \"level\" connector controls the water level of the reservoir"
@@ -10,13 +10,13 @@ model Reservoir "Model of the reservoir"
   parameter Boolean useInflow=false "If checked, the \"inflow\" connector is used"   annotation (
     Dialog(group="Setup", enable=not useLevel),
     choices(checkBox = true));
-  parameter SI.Height H_0=50 "Initial water level above intake"
+  parameter SI.Height h_0=50 "Initial water level above intake"
     annotation (Dialog(group="Setup",   enable=not useLevel));
   //// geometrical parameters in case when the inflow to reservoir is used
-  parameter SI.Length l=500 "Length of the reservoir"                 annotation (
+  parameter SI.Length L=500 "Length of the reservoir"                 annotation (
     Dialog(group="Geometry"));
-  parameter Modelica.SIunits.Length w = 100 "Bed width of the reservoir" annotation (
-    Dialog(group = "Geometry"));
+  parameter SI.Length W=100 "Bed width of the reservoir"                 annotation (
+    Dialog(group="Geometry"));
   parameter Modelica.SIunits.Angle alpha = 0 "The angle of the reservoir walls (zero angle corresponds to vertical walls)" annotation (
     Dialog(group = "Geometry"));
   parameter Real f = 0.0008 "Friction factor of the reservoir" annotation (
@@ -49,17 +49,17 @@ model Reservoir "Model of the reservoir"
 
 initial equation
    if not useLevel then
-    h  =H_0;
+    h  =h_0;
    end if;
 equation
-  A =h  * (w +h  * Modelica.Math.tan(alpha))
+  A =h  * (W +h  * Modelica.Math.tan(alpha))
     "Vertical cross section of the reservoir";
-  m = data.rho * A *l  "Water mass in reservoir";
+  m = data.rho * A *L  "Water mass in reservoir";
   Vdot = Vdot_i - Vdot_o "Volumetric water flow rate";
   mdot = data.rho * Vdot "Water mass flow rate";
   v = mdot / data.rho / A "Water velocity";
-  M =l  * mdot "Momentum based on the length";
-  F_f = 1 / 8 * data.rho * f *l  * (w + 2 *h  / Modelica.Math.cos(alpha)) * v * abs(v)
+  M =L  * mdot "Momentum based on the length";
+  F_f = 1 / 8 * data.rho * f *L  * (W + 2 *h  / Modelica.Math.cos(alpha)) * v * abs(v)
    "Friction force due to movement along the reservoir length";
   if useLevel then
     Vdot_i - Vdot_o = 0;

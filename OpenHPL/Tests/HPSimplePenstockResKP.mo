@@ -7,7 +7,7 @@ model HPSimplePenstockResKP "Model of HP system with using reservoir model based
     Placement(visible = true, transformation(extent = {{-12, -4}, {8, 16}}, rotation = 0)));
   Waterway.Pipe intake annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
   Waterway.Pipe discharge(H=5, L=600) annotation (Placement(visible=true, transformation(extent={{46,26},{66,46}}, rotation=0)));
-  Waterway.Reservoir tail(H_0=10) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=10) annotation (Placement(visible=true, transformation(
         origin={92,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -34,7 +34,7 @@ model HPSimplePenstockResKP "Model of HP system with using reservoir model based
         rotation=0)));
   Waterway.ReservoirChannel reservoir(
     N=20,
-    w=1000,
+    W=1000,
     SteadyState=true) annotation (Placement(transformation(extent={{-102,52},{-82,72}})));
 equation
   connect(turbine.P_out, aggregate.P_in) annotation (

@@ -11,7 +11,7 @@ model HPSimple_OpenChannel "Example with the open channel"
   Waterway.Pipe discharge(     L=600, H=-5)
                                       annotation (Placement(visible=true, transformation(extent={{-40,-10},{-20,10}},
                                                                                                                    rotation=0)));
-  Waterway.Reservoir tail(H_0=5)  annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=5)  annotation (Placement(visible=true, transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -28,18 +28,18 @@ model HPSimple_OpenChannel "Example with the open channel"
         origin={-60,0},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  inner OpenHPL.Data data(V_0=18.9979) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=18.9979) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Waterway.Pipe pipe            annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
   Waterway.OpenChannel openChannel(
     N=100,
-    w=50,
-    h0=vector([ones(68)*0.30417; 0.3045; 0.3089; 0.33; 0.398; linspace(
+    W=50,
+    h_0=vector([ones(68)*0.30417; 0.3045; 0.3089; 0.33; 0.398; linspace(
         0.519,
         5.00164,
-        28)]))                                  annotation (Placement(transformation(extent={{0,-10},{20,10}})));
+        28)])) annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   Waterway.SurgeTank surgeTank(h_0=73.9171)
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
   Waterway.Pipe pipe1(H=0, L=10)

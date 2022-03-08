@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified models for penstock, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_0=46.5, UseInFlow=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=46.5, UseInFlow=false) annotation (Placement(visible=true, transformation(
         origin={-94,64},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -19,7 +19,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
     H=3.5,
     L=601,
     p_eps=0.075) annotation (Placement(visible=true, transformation(extent={{44,-24},{64,-4}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_0=2, Input_level=true) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=2, Input_level=true) annotation (Placement(visible=true, transformation(
         origin={94,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -32,7 +32,7 @@ model HydroCordModeKPlFrancisDraftTube "Model of HP system with simplified model
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Data data(V_0=0.0058466) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=0.0058466) annotation (Placement(visible=true, transformation(
         origin={-86,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));

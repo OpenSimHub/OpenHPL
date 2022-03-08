@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HPElasticKPPenstockANDIntake "Model of HP system with elastic penctock and intake (KP), but simplified models for turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
         origin={-92,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -11,7 +11,7 @@ model HPElasticKPPenstockANDIntake "Model of HP system with elastic penctock and
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
         origin={78,38},
         extent={{-10,10},{10,-10}},
         rotation=180)));

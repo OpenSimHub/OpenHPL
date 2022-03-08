@@ -1,7 +1,7 @@
 within OpenHPL.Examples;
 model HPSimple_Francis "Model of the HP system with Francis turbine and simplified models for conduits (connected to the grid generator is also used)"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
         origin={-90,50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -9,7 +9,7 @@ model HPSimple_Francis "Model of the HP system with Francis turbine and simplifi
     Placement(visible = true, transformation(origin={50,30},    extent={{10,-10},{-10,10}},      rotation = 0)));
   OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,40},{-50,60}}, rotation=0)));
   Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}},rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -57,7 +57,7 @@ model HPSimple_Francis "Model of the HP system with Francis turbine and simplifi
         origin={30,0},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Data data(V_0=4.54) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=4.54) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));

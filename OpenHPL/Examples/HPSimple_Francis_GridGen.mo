@@ -2,7 +2,7 @@ within OpenHPL.Examples;
 model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Examples.BaseClasses.MachineTestBase(pwLine2(displayPF=true), pwLine1(displayPF=true));
-  OpenHPL.Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
         origin={-80,-50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -10,7 +10,7 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
                                                                                                                     rotation=0)));
   OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{48,-60},{68,-40}},
                                                                                                                              rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
         origin={84,-50},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -53,7 +53,7 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
         origin={32,-50},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  inner OpenHPL.Data data(V_0=4.49) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=4.49) annotation (Placement(visible=true, transformation(
         origin={-90,70},
         extent={{-10,-10},{10,10}},
         rotation=0)));

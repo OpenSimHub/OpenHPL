@@ -2,11 +2,11 @@ within OpenHPL.Tests;
 model Reservoir
  extends Modelica.Icons.Example;
 
-  OpenHPL.Waterway.Reservoir head1_constlevel(H_0=10) annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
-  OpenHPL.Waterway.Reservoir tail(H_0=12) annotation (Placement(transformation(extent={{60,-10},{40,10}})));
+  OpenHPL.Waterway.Reservoir head1_constlevel(h_0=10) annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=12) annotation (Placement(transformation(extent={{60,-10},{40,10}})));
   OpenHPL.Waterway.Pipe pipe1(H=0) annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   inner OpenHPL.Data data annotation (Placement(transformation(extent={{-92,76},{-72,96}})));
-  Waterway.Reservoir head2_level(useLevel=true, H_0=10) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+  Waterway.Reservoir head2_level(useLevel=true, h_0=10) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Waterway.Pipe pipe2(H=0) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp ramp2(
     height=1,
@@ -16,7 +16,7 @@ model Reservoir
   Waterway.Reservoir head3_flow(
     useLevel=true,
     useInflow=false,
-    H_0=10)            annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
+    h_0=10)            annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
   Waterway.Pipe pipe3(H=0) annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   Modelica.Blocks.Sources.Ramp ramp3(
     height=-30,
