@@ -1,7 +1,7 @@
 within OpenHPL.Interfaces;
 connector Contact_o "Outlet contact"
   extends Contact;
-    annotation (defaultComponentName="i",
+    annotation (defaultComponentName="o",
               Diagram(graphics={Ellipse(
           extent={{-40,40},{40,-40}},
           fillColor={0,128,255},
