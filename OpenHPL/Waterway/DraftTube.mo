@@ -1,4 +1,4 @@
-within OpenHPL.Waterway;
+﻿within OpenHPL.Waterway;
 model DraftTube "Model of a draft tube for reaction turbines"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.DraftTube;
@@ -23,18 +23,23 @@ model DraftTube "Model of a draft tube for reaction turbines"
 
   parameter SI.Conversions.NonSIunits.Angle_deg theta = 5 "Angle at which conical diffuser is inclined" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
-  parameter SI.Conversions.NonSIunits.Angle_deg theta_moody = 30 "Angle at which Moody spreading pipes are branched possible value is 15,30,45,60 or 90)" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
+  parameter Integer theta_moody = 30 "Angle in deg at which Moody spreading pipes are branched."
+   annotation (Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe),
+    choices( choice = 15 "15°",
+             choice = 30 "30°",
+             choice = 45 "45°",
+             choice = 60 "60°",
+             choice = 90 "90°"));
   parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
-  // condition of steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
-  // staedy state value for flow rate
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial volume flow rate" annotation (Dialog(group="Initialization"));
+
   // possible parameters for temperature variation. Not finished...
   // parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   // parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
-  // variables
+
+  /* variables */
   SI.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
   SI.Area A_i = D_i ^ 2 * pi / 4 "Inlet cross-section area of draft tube";
   SI.Area A_o = D_o ^ 2 * pi / 4 "Outlet cross-section area of draft tube";
@@ -57,26 +62,21 @@ model DraftTube "Model of a draft tube for reaction turbines"
   SI.Force F_fm "Fluid frictional force in the Main section of Moody spreading pipe";
   SI.Force F_fb "Fluid frictional force in the Branch section of Moody spreading pipe";
 
-  //Real cos_theta = H / L "slope ratio";
   SI.Velocity v "Water velocity for conical diffuser";
   SI.Velocity v_m "Water velocity inside Main section of Moody spreading pipes";
   SI.Velocity v_b "Water velocity inside Branch section of Moody spreading pipes";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
-  //SI.Pressure dp = p_o-p_i "Pressure drop in and out of draft tube";
+  SI.Pressure dp = p_o-p_i "Pressure drop in and out of draft tube";
   Real phi_d "Generalized friction factor for draft tube";
   Real phi_d_o "Initial generalized friction factor for Moody spreading pipes";
 
   SI.VolumeFlowRate Vdot(start = Vdot_0, fixed = true) "Volume flow rate";
   SI.VolumeFlowRate Vdot_b "Volume flow rate for Branch section of Moody spreading pipes";
 
-  Real cos_theta = Modelica.Math.cos(SI.Conversions.from_deg(theta))
-                                                                                  "Calculating cos_theta";
-  Real cos_theta_moody = Modelica.Math.cos(SI.Conversions.from_deg(theta_moody))
-                                                                                              "Calculating cos_theta_moody";
-
-  Real cos_theta_moody_by_2 = Modelica.Math.cos(SI.Conversions.from_deg(theta_moody/2))
-                                                                                              "Calculating cos_theta_moody_by_2";
+  Real cos_theta = cos(SI.Conversions.from_deg(theta)) "Calculating cos_theta";
+  Real cos_theta_moody = cos(SI.Conversions.from_deg(theta_moody)) "Calculating cos_theta_moody";
+  Real cos_theta_moody_by_2 = cos(SI.Conversions.from_deg(theta_moody/2)) "Calculating cos_theta_moody_by_2";
 
  // connectors
   extends OpenHPL.Interfaces.ContactPort;
@@ -130,9 +130,8 @@ equation
     F_fm = Functions.DarcyFriction.Friction(v_m, D_i, L_m, data.rho, data.mu, p_eps);
     F_fb = Functions.DarcyFriction.Friction(v_b, D_o, L_b, data.rho, data.mu, p_eps);
 
-    // calculating phi_d
-    phi_d = 1+(v_b/v_m)^2-2*v_b/v_m*cos_theta_moody-phi_d_o*(v_b/v_m)^2;
-    // phi_d_o is calculated based on theta_moody
+     phi_d = 1+(v_b/v_m)^2-2*v_b/v_m*cos_theta_moody-phi_d_o*(v_b/v_m)^2;
+
     if theta_moody == 15 then
       phi_d_o = 0.04;
     elseif theta_moody == 30 then
@@ -143,15 +142,15 @@ equation
       phi_d_o = 0.64;
     elseif theta_moody == 90 then
       phi_d_o = 1;
-    end if;
+    end if "phi_d_o is calculated based on theta_moody";
 
   end if;
   // connector
-    p_i = i.p;
-    p_o = o.p;
-  annotation (
-    Documentation(info="<html>
-<p>Two of the draft tubes are modeled using <em>Momentum balance . </em>They are:</p>
+  p_i = i.p;
+  p_o = o.p;
+  annotation (Documentation(info="<html>
+    <p>Two of the draft tubes are modeled using <em>Momentum balance</em>.
+    They are:</p>
 <ul>
 <li><strong>Conical diffuser:</strong> It is the most well-know draft tube which has efficiency of around 90&percnt;  and mostly used for low head reaction turbines.</li>
 <li><strong>Moody spreading draft tubes:</strong> When conical diffuser length exceeds beyond its stability for high head reaction turbines, either a elbow type draft tube is used which has around 70&percnt; of efficiency. However, other choice is to use Moody spreading draft tube that has efficiency of around 80&percnt;. The construction and design of Moody spreading draft tube is daunting and time consuming but it is mostly chosen for handling water whril at turbine&apos;s outlet.</li>
