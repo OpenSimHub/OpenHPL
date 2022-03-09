@@ -111,11 +111,11 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-This is the hydrology model that is based on the HBV hydrological model. 
+This is the hydrology model that is based on the HBV hydrological model.
 This model can be used to define the inflow (runoff) to the reservoir.</p>
-<p>Here, the input data are used for the model and this data is in: 
+<p>Here, the input data are used for the model and this data is in:
 <a href=\"modelica://OpenHPL/Resources/Tables/\">Resources/Tables/...</a></p>
-<p>More info about model can be found in 
+<p>More info about model can be found in
 <a href=\"modelica://OpenHPL.UsersGuide.References\">[Shafiee2013]</a>.</p>
 </html>"));
 end RunOff_zones;

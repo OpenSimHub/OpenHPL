@@ -34,7 +34,7 @@ possible to model the electrical part for the hydropower system.
 </li>
 </ol>
 <p>
-A detailed description of each hydropower unit and their uses are presented below in 
+A detailed description of each hydropower unit and their uses are presented below in
 the <a href=\"modelica://OpenHPL/Resources/Documents/UsersGuide.pdf\">User's Guide PDF</a>
 and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2019]</a>.
 </p>

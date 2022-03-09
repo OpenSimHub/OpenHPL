@@ -3,7 +3,7 @@ model Turbine "Simple turbine model with mechanical connectors"
   outer Data data "Using standard class with global parameters";
   extends Icons.Turbine;
 
-  parameter Boolean ValveCapacity =  true "If checked the guide vane capacity C_v should be specified, 
+  parameter Boolean ValveCapacity =  true "If checked the guide vane capacity C_v should be specified,
     otherwise specify the nominal turbine parameters (net head and flow rate)"
     annotation (Dialog(group = "Nominal turbine parameters"), choices(checkBox = true));
   parameter Real C_v = 3.7 "Guide vane 'valve capacity'"
@@ -20,7 +20,7 @@ model Turbine "Simple turbine model with mechanical connectors"
   parameter SI.Efficiency eta_h = 0.9 "Turbine hydraulic efficiency"
     annotation (Dialog(group = "Efficiency data", enable = ConstEfficiency));
   parameter Real lookup_table[:, :] = [0, 0.4; 0.2, 0.7; 0.5, 0.9; 0.95, 0.95; 1.0, 0.93]
-    "Look-up table for the turbine efficiency, described by a table matrix, 
+    "Look-up table for the turbine efficiency, described by a table matrix,
      where the first column is a pu value of the guide vane opening,
      and the second column is a pu value of the turbine efficiency."
     annotation (Dialog(group = "Efficiency data", enable = not ConstEfficiency));

@@ -53,8 +53,8 @@ equation
   o.p = i.p - dp "Pressure of the output connector";
   annotation (
     Documentation(info="<html>
-    <p>Various possibilities of the fittings for the pipes with different diameters 
-    and also the orifices in the pipe. 
+    <p>Various possibilities of the fittings for the pipes with different diameters
+    and also the orifices in the pipe.
     Here, the pressure drop due to these constrictions is defined.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\"><tr>
 <td><p><em>Squared Reduction:</em></p></td>

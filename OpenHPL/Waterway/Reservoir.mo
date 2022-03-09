@@ -23,7 +23,6 @@ model Reservoir "Model of the reservoir"
     Dialog(group = "Geometry"));
   //// conditions of use
 
-
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   //parameter SI.Temperature T_0 = data.T_0 "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
@@ -78,11 +77,11 @@ equation
   annotation ( Documentation(info="<html>
 <p>Simple model of the reservoir with different options:</p>
 <ul>
-<li><em>Default</em>: Container with an initial water level of <code>H_0</code>. 
+<li><em>Default</em>: Container with an initial water level of <code>H_0</code>.
  The water level will vary according to the outlet volume flow rate.</li>
 <li><code>useLevel</code>: The water level is determined by the <code>level</code> input.</li>
 <li><code>useInflow</code>: Reservoir starts with an initial water level of <code>H_0</code>
- but uses the <code>inflow</code> input as additional water source (can also be negative 
+ but uses the <code>inflow</code> input as additional water source (can also be negative
 to simulate evaporation.</li>
 </ul>
 <p>

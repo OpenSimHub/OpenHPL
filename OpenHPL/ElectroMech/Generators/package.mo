@@ -4,5 +4,4 @@ package Generators "Collection of generator models"
 
   extends Icons.Generator;
 
-
 end Generators;

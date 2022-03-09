@@ -4,7 +4,4 @@ package Controllers "Collection of different controllers"
 
   extends Icons.Governor;
 
-
-
-
 end Controllers;

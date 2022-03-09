@@ -15,7 +15,7 @@ algorithm
   end if;
   annotation (
     Documentation(info="<html>
-    <p>Define dimension factor &phi; for Thick Orifice.  
+    <p>Define dimension factor &phi; for Thick Orifice.
     Orifice length should be provided and this length should not be greater than 5D<sub>o</sub>.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\">
 <tr>

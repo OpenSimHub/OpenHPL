@@ -75,7 +75,6 @@ model DraftTube "Model of a draft tube for reaction turbines"
   Real cos_theta_moody = Modelica.Math.cos(SI.Conversions.from_deg(theta_moody))
                                                                                               "Calculating cos_theta_moody";
 
-
   Real cos_theta_moody_by_2 = Modelica.Math.cos(SI.Conversions.from_deg(theta_moody/2))
                                                                                               "Calculating cos_theta_moody_by_2";
 

@@ -231,8 +231,8 @@ This mechanistic turbine model does not work really well for low loads (&lt;10% 
 However there is parameters that could be tuned for low load regimes.
 These are <code>u_min</code> and <code>k_ft4</code>.</p>
 
-<p>More info about the mechanistic turbine model can be found in: 
-<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2018]</a> and about 
+<p>More info about the mechanistic turbine model can be found in:
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2018]</a> and about
 the servo (also turbine model) in:
 <a href=\"modelica://OpenHPL/Resources/Documents/Turbines_model.pdf\">Resources/Documents/Turbines_model.pdf</a>.</p>
 </html>"),

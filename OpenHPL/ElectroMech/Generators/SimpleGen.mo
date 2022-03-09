@@ -23,7 +23,7 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
 <p>
 The generator can be loaded either:</p>
 <ul>
-<li>via the mechanical shaft connector (e.g., another <code>SimpleGen</code> as representation 
+<li>via the mechanical shaft connector (e.g., another <code>SimpleGen</code> as representation
 of an electric grid. The input <code>P_load</code> should be set to 0 in this case.</li>
 <li>or via the input connector <code>P_load</code> specifying the connected electrical load.</li>
 </ul>

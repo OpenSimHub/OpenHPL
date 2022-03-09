@@ -5,11 +5,11 @@ class Copyright "Disclaimer<html>
 <ul>
 <li><a href=\"https://www.usn.no/english/\">University of South-Eastern Norway</a> (USN)</li>
 </ul>
-<p>The maintainers can be contacted by email: 
+<p>The maintainers can be contacted by email:
   <a href=\"mailto:OpenHPL@opensimhub.org\">OpenHPL@opensimhub.org</a></p>
-<p>This Source Code Form is subject to the terms of the 
+<p>This Source Code Form is subject to the terms of the
   <a href=\"modelica://OpenHPL/Resources/LICENSE\">Mozilla Public License, v. 2.0</a>.</p>
-<p>If a copy of the MPL was not distributed with this file, 
+<p>If a copy of the MPL was not distributed with this file,
 You can obtain one at <a href=\"http://mozilla.org/MPL/2.0/\">http://mozilla.org/MPL/2.0</a>.</p>
 </html>"
 
