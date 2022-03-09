@@ -13,7 +13,6 @@ model MCB "Mechanical equivalent of an electrical Main Circuit Breaker"
   Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=deltaSpeed*2*C.pi*data.f_0)
                                                                                       annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
-        rotation=0,
         origin={0,50})));
   Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
   Modelica.Mechanics.Rotational.Sensors.RelSpeedSensor relSpeedSensor annotation (Placement(transformation(extent={{60,40},{80,20}})));

@@ -2,13 +2,12 @@ within OpenHPL.Examples;
 model HPSimple_Francis_IPSLGenGov "Synergy with OpenIPSL library(generator + governor)"
   //input Real u;
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-86,60},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,50},{-50,70}}, rotation=0)));
-  Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,30},{70,50}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
+  Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{50,30},{70,50}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={88,40},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -17,14 +16,12 @@ model HPSimple_Francis_IPSLGenGov "Synergy with OpenIPSL library(generator + gov
     D_i=3,
     D_o=3,
     H=428.5,
-    L=600) annotation (Placement(visible=true, transformation(
+    L=600) annotation (Placement(transformation(
         origin={0,52},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.9392) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.9392) annotation (Placement(transformation(
         origin={-30,60},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Francis turbine(
     D_i=1.632,
     GivenData=true,
@@ -50,14 +47,12 @@ model HPSimple_Francis_IPSLGenGov "Synergy with OpenIPSL library(generator + gov
     u_end_=2.36,
     u_start_=2.23,
     w_1_=0.2,
-    w_v_=0.2) annotation (Placement(visible=true, transformation(
+    w_v_=0.2) annotation (Placement(transformation(
         origin={30,40},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data(Vdot_0=4.49671) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data(Vdot_0=4.49671) annotation (Placement(transformation(
         origin={-90,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Machines.PSAT.Order2 order2_1(D = 0, M = 10,
     P_0=16035269.869201,
     Q_0=11859436.505981,
@@ -69,24 +64,24 @@ model HPSimple_Francis_IPSLGenGov "Synergy with OpenIPSL library(generator + gov
   Modelica.Blocks.Math.Gain RealizerAng(k = 50 * Modelica.Constants.pi / 3) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {52, 10})));
   inner OpenIPSL.Electrical.SystemBase SysData annotation (
-    Placement(visible = true, transformation(extent = {{-96, -100}, {-72, -80}}, rotation = 0)));
+    Placement(transformation(extent = {{-96, -100}, {-72, -80}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine1(X = 0.1, R = 0.01, G = 0, B = 0.0005) annotation (
-    Placement(visible = true, transformation(origin = {16, -88}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
+    Placement(transformation(origin = {16, -88}, extent = {{-6, -6}, {6, 6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLinewithOpening1(G = 0, R = 0.01, X = 0.1, opening = 1, B = 0.0005, t1 = 600, t2 = 600.15) annotation (
-    Placement(visible = true, transformation(origin = {56, -64}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
+    Placement(transformation(origin = {56, -64}, extent = {{-6, -6}, {6, 6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine2(G = 0, R = 0.01, X = 0.1, B = 0.0005) annotation (
-    Placement(visible = true, transformation(origin = {16, -64}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
+    Placement(transformation(origin = {16, -64}, extent = {{-6, -6}, {6, 6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine3(G = 0, R = 0.01, X = 0.1, B = 0.0005) annotation (
-    Placement(visible = true, transformation(origin = {58, -90}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
+    Placement(transformation(origin = {58, -90}, extent = {{-6, -6}, {6, 6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine4(G = 0, R = 0.01, X = 0.1, B = 0.0005) annotation (
-    Placement(visible = true, transformation(origin = {56, -40}, extent = {{-5.99999, -5.99998}, {5.99999, 6}}, rotation = 0)));
+    Placement(transformation(origin = {56, -40}, extent = {{-5.99999, -5.99998}, {5.99999, 6}})));
   OpenIPSL.Electrical.Loads.PSAT.PQ     pwLoadPQ1(P_0=8000000, Q_0=6000000)               annotation (
-    Placement(visible = true, transformation(origin = {90, -52}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+    Placement(transformation(origin = {90, -52}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
   OpenIPSL.Electrical.Loads.PSAT.PQvar            pwLoadPQ2(
     P_0=8000000,
     Q_0=6000000,
     dP1(displayUnit="MW") = 1000000,                                                                                                    t_end_1 = 1100, t_end_2 = 1e10, t_start_1 = 1000, t_start_2 = 1e10) annotation (
-    Placement(visible = true, transformation(origin = {90.0335, -90.2889}, extent = {{-6.2889, -6.0335}, {6.2889, 6.0335}}, rotation = 90)));
+    Placement(transformation(origin = {90.0335, -90.2889}, extent = {{-6.2889, -6.0335}, {6.2889, 6.0335}}, rotation = 90)));
   OpenIPSL.Electrical.Buses.Bus bus annotation (
     Placement(transformation(extent = {{-14, -86}, {6, -66}})));
   OpenIPSL.Electrical.Buses.Bus bus1 annotation (

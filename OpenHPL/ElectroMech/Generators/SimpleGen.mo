@@ -4,7 +4,6 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
   extends OpenHPL.Icons.Generator;
 
   Modelica.Blocks.Interfaces.RealInput Pload(unit="W") "Electrical load power demand" annotation (Placement(
-      visible=true,
       transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,

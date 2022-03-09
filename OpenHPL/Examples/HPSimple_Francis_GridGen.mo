@@ -2,15 +2,12 @@ within OpenHPL.Examples;
 model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Examples.BaseClasses.MachineTestBase(pwLine2(displayPF=true), pwLine1(displayPF=true));
-  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-80,-50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-60,-60},{-40,-40}},
-                                                                                                                    rotation=0)));
-  OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{48,-60},{68,-40}},
-                                                                                                                             rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+  OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(transformation(extent={{48,-60},{68,-40}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={84,-50},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -18,14 +15,12 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
     L=600,
     H=428.5,
     D_i=3,
-    D_o=3) annotation (Placement(visible=true, transformation(
+    D_o=3) annotation (Placement(transformation(
         origin={4,-50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(transformation(
         origin={-24,-50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Francis turbine(
     D_i=1.632,
     GivenData=true,
@@ -49,38 +44,35 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
     r_Y_=1.2,
     r_v_=1.1,
     w_1_=0.2,
-    w_v_=0.2) annotation (Placement(visible=true, transformation(
+    w_v_=0.2) annotation (Placement(transformation(
         origin={32,-50},
-        extent={{-10,10},{10,-10}},
-        rotation=0)));
-  inner OpenHPL.Data data(Vdot_0=4.49) annotation (Placement(visible=true, transformation(
+        extent={{-10,10},{10,-10}})));
+  inner OpenHPL.Data data(Vdot_0=4.49) annotation (Placement(transformation(
         origin={-90,70},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Machines.PSAT.Order2 order2_1(D = 0, M = 10,
     P_0=16035269.869201,
     Q_0=11859436.505981,
     Sn=120000000,
     Vn=400000,                                                                                                                       ra = 0.001, w(fixed = true), x1d = 0.302) annotation (
-    Placement(visible = true, transformation(extent={{-40,-10},{-20,10}},   rotation = 0)));
+    Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Blocks.Math.Gain PSI_to_Ppu(k=1/turbine.P_n)
                                                       annotation (
-    Placement(visible = true, transformation(origin={-59,-5},     extent={{-5,-5},{5,5}},      rotation = 0)));
-  Modelica.Blocks.Math.Gain wpu_to_wSI(k=2*Modelica.Constants.pi/60*turbine.n_n) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin={-59,-5},     extent={{-5,-5},{5,5}})));
+  Modelica.Blocks.Math.Gain wpu_to_wSI(k=2*Modelica.Constants.pi/60*turbine.n_n) annotation (Placement(transformation(
         origin={-60,20},
         extent={{-6,6},{6,-6}},
         rotation=180)));
   OpenHPL.Controllers.Governor governor(Pn = turbine.P_n, Y_gv_ref = 0.1)
-                                       annotation (Placement(visible=true, transformation(origin = {20, -72}, extent = {{-10, -10}, {10, 10}},
-                                                                                                                    rotation=0)));
+                                       annotation (Placement(transformation(origin = {20, -72}, extent = {{-10, -10}, {10, 10}})));
   //(a = 7.862E-25, c = 1.108E-08, d = -5.344E-02, b = -1.010E-16)
-  Modelica.Blocks.Math.Gain fpu_to_fSI(k=SysData.fn) annotation (Placement(visible=true, transformation(
+  Modelica.Blocks.Math.Gain fpu_to_fSI(k=SysData.fn) annotation (Placement(transformation(
         origin={-50,-90},
         extent={{6,6},{-6,-6}},
         rotation=180)));
   Modelica.Blocks.Sources.Ramp power(duration = 1, height = +1e6, offset = 12e6,
     startTime=200)                                                                                  annotation (
-    Placement(visible = true, transformation(origin={-10,-72},  extent={{-8,-8},{8,8}},      rotation = 0)));
+    Placement(transformation(origin={-10,-72},  extent={{-8,-8},{8,8}})));
 equation
   connect(fpu_to_fSI.y, governor.f) annotation (
     Line(points={{-43.4,-90},{4,-90},{4,-76},{8,-76},{8,-76}},          color = {0, 0, 127}));

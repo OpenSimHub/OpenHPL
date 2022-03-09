@@ -15,6 +15,5 @@ partial package Water "Hydro icon"
         Line(
           points={{-60,40},{-40,28},{-20,48},{0,28},{20,48},{40,28},{60,40}},
           color={28,108,200},
-          smooth=Smooth.Bezier)}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, grid={2,2})));
+          smooth=Smooth.Bezier)}));
 end Water;

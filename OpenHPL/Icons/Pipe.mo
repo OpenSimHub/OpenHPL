@@ -27,7 +27,6 @@ partial class Pipe "Pipe icon"
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={175,175,175},
-          origin={0,0},
           rotation=-45,
           visible=vertical),
         Rectangle(
@@ -35,7 +34,6 @@ partial class Pipe "Pipe icon"
           lineColor={28,108,200},
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
-          origin={0,0},
           rotation=-45,
           visible=vertical),
         Text(

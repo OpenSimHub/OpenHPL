@@ -17,7 +17,6 @@ model Grid "Model of a mechanical grid equivalent"
                                    power(y=dP2.y));
 
   Modelica.Blocks.Interfaces.RealInput Pload(unit="W") "Electrical load power demand" annotation (Placement(
-      visible=true,
       transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
@@ -35,7 +34,6 @@ model Grid "Model of a mechanical grid equivalent"
   Modelica.Blocks.Math.Product product annotation (Placement(transformation(extent={{-24,62},{-14,72}})));
   Modelica.Blocks.Math.Add dP2(k2=-1) annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
-        rotation=0,
         origin={-20,30})));
 equation
   connect(dF.u1, toHz.y) annotation (Line(points={{38,-60},{88.6,-60},{88.6,-40}}, color={0,0,127}));

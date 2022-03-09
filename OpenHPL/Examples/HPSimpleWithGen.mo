@@ -1,19 +1,18 @@
 within OpenHPL.Examples;
 model HPSimpleWithGen "Model of waterway of the HP system with simplified models for conduits, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-90,30},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(
     duration=30,
     height=-0.9,
     offset=1,
     startTime=200)                                                                                        annotation (
-    Placement(visible = true, transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,20},{-50,40}}, rotation=0)));
-  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5)                    annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}})));
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
+  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5)                    annotation (Placement(transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -22,25 +21,21 @@ model HPSimpleWithGen "Model of waterway of the HP system with simplified models
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(visible=true, transformation(
+    vertical=true) annotation (Placement(transformation(
         origin={0,30},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(
         origin={-30,30},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Turbines.Turbine turbine(
     enable_P_out=true,
     C_v=3.7,
-    ConstEfficiency=true) annotation (Placement(visible=true, transformation(
+    ConstEfficiency=true) annotation (Placement(transformation(
         origin={30,10},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Generators.SimpleGen simpleGen annotation (Placement(transformation(extent={{20,40},{40,60}})));
   Modelica.Blocks.Math.Gain loadLevel(k=1) annotation (Placement(transformation(extent={{72,60},{52,80}})));
 equation

@@ -62,7 +62,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
                 iconTransformation(extent={{100,-50},{120,-30}})));
   Modelica.Blocks.Interfaces.RealOutput w if enable_w "Angular velocity of the generator"
-    annotation (Placement(transformation(extent={{100,30},{120,50}},                                                                             rotation=0),
+    annotation (Placement(transformation(extent={{100,30},{120,50}}),
       iconTransformation(extent={{100,30},{120,50}})));
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_b flange(phi(start=0, fixed=true))

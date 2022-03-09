@@ -60,8 +60,8 @@ model SynchGen "Simple model of the generator connected to the grid"
   //// connectors
   Modelica.Blocks.Interfaces.RealOutput f = np / 120 * 30 * w / pi if UseFrequencyOutput "Output generator frequency" annotation (
     Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealOutput w_out = w "Output of the generator's angular velocity" annotation (Placement(visible = true, transformation(origin={110,60}, extent={{-10,-10},
-            {10,10}},                                                                                                                                                                    rotation=0)));
+  Modelica.Blocks.Interfaces.RealOutput w_out = w "Output of the generator's angular velocity" annotation (Placement(transformation(origin={110,60}, extent={{-10,-10},
+            {10,10}})));
   Modelica.Blocks.Interfaces.RealInput P_in  "Input of mechanical power" annotation (
     Placement(transformation(extent={{-20,-20},{20,20}},      rotation = 270, origin={0,120})));
 initial equation

@@ -42,9 +42,8 @@ model Reservoir "Model of the reservoir"
   OpenHPL.Interfaces.Contact_o o(p=p_o) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealInput inflow=Vdot_i if useInflow "Conditional input inflow of the reservoir" annotation (Placement(transformation(
         origin={-120,0},
-        extent={{-20,-20},{20,20}},
-        rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput level=h if    useLevel "Conditional input water level of the reservoir" annotation (Evaluate=true, Placement(transformation(extent={{-140,40},{-100,80}}, rotation=0)));
+        extent={{-20,-20},{20,20}})));
+  Modelica.Blocks.Interfaces.RealInput level=h if    useLevel "Conditional input water level of the reservoir" annotation (Evaluate=true, Placement(transformation(extent={{-140,40},{-100,80}})));
 
 initial equation
    if not useLevel then

@@ -51,6 +51,5 @@ partial class OpenChannel "Open channel icon"
           extent={{-60,-20},{-20,-50}},
           lineColor={0,128,255},
           fillPattern=FillPattern.Backward,
-          fillColor={85,170,255})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, grid={1,1})));
+          fillColor={85,170,255})}));
 end OpenChannel;

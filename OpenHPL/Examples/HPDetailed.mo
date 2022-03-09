@@ -1,27 +1,25 @@
 within OpenHPL.Examples;
 model HPDetailed "Model of waterway of the HP system with detailed model for the penstock (using KP scheme) and simplified models for others conduits, turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-90,10},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin={0,50},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Data data(Vdot_0=19.12, rho(displayUnit="kg/m3") = 997) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin={0,50},    extent = {{-10, -10}, {10, 10}})));
+  inner OpenHPL.Data data(Vdot_0=19.12, rho(displayUnit="kg/m3") = 997) annotation (Placement(transformation(
         origin={-90,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,0},{-50,20}},  rotation=0)));
-  Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}},rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
+  Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
   ElectroMech.Turbines.Turbine turbine(
     C_v=3.7,
     ConstEfficiency=false,
-    WaterCompress=true) annotation (Placement(visible=true, transformation(extent={{20,-10},{40,10}}, rotation=0)));
-  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(extent={{-40,0},{-20,20}},  rotation=0)));
+    WaterCompress=true) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   Waterway.PenstockKP penstockKP(
     D_i=3,
     D_o=3,

@@ -22,8 +22,8 @@ model Pelton "Model of the Pelton turbine"
     //// connectors
     extends OpenHPL.Interfaces.TurbineContacts;
     Modelica.Blocks.Interfaces.RealInput w_in "Input angular velocity from the generator" annotation (
-                                Placement(visible = true, transformation(origin={-120,-80},    extent={{-20,-20},
-            {20,20}},                                                                                                           rotation = 0)));
+                                Placement(transformation(origin={-120,-80},    extent={{-20,-20},
+            {20,20}})));
 equation
   //// Condition for inlet water compressibility
     if not CompElas then
@@ -60,6 +60,5 @@ This model is based on the Euler turbine equation.
 <p>More info about the model can be found in:
 <a href=\"modelica://OpenHPL/Resources/Documents/Turbines_model.pdf\">Resources/Documents/Turbines_model.pdf</a>
 </p>
-</html>"),
-        Icon(                                                                                                                                   coordinateSystem(initialScale = 0.1)));
+</html>"));
 end Pelton;

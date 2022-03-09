@@ -80,8 +80,8 @@ model Francis "Model of the Francis turbine"
     //// connectors
     extends OpenHPL.Interfaces.TurbineContacts;
     Modelica.Blocks.Interfaces.RealInput w_in  "Input angular velocity from the generator" annotation (
-                                Placement(visible = true, transformation(origin={-120,-80},    extent={{-20,-20},
-      {20,20}},                                                                                                                 rotation = 0)));
+                                Placement(transformation(origin={-120,-80},    extent={{-20,-20},
+      {20,20}})));
 equation
   //// design algorithm for runner
     if GivenData then
@@ -235,6 +235,5 @@ These are <code>u_min</code> and <code>k_ft4</code>.</p>
 <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2018]</a> and about
 the servo (also turbine model) in:
 <a href=\"modelica://OpenHPL/Resources/Documents/Turbines_model.pdf\">Resources/Documents/Turbines_model.pdf</a>.</p>
-</html>"),
-        Icon(                                                                                                                                                      coordinateSystem(initialScale = 0.1)));
+</html>"));
 end Francis;

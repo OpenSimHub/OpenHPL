@@ -1,17 +1,15 @@
 within OpenHPL.Examples;
 model HPSimple_OpenChannel "Example with the open channel"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir annotation (Placement(transformation(
         origin={-90,50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493,
     startTime=600)                                                                                        annotation (
-    Placement(visible = true, transformation(origin={-90,-30},  extent={{-10,-10},{10,10}},      rotation = 0)));
+    Placement(transformation(origin={-90,-30},  extent={{-10,-10},{10,10}})));
   Waterway.Pipe discharge(     L=600, H=-5)
-                                      annotation (Placement(visible=true, transformation(extent={{-40,-10},{-20,10}},
-                                                                                                                   rotation=0)));
-  Waterway.Reservoir tail(h_0=5)  annotation (Placement(visible=true, transformation(
+                                      annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+  Waterway.Reservoir tail(h_0=5)  annotation (Placement(transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -20,18 +18,16 @@ model HPSimple_OpenChannel "Example with the open channel"
     D_i=3.3,
     D_o=3.3,
     H=420,
-    L=600) annotation (Placement(visible=true, transformation(
+    L=600) annotation (Placement(transformation(
         origin={0,40},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(visible=true, transformation(
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(transformation(
         origin={-60,0},
-        extent={{-10,10},{10,-10}},
-        rotation=0)));
-  inner OpenHPL.Data data(Vdot_0=18.9979) annotation (Placement(visible=true, transformation(
+        extent={{-10,10},{10,-10}})));
+  inner OpenHPL.Data data(Vdot_0=18.9979) annotation (Placement(transformation(
         origin={-90,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.Pipe pipe            annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
   Waterway.OpenChannel openChannel(
     N=100,
