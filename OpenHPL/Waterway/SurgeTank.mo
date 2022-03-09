@@ -27,7 +27,7 @@ model SurgeTank "Model of the surge tank/shaft"
   // steady state values for flow rate and water level in surge tank
   parameter SI.VolumeFlowRate Vdot_0 = 0 "Initial volume flow rate in the surge tank" annotation (
     Dialog(group = "Initialization"));
-  parameter SI.Height h_0 = 69.9 "Initial water height in the surge tank" annotation (
+  parameter SI.Height h_0 = 69.9 "Initial water level in the surge tank" annotation (
     Dialog(group = "Initialization"));
   parameter SI.Pressure p_ac = 4*data.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
     Dialog(group = "Initialization",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
