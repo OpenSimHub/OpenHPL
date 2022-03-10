@@ -2,7 +2,6 @@ within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
   outer Data data "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
-  //// constant water level in the reservoir
   parameter Boolean useLevel=false "If checked, the \"level\" connector controls the water level of the reservoir"
     annotation (
     Dialog(group="Setup", enable=not useInflow),
@@ -12,7 +11,6 @@ model Reservoir "Model of the reservoir"
     choices(checkBox = true));
   parameter SI.Height h_0=50 "Initial water level above intake"
     annotation (Dialog(group="Setup",   enable=not useLevel));
-  //// geometrical parameters in case when the inflow to reservoir is used
   parameter SI.Length L=500 "Length of the reservoir"                 annotation (
     Dialog(group="Geometry"));
   parameter SI.Length W=100 "Bed width of the reservoir"                 annotation (
@@ -21,7 +19,6 @@ model Reservoir "Model of the reservoir"
     Dialog(group = "Geometry"));
   parameter Real f = 0.0008 "Friction factor of the reservoir" annotation (
     Dialog(group = "Geometry"));
-  //// conditions of use
 
   //// possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));

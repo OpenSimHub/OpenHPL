@@ -53,12 +53,12 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={-40,-40})));
-  Modelica.Blocks.Math.Gain toHz(k=SI.Conversions.to_Hz(p/2)) annotation (Placement(transformation(extent={{76,-46},{88,-34}})));
+  Modelica.Blocks.Math.Gain toHz(k=SI.Conversions.to_Hz(p/2),y(unit="Hz")) annotation (Placement(transformation(extent={{76,-46},{88,-34}})));
   Modelica.Blocks.Nonlinear.Limiter torqueLimit(uMax=Pmax/w_0) annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=180,
         origin={-40,0})));
-  Modelica.Blocks.Interfaces.RealOutput f(unit="Hz") if enable_f "Output of generator frequency"
+  Modelica.Blocks.Interfaces.RealOutput f if enable_f "Output of generator frequency"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
                 iconTransformation(extent={{100,-50},{120,-30}})));
   Modelica.Blocks.Interfaces.RealOutput w if enable_w "Angular velocity of the generator"

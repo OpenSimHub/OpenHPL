@@ -1,5 +1,5 @@
 within OpenHPL.Examples;
-model Grid "Example to demonstrate the influence of lambda and mu"
+model PowerSystemSimple "Example to demonstrate the influence of lambda and mu"
   extends Modelica.Icons.Example;
   OpenHPL.ElectroMech.PowerSystem.Grid grid(
     Pgrid(displayUnit="MW") = 400000000,
@@ -49,4 +49,4 @@ the effect of self-regulation based on &Delta;f = -0.5 Hz one will get a smaller
 than the simulation shows. Can you think why?
 </p>
 </html>"));
-end Grid;
+end PowerSystemSimple;

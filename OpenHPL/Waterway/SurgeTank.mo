@@ -55,7 +55,7 @@ model SurgeTank "Model of the surge tank/shaft"
   Real phiSO "Dimensionless factor based on the type of fitting ";
   // initial values for differential variables
   SI.Height h(start = h_0) "Water height in the surge tank";
-  SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
+  SI.VolumeFlowRate Vdot(start = Vdot_0, fixed=true) "Volume flow rate";
   // variables for temperature. Not in use for now...
   // Real W_f, W_e;
   // connector (acquisition of algebraic variable, mass flow rate mdot, and node pressure (manifold pressure) p_n)
