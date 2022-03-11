@@ -32,82 +32,96 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
     annotation (Dialog(group = "Mechanical"));
   parameter SI.AngularVelocity w_0 = data.f_0 * 4 * C.pi / p "Initial mechanical angular velocity"
     annotation (Dialog(group = "Initialization"));
-  parameter Boolean enable_nomSpeed = false "If checked, unit runs at angular velocity w_0 constantly"
+  parameter Boolean enable_nomSpeed = false    "If checked, unit runs at angular velocity w_0 constantly"
     annotation (choices(checkBox = true), Dialog(group = "Initialization"));
+  parameter Boolean enable_w_in=false "If checked, get a connector for angular velocity input"
+    annotation (choices(checkBox = true), Dialog(group="Inputs", tab="I/O", enable=not enable_nomSpeed));
   parameter Boolean enable_w = false "If checked, get a connector for angular velocity output"
-    annotation (choices(checkBox = true), Dialog(group = "Outputs"));
+    annotation (choices(checkBox = true), Dialog(group = "Outputs", tab="I/O"));
   parameter Boolean enable_f = false "If checked, get a connector for frequency output"
-    annotation (choices(checkBox = true), Dialog(group = "Outputs"));
+    annotation (choices(checkBox = true), Dialog(group = "Outputs", tab="I/O"));
 
-  Modelica.Blocks.Math.Division power2torque annotation (Placement(transformation(extent={{-66,-6},{-54,6}})));
+  Modelica.Blocks.Math.Division power2torque annotation (Placement(transformation(extent={{-76,-6},{-64,6}})));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
-        origin={20,-20})));
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=if useH then 2*H*Pmax/w_0^2 else J,  w(start=w_0, fixed=not enable_nomSpeed)) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+        origin={10,-20})));
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=if useH then 2*H*Pmax/w_0^2 else J,  w(start=w_0, fixed=not enable_nomSpeed)) annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Electrical.Machines.Losses.Friction friction(frictionParameters(PRef=Ploss, wRef=data.f_0*4*C.pi/p))
-                                                        annotation (Placement(transformation(extent={{10,60},{30,40}})));
-  Modelica.Mechanics.Rotational.Components.Fixed fixed annotation (Placement(transformation(extent={{30,50},{50,70}})));
-  Modelica.Mechanics.Rotational.Sources.Torque torque annotation (Placement(transformation(extent={{-26,-6},{-14,6}})));
+                                                        annotation (Placement(transformation(extent={{0,60},{20,40}})));
+  Modelica.Mechanics.Rotational.Components.Fixed fixed annotation (Placement(transformation(extent={{20,50},{40,70}})));
+  Modelica.Mechanics.Rotational.Sources.Torque torque annotation (Placement(transformation(extent={{-36,-6},{-24,6}})));
   Modelica.Blocks.Nonlinear.Limiter div0protect(uMax=Modelica.Constants.inf, uMin=Modelica.Constants.small) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
-        origin={-40,-40})));
-  Modelica.Blocks.Math.Gain toHz(k=SI.Conversions.to_Hz(p/2),y(unit="Hz")) annotation (Placement(transformation(extent={{76,-46},{88,-34}})));
+        origin={-50,-40})));
+  Modelica.Blocks.Math.Gain toHz(k=SI.Conversions.to_Hz(p/2),y(unit="Hz")) annotation (Placement(transformation(extent={{66,-46},{78,-34}})));
   Modelica.Blocks.Nonlinear.Limiter torqueLimit(uMax=Pmax/w_0) annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=180,
-        origin={-40,0})));
-  Modelica.Blocks.Interfaces.RealOutput f if enable_f "Output of generator frequency"
+        origin={-50,0})));
+  Modelica.Blocks.Interfaces.RealOutput f if enable_f "Frequency output of the aggregate"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
                 iconTransformation(extent={{100,-50},{120,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput w if enable_w "Angular velocity of the generator"
+  Modelica.Blocks.Interfaces.RealOutput w if enable_w "Angular velocity output of the aggregate"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
       iconTransformation(extent={{100,30},{120,50}})));
 
-  Modelica.Mechanics.Rotational.Interfaces.Flange_b flange(phi(start=0, fixed=true))
-                                                           "Flange of right shaft" annotation (Placement(transformation(extent={{50,-10},{70,10}}),  iconTransformation(extent={{-10,-10},{10,10}})));
-  Modelica.Blocks.Sources.RealExpression power annotation (Placement(transformation(extent={{-50,20},{-70,40}})));
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b flange "Flange of right shaft" annotation (Placement(transformation(extent={{40,-10},{60,10}}),  iconTransformation(extent={{-10,-10},{10,10}})));
+  Modelica.Blocks.Sources.RealExpression power annotation (Placement(transformation(extent={{-60,20},{-80,40}})));
   Modelica.Mechanics.Rotational.Sensors.PowerSensor frictionLoss annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
-        origin={20,20})));
-  Modelica.Mechanics.Rotational.Sources.ConstantSpeed nomSpeed(w_fixed=w_0*p/2) if
-                                                                                  enable_nomSpeed annotation (Placement(transformation(extent={{86,-6},{74,6}})));
-  Modelica.Mechanics.Rotational.Components.IdealGear toSysSpeed(ratio=2/p) "Converts to system speed based on p = 2" annotation (Placement(transformation(extent={{34,-6},{46,6}})));
+        origin={10,20})));
+  Modelica.Mechanics.Rotational.Sources.Speed         setSpeed if enable_nomSpeed or enable_w_in  annotation (Placement(transformation(extent={{76,-6},{64,6}})));
+  Modelica.Mechanics.Rotational.Components.IdealGear toSysSpeed(ratio=2/p) "Converts to system speed based on p = 2" annotation (Placement(transformation(extent={{24,-6},{36,6}})));
+  Modelica.Blocks.Sources.RealExpression nominalSpeed(y=w_0*p/2) if enable_nomSpeed annotation (Placement(transformation(extent={{-12,-70},{8,-50}})));
+  Modelica.Blocks.Interfaces.RealInput w_in if enable_w_in and not enable_nomSpeed
+                                            "Angular velocity input of the aggregate [pu]" annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={-80,-120})));
+  Modelica.Blocks.Math.Gain pu2w(k=data.f_0*4*C.pi/p) if enable_w_in
+                                                      annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
 equation
   connect(toHz.u, speedSensor.w) annotation (Line(
-      points={{74.8,-40},{20,-40},{20,-31}},
+      points={{64.8,-40},{10,-40},{10,-31}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(w, speedSensor.w) annotation (Line(
-      points={{110,40},{50,40},{50,-40},{20,-40},{20,-31}},
+      points={{110,40},{40,40},{40,-40},{10,-40},{10,-31}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(div0protect.y, power2torque.u2) annotation (Line(points={{-46.6,-40},{-80,-40},{-80,-3.6},{-67.2,-3.6}},
+  connect(div0protect.y, power2torque.u2) annotation (Line(points={{-56.6,-40},{-90,-40},{-90,-3.6},{-77.2,-3.6}},
                                                                                                              color={0,0,127}));
-  connect(f,toHz. y) annotation (Line(points={{110,-40},{88.6,-40}},
+  connect(f,toHz. y) annotation (Line(points={{110,-40},{78.6,-40}},
                                                                color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(power2torque.y, torqueLimit.u) annotation (Line(points={{-53.4,0},{-54,0},{-54,8.88178e-16},{-47.2,8.88178e-16}},
+  connect(power2torque.y, torqueLimit.u) annotation (Line(points={{-63.4,0},{-64,0},{-64,8.88178e-16},{-57.2,8.88178e-16}},
                                                                                                                           color={0,0,127}));
-  connect(torqueLimit.y, torque.tau) annotation (Line(points={{-33.4,-6.66134e-16},{-32,-6.66134e-16},{-32,0},{-27.2,0}},
+  connect(torqueLimit.y, torque.tau) annotation (Line(points={{-43.4,-6.66134e-16},{-42,-6.66134e-16},{-42,0},{-37.2,0}},
                                                                                                                         color={0,0,127}));
-  connect(speedSensor.w,div0protect. u) annotation (Line(points={{20,-31},{20,-40},{-32.8,-40}},
+  connect(speedSensor.w,div0protect. u) annotation (Line(points={{10,-31},{10,-40},{-42.8,-40}},
                                                                                          color={0,0,127}));
-  connect(inertia.flange_b, speedSensor.flange) annotation (Line(points={{10,0},{20,0},{20,-10}}, color={0,0,0}));
-  connect(friction.support, fixed.flange) annotation (Line(points={{20,60},{20,70},{40,70},{40,60}}, color={0,0,0}));
-  connect(torque.flange, inertia.flange_a) annotation (Line(points={{-14,0},{-10,0}},
+  connect(inertia.flange_b, speedSensor.flange) annotation (Line(points={{0,0},{10,0},{10,-10}},  color={0,0,0}));
+  connect(friction.support, fixed.flange) annotation (Line(points={{10,60},{10,70},{30,70},{30,60}}, color={0,0,0}));
+  connect(torque.flange, inertia.flange_a) annotation (Line(points={{-24,0},{-20,0}},
                                                                                    color={0,0,0}));
   connect(w, w) annotation (Line(points={{110,40},{105,40},{105,40},{110,40}}, color={0,0,127}));
-  connect(power.y, power2torque.u1) annotation (Line(points={{-71,30},{-80,30},{-80,3.6},{-67.2,3.6}},
+  connect(power.y, power2torque.u1) annotation (Line(points={{-81,30},{-90,30},{-90,3.6},{-77.2,3.6}},
                                                                                                  color={0,0,127}));
-  connect(frictionLoss.flange_a, inertia.flange_b) annotation (Line(points={{20,10},{20,0},{10,0}}, color={0,0,0}));
-  connect(frictionLoss.flange_b, friction.flange) annotation (Line(points={{20,30},{20,40}}, color={0,0,0}));
-  connect(nomSpeed.flange, flange) annotation (Line(points={{74,0},{60,0}}, color={0,0,0},
+  connect(frictionLoss.flange_a, inertia.flange_b) annotation (Line(points={{10,10},{10,0},{0,0}},  color={0,0,0}));
+  connect(frictionLoss.flange_b, friction.flange) annotation (Line(points={{10,30},{10,40}}, color={0,0,0}));
+  connect(setSpeed.flange, flange) annotation (Line(points={{64,0},{50,0}}, color={0,0,0},
       pattern=LinePattern.Dash));
-  connect(flange, toSysSpeed.flange_b) annotation (Line(points={{60,0},{46,0}}, color={0,0,0}));
-  connect(toSysSpeed.flange_a, inertia.flange_b) annotation (Line(points={{34,0},{10,0}}, color={0,0,0}));
+  connect(flange, toSysSpeed.flange_b) annotation (Line(points={{50,0},{36,0}}, color={0,0,0}));
+  connect(toSysSpeed.flange_a, inertia.flange_b) annotation (Line(points={{24,0},{0,0}},  color={0,0,0}));
+  connect(setSpeed.w_ref, pu2w.y) annotation (Line(points={{77.2,0},{88,0},{88,-80},{11,-80}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(pu2w.u, w_in) annotation (Line(points={{-12,-80},{-80,-80},{-80,-120}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(nominalSpeed.y,setSpeed. w_ref) annotation (Line(points={{9,-60},{88,-60},{88,0},{77.2,0}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(graphics={
         Text(
           visible=enable_w,
@@ -122,5 +136,12 @@ equation
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="f")}));
+          textString="f"),
+        Text(
+          visible=enable_w_in,
+          extent={{-100,-70},{-60,-90}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="w_in")}));
 end Power2Torque;
