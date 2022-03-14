@@ -1,4 +1,4 @@
-﻿within OpenHPL.Waterway;
+within OpenHPL.Waterway;
 model DraftTube "Model of a draft tube for reaction turbines"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.DraftTube;
