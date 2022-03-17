@@ -1,21 +1,69 @@
-﻿within OpenHPL.UsersGuide;
+within OpenHPL.UsersGuide;
 model References "References"
   extends Modelica.Icons.References;
   annotation (Documentation(info="<html>
-
 <dl>
+<dt>[Hinna2021]</dt>
+<dd><p>Jonas Tveit Hinna:
+        &quot;Modelica model of transient pipe flow in hydraulic laboratory systems using the method of characteristics&quot;,
+        Master's Thesis, NTNU,
+        Trondheim, Norway, 2021.
+        (<a href=\"https://hdl.handle.net/11250/2779970\">https://hdl.handle.net/11250/2779970</a>)</p>
+</dd>
+<dt>[Pandey2020a]</dt>
+<dd><p>Madhusudhan Pandey, Bernt Lie:
+       &quot;The Role of Hydropower Simulation in Smart Energy Systems&quot;,
+       in: 2020 IEEE 7th International Conference on Energy Smart Systems (ESS). 
+       Presented at the 2020 IEEE 7th International Conference on Energy Smart Systems (ESS), 
+       IEEE, Kyiv, Ukraine, pp. 392–397. 
+       <a href=\"https://doi.org/10.1109/ESS50319.2020.9160193\">doi:10.1109/ESS50319.2020.9160193</a></p>
+</dd>
+<dt>[Pandey2020b]</dt>
+<dd><p>Madhusudhan Pandey, Bernt Lie:
+       &quot;The influence of surge tanks on the water hammer effect at different hydro power discharge rates&quot;,
+       Presented at the SIMS Conference on Simulation and Modelling SIMS 2020, 
+       September 22-24, Finland, pp. 125–130. 
+       <a href=\"https://doi.org/10.3384/ecp20176125\">doi:10.3384/ecp20176125</a></p>
+</dd>
+<dt>[Pandey2020c]</dt>
+<dd><p>Madhusudhan Pandey, Bernt Lie:
+       &quot;Mechanistic modeling of different types of surge tanks and draft tubes for hydropower plants&quot;,
+       Presented at the SIMS Conference on Simulation and Modelling SIMS 2020, 
+       September 22-24, Finland, pp. 131–138.
+       <a href=\"https://doi.org/10.3384/ecp20176131\">doi:10.3384/ecp20176131</a></p>
+</dd>
+<dt>[Pandey2021a]</dt>
+<dd><p>Madhusudhan Pandey, Dietmar Winkler, Roshan Sharma, Bernt Lie:
+        &quot;Using MPC to Balance Intermittent Wind and Solar Power with Hydro Power in Microgrids.&quot;,
+        Energies 14, 2021. 
+        <a href=\"https://doi.org/10.3390/en14040874\">doi:10.3390/en14040874</a></p>
+</dd>
+<dt>[Pandey2021b]</dt>
+<dd><p>Madhusudhan Pandey, Dietmar Winkler, Roshan Sharma, Bernt Lie:
+       &quot;Formulation of Stochastic MPC to Balance Intermittent Solar Power with Hydro Power in Microgrid&quot;,
+       Presented at the SIMS Conference on Simulation and Modelling SIMS 2021, 
+       September 21-23, Finland, pp. 196–203. 
+       <a href=\"https://doi.org/10.3384/ecp21185196\">doi:10.3384/ecp21185196</a></p>
+</dd>
+<dt>[Pandey2021c]</dt>
+<dd><p>Madhusudhan Pandey, Roshan Sharma, Bernt Lie:
+       &quot;Droop Control of Hydro Power System in OpenHPL&quot;,
+       Presented at the SIMS Conference on Simulation and Modelling SIMS 2021, 
+       September 21-23, Finland, pp. 204–210. 
+       <a href=\"https://doi.org/10.3384/ecp21185204\">doi:10.3384/ecp21185204</a></p>
+</dd>
 <dt>[Shafiee2013]</dt>
-<dd><p>Sobhan Shafiee
+<dd><p>Sobhan Shafiee:
         &quot;Automatic updating of hydrological models for
         runoff/inflow forecasting to hydropower system&quot;,
-        Master's thesis, Telemark University College,
+        Master's Thesis, Telemark University College,
         Porsgrunn, Norway, 2013.
         (<a href=\"modelica://OpenHPL/Resources/Documents/Shafiee2013.pdf\">view PDF</a>)</p>
 </dd>
 <dt>[Sharefi2011]</dt>
-<dd><p>Behzad Rahimi Sharefi
+<dd><p>Behzad Rahimi Sharefi:
         &quot;Modeling for Control of Hydropower Systems&quot;,
-        Master's thesis, Telemark University College,
+        Master's Thesis, Telemark University College,
         Porsgrunn, Norway, 2011.
         (<a href=\"modelica://OpenHPL/Resources/Documents/Sharefi2011.pdf\">view PDF</a>)</p>
 </dd>
@@ -27,7 +75,7 @@ model References "References"
         <a href=\"https://doi.org/10.3384/ecp17138368\">doi:10.3384/ecp17138368</a>.</p>
 </dd>
 <dt>[Vytvytskyi2015]</dt>
-<dd><p>Liubomyr Vytvytskyi, Roahsn Sharma, Bernt Lie:
+<dd><p>Liubomyr Vytvytskyi, Roshan Sharma, Bernt Lie:
          &quot;Model based control for run-of-river system. Part 1: Model implementation and tuning&quot;,
       <em>Modeling, Identification and Control: A Norwegian Research Bulletin (MIC)</em>,
       Vol 36, No 4, pp. 237-249, 2015,
@@ -48,12 +96,12 @@ model References "References"
         <a href=\"https://doi.org/10.1016/j.ifacol.2018.03.018\">doi:10.1016/j.ifacol.2018.03.018</a>.</p>
 </dd>
 <dt>[Vytvytskyi2019]</dt>
-<dd><p>Liubomyr Vytvytskyi, &quot;Dynamics and model analysis of hydropower systems&quot;,
+<dd><p>Liubomyr Vytvytskyi: &quot;Dynamics and model analysis of hydropower systems&quot;,
         PhD dissertation, University of South-Eastern Norway, 2019,
         <a href=\"http://hdl.handle.net/11250/2608105\">http://hdl.handle.net/11250/2607645</a>.</p>
 </dd>
 <dt>[White2009]</dt>
-<dd><p>Frank M. White, &quot;Fluid mechanics&quot;,
+<dd><p>Frank M. White: &quot;Fluid mechanics&quot;,
         Book, Mcgraw-Hill series in mechanical engineering, 2009,
         6th Edition, ISBN 978-0-07-352934-9.</p>
 </dd>
