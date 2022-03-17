@@ -1,4 +1,4 @@
-package OpenHPL
+package OpenHPL "Open-source hydropower library"
   extends Icons.Logo;
   import C = Modelica.Constants;
   import SI = Modelica.SIunits;
