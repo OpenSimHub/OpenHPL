@@ -1,5 +1,6 @@
 within OpenHPL.Waterway;
 model OpenChannel "Open channel model (use KP scheme)"
+  extends Modelica.Icons.UnderConstruction;
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.OpenChannel;
   //// geometrical parameters of the open channel
@@ -40,28 +41,12 @@ equation
   o.p = h[N] * data.g * data.rho + data.p_a;
   annotation (
     Documentation(info="<html>
-<p>
-This is a model for the open channel (river).
-Could be used for modelling of run-of-river hydropower plants.
-</p>
-<p>
-In this model it is assumed that the channel has the inlet and
-outlet from the bottom of the left and right sides, respectevely.
-</p>
-<p>
-That is why this open channel should be connected from both sides to the
-<a href=\"modelica://OpenHPL.Waterway.Pipe\">Pipe</a> elements.
-Connectors hold information about the inlet/outlet flow rate and the pressures
- that is defined as sum of atmospheric pressure and pressure of the water (depends on depth).
-</p>
-<p>
-As boundary conditions, at least two of the four quentities
-(inlet flow or depth and outlet flow or depth) should be used.
-</p>
-<p>Perhaps, this structure is not really useful and some modification should be done.
-This is still under discussion and has not been tested properly.
-</p>
-<p>More info about the original model can be found in
-<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2015]</a>.</p>
+<p style=\"color: #ff0000;\"><em>Note: Currently under investigation for plausibility.</em></p>
+<p>This is a model for the open channel (river). Could be used for modelling of run-of-river hydropower plants. </p>
+<p>In this model it is assumed that the channel has the inlet and outlet from the bottom of the left and right sides, respectevely. </p>
+<p>That is why this open channel should be connected from both sides to the <a href=\"modelica://OpenHPL.Waterway.Pipe\">Pipe</a> elements. Connectors hold information about the inlet/outlet flow rate and the pressures that is defined as sum of atmospheric pressure and pressure of the water (depends on depth). </p>
+<p>As boundary conditions, at least two of the four quentities (inlet flow or depth and outlet flow or depth) should be used. </p>
+<p>Perhaps, this structure is not really useful and some modification should be done. This is still under discussion and has not been tested properly. </p>
+<p>More info about the original model can be found in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2015]</a>.</p>
 </html>"));
 end OpenChannel;

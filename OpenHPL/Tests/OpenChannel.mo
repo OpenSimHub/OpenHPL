@@ -1,4 +1,4 @@
-within OpenHPL.Examples;
+within OpenHPL.Tests;
 model OpenChannel "Model of a hydropower system with open channel model"
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir reservoir(h_0=5)  annotation (Placement(transformation(
