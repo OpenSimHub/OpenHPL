@@ -1,5 +1,6 @@
 within OpenHPL.Waterway;
 model ReservoirChannel "Reservoir model based on open channel model"
+  extends Modelica.Icons.UnderConstruction;
   extends OpenHPL.Icons.Reservoir;
   outer Data data "Using standard data set";
   //// reservoir segmentation

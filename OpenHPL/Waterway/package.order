@@ -6,9 +6,9 @@ Pipe
 PenstockKP
 SurgeTank
 Reservoir
-ReservoirChannel
 RunOff_zones
 RunOff_zones_input
 VolumeFlowSource
 Penstock
 OpenChannel
+ReservoirChannel
