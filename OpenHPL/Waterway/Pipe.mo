@@ -72,16 +72,16 @@ equation
   //n.T = T;
   ////
   annotation (
-    Documentation(info= "<html><p>The simple model of the pipe gives possibilities
+    Documentation(info="<html><p>The simple model of the pipe gives possibilities
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
     <p>This model is described by the momentum differential equation, which depends
     on pressure drop through the pipe together with friction and gravity forces.
-    The main defined variable is volumetric flow rate <em>Vdot</em>.</p>
+    The main defined variable is volumetric flow rate <code>Vdot</code>.</p>
     <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"> </p>
     <p>In this pipe model, the flow rate changes simultaneously in the whole pipe
     (an information about the speed of wave propagation is not included here).
     Water pressures can be shown just in the boundaries of pipe
-    (inlet and outlet pressure from connectors).&nbsp;</p>
+    (inlet and outlet pressure from connectors).</p>
     <p>It should be noted that this pipe model provides possibilities for modelling
     of pipes with both a positive and a negative slopes (positive or negative height difference).</p>
     <p>More info about the pipe model can be found in
