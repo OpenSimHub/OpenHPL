@@ -84,15 +84,14 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
   Modelica.Blocks.Math.Gain pu2w(k=data.f_0*4*C.pi/p) if enable_w_in
                                                       annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
 equation
-  connect(toHz.u, speedSensor.w) annotation (Line(
-      points={{64.8,-40},{10,-40},{10,-31}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(w, speedSensor.w) annotation (Line(
       points={{110,40},{40,40},{40,-40},{10,-40},{10,-31}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(div0protect.y, power2torque.u2) annotation (Line(points={{-56.6,-40},{-90,-40},{-90,-3.6},{-77.2,-3.6}},
+  connect(toHz.u, speedSensor.w) annotation (Line(
+      points={{64.8,-40},{10,-40},{10,-31}},
+      color={0,0,127}));
+  connect(div0protect.y, power2torque.u2) annotation (Line(points={{-56.6,-40},{-88,-40},{-88,-3.6},{-77.2,-3.6}},
                                                                                                              color={0,0,127}));
   connect(f,toHz. y) annotation (Line(points={{110,-40},{78.6,-40}},
                                                                color={0,0,127},
@@ -108,7 +107,7 @@ equation
   connect(torque.flange, inertia.flange_a) annotation (Line(points={{-24,0},{-20,0}},
                                                                                    color={0,0,0}));
   connect(w, w) annotation (Line(points={{110,40},{105,40},{105,40},{110,40}}, color={0,0,127}));
-  connect(power.y, power2torque.u1) annotation (Line(points={{-81,30},{-90,30},{-90,3.6},{-77.2,3.6}},
+  connect(power.y, power2torque.u1) annotation (Line(points={{-81,30},{-88,30},{-88,3.6},{-77.2,3.6}},
                                                                                                  color={0,0,127}));
   connect(frictionLoss.flange_a, inertia.flange_b) annotation (Line(points={{10,10},{10,0},{0,0}},  color={0,0,0}));
   connect(frictionLoss.flange_b, friction.flange) annotation (Line(points={{10,30},{10,40}}, color={0,0,0}));
