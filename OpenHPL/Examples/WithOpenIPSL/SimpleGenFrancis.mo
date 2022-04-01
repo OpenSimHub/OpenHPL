@@ -1,25 +1,27 @@
 within OpenHPL.Examples.WithOpenIPSL;
-model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
+model SimpleGenFrancis "Synergy with OpenIPSL library(generator)"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Examples.BaseClasses.MachineTestBase(pwLine2(displayPF=true), pwLine1(displayPF=true));
   OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-80,-50},
         extent={{-10,-10},{10,10}})));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-66,-60},{-46,-40}})));
   OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(transformation(extent={{48,-60},{68,-40}})));
   OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={84,-50},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  OpenHPL.Waterway.PenstockKP penstock(
+  replaceable
+  Waterway.Pipe               penstock(
+    vertical=true,
     L=600,
     H=428.5,
-    D_i=3,
-    D_o=3) annotation (Placement(transformation(
-        origin={4,-50},
+    D_i=3) constrainedby Interfaces.TwoContact
+           annotation (Placement(transformation(
+        origin={0,-50},
         extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(transformation(
-        origin={-24,-50},
+        origin={-30,-50},
         extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Francis turbine(
     D_i=1.632,
@@ -47,15 +49,20 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
     w_v_=0.2) annotation (Placement(transformation(
         origin={32,-50},
         extent={{-10,10},{10,-10}})));
-  inner OpenHPL.Data data(Vdot_0=4.49) annotation (Placement(transformation(
+  inner OpenHPL.Data data(SteadyState=true, Vdot_0=4.49)
+                                       annotation (Placement(transformation(
         origin={-90,70},
         extent={{-10,-10},{10,10}})));
-  OpenIPSL.Electrical.Machines.PSAT.Order2 order2_1(D = 0, M = 10,
+  OpenIPSL.Electrical.Machines.PSAT.Order2 generator(
+    D=0,
+    M=10,
     P_0=16035269.869201,
     Q_0=11859436.505981,
     Sn=120000000,
-    Vn=400000,                                                                                                                       ra = 0.001, w(fixed = true), x1d = 0.302) annotation (
-    Placement(transformation(extent={{-40,-10},{-20,10}})));
+    Vn=400000,
+    ra=0.001,
+    w(fixed=true),
+    x1d=0.302) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Blocks.Math.Gain PSI_to_Ppu(k=1/turbine.P_n)
                                                       annotation (
     Placement(transformation(origin={-59,-5},     extent={{-5,-5},{5,5}})));
@@ -64,38 +71,35 @@ model HPSimple_Francis_GridGen "Synergy with OpenIPSL library(generator)"
         extent={{-6,6},{6,-6}},
         rotation=180)));
   OpenHPL.Controllers.Governor governor(Pn = turbine.P_n, Y_gv_ref = 0.1)
-                                       annotation (Placement(transformation(origin = {20, -72}, extent = {{-10, -10}, {10, 10}})));
+                                       annotation (Placement(transformation(origin={12,-80},    extent = {{-10, -10}, {10, 10}})));
   //(a = 7.862E-25, c = 1.108E-08, d = -5.344E-02, b = -1.010E-16)
   Modelica.Blocks.Math.Gain fpu_to_fSI(k=SysData.fn) annotation (Placement(transformation(
-        origin={-50,-90},
+        origin={-60,-90},
         extent={{6,6},{-6,-6}},
         rotation=180)));
   Modelica.Blocks.Sources.Ramp power(duration = 1, height = +1e6, offset = 12e6,
     startTime=200)                                                                                  annotation (
-    Placement(transformation(origin={-10,-72},  extent={{-8,-8},{8,8}})));
+    Placement(transformation(origin={-30,-72},  extent={{-8,-8},{8,8}})));
 equation
   connect(fpu_to_fSI.y, governor.f) annotation (
-    Line(points={{-43.4,-90},{4,-90},{4,-76},{8,-76},{8,-76}},          color = {0, 0, 127}));
+    Line(points={{-53.4,-90},{-10,-90},{-10,-84},{0,-84}},              color = {0, 0, 127}));
   connect(governor.Y_gv, turbine.u_t) annotation (
-    Line(points = {{31, -72}, {32, -72}, {32, -62}}, color = {0, 0, 127}));
+    Line(points={{23,-80},{32,-80},{32,-62}},        color = {0, 0, 127}));
   connect(governor.P_ref, power.y) annotation (
-    Line(points = {{8, -68}, {4.4, -68}, {4.4, -72}, {-1.2, -72}}, color = {0, 0, 127}));
-  connect(fpu_to_fSI.u, wpu_to_wSI.u) annotation (Line(points={{-57.2,-90},{-94,-90},{-94,30},{-48,30},{-48,20},{-52.8,20}}, color={0,0,127}));
-  connect(order2_1.w, wpu_to_wSI.u) annotation (Line(points={{-19,9},{-14,9},{-14,20},{-52.8,20}}, color={0,0,127}));
+    Line(points={{0,-76},{-10,-76},{-10,-72},{-21.2,-72}},         color = {0, 0, 127}));
+  connect(fpu_to_fSI.u, wpu_to_wSI.u) annotation (Line(points={{-67.2,-90},{-94,-90},{-94,30},{-48,30},{-48,20},{-52.8,20}}, color={0,0,127}));
+  connect(generator.w, wpu_to_wSI.u) annotation (Line(points={{-19,9},{-16,9},{-16,20},{-52.8,20}}, color={0,0,127}));
   connect(PSI_to_Ppu.u, turbine.P_out) annotation (
     Line(points={{-65,-5},{-70,-5},{-70,-24},{32,-24},{32,-39}},           color = {0, 0, 127}));
-  connect(PSI_to_Ppu.y, order2_1.pm) annotation (
-    Line(points={{-53.5,-5},{-42,-5}},          color = {0, 0, 127}));
-  connect(order2_1.vf, order2_1.vf0) annotation (
-    Line(points={{-42,5},{-46,5},{-46,14},{-38,14},{-38,11}},           color = {0, 0, 127}));
+  connect(PSI_to_Ppu.y, generator.pm) annotation (Line(points={{-53.5,-5},{-42,-5}}, color={0,0,127}));
+  connect(generator.vf, generator.vf0) annotation (Line(points={{-42,5},{-46,5},{-46,14},{-38,14},{-38,11}}, color={0,0,127}));
   connect(wpu_to_wSI.y, turbine.w_in) annotation (Line(points={{-66.6,20},{-80,20},{-80,-32},{16,-32},{16,-42},{20,-42}}, color={0,0,127}));
-  connect(order2_1.p, bus1.p) annotation (Line(points={{-20,0},{0,0}}, color={0,0,255}));
+  connect(generator.p, bus1.p) annotation (Line(points={{-20,0},{0,0}}, color={0,0,255}));
   connect(discharge.o, tail.o) annotation (Line(points={{68,-50},{74,-50}}, color={28,108,200}));
   connect(turbine.o, discharge.i) annotation (Line(points={{42,-50},{48,-50}}, color={28,108,200}));
-  connect(turbine.i, penstock.o) annotation (Line(points={{22,-50},{14,-50}}, color={28,108,200}));
-  connect(penstock.i, surgeTank.o) annotation (Line(points={{-6,-50},{-14,-50}}, color={28,108,200}));
-  connect(surgeTank.i, intake.o) annotation (Line(points={{-34,-50},{-40,-50}}, color={28,108,200}));
-  connect(intake.i, reservoir.o) annotation (Line(points={{-60,-50},{-70,-50}}, color={28,108,200}));
-  annotation (
-    experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
-end HPSimple_Francis_GridGen;
+  connect(turbine.i, penstock.o) annotation (Line(points={{22,-50},{10,-50}}, color={28,108,200}));
+  connect(penstock.i, surgeTank.o) annotation (Line(points={{-10,-50},{-20,-50}},color={28,108,200}));
+  connect(surgeTank.i, intake.o) annotation (Line(points={{-40,-50},{-46,-50}}, color={28,108,200}));
+  connect(intake.i, reservoir.o) annotation (Line(points={{-66,-50},{-70,-50}}, color={28,108,200}));
+annotation (experiment(StopTime = 2000));
+end SimpleGenFrancis;
