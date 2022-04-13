@@ -1,4 +1,4 @@
-within OpenHPL.UsersGuide;
+﻿within OpenHPL.UsersGuide;
 model References "References"
   extends Modelica.Icons.References;
   annotation (Documentation(info="<html>
@@ -35,7 +35,7 @@ model References "References"
 <dt>[Pandey2021a]</dt>
 <dd><p>Madhusudhan Pandey, Dietmar Winkler, Roshan Sharma, Bernt Lie:
         &quot;Using MPC to Balance Intermittent Wind and Solar Power with Hydro Power in Microgrids.&quot;,
-        Energies 14, 2021. 
+        Energies 2021, 14, no. 4: 874. 
         <a href=\"https://doi.org/10.3390/en14040874\">doi:10.3390/en14040874</a></p>
 </dd>
 <dt>[Pandey2021b]</dt>
@@ -51,6 +51,12 @@ model References "References"
        Presented at the SIMS Conference on Simulation and Modelling SIMS 2021, 
        September 21-23, Finland, pp. 204–210. 
        <a href=\"https://doi.org/10.3384/ecp21185204\">doi:10.3384/ecp21185204</a></p>
+</dd>
+<dt>[Pandey2022]</dt>
+<dd><p>Madhusudhan Pandey, Dietmar Winkler, Kaspar Vereide, Roshan Sharma, Bernt Lie:
+        &quot;Mechanistic Model of an Air Cushion Surge Tank for Hydro Power Plants&quot;,
+        Energies 2022, 15, no. 8: 2824. 
+        <a href=\"https://doi.org/10.3390/en15082824\">doi:10.3390/en15082824</a></p>
 </dd>
 <dt>[Shafiee2013]</dt>
 <dd><p>Sobhan Shafiee:
