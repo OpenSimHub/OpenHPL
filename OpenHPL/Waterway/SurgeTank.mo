@@ -36,7 +36,7 @@ model SurgeTank "Model of the surge tank/shaft"
   //possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   //parameter SI.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
-  //// variables
+  // variables
   SI.Mass m "Water mass";
   SI.Mass m_a = p_ac*A*(L-h_0/cos_theta)*data.M_a/(Modelica.Constants.R*T_ac) "Air mass inside surge tank";
   SI.Momentum M "Water momuntum";

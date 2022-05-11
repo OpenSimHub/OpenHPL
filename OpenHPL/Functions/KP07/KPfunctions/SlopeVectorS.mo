@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07.KPfunctions;
 model SlopeVectorS
   extends Icons.Method;
-  parameter Integer N "number of segments";
+  parameter Integer N "Number of segments";
   input Real U_[2 * (N + 4)], theta, dx;
   output Real s[2, N + 2];
 protected

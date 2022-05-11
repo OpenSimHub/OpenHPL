@@ -13,7 +13,7 @@ function Friction "Friction force with Darcy friction factor"
   // Local (protected) quantities
 protected
   SI.ReynoldsNumber N_Re "Reynolds number";
-  Real f "friction factor";
+  Real f "Friction factor";
 algorithm
   N_Re := rho * abs(v) * D / mu;
   f := fDarcy(N_Re, D, p_eps);

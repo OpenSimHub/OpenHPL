@@ -3,7 +3,7 @@ model OpenChannel "Open channel model (use KP scheme)"
   extends Modelica.Icons.UnderConstruction;
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.OpenChannel;
-  //// geometrical parameters of the open channel
+  // geometrical parameters of the open channel
   parameter Integer N = 100 "Number of segments" annotation (Dialog(group = "Geometry"));
   parameter SI.Length W=180 "Channel width"                 annotation (Dialog(group="Geometry"));
   parameter SI.Length L = 5000 "Channel length" annotation (Dialog(group = "Geometry"));
@@ -13,13 +13,13 @@ model OpenChannel "Open channel model (use KP scheme)"
   parameter SI.Height h_0[N]=ones(N)*5 "Initial water level"          annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate" annotation (Dialog(group="Initialization"));
   parameter Boolean BoundaryCondition[2,2] = [false, true; false, true] "Boundary conditions. Choose options for the boundaries in a matrix table, i.e., if the matrix element = true, this element is used as boundary. The element represent the following quantities: [inlet depth, inlet flow; outlet depth, outlet flow]" annotation (Dialog(group = "Boundary condition"));
-  //// variables
+  // variables
   SI.VolumeFlowRate Vdot_o "Outlet flow";
   SI.VolumeFlowRate Vdot_i "Inlet flow rate";
   SI.Height h[N] "Water level in each unit of the channel";
-  //// connector
+  // connector
   extends OpenHPL.Interfaces.TwoContact;
-  //// using open channel example from KP method class
+  // using open channel example from KP method class
   Internal.KPOpenChannel openChannel(
     N=N,
     W=W,
@@ -31,12 +31,12 @@ model OpenChannel "Open channel model (use KP scheme)"
     boundaryCondition=BoundaryCondition,
     SteadyState=SteadyState) annotation (Placement(transformation(extent={{-10,-8},{10,12}})));
 equation
-//// define a vector of the water depth in the channel
+// define a vector of the water depth in the channel
   h = openChannel.h;
-//// flow rate boundaries
+// flow rate boundaries
   i.mdot =Vdot_i*data.rho;
   o.mdot =-Vdot_o*data.rho;
-//// presurre boundaries
+// presurre boundaries
   i.p = h[1] * data.g * data.rho + data.p_a;
   o.p = h[N] * data.g * data.rho + data.p_a;
   annotation (

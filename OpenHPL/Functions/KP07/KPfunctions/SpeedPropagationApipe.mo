@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07.KPfunctions;
 model SpeedPropagationApipe
   extends Icons.Method;
-  parameter Integer N "number of segments";
+  parameter Integer N "Number of segments";
   input Real lamda1[N, 4], lamda2[N, 4];
   output Real A[N, 4];
 protected

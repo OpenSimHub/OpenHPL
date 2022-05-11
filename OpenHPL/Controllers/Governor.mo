@@ -1,8 +1,8 @@
 within OpenHPL.Controllers;
 model Governor "Governor/control model"
   extends OpenHPL.Icons.Governor;
-outer Data data "using standard class with constants";
-  //// control parameters of the governor
+outer Data data "Using standard class with constants";
+  // control parameters of the governor
   parameter SI.Time T_p = 0.04 "Pilot servomotor time constant" annotation (
     Dialog(group = "Controller settings"));
   parameter SI.Time T_g = 0.2 "Main servomotor integration time" annotation (
@@ -25,14 +25,14 @@ outer Data data "using standard class with constants";
     Dialog(group = "System settings"));
   parameter SI.Power Pn = 104e6 "Reference power" annotation (
     Dialog(group = "System settings"));
-  //// connectors
+  // connectors
   Modelica.Blocks.Interfaces.RealInput P_ref annotation (
     Placement(transformation(extent = {{-140, 20}, {-100, 60}}), iconTransformation(extent = {{-140, 20}, {-100, 60}})));
   Modelica.Blocks.Interfaces.RealOutput Y_gv annotation (
     Placement(transformation(extent = {{100, -10}, {120, 10}}), iconTransformation(extent = {{100, -10}, {120, 10}})));
   Modelica.Blocks.Interfaces.RealInput f annotation (
     Placement(transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}})));
-  //// blocks
+  // blocks
   Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table) annotation (
     Placement(transformation(origin = {-54, 40}, extent = {{10, -10}, {-10, 10}}, rotation = 180)));
   Modelica.Blocks.Continuous.TransferFunction pilot_servo(a = {T_p, 1}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = 0)  annotation (
@@ -107,10 +107,10 @@ equation
     Line(points = {{29, 0}, {34, 0}}, color = {0, 0, 127}));
   connect(pilot_servo.y, gain_T_s.u) annotation (
     Line(points={{-29,0},{-22,0},{-22,0},{-22,0}},          color = {0, 0, 127}));
-//// define curve for control signal based on power
+// define curve for control signal based on power
   //look_up_table.u[1] = P_ref / Pn;
   //Y_gv_ref = look_up_table.y[1];
-//// governor model
+// governor model
   //dd = delta * Y_gv - x_r;
   //e = 1 - f / f_ref - dd + droop * (Y_gv_ref - Y_gv);
 //(P_ref/103e6 - P_g/103e6);

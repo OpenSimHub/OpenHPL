@@ -5,11 +5,11 @@ model ElasticPenstock
   import Modelica.Constants.pi;
   parameter SI.Height H = 420 "Height over which water fall in the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Length L = 600 "length of the pipe" annotation (
+  parameter SI.Length L = 600 "Length of the pipe" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Diameter D = 3.3 "Diameter from the input side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe, m3/s" annotation (
+  parameter SI.VolumeFlowRate Vdot_0 = 20 "Initial flow rate in the pipe, m3/s" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20;
   SI.Area A_atm = D ^ 2 * pi / 4;
@@ -31,23 +31,23 @@ initial equation
   mdot = data.rho * Vdot_0 * ones(N, 1);
   p_p = [p_1 + dp / 2:dp:p_1 + dp / 2 + dp * (N - 1)];
 equation
-  /////  define state vector
+  //  define state vector
   U[1:N, 1] = p_p[:, 1];
   U[N + 1:2 * N, 1] = mdot[:, 1];
   // Define variables interested vol. flow rate
   Vdot = basic.Vdot;
-  ////// Define the piecewise linear reconstruction of states.
+  // Define the piecewise linear reconstruction of states.
   U_ = kP.U_;
-  //////
+  //
   p_ = transpose(matrix(U_[1:2:8, :]));
-  ///// mass flow rate
+  // mass flow rate
   mdot_ = transpose(matrix(U_[2:2:8, :]));
-  ///// eigenvalues
+  // eigenvalues
   lam1 = (basicMid.v + sqrt(basicMid.v .* basicMid.v + 4 * basicMid.A / data.rho ./ A_atm / data.beta_total)) / 2;
   lam2 = (basicMid.v - sqrt(basicMid.v .* basicMid.v + 4 * basicMid.A / data.rho ./ A_atm / data.beta_total)) / 2;
-  ///// F vector
+  // F vector
   F_ = [mdot_ ./ data.rho ./ A_atm ./ data.beta_total; mdot_ .* basicMid.v + basicMid.A .* p_];
-  //// source term of friction and gravity forces
+  // source term of friction and gravity forces
   for i in 1:N loop
     F_d[i, 1] = DarcyFriction.Friction(basic.v[i, 1], 2 * sqrt(basic.A[i, 1] / pi), dx, basic.rho[i, 1], data.mu, data.p_eps) / dx;
   end for;

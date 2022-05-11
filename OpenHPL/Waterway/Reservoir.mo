@@ -20,7 +20,7 @@ model Reservoir "Model of the reservoir"
   parameter Real f = 0.0008 "Friction factor of the reservoir" annotation (
     Dialog(group = "Geometry"));
 
-  //// possible parameters for temperature variation. Not finished...
+  // possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   //parameter SI.Temperature T_0 = data.T_0 "Initial temperature of the water" annotation (Dialog(group = "Initialization", enable = TempUse));
 

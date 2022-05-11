@@ -38,11 +38,11 @@ initial equation
   V_s_w = zeros(N);
   V_b_w = zeros(N);
 equation
-  ///// Total runoff
+  // Total runoff
   //der(Vdot_tot) = if V_s_w > s_T then (a_1*(V_s_w-s_T)+a_2*V_s_w)*(1-sum(a_L)/N)*sum(A) + sum(A)*a_3*V_b_w else a_2*V_s_w*(1-sum(a_L)/N)*sum(A) + sum(A)*a_3*V_b_w;
   Vdot_tot = sum(A .* (Vdot_b2br + Vdot_s2sr + Vdot_s2fr));
   for i in 1:N loop
-    ///// Snow zone (Snow rourine)
+    // Snow zone (Snow rourine)
     //T[i] = temp_var.y[i];
     T[i] = temp_var[i];
     //Vdot_p[i] = prec_var.y[i] * 1e-3 / 86400;
@@ -56,26 +56,26 @@ equation
     //Vdot_w2d[i] = if T[i]<=T_t and V_s_s[i]>=0 then k_m*(T_t-T[i]) else 0;
     //Vdot_s2g[i] = if T[i]>T_t and V_s_s[i]<err*1e-5 and V_s_d[i]<err then Vdot_p_r[i] elseif V_s_s[i]>=err and V_s_d[i]>=err then (1+a_w)*Vdot_d2w[i]+Vdot_p_r[i] else 0;
     Vdot_s2g[i] = Vdot_p_r[i] + Vdot_d2w[i];
-    ///// Ground zone (Soil moisure)
+    // Ground zone (Soil moisure)
     //der(V_g_w[i]) = Vdot_s2g[i] - Vdot_g2s[i] - (1-a)*Vdot_g_e[i];
     der(V_g_w[i]) = Vdot_s2g[i] - Vdot_g2s[i] - a_e[i] .* Vdot_g_e[i];
     Vdot_g2s[i] = if V_g_w[i] >= 0 and V_g_w[i] < g_T then (V_g_w[i] / g_T) ^ beta * Vdot_s2g[i] else Vdot_s2g[i];
     Vdot_epot[i] = evap_var * 1e-3 / 86400 * (1 + CE * (T[i] - month_temp[i]));
     Vdot_g_e[i] = if V_g_w[i] < g_T then V_g_w[i] / g_T * Vdot_epot[i] else Vdot_epot[i];
     a_e[i] = if V_s_d[i] < err then 1 else 0;
-    ///// Soil zone (Upprec zone)
+    // Soil zone (Upprec zone)
     der(V_s_w[i]) = Vdot_g2s[i] - a_sw[i] * Vdot_s2b[i] - Vdot_s2sr[i] - Vdot_s2fr[i];
     Vdot_s2b[i] = (1 - a_L[i]) * precC;
     Vdot_s2sr[i] = if V_s_w[i] > s_T then a_1 * (V_s_w[i] - s_T) else 0;
     Vdot_s2fr[i] = a_2 * V_s_w[i];
     a_sw[i] = if Vdot_g2s[i] < Vdot_s2b[i] then 0 else 1;
-    ///// Basement zone (Lower zone)
+    // Basement zone (Lower zone)
     der(V_b_w[i]) = Vdot_s2b[i] + Vdot_pl[i] - Vdot_b2br[i] - Vdot_l_e[i];
     Vdot_pl[i] = a_L[i] * Vdot_p[i];
     Vdot_b2br[i] = a_3 * V_b_w[i];
     Vdot_l_e[i] = a_L[i] * Vdot_epot[i];
   end for;
-  ///// Error
+  // Error
   F_o = (flow_var - 17.230144) ^ 2;
   F_e = (flow_var - Vdot_tot) ^ 2;
   R2 = 1 - F_e / F_o;

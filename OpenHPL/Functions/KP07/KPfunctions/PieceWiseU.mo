@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07.KPfunctions;
 model PieceWiseU
   extends Icons.Method;
-  parameter Integer N(start=2) "number of segments";
+  parameter Integer N(start=2) "Number of segments";
   input Real dx, boun[2, 2], theta;
   input Real U[2 * N], B[N + 4];
   input Boolean bounCon[2, 2];
