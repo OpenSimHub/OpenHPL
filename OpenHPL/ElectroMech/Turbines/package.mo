@@ -4,5 +4,4 @@ package Turbines "Different turbine models"
 
   extends Icons.Turbine;
 
-
 end Turbines;

@@ -6,18 +6,18 @@ model Fitting "Different pipes fitting"
   /* conditions for different fitting type */
   parameter Types.Fitting fit_type=OpenHPL.Types.Fitting.Square "Type of pipe fitting";
   /* geometrical parameters for fitting */
-  parameter Modelica.SIunits.Diameter D_i = 5.8 "Pipe diameter of the inlet (LHS)" annotation (
+  parameter SI.Diameter D_i = 5.8 "Pipe diameter of the inlet (LHS)" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_o = 3.3 "Pipe diameter of the outlet (RHS)" annotation (
+  parameter SI.Diameter D_o = 3.3 "Pipe diameter of the outlet (RHS)" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg theta = 45 "If Tapered fitting: angle of the tapered reduction/expansion"
+  parameter SI.Conversions.NonSIunits.Angle_deg theta = 45 "If Tapered fitting: angle of the tapered reduction/expansion"
   annotation (Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.Tapered));
-  parameter Modelica.SIunits.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
+  parameter SI.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
     Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.ThickOrifice));
   /* variables */
-  Modelica.SIunits.Velocity v(start=Modelica.Constants.eps) "Water velocity";
-  Modelica.SIunits.Area A "Cross section area";
-  Modelica.SIunits.Pressure dp "Pressure drop of fitting";
+  SI.Velocity v(start=Modelica.Constants.eps) "Water velocity";
+  SI.Area A "Cross section area";
+  SI.Pressure dp "Pressure drop of fitting";
   Real phi "Dimensionless factor based on the type of fitting ";
   /* Connector */
   extends OpenHPL.Interfaces.ContactPort;
@@ -53,8 +53,8 @@ equation
   o.p = i.p - dp "Pressure of the output connector";
   annotation (
     Documentation(info="<html>
-    <p>Various possibilities of the fittings for the pipes with different diameters 
-    and also the orifices in the pipe. 
+    <p>Various possibilities of the fittings for the pipes with different diameters
+    and also the orifices in the pipe.
     Here, the pressure drop due to these constrictions is defined.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\"><tr>
 <td><p><em>Squared Reduction:</em></p></td>

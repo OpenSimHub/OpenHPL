@@ -11,7 +11,7 @@ model HPSimplePenstockOpenChannel "testing open channel"
   Waterway.Pipe discharge(     L=600, H=-5)
                                       annotation (Placement(visible=true, transformation(extent={{6,0},{
             26,20}},                                                                                               rotation=0)));
-  Waterway.Reservoir tail(H_0=5)  annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=5)  annotation (Placement(visible=true, transformation(
         origin={90,10},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -27,7 +27,7 @@ model HPSimplePenstockOpenChannel "testing open channel"
         origin={-12,14},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Data data(V_0=18.9979) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=18.9979) annotation (Placement(visible=true, transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -35,12 +35,11 @@ model HPSimplePenstockOpenChannel "testing open channel"
             {-54,54}})));
   Waterway.OpenChannel openChannel(
     N=100,
-    w=50,
-    h0=vector([ones(68)*0.30417; 0.3045; 0.3089; 0.33; 0.398; linspace(
+    W=50,
+    h_0=vector([ones(68)*0.30417; 0.3045; 0.3089; 0.33; 0.398; linspace(
         0.519,
         5.00164,
-        28)]))                                  annotation (Placement(transformation(extent={{30,2},{
-            50,22}})));
+        28)])) annotation (Placement(transformation(extent={{30,2},{50,22}})));
   Waterway.Pipe pipe1(H=0, L=10)
                                 annotation (Placement(transformation(extent={{54,-2},
             {74,18}})));

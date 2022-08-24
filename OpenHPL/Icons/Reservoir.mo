@@ -20,6 +20,5 @@ partial class Reservoir "Reservoir icon"
           points={{-80,-20},{-60,0},{-20,-40},{20,0},{60,-40},{80,-20}},
           color={28,108,200},
           thickness=0.5,
-          smooth=Smooth.Bezier)}),
-    Diagram(coordinateSystem(preserveAspectRatio = false)));
+          smooth=Smooth.Bezier)}));
 end Reservoir;

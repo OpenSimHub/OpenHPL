@@ -10,7 +10,7 @@ model HPSimplePenstockFrancisGener "HP system model with Francis turbine and gen
     Placement(visible = true, transformation(origin = {10, 86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Waterway.Pipe intake annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
   Waterway.Pipe discharge(H=5, L=600) annotation (Placement(visible=true, transformation(extent={{46,26},{66,46}}, rotation=0)));
-  Waterway.Reservoir tail(H_0=10) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=10) annotation (Placement(visible=true, transformation(
         origin={92,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));

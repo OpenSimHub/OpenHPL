@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07.KPfunctions;
 model FluxesH
   extends Icons.Method;
-  parameter Integer N(start=2) "number of segments";
+  parameter Integer N(start=2) "Number of segments";
   input Real U_[8, N], A_[N, 4], F_[2 * N, 4];
   output Real H[2 * N, 2];
 protected

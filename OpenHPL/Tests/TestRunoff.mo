@@ -2,10 +2,10 @@ within OpenHPL.Tests;
 model TestRunoff
   extends Modelica.Icons.Example;
   Waterway.Reservoir reservoir1(
-    H_0=48,
-    l=5000,
+    h_0=48,
+    L=5000,
     UseInFlow=true,
-    w=1000) annotation (Placement(visible=true, transformation(
+    W=1000) annotation (Placement(visible=true, transformation(
         origin={-58,40},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -14,7 +14,7 @@ model TestRunoff
     Placement(visible = true, transformation(origin = {24, 62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-36,26},{-16,46}}, rotation=0)));
   Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{56,-2},{76,18}}, rotation=0)));
-  Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
         origin={94,16},
         extent={{-10,10},{10,-10}},
         rotation=180)));

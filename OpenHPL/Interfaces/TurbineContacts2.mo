@@ -2,7 +2,7 @@ within OpenHPL.Interfaces;
 partial model TurbineContacts2 "Model of turbine connectors"
   extends Interfaces.ContactPort;
   parameter Boolean enable_P_out = false "If checked, get a connector for the output power"
-    annotation (choices(checkBox = true), Dialog(group="Outputs"));
+    annotation (choices(checkBox = true), Dialog(group="Outputs",tab="I/O"));
   input Modelica.Blocks.Interfaces.RealInput u_t "[Guide vane|nozzle] opening of the turbine" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,

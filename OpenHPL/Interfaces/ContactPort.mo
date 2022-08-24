@@ -1,6 +1,6 @@
 within OpenHPL.Interfaces;
 partial model ContactPort "Model of two connectors with mass flow rate"
-  Modelica.SIunits.MassFlowRate mdot "Mass flow rate";
+  SI.MassFlowRate mdot "Mass flow rate";
   extends TwoContact;
 equation
   0 = i.mdot + o.mdot;

@@ -29,6 +29,5 @@ partial class Generator "Generator icon"
           points={{6,-20},{-14,-44},{1.375,-44},{-14,-62},{14,-38},{0,-38},{20,-20},{6,-20}},
           lineColor={0,0,0},
           fillColor={238,46,47},
-          fillPattern=FillPattern.Solid)}),
-    Diagram(coordinateSystem(preserveAspectRatio = false)));
+          fillPattern=FillPattern.Solid)}));
 end Generator;

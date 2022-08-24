@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HPElasticKPPenstockFrancisGov "HP system model with Francis turbine and elastic penstock and governor"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
         origin={-92,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -13,7 +13,7 @@ model HPElasticKPPenstockFrancisGov "HP system model with Francis turbine and el
         rotation=0)));
   OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-76,54},{-56,74}}, rotation=0)));
   Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{56,30},{76,50}}, rotation=0)));
-  Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
         origin={94,46},
         extent={{-10,10},{10,-10}},
         rotation=180)));

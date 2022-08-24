@@ -1,13 +1,13 @@
 within OpenHPL.Controllers;
 model Governor "Governor/control model"
   extends OpenHPL.Icons.Governor;
-outer Data data "using standard class with constants";
-  //// control parameters of the governor
-  parameter Modelica.SIunits.Time T_p = 0.04 "Pilot servomotor time constant" annotation (
+outer Data data "Using standard class with constants";
+  // control parameters of the governor
+  parameter SI.Time T_p = 0.04 "Pilot servomotor time constant" annotation (
     Dialog(group = "Controller settings"));
-  parameter Modelica.SIunits.Time T_g = 0.2 "Main servomotor integration time" annotation (
+  parameter SI.Time T_g = 0.2 "Main servomotor integration time" annotation (
     Dialog(group = "Controller settings"));
-  parameter Modelica.SIunits.Time T_r = 1.75 "Transient droop time constant" annotation (
+  parameter SI.Time T_r = 1.75 "Transient droop time constant" annotation (
     Dialog(group = "Controller settings"));
   parameter Real lookup_table[:, :] = [0.0, 0.0; 0.01, 0.06; 0.22, 0.25; 0.53, 0.5; 0.8, 0.75; 1.0, 0.95; 1.05, 1.0] "Table matrix (grid = first column; e.g., table=[0, 0; 1, 1; 2, 4])" annotation (
     Dialog(group = "System settings"));
@@ -21,49 +21,49 @@ outer Data data "using standard class with constants";
     Dialog(group = "System settings"));
   parameter Real Y_gv_ref = 0.72151 "Initial guide vane opening rate" annotation (
     Dialog(group = "System settings"));
-  parameter Modelica.SIunits.Frequency f_ref = data.f_0 "Reference frequency" annotation (
+  parameter SI.Frequency f_ref = data.f_0 "Reference frequency" annotation (
     Dialog(group = "System settings"));
-  parameter Modelica.SIunits.Power Pn = 104e6 "Reference power" annotation (
+  parameter SI.Power Pn = 104e6 "Reference power" annotation (
     Dialog(group = "System settings"));
-  //// connectors
+  // connectors
   Modelica.Blocks.Interfaces.RealInput P_ref annotation (
-    Placement(visible = true, transformation(extent = {{-140, 20}, {-100, 60}}, rotation = 0), iconTransformation(extent = {{-140, 20}, {-100, 60}}, rotation = 0)));
+    Placement(transformation(extent = {{-140, 20}, {-100, 60}}), iconTransformation(extent = {{-140, 20}, {-100, 60}})));
   Modelica.Blocks.Interfaces.RealOutput Y_gv annotation (
-    Placement(visible = true, transformation(extent = {{100, -10}, {120, 10}}, rotation = 0), iconTransformation(extent = {{100, -10}, {120, 10}}, rotation = 0)));
+    Placement(transformation(extent = {{100, -10}, {120, 10}}), iconTransformation(extent = {{100, -10}, {120, 10}})));
   Modelica.Blocks.Interfaces.RealInput f annotation (
-    Placement(visible = true, transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  //// blocks
+    Placement(transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}})));
+  // blocks
   Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table) annotation (
-    Placement(visible = true, transformation(origin = {-54, 40}, extent = {{10, -10}, {-10, 10}}, rotation = 180)));
+    Placement(transformation(origin = {-54, 40}, extent = {{10, -10}, {-10, 10}}, rotation = 180)));
   Modelica.Blocks.Continuous.TransferFunction pilot_servo(a = {T_p, 1}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = 0)  annotation (
-  Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Continuous.TransferFunction main_servo(a = { 1, 0}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = Y_gv_ref) annotation (
-  Placement(visible = true, transformation(origin = {46, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {46, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain gain_T_s(k = 1 / T_g)  annotation (
-  Placement(visible = true, transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter_dotY_gv(limitsAtInit = true, uMax = Y_gv_max, uMin = -Y_gv_min)  annotation (
-  Placement(visible = true, transformation(origin = {18, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {18, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter_Y_gv(limitsAtInit = true, uMax = 1, uMin = 0) annotation (
-  Placement(visible = true, transformation(origin = {76, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {76, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Continuous.TransferFunction control(a = {T_r, 1}, b = {delta * T_r, 0}, initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = 0) annotation (
-  Placement(visible = true, transformation(origin = {62, -30}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {62, -30}, extent = {{10, -10}, {-10, 10}})));
   Modelica.Blocks.Math.Gain gain_droop(k = droop) annotation (
-  Placement(visible = true, transformation(origin = {62, -56}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {62, -56}, extent = {{10, -10}, {-10, 10}})));
   Modelica.Blocks.Math.Gain gain_P(k = 1 / Pn) annotation (
-  Placement(visible = true, transformation(origin = {-84, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {-84, 40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add1 annotation (
-  Placement(visible = true, transformation(origin = {8, -44}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {8, -44}, extent = {{10, -10}, {-10, 10}})));
   Modelica.Blocks.Math.Add3 add2(k2 = -1, k3 = -1)  annotation (
-  Placement(visible = true, transformation(origin = {-58, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
+  Placement(transformation(origin = {-58, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Blocks.Math.Add add3(k1 = -1, k2 = +1)  annotation (
-  Placement(visible = true, transformation(origin = {-58, -60}, extent = {{10, -10}, {-10, 10}}, rotation = -90)));
+  Placement(transformation(origin = {-58, -60}, extent = {{10, -10}, {-10, 10}}, rotation = -90)));
   Modelica.Blocks.Math.Gain gain_f(k = 1 / f_ref) annotation (
-  Placement(visible = true, transformation(origin = {-84, -62}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+  Placement(transformation(origin = {-84, -62}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Blocks.Sources.Constant const(k = 1)  annotation (
-  Placement(visible = true, transformation(origin = {-30, -80}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Placement(transformation(origin = {-30, -80}, extent = {{10, -10}, {-10, 10}})));
   Modelica.Blocks.Math.Gain gain_droop2(k = droop) annotation (
-    Placement(visible = true, transformation(origin = {-80, -4}, extent = {{-10, 10}, {10, -10}}, rotation = -90)));
-  //Modelica.Blocks.Interfaces.RealInput P_g annotation (Placement(visible = true, transformation(extent = {{-128, -54}, {-88, -14}}, rotation = 0), iconTransformation(extent = {{-120, 24}, {-80, 64}}, rotation = 0)));
+    Placement(transformation(origin = {-80, -4}, extent = {{-10, 10}, {10, -10}}, rotation = -90)));
+  //Modelica.Blocks.Interfaces.RealInput P_g annotation (Placement(transformation(extent = {{-128, -54}, {-88, -14}}), iconTransformation(extent = {{-120, 24}, {-80, 64}})));
 initial equation
   //Y_gv = Y_gv_ref;
   //x_r = delta * Y_gv;
@@ -107,10 +107,10 @@ equation
     Line(points = {{29, 0}, {34, 0}}, color = {0, 0, 127}));
   connect(pilot_servo.y, gain_T_s.u) annotation (
     Line(points={{-29,0},{-22,0},{-22,0},{-22,0}},          color = {0, 0, 127}));
-//// define curve for control signal based on power
+// define curve for control signal based on power
   //look_up_table.u[1] = P_ref / Pn;
   //Y_gv_ref = look_up_table.y[1];
-//// governor model
+// governor model
   //dd = delta * Y_gv - x_r;
   //e = 1 - f / f_ref - dd + droop * (Y_gv_ref - Y_gv);
 //(P_ref/103e6 - P_g/103e6);

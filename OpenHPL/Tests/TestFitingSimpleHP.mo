@@ -23,7 +23,7 @@ model TestFitingSimpleHP "Model of HP system with pipe fitting"
         origin={40,-14},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Waterway.Reservoir tail(H_0=10) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=10) annotation (Placement(visible=true, transformation(
         origin={92,-30},
         extent={{10,-10},{-10,10}},
         rotation=0)));

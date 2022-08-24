@@ -5,28 +5,28 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
   extends OpenHPL.Icons.Pipe(vertical=true);
   import Modelica.Constants.pi;
   // Penstock
-  parameter Modelica.SIunits.Height H = 420 "Height over which water fall in the pipe, m" annotation (
+  parameter SI.Height H = 420 "Height over which water fall in the pipe, m" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Length L = 600 "length of the pipe, m" annotation (
+  parameter SI.Length L = 600 "length of the pipe, m" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_i = 3.3 "Diametr from the input side of the pipe" annotation (
+  parameter SI.Diameter D_i = 3.3 "Diametr from the input side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter D_o = D_i "Diametr from the output side of the pipe" annotation (
+  parameter SI.Diameter D_o = D_i "Diametr from the output side of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.VolumeFlowRate Vdot_0 = 20 "initial flow rate in the pipe, m3/s" annotation (
+  parameter SI.VolumeFlowRate Vdot_0 = 20 "Initial volume flow rate" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20 "Number of segments" annotation (
     Dialog(group = "Discretization"));
-  Modelica.SIunits.Diameter dD = 0.5 * (D_i + D_o), D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N), D_[N + 1] = linspace(D_i, D_o, N + 1);
-  Modelica.SIunits.Area A[N] = D .^ 2 * pi / 4, A_[N + 1] = D_ .^ 2 * pi / 4, A_m[N - 2], A_m_end, A_m_first;
-  Modelica.SIunits.Pressure p_i, p_o, p_[N - 1], dp = data.rho * data.g * H / N, p_m[N - 2];
-  Modelica.SIunits.Length dx = L / N, Per_m[N - 2];
-  Modelica.SIunits.MassFlowRate mdot_R, mdot_V, mdot[N - 2], m_exp[N];
+  SI.Diameter dD = 0.5 * (D_i + D_o), D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N), D_[N + 1] = linspace(D_i, D_o, N + 1);
+  SI.Area A[N] = D .^ 2 * pi / 4, A_[N + 1] = D_ .^ 2 * pi / 4, A_m[N - 2], A_m_end, A_m_first;
+  SI.Pressure p_i, p_o, p_[N - 1], dp = data.rho * data.g * H / N, p_m[N - 2];
+  SI.Length dx = L / N, Per_m[N - 2];
+  SI.MassFlowRate mdot_R, mdot_V, mdot[N - 2], m_exp[N];
   Real F_ap[N - 1], F_m[N - 2], F_exp[N], p_eps_m[N - 2], Ap_m[3, N - 2], F_m_end, F_m_first;
-  Modelica.SIunits.Force F_g[N - 2], F_p[N - 2];
-  Modelica.SIunits.Density rho_m[N - 2], rho_m_end, rho_m_first;
-  Modelica.SIunits.Velocity v_exp[N];
-  Modelica.SIunits.VolumeFlowRate V_p_out[N - 2], V_p_out_end;
+  SI.Force F_g[N - 2], F_p[N - 2];
+  SI.Density rho_m[N - 2], rho_m_end, rho_m_first;
+  SI.Velocity v_exp[N];
+  SI.VolumeFlowRate V_p_out[N - 2], V_p_out_end;
   extends OpenHPL.Interfaces.TwoContact;
 initial equation
   mdot_R = data.rho * Vdot_0;

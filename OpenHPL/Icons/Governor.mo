@@ -6,6 +6,5 @@ partial class Governor "Governor icon"
         Text(lineColor={28,108,200},
           extent={{-150,100},{150,60}},
           textString="%name",
-          textStyle={TextStyle.Bold})}),
-    Diagram(coordinateSystem(preserveAspectRatio = false)));
+          textStyle={TextStyle.Bold})}));
 end Governor;

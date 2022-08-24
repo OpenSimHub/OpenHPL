@@ -110,6 +110,5 @@ partial package Logo "Main package icon"
           lineColor={28,108,200},
           lineThickness=0.5,
           fillPattern=FillPattern.Solid,
-          fillColor={255,255,255})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, grid={1,1})));
+          fillColor={255,255,255})}));
 end Logo;

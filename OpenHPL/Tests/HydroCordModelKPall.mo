@@ -2,7 +2,7 @@ within OpenHPL.Tests;
 model HydroCordModelKPall "Model of HP system with simplified models for penstock, turbine, etc."
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir reservoir(
-    H_0=46.5,
+    h_0=46.5,
     UseInFlow=false,
     Input_level=false) annotation (Placement(visible=true, transformation(
         origin={-94,64},
@@ -15,7 +15,7 @@ model HydroCordModelKPall "Model of HP system with simplified models for penstoc
     D_o=6.3,
     H=9,
     L=81.5) annotation (Placement(visible=true, transformation(extent={{-80,50},{-60,70}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(H_0=2, Input_level=true) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=2, Input_level=true) annotation (Placement(visible=true, transformation(
         origin={94,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -27,7 +27,7 @@ model HydroCordModelKPall "Model of HP system with simplified models for penstoc
         origin={-4,66},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  inner OpenHPL.Data data(V_0=0.000429934) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=0.000429934) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));

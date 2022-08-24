@@ -1,7 +1,7 @@
 within OpenHPL.Tests;
 model HydroCordModel "Model of HP system with simplified models for penstock, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(H_0=418.5 - 372, UseInFlow=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=418.5 - 372, UseInFlow=false) annotation (Placement(visible=true, transformation(
         origin={-94,64},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -21,7 +21,7 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     p_eps=0.05) annotation (Placement(visible=true, transformation(extent={{44,-24},{64,-4}}, rotation=0)));
   OpenHPL.Waterway.Reservoir tail(
     Input_level=true,
-    H_0=24.5 - 22.6,
+    h_0=24.5 - 22.6,
     UseInFlow=false) annotation (Placement(visible=true, transformation(
         origin={94,0},
         extent={{-10,10},{10,-10}},
@@ -103,7 +103,7 @@ model HydroCordModel "Model of HP system with simplified models for penstock, tu
     Placement(visible = true, transformation(origin = {90, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Blocks.Sources.Constant const_level(k = 22.6) annotation (
     Placement(visible = true, transformation(origin = {58, -88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Data data(V_0=0.00040045) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=0.00040045) annotation (Placement(visible=true, transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}},
         rotation=0)));

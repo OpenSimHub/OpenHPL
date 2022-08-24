@@ -4,7 +4,6 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
   extends OpenHPL.Icons.Generator;
 
   Modelica.Blocks.Interfaces.RealInput Pload(unit="W") "Electrical load power demand" annotation (Placement(
-      visible=true,
       transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
@@ -23,9 +22,10 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
 <p>
 The generator can be loaded either:</p>
 <ul>
-<li>via the mechanical shaft connector (e.g., another <code>SimpleGen</code> as representation 
-of an electric grid. The input <code>P_load</code> should be set to 0 in this case.</li>
-<li>or via the input connector <code>P_load</code> specifying the connected electrical load.</li>
+<li>via the mechanical shaft connector (e.g., using the 
+<a href=\"OpenHPL.ElectroMech.PowerSystem.Grid\">Grid</a> model).
+ The input <code>Pload</code> should be set to 0 in this case.</li>
+<li>or via the input connector <code>Pload</code> specifying the connected electrical load.</li>
 </ul>
 <p align=\"center\">
 <img src=\"modelica://OpenHPL/Resources/Images/simplegen.svg\">

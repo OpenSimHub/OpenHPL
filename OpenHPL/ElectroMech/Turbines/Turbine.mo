@@ -3,7 +3,7 @@ model Turbine "Simple turbine model with mechanical connectors"
   outer Data data "Using standard class with global parameters";
   extends Icons.Turbine;
 
-  parameter Boolean ValveCapacity =  true "If checked the guide vane capacity C_v should be specified, 
+  parameter Boolean ValveCapacity =  true "If checked the guide vane capacity C_v should be specified,
     otherwise specify the nominal turbine parameters (net head and flow rate)"
     annotation (Dialog(group = "Nominal turbine parameters"), choices(checkBox = true));
   parameter Real C_v = 3.7 "Guide vane 'valve capacity'"
@@ -20,7 +20,7 @@ model Turbine "Simple turbine model with mechanical connectors"
   parameter SI.Efficiency eta_h = 0.9 "Turbine hydraulic efficiency"
     annotation (Dialog(group = "Efficiency data", enable = ConstEfficiency));
   parameter Real lookup_table[:, :] = [0, 0.4; 0.2, 0.7; 0.5, 0.9; 0.95, 0.95; 1.0, 0.93]
-    "Look-up table for the turbine efficiency, described by a table matrix, 
+    "Look-up table for the turbine efficiency, described by a table matrix,
      where the first column is a pu value of the guide vane opening,
      and the second column is a pu value of the turbine efficiency."
     annotation (Dialog(group = "Efficiency data", enable = not ConstEfficiency));
@@ -44,7 +44,7 @@ equation
   look_up_table.u[1] = u_t "Link the guide vane opening";
   C_v_ = if ValveCapacity then C_v else Vdot_n/sqrt(H_n*data.g*data.rho/data.p_a)/u_n
     "Define guide vane 'valve capacity' base on the Nominal turbine parameters";
-  dp = Vdot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2 "turbine valve equation for pressure drop";
+  dp = Vdot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2 "Turbine valve equation for pressure drop";
   dp = i.p - o.p "Link the pressure drop to the ports";
   Kdot_i_tr = dp * Vdot "Turbine energy balance";
   if ConstEfficiency then
@@ -60,8 +60,8 @@ equation
       points={{40,110},{40,80},{9,80}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(lossCorrection.u1, power.y) annotation (Line(points={{-8,80},{-80,80},{-80,30},{-71,30}}, color={0,0,127}));
-  connect(frictionLoss.power, lossCorrection.u2) annotation (Line(points={{9,12},{0,12},{0,72}},  color={0,0,127}));
+  connect(lossCorrection.u1, power.y) annotation (Line(points={{-8,80},{-88,80},{-88,30},{-81,30}}, color={0,0,127}));
+  connect(frictionLoss.power, lossCorrection.u2) annotation (Line(points={{-1,12},{0,12},{0,72}}, color={0,0,127}));
   annotation (
     Documentation(info="<html><p>
 This is a simple model of the turbine that give possibilities for simplified

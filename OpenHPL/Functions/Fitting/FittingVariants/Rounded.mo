@@ -1,9 +1,9 @@
 within OpenHPL.Functions.Fitting.FittingVariants;
 function Rounded "Calculation of phi for rounded reduction/expansion"
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.ReynoldsNumber N_Re "Reynolds number";
-  input Modelica.SIunits.Height p_eps "Pipe roughness height, only for exansion";
-  input Modelica.SIunits.Diameter D_i, D_o "Pipe diameters";
+  input SI.ReynoldsNumber N_Re "Reynolds number";
+  input SI.Height p_eps "Pipe roughness height, only for exansion";
+  input SI.Diameter D_i, D_o "Pipe diameters";
   output Real phi "Dimension factor";
 algorithm
   if D_o <= D_i then

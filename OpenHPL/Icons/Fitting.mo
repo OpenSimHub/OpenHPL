@@ -32,6 +32,5 @@ partial class Fitting "Pipe fitting icon"
           pattern=LinePattern.None),
         Line(points={{10,25}}, color={0,0,0}),
         Line(points={{10,30},{90,30},{90,20},{0,20},{0,50},{-90,50}}, color={0,0,0}),
-        Line(points={{-90,-50},{0,-50},{0,-21},{90,-21},{90,-30},{10,-30}}, color={0,0,0})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, grid={1,1})));
+        Line(points={{-90,-50},{0,-50},{0,-21},{90,-21},{90,-30},{10,-30}}, color={0,0,0})}));
 end Fitting;

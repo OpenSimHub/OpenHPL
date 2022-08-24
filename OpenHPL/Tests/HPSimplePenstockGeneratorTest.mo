@@ -2,7 +2,7 @@ within OpenHPL.Tests;
 model HPSimplePenstockGeneratorTest "Generator testing for HP"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
-  Waterway.Reservoir reservoir(H_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
         origin={-92,62},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -12,7 +12,7 @@ model HPSimplePenstockGeneratorTest "Generator testing for HP"
     Placement(visible = true, transformation(extent = {{52, -28}, {72, -8}}, rotation = 0)));
   Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
   Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{46,26},{66,46}}, rotation=0)));
-  Waterway.Reservoir tail(H_0=5) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
         origin={92,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
