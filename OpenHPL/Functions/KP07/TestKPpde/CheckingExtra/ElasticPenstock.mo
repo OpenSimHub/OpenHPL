@@ -1,7 +1,7 @@
 within OpenHPL.Functions.KP07.TestKPpde.CheckingExtra;
 model ElasticPenstock
+  inner Data data;
   extends Modelica.Icons.Example;
-  outer Data data;
   import Modelica.Constants.pi;
   parameter SI.Height H = 420 "Height over which water fall in the pipe" annotation (
     Dialog(group = "Geometry"));
@@ -55,8 +55,7 @@ equation
   S_[N + 1:2 * N, 1] = vector(basic.F_ap * data.g * H / L - F_d);
   // define differential equation
   der(U) = kP.diff_eq;
-  annotation (
-    experiment(StopTime = 100),
+  annotation (experiment(StopTime = 100),
     Documentation(info = "<html>
 <p>Here is example of using the KP function to solve hyperbolic PDE (here, model for penstock with compressible water and elastic walls is used).</p>
 <p>All calculation of the variables that is used for defining eigenvalues, source term S and vector F are implemented in additional function <code>BasicEquation</code> which used one time for centered values and then for boundary values.</p>
