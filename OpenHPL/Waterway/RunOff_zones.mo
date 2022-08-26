@@ -5,8 +5,7 @@ model RunOff_zones "Run off model. (with 10 height zones)"
   parameter Integer N = 10 "# of height zones" annotation (
     Dialog(group = "Geometry"));
   // parameters of the hydrology model
-  parameter SI.Conversions.NonSIunits.Temperature_degC T_t = -3.91223331e-01 "Threshold temperature" annotation (
-    Dialog(group = "Physically-based parameters"));
+  parameter Modelica.Units.NonSI.Temperature_degC T_t=-3.91223331e-01 "Threshold temperature" annotation (Dialog(group="Physically-based parameters"));
   parameter SI.Area A[N] = ones(N) * 41.3e6 "Catchment area" annotation (
     Dialog(group = "Geometry"));
   parameter Real s_T = 3.99187122e-02 "Soil zone saturation threshold, m" annotation (
@@ -49,7 +48,7 @@ model RunOff_zones "Run off model. (with 10 height zones)"
   SI.VolumeFlowRate Vdot_tot "Total runoff";
   SI.Velocity Vdot_s2b[N] "Runoff rate from soil zone to base zone", Vdot_pl[N] "Precipitation in lake", Vdot_b2br[N] "Runoff rate from base zone t obase runoff", Vdot_l_e[N] "Rate of evapotranspiration from lake", Vdot_g2s[N] "Runoff rate from ground zone to soil zone", Vdot_s2sr[N] "Runoff rate from soil zone to surface runoff", Vdot_s2fr[N] "Runoff rate from soil zone to fast runoff", Vdot_s2g[N] "Runoff rate from snow zone to ground zone", Vdot_g_e[N] "Evapotranspiration rate from ground zone", Vdot_p_r[N] "Precipitation in mainland in the form of snow", Vdot_d2w[N] "Melting rate from dry snow form to water snow form", Vdot_p_s[N] "Precipitation in mainland in the form of snow", Vdot_epot[N] "Evapotranspiration";
   //Vdot_w2d[N] "Freezing rate from water snow form to dry snow form";
-  SI.Conversions.NonSIunits.Temperature_degC T[N] "Ambient temperature";
+  Modelica.Units.NonSI.Temperature_degC T[N] "Ambient temperature";
   SI.Velocity Vdot_p[N] "Precipitation";
   Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Small error, m";
   // using  data

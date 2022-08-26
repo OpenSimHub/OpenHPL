@@ -36,7 +36,7 @@ model Turbine "Simple turbine model with mechanical connectors"
   Real C_v_ "Guide vane 'valve capacity'";
 
   output SI.EnergyFlowRate Wdot_s "Shaft power";
-  Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table);
+  Modelica.Blocks.Tables.CombiTable1Dv look_up_table(table=lookup_table);
   Modelica.Blocks.Math.Feedback lossCorrection annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 equation
   Vdot = if WaterCompress then mdot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else mdot / data.rho

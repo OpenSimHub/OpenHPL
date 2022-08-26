@@ -55,7 +55,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={-50,-40})));
-  Modelica.Blocks.Math.Gain toHz(k=SI.Conversions.to_Hz(p/2),y(unit="Hz")) annotation (Placement(transformation(extent={{66,-46},{78,-34}})));
+  Modelica.Blocks.Math.Gain toHz(k=Modelica.Units.Conversions.to_Hz(p/2), y(unit="Hz")) annotation (Placement(transformation(extent={{66,-46},{78,-34}})));
   Modelica.Blocks.Nonlinear.Limiter torqueLimit(uMax=Pmax/w_0) annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=180,

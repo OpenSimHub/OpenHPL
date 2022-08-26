@@ -33,7 +33,8 @@ outer Data data "Using standard class with constants";
   Modelica.Blocks.Interfaces.RealInput f annotation (
     Placement(transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}})));
   // blocks
-  Modelica.Blocks.Tables.CombiTable1D look_up_table(table = lookup_table) annotation (
+  Modelica.Blocks.Tables.CombiTable1Dv look_up_table(
+                                                    table = lookup_table) annotation (
     Placement(transformation(origin = {-54, 40}, extent = {{10, -10}, {-10, 10}}, rotation = 180)));
   Modelica.Blocks.Continuous.TransferFunction pilot_servo(a = {T_p, 1}, b = {1}, initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = 0)  annotation (
   Placement(transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}})));
@@ -41,9 +42,9 @@ outer Data data "Using standard class with constants";
   Placement(transformation(origin = {46, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain gain_T_s(k = 1 / T_g)  annotation (
   Placement(transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter_dotY_gv(limitsAtInit = true, uMax = Y_gv_max, uMin = -Y_gv_min)  annotation (
+  Modelica.Blocks.Nonlinear.Limiter limiter_dotY_gv(                     uMax = Y_gv_max, uMin = -Y_gv_min)  annotation (
   Placement(transformation(origin = {18, 0}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter_Y_gv(limitsAtInit = true, uMax = 1, uMin = 0) annotation (
+  Modelica.Blocks.Nonlinear.Limiter limiter_Y_gv(                     uMax = 1, uMin = 0) annotation (
   Placement(transformation(origin = {76, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Continuous.TransferFunction control(a = {T_r, 1}, b = {delta * T_r, 0}, initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = 0) annotation (
   Placement(transformation(origin = {62, -30}, extent = {{10, -10}, {-10, 10}})));

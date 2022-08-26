@@ -6,7 +6,7 @@ model MCB "Mechanical equivalent of an electrical Main Circuit Breaker"
 
   Modelica.Blocks.Logical.TriggeredTrapezoid triggeredTrapezoid(rising=0.01)
                                                                 annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  Modelica.Blocks.Sources.Clock clock annotation (Placement(transformation(extent={{-92,-46},{-80,-34}})));
+  Modelica.Blocks.Sources.ContinuousClock clock annotation (Placement(transformation(extent={{-92,-46},{-80,-34}})));
   Modelica.Blocks.Logical.GreaterEqualThreshold closeMCB(threshold=t_close) annotation (Placement(transformation(extent={{-66,-34},{-54,-22}})));
   Modelica.Blocks.Logical.GreaterEqualThreshold openMCB(threshold=t_open) annotation (Placement(transformation(extent={{-66,-58},{-54,-46}})));
   Modelica.Blocks.Logical.RSFlipFlop rSFlipFlop annotation (Placement(transformation(extent={{0,-56},{20,-36}})));

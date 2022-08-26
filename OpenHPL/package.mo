@@ -1,13 +1,13 @@
 package OpenHPL "Open-source hydropower library"
   extends Icons.Logo;
   import C = Modelica.Constants;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
 
   annotation (
-    version="1.6.0",
+    version="2.0.0-dev",
     versionDate="2022-05-24",
     Protection(access = Access.packageDuplicate),
-    uses(Modelica(version="3.2.3"), OpenIPSL(version="2.0.0")),
+    uses(OpenIPSL(version="3.0.1"), Modelica(version="4.0.0")),
     preferredView="info",
     Documentation(info="<html>
 <p>The OpenHPL is an open-source hydropower library that

@@ -10,8 +10,7 @@ model Fitting "Different pipes fitting"
     Dialog(group = "Geometry"));
   parameter SI.Diameter D_o = 3.3 "Pipe diameter of the outlet (RHS)" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Conversions.NonSIunits.Angle_deg theta = 45 "If Tapered fitting: angle of the tapered reduction/expansion"
-  annotation (Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.Tapered));
+  parameter Modelica.Units.NonSI.Angle_deg theta=45 "If Tapered fitting: angle of the tapered reduction/expansion" annotation (Dialog(group="Geometry", enable=fit_type == OpenHPL.Types.Fitting.Tapered));
   parameter SI.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
     Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.ThickOrifice));
   /* variables */

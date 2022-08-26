@@ -20,8 +20,7 @@ model Francis "Model of the Francis turbine"
         Dialog(group = "Nominal parameters"));
     parameter SI.Power P_n = 103e6 "Nominal power" annotation (
         Dialog(group = "Nominal parameters"));
-    parameter SI.Conversions.NonSIunits.AngularVelocity_rpm n_n = 500 "Nominal turbine speed" annotation (
-        Dialog(group = "Nominal parameters"));
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm n_n=500 "Nominal turbine speed" annotation (Dialog(group="Nominal parameters"));
     // geometrical parameters of the turbine
     parameter SI.Radius R_1_ = 2.63 / 2 "Radius of the turbine blade inlet" annotation (
         Dialog(group = "Runner", enable = GivenData)), R_2_ = 1.55 / 2 "Radius of the turbine blade outlet" annotation (
@@ -46,9 +45,8 @@ model Francis "Model of the Francis turbine"
         Dialog(group = "Parameters for low load"));
     parameter Real u_min = 0.03 "Control signal value under which the moodel used k_f4 friction term to balance the model" annotation (
         Dialog(group = "Parameters for low load"));
-    parameter SI.Conversions.NonSIunits.Angle_deg beta1_ = 110 "Turbine inlet blade angle" annotation (
-        Dialog(group = "Runner", enable = GivenData)), beta2_ = 162.5 "Turbine outlet blade angle" annotation (
-        Dialog(group = "Runner", enable = GivenData));
+  parameter Modelica.Units.NonSI.Angle_deg beta1_=110 "Turbine inlet blade angle" annotation (Dialog(group="Runner", enable=GivenData));
+  parameter Modelica.Units.NonSI.Angle_deg beta2_=162.5 "Turbine outlet blade angle" annotation (Dialog(group="Runner", enable=GivenData));
     parameter Real Reduction = 0.2 "Reduction the given formula for the guide vane pressure drop" annotation (
         Dialog(tab = "Guide vane")), u_start_ = 2.28 "Servo position with zero flow" annotation (
         Dialog(tab = "Servo")), u_end_ = 2.4 "Servo position with full flow" annotation (
@@ -64,7 +62,9 @@ model Francis "Model of the Francis turbine"
     SI.VolumeFlowRate Vdot "Flow rate";
     SI.AngularVelocity w=w_in "Angular velocity";
     SI.Velocity u_2 "Outlet reference velocity", c_m2 "Outlet meridional velocity", c_m1 "Inlet meridional velocity", u_1 "Inlet reference velocity", c_u1 "Inlet tangential velocity";
-    SI.Conversions.NonSIunits.Angle_deg beta1 "Inlet blade angle", beta2 "Outlet blade angle", _beta1;
+  Modelica.Units.NonSI.Angle_deg beta1 "Inlet blade angle";
+  Modelica.Units.NonSI.Angle_deg beta2 "Outlet blade angle";
+  Modelica.Units.NonSI.Angle_deg _beta1;
     SI.Angle alpha1 "Inlet guide vane angle", phi "One of servo angles", psi "One of servo angles", theta "One of servo angles", dtheta "One of servo angles";
     Real k_ft1, k_ft2, k_ft3;
     //"Losses coefficients"
@@ -95,12 +95,12 @@ equation
         _beta1 = 180 - beta1;
     else
         beta2 = 162.5;
-        R_2 = 0.5 * (240 * Vdot_n / (pi ^ 2 * n_n * Modelica.Math.tan(SI.Conversions.from_deg(180 - beta2)))) ^ (1 / 3);
+        R_2 =0.5*(240*Vdot_n/(pi^2*n_n*Modelica.Math.tan(Modelica.Units.Conversions.from_deg(180 - beta2))))^(1/3);
         R_1 = 30 * u_1 / pi / n_n;
         w_1 = 0.8 * Vdot_n / (pi * 2 * R_1 * c_m1);
         w_v = w_1;
         R_v = 1.1 * R_1;
-        Modelica.Math.tan(SI.Conversions.from_deg(_beta1)) = c_m1 / (u_1 - c_u1);
+    Modelica.Math.tan(Modelica.Units.Conversions.from_deg(_beta1)) = c_m1/(u_1 - c_u1);
         beta1 = 180 - _beta1;
     end if;
   // design algorithm for runner losses
@@ -138,7 +138,7 @@ equation
     theta_n = theta0 - Modelica.Math.acos((r_v ^ 2 + R_v ^ 2 - d_n ^ 2) / (2 * r_v * R_v));
   // design algorithm for velocities, used for runner design
     u_2 = 2 * pi * R_2 * n_n / 60;
-    c_m2 = u_2 * Modelica.Math.tan(SI.Conversions.from_deg(180 - beta2));
+    c_m2 =u_2*Modelica.Math.tan(Modelica.Units.Conversions.from_deg(180 - beta2));
     c_m1 = c_m2 / 1.1;
     u_1 = 0.725 * sqrt(2 * data.g * H_n);
     c_u1 = 0.48 / 0.725 * sqrt(2 * data.g * H_n);
@@ -191,8 +191,8 @@ equation
   // Blade angles relation
     cot_a1 = 1 / Modelica.Math.tan(alpha1);
     cot_a2 = cot_b2 + w * R_2 / (Vdot / A_2);
-    cot_b1 = 1 / Modelica.Math.tan(SI.Conversions.from_deg(beta1));
-    cot_b2 = 1 / Modelica.Math.tan(SI.Conversions.from_deg(beta2));
+    cot_b1 =1/Modelica.Math.tan(Modelica.Units.Conversions.from_deg(beta1));
+    cot_b2 =1/Modelica.Math.tan(Modelica.Units.Conversions.from_deg(beta2));
     cot_g1 = cot_a1 - w * R_1 / (Vdot / A_1);
   // pressure drop through the turbine
     dp_r * Vdot + 0.5 * mdot * Vdot ^ 2 * (1 / A_0 ^ 2 - 1 / A_2 ^ 2) = Wdot_t;

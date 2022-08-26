@@ -5,7 +5,7 @@ function FittingPhi "Calculates the dimension factor phi based in the fitting ty
   input SI.Diameter D_i "Pipe diameter of inlet (LHS)";
   input SI.Diameter D_o "Pipe diameter of outlet (RHS)";
   input SI.Length L "Fitting length";
-  input SI.Conversions.NonSIunits.Angle_deg theta = 90 "Angle of the tapered reduction/expansion";
+  input Modelica.Units.NonSI.Angle_deg theta=90 "Angle of the tapered reduction/expansion";
   input SI.Density rho "Density";
   input SI.DynamicViscosity mu "Dynamic viscosity of water";
   input SI.Height p_eps "Pipe roughness height";

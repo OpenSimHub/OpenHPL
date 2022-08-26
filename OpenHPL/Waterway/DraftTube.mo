@@ -21,8 +21,7 @@ model DraftTube "Model of a draft tube for reaction turbines"
   parameter SI.Length L_b = 3 "Length of Branch section of Moody spreading pipe" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
 
-  parameter SI.Conversions.NonSIunits.Angle_deg theta = 5 "Angle at which conical diffuser is inclined" annotation (
-    Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
+  parameter Modelica.Units.NonSI.Angle_deg theta=5 "Angle at which conical diffuser is inclined" annotation (Dialog(group="Geometry", enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
   parameter Integer theta_moody = 30 "Angle in deg at which Moody spreading pipes are branched."
    annotation (Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe),
     choices( choice = 15 "15°",
@@ -74,9 +73,12 @@ model DraftTube "Model of a draft tube for reaction turbines"
   SI.VolumeFlowRate Vdot(start = Vdot_0, fixed = true) "Volume flow rate";
   SI.VolumeFlowRate Vdot_b "Volume flow rate for Branch section of Moody spreading pipes";
 
-  Real cos_theta = cos(SI.Conversions.from_deg(theta)) "Calculating cos_theta";
-  Real cos_theta_moody = cos(SI.Conversions.from_deg(theta_moody)) "Calculating cos_theta_moody";
-  Real cos_theta_moody_by_2 = cos(SI.Conversions.from_deg(theta_moody/2)) "Calculating cos_theta_moody_by_2";
+  Real cos_theta = cos(Modelica.Units.Conversions.from_deg(
+                                               theta)) "Calculating cos_theta";
+  Real cos_theta_moody = cos(Modelica.Units.Conversions.from_deg(
+                                                     theta_moody)) "Calculating cos_theta_moody";
+  Real cos_theta_moody_by_2 = cos(Modelica.Units.Conversions.from_deg(
+                                                          theta_moody/2)) "Calculating cos_theta_moody_by_2";
 
  // connectors
   extends OpenHPL.Interfaces.ContactPort;

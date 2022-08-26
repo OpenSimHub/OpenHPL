@@ -1,7 +1,7 @@
 within OpenHPL.Examples.WithOpenIPSL;
 model SimpleGenFrancis "Synergy with OpenIPSL library(generator)"
   extends Modelica.Icons.Example;
-  extends OpenIPSL.Examples.BaseClasses.MachineTestBase(pwLine2(displayPF=true), pwLine1(displayPF=true));
+  extends OpenIPSL.Tests.BaseClasses.MachineTestBase(pwLine2(displayPF=true), pwLine1(displayPF=true));
   OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-80,-50},
         extent={{-10,-10},{10,10}})));

@@ -89,8 +89,10 @@ model HydroCordModel2 "Model of HP system with simplified models for penstock, t
     Placement(visible = true, transformation(origin = {58, -64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Gain per_gain(k = 1 / 100) annotation (
     Placement(visible = true, transformation(origin = {-22, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Nonlinear.Limiter limiter1(limitsAtInit = true, uMax = 100, uMin = 0.001) annotation (
-    Placement(visible = true, transformation(origin = {-54, -42}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=100, uMin=0.001) annotation (Placement(visible=true, transformation(
+        origin={-54,-42},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   Modelica.Blocks.Math.Add add1(k2 = -1) annotation (
     Placement(visible = true, transformation(origin = {90, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Blocks.Sources.Constant const_level(k = 22.6) annotation (

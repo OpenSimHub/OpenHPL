@@ -7,7 +7,7 @@ model Pelton "Model of the Pelton turbine"
     parameter SI.Radius R = 3.3 "Radius of the turbine";
     parameter SI.Diameter D_0 = 3.3 "Input diameter of the nozzle";
     parameter Real k = 0.8 "Friction factor", k_f = 1 "Coefficient of friction loss in the nozzle", K = 0.25 "Friction loss coefficient due to power loss", d_u = 1 "Deflector mechanism coefficient";
-    parameter SI.Conversions.NonSIunits.Angle_deg beta = 165;
+  parameter Modelica.Units.NonSI.Angle_deg beta=165;
     // condition for inlet water compressibility
     parameter Boolean CompElas = false "If checked the water is compressible and the walls is elastic" annotation (
         choices(checkBox = true));
@@ -18,7 +18,7 @@ model Pelton "Model of the Pelton turbine"
     SI.VolumeFlowRate Vdot "Flow rate";
     SI.Velocity v_R, v_1;
     SI.AngularVelocity w=w_in "Angular velocity";
-    Real cos_b = Modelica.Math.cos(SI.Conversions.from_deg(beta));
+    Real cos_b = Modelica.Math.cos(Modelica.Units.Conversions.from_deg(beta));
     // connectors
     extends OpenHPL.Interfaces.TurbineContacts;
     Modelica.Blocks.Interfaces.RealInput w_in "Input angular velocity from the generator" annotation (
