@@ -16,7 +16,7 @@ model TorpaHPPAirCushionTest "Test case for air cushion surge tank from Torpa hy
     H=5,
     L=10000,
     D_i=6.56)                                   annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=20,Input_level=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=20)                   annotation (Placement(visible=true, transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -49,6 +49,7 @@ model TorpaHPPAirCushionTest "Test case for air cushion surge tank from Torpa hy
         origin={30,10},
         extent={{-10,-10},{10,10}},
         rotation=0)));
+  inner Data data annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 equation
   connect(turbine.o, discharge.i) annotation (
     Line(points={{40,10},{44,10},{44,0},{50,0}},            color = {28, 108, 200}));
