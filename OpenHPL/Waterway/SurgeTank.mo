@@ -155,6 +155,6 @@ equation
 <p>The throttle valve surge tank is shown below:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/STThrottleValve.svg\"/></p>
 
-<p>The simple surge tank model can be found in this link: <a href=\"modelica://OpenHPL.UsersGuide.References\">OpenHPL.UsersGuide.References&gt;[Valen2017]</a> </p>
+<p>The simple surge tank model can be found in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
 </html>"));
 end SurgeTank;
