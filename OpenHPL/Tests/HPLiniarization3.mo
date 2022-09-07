@@ -3,16 +3,15 @@ model HPLiniarization3 "Simple HP system model for liniarization"
   extends Modelica.Icons.Example;
   input Real u(start = 0.7493);
   output Real dotV;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.Pipe intake(H=23, Vdot_0=19.0777) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
+        extent={{-10,-10},{10,10}})));
+  Waterway.Pipe intake(H=23, Vdot_0=19.0777) annotation (Placement(transformation(extent={{-72,50},{-52,70}})));
   OpenHPL.Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    Vdot_0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.0777) annotation (Placement(transformation(extent={{30,24},{50,44}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={72,40},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -21,22 +20,19 @@ model HPLiniarization3 "Simple HP system model for liniarization"
     D_o=3,
     H=428.5,
     L=600,
-    Vdot_0=19.0777) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.0777) annotation (Placement(transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank(h_0=69.908, p_2=data.p_a) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank(h_0=69.908, p_2=data.p_a) annotation (Placement(transformation(
         origin={-30,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(transformation(
         origin={10,34},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
 equation
   connect(discharge.n, tail.n) annotation (
     Line(points = {{50, 34}, {56.05, 34}, {56.05, 40}, {62, 40}}, color = {28, 108, 200}));

@@ -1,19 +1,18 @@
 within OpenHPL.Tests;
 model HPLiniarizationFranGen "HP system model for liniarization with Francis turbine + generator"
   extends Modelica.Icons.Example;
-  Waterway.Pipe intake(H=23, Vdot_0=18.5952) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
+  Waterway.Pipe intake(H=23, Vdot_0=18.5952) annotation (Placement(transformation(extent={{-72,50},{-52,70}})));
   input Real u = 0.576313;
   output Real P;
   //, f;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    Vdot_0=18.5952) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+    Vdot_0=18.5952) annotation (Placement(transformation(extent={{30,24},{50,44}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={94,40},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -22,27 +21,24 @@ model HPLiniarizationFranGen "HP system model for liniarization with Francis tur
     D_o=3,
     H=428.5,
     L=600,
-    Vdot_0=18.5952) annotation (Placement(visible=true, transformation(
+    Vdot_0=18.5952) annotation (Placement(transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank(h_0=69.963) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank(h_0=69.963) annotation (Placement(transformation(
         origin={-30,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Turbines.Francis turbine(
     GivenData=false,
     GivenServoData=false,
     Given_losses=false,
     u_end_=2.3683,
-    u_start_=2.24) annotation (Placement(visible=true, transformation(
+    u_start_=2.24) annotation (Placement(transformation(
         origin={10,34},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Generators.SynchGen generator(
     SelfInitialization=true,
     EEd_0=-7207.13,
@@ -50,7 +46,7 @@ model HPLiniarizationFranGen "HP system model for liniarization with Francis tur
     Ef_0=38110.4,
     Vstabilizer_0=0,
     w_0=52.3599,
-    DELTA_0=0.65703268757177) annotation (Placement(visible=true, transformation(extent={{0,-10},{20,10}}, rotation=0)));
+    DELTA_0=0.65703268757177) annotation (Placement(transformation(extent={{0,-10},{20,10}})));
 equation
   connect(generator.w_out, turbine.w_in) annotation (
     Line(points = {{16, 10}, {16, 17}, {14, 17}, {14, 24}}, color = {0, 0, 127}));

@@ -1,46 +1,42 @@
 within OpenHPL.Tests;
 model HPSimpleElasticPenstock "Model of HP system with elastic penctock (StagardGrid), but simplified models for turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-90,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin={10,82})));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+    Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin={10,82})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.Pipe intake(
     H=23,
     SteadyState=false,
-    Vdot_0=19.06) annotation (Placement(visible=true, transformation(extent={{-66,52},{-46,72}}, rotation=0)));
+    Vdot_0=19.06) annotation (Placement(transformation(extent={{-66,52},{-46,72}})));
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
     SteadyState=false,
-    Vdot_0=19.06) annotation (Placement(visible=true, transformation(extent={{54,26},{74,46}}, rotation=0)));
+    Vdot_0=19.06) annotation (Placement(transformation(extent={{54,26},{74,46}})));
   Waterway.Reservoir tail(h_0=10) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={92,42})));
-  Waterway.SurgeTank surgeTank1(SteadyState=false, h_0=71) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank1(SteadyState=false, h_0=71) annotation (Placement(transformation(
         origin={-26,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.Penstock penstock(
     D_i=3,
     D_o=3,
     H=428.5,
     N=10,
-    Vdot_0=19.06) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.06) annotation (Placement(transformation(
         origin={0,54},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(visible=true, transformation(extent={{20,26},{40,46}}, rotation=0)));
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(transformation(extent={{20,26},{40,46}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
-    Placement(visible = true, transformation(extent = {{-10, -4}, {10, 16}}, rotation = 0)));
-  OpenHPL.ElectroMech.Generators.SimpleGen aggregate annotation (Placement(visible=true, transformation(extent={{20,-4},{40,16}}, rotation=0)));
+    Placement(transformation(extent = {{-10, -4}, {10, 16}})));
+  OpenHPL.ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{20,-4},{40,16}})));
 equation
   connect(load.y, aggregate.u) annotation (
     Line(points = {{11, 6}, {20, 6}}, color = {0, 0, 127}));

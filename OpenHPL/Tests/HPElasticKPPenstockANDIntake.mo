@@ -1,23 +1,21 @@
 within OpenHPL.Tests;
 model HPElasticKPPenstockANDIntake "Model of HP system with elastic penctock and intake (KP), but simplified models for turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(height = -0.04615, duration = 1, offset = 0.7493, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin = {0, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {0, 84}, extent = {{-10, -10}, {10, 10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={78,38},
         extent={{-10,10},{10,-10}},
         rotation=180)));
   ElectroMech.Turbines.Turbine turbine(
     C_v=3.7,
-    WaterCompress=true) annotation (Placement(visible=true, transformation(extent={{8,32},{28,52}}, rotation=0)));
+    WaterCompress=true) annotation (Placement(transformation(extent={{8,32},{28,52}})));
   Waterway.PenstockKP penstockKP(
     D_i=3,
     D_o=3,
@@ -32,18 +30,16 @@ model HPElasticKPPenstockANDIntake "Model of HP system with elastic penctock and
     N=110,
     PipeElasticity=true,
     h_s0=48,
-    p_p0=997*9.81*(48 + 23/110/2):997*9.81*23/110:997*9.81*(48 + 23/110*(110 - 1/2))) annotation (Placement(visible=true, transformation(
+    p_p0=997*9.81*(48 + 23/110/2):997*9.81*23/110:997*9.81*(48 + 23/110*(110 - 1/2))) annotation (Placement(transformation(
         origin={-62,68},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.Pipe discharge(
     D_i=5.8,
     D_o=5.8,
     H=0.5,
-    L=600) annotation (Placement(visible=true, transformation(
+    L=600) annotation (Placement(transformation(
         origin={48,40},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
 equation
   connect(reservoir.n, Intake.p) annotation (
     Line(points = {{-81.9, 65.9}, {-72, 65.9}, {-72, 67.9}, {-71.9, 67.9}}, color = {28, 108, 200}));

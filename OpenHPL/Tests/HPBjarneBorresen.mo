@@ -1,16 +1,15 @@
 within OpenHPL.Tests;
 model HPBjarneBorresen "Model of HP system with simplified models for penstock, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=503 - 499.5) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=503 - 499.5) annotation (Placement(transformation(
         origin={-94,64},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe PN6(
     D_i=1.4,
     D_o=1.4,
     H=499.5 - 470,
-    L=3372) annotation (Placement(visible=true, transformation(extent={{-76,50},{-56,70}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=218 - 217) annotation (Placement(visible=true, transformation(
+    L=3372) annotation (Placement(transformation(extent={{-76,50},{-56,70}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=218 - 217) annotation (Placement(transformation(
         origin={88,-20},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -19,48 +18,43 @@ model HPBjarneBorresen "Model of HP system with simplified models for penstock, 
     D_o=1.4,
     H=238 - 217,
     L=147,
-    PipeElasticity=true) annotation (Placement(visible=true, transformation(
+    PipeElasticity=true) annotation (Placement(transformation(
         origin={46,-8},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  inner OpenHPL.Data data(Vdot_0=2.4) annotation (Placement(visible=true, transformation(
+  inner OpenHPL.Data data(Vdot_0=2.4) annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.ElectroMech.Turbines.Turbine turbine(C_v=0.8) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.ElectroMech.Turbines.Turbine turbine(C_v=0.8) annotation (Placement(transformation(
         origin={62,-26},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe PN10(
     D_i=1.4,
     D_o=1.4,
     H=470 - 440,
-    L=972) annotation (Placement(visible=true, transformation(
+    L=972) annotation (Placement(transformation(
         origin={-40,54},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe PN16(
     D_i=1.4,
     D_o=1.4,
     H=440 - 380,
-    L=300) annotation (Placement(visible=true, transformation(
+    L=300) annotation (Placement(transformation(
         origin={-12,48},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe PN20(
     D_i=1.4,
     D_o=1.4,
     H=380 - 340,
-    L=252) annotation (Placement(visible=true, transformation(
+    L=252) annotation (Placement(transformation(
         origin={14,44},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.PenstockKP K91(
     D_i=1.4,
     D_o=1.4,
     H=340 - 268,
     L=335,
-    PipeElasticity=true) annotation (Placement(visible=true, transformation(
+    PipeElasticity=true) annotation (Placement(transformation(
         origin={24,28},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
@@ -69,12 +63,11 @@ model HPBjarneBorresen "Model of HP system with simplified models for penstock, 
     D_o=1.4,
     H=268 - 238,
     L=122,
-    PipeElasticity=true) annotation (Placement(visible=true, transformation(
+    PipeElasticity=true) annotation (Placement(transformation(
         origin={36,10},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = 0.2, offset = 0.6, startTime = 500) annotation (
-    Placement(visible = true, transformation(origin = {44, 66}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {44, 66}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(control.y, turbine.u_t) annotation (
     Line(points = {{56, 66}, {62, 66}, {62, -16}, {62, -16}}, color = {0, 0, 127}));

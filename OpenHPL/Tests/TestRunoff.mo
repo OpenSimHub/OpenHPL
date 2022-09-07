@@ -5,16 +5,15 @@ model TestRunoff
     h_0=48,
     L=5000,
     UseInFlow=true,
-    W=1000) annotation (Placement(visible=true, transformation(
+    W=1000) annotation (Placement(transformation(
         origin={-58,40},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.RunOff_zones runOff annotation (Placement(transformation(extent={{-102,40},{-82,60}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, startTime = 600 * 1e10, offset = 0.3493) annotation (
-    Placement(visible = true, transformation(origin = {24, 62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-36,26},{-16,46}}, rotation=0)));
-  Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{56,-2},{76,18}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {24, 62}, extent = {{-10, -10}, {10, 10}})));
+  Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-36,26},{-16,46}})));
+  Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{56,-2},{76,18}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={94,16},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -22,22 +21,19 @@ model TestRunoff
     D_i=3,
     D_o=3,
     H=428.5,
-    L=600) annotation (Placement(visible=true, transformation(
+    L=600) annotation (Placement(transformation(
         origin={24,26},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(
         origin={2,42},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(transformation(
         origin={40,12},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
 equation
   connect(reservoir1.inflow, runOff.Vdot_runoff) annotation (Line(points={{-68,40},{-76,40},{-76,50},{-82,50}}, color={0,0,127}));
   connect(control.y, turbine.u_t) annotation (

@@ -1,23 +1,21 @@
 within OpenHPL.Tests;
 model HPElasticKPPenstockFrancis "HP system model with Francis turbine and elastic penstock"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.6, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin = {18, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {18, 84}, extent = {{-10, -10}, {10, 10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-74,54},{-54,74}}, rotation=0)));
-  Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{56,30},{76,50}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-74,54},{-54,74}})));
+  Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(transformation(extent={{56,30},{76,50}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={94,46},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(extent={{-44,60},{-24,80}}, rotation=0)));
+  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(extent={{-44,60},{-24,80}})));
   Waterway.PenstockKP penstockKP(
     D_i=3,
     D_o=3,
@@ -36,17 +34,15 @@ model HPElasticKPPenstockFrancis "HP system model with Francis turbine and elast
     r_Y=1.2,
     r_v=1.1,
     w_1_=0.2,
-    w_v_=0.2) annotation (Placement(visible=true, transformation(
+    w_v_=0.2) annotation (Placement(transformation(
         origin={42,38},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Generators.SynchGen generator(
     P_op=100e6,
     Q_op=62.5e6,
-    UseFrequencyOutput=false) annotation (Placement(visible=true, transformation(
+    UseFrequencyOutput=false) annotation (Placement(transformation(
         origin={40,4},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
 equation
   connect(generator.w_out, francis.w_in) annotation (
     Line(points = {{46, 14}, {46, 14}, {46, 28}, {46, 28}, {46, 28}}, color = {0, 0, 127}));

@@ -1,20 +1,18 @@
 within OpenHPL.Tests;
 model HPElasticKPPenstockWithoutSurge "Model of HP system without surge tank and with elastic penctock (KP), but simplified models for turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-90,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {10, 84})));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+    Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {10, 84})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    Vdot_0=19.06) annotation (Placement(visible=true, transformation(extent={{56,24},{76,44}}, rotation=0)));
+    Vdot_0=19.06) annotation (Placement(transformation(extent={{56,24},{76,44}})));
   Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
@@ -25,18 +23,16 @@ model HPElasticKPPenstockWithoutSurge "Model of HP system without surge tank and
     H=428.5,
     N=10,
     PipeElasticity=true,
-    Vdot_0=19.06*ones(10)) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.06*ones(10)) annotation (Placement(transformation(
         origin={-6,50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompres=true) annotation (Placement(transformation(extent={{22,26},{42,46}})));
-  Waterway.Pipe condiut(H=23, Vdot_0=19.06) annotation (Placement(visible=true, transformation(
+  Waterway.Pipe condiut(H=23, Vdot_0=19.06) annotation (Placement(transformation(
         origin={-48,64},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
-    Placement(visible = true, transformation(extent = {{-8, -2}, {12, 18}}, rotation = 0)));
-  ElectroMech.Generators.SimpleGen aggregate annotation (Placement(visible=true, transformation(extent={{22,-2},{42,18}}, rotation=0)));
+    Placement(transformation(extent = {{-8, -2}, {12, 18}})));
+  ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{22,-2},{42,18}})));
 equation
   connect(turbine.P_out, aggregate.P_in) annotation (
     Line(points = {{32, 26}, {32, 26}, {32, 18}, {32, 18}}, color = {0, 0, 127}));

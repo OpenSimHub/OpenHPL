@@ -1,18 +1,17 @@
 within OpenHPL.Tests;
 model HPSimplePenstockPelton "HP system model with Pelton turbine"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, offset = 0.015, startTime = 600, height = 0.01) annotation (
-    Placement(visible = true, transformation(origin = {-10, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
+    Placement(transformation(origin = {-10, 84}, extent = {{-10, -10}, {10, 10}})));
+  Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-72,50},{-52,70}})));
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    Vdot_0=0) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+    Vdot_0=0) annotation (Placement(transformation(extent={{30,24},{50,44}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={94,40},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -20,23 +19,20 @@ model HPSimplePenstockPelton "HP system model with Pelton turbine"
     D_i=3,
     D_o=3,
     H=610,
-    L=700) annotation (Placement(visible=true, transformation(
+    L=700) annotation (Placement(transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(
         origin={-30,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  ElectroMech.Turbines.Pelton turbine(R=1.74/2, D_0=1) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  ElectroMech.Turbines.Pelton turbine(R=1.74/2, D_0=1) annotation (Placement(transformation(
         origin={10,34},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.ElectroMech.Generators.SynchGen aggregate(np=5) annotation (Placement(visible=true, transformation(extent={{0,-4},{20,16}}, rotation=0)));
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.ElectroMech.Generators.SynchGen aggregate(np=5) annotation (Placement(transformation(extent={{0,-4},{20,16}})));
 equation
   connect(aggregate.P_in, turbine.P_out) annotation (
     Line(points={{4,16},{4,19},{10,19},{10,23}},        color = {0, 0, 127}));

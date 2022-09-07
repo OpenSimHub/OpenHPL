@@ -1,24 +1,22 @@
 within OpenHPL.Tests;
 model HPElasticKPPenstock "Model of HP system with elastic penctock (KP), but simplified models for turbine, etc."
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin={0,84},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Data data(Vdot_0=19.12, rho(displayUnit="kg/m3") = 997) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin={0,84},    extent = {{-10, -10}, {10, 10}})));
+  inner OpenHPL.Data data(Vdot_0=19.12, rho(displayUnit="kg/m3") = 997) annotation (Placement(transformation(
         origin={-90,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-72,54},{-52,74}}, rotation=0)));
-  Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{38,30},{58,50}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-72,54},{-52,74}})));
+  Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{38,30},{58,50}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,46},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(visible=true, transformation(extent={{8,32},{28,52}}, rotation=0)));
-  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(extent={{-42,60},{-22,80}}, rotation=0)));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(transformation(extent={{8,32},{28,52}})));
+  Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(extent={{-42,60},{-22,80}})));
   Waterway.PenstockKP penstockKP(
     D_i=3,
     D_o=3,
@@ -28,8 +26,8 @@ model HPElasticKPPenstock "Model of HP system with elastic penctock (KP), but si
     h_s0=69.9,
     p_p0=997*data.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N/2):997*data.g*penstockKP.H/penstockKP.N:997*data.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N*(penstockKP.N - 1/2))) annotation (Placement(transformation(extent={{-20,44},{0,64}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
-    Placement(visible = true, transformation(extent = {{-22, 0}, {-2, 20}}, rotation = 0)));
-  ElectroMech.Generators.SimpleGen aggregate annotation (Placement(visible=true, transformation(extent={{8,0},{28,20}}, rotation=0)));
+    Placement(transformation(extent = {{-22, 0}, {-2, 20}})));
+  ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{8,0},{28,20}})));
 equation
   //19.077 * ones(10)
   //, H = 428.5, h_s0 = 69.9, N = 10, p_p0 = 997 * 9.81 * (69.9 + 428.5 / 10 / 2):997 * 9.81 * 428.5 / 10:9.81 * 997 * (69.9 + 428.5 / 10 * (10 - 1 / 2))

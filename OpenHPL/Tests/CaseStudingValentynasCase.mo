@@ -2,32 +2,31 @@ within OpenHPL.Tests;
 model CaseStudingValentynasCase "HP system model for Valentyna's Master case"
   extends Modelica.Icons.Example;
   Real coef2, coef3;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,68},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1980, height = 0.75, offset = 0.04, startTime = 10) annotation (
-    Placement(visible = true, transformation(origin = {10, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {10, 80}, extent = {{-10, -10}, {10, 10}})));
   OpenHPL.Waterway.Pipe intake(
     D_i=5,
     D_o=5,
     H=15.5,
-    L=3000) annotation (Placement(visible=true, transformation(extent={{-78,58},{-58,78}}, rotation=0)));
+    L=3000) annotation (Placement(transformation(extent={{-78,58},{-58,78}})));
   OpenHPL.Waterway.Pipe discharge(
     D_i=5,
     D_o=5,
     H=0.5,
-    L=600) annotation (Placement(visible=true, transformation(extent={{50,4},{70,24}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+    L=600) annotation (Placement(transformation(extent={{50,4},{70,24}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={94,18},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  OpenHPL.ElectroMech.Generators.SynchGen generator(UseFrequencyOutput=false) annotation (Placement(visible=true, transformation(extent={{24,-18},{44,2}}, rotation=0)));
+  OpenHPL.ElectroMech.Generators.SynchGen generator(UseFrequencyOutput=false) annotation (Placement(transformation(extent={{24,-18},{44,2}})));
   Waterway.Pipe penstock(
     D_i=4,
     D_o=4,
     H=133,
-    L=300) annotation (Placement(visible=true, transformation(
+    L=300) annotation (Placement(transformation(
         origin={-26,62},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
@@ -53,20 +52,18 @@ model CaseStudingValentynasCase "HP system model for Valentyna's Master case"
     u_end=2.11,
     u_start=2,
     w_1_=0.26,
-    w_v_=0.259) annotation (Placement(visible=true, transformation(
+    w_v_=0.259) annotation (Placement(transformation(
         origin={34,20},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data(Vdot_0=5.2) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data(Vdot_0=5.2) annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.Fitting fitting(D_1=3, D_2=1.73) annotation (Placement(visible=true, transformation(extent={{0,-4},{20,16}}, rotation=0)));
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.Fitting fitting(D_1=3, D_2=1.73) annotation (Placement(transformation(extent={{0,-4},{20,16}})));
   OpenHPL.Waterway.Pipe penstock1(
     D_i=3,
     D_o=3,
     H=89,
-    L=200) annotation (Placement(visible=true, transformation(
+    L=200) annotation (Placement(transformation(
         origin={-10,18},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
@@ -74,10 +71,9 @@ model CaseStudingValentynasCase "HP system model for Valentyna's Master case"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-16,40})));
-  Waterway.SurgeTank surgeTank(D=4.5, h_0=48 + 45.5) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank(D=4.5, h_0=48 + 45.5) annotation (Placement(transformation(
         origin={-42,74},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
 equation
   connect(generator.w_out, turbine.w_in) annotation (
     Line(points={{40,2},{38,2},{38,10},{38,9.8},{38,9.8}},          color = {0, 0, 127}));

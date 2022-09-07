@@ -2,17 +2,16 @@ within OpenHPL.Tests;
 model HPSimplePenstockGeneratorTest "Generator testing for HP"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(startTime = 600, duration = 1, height = -0.14615, offset = 0.6493) annotation (
-    Placement(visible = true, transformation(origin = {12, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {12, 84}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Ramp load(offset = 80e6, height = -40e6, startTime = 600, duration = 1) annotation (
-    Placement(visible = true, transformation(extent = {{52, -28}, {72, -8}}, rotation = 0)));
-  Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
-  Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{46,26},{66,46}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+    Placement(transformation(extent = {{52, -28}, {72, -8}})));
+  Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-64,52},{-44,72}})));
+  Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(transformation(extent={{46,26},{66,46}})));
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={92,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -21,22 +20,19 @@ model HPSimplePenstockGeneratorTest "Generator testing for HP"
     H=428.5,
     D_i=3,
     D_o=3,
-    N=10) annotation (Placement(visible=true, transformation(
+    N=10) annotation (Placement(transformation(
         origin={0,46},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank(h_0=71) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank(h_0=71) annotation (Placement(transformation(
         origin={-22,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(transformation(
         origin={26,36},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Generators.SynchGen generator(k_b=1000, J=850000) annotation (Placement(transformation(extent={{18,-4},{38,16}})));
   Controllers.Governor governor(
     delta=0.04,

@@ -1,17 +1,15 @@
 within OpenHPL.Tests;
 model HPSimplePenstockControl "Model of HP system with governor"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir annotation (Placement(transformation(
         origin={-92,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.Pipe intake annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
-  Waterway.Pipe discharge(H=5, L=600) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=10) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  Waterway.Pipe intake annotation (Placement(transformation(extent={{-64,52},{-44,72}})));
+  Waterway.Pipe discharge(H=5, L=600) annotation (Placement(transformation(extent={{48,26},{68,46}})));
+  Waterway.Reservoir tail(h_0=10) annotation (Placement(transformation(
         origin={86,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -19,23 +17,20 @@ model HPSimplePenstockControl "Model of HP system with governor"
     H=420,
     L=600,
     D_i=3.3,
-    D_o=3.3) annotation (Placement(visible=true, transformation(
+    D_o=3.3) annotation (Placement(transformation(
         origin={-2,46},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.SurgeTank surgeTank annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  Waterway.SurgeTank surgeTank annotation (Placement(transformation(
         origin={-22,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(transformation(
         origin={26,36},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Controllers.Governor governor annotation (Placement(visible = true, transformation(origin = {44, 84}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Controllers.Governor governor annotation (Placement(transformation(origin = {44, 84}, extent = {{10, -10}, {-10, 10}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -3e6, offset = 80e6, startTime = 4000) annotation (
-    Placement(visible = true, transformation(extent = {{-16, -10}, {4, 10}}, rotation = 0)));
+    Placement(transformation(extent = {{-16, -10}, {4, 10}})));
   OpenHPL.ElectroMech.Generators.SimpleGen simpleGen annotation (
-    Placement(visible = true, transformation(origin = {26, 8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {26, 8}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(simpleGen.f, governor.f) annotation (
     Line(points = {{38, 8}, {98, 8}, {98, 80}, {56, 80}, {56, 80}, {56, 80}}, color = {0, 0, 127}));

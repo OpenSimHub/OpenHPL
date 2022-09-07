@@ -55,8 +55,8 @@ equation
       pattern=LinePattern.Dot));
   annotation (Documentation(info="<html>
 Can be used as an ideal volume flow source. Either with a fixed volume flow defined by <code>Vdot_0</code>
-or via the input connector <code>inFlow</code>. 
-In addition the input can be passed through a first order filter which is sometimes necessary 
+or via the input connector <code>inFlow</code>.
+In addition the input can be passed through a first order filter which is sometimes necessary
 for numerical reasons depending on the nature of the input data stream.
 </html>"));
 end VolumeFlowSource;

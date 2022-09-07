@@ -3,16 +3,15 @@ model HPLiniarizationKP "HP system model for liniarization with elastic penstock
   extends Modelica.Icons.Example;
   input Real u(start = 0.7493);
   output Real dotV;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-92,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Waterway.Pipe intake(H=23, Vdot_0=19.0777) annotation (Placement(visible=true, transformation(extent={{-72,50},{-52,70}}, rotation=0)));
+        extent={{-10,-10},{10,10}})));
+  Waterway.Pipe intake(H=23, Vdot_0=19.0777) annotation (Placement(transformation(extent={{-72,50},{-52,70}})));
   Waterway.Pipe discharge(
     H=0.5,
     L=600,
-    Vdot_0=19.0777) annotation (Placement(visible=true, transformation(extent={{30,24},{50,44}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+    Vdot_0=19.0777) annotation (Placement(transformation(extent={{30,24},{50,44}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={72,40},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -25,22 +24,19 @@ model HPLiniarizationKP "HP system model for liniarization with elastic penstock
     PipeElasticity=true,
     Vdot_0=19.0777*ones(10),
     h_s0=69,
-    p_p0=997*9.81*(69 + 428.5/10/2):997*9.81*428.5/10:997*9.81*(69 + 428.5/10*(10 - 1/2))) annotation (Placement(visible=true, transformation(
+    p_p0=997*9.81*(69 + 428.5/10/2):997*9.81*428.5/10:997*9.81*(69 + 428.5/10*(10 - 1/2))) annotation (Placement(transformation(
         origin={-10,48},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank(h_0=69.908) annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank(h_0=69.908) annotation (Placement(transformation(
         origin={-30,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(transformation(
         origin={10,34},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
 equation
   connect(discharge.n, tail.n) annotation (
     Line(points={{50,34},{56.05,34},{56.05,40},{62,40}},                color = {28, 108, 200}));

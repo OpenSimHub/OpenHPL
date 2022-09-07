@@ -2,27 +2,26 @@ within OpenHPL.Tests;
 model HPSTSimple
   "Model of waterway of the HP system with simplified models for conduits, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=50) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=50) annotation (Placement(transformation(
         origin={-90,30},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(
     duration=0,
     height=0.9,
     offset=0,
     startTime=0)                                                                                          annotation (
-    Placement(visible = true, transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}})));
   OpenHPL.Waterway.Pipe intake(
     H=20,
     L=4500,
     D_i=6,
-    D_o=6)                           annotation (Placement(visible=true, transformation(extent={{-70,20},{-50,40}}, rotation=0)));
+    D_o=6)                           annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
   OpenHPL.Waterway.Pipe discharge(
     H=0,
     L=700,
     D_i=6,
-    D_o=6)                                      annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5, Input_level=false) annotation (Placement(visible=true, transformation(
+    D_o=6)                                      annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5, Input_level=false) annotation (Placement(transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -31,17 +30,15 @@ model HPSTSimple
     D_o=4,
     H=300,
     L=500,
-    vertical=true) annotation (Placement(visible=true, transformation(
+    vertical=true) annotation (Placement(transformation(
         origin={0,30},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Turbines.Turbine turbine(
     ValveCapacity=false,               C_v=3.7,
     H_n=370,
-    Vdot_n=40,                                  ConstEfficiency=false) annotation (Placement(visible=true, transformation(
+    Vdot_n=40,                                  ConstEfficiency=false) annotation (Placement(transformation(
         origin={30,10},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.SurgeTank STSimple(
     SurgeTankType=OpenHPL.Types.SurgeTank.STSimple,
     H=80,

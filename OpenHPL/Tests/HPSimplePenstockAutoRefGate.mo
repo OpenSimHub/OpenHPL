@@ -1,43 +1,39 @@
 within OpenHPL.Tests;
 model HPSimplePenstockAutoRefGate
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir annotation (Placement(transformation(
         origin={-92,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -3e6, offset = 80e6, startTime = 1200) annotation (
-    Placement(visible = true, transformation(extent = {{-12, -4}, {8, 16}}, rotation = 0)));
-  Waterway.Pipe intake(Vdot_0=19) annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
+    Placement(transformation(extent = {{-12, -4}, {8, 16}})));
+  Waterway.Pipe intake(Vdot_0=19) annotation (Placement(transformation(extent={{-64,52},{-44,72}})));
   Waterway.Pipe discharge(
     H=5,
     L=600,
-    Vdot_0=19) annotation (Placement(visible=true, transformation(extent={{48,26},{68,46}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=10) annotation (Placement(visible=true, transformation(
+    Vdot_0=19) annotation (Placement(transformation(extent={{48,26},{68,46}})));
+  Waterway.Reservoir tail(h_0=10) annotation (Placement(transformation(
         origin={90,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Generators.SimpleGen aggregate(w_0=52.4) annotation (Placement(visible=true, transformation(extent={{16,-4},{36,16}}, rotation=0)));
+  ElectroMech.Generators.SimpleGen aggregate(w_0=52.4) annotation (Placement(transformation(extent={{16,-4},{36,16}})));
   Waterway.Pipe penstock(
     H=420,
     L=600,
     D_i=3.3,
     D_o=3.3,
-    Vdot_0=19) annotation (Placement(visible=true, transformation(
+    Vdot_0=19) annotation (Placement(transformation(
         origin={-2,46},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank annotation (Placement(transformation(
         origin={-22,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7) annotation (Placement(transformation(
         origin={26,36},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Gain gain(k = 9.21104e-09) annotation (
     Placement(transformation(extent = {{20, -28}, {40, -8}})));
   Modelica.Blocks.Math.Add add annotation (

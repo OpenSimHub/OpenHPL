@@ -1,13 +1,12 @@
 within OpenHPL.Tests;
 model HPSimplePenstockFrancisGenIPSL "Synergy with OpenIPSL library(generator)"
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-48,48},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-34,38},{-14,58}}, rotation=0)));
-  OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(visible=true, transformation(extent={{50,22},{70,42}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-34,38},{-14,58}})));
+  OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(transformation(extent={{50,22},{70,42}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={86,28},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -15,14 +14,13 @@ model HPSimplePenstockFrancisGenIPSL "Synergy with OpenIPSL library(generator)"
     L=600,
     H=428.5,
     D_i=3,
-    D_o=3) annotation (Placement(visible=true, transformation(
+    D_o=3) annotation (Placement(transformation(
         origin={12,40},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(transformation(
         origin={0,54},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Francis turbine(
     D_i=1.632,
     GivenData=true,
@@ -46,50 +44,48 @@ model HPSimplePenstockFrancisGenIPSL "Synergy with OpenIPSL library(generator)"
     r_Y_=1.2,
     r_v_=1.1,
     w_1_=0.2,
-    w_v_=0.2) annotation (Placement(visible=true, transformation(
+    w_v_=0.2) annotation (Placement(transformation(
         origin={28,28},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data(Vdot_0=4.49) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data(Vdot_0=4.49) annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Machines.PSAT.Order2 order2_1(D = 0, M = 10, P_0 = 16.0352698692006, Q_0 = 11.859436505981, Sn = 20, Vn = 400, ra = 0.001, w(fixed = true), x1d = 0.302) annotation (
-    Placement(visible = true, transformation(extent = {{-14, -20}, {6, 0}}, rotation = 0)));
+    Placement(transformation(extent = {{-14, -20}, {6, 0}})));
   Modelica.Blocks.Math.Gain Normilizer(k = 1 / 100e6) annotation (
-    Placement(visible = true, transformation(origin = {-33, -15}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+    Placement(transformation(origin = {-33, -15}, extent = {{-7, -7}, {7, 7}})));
   Modelica.Blocks.Math.Gain RealizerAng(k = 50 * Modelica.Constants.pi / 3) annotation (
-    Placement(visible = true, transformation(origin = {49, 11}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+    Placement(transformation(origin = {49, 11}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
   inner OpenIPSL.Electrical.SystemBase SysData annotation (
-    Placement(visible = true, transformation(extent = {{-60, -60}, {-36, -40}}, rotation = 0)));
-  OpenHPL.Controllers.Governor governor annotation (Placement(visible=true, transformation(extent={{54,42},{34,62}}, rotation=0)));
+    Placement(transformation(extent = {{-60, -60}, {-36, -40}})));
+  OpenHPL.Controllers.Governor governor annotation (Placement(transformation(extent={{54,42},{34,62}})));
   //(a = 7.862E-25, c = 1.108E-08, d = -5.344E-02, b = -1.010E-16)
   Modelica.Blocks.Math.Gain Frequency(k = 50) annotation (
-    Placement(visible = true, transformation(origin = {60, 70}, extent = {{-8, -8}, {8, 8}}, rotation = 180)));
+    Placement(transformation(origin = {60, 70}, extent = {{-8, -8}, {8, 8}}, rotation = 180)));
   Modelica.Blocks.Sources.Ramp power(duration = 1, height = +1e6, offset = 12e6, startTime = 15000) annotation (
-    Placement(visible = true, transformation(origin = {78, 52}, extent = {{8, -8}, {-8, 8}}, rotation = 0)));
+    Placement(transformation(origin = {78, 52}, extent = {{8, -8}, {-8, 8}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine1(X = 0.1, R = 0.01, G = 0, B = 0.0005) annotation (
-    Placement(visible = true, transformation(origin = {16, -58}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
+    Placement(transformation(origin = {16, -58}, extent = {{-6, -6}, {6, 6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLinewithOpening1(B = 0.0005, G = 0, R = 0.01, X = 0.1, opening = 1, t1 = 600, t2 = 600.15) annotation (
-    Placement(visible = true, transformation(origin = {56, -34}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
+    Placement(transformation(origin = {56, -34}, extent = {{-6, -6}, {6, 6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine2(G = 0, R = 0.01, X = 0.1, B = 0.0005) annotation (
-    Placement(visible = true, transformation(origin = {14, -34}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
+    Placement(transformation(origin = {14, -34}, extent = {{-6, -6}, {6, 6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine3(G = 0, R = 0.01, X = 0.1, B = 0.0005) annotation (
-    Placement(visible = true, transformation(origin = {58, -60}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
+    Placement(transformation(origin = {58, -60}, extent = {{-6, -6}, {6, 6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine4(G = 0, R = 0.01, X = 0.1, B = 0.0005) annotation (
-    Placement(visible = true, transformation(origin = {56, -10}, extent = {{-5.99999, -5.99998}, {5.99999, 6}}, rotation = 0)));
+    Placement(transformation(origin = {56, -10}, extent = {{-5.99999, -5.99998}, {5.99999, 6}})));
   OpenIPSL.Electrical.Loads.PSAT.LOADPQ pwLoadPQ1(V_0 = 1, angle_0 = 0, P_0 = 8, Q_0 = 6) annotation (
-    Placement(visible = true, transformation(origin = {90, -22}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+    Placement(transformation(origin = {90, -22}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
   OpenIPSL.Electrical.Loads.PSAT.LOADPQ_variation pwLoadPQ2(V_0 = 1, angle_0 = 0, P_0 = 8, Q_0 = 6, dQ1 = 0, t_start_2 = 1e10, t_end_2 = 1e10, dP2 = 0, dQ2 = 0, t_start_1 = 1e3, t_end_1 = 1.1e3, dP1 = 1) annotation (
-    Placement(visible = true, transformation(origin = {90.0335, -60.2889}, extent = {{-6.2889, -6.0335}, {6.2889, 6.0335}}, rotation = 90)));
+    Placement(transformation(origin = {90.0335, -60.2889}, extent = {{-6.2889, -6.0335}, {6.2889, 6.0335}}, rotation = 90)));
   OpenIPSL.Electrical.Buses.Bus bus annotation (
-    Placement(visible = true, transformation(extent = {{-14, -56}, {6, -36}}, rotation = 0)));
+    Placement(transformation(extent = {{-14, -56}, {6, -36}})));
   OpenIPSL.Electrical.Buses.Bus bus1 annotation (
-    Placement(visible = true, transformation(extent = {{26, -56}, {46, -36}}, rotation = 0)));
+    Placement(transformation(extent = {{26, -56}, {46, -36}})));
   OpenIPSL.Electrical.Buses.Bus bus2 annotation (
-    Placement(visible = true, transformation(extent = {{66, -32}, {86, -12}}, rotation = 0)));
+    Placement(transformation(extent = {{66, -32}, {86, -12}})));
   OpenIPSL.Electrical.Buses.Bus bus3 annotation (
-    Placement(visible = true, transformation(extent = {{66, -70}, {86, -50}}, rotation = 0)));
+    Placement(transformation(extent = {{66, -70}, {86, -50}})));
 equation
   connect(pwLine2.p, bus.p) annotation (
     Line(points = {{9, -34}, {2, -34}, {2, -46}, {-4, -46}}, color = {0, 0, 255}));

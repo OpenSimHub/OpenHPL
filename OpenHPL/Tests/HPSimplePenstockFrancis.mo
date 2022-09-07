@@ -1,33 +1,31 @@
 within OpenHPL.Tests;
 model HPSimplePenstockFrancis "HP system model with Francis turbine"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir annotation (Placement(transformation(
         origin={-92,62},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 10, height = -0.0287, offset = 0.9, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin = {10, 86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {10, 86}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Ramp load(offset = 103e6, height = -13e6, duration = 10, startTime = 600) annotation (
-    Placement(visible = true, transformation(extent = {{-14, -4}, {6, 16}}, rotation = 0)));
-  Waterway.Pipe intake annotation (Placement(visible=true, transformation(extent={{-64,52},{-44,72}}, rotation=0)));
-  Waterway.Pipe discharge(H=5, L=600) annotation (Placement(visible=true, transformation(extent={{46,26},{66,46}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=10) annotation (Placement(visible=true, transformation(
+    Placement(transformation(extent = {{-14, -4}, {6, 16}})));
+  Waterway.Pipe intake annotation (Placement(transformation(extent={{-64,52},{-44,72}})));
+  Waterway.Pipe discharge(H=5, L=600) annotation (Placement(transformation(extent={{46,26},{66,46}})));
+  Waterway.Reservoir tail(h_0=10) annotation (Placement(transformation(
         origin={92,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Generators.SimpleGen aggregate(SteadyState=false, k_b=0) annotation (Placement(visible=true, transformation(extent={{18,-4},{38,16}}, rotation=0)));
+  ElectroMech.Generators.SimpleGen aggregate(SteadyState=false, k_b=0) annotation (Placement(transformation(extent={{18,-4},{38,16}})));
   Waterway.Pipe penstock(
     H=420,
     L=600,
     D_i=3.3,
-    D_o=3.3) annotation (Placement(visible=true, transformation(
+    D_o=3.3) annotation (Placement(transformation(
         origin={-2,46},
         extent={{-10,-10},{10,10}},
         rotation=-90)));
-  Waterway.SurgeTank surgeTank annotation (Placement(visible=true, transformation(
+  Waterway.SurgeTank surgeTank annotation (Placement(transformation(
         origin={-22,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Turbines.Francis turbine(
     D_i=1.632,
     GivenData=true,
@@ -49,14 +47,12 @@ model HPSimplePenstockFrancis "HP system model with Francis turbine"
     r_Y=1.2,
     r_v=1.1,
     w_1_=0.2,
-    w_v_=0.2) annotation (Placement(visible=true, transformation(
+    w_v_=0.2) annotation (Placement(transformation(
         origin={28,38},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
 equation
   connect(aggregate.w_out, turbine.w_in) annotation (
     Line(points = {{32, 16}, {32, 16}, {32, 28}, {32, 28}}, color = {0, 0, 127}));

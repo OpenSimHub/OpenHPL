@@ -22,7 +22,7 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
 <p>
 The generator can be loaded either:</p>
 <ul>
-<li>via the mechanical shaft connector (e.g., using the 
+<li>via the mechanical shaft connector (e.g., using the
 <a href=\"OpenHPL.ElectroMech.PowerSystem.Grid\">Grid</a> model).
  The input <code>Pload</code> should be set to 0 in this case.</li>
 <li>or via the input connector <code>Pload</code> specifying the connected electrical load.</li>

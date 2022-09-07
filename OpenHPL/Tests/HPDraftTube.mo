@@ -1,19 +1,18 @@
 within OpenHPL.Tests;
 model HPDraftTube "Testing the draft tube models."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-88,50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin={22,70},     extent = {{-10, -10}, {10, 10}}, rotation=270)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-68,40},{-48,60}}, rotation=0)));
+    Placement(transformation(origin={22,70},     extent = {{-10, -10}, {10, 10}}, rotation=270)));
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-68,40},{-48,60}})));
   OpenHPL.Waterway.Pipe discharge(
     H=4.92,
     L=5,
     D_i=3,
-    D_o=4.73)                                   annotation (Placement(visible=true, transformation(extent={{54,30},{74,50}},  rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5)                    annotation (Placement(visible=true, transformation(
+    D_o=4.73)                                   annotation (Placement(transformation(extent={{54,30},{74,50}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5)                    annotation (Placement(transformation(
         origin={90,40},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -22,36 +21,31 @@ model HPDraftTube "Testing the draft tube models."
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(visible=true, transformation(
+    vertical=true) annotation (Placement(transformation(
         origin={2,50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(
         origin={-28,50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(transformation(
         origin={30,40},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.Reservoir         reservoir1(h_0=48)
-                                               annotation (Placement(visible=true, transformation(
+                                               annotation (Placement(transformation(
         origin={-90,-10},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control1(
     duration=1,
     height=-0.04615,
     offset=0.7493,
     startTime=600)                                                                                        annotation (
-    Placement(visible = true, transformation(origin={22,10},     extent = {{-10, -10}, {10, 10}}, rotation=270)));
+    Placement(transformation(origin={22,10},     extent = {{-10, -10}, {10, 10}}, rotation=270)));
   Waterway.Pipe         intake1(H=23)
-                                     annotation (Placement(visible=true, transformation(extent={{-70,-20},{-50,0}}, rotation=0)));
-  Waterway.Reservoir         tail1(h_0=5)                   annotation (Placement(visible=true, transformation(
+                                     annotation (Placement(transformation(extent={{-70,-20},{-50,0}})));
+  Waterway.Reservoir         tail1(h_0=5)                   annotation (Placement(transformation(
         origin={90,-20},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -60,20 +54,17 @@ model HPDraftTube "Testing the draft tube models."
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(visible=true, transformation(
+    vertical=true) annotation (Placement(transformation(
         origin={0,-10},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.SurgeTank         surgeTank1(h_0=69.9)
-                                                 annotation (Placement(visible=true, transformation(
+                                                 annotation (Placement(transformation(
         origin={-30,-10},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Turbines.Turbine turbine1(C_v=3.7, ConstEfficiency=false)
-                                                                       annotation (Placement(visible=true, transformation(
+                                                                       annotation (Placement(transformation(
         origin={30,-20},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.DraftTube draftTube1(
     DraftTubeType=OpenHPL.Types.DraftTube.MoodySpreadingPipe,
     H=4.92,
@@ -81,20 +72,18 @@ model HPDraftTube "Testing the draft tube models."
     D_i=3,
     D_o=4.73) annotation (Placement(transformation(extent={{54,-30},{74,-10}})));
   Waterway.Reservoir         reservoir2(h_0=48)
-                                               annotation (Placement(visible=true, transformation(
+                                               annotation (Placement(transformation(
         origin={-90,-70},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control2(
     duration=1,
     height=-0.04615,
     offset=0.7493,
     startTime=600)                                                                                        annotation (
-    Placement(visible = true, transformation(origin={24,-50},    extent = {{-10, -10}, {10, 10}}, rotation=270)));
+    Placement(transformation(origin={24,-50},    extent = {{-10, -10}, {10, 10}}, rotation=270)));
   Waterway.Pipe         intake2(H=23)
-                                     annotation (Placement(visible=true, transformation(extent={{-68,-80},{-48,-60}},
-                                                                                                                    rotation=0)));
-  Waterway.Reservoir         tail2(h_0=5)                   annotation (Placement(visible=true, transformation(
+                                     annotation (Placement(transformation(extent={{-68,-80},{-48,-60}})));
+  Waterway.Reservoir         tail2(h_0=5)                   annotation (Placement(transformation(
         origin={90,-80},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -103,20 +92,17 @@ model HPDraftTube "Testing the draft tube models."
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(visible=true, transformation(
+    vertical=true) annotation (Placement(transformation(
         origin={2,-70},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.SurgeTank         surgeTank2(h_0=69.9)
-                                                 annotation (Placement(visible=true, transformation(
+                                                 annotation (Placement(transformation(
         origin={-30,-70},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   ElectroMech.Turbines.Turbine turbine2(C_v=3.7, ConstEfficiency=false)
-                                                                       annotation (Placement(visible=true, transformation(
+                                                                       annotation (Placement(transformation(
         origin={32,-80},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Waterway.DraftTube draftTube2(
     DraftTubeType=OpenHPL.Types.DraftTube.MoodySpreadingPipe,
     H=4.92,

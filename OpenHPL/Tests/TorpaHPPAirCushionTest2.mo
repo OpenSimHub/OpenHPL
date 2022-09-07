@@ -1,15 +1,14 @@
 within OpenHPL.Tests;
 model TorpaHPPAirCushionTest2 "Test case for air cushion surge tank from Torpa hydro power plant."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
         origin={-90,30},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(visible=true, transformation(extent={{-70,20},{-50,40}}, rotation=0)));
-  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(visible=true, transformation(extent={{50,-10},{70,10}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=5)                    annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}})));
+  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
+  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=5)                    annotation (Placement(transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -18,18 +17,15 @@ model TorpaHPPAirCushionTest2 "Test case for air cushion surge tank from Torpa h
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(visible=true, transformation(
+    vertical=true) annotation (Placement(transformation(
         origin={0,30},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(
         origin={-30,30},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7, ConstEfficiency=false) annotation (Placement(transformation(
         origin={44,50},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   inner Data data annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 equation
   connect(turbine.o, discharge.i) annotation (

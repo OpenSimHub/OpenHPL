@@ -1,31 +1,29 @@
 within OpenHPL.Tests;
 model HPElasticKPPenstockHalfSurgeD "Similar to previous HP system, but with twice reduced surge tank diameter"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir annotation (Placement(visible=true, transformation(
+  Waterway.Reservoir reservoir annotation (Placement(transformation(
         origin={-92,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493, startTime = 1200) annotation (
-    Placement(visible = true, transformation(origin = {0, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  inner OpenHPL.Data data annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {0, 84}, extent = {{-10, -10}, {10, 10}})));
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 1200) annotation (
-    Placement(visible = true, transformation(extent = {{-20, 2}, {0, 22}}, rotation = 0)));
-  Waterway.Pipe intake(Vdot_0=19) annotation (Placement(visible=true, transformation(extent={{-74,56},{-54,76}}, rotation=0)));
+    Placement(transformation(extent = {{-20, 2}, {0, 22}})));
+  Waterway.Pipe intake(Vdot_0=19) annotation (Placement(transformation(extent={{-74,56},{-54,76}})));
   Waterway.Pipe discharge(
     H=5,
     L=600,
-    Vdot_0=19) annotation (Placement(visible=true, transformation(extent={{38,28},{58,48}}, rotation=0)));
-  Waterway.Reservoir tail(h_0=10) annotation (Placement(visible=true, transformation(
+    Vdot_0=19) annotation (Placement(transformation(extent={{38,28},{58,48}})));
+  Waterway.Reservoir tail(h_0=10) annotation (Placement(transformation(
         origin={78,38},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Generators.SimpleGen aggregate(w_0=52) annotation (Placement(visible=true, transformation(extent={{8,2},{28,22}}, rotation=0)));
-  ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(visible=true, transformation(extent={{8,32},{28,52}}, rotation=0)));
-  Waterway.PenstockKP penstockKP(N=20, Vdot_0=19*ones(20)) annotation (Placement(visible=true, transformation(extent={{-18,42},{2,62}}, rotation=0)));
-  Waterway.SurgeTank surgeTank(D=1.7) annotation (Placement(visible=true, transformation(extent={{-44,60},{-24,80}}, rotation=0)));
+  ElectroMech.Generators.SimpleGen aggregate(w_0=52) annotation (Placement(transformation(extent={{8,2},{28,22}})));
+  ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(transformation(extent={{8,32},{28,52}})));
+  Waterway.PenstockKP penstockKP(N=20, Vdot_0=19*ones(20)) annotation (Placement(transformation(extent={{-18,42},{2,62}})));
+  Waterway.SurgeTank surgeTank(D=1.7) annotation (Placement(transformation(extent={{-44,60},{-24,80}})));
 equation
   connect(turbine.P_out, aggregate.P_in) annotation (
     Line(points = {{18, 32}, {18, 32}, {18, 22}, {18, 22}}, color = {0, 0, 127}));

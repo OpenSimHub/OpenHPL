@@ -1,23 +1,22 @@
 within OpenHPL.Tests;
 model HydroCordModelKP2 "Model of HP system with simplified models for penstock, turbine, etc."
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=46.5, UseInFlow=false) annotation (Placement(visible=true, transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0=46.5, UseInFlow=false) annotation (Placement(transformation(
         origin={-94,64},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.05, offset = 0.9, startTime = 600) annotation (
-    Placement(visible = true, transformation(origin = {16, 86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {16, 86}, extent = {{-10, -10}, {10, 10}})));
   OpenHPL.Waterway.Pipe intake1(
     D_i=6.3,
     D_o=6.3,
     H=9,
-    L=81.5) annotation (Placement(visible=true, transformation(extent={{-80,50},{-60,70}}, rotation=0)));
+    L=81.5) annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
   OpenHPL.Waterway.Pipe discharge1(
     D_i=6.3,
     D_o=6.3,
     H=3.5,
-    L=601) annotation (Placement(visible=true, transformation(extent={{44,-24},{64,-4}}, rotation=0)));
-  OpenHPL.Waterway.Reservoir tail(h_0=2, Input_level=true) annotation (Placement(visible=true, transformation(
+    L=601) annotation (Placement(transformation(extent={{44,-24},{64,-4}})));
+  OpenHPL.Waterway.Reservoir tail(h_0=2, Input_level=true) annotation (Placement(transformation(
         origin={94,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -25,49 +24,42 @@ model HydroCordModelKP2 "Model of HP system with simplified models for penstock,
     D=3.4,
     H=75.5,
     L=87,
-    h_0=62.4956) annotation (Placement(visible=true, transformation(
+    h_0=62.4956) annotation (Placement(transformation(
         origin={-4,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  inner OpenHPL.Data data(Vdot_0=1.82328) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  inner OpenHPL.Data data(Vdot_0=1.82328) annotation (Placement(transformation(
         origin={-90,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Turbine turbine(
     C_v=6.5,
     ConstEfficiency=false,
-    WaterCompress=true) annotation (Placement(visible=true, transformation(
+    WaterCompress=true) annotation (Placement(transformation(
         origin={32,-6},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe intake2(
     D_i=6.3,
     D_o=6.3,
     H=-2,
-    L=395) annotation (Placement(visible=true, transformation(
+    L=395) annotation (Placement(transformation(
         origin={-48,66},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe intake3(
     D_i=6.3,
     D_o=6.3,
     H=9,
-    L=4020) annotation (Placement(visible=true, transformation(
+    L=4020) annotation (Placement(transformation(
         origin={-26,60},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  OpenHPL.Waterway.Fitting fitting1(D_1=4.7, D_2=3.3) annotation (Placement(visible=true, transformation(
+        extent={{-10,-10},{10,10}})));
+  OpenHPL.Waterway.Fitting fitting1(D_1=4.7, D_2=3.3) annotation (Placement(transformation(
         origin={10,26},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe discharge2(
     D_i=6.3,
     D_o=6.3,
     H=-8.5,
-    L=21) annotation (Placement(visible=true, transformation(
+    L=21) annotation (Placement(transformation(
         origin={74,-8},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.PenstockKP penstockKP1(
     D_i=4.7,
     D_o=4.7,
@@ -75,10 +67,9 @@ model HydroCordModelKP2 "Model of HP system with simplified models for penstock,
     L=363,
     N=5,
     PipeElasticity=false,
-    h_s0=62.4956) annotation (Placement(visible=true, transformation(
+    h_s0=62.4956) annotation (Placement(transformation(
         origin={18,52},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.PenstockKP penstockKP2(
     D_i=3.3,
     D_o=3.3,
@@ -86,24 +77,22 @@ model HydroCordModelKP2 "Model of HP system with simplified models for penstock,
     L=145,
     N=5,
     PipeElasticity=false,
-    h_s0=62.4956 + 233) annotation (Placement(visible=true, transformation(
+    h_s0=62.4956 + 233) annotation (Placement(transformation(
         origin={8,4},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.CombiTimeTable servo_pos(columns = {2}, fileName = "C:/Users/liubomyr/OneDrive/Documents/PhD/HydroCord/Servo_pos_short.txt", tableName = "position", tableOnFile = true) annotation (
-    Placement(visible = true, transformation(origin = {-86, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-86, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.CombiTimeTable tail_level(columns = {2}, fileName = "C:/Users/liubomyr/OneDrive/Documents/PhD/HydroCord/Tail_level_short.txt", tableName = "level", tableOnFile = true) annotation (
-    Placement(visible = true, transformation(origin = {58, -64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {58, -64}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain per_gain(k = 1 / 100) annotation (
-    Placement(visible = true, transformation(origin = {-22, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=100, uMin=0.001) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {-22, -44}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=100, uMin=0.001) annotation (Placement(transformation(
         origin={-54,-42},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Add add1(k2 = -1) annotation (
-    Placement(visible = true, transformation(origin = {90, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
+    Placement(transformation(origin = {90, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Blocks.Sources.Constant const_level(k = 22.6) annotation (
-    Placement(visible = true, transformation(origin = {58, -88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {58, -88}, extent = {{-10, -10}, {10, 10}})));
 equation
   //turbine.u_t = 4.54929515955115/100;
   //tail.Level_in = 24.65206211-22.6;
