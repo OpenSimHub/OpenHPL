@@ -74,6 +74,13 @@ model References "References"
         (<a href=\"modelica://OpenHPL/Resources/Documents/Sharefi2011.pdf\">view PDF</a>)</p>
 </dd>
 <dt>[Splavska2017]</dt>
+<dd><p>Valentyna Splavska:
+         &quot;Simulation and control of hydro power plants&quot;,
+         <em>Master's Thesis</em>,
+         University College of Southeast Norway, Porsgrunn, Norway, 2017,
+        <a href=\"http://hdl.handle.net/11250/2484870\">http://hdl.handle.net/11250/2484870</a>.</p>
+</dd>
+<dt>[Splavska2017a]</dt>
 <dd><p>Valentyna Splavska, Liubomyr Vytvytskyi, Bernt Lie:
          &quot;Hydropower Systems: Comparison of Mechanistic and Table Look-up Turbine Models&quot;,
       <em>The 58th Conference on Simulation and Modelling (SIMS 58)</em>,

@@ -86,6 +86,6 @@ equation
     of pipes with both a positive and a negative slopes (positive or negative height difference).</p>
     <p>More info about the pipe model can be found in
         <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
-    and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
+    and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017a]</a>.</p>
 </html>"));
 end Pipe;
