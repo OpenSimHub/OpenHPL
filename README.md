@@ -12,7 +12,7 @@ More information about the library can be found in the [User's Guide](OpenHPL/Re
 
 ## Current release
 
-Download [OpenHPL v1.0.1 (2019-09-06)](../../releases/tag/v1.0.1)
+Download [OpenHPL v2.0.0 (2022-09-07)](../../releases/tag/v2.0.0)
 
 ## License
 
