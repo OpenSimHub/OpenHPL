@@ -33,7 +33,7 @@ The generator can be loaded either:</p>
 </html>"), Icon(graphics={
         Text(
           extent={{-20,100},{20,86}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="P_load")}));

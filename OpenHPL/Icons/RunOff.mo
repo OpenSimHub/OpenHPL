@@ -2,7 +2,7 @@ within OpenHPL.Icons;
 partial class RunOff "Run off model icon"
   annotation (
     Icon(coordinateSystem(preserveAspectRatio = false), graphics={
-        Text(lineColor={28,108,200},
+        Text(textColor={28,108,200},
           extent={{-150,100},{150,60}},
           textString="%name",
           textStyle={TextStyle.Bold}),

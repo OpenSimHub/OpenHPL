@@ -126,21 +126,21 @@ equation
         Text(
           visible=enable_w,
           extent={{80,50},{100,30}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="w"),
         Text(
           visible=enable_f,
           extent={{80,-30},{100,-50}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="f"),
         Text(
           visible=enable_w_in,
           extent={{-100,-70},{-60,-90}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="w_in")}));

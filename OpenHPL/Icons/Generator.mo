@@ -3,7 +3,7 @@ partial class Generator "Generator icon"
   annotation (
     Icon(graphics={
         Text(
-          lineColor={127,0,0},
+          textColor={127,0,0},
           extent={{-100,-110},{100,-150}},
           textStyle={TextStyle.Bold},
           textString="%name"),
@@ -18,7 +18,7 @@ partial class Generator "Generator icon"
           pattern=LinePattern.None),
         Text(
           extent={{-40,70},{40,10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="G"),
         Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
         Line(

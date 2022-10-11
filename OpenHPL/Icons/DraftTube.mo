@@ -11,7 +11,7 @@ partial class DraftTube "Draft tube icon"
           smooth=Smooth.Bezier,
           fillColor={175,175,175}),
                      Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-150,140},{150,100}},
           textString="%name",
           textStyle={TextStyle.Bold}),
