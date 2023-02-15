@@ -14,7 +14,7 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
         origin={0,120})));
 
   annotation (
-    Documentation(info="<html>
+    Documentation(info= "<html>
 <h4>Simple model of an ideal generator with friction.</h4>
 
 <p>This model based on the angular momentum balance, which depends on the turbine shaft power,
@@ -23,7 +23,7 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
 The generator can be loaded either:</p>
 <ul>
 <li>via the mechanical shaft connector (e.g., using the
-<a href=\"OpenHPL.ElectroMech.PowerSystem.Grid\">Grid</a> model).
+<a href=\"modelica://OpenHPL.ElectroMech.PowerSystem.Grid\">Grid</a> model).
  The input <code>Pload</code> should be set to 0 in this case.</li>
 <li>or via the input connector <code>Pload</code> specifying the connected electrical load.</li>
 </ul>
