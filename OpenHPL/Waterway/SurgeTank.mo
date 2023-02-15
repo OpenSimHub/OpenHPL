@@ -39,7 +39,7 @@ model SurgeTank "Model of the surge tank/shaft"
   // variables
   SI.Mass m "Water mass";
   SI.Mass m_a = p_ac*A*(L-h_0/cos_theta)*data.M_a/(Modelica.Constants.R*T_ac) "Air mass inside surge tank";
-  SI.Momentum M "Water momuntum";
+  SI.Momentum M "Water momentum";
   SI.Force Mdot "Difference in influent and effulent momentum";
   SI.Force F "Total force acting in the surge tank";
   SI.Area A = (pi*D ^ 2) / 4 "Cross sectional area of the surge tank";
