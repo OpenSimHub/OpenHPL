@@ -21,7 +21,7 @@ model VolumeFlowSource "Volume flow source (either fixed or variable)"
   Modelica.Blocks.Continuous.FirstOrder firstOrder(
     T=T_f,
     initType=Modelica.Blocks.Types.Init.SteadyState,
-    y_start=data.Vdot_0) if                                   useFilter
+    y_start=data.Vdot_0) if useFilter
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
 protected
   Modelica.Blocks.Interfaces.RealOutput Vdot "Outlet flow"

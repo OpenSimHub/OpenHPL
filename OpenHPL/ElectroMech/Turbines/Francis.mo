@@ -79,8 +79,8 @@ model Francis "Model of the Francis turbine"
     SI.Angle alpha1_n "Nominal inlet guide vane angle";
     // connectors
     extends OpenHPL.Interfaces.TurbineContacts;
-    Modelica.Blocks.Interfaces.RealInput w_in  "Input angular velocity from the generator" annotation (
-                                Placement(transformation(origin={-120,-80},    extent={{-20,-20},
+    Modelica.Blocks.Interfaces.RealInput w_in "Input angular velocity from the generator" annotation (
+                                Placement(transformation(origin={-120,-80}, extent={{-20,-20},
       {20,20}})));
 equation
   // design algorithm for runner

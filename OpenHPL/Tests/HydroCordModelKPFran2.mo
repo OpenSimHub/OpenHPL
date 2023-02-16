@@ -115,25 +115,25 @@ equation
   //francis1.w_in = 375.12178419695*Modelica.Constants.pi/30;
   //tail.Level_in = 24.65206211-22.6;
   connect(per_gain.y, francis1.u_t) annotation (
-    Line(points={{-9,-70},{40,-70},{40,14},{30,14},{30,8},{30,8}},              color = {0, 0, 127}));
+    Line(points={{-9,-70},{40,-70},{40,14},{30,14},{30,8},{30,8}}, color = {0, 0, 127}));
   connect(rotation.y[1], rot_gain.u) annotation (
-    Line(points={{-73,-38},{-68,-38},{-68,-36},{-62,-36},{-62,-36}},            color = {0, 0, 127}, thickness = 0.5));
+    Line(points={{-73,-38},{-68,-38},{-68,-36},{-62,-36},{-62,-36}}, color = {0, 0, 127}, thickness = 0.5));
   connect(rot_gain.y, francis1.w_in) annotation (
-    Line(points={{-39,-36},{4,-36},{4,-12},{18,-12}},            color = {0, 0, 127}));
+    Line(points={{-39,-36},{4,-36},{4,-12},{18,-12}}, color = {0, 0, 127}));
   connect(servo_pos.y[1], limiter1.u) annotation (
-    Line(points={{-73,-66},{-67,-66},{-67,-68},{-64,-68}},          color = {0, 0, 127}, thickness = 0.5));
+    Line(points={{-73,-66},{-67,-66},{-67,-68},{-64,-68}}, color = {0, 0, 127}, thickness = 0.5));
   connect(limiter1.y, per_gain.u) annotation (
     Line(points={{-41,-68},{-40,-68},{-40,-68},{-39,-68},{-39,-70},{-33,-70},
-          {-33,-73},{-33,-70},{-32,-70}},                                                                                       color = {0, 0, 127}));
+          {-33,-73},{-33,-70},{-32,-70}}, color = {0, 0, 127}));
   connect(francis1.n, discharge1.p) annotation (
     Line(points = {{40, -4}, {44, -4}, {44, -14}, {44, -14}}, color = {28, 108, 200}));
   connect(penstockKP2.n, francis1.p) annotation (
     Line(points = {{18, 4}, {20, 4}, {20, -4}, {20, -4}}, color = {28, 108, 200}));
   connect(add1.y, tail.level) annotation (Line(points={{90,-33},{90,-33},{90,5},{106,5}}, color={0,0,127}));
   connect(const_level.y, add1.u2) annotation (
-    Line(points={{69,-88},{96,-88},{96,-56},{96,-56}},          color = {0, 0, 127}));
+    Line(points={{69,-88},{96,-88},{96,-56},{96,-56}}, color = {0, 0, 127}));
   connect(tail_level.y[1], add1.u1) annotation (
-    Line(points={{69,-64},{84,-64},{84,-56},{84,-56}},          color = {0, 0, 127}, thickness = 0.5));
+    Line(points={{69,-64},{84,-64},{84,-56},{84,-56}}, color = {0, 0, 127}, thickness = 0.5));
   connect(fitting1.n, penstockKP2.p) annotation (
     Line(points = {{20, 26}, {26, 26}, {26, 16}, {-10, 16}, {-10, 4}, {-2, 4}, {-2, 4}, {-2, 4}}, color = {28, 108, 200}));
   connect(penstockKP1.n, fitting1.p) annotation (
@@ -146,13 +146,13 @@ equation
   connect(discharge1.n, discharge2.p) annotation (
     Line(points = {{64, -14}, {64, -14}, {64, -8}, {64, -8}}, color = {28, 108, 200}));
   connect(intake3.n, surgeTank.p) annotation (
-    Line(points={{-16,60},{-14,60},{-14,66}},        color = {28, 108, 200}));
+    Line(points={{-16,60},{-14,60},{-14,66}}, color = {28, 108, 200}));
   connect(intake2.n, intake3.p) annotation (
-    Line(points={{-38,66},{-36,66},{-36,60}},        color = {28, 108, 200}));
+    Line(points={{-38,66},{-36,66},{-36,60}}, color = {28, 108, 200}));
   connect(intake1.n, intake2.p) annotation (
-    Line(points={{-60,60},{-58,60},{-58,66}},        color = {28, 108, 200}));
+    Line(points={{-60,60},{-58,60},{-58,66}}, color = {28, 108, 200}));
   connect(reservoir.n, intake1.p) annotation (
-    Line(points={{-84,64},{-79.95,64},{-79.95,60},{-80,60}},                color = {28, 108, 200}));
+    Line(points={{-84,64},{-79.95,64},{-79.95,60},{-80,60}}, color = {28, 108, 200}));
   annotation (
     experiment(StopTime = 1794, StartTime = 0, Tolerance = 0.0001, Interval = 1.0));
 end HydroCordModelKPFran2;

@@ -5,12 +5,12 @@ model HPSimplePenstockOpenChannel "testing open channel"
         origin={-90,44},
         extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 1, height = -0.04615, offset = 0.7493,
-    startTime=60000)                                                                                      annotation (
-    Placement(transformation(origin={-38,86},   extent = {{-10, -10}, {10, 10}})));
-  Waterway.Pipe discharge(     L=600, H=-5)
+    startTime=60000) annotation (
+    Placement(transformation(origin={-38,86}, extent = {{-10, -10}, {10, 10}})));
+  Waterway.Pipe discharge( L=600, H=-5)
                                       annotation (Placement(transformation(extent={{6,0},{
             26,20}})));
-  Waterway.Reservoir tail(h_0=5)  annotation (Placement(transformation(
+  Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,10},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -28,7 +28,7 @@ model HPSimplePenstockOpenChannel "testing open channel"
   inner OpenHPL.Data data(Vdot_0=18.9979) annotation (Placement(transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}})));
-  Waterway.Pipe pipe            annotation (Placement(transformation(extent={{-74,34},
+  Waterway.Pipe pipe annotation (Placement(transformation(extent={{-74,34},
             {-54,54}})));
   Waterway.OpenChannel openChannel(
     N=100,
@@ -46,9 +46,9 @@ equation
   connect(turbine.p, penstock.n) annotation (
     Line(points={{-22,14},{-30,14},{-30,16}}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{-27,86},{-12,86},{-12,26}},       color = {0, 0, 127}));
+    Line(points={{-27,86},{-12,86},{-12,26}}, color = {0, 0, 127}));
   connect(reservoir.n, pipe.p) annotation (
-    Line(points={{-80,44},{-74,44}},                                        color = {28, 108, 200}));
+    Line(points={{-80,44},{-74,44}}, color = {28, 108, 200}));
   connect(turbine.n, discharge.p)
     annotation (Line(points={{-2,14},{6,14},{6,10}}, color={28,108,200}));
   connect(discharge.n, openChannel.p)
@@ -58,7 +58,7 @@ equation
           8},{54,8}},
                     color={28,108,200}));
   connect(tail.n, pipe1.n) annotation (Line(points={{80,10},{78,10},{78,8},{74,
-          8}},  color={28,108,200}));
+          8}}, color={28,108,200}));
   connect(pipe.n, surgeTank.p)
     annotation (Line(points={{-54,44},{-54,48},{-52,48}}, color={28,108,200}));
   connect(penstock.p, surgeTank.n)

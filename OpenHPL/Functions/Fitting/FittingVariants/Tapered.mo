@@ -33,7 +33,7 @@ algorithm
         D_i,
         D_o);
     else
-      phi :=  Square(N_Re,p_eps,D_i,D_o);
+      phi := Square(N_Re,p_eps,D_i,D_o);
     end if;
   end if;
   annotation (

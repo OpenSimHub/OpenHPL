@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
   outer OpenHPL.Data data "Using standard data set";
-  extends OpenHPL.Icons.Pipe(    vertical=true);
+  extends OpenHPL.Icons.Pipe( vertical=true);
   import Modelica.Constants.pi;
   // geometrical parameters of the pipe
   parameter SI.Height H = 420 "Height difference from the inlet to the outlet of the pipe" annotation (
@@ -21,7 +21,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   // staedy state values for pressure in all segments of the pipe
   parameter SI.Height h_s0 = 69 "Initial water head before the pipe, m" annotation (
     Dialog(group = "Initialization"));
-  parameter SI.Pressure p_p0[N]=  1.013e5 + 997 * 9.81 * (h_s0 + H / N / 2):997 * 9.81 * H / N:1.013e5 + 997 * 9.81 * (h_s0 + H / N * (N - 1 / 2)) "Initial presure vector, bar" annotation (
+  parameter SI.Pressure p_p0[N]= 1.013e5 + 997 * 9.81 * (h_s0 + H / N / 2):997 * 9.81 * H / N:1.013e5 + 997 * 9.81 * (h_s0 + H / N * (N - 1 / 2)) "Initial presure vector, bar" annotation (
     Dialog(group = "Initialization"));
   // segmentation of the pipe
   parameter Integer N = 10 "Number of segments" annotation (

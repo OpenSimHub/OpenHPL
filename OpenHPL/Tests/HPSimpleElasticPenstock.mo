@@ -45,7 +45,7 @@ equation
   connect(penstock.n, turbine.p) annotation (
     Line(points = {{10.1, 53.9}, {10.1, 43.95}, {20, 43.95}, {20, 36}}, color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{21,82},{22,82},{22,48}},        color = {0, 0, 127}));
+    Line(points={{21,82},{22,82},{22,48}}, color = {0, 0, 127}));
   connect(reservoir.n, intake.p) annotation (
     Line(points = {{-79.9, 61.9}, {-72.95, 61.9}, {-72.95, 61.9}, {-65.9, 61.9}}, color = {28, 108, 200}));
   connect(intake.n, surgeTank1.p) annotation (

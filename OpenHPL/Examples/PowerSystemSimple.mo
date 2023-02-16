@@ -6,7 +6,7 @@ model PowerSystemSimple "Example to demonstrate the influence of lambda and mu"
     useLambda=true,
     Lambda=266.6e6,
     J=1e6,
-    enable_f=true)                          annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+    enable_f=true) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Sources.Step loadStep(
     height=133.3e6,
     offset=100e6,

@@ -5,12 +5,12 @@ model OpenChannel "Open channel model (use KP scheme)"
   extends OpenHPL.Icons.OpenChannel;
   // geometrical parameters of the open channel
   parameter Integer N = 100 "Number of segments" annotation (Dialog(group = "Geometry"));
-  parameter SI.Length W=180 "Channel width"                 annotation (Dialog(group="Geometry"));
+  parameter SI.Length W=180 "Channel width" annotation (Dialog(group="Geometry"));
   parameter SI.Length L = 5000 "Channel length" annotation (Dialog(group = "Geometry"));
   parameter SI.Height H[2] = {17.5, 0} "Channel bed geometry, height from the left and right sides" annotation (Dialog(group = "Geometry"));
   parameter Real f_n = 0.04 "Manning's roughness coefficient [s/m^1/3]" annotation (Dialog(group = "Geometry"));
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
-  parameter SI.Height h_0[N]=ones(N)*5 "Initial water level"          annotation (Dialog(group="Initialization"));
+  parameter SI.Height h_0[N]=ones(N)*5 "Initial water level" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate" annotation (Dialog(group="Initialization"));
   parameter Boolean BoundaryCondition[2,2] = [false, true; false, true] "Boundary conditions. Choose options for the boundaries in a matrix table, i.e., if the matrix element = true, this element is used as boundary. The element represent the following quantities: [inlet depth, inlet flow; outlet depth, outlet flow]" annotation (Dialog(group = "Boundary condition"));
   // variables

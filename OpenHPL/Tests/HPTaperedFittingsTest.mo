@@ -18,15 +18,15 @@ model HPTaperedFittingsTest "Test for comparing fitting behaviour"
     D_i=4) annotation (Placement(transformation(extent={{40,50},{60,70}})));
   OpenHPL.Waterway.Reservoir tailWater(h_0=10) annotation (Placement(transformation(extent={{100,-10},{80,10}})));
   inner OpenHPL.Data data(SteadyState=true) annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  Waterway.Pipe         pipe2(
+  Waterway.Pipe pipe2(
     H=5,
     L=100,
-    D_i=4)                          annotation (Placement(transformation(extent={{-60,12},
+    D_i=4) annotation (Placement(transformation(extent={{-60,12},
             {-40,32}})));
-  Waterway.Pipe         tail2(
+  Waterway.Pipe tail2(
     H=0,
     L=100,
-    D_i=2)                          annotation (Placement(transformation(extent={{40,12},
+    D_i=2) annotation (Placement(transformation(extent={{40,12},
             {60,32}})));
   Waterway.Fitting TaperedReductionRev(
     fit_type=OpenHPL.Types.Fitting.Tapered,
@@ -36,29 +36,29 @@ model HPTaperedFittingsTest "Test for comparing fitting behaviour"
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={0,22})));
-  Waterway.Pipe         pipe3(
+  Waterway.Pipe pipe3(
     H=0,
     L=100,
-    D_i=2)                          annotation (Placement(transformation(extent={{-60,-30},
+    D_i=2) annotation (Placement(transformation(extent={{-60,-30},
             {-40,-10}})));
-  Waterway.Pipe         tail3(
+  Waterway.Pipe tail3(
     H=5,
     L=100,
-    D_i=4)                          annotation (Placement(transformation(extent={{40,-30},
+    D_i=4) annotation (Placement(transformation(extent={{40,-30},
             {60,-10}})));
   Waterway.Fitting TaperedReduction(
     fit_type=OpenHPL.Types.Fitting.Tapered,
     D_i=4,
     D_o=2,
     L=4) annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-  Waterway.Pipe         pipe4(
+  Waterway.Pipe pipe4(
     H=0,
     L=100,
-    D_i=4)                          annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
-  Waterway.Pipe         tail4(
+    D_i=4) annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
+  Waterway.Pipe tail4(
     H=5,
     L=100,
-    D_i=2)                          annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
+    D_i=2) annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
   Waterway.Fitting TaperedExpansionRev(
     fit_type=OpenHPL.Types.Fitting.Tapered,
     D_i=2,

@@ -114,15 +114,15 @@ equation
     Line(points = {{42, -6}, {42, -6}, {42, 10}, {44, 10}}, color = {28, 108, 200}));
   connect(add1.y, tail.level) annotation (Line(points={{90,-33},{90,-33},{90,5},{106,5}}, color={0,0,127}));
   connect(const_level.y, add1.u2) annotation (
-    Line(points={{69,-88},{96,-88},{96,-56},{96,-56}},          color = {0, 0, 127}));
+    Line(points={{69,-88},{96,-88},{96,-56},{96,-56}}, color = {0, 0, 127}));
   connect(tail_level.y[1], add1.u1) annotation (
-    Line(points={{69,-64},{84,-64},{84,-56},{84,-56}},          color = {0, 0, 127}, thickness = 0.5));
+    Line(points={{69,-64},{84,-64},{84,-56},{84,-56}}, color = {0, 0, 127}, thickness = 0.5));
   connect(per_gain.y, turbine.u_t) annotation (
-    Line(points={{-11,-44},{40,-44},{40,14},{32,14},{32,6},{32,6}},              color = {0, 0, 127}));
+    Line(points={{-11,-44},{40,-44},{40,14},{32,14},{32,6},{32,6}}, color = {0, 0, 127}));
   connect(limiter1.y, per_gain.u) annotation (
-    Line(points={{-43,-42},{-40,-42},{-40,-44},{-34,-44},{-34,-44}},            color = {0, 0, 127}));
+    Line(points={{-43,-42},{-40,-42},{-40,-44},{-34,-44},{-34,-44}}, color = {0, 0, 127}));
   connect(servo_pos.y[1], limiter1.u) annotation (
-    Line(points={{-75,-40},{-68,-40},{-68,-42},{-66,-42}},          color = {0, 0, 127}, thickness = 0.5));
+    Line(points={{-75,-40},{-68,-40},{-68,-42},{-66,-42}}, color = {0, 0, 127}, thickness = 0.5));
   connect(fitting1.n, penstock2.p) annotation (
     Line(points = {{20, 26}, {26, 26}, {26, 16}, {-10, 16}, {-10, 4}, {-2, 4}, {-2, 4}, {-2, 4}}, color = {28, 108, 200}));
   connect(penstock1.n, fitting1.p) annotation (
@@ -137,13 +137,13 @@ equation
   connect(discharge1.n, discharge2.p) annotation (
     Line(points = {{64, -14}, {64, -14}, {64, -8}, {64, -8}}, color = {28, 108, 200}));
   connect(intake3.n, surgeTank.p) annotation (
-    Line(points={{-16,60},{-14,60},{-14,66}},        color = {28, 108, 200}));
+    Line(points={{-16,60},{-14,60},{-14,66}}, color = {28, 108, 200}));
   connect(intake2.n, intake3.p) annotation (
-    Line(points={{-38,66},{-36,66},{-36,60}},        color = {28, 108, 200}));
+    Line(points={{-38,66},{-36,66},{-36,60}}, color = {28, 108, 200}));
   connect(intake1.n, intake2.p) annotation (
-    Line(points={{-60,60},{-58,60},{-58,66}},        color = {28, 108, 200}));
+    Line(points={{-60,60},{-58,60},{-58,66}}, color = {28, 108, 200}));
   connect(reservoir.n, intake1.p) annotation (
-    Line(points={{-84,64},{-79.95,64},{-79.95,60},{-80,60}},                color = {28, 108, 200}));
+    Line(points={{-84,64},{-79.95,64},{-79.95,60},{-80,60}}, color = {28, 108, 200}));
   annotation (
     experiment(StopTime = 3600, StartTime = 0, Tolerance = 0.0001, Interval = 1.0));
 end HydroCordModelKPDraftTube;

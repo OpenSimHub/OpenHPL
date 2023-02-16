@@ -12,7 +12,7 @@ model SimpleGenFrancisTG "Synergy with OpenIPSL library(generator)"
         extent={{-10,10},{10,-10}},
         rotation=180)));
   replaceable
-  Waterway.Pipe               penstock(
+  Waterway.Pipe penstock(
     vertical=true,
     L=600,
     H=428.5,
@@ -65,7 +65,7 @@ model SimpleGenFrancisTG "Synergy with OpenIPSL library(generator)"
     x1d=0.302) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Blocks.Math.Gain PSI_to_Ppu(k=1/turbine.P_n)
                                                       annotation (
-    Placement(transformation(origin={-59,-5},     extent={{-5,-5},{5,5}})));
+    Placement(transformation(origin={-59,-5}, extent={{-5,-5},{5,5}})));
   Modelica.Blocks.Math.Gain wpu_to_wSI(k=2*Modelica.Constants.pi/60*turbine.n_n) annotation (Placement(transformation(
         origin={-60,20},
         extent={{-6,6},{6,-6}},
@@ -81,12 +81,12 @@ model SimpleGenFrancisTG "Synergy with OpenIPSL library(generator)"
     pmax=1,
     pmin=0,
     pref=0.1537,
-    wref=1)                                                                                                                                                  annotation (
+    wref=1) annotation (
     Placement(transformation(extent={{-12,-92},{12,-68}})));
 equation
   connect(generator.w, wpu_to_wSI.u) annotation (Line(points={{-19,9},{-16,9},{-16,20},{-52.8,20}}, color={0,0,127}));
   connect(PSI_to_Ppu.u, turbine.P_out) annotation (
-    Line(points={{-65,-5},{-70,-5},{-70,-24},{32,-24},{32,-39}},           color = {0, 0, 127}));
+    Line(points={{-65,-5},{-70,-5},{-70,-24},{32,-24},{32,-39}}, color = {0, 0, 127}));
   connect(PSI_to_Ppu.y, generator.pm) annotation (Line(points={{-53.5,-5},{-42,-5}}, color={0,0,127}));
   connect(generator.vf, generator.vf0) annotation (Line(points={{-42,5},{-46,5},{-46,14},{-38,14},{-38,11}}, color={0,0,127}));
   connect(wpu_to_wSI.y, turbine.w_in) annotation (Line(points={{-66.6,20},{-80,20},{-80,-32},{16,-32},{16,-42},{20,-42}}, color={0,0,127}));

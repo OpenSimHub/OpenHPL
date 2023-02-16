@@ -15,6 +15,6 @@ equation
   connect(mCB.gridFlange, grid.flange_a) annotation (Line(points={{9.8,0},{22,0}}, color={0,0,0}));
   connect(constantSpeed.flange, grid.flange_b) annotation (Line(points={{54,0},{42,0}}, color={0,0,0}));
   connect(gen.flange_b, mCB.genFlange) annotation (Line(points={{-20,0},{-10,0}}, color={0,0,0}));
-  connect(torqueStep.flange, gen.flange_a) annotation (Line(points={{-50,0},{-40,0}},                   color={0,0,0}));
+  connect(torqueStep.flange, gen.flange_a) annotation (Line(points={{-50,0},{-40,0}}, color={0,0,0}));
   annotation (experiment(StopTime=299));
 end TestMCB;

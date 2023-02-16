@@ -25,12 +25,12 @@ model MCB "Mechanical equivalent of an electrical Main Circuit Breaker"
 equation
   connect(clock.y, closeMCB.u) annotation (Line(points={{-79.4,-40},{-72,-40},{-72,-28},{-67.2,-28}},
                                                                                                   color={0,0,127}));
-  connect(rSFlipFlop.R, openMCB.y) annotation (Line(points={{-2,-52},{-53.4,-52}},                            color={255,0,255}));
-  connect(relSpeedSensor.flange_a, clutch.flange_a) annotation (Line(points={{60,30},{50,30},{50,0},{60,0}},   color={0,0,0}));
-  connect(relSpeedSensor.flange_b, clutch.flange_b) annotation (Line(points={{80,30},{88,30},{88,0},{80,0}},   color={0,0,0}));
+  connect(rSFlipFlop.R, openMCB.y) annotation (Line(points={{-2,-52},{-53.4,-52}}, color={255,0,255}));
+  connect(relSpeedSensor.flange_a, clutch.flange_a) annotation (Line(points={{60,30},{50,30},{50,0},{60,0}}, color={0,0,0}));
+  connect(relSpeedSensor.flange_b, clutch.flange_b) annotation (Line(points={{80,30},{88,30},{88,0},{80,0}}, color={0,0,0}));
   connect(clutch.flange_a, genFlange) annotation (Line(points={{60,0},{-100,0}}, color={0,0,0}));
   connect(clutch.flange_b, gridFlange) annotation (Line(points={{80,0},{98,0}}, color={0,0,0}));
-  connect(relSpeedSensor.w_rel, lessThreshold.u) annotation (Line(points={{70,41},{70,50},{12,50}},                       color={0,0,127}));
+  connect(relSpeedSensor.w_rel, lessThreshold.u) annotation (Line(points={{70,41},{70,50},{12,50}}, color={0,0,127}));
   connect(triggeredTrapezoid.y, clutch.f_normalized) annotation (Line(points={{61,-40},{70,-40},{70,-11}},
                                                                                                         color={0,0,127}));
   connect(clock.y, openMCB.u) annotation (Line(points={{-79.4,-40},{-72,-40},{-72,-52},{-67.2,-52}},

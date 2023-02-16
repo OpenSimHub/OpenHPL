@@ -2,7 +2,7 @@ within OpenHPL.ElectroMech.PowerSystem;
 model Grid "Model of a mechanical grid equivalent"
   extends OpenHPL.Icons.Pylon;
 
-  parameter SI.Power Pgrid=1000000000        "Active power capacity of the grid" annotation (Dialog(group="Electrical"));
+  parameter SI.Power Pgrid=1000000000 "Active power capacity of the grid" annotation (Dialog(group="Electrical"));
   parameter Boolean useLambda=false "If checked, specify Lambda, otherwise the droop Rgrid is used"
     annotation (choices(checkBox = true), Dialog(group="Electrical"));
   parameter Types.Lambda Lambda=Pgrid/(Rgrid*data.f_0) "Network Power-Frequency Characteristic (bias factor)"
@@ -13,7 +13,7 @@ model Grid "Model of a mechanical grid equivalent"
 
   extends BaseClasses.Power2Torque(
     final Pmax=1.2*Pgrid,
-    final Ploss=0,                 final enable_nomSpeed=false,
+    final Ploss=0, final enable_nomSpeed=false,
                                    power(y=dP2.y));
 
   Modelica.Blocks.Interfaces.RealInput Pload(unit="W") "Electrical load power demand" annotation (Placement(

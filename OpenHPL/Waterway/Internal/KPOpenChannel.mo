@@ -17,7 +17,7 @@ model KPOpenChannel "Implementation of the KP functions for an open channel"
   SI.VolumeFlowRate Vdot[N];
   SI.Height z[N], B[N], z_[N, 4], h_[N, 4], h[N](start=h_0);
   SI.Velocity u_[N, 4];
-  Real q0 = Vdot_0 /W,  q[N](start = ones(N) * Vdot_0 /W),  q_[N, 4], q_t;
+  Real q0 = Vdot_0 /W, q[N](start = ones(N) * Vdot_0 /W), q_[N, 4], q_t;
   Real S_[2 * N], theta = 1.3, F_[2 * N, 4], lam1[N, 4], lam2[N, 4], F_f[N];
   Real U[2 * N], U_[8, N], U_mp[N], U_pm[N];
   Functions.KP07.KPmethod KP(N = N, U = vector([h; q]), dx = dx, theta = theta, B = vector([b[1] + 3 / 2 * (b[1] - b[2]); b[1] + 1 / 2 * (b[1] - b[2]); B; b[N + 1] - 1 / 2 * (b[N] - b[N+1]); b[N + 1] - 3 / 2 * (b[N] - b[N+1])]), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = boundaryValues, boundaryCon = boundaryCondition)
@@ -80,7 +80,7 @@ equation
   F_ = [q_; q_ .* q_ ./ h_ + data.g * h_ .* h_ / 2];
   // Source term of friction and gravity forces
   for i in 1:N loop
-    F_f[i] = (-data.g * h[i] * (b[i + 1] - b[i]) / dx) - f_n ^ 2 * data.g * q[i] * abs(q[i]) * (W + 2 * h[i] ^ (4 / 3)) /W  ^ (4 / 3) * (2 * h[i] / (h[i] ^ 2 + max(h_[i, 4] ^ 2, 1e-10))) ^ (7 / 3);
+    F_f[i] = (-data.g * h[i] * (b[i + 1] - b[i]) / dx) - f_n ^ 2 * data.g * q[i] * abs(q[i]) * (W + 2 * h[i] ^ (4 / 3)) /W ^ (4 / 3) * (2 * h[i] / (h[i] ^ 2 + max(h_[i, 4] ^ 2, 1e-10))) ^ (7 / 3);
   end for;
   S_[1:N] = zeros(N);
   S_[N + 1:2 * N] = F_f;

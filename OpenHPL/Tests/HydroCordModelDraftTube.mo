@@ -124,24 +124,24 @@ equation
   connect(limiter1.y, per_gain.u) annotation (
     Line(points = {{47, 80}, {42, 80}}, color = {0, 0, 127}));
   connect(per_gain.y, turbine.u_t) annotation (
-    Line(points={{19,80},{12,80},{12,60},{32,60},{32,6}},            color = {0, 0, 127}));
+    Line(points={{19,80},{12,80},{12,60},{32,60},{32,6}}, color = {0, 0, 127}));
   connect(surgeTank.n, penstock1.p) annotation (
     Line(points = {{6, 66}, {8, 66}, {8, 60}}, color = {28, 108, 200}));
   connect(penstock1.n, fitting1.p) annotation (
-    Line(points={{8,40},{11.9,40},{11.9,40},{14,40}},                color = {28, 108, 200}));
+    Line(points={{8,40},{11.9,40},{11.9,40},{14,40}}, color = {28, 108, 200}));
   connect(turbine.p, penstock2.n) annotation (
     Line(points = {{22, -6}, {22, 0}, {18, 0}}, color = {28, 108, 200}));
   connect(fitting1.n, penstock2.p) annotation (
-    Line(points={{14,20},{17.9,20},{17.9,20},{18,20}},                      color = {28, 108, 200}));
+    Line(points={{14,20},{17.9,20},{17.9,20},{18,20}}, color = {28, 108, 200}));
   connect(intake3.n, surgeTank.p) annotation (
-    Line(points={{-16,60},{-14,60},{-14,66}},        color = {28, 108, 200}));
+    Line(points={{-16,60},{-14,60},{-14,66}}, color = {28, 108, 200}));
   connect(intake2.n, intake3.p) annotation (
-    Line(points={{-38,66},{-36,66},{-36,60}},        color = {28, 108, 200}));
+    Line(points={{-38,66},{-36,66},{-36,60}}, color = {28, 108, 200}));
   connect(intake1.n, intake2.p) annotation (
-    Line(points={{-60,60},{-58,60},{-58,66}},        color = {28, 108, 200}));
+    Line(points={{-60,60},{-58,60},{-58,66}}, color = {28, 108, 200}));
   connect(reservoir.n, intake1.p) annotation (
-    Line(points={{-84,64},{-79.95,64},{-79.95,60},{-80,60}},                color = {28, 108, 200}));
+    Line(points={{-84,64},{-79.95,64},{-79.95,60},{-80,60}}, color = {28, 108, 200}));
   annotation (
     experiment(StopTime = 3600, StartTime = 0, Tolerance = 0.0001, Interval = 1),
-    Diagram(graphics={  Rectangle(origin = {17, 10}, extent = {{1, -2}, {-1, 2}})}));
+    Diagram(graphics={ Rectangle(origin = {17, 10}, extent = {{1, -2}, {-1, 2}})}));
 end HydroCordModelDraftTube;

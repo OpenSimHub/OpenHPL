@@ -39,17 +39,17 @@ model HPLiniarizationKP "HP system model for liniarization with elastic penstock
         extent={{-10,-10},{10,10}})));
 equation
   connect(discharge.n, tail.n) annotation (
-    Line(points={{50,34},{56.05,34},{56.05,40},{62,40}},                color = {28, 108, 200}));
+    Line(points={{50,34},{56.05,34},{56.05,40},{62,40}}, color = {28, 108, 200}));
   connect(reservoir.n, intake.p) annotation (
-    Line(points={{-82,62},{-77.95,62},{-77.95,60},{-72,60}},                      color = {28, 108, 200}));
+    Line(points={{-82,62},{-77.95,62},{-77.95,60},{-72,60}}, color = {28, 108, 200}));
   connect(intake.n, surgeTank.p) annotation (
-    Line(points={{-52,60},{-45.95,60},{-45.95,66},{-40,66}},                      color = {28, 108, 200}));
+    Line(points={{-52,60},{-45.95,60},{-45.95,66},{-40,66}}, color = {28, 108, 200}));
   connect(surgeTank.n, penstock.p) annotation (
-    Line(points={{-20,66},{-15.95,66},{-15.95,58},{-10,58}},                      color = {28, 108, 200}));
+    Line(points={{-20,66},{-15.95,66},{-15.95,58},{-10,58}}, color = {28, 108, 200}));
   connect(penstock.n, turbine.p) annotation (
-    Line(points={{-10,38},{-10,34},{0,34}},                    color = {28, 108, 200}));
+    Line(points={{-10,38},{-10,34},{0,34}}, color = {28, 108, 200}));
   connect(turbine.n, discharge.p) annotation (
-    Line(points={{20,34},{25.05,34},{30,34}},                  color = {28, 108, 200}));
+    Line(points={{20,34},{25.05,34},{30,34}}, color = {28, 108, 200}));
   turbine.u_t = u;
   dotV = turbine.Vdot;
   annotation (

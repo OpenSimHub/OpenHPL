@@ -1,7 +1,7 @@
 package OpenHPL "Open-source hydropower library"
   extends Icons.Logo;
   import C = Modelica.Constants;
-  import      Modelica.Units.SI;
+  import Modelica.Units.SI;
 
   annotation (
     version="2.0.0",

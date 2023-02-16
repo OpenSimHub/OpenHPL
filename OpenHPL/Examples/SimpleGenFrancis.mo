@@ -5,9 +5,9 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
         origin={-90,50},
         extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(
-    duration=980,                                       height = 0.87, offset = 0.09, startTime = 10) annotation (
-    Placement(transformation(origin={50,30},    extent={{10,-10},{-10,10}})));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
+    duration=980, height = 0.87, offset = 0.09, startTime = 10) annotation (
+    Placement(transformation(origin={50,30}, extent={{10,-10},{-10,10}})));
+  OpenHPL.Waterway.Pipe intake(H = 23, M(fixed = true)) annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
   Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
   OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,0},
@@ -24,7 +24,7 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
            annotation (Placement(transformation(
         origin={-30,0},
         extent={{-10,-10},{10,10}})));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=71) annotation (Placement(transformation(
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0 = 71, m(fixed = true)) annotation (Placement(transformation(
         origin={-30,50},
         extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Francis turbine(
@@ -65,24 +65,24 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
     fit_type=OpenHPL.Types.Fitting.Square) annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
 equation
   connect(generator.w_out, turbine.w_in) annotation (
-    Line(points={{19,-24},{12,-24},{12,-8},{18,-8}},        color = {0, 0, 127}));
+    Line(points={{19,-24},{12,-24},{12,-8},{18,-8}}, color = {0, 0, 127}));
   connect(turbine.P_out, generator.P_in) annotation (
-    Line(points={{30,-11},{30,-18}},                        color = {0, 0, 127}));
+    Line(points={{30,-11},{30,-18}}, color = {0, 0, 127}));
   connect(reservoir.o, intake.i) annotation (
-    Line(points={{-80,50},{-70,50}},                                        color = {28, 108, 200}));
+    Line(points={{-80,50},{-70,50}}, color = {28, 108, 200}));
   connect(surgeTank.i, intake.o) annotation (
-    Line(points={{-40,50},{-50,50}},                                        color = {28, 108, 200}));
+    Line(points={{-40,50},{-50,50}}, color = {28, 108, 200}));
   connect(surgeTank.o, penstock.i) annotation (
-    Line(points={{-20,50},{-10,50},{-10,20},{-48,20},{-48,0},{-40,0}},            color = {28, 108, 200}));
+    Line(points={{-20,50},{-10,50},{-10,20},{-48,20},{-48,0},{-40,0}}, color = {28, 108, 200}));
   connect(turbine.o, discharge.i) annotation (
-    Line(points={{40,0},{50,0}},                                        color = {28, 108, 200}));
+    Line(points={{40,0},{50,0}}, color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{39,30},{30,30},{30,12}},          color = {0, 0, 127}));
+    Line(points={{39,30},{30,30},{30,12}}, color = {0, 0, 127}));
   connect(turbine.i, fitting.o) annotation (
-    Line(points={{20,0},{8,0}},                               color = {28, 108, 200}));
+    Line(points={{20,0},{8,0}}, color = {28, 108, 200}));
   connect(tail.o, discharge.o) annotation (
-    Line(points={{80,6.66134e-16},{80,0},{70,0}},                                       color = {28, 108, 200}));
+    Line(points={{80,6.66134e-16},{80,0},{70,0}}, color = {28, 108, 200}));
   connect(penstock.o, fitting.i) annotation (
-    Line(points={{-20,0},{-12,0}},                                       color = {28, 108, 200}));
+    Line(points={{-20,0},{-12,0}}, color = {28, 108, 200}));
   annotation (experiment(StopTime=1000));
 end SimpleGenFrancis;

@@ -6,14 +6,14 @@ model Reservoir "Model of the reservoir"
     annotation (
     Dialog(group="Setup", enable=not useInflow),
     choices(checkBox = true));
-  parameter Boolean useInflow=false "If checked, the \"inflow\" connector is used"   annotation (
+  parameter Boolean useInflow=false "If checked, the \"inflow\" connector is used" annotation (
     Dialog(group="Setup", enable=not useLevel),
     choices(checkBox = true));
   parameter SI.Height h_0=50 "Initial water level above intake"
-    annotation (Dialog(group="Setup",   enable=not useLevel));
-  parameter SI.Length L=500 "Length of the reservoir"                 annotation (
+    annotation (Dialog(group="Setup", enable=not useLevel));
+  parameter SI.Length L=500 "Length of the reservoir" annotation (
     Dialog(group="Geometry"));
-  parameter SI.Length W=100 "Bed width of the reservoir"                 annotation (
+  parameter SI.Length W=100 "Bed width of the reservoir" annotation (
     Dialog(group="Geometry"));
   parameter SI.Angle alpha = 0 "The angle of the reservoir walls (zero angle corresponds to vertical walls)" annotation (
     Dialog(group = "Geometry"));
@@ -40,21 +40,21 @@ model Reservoir "Model of the reservoir"
   Modelica.Blocks.Interfaces.RealInput inflow=Vdot_i if useInflow "Conditional input inflow of the reservoir" annotation (Placement(transformation(
         origin={-120,0},
         extent={{-20,-20},{20,20}})));
-  Modelica.Blocks.Interfaces.RealInput level=h if    useLevel "Conditional input water level of the reservoir" annotation (Evaluate=true, Placement(transformation(extent={{-140,40},{-100,80}})));
+  Modelica.Blocks.Interfaces.RealInput level=h if useLevel "Conditional input water level of the reservoir" annotation (Evaluate=true, Placement(transformation(extent={{-140,40},{-100,80}})));
 
 initial equation
    if not useLevel then
-    h  =h_0;
+    h =h_0;
    end if;
 equation
-  A =h  * (W +h  * Modelica.Math.tan(alpha))
+  A =h * (W +h * Modelica.Math.tan(alpha))
     "Vertical cross section of the reservoir";
-  m = data.rho * A *L  "Water mass in reservoir";
+  m = data.rho * A *L "Water mass in reservoir";
   Vdot = Vdot_i - Vdot_o "Volumetric water flow rate";
   mdot = data.rho * Vdot "Water mass flow rate";
   v = mdot / data.rho / A "Water velocity";
-  M =L  * mdot "Momentum based on the length";
-  F_f = 1 / 8 * data.rho * f *L  * (W + 2 *h  / Modelica.Math.cos(alpha)) * v * abs(v)
+  M =L * mdot "Momentum based on the length";
+  F_f = 1 / 8 * data.rho * f *L * (W + 2 *h / Modelica.Math.cos(alpha)) * v * abs(v)
    "Friction force due to movement along the reservoir length";
   if useLevel then
     Vdot_i - Vdot_o = 0;

@@ -17,11 +17,11 @@ model HPAllTypeFittingsTest "Test for comparing fitting behaviour"
     D_i=4) annotation (Placement(transformation(extent={{40,70},{60,90}})));
   OpenHPL.Waterway.Reservoir tailWater(h_0=10) annotation (Placement(transformation(extent={{100,-10},{80,10}})));
   inner OpenHPL.Data data(SteadyState=true) annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  Waterway.Pipe         pipe2(
+  Waterway.Pipe pipe2(
     H=5,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
-  Waterway.Pipe         tail2(
+  Waterway.Pipe tail2(
     H=0,
     L=100,
     D_i=2) annotation (Placement(transformation(extent={{40,50},{60,70}})));
@@ -30,19 +30,19 @@ model HPAllTypeFittingsTest "Test for comparing fitting behaviour"
     D_i=2,
     D_o=4,
     L=4) annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  Waterway.Pipe         pipe3(
+  Waterway.Pipe pipe3(
     H=5,
     L=100,
     D_i=2) annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
-  Waterway.Pipe         tail3(
+  Waterway.Pipe tail3(
     H=0,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{40,30},{60,50}})));
-  Waterway.Pipe         pipe4(
+  Waterway.Pipe pipe4(
     H=5,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
-  Waterway.Pipe         tail4(
+  Waterway.Pipe tail4(
     H=0,
     L=100,
     D_i=2) annotation (Placement(transformation(extent={{40,10},{60,30}})));
@@ -51,20 +51,20 @@ model HPAllTypeFittingsTest "Test for comparing fitting behaviour"
     D_i=2,
     D_o=4,
     L=4) annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-  Waterway.Pipe         pipe5(
+  Waterway.Pipe pipe5(
     H=5,
     L=100,
     D_i=2) annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
-  Waterway.Pipe         tail5(
+  Waterway.Pipe tail5(
     H=0,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{40,-30},{60,-10}})));
-  Waterway.Pipe         pipe6(
+  Waterway.Pipe pipe6(
     vertical=false,
     H=5,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
-  Waterway.Pipe         tail6(
+  Waterway.Pipe tail6(
     H=0,
     L=100,
     D_i=2) annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
@@ -73,11 +73,11 @@ model HPAllTypeFittingsTest "Test for comparing fitting behaviour"
     D_i=4,
     D_o=2,
     L=4) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={0,-60})));
-  Waterway.Pipe         pipe7(
+  Waterway.Pipe pipe7(
     H=5,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
-  Waterway.Pipe         tail7(
+  Waterway.Pipe tail7(
     H=0,
     L=100,
     D_i=2) annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
@@ -86,11 +86,11 @@ model HPAllTypeFittingsTest "Test for comparing fitting behaviour"
     D_i=4,
     D_o=2,
     L=4) annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
-  Waterway.Pipe         pipe8(
+  Waterway.Pipe pipe8(
     H=5,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
-  Waterway.Pipe         tail8(
+  Waterway.Pipe tail8(
     H=0,
     L=100,
     D_i=2) annotation (Placement(transformation(extent={{40,-90},{60,-70}})));

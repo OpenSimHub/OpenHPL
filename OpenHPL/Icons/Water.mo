@@ -3,7 +3,7 @@ partial package Water "Hydro icon"
   extends Modelica.Icons.Package;
 
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, grid={2,2}),           graphics={
+    Icon(coordinateSystem(preserveAspectRatio=false, grid={2,2}), graphics={
         Line(
           points={{-60,-40},{-40,-52},{-20,-32},{0,-52},{20,-32},{40,-52},{60,-40}},
           color={28,108,200},

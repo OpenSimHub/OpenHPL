@@ -22,7 +22,7 @@ model Pelton "Model of the Pelton turbine"
     // connectors
     extends OpenHPL.Interfaces.TurbineContacts;
     Modelica.Blocks.Interfaces.RealInput w_in "Input angular velocity from the generator" annotation (
-                                Placement(transformation(origin={-120,-80},    extent={{-20,-20},
+                                Placement(transformation(origin={-120,-80}, extent={{-20,-20},
             {20,20}})));
 equation
   // Condition for inlet water compressibility

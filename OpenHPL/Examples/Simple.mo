@@ -5,12 +5,12 @@ model Simple "Model of a hydropower system with a simple turbine turbine"
         origin={-90,30},
         extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(
-    duration=30,                                     height = -0.04615, offset = 0.7493,
-    startTime=500)                                                                                        annotation (
-    Placement(transformation(origin={-10,70},    extent = {{-10, -10}, {10, 10}})));
-  OpenHPL.Waterway.Pipe intake(H=23) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
+    duration=30, height = -0.04615, offset = 0.7493,
+    startTime=500) annotation (
+    Placement(transformation(origin={-10,70}, extent = {{-10, -10}, {10, 10}})));
+  OpenHPL.Waterway.Pipe intake(H=23,M(fixed=true)) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
   OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
-  OpenHPL.Waterway.Reservoir tail(h_0=5)                    annotation (Placement(transformation(
+  OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -28,7 +28,7 @@ model Simple "Model of a hydropower system with a simple turbine turbine"
     annotation (Placement(transformation(
         origin={30,10},
         extent={{-10,-10},{10,10}})));
-  inner OpenHPL.Data data(SteadyState=true,  TempUse=false)
+  inner OpenHPL.Data data(SteadyState= true, TempUse=false)
                           annotation (Placement(transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}})));
@@ -38,9 +38,9 @@ equation
                                                                                     color={0,0,127}));
   connect(penstock.o, turbine.i) annotation (Line(points={{10,30},{14.95,30},{14.95,10},{20,10}}, color={28,108,200}));
   connect(reservoir.o, intake.i) annotation (
-    Line(points={{-80,30},{-70,30}},                                              color = {28, 108, 200}));
+    Line(points={{-80,30},{-70,30}}, color = {28, 108, 200}));
   connect(intake.o, surgeTank.i) annotation (
-    Line(points={{-50,30},{-40,30}},                                              color = {28, 108, 200}));
+    Line(points={{-50,30},{-40,30}}, color = {28, 108, 200}));
   connect(surgeTank.o, penstock.i) annotation (Line(points={{-20,30},{-10,30}}, color={28,108,200}));
   connect(discharge.o, tail.o) annotation (Line(points={{70,0},{80,0}}, color={28,108,200}));
   annotation (experiment(StopTime=1000));

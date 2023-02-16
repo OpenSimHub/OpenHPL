@@ -3,7 +3,7 @@ partial package Logo "Main package icon"
   extends Modelica.Icons.Package;
 
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}),           graphics={
+    Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}), graphics={
         Polygon(
           points={{-8.5,-13.5},{-8.5,-9.5},{-8.5,-5.5},{-7.5,-0.5},{-4.5,5.5},{-1.5,9.5},{2.5,12.5},{8.5,13.5},{8.5,-13.5},{-8.5,-13.5}},
           lineColor={28,108,200},

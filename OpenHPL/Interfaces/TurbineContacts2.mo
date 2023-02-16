@@ -11,7 +11,7 @@ partial model TurbineContacts2 "Model of turbine connectors"
         rotation=-90,
         origin={-80,120})));
   Modelica.Blocks.Interfaces.RealOutput P_out(unit="W") if enable_P_out "Mechanical Output power" annotation (
-    Placement(transformation(origin={40,110}, extent={{-10,-10},{10,10}},      rotation=90), iconTransformation(
+    Placement(transformation(origin={40,110}, extent={{-10,-10},{10,10}}, rotation=90), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={40,110})));

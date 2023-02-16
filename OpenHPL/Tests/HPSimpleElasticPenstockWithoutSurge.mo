@@ -33,7 +33,7 @@ equation
   connect(turbine1.P_out, aggregate.P_in) annotation (
     Line(points = {{20, 25}, {20, 22}}, color = {0, 0, 127}));
   connect(turbine1.u_t, control.y) annotation (
-    Line(points={{16,48},{27,48},{27,48.8},{24,48.8},{24,84},{21,84}},                  color = {0, 0, 127}));
+    Line(points={{16,48},{27,48},{27,48.8},{24,48.8},{24,84},{21,84}}, color = {0, 0, 127}));
   connect(reservoir.n, intake.p) annotation (
     Line(points = {{-79.9, 61.9}, {-68, 61.9}, {-68, 61.9}, {-57.9, 61.9}}, color = {28, 108, 200}));
   connect(penstock1.p, intake.n) annotation (

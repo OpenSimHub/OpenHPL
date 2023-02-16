@@ -76,31 +76,31 @@ model CaseStudingValentynasCase "HP system model for Valentyna's Master case"
         extent={{-10,-10},{10,10}})));
 equation
   connect(generator.w_out, turbine.w_in) annotation (
-    Line(points={{40,2},{38,2},{38,10},{38,9.8},{38,9.8}},          color = {0, 0, 127}));
+    Line(points={{40,2},{38,2},{38,10},{38,9.8},{38,9.8}}, color = {0, 0, 127}));
   connect(turbine.P_out, generator.P_in) annotation (
-    Line(points={{34,9},{28,9},{28,2},{28,2}},            color = {0, 0, 127}));
+    Line(points={{34,9},{28,9},{28,2},{28,2}}, color = {0, 0, 127}));
   connect(intake.n, surgeTank.p) annotation (
-    Line(points={{-58,68},{-54,68},{-54,74},{-52,74}},                      color = {28, 108, 200}));
+    Line(points={{-58,68},{-54,68},{-54,74},{-52,74}}, color = {28, 108, 200}));
   connect(reservoir.n, intake.p) annotation (
-    Line(points={{-82,68},{-80,68},{-80,68},{-80,67.6},{-80,68},{-78,68}},                          color = {28, 108, 200}));
+    Line(points={{-82,68},{-80,68},{-80,68},{-80,67.6},{-80,68},{-78,68}}, color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{21,80},{34,80},{34,32}},          color = {0, 0, 127}));
+    Line(points={{21,80},{34,80},{34,32}}, color = {0, 0, 127}));
   connect(turbine.p, fitting.n) annotation (
-    Line(points={{24,20},{20,20},{20,6}},                    color = {28, 108, 200}));
+    Line(points={{24,20},{20,20},{20,6}}, color = {28, 108, 200}));
   connect(turbine.n, discharge.p) annotation (
-    Line(points={{44,20},{47,20},{47,14},{50,14}},                      color = {28, 108, 200}));
+    Line(points={{44,20},{47,20},{47,14},{50,14}}, color = {28, 108, 200}));
   connect(fitting.p, penstock1.n) annotation (
-    Line(points={{0,6},{-6,6},{-6,8},{-10,8}},                      color = {28, 108, 200}));
+    Line(points={{0,6},{-6,6},{-6,8},{-10,8}}, color = {28, 108, 200}));
   connect(discharge.n, tail.n) annotation (
-    Line(points={{70,14},{76,14},{76,18},{84,18},{84,18}},                        color = {28, 108, 200}));
+    Line(points={{70,14},{76,14},{76,18},{84,18},{84,18}}, color = {28, 108, 200}));
   connect(penstock1.p, fitting1.n) annotation (
-    Line(points={{-10,28},{-14,28},{-14,30},{-16,30}},                      color = {28, 108, 200}));
+    Line(points={{-10,28},{-14,28},{-14,30},{-16,30}}, color = {28, 108, 200}));
   coef2 = turbine.Wdot_s / turbine.Vdot / turbine.dp_tr;
   coef3 = turbine.Wdot_s / turbine.Vdot / turbine.dp_r;
   connect(penstock.n, fitting1.p) annotation (
-    Line(points={{-26,52},{-26,49.9},{-16,49.9},{-16,50}},                    color = {28, 108, 200}));
+    Line(points={{-26,52},{-26,49.9},{-16,49.9},{-16,50}}, color = {28, 108, 200}));
   connect(penstock.p, surgeTank.n) annotation (
-    Line(points={{-26,72},{-30,72},{-30,74},{-32,74}},                      color = {28, 108, 200}));
+    Line(points={{-26,72},{-30,72},{-30,74},{-32,74}}, color = {28, 108, 200}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end CaseStudingValentynasCase;

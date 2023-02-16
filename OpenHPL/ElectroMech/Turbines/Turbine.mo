@@ -3,7 +3,7 @@ model Turbine "Simple turbine model with mechanical connectors"
   outer Data data "Using standard class with global parameters";
   extends Icons.Turbine;
 
-  parameter Boolean ValveCapacity =  true "If checked the guide vane capacity C_v should be specified,
+  parameter Boolean ValveCapacity = true "If checked the guide vane capacity C_v should be specified,
     otherwise specify the nominal turbine parameters (net head and flow rate)"
     annotation (Dialog(group = "Nominal turbine parameters"), choices(checkBox = true));
   parameter Real C_v = 3.7 "Guide vane 'valve capacity'"
@@ -25,7 +25,7 @@ model Turbine "Simple turbine model with mechanical connectors"
      and the second column is a pu value of the turbine efficiency."
     annotation (Dialog(group = "Efficiency data", enable = not ConstEfficiency));
   parameter Boolean WaterCompress = false "If checked the water is compressible in the penstock"
-    annotation (Dialog(tab = "Advanced"),  choices(checkBox = true));
+    annotation (Dialog(tab = "Advanced"), choices(checkBox = true));
 
   extends BaseClasses.Power2Torque(power(y=Wdot_s));
   extends OpenHPL.Interfaces.TurbineContacts2;
