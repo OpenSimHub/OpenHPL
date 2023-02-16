@@ -20,7 +20,7 @@ equation
   connect(loadStep.y, grid.Pload) annotation (Line(points={{21,30},{30,30},{30,12}}, color={0,0,127}));
   connect(simpleGen.flange, grid.flange) annotation (Line(points={{-30,0},{30,0}}, color={0,0,0}));
   connect(PowerInput.y, simpleGen.Pload) annotation (Line(points={{-39,30},{-30,30},{-30,12}}, color={0,0,127}));
-  annotation (                                experiment(StopTime=20, __Dymola_NumberOfIntervals=5000), Documentation(info="<html>
+  annotation ( experiment(StopTime=20, StartTime = 0, Tolerance = 1e-06, Interval = 0.004), Documentation(info="<html>
 <h4>Example 5.8 [Schavemaker 2008]</h4>
 <p>
 The given grid has a bias factor of &lambda;=266.6&nbsp;MW/Hz.
