@@ -25,8 +25,9 @@ record Data "Provides a data set of most common used settings"
     annotation (Dialog(group="Initialization"));
   parameter SI.Frequency f_0 = 50 "Initial system frequency"
     annotation (Dialog(group = "Initialization"));
-  parameter Boolean TempUse = false "If checked, the water temperature is not constant"
-    annotation (choices(checkBox = true), Dialog(group = "Thermal behaviour (not yet implemented)"));
+  final parameter Boolean TempUse = false "If checked, the water temperature is not constant"
+    annotation (choices(checkBox = true), Dialog(group = "Thermal behaviour (not yet implemented)",
+      enable = false));
   parameter SI.Temperature T_0(displayUnit="degC") = 283.15 "Initial water temperature"
     annotation (Dialog(group = "Thermal behaviour (not yet implemented)", enable = TempUse));
   parameter SI.SpecificHeatCapacity c_p = 4200 "Heat capacity of water at T_0"
