@@ -28,7 +28,7 @@ model Simple "Model of a hydropower system with a simple turbine turbine"
     annotation (Placement(transformation(
         origin={30,10},
         extent={{-10,-10},{10,10}})));
-  inner OpenHPL.Data data(SteadyState= true, TempUse=false)
+  inner OpenHPL.Data data(SteadyState= true)
                           annotation (Placement(transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}})));
