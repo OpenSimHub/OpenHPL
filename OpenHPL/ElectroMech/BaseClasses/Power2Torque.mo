@@ -60,10 +60,12 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
         extent={{6,6},{-6,-6}},
         rotation=180,
         origin={-50,0})));
-  Modelica.Blocks.Interfaces.RealOutput f if enable_f "Frequency output of the aggregate"
+  Modelica.Blocks.Interfaces.RealOutput f(unit="Hz")
+                                          if enable_f "Frequency output of the aggregate"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
                 iconTransformation(extent={{100,-50},{120,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput w if enable_w "Angular velocity output of the aggregate"
+  Modelica.Blocks.Interfaces.RealOutput w(unit="rad/s")
+                                          if enable_w "Angular velocity output of the aggregate"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
       iconTransformation(extent={{100,30},{120,50}})));
 
