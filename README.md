@@ -16,7 +16,7 @@ Download [OpenHPL v2.0.0 (2022-09-07)](../../releases/tag/v2.0.0)
 
 ## License
 
-Copyright &copy; 2019-2022
+Copyright &copy; 2019-2023
 * [University of South-Eastern Norway](https://www.usn.no/english/) (USN)
 
 This Source Code Form is subject to the terms of the [Mozilla Public License, v. 2.0](LICENSE).
