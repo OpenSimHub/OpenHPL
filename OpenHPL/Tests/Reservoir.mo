@@ -16,7 +16,7 @@ model Reservoir
   Waterway.Reservoir head3_flow(
     useLevel=true,
     useInflow=false,
-    h_0=10)            annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
+    h_0=10) annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
   Waterway.Pipe pipe3(H=0, M(fixed=true)) annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   Modelica.Blocks.Sources.Ramp ramp3(
     height=-30,
