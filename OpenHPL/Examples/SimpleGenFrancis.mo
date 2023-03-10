@@ -7,7 +7,7 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
   Modelica.Blocks.Sources.Ramp control(
     duration=980, height = 0.87, offset = 0.09, startTime = 10) annotation (
     Placement(transformation(origin={50,30}, extent={{10,-10},{-10,10}})));
-  OpenHPL.Waterway.Pipe intake(H = 23, M(fixed = true)) annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
+  OpenHPL.Waterway.Pipe intake(H = 23, Vdot(fixed = true)) annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
   Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
   OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,0},
@@ -24,7 +24,7 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
            annotation (Placement(transformation(
         origin={-30,0},
         extent={{-10,-10},{10,10}})));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0 = 71, m(fixed = true)) annotation (Placement(transformation(
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0 = 71) annotation (Placement(transformation(
         origin={-30,50},
         extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Francis turbine(
@@ -55,8 +55,7 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
     w_v_=0.2) annotation (Placement(transformation(
         origin={30,0},
         extent={{-10,-10},{10,10}})));
-  inner OpenHPL.Data data(SteadyState=true,
-                          Vdot_0=4.54) annotation (Placement(transformation(
+  inner OpenHPL.Data data(Vdot_0=4.54) annotation (Placement(transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}})));
   Waterway.Fitting fitting(

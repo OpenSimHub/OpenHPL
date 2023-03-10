@@ -8,7 +8,7 @@ model Simple "Model of a hydropower system with a simple turbine turbine"
     duration=30, height = -0.04615, offset = 0.7493,
     startTime=500) annotation (
     Placement(transformation(origin={-10,70}, extent = {{-10, -10}, {10, 10}})));
-  OpenHPL.Waterway.Pipe intake(H=23,M(fixed=true)) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
+  OpenHPL.Waterway.Pipe intake(H=23, Vdot(fixed = true)) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
   OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
   OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,0},
@@ -28,8 +28,7 @@ model Simple "Model of a hydropower system with a simple turbine turbine"
     annotation (Placement(transformation(
         origin={30,10},
         extent={{-10,-10},{10,10}})));
-  inner OpenHPL.Data data(SteadyState= true)
-                          annotation (Placement(transformation(
+  inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}})));
 equation
