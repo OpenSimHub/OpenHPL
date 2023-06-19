@@ -52,7 +52,9 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
     u_end_=2.4,
     u_start_=2.28,
     w_1_=0.2,
-    w_v_=0.2) annotation (Placement(transformation(
+    w_v_=0.2,
+    enable_P_out=true)
+              annotation (Placement(transformation(
         origin={30,0},
         extent={{-10,-10},{10,10}})));
   inner OpenHPL.Data data(Vdot_0=4.54) annotation (Placement(transformation(
@@ -66,7 +68,8 @@ equation
   connect(generator.w_out, turbine.w_in) annotation (
     Line(points={{19,-24},{12,-24},{12,-8},{18,-8}}, color = {0, 0, 127}));
   connect(turbine.P_out, generator.P_in) annotation (
-    Line(points={{30,-11},{30,-18}}, color = {0, 0, 127}));
+    Line(points={{34,11},{34,18},{30,18},{30,-18}},
+                                     color = {0, 0, 127}));
   connect(reservoir.o, intake.i) annotation (
     Line(points={{-80,50},{-70,50}}, color = {28, 108, 200}));
   connect(surgeTank.i, intake.o) annotation (
@@ -76,7 +79,7 @@ equation
   connect(turbine.o, discharge.i) annotation (
     Line(points={{40,0},{50,0}}, color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{39,30},{30,30},{30,12}}, color = {0, 0, 127}));
+    Line(points={{39,30},{22,30},{22,12}}, color = {0, 0, 127}));
   connect(turbine.i, fitting.o) annotation (
     Line(points={{20,0},{8,0}}, color = {28, 108, 200}));
   connect(tail.o, discharge.o) annotation (

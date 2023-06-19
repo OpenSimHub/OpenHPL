@@ -29,15 +29,16 @@ model HPSimplePenstockPelton "HP system model with Pelton turbine"
   inner OpenHPL.Data data annotation (Placement(transformation(
         origin={-90,92},
         extent={{-10,-10},{10,10}})));
-  ElectroMech.Turbines.Pelton turbine(R=1.74/2, D_0=1) annotation (Placement(transformation(
+  ElectroMech.Turbines.Pelton turbine(R=1.74/2, D_0=1,
+    enable_P_out=true)                                 annotation (Placement(transformation(
         origin={10,34},
         extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Generators.SynchGen aggregate(np=5) annotation (Placement(transformation(extent={{0,-4},{20,16}})));
 equation
   connect(aggregate.P_in, turbine.P_out) annotation (
-    Line(points={{4,16},{4,19},{10,19},{10,23}}, color = {0, 0, 127}));
+    Line(points={{10,18},{10,45},{14,45}},       color = {0, 0, 127}));
   connect(aggregate.w_out, turbine.w_in) annotation (
-    Line(points={{16,16},{16,20},{14,20},{14,23.8}}, color = {0, 0, 127}));
+    Line(points={{21,12},{21,20},{-2,20},{-2,26}},   color = {0, 0, 127}));
   connect(reservoir.n, intake.p) annotation (
     Line(points={{-82,62},{-77.95,62},{-77.95,60},{-72,60}}, color = {28, 108, 200}));
   connect(intake.n, surgeTank.p) annotation (
@@ -51,7 +52,7 @@ equation
   connect(turbine.n, discharge.p) annotation (
     Line(points={{20,34},{20,34},{30,34}}, color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{1,84},{10,84},{10,46}}, color = {0, 0, 127}));
+    Line(points={{1,84},{2,84},{2,46}},   color = {0, 0, 127}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end HPSimplePenstockPelton;
