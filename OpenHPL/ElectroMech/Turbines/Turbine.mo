@@ -28,7 +28,7 @@ model Turbine "Simple turbine model with mechanical connectors"
     annotation (Dialog(tab = "Advanced"), choices(checkBox = true));
 
   extends BaseClasses.Power2Torque(power(y=Wdot_s));
-  extends OpenHPL.Interfaces.TurbineContacts2;
+  extends OpenHPL.Interfaces.TurbineContacts;
 
   SI.Pressure dp "Turbine pressure drop";
   SI.EnergyFlowRate Kdot_i_tr "Kinetic energy flow";
