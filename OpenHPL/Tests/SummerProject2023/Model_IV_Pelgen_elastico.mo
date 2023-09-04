@@ -23,20 +23,21 @@ model Model_IV_Pelgen_elastico "System with elastic pipe and variable load"
   Modelica.Blocks.Sources.Constant const2(k = 4000000) annotation (
     Placement(visible = true, transformation(origin = {90, 22}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   OpenHPL.ElectroMech.Turbines.Turbine turbine(H_n = 382, Pmax = 3.9e6, ValveCapacity = false, Vdot_n = 1.2) annotation (
-    Placement(visible = true, transformation(origin = {12, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin={30,-10},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   OpenHPL.Waterway.PenstockKP penstockKP(D_i = 0.7, H = 385.7, L = 2006.2) annotation (
     Placement(visible = true, transformation(origin = {-42, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(const.y, switch1.u1) annotation (
     Line(points={{79,70},{67.8,70},{67.8,56.2}},  color = {0, 0, 127}));
   connect(switch2.y, turbine.u_t) annotation (
-    Line(points={{-7.1,39},{4,39},{4,2}},      color = {0, 0, 127}));
+    Line(points={{-7.1,39},{14,39},{14,8},{22,8},{22,2}},
+                                               color = {0, 0, 127}));
   connect(turbine.o, tail.o) annotation (
-    Line(points = {{22, -10}, {80, -10}}, color = {0, 128, 255}));
+    Line(points={{40,-10},{80,-10}},      color = {0, 128, 255}));
   connect(ramp.y, switch2.u3) annotation (
     Line(points={{-59,24},{-42,24},{-42,31.8},{-27.8,31.8}},    color = {0, 0, 127}));
   connect(simpleGen.flange, turbine.flange) annotation (
-    Line(points = {{30, 28}, {30, 12}, {12, 12}, {12, -10}}));
+    Line(points={{30,28},{30,-10}}));
   connect(switch1.y, simpleGen.Pload) annotation (
     Line(points={{47.1,49},{30,49},{30,40}},      color = {0, 0, 127}));
   connect(booleanStep.y, switch1.u2) annotation (
@@ -50,8 +51,7 @@ equation
   connect(reservoir.o, penstockKP.i) annotation (
     Line(points = {{-80, -10}, {-52, -10}}, color = {0, 128, 255}));
   connect(penstockKP.o, turbine.i) annotation (
-    Line(points = {{-32, -10}, {2, -10}}, color = {0, 128, 255}));
+    Line(points={{-32,-10},{20,-10}},     color = {0, 128, 255}));
   annotation (
-    Diagram(coordinateSystem(extent = {{-100, 100}, {120, -20}})),
     experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-06, Interval = 0.3));
 end Model_IV_Pelgen_elastico;
