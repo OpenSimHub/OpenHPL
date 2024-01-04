@@ -10,18 +10,14 @@ partial class Pipe "Pipe icon"
           extent={{-90,40},{90,-40}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          fillColor={175,175,175}),
+          fillColor={175,175,175},
+          visible=not vertical),
         Rectangle(
           extent={{-90,30},{90,-30}},
           lineColor={28,108,200},
           fillColor={0,128,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-90,90},{90,-90}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          visible=vertical),
+          visible=not vertical),
         Rectangle(
           extent={{-85,30},{85,-30}},
           lineColor={0,0,0},
