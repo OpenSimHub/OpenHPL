@@ -44,7 +44,7 @@ equation
   look_up_table.u[1] = u_t "Link the guide vane opening";
   C_v_ = if ValveCapacity then C_v else Vdot_n/sqrt(H_n*data.g*data.rho/data.p_a)/u_n
     "Define guide vane 'valve capacity' base on the Nominal turbine parameters";
-  dp = Vdot ^ 2 * data.p_a / (C_v_ * u_t) ^ 2 "Turbine valve equation for pressure drop";
+  dp = Vdot ^ 2 * data.p_a / (C_v_ * max(1e-6, u_t)) ^ 2 "Turbine valve equation for pressure drop";
   dp = i.p - o.p "Link the pressure drop to the ports";
   Kdot_i_tr = dp * Vdot "Turbine energy balance";
   if ConstEfficiency then
