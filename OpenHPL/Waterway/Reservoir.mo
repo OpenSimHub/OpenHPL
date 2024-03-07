@@ -2,15 +2,19 @@ within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
   outer Data data "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
-  parameter Boolean useLevel=false "If checked, the \"level\" connector controls the water level of the reservoir"
-    annotation (
-    Dialog(group="Setup", enable=not useInflow),
-    choices(checkBox = true));
-  parameter Boolean useInflow=false "If checked, the \"inflow\" connector is used" annotation (
-    Dialog(group="Setup", enable=not useLevel),
-    choices(checkBox = true));
   parameter SI.Height h_0=50 "Initial water level above intake"
     annotation (Dialog(group="Setup", enable=not useLevel));
+  parameter Boolean constantLevel=false "If checked, the reservoir keeps the constant water level h_0"
+    annotation (
+    Dialog(group="Setup", enable=not (useInflow or useLevel)),
+    choices(checkBox = true));
+  parameter Boolean useLevel=false "If checked, the \"level\" connector controls the water level of the reservoir"
+    annotation (
+    Dialog(group="Setup", enable=not (useInflow or constantLevel)),
+    choices(checkBox = true));
+  parameter Boolean useInflow=false "If checked, the \"inflow\" connector is used" annotation (
+    Dialog(group="Setup", enable=not (useLevel or constantLevel)),
+    choices(checkBox = true));
   parameter SI.Length L=500 "Length of the reservoir" annotation (
     Dialog(group="Geometry"));
   parameter SI.Length W=100 "Bed width of the reservoir" annotation (
@@ -44,7 +48,7 @@ model Reservoir "Model of the reservoir"
 
 initial equation
    if not useLevel then
-    h =h_0;
+    h = h_0;
    end if;
 equation
   A =h * (W +h * Modelica.Math.tan(alpha))
@@ -56,7 +60,11 @@ equation
   M =L * mdot "Momentum based on the length";
   F_f = 1 / 8 * data.rho * f *L * (W + 2 *h / Modelica.Math.cos(alpha)) * v * abs(v)
    "Friction force due to movement along the reservoir length";
-  if useLevel then
+  if constantLevel then
+    h = h_0;
+    Vdot_i - Vdot_o = 0;
+    p_o = data.p_a + data.g*data.rho*h;
+  elseif useLevel then
     Vdot_i - Vdot_o = 0;
     p_o = data.p_a + data.g*data.rho*h;
   elseif useInflow then
