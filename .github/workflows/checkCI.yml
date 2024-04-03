@@ -7,13 +7,13 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 5
       - name: Setup python environment
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: 3.12
       - name: Install python packages
         run: |
           pip install --user pytidylib
@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 5
       - name: Check file encoding
@@ -45,7 +45,7 @@ jobs:
       - name: Get moparser
         run: git clone --depth=1 https://github.com/modelica-tools/ModelicaSyntaxChecker
       - name: Check syntax
-        run: ModelicaSyntaxChecker/Linux64/moparser -v 3.4 -r OpenHPL
+        run: ModelicaSyntaxChecker/Linux64/moparser -v 3.6 -r OpenHPL
 #  deprecation_checks:
 #    timeout-minutes: 5
 #    runs-on: ubuntu-latest
