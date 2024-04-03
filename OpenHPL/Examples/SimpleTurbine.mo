@@ -1,5 +1,5 @@
 within OpenHPL.Examples;
-model Simple "Model of a hydropower system with a simple turbine turbine"
+model SimpleTurbine "Model of a hydropower system with a simple turbine turbine"
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir reservoir(h_0=10) annotation (Placement(transformation(
         origin={-90,30},
@@ -47,4 +47,4 @@ equation
   connect(surgeTank.o, penstock.i) annotation (Line(points={{-20,30},{-10,30}}, color={28,108,200}));
   connect(discharge.o, tail.o) annotation (Line(points={{70,0},{80,0}}, color={28,108,200}));
   annotation (experiment(StopTime=1000));
-end Simple;
+end SimpleTurbine;
