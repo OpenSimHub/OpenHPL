@@ -3,7 +3,8 @@ partial model TurbineContacts "Model of turbine connectors"
   extends Interfaces.TwoContacts;
   parameter Boolean enable_P_out = false "If checked, get a connector for the output power"
     annotation (choices(checkBox = true), Dialog(group="Outputs",tab="I/O"));
-  input Modelica.Blocks.Interfaces.RealInput u_t "[Guide vane|nozzle] opening of the turbine" annotation (Placement(transformation(
+  input Modelica.Blocks.Interfaces.RealInput u_t "[Guide vane|nozzle] opening of the turbine(=1: completely open, =0: completely closed)"
+                                                                                              annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-80,120}), iconTransformation(
