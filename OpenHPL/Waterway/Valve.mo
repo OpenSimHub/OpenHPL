@@ -1,8 +1,7 @@
 within OpenHPL.Waterway;
 model Valve "Simple hydraulic valve"
   extends ElectroMech.BaseClasses.BaseValve;
-
-    extends Icons.Valve;
+  extends Icons.Valve;
 
   Modelica.Blocks.Interfaces.RealInput opening(min=0, max=1)
     "=1: completely open, =0: completely closed"
@@ -14,8 +13,6 @@ model Valve "Simple hydraulic valve"
         rotation=270,
         origin={0,80})));
 equation
-
-
   connect(opening, u) annotation (Line(points={{0,120},{0,70}}, color={0,0,127}));
   annotation (
     Documentation(info="<html><p>
