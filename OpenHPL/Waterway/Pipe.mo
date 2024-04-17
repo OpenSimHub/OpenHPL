@@ -1,9 +1,10 @@
 within OpenHPL.Waterway;
-model Pipe "Model of the pipe"
+model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
-  import Modelica.Constants.pi;
-  // geometrical parameters of the pipe
+  extends OpenHPL.Interfaces.ContactPort;
+
+  // Geometrical parameters of the pipe:
   parameter SI.Length H = 25 "Height difference from the inlet to the outlet" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Length L = 6600 "Length of the pipe" annotation (
@@ -14,20 +15,16 @@ model Pipe "Model of the pipe"
     Dialog(group = "Geometry"));
   parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
-  // condition of steady state
+  // Steady state:
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
-  // steady state value for flow rate
-  parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate in the pipe" annotation (Dialog(group="Initialization"));
-  // possible parameters for temperature variation. Not finished...
-  //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
-  // variables
+  parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate of the pipe" annotation (Dialog(group="Initialization"));
+
   SI.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
-  SI.Mass m "water mass";
-  SI.Area A_i = D_i ^ 2 * pi / 4 "Inlet cross section area";
-  SI.Area A_o = D_o ^ 2 * pi / 4 "Outlet cross section area";
-  SI.Area A_ = D_ ^ 2 * pi / 4 "Average cross section area";
-  Real cos_theta = H / L "slope ratio";
+  SI.Mass m "Water mass";
+  SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
+  SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
+  SI.Area A_ = D_ ^ 2 * C.pi / 4 "Average cross-sectional area";
+  Real cos_theta = H / L "Slope ratio";
   SI.Velocity v "Water velocity";
   SI.Force F_f "Friction force";
   SI.Momentum M "Water momentum";
@@ -36,41 +33,41 @@ model Pipe "Model of the pipe"
   SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
   SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
 
-  // variables for temperature. Not in use for now...
-  //Real W_f, W_e;
-  //SI.Temperature T( start = T_0);
-  // connectors
-  extends OpenHPL.Interfaces.ContactPort;
+  /* TBD:
+  // temperature variation. Not finished...
+  parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
+  parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  Real W_f, W_e;
+  SI.Temperature T( start = T_0);
+  */
+
 initial equation
   if SteadyState then
     der(M) = 0;
   end if;
 equation
-  // Water volumetric flow rate through the pipe
-  Vdot = mdot / data.rho;
-  // Water velocity
-  v = Vdot / A_;
-  // Momentum and mass of water
-  M = data.rho * L * Vdot;
-  m = data.rho * A_ * L;
-  // Friction force
-  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps);
-  // momentum balance
-  der(M) = data.rho * Vdot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * data.g * cos_theta;
-  // pipe pressure
-  p_i = i.p;
-  p_o = o.p;
+  Vdot = mdot / data.rho "Volumetric flow rate through the pipe";
+  v = Vdot / A_ "Water velocity";
+  M = data.rho * L * Vdot "Momentum of water";
+  m = data.rho * A_ * L "Mass of water";
+  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps) "Friction force";
+  der(M) = data.rho * Vdot ^ 2 * (1 / A_i - 1 / A_o) + p_i * A_i - p_o * A_o - F_f + m * data.g * cos_theta
+   "momentum balance";
+  p_i = i.p "Inlet pressure";
+  p_o = o.p "Outlet pressure";
+
+  /* TBD:
   // possible temperature variation implementation. Not finished...
-  //W_f = -F_f * v;
-  //W_e = Vdot * (p_i- p_o);
-  //if TempUse then
-  //data.c_p * m * der(T) = Vdot * data.rho * data.c_p * (p.T - T) + W_e - W_f;
-  //0 = Vdot * data.rho * data.c_p * (p.T - n.T) + W_e - W_f;
-  //else
-  //der(n.T) = 0;
-  //end if;
-  //n.T = T;
-  //
+  W_f = -F_f * v;
+  W_e = Vdot * (p_i- p_o);
+  if TempUse then
+  data.c_p * m * der(T) = Vdot * data.rho * data.c_p * (p.T - T) + W_e - W_f;
+  0 = Vdot * data.rho * data.c_p * (p.T - n.T) + W_e - W_f;
+  else
+  der(n.T) = 0;
+  end if;
+  n.T = T;
+  */
   annotation (
     Documentation(info="<html><p>The simple model of the pipe gives possibilities
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
