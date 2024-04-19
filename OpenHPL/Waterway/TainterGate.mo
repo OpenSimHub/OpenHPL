@@ -56,12 +56,10 @@ More specifically the following documentation is taken from the
 <a href=\"https://www.hec.usace.army.mil/confluence/rasdocs/ras1dtechref/latest\">
 HEC-RAS Hydraulic Reference Manual</a> on <a href=\"https://www.hec.usace.army.mil/confluence/rasdocs/ras1dtechref/latest/modeling-gated-spillways-weirs-and-drop-structures/hydraulic-computations-through-gated-spillways/radial-gates\">Radial Gates</a>.
 </p>
-<p>
 <figure>
 <img src=\"modelica://OpenHPL/Resources/Images/TainterGate.png\"/>
   <figcaption>Example Radial Gate with an Ogee Spillway Crest [HEC-RAS].</figcaption>
 </figure>
-</p>
 <h4>Implementation</h4>
 <p>
 The calculation of the flow through the gate is approximated for three different regions:
