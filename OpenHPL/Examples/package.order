@@ -8,5 +8,6 @@ DetailedGen
 DetailedGenFrancis
 PowerSystemSimple
 VolumeFlowSource
-TainterGate
+Gate
 WithOpenIPSL
+TainterGate3

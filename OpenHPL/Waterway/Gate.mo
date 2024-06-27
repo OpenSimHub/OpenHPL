@@ -1,39 +1,54 @@
 within OpenHPL.Waterway;
-model TainterGate3 "Model of a tainter gate based on [Bollrich2019]"
+model Gate "Model of a sluice or tainter gate based on [Bollrich2019]"
   outer Data data "Using standard class with system parameters";
-  extends Icons.TainterGate;
+  extends Icons.Gate;
   extends OpenHPL.Interfaces.ContactPort;
-
-//   parameter SI.Height b_max "Maxium opening of the gate";
-//   parameter SI.Height b_min = 0 "Minimum opening of the gate";
-  parameter SI.Length r "Radius of the gate arm";
-  parameter SI.Height a "Height of the hinge above gate bottom";
-  parameter SI.Height b "Width of the gate";
-  parameter Real Cc_[3] = {1,2,3} "Polinomial factors of contraction coefficient Cc {linear,quadratic,cube}";
-  SI.Height h_i "Inlet water level";
-  SI.Height h_o "Outlet water level";
-  Real alpha = h_o/(Cc*u);
-  Real beta = h_i/h_o;
-  Real gamma = (h_o/(Cc*u))^2 - (h_o/h_i)^2 "Loss factor";
-  Real psi = (1/beta)^2 - 1 + (gamma^2*(beta-1))/(psi_x1 + psi_x2) "Head-loss parameter";
-  Real psi_ = (1/beta)^2 - 1 + (gamma^2*(beta-1))/(psi_x1 - psi_x2) "Neg Head-loss parameter";
-  Real psi_x1 = gamma*beta-2*(alpha-1);
-  Real psi_x2 =  sqrt((2*(alpha-1)-gamma*beta)^2 - gamma^2*(beta^2-1));
-
-  SI.Angle theta = C.pi/2 - asin((a-u)/r) "Flow angle of the gate";
-  Real Cc = Cc_[3]*theta^3 + Cc_[2]*theta^2 + Cc_[1]*theta + 1.002282138151680 "Contraction coefficient";
-  SI.VolumeFlowRate Vdot,Vdot_gamma "Volume flow rate through the gate";
-
-    Modelica.Blocks.Interfaces.RealInput u "Opening of the gate [m]" annotation (Placement(transformation(
+  import Modelica.Units.Conversions.to_deg;
+  parameter Boolean sluice=false "if true, gate is of type sluice gate, otherwise it is a radial/tainter gate type" annotation (Dialog(group="Type"), choices(checkBox=true));
+  parameter SI.Height b "Width of the gate" annotation (Dialog(group="Common"));
+  parameter SI.Length r "Radius of the gate arm" annotation (Dialog(enable=not sluice, group="Radial/Tainter"));
+  parameter SI.Height h_h "Height of the hinge above gate bottom" annotation (Dialog(group="Radial/Tainter", enable=not sluice));
+  SI.Height h_0 "Inlet water level";
+  SI.Height h_2 "Outlet water level";
+  SI.Height h_2_limit "Limit of free flow";
+  SI.Area A = a*b "Area of the physical gate opening";
+  SI.VolumeFlowRate Vdot "Volume flow rate through the gate";
+  Real mu_A "Discharge coefficient";
+  Real psi "Contraction coefficient";
+  //Real psi90 "Contraction coefficient for vertical gate";
+  Real chi "Back-up coefficient";
+  SI.Angle alpha = C.pi/2 - asin((h_h-a)/r) "Edge angle of the gate";
+    Real x,y,z;
+    Real h0_a = h_0/a;
+    Real h2_a = h_2/a;
+  Modelica.Blocks.Interfaces.RealInput a "Opening of the gate [m]" annotation (Placement(transformation(
           extent={{-20,-20},{20,20}},
           rotation=270,
           origin={0,120})));
 equation
-  Vdot = b*h_o * sqrt((2*data.g*max(0,(h_i - h_o)))/(psi + 1 - (h_o/h_i)^2)) "Calculated flow";
-  Vdot_gamma = b*h_o * sqrt((2*data.g*max(0,(h_i - h_o)))/(gamma + 1 - (h_o/h_i)^2)) "Calculated flow";
+  mu_A = psi/sqrt(1+psi*a/h_0);
+  if sluice then
+    psi = 1 / (1+ 0.64 * sqrt(1-(a/h_0)^2));
+  else
+    psi = 1.3 - 0.8 * sqrt(1 - ((to_deg(alpha)-205)/220)^2) "Normally only valid for a/h_0 --> 0";
+  end if;
+      x = (1-2*psi*a/h_0*(1-psi*a/max(C.small,h_2)))^2;
+    y = x+z-1;
+    z = (h_2/h_0)^2;
+
+  h_2_limit = a*psi/2*(sqrt(1+16/(psi*(1+psi*a/h_0)) * (h_0/a))-1);
+
+  if h_2 >= h_2_limit then
+    chi = sqrt((1+psi*a/h_0) * ((1-2*psi*a/h_0 * (1-psi*a/h_2))-
+          sqrt((1-2*psi*a/h_0*(1-psi*a/max(C.small,h_2)))^2 + (h_2/h_0)^2 - 1))) "Backed-up flow";
+  else
+    chi = 1 "Free flow";
+  end if;
+
+  Vdot = chi * mu_A * A * sqrt(2*data.g*h_0) "Volume flow rate through the gate";
   mdot = Vdot * data.rho "Mass flow rate through the gate";
-  i.p = h_i * data.g * data.rho + data.p_a "Inlet water pressure";
-  o.p = h_o * data.g * data.rho + data.p_a "Outlet water pressure";
+  i.p = h_0 * data.g * data.rho + data.p_a "Inlet water pressure";
+  o.p = h_2 * data.g * data.rho + data.p_a "Outlet water pressure";
   annotation (Documentation(info="<html>
 <h4>Implementation</h4>
 <p>
@@ -85,9 +100,9 @@ $$Q_A = \\chi \\cdot \\mu_A \\cdot A \\cdot \\sqrt{2g\\cdot h_0} \\tag{8.29} $$
 
 With 
 <dl>
-<dd>Back-up factor</dd>
+<dd>Back-up coefficient</dd>
 <dt> $$ \\chi = \\sqrt{
-	      \\left(
+              \\left(
                    1 + \\frac{\\psi\\cdot a}{h_0} 
                  \\right) \\cdot 
                  \\left\\{ 
@@ -105,8 +120,8 @@ With
                          \\right)
                        \\right]^2
                        +
-	           \\left(
-                   	\\frac{h_2}{h_0}
+                   \\left(
+                           \\frac{h_2}{h_0}
                       \\right)^2
                       - 1
                      } 
@@ -123,4 +138,4 @@ $$ \\frac{h_2^*}{a} = \\frac{\\psi}{2} \\cdot \\left( \\sqrt{ 1 + \\frac{16}{\\p
 So when \\(\\frac{h_2}{a} \\geq \\frac{h_2^*}{a}\\) then we have back-up flow.
 </p>
 </html>"));
-end TainterGate3;
+end Gate;

@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
-model TainterGate "Model of a tainter gate (HEC-RAS)"
+model Gate_HR "Model of a tainter gate (HEC-RAS)"
   outer Data data "Using standard class with system parameters";
-  extends Icons.TainterGate;
+  extends Icons.Gate;
   extends OpenHPL.Interfaces.ContactPort;
 
   parameter SI.Height W "Width of the gated spillway"
@@ -84,4 +84,4 @@ $$Q = C_{dx} A \\sqrt{2gH} \\tag{3}$$
 The use of <code>Cdx</code> is different to the implementaion as done in HEC-RAS. This was done in order to have a smoother transition from the partially to fully submerged region.
 </p>
 </html>"));
-end TainterGate;
+end Gate_HR;

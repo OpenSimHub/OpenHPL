@@ -7,9 +7,8 @@ Pipe
 PenstockKP
 SurgeTank
 Reservoir
-TainterGate
-TainterGate_old
-TainterGate3
+Gate
+Gate_HR
 RunOff_zones
 RunOff_zones_input
 VolumeFlowSource

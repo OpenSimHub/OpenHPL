@@ -8,6 +8,7 @@ Fitting
 DraftTube
 Valve
 OpenChannel
+Gate
 ElectroMech
 Turbine
 Generator
@@ -15,4 +16,3 @@ Pylon
 RunOff
 Method
 Governor
-TainterGate
