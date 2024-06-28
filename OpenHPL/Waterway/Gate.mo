@@ -27,7 +27,7 @@ model Gate "Model of a sluice or tainter gate based on [Bollrich2019]"
 equation
   mu_A = psi/sqrt(1+psi*a/h_0);
   if sluice then
-    psi = 1 / (1+ 0.64 * sqrt(1-(a/h_0)^2));
+    psi = 1 / (1+ 0.64 * sqrt(1-(a/h_0)^2)) "Sluice gate, i.e. alpha = 90 deg";
   else
     psi = 1.3 - 0.8 * sqrt(1 - ((to_deg(alpha)-205)/220)^2) "Normally only valid for a/h_0 --> 0";
   end if;
@@ -79,7 +79,9 @@ With
 <dt> $$ A = a\\cdot b $$ </dt>
 <dd>Discharge coefficient</dd>
 <dt> $$ \\mu_A = \\frac{\\psi}{\\sqrt{1+\\frac{\\psi\\cdot a}{h_0}}} \\tag{8.23}$$ </dt>
-<dd>Contraction coefficient (for \\(a/h_0 \\rightarrow 0\\))</dd>
+<dd>Contraction coefficient sluice gate (\\(\\alpha=90^\\circ\\))</dd>
+<dt> $$ \\psi_{90^\\circ}= \\frac{1}{1+0.64\\cdot \\sqrt{1-(a/h_0)^2}} \\tag{8.25}$$ </dt>
+<dd>Contraction coefficient radial gate (for \\(a/h_0 \\rightarrow 0\\))</dd>
 <dt> $$ \\psi_0(\\alpha)= 1.3 -0.8\\cdot\\sqrt{1-\\left(\\frac{\\alpha -205^\\circ}{220^\\circ}\\right)^2} \\tag{8.25a}$$ </dt>
 </dl>
 
