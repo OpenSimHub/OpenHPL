@@ -69,9 +69,10 @@ Equation numbers oand figure numbers given below are in sync with the numbers of
 <p>
 The free flow can be calulate with:
 
-$$Q_A = \\mu_A \\cdot A \\cdot \\sqrt{2g\\cdot h                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 _0} \\tag{8.24} $$
+$$Q_A = \\mu_A \\cdot A \\cdot \\sqrt{2g\\cdot h_0} \\tag{8.24} $$
 (valid for gate opening higher than the downstream water level)
-
+</p>
+<p>
 With 
 </p>
 <dl><dd>Opening area</dd>
