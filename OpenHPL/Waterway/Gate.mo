@@ -4,7 +4,6 @@ model Gate "Model of a sluice or tainter gate based on [Bollrich2019]"
   extends Icons.Gate;
   extends OpenHPL.Interfaces.ContactPort;
   import Modelica.Units.Conversions.to_deg;
-  parameter Boolean sluice=false "if true, gate is of type sluice gate, otherwise it is a radial/tainter gate type" annotation (Dialog(group="Type"), choices(checkBox=true));
   parameter SI.Height b "Width of the gate" annotation (Dialog(group="Common"));
   parameter SI.Length r "Radius of the gate arm" annotation (Dialog(enable=not sluice, group="Radial/Tainter"));
   parameter SI.Height h_h "Height of the hinge above gate bottom" annotation (Dialog(group="Radial/Tainter", enable=not sluice));

@@ -1,5 +1,6 @@
 within OpenHPL.Icons;
 partial class Gate "Icons for the gate"
+  parameter Boolean sluice=false "if true, gate is of type sluice gate, otherwise it is a radial/tainter gate type" annotation (Dialog(group="Type"), choices(checkBox=true));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-46,-60},{100,-72}},
