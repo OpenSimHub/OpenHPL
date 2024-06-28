@@ -65,7 +65,7 @@ Equation numbers oand figure numbers given below are in sync with the numbers of
     </td>
   </tr>
   <caption align=\"bottom\"><strong>Fig. 8.13:</strong> Free flow through the tainter gate (source:
-  <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>, page 376)<caption>
+  <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>, page 376)</caption>
 </table>
 <p>
 The free flow can be calulate with:
@@ -74,6 +74,7 @@ $$Q_A = \\mu_A \\cdot A \\cdot \\sqrt{2g\\cdot h                                
 (valid for gate opening higher than the downstream water level)
 
 With 
+</p>
 <dl><dd>Opening area</dd>
 <dt> $$ A = a\\cdot b $$ </dt>
 <dd>Discharge coefficient</dd>
@@ -81,8 +82,6 @@ With
 <dd>Contraction coefficient (for \\(a/h_0 \\rightarrow 0\\))</dd>
 <dt> $$ \\psi_0(\\alpha)= 1.3 -0.8\\cdot\\sqrt{1-\\left(\\frac{\\alpha -205^\\circ}{220^\\circ}\\right)^2} \\tag{8.25a}$$ </dt>
 </dl>
-</p>
-</p>
 
 <h5>Backed-up discharge</h5>
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
@@ -93,12 +92,13 @@ With
     </td>
   </tr>
   <caption align=\"bottom\"><strong>Fig. 8.16:</strong> Backed-up flow through the tainter gate (source:
-  <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>, page 379)<caption>
+  <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>, page 379)</caption>
 </table>
 <p>
 $$Q_A = \\chi \\cdot \\mu_A \\cdot A \\cdot \\sqrt{2g\\cdot h_0} \\tag{8.29} $$
 
 With 
+</p>
 <dl>
 <dd>Back-up coefficient</dd>
 <dt> $$ \\chi = \\sqrt{
@@ -128,7 +128,7 @@ With
                  \\right\\}
                } \\tag{8.28}$$ </dt>
 </dl>
-</p>
+
 <h5>Boundary between free and backed-up flow</h5>
 <p>
 The boundary of the height of the water level \\(h_2\\) behind the gate from which on the calculation switches to the backed-up flow (8.29) can be derived from:
