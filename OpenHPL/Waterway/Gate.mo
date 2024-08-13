@@ -53,7 +53,7 @@ equation
 <p>
 The calculation of the flow through the gate is approximated for two different regions and is based 
 on <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>. 
-Equation numbers oand figure numbers given below are in sync with the numbers of <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>. 
+Equation numbers and figure numbers given below are in sync with the numbers of <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>. 
 </p>
 <h5>Free flowing</h5>
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
