@@ -67,7 +67,7 @@ Equation numbers and figure numbers given below are in sync with the numbers of 
   <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>, page 376)</caption>
 </table>
 <p>
-The free flow can be calulate with:
+The free flow can be calculated with:
 
 $$Q_A = \\mu_A \\cdot A \\cdot \\sqrt{2g\\cdot h_0} \\tag{8.24} $$
 (valid for gate opening higher than the downstream water level)
