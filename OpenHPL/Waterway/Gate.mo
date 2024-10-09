@@ -83,16 +83,17 @@ With
 <dt> $$ \\psi_{90^\\circ}= \\frac{1}{1+0.64\\cdot \\sqrt{1-(a/h_0)^2}} \\tag{8.25}$$ </dt>
 <dd>Contraction coefficient radial gate (for \\(a/h_0 \\rightarrow 0\\))</dd>
 <dt> $$ \\psi_0(\\alpha)= 1.3 -0.8\\cdot\\sqrt{1-\\left(\\frac{\\alpha -205^\\circ}{220^\\circ}\\right)^2} \\tag{8.25a}$$ </dt>
-<dd> With the edge angle \\(\\alpha\\) of the gate </dd/
-<dt> $$ \\alpha = \\left( \\frac{\\pi}{2} - \\arcsin(\\frac{h_h-a}{r})\\right) \\cdot \\frac{180^\\circ}{\\pi} $$
+<dd> The edge angle \\(\\alpha\\) of the gate </dd>
+<dt> $$ \\alpha = \\left( \\frac{\\pi}{2} - \\arcsin(\\frac{h_h-a}{r})\\right) \\cdot \\frac{180^\\circ}{\\pi} $$ </dt>
+</dl>
 <blockquote>
+With:
 <ul> 
 <li> \\(a \\ldots\\) Vertical gate opening </li>
 <li> \\(h_h \\ldots\\) Height of the hinge above gate bottom\"</li>
 <li> \\(r \\ldots\\) Radius of the gate arm </li>
-</dt>
+</ul>
 </blockquote>
-</dl>
 
 <h5>Backed-up discharge</h5>
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
