@@ -3,6 +3,11 @@ model References "References"
   extends Modelica.Icons.References;
   annotation (Documentation(info="<html>
 <dl>
+<dt>[Bollrich2019]</dt>
+<dd><p>Gerhard Bollrich: &quot;Technische Hydromechanik 1 (eBook)&quot;,
+        Book, Beuth Verlag GmbH, 2019,
+        8th Edition, ISBN 978-3-410-29170-1.</p>
+</dd>
 <dt>[Hinna2021]</dt>
 <dd><p>Jonas Tveit Hinna:
         &quot;Modelica model of transient pipe flow in hydraulic laboratory systems using the method of characteristics&quot;,
