@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model Gate_HR "Model of a tainter gate (HEC-RAS)"
   outer Data data "Using standard class with system parameters";
-  extends Icons.Gate;
+  extends Icons.Gate(final sluice);
   extends OpenHPL.Interfaces.ContactPort;
 
   parameter SI.Height W "Width of the gated spillway"
