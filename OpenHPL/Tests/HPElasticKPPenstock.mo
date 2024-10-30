@@ -27,12 +27,12 @@ model HPElasticKPPenstock "Model of HP system with elastic penctock (KP), but si
     p_p0=997*data.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N/2):997*data.g*penstockKP.H/penstockKP.N:997*data.g*(penstockKP.h_s0 + penstockKP.H/penstockKP.N*(penstockKP.N - 1/2))) annotation (Placement(transformation(extent={{-20,44},{0,64}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
     Placement(transformation(extent = {{-22, 0}, {-2, 20}})));
-  ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{8,0},{28,20}})));
+  ElectroMech.Generators.SimpleGen unit annotation (Placement(transformation(extent={{8,0},{28,20}})));
 equation
   //19.077 * ones(10)
   //, H = 428.5, h_s0 = 69.9, N = 10, p_p0 = 997 * 9.81 * (69.9 + 428.5 / 10 / 2):997 * 9.81 * 428.5 / 10:9.81 * 997 * (69.9 + 428.5 / 10 * (10 - 1 / 2))
   //997 * data.g
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{18, 32}, {18, 32}, {18, 22}, {18, 22}, {18, 20}}, color = {0, 0, 127}));
   connect(control.y, turbine.u_t) annotation (
     Line(points={{11,84},{10,84},{10,54}}, color = {0, 0, 127}));
@@ -48,7 +48,7 @@ equation
     Line(points = {{-51.9, 63.9}, {-46, 63.9}, {-46, 69.9}, {-41.9, 69.9}}, color = {28, 108, 200}));
   connect(reservoir.n, intake.p) annotation (
     Line(points = {{-81.9, 65.9}, {-76, 65.9}, {-76, 63.9}, {-71.9, 63.9}}, color = {28, 108, 200}));
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{-1, 10}, {-1, 10}, {8, 10}}, color = {0, 0, 127}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));

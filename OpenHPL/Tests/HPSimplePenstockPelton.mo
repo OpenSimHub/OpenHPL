@@ -33,11 +33,11 @@ model HPSimplePenstockPelton "HP system model with Pelton turbine"
     enable_P_out=true)                                 annotation (Placement(transformation(
         origin={10,34},
         extent={{-10,-10},{10,10}})));
-  OpenHPL.ElectroMech.Generators.SynchGen aggregate(np=5) annotation (Placement(transformation(extent={{0,-4},{20,16}})));
+  OpenHPL.ElectroMech.Generators.SynchGen unit(np=5) annotation (Placement(transformation(extent={{0,-4},{20,16}})));
 equation
-  connect(aggregate.P_in, turbine.P_out) annotation (
+  connect(unit.P_in, turbine.P_out) annotation (
     Line(points={{10,18},{10,45},{14,45}},       color = {0, 0, 127}));
-  connect(aggregate.w_out, turbine.w_in) annotation (
+  connect(unit.w_out, turbine.w_in) annotation (
     Line(points={{21,12},{21,20},{-2,20},{-2,26}},   color = {0, 0, 127}));
   connect(reservoir.n, intake.p) annotation (
     Line(points={{-82,62},{-77.95,62},{-77.95,60},{-72,60}}, color = {28, 108, 200}));

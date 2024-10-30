@@ -36,11 +36,11 @@ model HPSimpleElasticPenstock "Model of HP system with elastic penctock (Stagard
   OpenHPL.ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(transformation(extent={{20,26},{40,46}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
     Placement(transformation(extent = {{-10, -4}, {10, 16}})));
-  OpenHPL.ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{20,-4},{40,16}})));
+  OpenHPL.ElectroMech.Generators.SimpleGen unit annotation (Placement(transformation(extent={{20,-4},{40,16}})));
 equation
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{11, 6}, {20, 6}}, color = {0, 0, 127}));
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{26, 25}, {26, 16}}, color = {0, 0, 127}));
   connect(penstock.n, turbine.p) annotation (
     Line(points = {{10.1, 53.9}, {10.1, 43.95}, {20, 43.95}, {20, 36}}, color = {28, 108, 200}));

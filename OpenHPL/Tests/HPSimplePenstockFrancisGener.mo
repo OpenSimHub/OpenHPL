@@ -13,7 +13,7 @@ model HPSimplePenstockFrancisGener "HP system model with Francis turbine and gen
         origin={92,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Generators.SynchGen aggregate(UseFrequencyOutput=true) annotation (Placement(transformation(extent={{18,-4},{38,16}})));
+  ElectroMech.Generators.SynchGen unit(UseFrequencyOutput=true) annotation (Placement(transformation(extent={{18,-4},{38,16}})));
   Waterway.Pipe penstock(
     H=420,
     L=600,
@@ -53,9 +53,9 @@ model HPSimplePenstockFrancisGener "HP system model with Francis turbine and gen
         origin={-90,92},
         extent={{-10,-10},{10,10}})));
 equation
-  connect(aggregate.w_out, turbine.w_in) annotation (
+  connect(unit.w_out, turbine.w_in) annotation (
     Line(points = {{34, 16}, {32, 16}, {32, 28}, {32, 28}}, color = {0, 0, 127}));
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{24, 28}, {22, 28}, {22, 16}, {22, 16}}, color = {0, 0, 127}));
   coef = turbine.Wdot_s / (495 * 997 * 9.81 * turbine.Vdot - (intake.F_f + discharge.F_f + penstock.F_f));
   connect(discharge.n, tail.n) annotation (

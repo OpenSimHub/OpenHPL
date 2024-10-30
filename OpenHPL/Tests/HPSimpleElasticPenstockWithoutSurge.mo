@@ -26,11 +26,11 @@ model HPSimpleElasticPenstockWithoutSurge "Model of HP system without surge tank
         extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
     Placement(transformation(extent = {{-16, 0}, {4, 20}})));
-  OpenHPL.ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{14,2},{34,22}})));
+  OpenHPL.ElectroMech.Generators.SimpleGen unit annotation (Placement(transformation(extent={{14,2},{34,22}})));
 equation
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{5, 10}, {9.5, 10}, {9.5, 12}, {14, 12}}, color = {0, 0, 127}));
-  connect(turbine1.P_out, aggregate.P_in) annotation (
+  connect(turbine1.P_out, unit.P_in) annotation (
     Line(points = {{20, 25}, {20, 22}}, color = {0, 0, 127}));
   connect(turbine1.u_t, control.y) annotation (
     Line(points={{16,48},{27,48},{27,48.8},{24,48.8},{24,84},{21,84}}, color = {0, 0, 127}));

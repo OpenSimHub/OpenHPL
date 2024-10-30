@@ -14,7 +14,7 @@ model HPSimplePenstockFrancis "HP system model with Francis turbine"
         origin={92,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Generators.SimpleGen aggregate(SteadyState=false, k_b=0) annotation (Placement(transformation(extent={{18,-4},{38,16}})));
+  ElectroMech.Generators.SimpleGen unit(SteadyState=false, k_b=0) annotation (Placement(transformation(extent={{18,-4},{38,16}})));
   Waterway.Pipe penstock(
     H=420,
     L=600,
@@ -54,9 +54,9 @@ model HPSimplePenstockFrancis "HP system model with Francis turbine"
         origin={-90,92},
         extent={{-10,-10},{10,10}})));
 equation
-  connect(aggregate.w_out, turbine.w_in) annotation (
+  connect(unit.w_out, turbine.w_in) annotation (
     Line(points = {{32, 16}, {32, 16}, {32, 28}, {32, 28}}, color = {0, 0, 127}));
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{24, 28}, {24, 28}, {24, 16}, {24, 16}}, color = {0, 0, 127}));
   connect(discharge.n, tail.n) annotation (
     Line(points = {{66.1, 35.9}, {76, 35.9}, {76, 41.9}, {81.9, 41.9}}));
@@ -70,7 +70,7 @@ equation
     Line(points = {{-43.9, 61.9}, {-40, 61.9}, {-40, 65.9}, {-31.9, 65.9}}));
   connect(surgeTank.n, penstock.p) annotation (
     Line(points = {{-11.9, 65.9}, {-2.1, 65.9}, {-2.1, 55.9}}));
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{7, 6}, {7, 6}, {18, 6}}, color = {0, 0, 127}));
   connect(control.y, turbine.u_t) annotation (
     Line(points = {{21, 86}, {28, 86}, {28, 48.8}}, color = {0, 0, 127}));

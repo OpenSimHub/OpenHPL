@@ -28,11 +28,11 @@ model HPElasticKPPenstockCompres "Model of HP system with elastic penctock (KP),
     h_s0=69) annotation (Placement(transformation(extent={{-20,44},{0,64}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
     Placement(transformation(extent = {{-22, 0}, {-2, 20}})));
-  OpenHPL.ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{6,0},{26,20}})));
+  OpenHPL.ElectroMech.Generators.SimpleGen unit annotation (Placement(transformation(extent={{6,0},{26,20}})));
 equation
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{-1, 10}, {6, 10}}, color = {0, 0, 127}));
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{14, 31}, {14, 25.5}, {12, 25.5}, {12, 20}}, color = {0, 0, 127}));
   connect(control.y, turbine.u_t) annotation (
     Line(points = {{11, 84}, {18, 84}, {18, 52.8}}, color = {0, 0, 127}));

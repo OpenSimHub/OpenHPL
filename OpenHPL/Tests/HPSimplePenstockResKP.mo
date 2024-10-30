@@ -11,7 +11,7 @@ model HPSimplePenstockResKP "Model of HP system with using reservoir model based
         origin={92,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{18,-4},{38,16}})));
+  ElectroMech.Generators.SimpleGen unit annotation (Placement(transformation(extent={{18,-4},{38,16}})));
   Waterway.Pipe penstock(
     D_i=3.3,
     D_o=3.3,
@@ -34,7 +34,7 @@ model HPSimplePenstockResKP "Model of HP system with using reservoir model based
     W=1000,
     SteadyState=true) annotation (Placement(transformation(extent={{-102,52},{-82,72}})));
 equation
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{28, 26}, {28, 26}, {28, 16}, {28, 16}}, color = {0, 0, 127}));
   connect(discharge.n, tail.n) annotation (
     Line(points = {{66.1, 35.9}, {76, 35.9}, {76, 41.9}, {81.9, 41.9}}));
@@ -42,7 +42,7 @@ equation
     Line(points = {{38.1, 35.9}, {43.1, 35.9}, {46.1, 35.9}}));
   connect(turbine.p, penstock.n) annotation (
     Line(points = {{18.1, 35.9}, {-2.1, 35.9}}));
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{9, 6}, {9, 6}, {18, 6}}, color = {0, 0, 127}));
   connect(intake.n, surgeTank.p) annotation (
     Line(points = {{-43.9, 61.9}, {-40, 61.9}, {-40, 65.9}, {-31.9, 65.9}}));

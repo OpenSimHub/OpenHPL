@@ -18,7 +18,7 @@ model HPSimplePenstockAutoRefGate
         origin={90,42},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Generators.SimpleGen aggregate(w_0=52.4) annotation (Placement(transformation(extent={{16,-4},{36,16}})));
+  ElectroMech.Generators.SimpleGen unit(w_0=52.4) annotation (Placement(transformation(extent={{16,-4},{36,16}})));
   Waterway.Pipe penstock(
     H=420,
     L=600,
@@ -41,7 +41,7 @@ model HPSimplePenstockAutoRefGate
   Modelica.Blocks.Sources.Constant const1(k = 0.0124905) annotation (
     Placement(transformation(extent = {{20, -56}, {40, -36}})));
 equation
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{26, 26}, {26, 26}, {26, 16}, {26, 16}}, color = {0, 0, 127}));
   connect(turbine.n, discharge.p) annotation (
     Line(points = {{36.1, 35.9}, {48.1, 35.9}}));
@@ -59,9 +59,9 @@ equation
     Line(points = {{41, -18}, {56, -18}}, color = {0, 0, 127}));
   connect(add.u2, const1.y) annotation (
     Line(points = {{56, -30}, {48, -30}, {48, -46}, {41, -46}}, color = {0, 0, 127}));
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{9, 6}, {12.5, 6}, {16, 6}}, color = {0, 0, 127}));
-  connect(gain.u, aggregate.u) annotation (
+  connect(gain.u, unit.u) annotation (
     Line(points = {{18, -18}, {12, -18}, {12, 6}, {16, 6}}, color = {0, 0, 127}));
   connect(add.y, turbine.u_t) annotation (
     Line(points = {{79, -24}, {88, -24}, {100, -24}, {100, 56}, {26, 56}, {26, 46.8}}, color = {0, 0, 127}));

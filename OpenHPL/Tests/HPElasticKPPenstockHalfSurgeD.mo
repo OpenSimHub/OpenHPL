@@ -20,14 +20,14 @@ model HPElasticKPPenstockHalfSurgeD "Similar to previous HP system, but with twi
         origin={78,38},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  ElectroMech.Generators.SimpleGen aggregate(w_0=52) annotation (Placement(transformation(extent={{8,2},{28,22}})));
+  ElectroMech.Generators.SimpleGen unit(w_0=52) annotation (Placement(transformation(extent={{8,2},{28,22}})));
   ElectroMech.Turbines.Turbine turbine(C_v=3.7, WaterCompress=true) annotation (Placement(transformation(extent={{8,32},{28,52}})));
   Waterway.PenstockKP penstockKP(N=20, Vdot_0=19*ones(20)) annotation (Placement(transformation(extent={{-18,42},{2,62}})));
   Waterway.SurgeTank surgeTank(D=1.7) annotation (Placement(transformation(extent={{-44,60},{-24,80}})));
 equation
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{18, 32}, {18, 32}, {18, 22}, {18, 22}}, color = {0, 0, 127}));
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{1, 12}, {8, 12}}, color = {0, 0, 127}));
   connect(discharge.p, turbine.n) annotation (
     Line(points = {{38.1, 37.9}, {31, 37.9}, {31, 41.9}, {28.1, 41.9}}));

@@ -18,7 +18,7 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
 <h4>Simple model of an ideal generator with friction.</h4>
 
 <p>This model based on the angular momentum balance, which depends on the turbine shaft power,
- the friction loss in the aggregate rotation and the power taken up by the generator.</p>
+ the friction loss in the unit rotation and the power taken up by the generator.</p>
 <p>
 The generator can be loaded either:</p>
 <ul>

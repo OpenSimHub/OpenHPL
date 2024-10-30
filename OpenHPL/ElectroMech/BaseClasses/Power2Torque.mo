@@ -62,11 +62,11 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
         rotation=180,
         origin={-50,0})));
   Modelica.Blocks.Interfaces.RealOutput f(unit="Hz")
-                                          if enable_f "Frequency output of the aggregate"
+                                          if enable_f "Frequency output of the unit"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
                 iconTransformation(extent={{100,-50},{120,-30}})));
   Modelica.Blocks.Interfaces.RealOutput w(unit="rad/s")
-                                          if enable_w "Angular velocity output of the aggregate"
+                                          if enable_w "Angular velocity output of the unit"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
       iconTransformation(extent={{100,30},{120,50}})));
 
@@ -80,7 +80,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
   Modelica.Mechanics.Rotational.Components.IdealGear toSysSpeed(ratio=2/p) "Converts to system speed based on p = 2" annotation (Placement(transformation(extent={{24,-6},{36,6}})));
   Modelica.Blocks.Sources.RealExpression nominalSpeed(y=w_0*p/2) if enable_nomSpeed annotation (Placement(transformation(extent={{-12,-70},{8,-50}})));
   Modelica.Blocks.Interfaces.RealInput w_in if enable_w_in and not enable_nomSpeed
-                                            "Angular velocity input of the aggregate [pu]" annotation (Placement(transformation(
+                                            "Angular velocity input of the unit [pu]" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-80,-120})));

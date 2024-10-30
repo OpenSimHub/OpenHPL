@@ -39,9 +39,9 @@ model TestFitingSimpleHP "Model of HP system with pipe fitting"
   Waterway.SurgeTank surgeTank annotation (Placement(transformation(extent={{-50,4},{-30,24}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
     Placement(transformation(extent = {{0, -50}, {20, -30}})));
-  ElectroMech.Generators.SimpleGen aggregate(SteadyState=false) annotation (Placement(transformation(extent={{30,-50},{50,-30}})));
+  ElectroMech.Generators.SimpleGen unit(SteadyState=false) annotation (Placement(transformation(extent={{30,-50},{50,-30}})));
 equation
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{40, -24}, {40, -24}, {40, -30}, {40, -30}}, color = {0, 0, 127}));
   connect(control.y, turbine.u_t) annotation (
     Line(points = {{27, 50}, {39, 50}, {39, -3.2}, {40, -3.2}}, color = {0, 0, 127}));
@@ -59,7 +59,7 @@ equation
     Line(points = {{-55.9, 13.9}, {-48, 13.9}, {-49.9, 13.9}}, color = {28, 108, 200}));
   connect(conduit.p, reservoir.n) annotation (
     Line(points = {{-75.9, 13.9}, {-75.95, 13.9}, {-75.95, 13.9}, {-81.9, 13.9}}, color = {28, 108, 200}));
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{21, -40}, {21, -40}, {30, -40}}, color = {0, 0, 127}));
   annotation (
     experiment(StartTime = 0, StopTime = 1000, Tolerance = 1e-06, Interval = 2));

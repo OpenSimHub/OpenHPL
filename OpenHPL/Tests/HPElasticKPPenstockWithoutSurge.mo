@@ -32,9 +32,9 @@ model HPElasticKPPenstockWithoutSurge "Model of HP system without surge tank and
         extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp load(duration = 1, height = -5e6, offset = 80e6, startTime = 600) annotation (
     Placement(transformation(extent = {{-8, -2}, {12, 18}})));
-  ElectroMech.Generators.SimpleGen aggregate annotation (Placement(transformation(extent={{22,-2},{42,18}})));
+  ElectroMech.Generators.SimpleGen unit annotation (Placement(transformation(extent={{22,-2},{42,18}})));
 equation
-  connect(turbine.P_out, aggregate.P_in) annotation (
+  connect(turbine.P_out, unit.P_in) annotation (
     Line(points = {{32, 26}, {32, 26}, {32, 18}, {32, 18}}, color = {0, 0, 127}));
   connect(condiut.n, penstockKP1.p) annotation (
     Line(points = {{-37.9, 63.9}, {-26, 63.9}, {-26, 49.9}, {-15.9, 49.9}}, color = {28, 108, 200}));
@@ -48,7 +48,7 @@ equation
     Line(points = {{81.9, 41.9}, {80, 41.9}, {80, 33.9}, {76.1, 33.9}}, color = {28, 108, 200}));
   connect(turbine.p, penstockKP1.n) annotation (
     Line(points = {{22.1, 35.9}, {14, 35.9}, {14, 49.9}, {4.1, 49.9}}, color = {28, 108, 200}));
-  connect(load.y, aggregate.u) annotation (
+  connect(load.y, unit.u) annotation (
     Line(points = {{13, 8}, {13, 8}, {22, 8}}, color = {0, 0, 127}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
