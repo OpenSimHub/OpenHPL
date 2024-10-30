@@ -1,5 +1,7 @@
 within OpenHPL.Icons;
 partial class Surge "Surge tank/shaft icon"
+  input SI.Length lds "Lenght of watercolumn in the surge shaft(for DynamicSelect)";
+  input SI.Length Lds "Length of the surge shaft (for DynamicSelect)";
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}),
                                                         graphics={
@@ -32,7 +34,7 @@ partial class Surge "Surge tank/shaft icon"
           pattern=LinePattern.None),
         Rectangle(
           extent=DynamicSelect({{-30,60},{30,18}},
-                {{-30,(20+70*l/L)},{30,18}}),
+                {{-30,(20+70*lds/Lds)},{30,18}}),
           lineColor={28,108,200},
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid,

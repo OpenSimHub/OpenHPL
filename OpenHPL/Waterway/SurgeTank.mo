@@ -1,7 +1,8 @@
 within OpenHPL.Waterway;
 model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
-  extends OpenHPL.Icons.Surge;
+  extends OpenHPL.Icons.Surge(lds=l, Lds=L);
+  extends OpenHPL.Interfaces.ContactNode;
   import Modelica.Constants.pi;
 
   parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank" annotation (
@@ -59,7 +60,7 @@ model SurgeTank "Model of the surge tank/shaft"
   // variables for temperature. Not in use for now...
   // Real W_f, W_e;
   // connector (acquisition of algebraic variable, mass flow rate mdot, and node pressure (manifold pressure) p_n)
-  extends OpenHPL.Interfaces.ContactNode;
+
 initial equation
   if SteadyState then
     der(M) = 0;
