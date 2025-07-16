@@ -39,6 +39,21 @@ model Pipe "Model of a pipe"
     parameter Real cos_theta = H / L "Slope ratio";
     parameter Real phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
 
+  /* TBD:
+  // temperature variation. Not finished...
+  parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
+  parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
+  Real W_f, W_e;
+  SI.Temperature T( start = T_0);
+  */
+
+protected
+  parameter SI.Diameter D_eff=
+    if D_i == D_o then
+      D_i
+    else
+      (D_i - D_o) / log(D_i/D_o) "Effective diameter for a linear taper";
+
 initial equation
   if SteadyState then
     der(mdot) = 0;
@@ -53,8 +68,18 @@ equation
   
   Vdot = mdot / data.rho "Volumetric flow rate through the pipe";
   v = Vdot / A_ "Average water velocity";
-  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)*cf "Friction force";
-  L * der(mdot)=(p_i+ data.rho *data.g * H)*A_i-p_o*A_o -F_f;
+  v_o = Vdot / A_o "Outlet water velocity";
+  M = data.rho * L * Vdot "Momentum of water";
+  m = data.rho * A_ * L "Mass of water";
+  F_f = Functions.DarcyFriction.Friction(v, D_eff, L, data.rho, data.mu, p_eps)
+    "Friction force";
+  F_taper = K_c * 0.5 * data.rho * A_o * v_o * abs(v_o)
+    "Tapering (local contraction) loss";
+  der(M) = data.rho * Vdot^2 * (1/A_i - 1/A_o)
+           + p_i * A_i - p_o * A_o
+           - F_f - F_taper
+           + m * data.g * cos_theta
+    "Momentum balance including tapering loss";
   p_i = i.p "Inlet pressure";
   p_o = o.p "Outlet pressure";
   i.mdot+o.mdot = 0 "Mass balance";
