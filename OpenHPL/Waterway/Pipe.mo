@@ -48,7 +48,7 @@ model Pipe "Model of a pipe"
 
 protected
   parameter SI.Diameter D_eff=
-    if abs(D_i - D_o)< C.eps then
+    if D_i == D_o then
       D_i
     else
       (D_i - D_o) / log(D_i/D_o) "Effective diameter for a linear taper";
@@ -72,8 +72,7 @@ equation
            - F_f - F_taper
            + m * data.g * cos_theta
     "Momentum balance including tapering loss";
-  // Connnections
-  p_i = i.p "Inlet pressure"; 
+  p_i = i.p "Inlet pressure";
   p_o = o.p "Outlet pressure";
   i.mdot+o.mdot = 0 "Mass balance";
   mdot = i.mdot "Inlet direction for mdot";
