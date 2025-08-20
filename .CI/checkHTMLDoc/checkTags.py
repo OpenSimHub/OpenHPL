@@ -19,7 +19,7 @@ PATTERN = re.compile(r'</?\w+((\s+\w+(\s*=\s*(?:\\"(.|\n)*?\\"|\'(.|\n)*?\'|[^\'
 VOID_TAGS = ('area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'menuitem', 'meta', 'param', 'source', 'track', 'wbr')
 
 # Tags that should not be used
-AVOIDABLE_TAGS = ('b', 'i', 'h1', 'h2', 'h3', 'h6', 'figure', 'figcaption')
+AVOIDABLE_TAGS = ('b', 'i', 'h1', 'h2', 'h3', 'h6')
 
 def _checkFileTags(file_name):
     """
