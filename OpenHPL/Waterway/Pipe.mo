@@ -29,11 +29,14 @@ model Pipe "Model of a pipe"
   Real cos_theta = H / L "Slope ratio";
   SI.Velocity v "Water velocity";
   SI.Force F_f "Friction force";
+  SI.Force F_taper "Tape friction force";
   SI.Momentum M "Water momentum";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
   SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
   SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
+  protected
+    SI.Velocity v_o;
 
   /* TBD:
   // temperature variation. Not finished...
