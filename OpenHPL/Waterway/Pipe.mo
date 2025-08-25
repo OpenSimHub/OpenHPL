@@ -30,13 +30,15 @@ model Pipe "Model of a pipe"
   SI.Velocity v "Water velocity";
   SI.Velocity v_o "Outlet water velocity";
   SI.Force F_f "Friction force";
-  SI.Force F_taper "Tapering (local contraction) loss";
+  SI.Force F_taper "Tape friction force";
   SI.Momentum M "Water momentum";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
   SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
   SI.MassFlowRate mdot "Mass flow rate";
   SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
+  protected
+    SI.Velocity v_o;
 
   /* TBD:
   // temperature variation. Not finished...
