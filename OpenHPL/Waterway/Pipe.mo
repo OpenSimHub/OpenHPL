@@ -23,21 +23,15 @@ model Pipe "Model of a pipe"
   
   SI.Velocity v "Average Water velocity";
   SI.Force F_f "Friction force";
+  SI.Force F_taper "Tape friction force";
+  SI.Momentum M "Water momentum";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
   //SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
   SI.MassFlowRate mdot "Mass flow rate";
-  SI.VolumeFlowRate Vdot "Volume flow rate";
- 
+  SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
   protected
-    parameter SI.Diameter D_ = ( D_i + D_o )/2 "Average diameter";
-    parameter SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
-    parameter SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
-    parameter SI.Area A_ =  D_  ^ 2 * C.pi / 4 "Average cross-sectional area";
-    parameter Real delta=2*(D_i-D_o)/(D_i+D_o) "Contraction factor";
-    parameter Real cf=1+2*delta^2 "Conical pipe function";
-    parameter Real cos_theta = H / L "Slope ratio";
-    parameter Real phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
+    SI.Velocity v_o;
 
   /* TBD:
   // temperature variation. Not finished...
