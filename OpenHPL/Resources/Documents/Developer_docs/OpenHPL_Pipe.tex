@@ -34,9 +34,8 @@ This includes a class of test cases.
 \section{Introduction}
 %  https://docs.bentley.com/LiveContent/web/Bentley%20HAMMER%20SS6-v1/en/GUID-F87F1515-85CE-4FF3-9C5F-3AD5E427F125.html
 %  https://ocw.snu.ac.kr/sites/default/files/NOTE/HD%20Ch6-LC9.pdf
-%  https://pubs.aip.org/aip/pof/article-abstract/36/7/077105/3300578/Influence-of-the-rigid-water-column-assumption-on?redirectedFrom=fulltext
 % 
-In the following transient change of pressure in a pipe is discussed. When the change is slow compared to the speed of sound, the elastic pressures waves in the medium can be ignored. This approach is often denoted rigid water column \cite{swiecicki64} and implies that the instantaneous flow rate is constant in all cross sections in the pipe
+In the following transient change of pressure in a pipe is discussed. When the change is slow compared to the speed of sound, the elastic pressures waves in the medium can be ignored. This approach is often denoted rigid water column and implies that the instantaneous flow rate is constant in all cross sections in the pipe
 \footnote{Since the compressibility of the medium is assumed to be constant, the density and hence the mass flow is also constant in all cross sections.}.
 The rigid water column momentum equation can be derived from Newtons first law:
 \[
@@ -54,11 +53,11 @@ Since OpenHPL is formulated with the mass flow $m=\rho \cdot q =\rho \cdot A \cd
 \]
 \subsection{Friction force}
 %
-In principle the friction force is found by integrating the wall shear force $\tau_{w}$ along all surfaces. For constant diameter pipe the traditional approach is to express this friction loss through the semi-empirical head loss formula \cite{white86}
+In principle the friction force is found by integrating the wall shear force $\tau_{w}$ along the all surfaces. For constant diameter pipe the traditional approach is to express this friction loss through the semi-empirical head loss formula 
 \[
 F_{f}= A \cdot \rho \cdot  g \cdot h_{f}= A \cdot \rho \cdot g \left[ f  \cdot \left(\frac{L}{D}\right) \frac{v^{2}}{2g} \right]
 \]
-where $f$ is the friction factor, commonly taken from the Moody diagram or various approximations to the Moody diagram.
+where $f$ is the friction factor, commonly taken from the Moody diagram or various approximations to the Moody diagram 
 %
 \begin{figure}[H] % The figure environment allows for captioning and floating
 	\centering % Centers the image within the figure environment
@@ -69,12 +68,10 @@ where $f$ is the friction factor, commonly taken from the Moody diagram or vario
 %
 \subsection{Area change/conical pipe}
 %
-If the pipe is strongly conical (either diverging or converging) special loss models must be used as the there is a risk for separation or other special flow phenomena. 
+If the pipe is strongly conical (either diverging or converging) special loss models must be used as the
 
 \section{Today's implementation}
-% ---
-%\begin{comment}
-% 
+\begin{comment}
 \begin{lstlisting}
 within OpenHPL.Waterway;
 model Pipe "Model of a pipe"
@@ -151,10 +148,8 @@ end Pipe;
 
 
 \end{lstlisting}
-%
+\end{comment}
 
-%\end{comment}
-% ---
 %
 
 \section{New implementation}
@@ -226,104 +221,23 @@ A\left(\overline{D}\right)=\frac{\pi}{4}\left(\frac{1}{2}\left(D_1 + D_2\right)\
 \subsection{Friction loss of variable area pipe}
 %
 In general it is difficult to find a closed form equation for the friction force for a pipe with varying area that is completely universal.
-For a constant diameter pipe the friction force can be estimated using the traditional friction coefficient approach 
 %
 \[
-F_{f}= A \cdot \rho \cdot  g \cdot h_{f}= A \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D}\right) \frac{v^{2}}{2g} \right] =\frac{1}{A} \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D}\right) \frac{Q^{2}}{2g} \right]
+F_{f}= A \cdot \rho \cdot  g \cdot h_{f}= A \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D}\right) \frac{v^{2}}{2g} \right] =\frac{1}{A} \cdot \rho \cdot g \left[ f \left(\frac{L}{D}\right) \frac{Q^{2}}{2g} \right]
 \]
-%
-where the he friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$.
-If the change in are is small compared to the pipe length, the friction force can be approximated as a sum of smaller pipes of length $dx \cdot L$, which in the limit of 
-$dx \rightarrow 0 $ becomes an integral.
-
-However, if the change i area is small compared to the pipe length we can approximate 
-
-\[
-F_{f}= \int_{0}^{1} \frac{1}{A(x)} \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D(x)}\right) \frac{Q^{2}}{2g} \right] dx
-\]
-Assuming a linear diameter distribution from the inlet to the outlet
- 
+ Assuming a linear diameter distribution from the inlet to the outlet
  \[
- D\left(x\right)=D_{1}+\left(D_{2}-D_{1} \right)\cdot x= D_{1}\cdot\left(1+\delta\cdot x\right) \; \; x \in [0,1]
+ D\left(x\right)=D_{1}+\frac{\left(D_{2}-D_{1} \right)}{L}\cdot x
  \]
- where
+ or
  \[
- \delta=\frac{\left(D_{2}-D_{1} \right)}{D_1}
+  D\left(x\right)=D_{1}+\frac{\left(D_{2}-D_{1} \right)}{L}\cdot x
  \]
- and
- \[
-  A\left(x\right)=\frac{\pi}{4} D^{2}=A_{1} \cdot \left(1+2\delta x +\delta^{2} x^{2}\right)
- \]
-
 %
-\[
-F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{\rho \cdot L \cdot Q^{2}}{2} \right] \int \frac{1}{A(x)\cdot D(x)} dx
-\]
-%
-\[
-F_{f}=  f \cdot \left[\frac{2 \rho \cdot L \cdot Q^{2}}{A_{1} D_{1}} \right] \int_{0}^{1} \frac{1}{\left(1+\delta\cdot x \right)^{3}} dx
-\]
-
-\[
-\int_{0}^{1} \frac{1}{\left(1+\delta\cdot x \right)^{3}} dx=\left[ \frac{-1}{(2\cdot d^{3}\cdot x^{2} + 4\cdot d^{2}\cdot x + 2\cdot d)}\right]_{0}^{1}
-\]
-%
- In principle the friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$. The Reynolds number depends on the local velocity (dependent on the local area) and the local diameter. In the current model this is ignored, and the mean velocity and diameter is used in the calculation.
- 
+ In principle the friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$. Ignoring this, and setting both to the constant value based on the mean value
  
 %
-\subsection{Kladd}
-%
-\[
-A\left(x\right)=\frac{\pi}{4} D^{2}=\frac{\pi}{4} D_{1}^{2}\left(1+2\delta x +\delta^{2} x^{2}\right)
-\]
-
-\[
-D\left(x\right)=D_{1}+\left(D_{2}-D_{1} \right)\cdot x= D_{1}\cdot\left(1+\frac{\left(D_{2}-D_{1} \right)}{D_1}\cdot x\right) \; \; x \in [0,1]
-\]
- %
-\[
-D\left(x\right)=D_{1}+\frac{\left(D_{2}-D_{1} \right)}{L}\cdot x
-\]
-%
-\[
-F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{\rho \cdot L \cdot Q^{2}}{2} \right] \int \frac{1}{A(x)\cdot D(x)} dx
-\]
-%
-\[
-F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{2 \rho \cdot L \cdot Q^{2}}{\pi} \right] \int \frac{1}{D^{3}(x)} dx
-\]
-\[
-F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{2 \rho \cdot L \cdot Q^{2}}{\pi} \right] \int \frac{1}{D^{3}(x)} dx
-\]
-
-\[
-F(x)=\int_{0}^{1} f(x)=\frac{-1}{(2\cdot d)\cdot (d^{2} + 2\cdot d + 1)} + \frac{1}{(2\cdot d)}
-\]
-
-\[
-F(\delta )=\int_{0}^{1} f(x) dx =\frac{(d^{2} + 2\cdot d + 1)-1}{(2\cdot d)\cdot (d^{2} + 2\cdot d + 1)}
-\]
-
-\[
-F(\delta )=\int_{0}^{1} f(x) dx =\frac{(\delta^{2} + 2\cdot \delta )}{(2\cdot \delta)\cdot (\delta^{2} + 2\cdot \delta + 1)}
-\]
-%
-\[
-F(\delta )=\int_{0}^{1} f(x) dx =\frac{(2\cdot \delta)\cdot (\frac{1}{2}\delta + 1 )}{(2\cdot \delta)\cdot (\delta^{2} + 2\cdot \delta + 1)}
-\]
-%
-\[
-F(\delta )=\int_{0}^{1} f(x) dx =\frac{(\frac{1}{2}\delta + 1 )}{(\delta^{2} + 2\cdot \delta + 1)}
-\]
-
-%
-
-\[
-F(0)=1
-\]
 %
 \bibliographystyle{plain}
 \bibliography{ohpl}
-\nocite{*}
 \end{document}
