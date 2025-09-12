@@ -34,8 +34,9 @@ This includes a class of test cases.
 \section{Introduction}
 %  https://docs.bentley.com/LiveContent/web/Bentley%20HAMMER%20SS6-v1/en/GUID-F87F1515-85CE-4FF3-9C5F-3AD5E427F125.html
 %  https://ocw.snu.ac.kr/sites/default/files/NOTE/HD%20Ch6-LC9.pdf
+%  https://pubs.aip.org/aip/pof/article-abstract/36/7/077105/3300578/Influence-of-the-rigid-water-column-assumption-on?redirectedFrom=fulltext
 % 
-In the following transient change of pressure in a pipe is discussed. When the change is slow compared to the speed of sound, the elastic pressures waves in the medium can be ignored. This approach is often denoted rigid water column and implies that the instantaneous flow rate is constant in all cross sections in the pipe
+In the following transient change of pressure in a pipe is discussed. When the change is slow compared to the speed of sound, the elastic pressures waves in the medium can be ignored. This approach is often denoted rigid water column \cite{swiecicki64} and implies that the instantaneous flow rate is constant in all cross sections in the pipe
 \footnote{Since the compressibility of the medium is assumed to be constant, the density and hence the mass flow is also constant in all cross sections.}.
 The rigid water column momentum equation can be derived from Newtons first law:
 \[
@@ -53,7 +54,7 @@ Since OpenHPL is formulated with the mass flow $m=\rho \cdot q =\rho \cdot A \cd
 \]
 \subsection{Friction force}
 %
-In principle the friction force is found by integrating the wall shear force $\tau_{w}$ along the all surfaces. For constant diameter pipe the traditional approach is to express this friction loss through the semi-empirical head loss formula 
+In principle the friction force is found by integrating the wall shear force $\tau_{w}$ along all surfaces. For constant diameter pipe the traditional approach is to express this friction loss through the semi-empirical head loss formula \cite{white86}
 \[
 F_{f}= A \cdot \rho \cdot  g \cdot h_{f}= A \cdot \rho \cdot g \left[ f  \cdot \left(\frac{L}{D}\right) \frac{v^{2}}{2g} \right]
 \]
@@ -71,6 +72,7 @@ where $f$ is the friction factor, commonly taken from the Moody diagram or vario
 If the pipe is strongly conical (either diverging or converging) special loss models must be used as the there is a risk for separation or other special flow phenomena. 
 
 \section{Today's implementation}
+% ---
 \begin{comment}
 \begin{lstlisting}
 within OpenHPL.Waterway;
@@ -149,7 +151,7 @@ end Pipe;
 
 \end{lstlisting}
 \end{comment}
-
+% ---
 %
 
 \section{New implementation}
