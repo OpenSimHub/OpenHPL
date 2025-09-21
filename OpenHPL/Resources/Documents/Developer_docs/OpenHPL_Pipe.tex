@@ -222,27 +222,61 @@ A\left(\overline{D}\right)=\frac{\pi}{4}\left(\frac{1}{2}\left(D_1 + D_2\right)\
 %
 \subsection{Friction loss of variable area pipe}
 %
-In general it is difficult to find a closed form equation for the friction force for a pipe with varying area that is completely universal. However, if the change i area is small compared to the pipe length we can approximate the 
+In general it is difficult to find a closed form equation for the friction force for a pipe with varying area that is completely universal.
+For a constant diameter pipe the friction force can be estimated using the traditional friction coefficient approach 
 %
 \[
 F_{f}= A \cdot \rho \cdot  g \cdot h_{f}= A \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D}\right) \frac{v^{2}}{2g} \right] =\frac{1}{A} \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D}\right) \frac{Q^{2}}{2g} \right]
 \]
 %
+where the he friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$.
+If the change in are is small compared to the pipe length, the friction force can be approximated as a sum of smaller pipes of length $dx \cdot L$, which in the limit of 
+$dx \rightarrow 0 $ becomes an integral.
+
+However, if the change i area is small compared to the pipe length we can approximate 
+
 \[
-F_{f}= A \cdot \rho \cdot  g \cdot h_{f}= \int \frac{1}{A(x)} \cdot \rho \cdot g \left[ f \cdot \left(\frac{1}{D(x)}\right) \frac{Q^{2}}{2g} \right] dx
+F_{f}= \int_{0}^{1} \frac{1}{A(x)} \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D(x)}\right) \frac{Q^{2}}{2g} \right] dx
 \]
- Assuming a linear diameter distribution from the inlet to the outlet
+Assuming a linear diameter distribution from the inlet to the outlet
+ 
  \[
- D\left(x\right)=D_{1}+\frac{\left(D_{2}-D_{1} \right)}{L}\cdot x
+ D\left(x\right)=D_{1}+\left(D_{2}-D_{1} \right)\cdot x= D_{1}\cdot\left(1+\delta\cdot x\right) \; \; x \in [0,1]
+ \]
+ where
+ \[
+ \delta=\frac{\left(D_{2}-D_{1} \right)}{D_1}
  \]
  and
  \[
-  A\left(x\right)=\frac{\pi}{4} D^{2}
+  A\left(x\right)=\frac{\pi}{4} D^{2}=A_{1} \cdot \left(1+2\delta x +\delta^{2} x^{2}\right)
  \]
+
+%
+\[
+F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{\rho \cdot L \cdot Q^{2}}{2} \right] \int \frac{1}{A(x)\cdot D(x)} dx
+\]
+%
+\[
+F_{f}=  f \cdot \left[\frac{2 \rho \cdot L \cdot Q^{2}}{A_{1} D_{1}} \right] \int_{0}^{1} \frac{1}{\left(1+\delta\cdot x \right)^{3}} dx
+\]
+%
+ In principle the friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$. Ignoring this, and setting both to the constant value based on the mean value
+ 
+%
+\subsection{Kladd}
+%
+\[
+A\left(x\right)=\frac{\pi}{4} D^{2}=\frac{\pi}{4} D_{1}^{2}\left(1+2\delta x +\delta^{2} x^{2}\right)
+\]
+
+\[
+D\left(x\right)=D_{1}+\left(D_{2}-D_{1} \right)\cdot x= D_{1}\cdot\left(1+\frac{\left(D_{2}-D_{1} \right)}{D_1}\cdot x\right) \; \; x \in [0,1]
+\]
  %
- \[
-  D\left(x\right)=D_{1}+\frac{\left(D_{2}-D_{1} \right)}{L}\cdot x
- \]
+\[
+D\left(x\right)=D_{1}+\frac{\left(D_{2}-D_{1} \right)}{L}\cdot x
+\]
 %
 \[
 F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{\rho \cdot L \cdot Q^{2}}{2} \right] \int \frac{1}{A(x)\cdot D(x)} dx
@@ -252,10 +286,7 @@ F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{\rho \cdot L \cdot Q^{2}}
 F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{2 \rho \cdot L \cdot Q^{2}}{\pi} \right] \int \frac{1}{D^{3}(x)} dx
 \]
 %
- In principle the friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$. Ignoring this, and setting both to the constant value based on the mean value
- 
-%
-%
 \bibliographystyle{plain}
 \bibliography{ohpl}
+\nocite{*}
 \end{document}
