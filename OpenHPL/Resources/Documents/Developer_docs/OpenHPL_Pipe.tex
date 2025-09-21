@@ -260,8 +260,13 @@ F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{\rho \cdot L \cdot Q^{2}}
 \[
 F_{f}=  f \cdot \left[\frac{2 \rho \cdot L \cdot Q^{2}}{A_{1} D_{1}} \right] \int_{0}^{1} \frac{1}{\left(1+\delta\cdot x \right)^{3}} dx
 \]
+
+\[
+\int_{0}^{1} \frac{1}{\left(1+\delta\cdot x \right)^{3}} dx=\left[ \frac{-1}{(2\cdot d^{3}\cdot x^{2} + 4\cdot d^{2}\cdot x + 2\cdot d)}\right]_{0}^{1}
+\]
 %
- In principle the friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$. Ignoring this, and setting both to the constant value based on the mean value
+ In principle the friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$. The Reynolds number depends on the local velocity (dependent on the local area) and the local diameter. In the current model this is ignored, and the mean velocity and diameter is used in the calculation.
+ 
  
 %
 \subsection{Kladd}
@@ -284,6 +289,35 @@ F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{\rho \cdot L \cdot Q^{2}}
 %
 \[
 F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{2 \rho \cdot L \cdot Q^{2}}{\pi} \right] \int \frac{1}{D^{3}(x)} dx
+\]
+\[
+F_{f}= A \cdot \rho \cdot  g \cdot h_{f}=  \left[\frac{2 \rho \cdot L \cdot Q^{2}}{\pi} \right] \int \frac{1}{D^{3}(x)} dx
+\]
+
+\[
+F(x)=\int_{0}^{1} f(x)=\frac{-1}{(2\cdot d)\cdot (d^{2} + 2\cdot d + 1)} + \frac{1}{(2\cdot d)}
+\]
+
+\[
+F(\delta )=\int_{0}^{1} f(x) dx =\frac{(d^{2} + 2\cdot d + 1)-1}{(2\cdot d)\cdot (d^{2} + 2\cdot d + 1)}
+\]
+
+\[
+F(\delta )=\int_{0}^{1} f(x) dx =\frac{(\delta^{2} + 2\cdot \delta )}{(2\cdot \delta)\cdot (\delta^{2} + 2\cdot \delta + 1)}
+\]
+%
+\[
+F(\delta )=\int_{0}^{1} f(x) dx =\frac{(2\cdot \delta)\cdot (\frac{1}{2}\delta + 1 )}{(2\cdot \delta)\cdot (\delta^{2} + 2\cdot \delta + 1)}
+\]
+%
+\[
+F(\delta )=\int_{0}^{1} f(x) dx =\frac{(\frac{1}{2}\delta + 1 )}{(\delta^{2} + 2\cdot \delta + 1)}
+\]
+
+%
+
+\[
+F(0)=1
 \]
 %
 \bibliographystyle{plain}
