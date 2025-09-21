@@ -21,14 +21,14 @@ model Pipe "Model of a pipe"
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate of the pipe" annotation (Dialog(group="Initialization"));
 
-  SI.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
+  SI.Diameter D_ = sqrt((4/C.pi)*A_) "Average diameter";
   SI.Mass m "Water mass";
   SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
   SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
-  SI.Area A_ = D_ ^ 2 * C.pi / 4 "Average cross-sectional area";
+  SI.Area A_ =  0.5 * (A_i + A_o) "Average cross-sectional area";
+  
   Real cos_theta = H / L "Slope ratio";
-  SI.Velocity v "Water velocity";
-  SI.Velocity v_o "Outlet water velocity";
+  SI.Velocity v "Average Water velocity";
   SI.Force F_f "Friction force";
   SI.Force F_taper "Tape friction force";
   SI.Momentum M "Water momentum";
