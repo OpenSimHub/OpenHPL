@@ -5,7 +5,7 @@ model Pipe "Model of a pipe"
   extends OpenHPL.Interfaces.TwoContacts;
 
   // Geometrical parameters of the pipe:
-  parameter SI.Length H = 0 "Height difference from the inlet to the outlet" annotation (
+  parameter SI.Length H = 10 "Height difference from the inlet to the outlet" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Length L = 1000 "Length of the pipe" annotation (
     Dialog(group = "Geometry"));
@@ -15,21 +15,16 @@ model Pipe "Model of a pipe"
     Dialog(group = "Geometry"));
   parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
-
+  //parameter Real K_c = 0.1 "Loss coefficient for contraction"
+  //  annotation (Dialog(group = "Geometry"));
   // Steady state:
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate of the pipe" annotation (Dialog(group="Initialization"));
 
-  SI.Diameter D_ = sqrt((4/C.pi)*A_) "Average diameter";
-  SI.Mass m "Water mass";
-  SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
-  SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
-  SI.Area A_ =  0.5 * (A_i + A_o) "Average cross-sectional area";
   
-  Real cos_theta = H / L "Slope ratio";
   SI.Velocity v "Average Water velocity";
   SI.Force F_f "Friction force";
-  SI.Force F_taper "Tape friction force";
+  // SI.Force F_taper "Tape friction force";
   SI.Momentum M "Water momentum";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
@@ -38,21 +33,18 @@ model Pipe "Model of a pipe"
   SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
   protected
     SI.Velocity v_o;
+    parameter Real delta=(D_i-D_o)/D_i "Contraction factor";
+    // parameter Real ddd=;
+    parameter SI.Diameter D_ = sqrt((4/C.pi)*A_) "Average diameter";
+    parameter SI.Mass m = data.rho * A_ * L      "Mass of water"; 
+    parameter SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
+    parameter SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
+    parameter SI.Area A_ =  0.5 * (A_i + A_o) "Average cross-sectional area";
+  
+    parameter Real cos_theta = H / L "Slope ratio";
+    
+  
 
-  /* TBD:
-  // temperature variation. Not finished...
-  parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
-  Real W_f, W_e;
-  SI.Temperature T( start = T_0);
-  */
-
-protected
-  parameter SI.Diameter D_eff=
-    if D_i == D_o then
-      D_i
-    else
-      (D_i - D_o) / log(D_i/D_o) "Effective diameter for a linear taper";
 
 initial equation
   if SteadyState then
@@ -62,24 +54,21 @@ initial equation
     mdot=Vdot_0*data.rho;
     */
   end if;
-  algorithm
-    assert( phi < 1.0 , "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
+  assert((D_i-D_o)/L > 0.1, "Change in pipe diameter too large",AssertionLevel.warning);
 equation
   
   Vdot = mdot / data.rho "Volumetric flow rate through the pipe";
   v = Vdot / A_ "Average water velocity";
   v_o = Vdot / A_o "Outlet water velocity";
   M = data.rho * L * Vdot "Momentum of water";
-  m = data.rho * A_ * L "Mass of water";
-  F_f = Functions.DarcyFriction.Friction(v, D_eff, L, data.rho, data.mu, p_eps)
-    "Friction force";
-  F_taper = K_c * 0.5 * data.rho * A_o * v_o * abs(v_o)
-    "Tapering (local contraction) loss";
+ 
+  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)*((0.5*delta+1)/(delta^2+2*delta+1)) "Friction force";
+ 
   der(M) = data.rho * Vdot^2 * (1/A_i - 1/A_o)
            + p_i * A_i - p_o * A_o
-           - F_f - F_taper
-           + m * data.g * cos_theta
-    "Momentum balance including tapering loss";
+           - F_f 
+           + m * data.g * cos_theta   "Momentum balance including friction loss";
+    
   p_i = i.p "Inlet pressure";
   p_o = o.p "Outlet pressure";
   i.mdot+o.mdot = 0 "Mass balance";
