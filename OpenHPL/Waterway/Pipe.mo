@@ -15,8 +15,7 @@ model Pipe "Model of a pipe"
     Dialog(group = "Geometry"));
   parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
-  //parameter Real K_c = 0.1 "Loss coefficient for contraction"
-  //  annotation (Dialog(group = "Geometry"));
+
   // Steady state:
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate of the pipe" annotation (Dialog(group="Initialization"));
@@ -24,51 +23,51 @@ model Pipe "Model of a pipe"
   
   SI.Velocity v "Average Water velocity";
   SI.Force F_f "Friction force";
-  // SI.Force F_taper "Tape friction force";
-  SI.Momentum M "Water momentum";
+  //SI.Momentum M "Water momentum";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
   //SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
   SI.MassFlowRate mdot "Mass flow rate";
   SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
   protected
-    SI.Velocity v_o;
-    parameter Real delta=(D_i-D_o)/D_i "Contraction factor";
-    // parameter Real ddd=;
     parameter SI.Diameter D_ = sqrt((4/C.pi)*A_) "Average diameter";
     parameter SI.Mass m = data.rho * A_ * L      "Mass of water"; 
     parameter SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
     parameter SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
     parameter SI.Area A_ =  0.5 * (A_i + A_o) "Average cross-sectional area";
-  
+    parameter Real delta=(D_i-D_o)/D_i "Contraction factor";
+    parameter Real cf=((0.5*delta+1)/(delta^2+2*delta+1)) "Conical pipe function";
     parameter Real cos_theta = H / L "Slope ratio";
+    parameter Real phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
     
   
 
 
 initial equation
+  
   if SteadyState then
+    // der(M)= 0;
     der(mdot) = 0;
-  /*else
-    Testing with no initialization for this case, to avoid conflicts with multiple branches. Should in princple be ok.
-    mdot=Vdot_0*data.rho;
-    */
   end if;
-  assert((D_i-D_o)/L > 0.1, "Change in pipe diameter too large",AssertionLevel.warning);
+  algorithm
+    Modelica.Utilities.Streams.print("\nD> delta..........= "+String(delta)+"\n");
+    Modelica.Utilities.Streams.print("\nD> Cone function..= "+String(cf)+"\n");
+    assert( phi > 1.0 , "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
 equation
   
   Vdot = mdot / data.rho "Volumetric flow rate through the pipe";
   v = Vdot / A_ "Average water velocity";
-  v_o = Vdot / A_o "Outlet water velocity";
-  M = data.rho * L * Vdot "Momentum of water";
+  // v_o = Vdot / A_o "Outlet water velocity";
+  //M = data.rho * L * Vdot "Momentum of water";
  
-  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)*((0.5*delta+1)/(delta^2+2*delta+1)) "Friction force";
- 
+  F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)*cf "Friction force";
+ /*
   der(M) = data.rho * Vdot^2 * (1/A_i - 1/A_o)
            + p_i * A_i - p_o * A_o
            - F_f 
            + m * data.g * cos_theta   "Momentum balance including friction loss";
-    
+   */
+  L * der(mdot)=(p_i+ data.rho *data.g * H)*A_i-p_o*A_o -F_f;
   p_i = i.p "Inlet pressure";
   p_o = o.p "Outlet pressure";
   i.mdot+o.mdot = 0 "Mass balance";
