@@ -31,6 +31,7 @@ model Turbine "Simple turbine model with mechanical connectors"
   extends OpenHPL.Interfaces.TurbineContacts;
 
   SI.Pressure dp "Turbine pressure drop";
+  SI.MassFlowRate mdot "Turbine pressure drop";
   SI.EnergyFlowRate Kdot_i_tr "Kinetic energy flow";
   SI.VolumeFlowRate Vdot "Flow rate";
   Real C_v_ "Guide vane 'valve capacity'";
@@ -46,6 +47,8 @@ equation
     "Define guide vane 'valve capacity' base on the Nominal turbine parameters";
   dp = Vdot ^ 2 * data.p_a / (C_v_ * max(1e-6, u_t)) ^ 2 "Turbine valve equation for pressure drop";
   dp = i.p - o.p "Link the pressure drop to the ports";
+  i.mdot+o.mdot=0 "Mass balance";
+  mdot = i.mdot "Flow direction";
   Kdot_i_tr = dp * Vdot "Turbine energy balance";
   if ConstEfficiency then
     Wdot_s = eta_h * Kdot_i_tr;

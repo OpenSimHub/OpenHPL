@@ -2,7 +2,7 @@ within OpenHPL.Waterway;
 model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
-  extends OpenHPL.Interfaces.ContactPort;
+  extends OpenHPL.Interfaces.TwoContacts;
 
   // Geometrical parameters of the pipe:
   parameter SI.Length H = 25 "Height difference from the inlet to the outlet" annotation (
@@ -35,6 +35,7 @@ model Pipe "Model of a pipe"
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
   SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
+  SI.MassFlowRate mdot "Mass flow rate";
   SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
 
   /* TBD:
@@ -71,8 +72,11 @@ equation
            - F_f - F_taper
            + m * data.g * cos_theta
     "Momentum balance including tapering loss";
-  p_i = i.p "Inlet pressure";
+  // Connnections
+  p_i = i.p "Inlet pressure"; 
   p_o = o.p "Outlet pressure";
+  i.mdot+o.mdot = 0 "Mass balance";
+  mdot = i.mdot "Inlet direction for mdot";
 
   /* TBD:
   // possible temperature variation implementation. Not finished...

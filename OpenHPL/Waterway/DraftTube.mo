@@ -67,6 +67,7 @@ model DraftTube "Model of a draft tube for reaction turbines"
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
   SI.Pressure dp = p_o-p_i "Pressure drop in and out of draft tube";
+  SI.MassFlowRate mdot "Mass flow rate";
   Real phi_d "Generalized friction factor for draft tube";
   Real phi_d_o "Initial generalized friction factor for Moody spreading pipes";
 
@@ -81,7 +82,7 @@ model DraftTube "Model of a draft tube for reaction turbines"
                                                           theta_moody/2)) "Calculating cos_theta_moody_by_2";
 
  // connectors
-  extends OpenHPL.Interfaces.ContactPort;
+  extends OpenHPL.Interfaces.TwoContacts;
 initial equation
   if SteadyState then
     der(M) = 0;
@@ -150,6 +151,8 @@ equation
   // connector
   p_i = i.p;
   p_o = o.p;
+  i.mdot+o.mdot=0;
+  mdot = i.mdot;
   annotation (Documentation(info="<html>
     <p>Two of the draft tubes are modeled using <em>Momentum balance</em>.
     They are:</p>

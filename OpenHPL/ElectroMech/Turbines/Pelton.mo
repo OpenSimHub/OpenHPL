@@ -16,6 +16,7 @@ model Pelton "Model of the Pelton turbine"
     SI.Area A_1, A_0 = pi * D_0 ^ 2 / 4;
     SI.EnergyFlowRate Wdot_s "Shaft power";
     SI.VolumeFlowRate Vdot "Flow rate";
+    SI.MassFlowRate mdot "Mass flow rate";
     SI.Velocity v_R, v_1;
     SI.AngularVelocity w=w_in "Angular velocity";
     Real cos_b = Modelica.Math.cos(Modelica.Units.Conversions.from_deg(beta));
@@ -45,6 +46,9 @@ equation
     p_tr1 = i.p;
   // + dp_n;
     p_tr2 = o.p;
+  // Flow rate connectors
+    i.mdot+o.mdot=0;
+    mdot=i.mdot;
   // output mechanical power
     P_out = Wdot_s;
     annotation (
