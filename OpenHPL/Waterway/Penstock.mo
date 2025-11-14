@@ -27,7 +27,7 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
   SI.Density rho_m[N - 2], rho_m_end, rho_m_first;
   SI.Velocity v_exp[N];
   SI.VolumeFlowRate V_p_out[N - 2], V_p_out_end;
-  extends OpenHPL.Interfaces.TwoContact;
+  extends OpenHPL.Interfaces.TwoContacts;
 initial equation
   mdot_R = data.rho * Vdot_0;
   mdot_V = data.rho * Vdot_0;

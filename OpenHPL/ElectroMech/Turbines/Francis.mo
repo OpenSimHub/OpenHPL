@@ -60,6 +60,7 @@ model Francis "Model of the Francis turbine"
     SI.Area A_1 "Runner inlet cross section", A_0 "Turbine inlet cross section", A_v "Guide vane cross section", A_2 "Runner outlet cross section";
     SI.EnergyFlowRate Wdot_s "Shaft power", Wdot_ft "Total runner losses", W_t1 "Euler first term", W_t2 "Euler second term", Wdot_ft_s "Shock losses", Wdot_ft_w "Whirl losses", Wdot_ft_l "Friction losses", Wdot_t "Total power";
     SI.VolumeFlowRate Vdot "Flow rate";
+    SI.MassFlowRate mdot "Mass flow rate";
     SI.AngularVelocity w=w_in "Angular velocity";
     SI.Velocity u_2 "Outlet reference velocity", c_m2 "Outlet meridional velocity", c_m1 "Inlet meridional velocity", u_1 "Inlet reference velocity", c_u1 "Inlet tangential velocity";
   Modelica.Units.NonSI.Angle_deg beta1 "Inlet blade angle";
@@ -202,6 +203,8 @@ equation
     coef = Wdot_s / Wdot_t;
   // connectors
     p_tr2 = o.p;
+    i.mdot+o.mdot=0;
+    mdot=i.mdot;
   // output mechanical power
     P_out = Wdot_s;
     annotation (

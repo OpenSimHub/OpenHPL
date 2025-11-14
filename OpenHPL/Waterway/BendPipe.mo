@@ -14,12 +14,15 @@ model BendPipe "Bend in pipes"
   SI.Velocity v(start=Modelica.Constants.eps) "Water velocity";
   SI.Area A = pi*D_i^2/4 "Cross section area";
   SI.Pressure dp "Pressure drop of fitting";
-  /* Connector */
-  extends OpenHPL.Interfaces.ContactPort;
+  SI.MassFlowRate mdot "Pressure drop of fitting";
+  extends OpenHPL.Interfaces.TwoContacts;
 equation
   v = mdot / data.rho / A;
   dp = K_L * 0.5 * data.rho * v^2;
+   // Connections
   o.p = i.p - dp "Pressure of the output connector";
+  i.mdot + o.mdot = 0 "Mass balance";
+  mdot = i.mdot "Flow direction";
   annotation (
     Documentation(info="<html>
 <p>Usually minor head losses in pipes are considered to be due to fittings, diffusers, nozzles, bend in pipes, etc. We are more interested in head loss due to bend pipes for this model.</p>
