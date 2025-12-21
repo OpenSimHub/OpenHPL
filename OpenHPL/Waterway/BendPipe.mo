@@ -14,7 +14,7 @@ model BendPipe "Bend in pipes"
   SI.Velocity v(start=Modelica.Constants.eps) "Water velocity";
   SI.Area A = pi*D_i^2/4 "Cross section area";
   SI.Pressure dp "Pressure drop of fitting";
-  SI.MassFlowRate mdot "Pressure drop of fitting";
+  SI.MassFlowRate mdot "Mass flow rate";
   extends OpenHPL.Interfaces.TwoContacts;
 equation
   v = mdot / data.rho / A;
