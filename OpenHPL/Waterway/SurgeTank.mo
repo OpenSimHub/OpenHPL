@@ -39,7 +39,7 @@ model SurgeTank "Model of the surge tank/shaft"
   //parameter SI.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   // variables
   SI.Mass m "Water mass";
-  SI.Mass mdot "Mass flow rate";
+  SI.MassFlowRate mdot "Mass flow rate";
   SI.Mass m_a = p_ac*A*(L-h_0/cos_theta)*data.M_a/(Modelica.Constants.R*T_ac) "Air mass inside surge tank";
   SI.Momentum M "Water momentum";
   SI.Force Mdot "Difference in influent and effulent momentum";
@@ -54,7 +54,6 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.Force F_g "Gravity force";
   SI.Pressure p_t "Pressure at top of the surge tank";
   SI.Pressure p_b "Pressure at bottom of the surge tank";
-  SI.Pressure p_n "Pressure at node or manifold of the surge tank";
   Real phiSO "Dimensionless factor based on the type of fitting ";
   // initial values for differential variables
   SI.Height h(start = h_0) "Water height in the surge tank";
@@ -131,10 +130,9 @@ equation
   mdot = data.rho * Vdot;
   Mdot = mdot * v;
   F = F_p - F_f - F_g;
-  p_b = p_n "Linking bottom node pressure to connector";
-  p_n = i.p "Surgetank manifold pressure";
+  p_b = i.p "Linking bottom node pressure to connector";
   i.p = o.p "Inlet and outlet pressure equality";
-  mdot = i.mdot+o.mdot "Mass balance"; 
+  mdot = i.mdot+o.mdot "Mass balance";
   F_g = m * data.g * cos_theta;
  annotation (
     Documentation(info="<html>

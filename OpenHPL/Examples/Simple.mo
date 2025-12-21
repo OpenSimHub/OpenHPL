@@ -33,7 +33,7 @@ model Simple "Model of a hydropower system with a simple turbine turbine"
         extent={{-10,-10},{10,10}})));
 equation
   connect(turbine.o, discharge.i) annotation (Line(points={{40,10},{44,10},{44,0},{50,0}}, color={28,108,200}));
-  connect(control.y, turbine.u_t) annotation (Line(points={{1,70},{16,70},{16,40},{22,40}, {22, 22}},
+  connect(control.y, turbine.u_t) annotation (Line(points={{1,70},{16,70},{16,40},{22,40},{22,22}},
                                                                                     color={0,0,127}));
   connect(penstock.o, turbine.i) annotation (Line(points={{10,30},{14.95,30},{14.95,10},{20,10}}, color={28,108,200}));
   connect(reservoir.o, intake.i) annotation (
