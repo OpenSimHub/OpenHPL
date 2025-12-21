@@ -1,5 +1,5 @@
 within OpenHPL.Interfaces;
-partial model TwoContact "Model of two connectors"
+partial model TwoContacts "Model of two connectors"
   Contact_i i "Inlet contact (positive design flow direction is from i to o)"
                               annotation (
     Placement(transformation(extent={{-110,-10},{-90,10}})));
@@ -12,4 +12,4 @@ partial model TwoContact "Model of two connectors"
     Can be used in cases where model is needed inlet and outlet Contacts, but do not need
     any specification about mass flow rate and pressures between these Contacts.</p>
 </html>"));
-end TwoContact;
+end TwoContacts;

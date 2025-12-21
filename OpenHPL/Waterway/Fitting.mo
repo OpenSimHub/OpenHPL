@@ -17,9 +17,10 @@ model Fitting "Different pipes fitting"
   SI.Velocity v(start=Modelica.Constants.eps) "Water velocity";
   SI.Area A "Cross section area";
   SI.Pressure dp "Pressure drop of fitting";
+  SI.MassFlowRate mdot "Mass flow rate";
   Real phi "Dimensionless factor based on the type of fitting ";
   /* Connector */
-  extends OpenHPL.Interfaces.ContactPort;
+  extends OpenHPL.Interfaces.TwoContacts;
 equation
   v = mdot / data.rho / A;
   if v>=0 then
@@ -50,6 +51,8 @@ equation
     dp = - phi * 0.5 * data.rho * v^2;
   end if;
   o.p = i.p - dp "Pressure of the output connector";
+  i.mdot+o.mdot = 0 "Mass balance";
+  mdot = i.mdot "Flow direction";
   annotation (
     Documentation(info="<html>
     <p>Various possibilities of the fittings for the pipes with different diameters

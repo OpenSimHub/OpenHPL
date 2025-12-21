@@ -42,7 +42,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   SI.VolumeFlowRate Vdot[N] "centered volumetric flow";
   SI.Force F_f[N] "centered friction force vector";
   Real theta = 1.3 "parameter for slope limiter";
-  extends OpenHPL.Interfaces.TwoContact;
+  extends OpenHPL.Interfaces.TwoContacts;
 public
   Functions.KP07.KPmethod KP(N = N, U = U, dx = dx, theta = theta, B = zeros(N + 4), S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_i, 0; p_o, 0], boundaryCon = [true, false; true, false]);
   // specify all variables which is needed for using KP method for solve PDE

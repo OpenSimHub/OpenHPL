@@ -18,7 +18,7 @@ model OpenChannel "Open channel model (use KP scheme)"
   SI.VolumeFlowRate Vdot_i "Inlet flow rate";
   SI.Height h[N] "Water level in each unit of the channel";
   // connector
-  extends OpenHPL.Interfaces.TwoContact;
+  extends OpenHPL.Interfaces.TwoContacts;
   // using open channel example from KP method class
   Internal.KPOpenChannel openChannel(
     N=N,

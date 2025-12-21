@@ -2,7 +2,7 @@ within OpenHPL.Waterway;
 model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Surge(lds=l, Lds=L);
-  extends OpenHPL.Interfaces.ContactNode;
+  extends OpenHPL.Interfaces.TwoContacts;
   import Modelica.Constants.pi;
 
   parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank" annotation (
@@ -39,6 +39,7 @@ model SurgeTank "Model of the surge tank/shaft"
   //parameter SI.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
   // variables
   SI.Mass m "Water mass";
+  SI.MassFlowRate mdot "Mass flow rate";
   SI.Mass m_a = p_ac*A*(L-h_0/cos_theta)*data.M_a/(Modelica.Constants.R*T_ac) "Air mass inside surge tank";
   SI.Momentum M "Water momentum";
   SI.Force Mdot "Difference in influent and effulent momentum";
@@ -129,7 +130,9 @@ equation
   mdot = data.rho * Vdot;
   Mdot = mdot * v;
   F = F_p - F_f - F_g;
-  p_b = p_n "Linking bottom node pressure to connector";
+  p_b = i.p "Linking bottom node pressure to connector";
+  i.p = o.p "Inlet and outlet pressure equality";
+  mdot = i.mdot+o.mdot "Mass balance";
   F_g = m * data.g * cos_theta;
  annotation (
     Documentation(info="<html>
