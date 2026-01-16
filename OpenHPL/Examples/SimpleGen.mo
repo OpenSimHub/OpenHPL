@@ -1,6 +1,7 @@
 within OpenHPL.Examples;
 model SimpleGen "Model of a hydropower system with a simple turbine turbine and generator"
-  extends Simple(turbine(
+  extends SimpleTurbine(
+                 turbine(
       enable_nomSpeed=false,
       enable_P_out=true));
   ElectroMech.Generators.SimpleGen simpleGen annotation (Placement(transformation(extent={{20,50},{40,70}})));
