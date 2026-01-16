@@ -29,6 +29,7 @@ partial model BaseValve "Simple hydraulic valve (base class)"
 
   SI.Pressure dp "Pressure drop";
   SI.EnergyFlowRate Kdot_i_tr "Kinetic energy flow";
+  SI.MassFlowRate mdot "Mass flow rate";
   SI.VolumeFlowRate Vdot "Flow rate";
   Real C_v_ "Valve capacity";
 
@@ -45,6 +46,8 @@ protected
         rotation=270,
         origin={0,80})));
 equation
+  i.mdot+o.mdot=0;
+  mdot = i.mdot;
   Vdot = if WaterCompress then mdot / (data.rho * (1 + data.beta * (i.p - data.p_a))) else mdot / data.rho
     "Checking for water compressibility";
   look_up_table.u[1] = u "Link the valve opening";
