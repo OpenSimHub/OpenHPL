@@ -1,18 +1,18 @@
 within OpenHPL.ElectroMech.BaseClasses;
 partial model BaseValve "Simple hydraulic valve (base class)"
   outer Data data "Using standard class with global parameters";
-  extends OpenHPL.Interfaces.ContactPort;
+  extends OpenHPL.Interfaces.TwoContacts;
 
   parameter Boolean ValveCapacity = true "If checked the valve capacity C_v should be specified,
     otherwise specify the nominal values (net head and flow rate)"
     annotation (Dialog(group = "Nominal values"), choices(checkBox = true));
-  parameter Real C_v = 1 "Guide vane 'valve capacity'"
+  parameter Real C_v = 1 "Valve capacity"
     annotation (Dialog(group = "Nominal values", enable = ValveCapacity));
   parameter SI.Height H_n = 100 "Nominal net head"
     annotation (Dialog(group = "Nominal values", enable = not ValveCapacity));
   parameter SI.VolumeFlowRate Vdot_n = 3 "Nominal flow rate"
     annotation (Dialog(group = "Nominal values", enable = not ValveCapacity));
-  parameter SI.PerUnit u_n = 0.95 "Nominal guide vane opening"
+  parameter SI.PerUnit u_n = 0.95 "Nominal opening"
     annotation (Dialog(group = "Nominal values", enable = not ValveCapacity));
   parameter Boolean ConstEfficiency = true "If checked the constant efficiency eta_h is used,
     otherwise specify lookup table for efficiency"
@@ -20,7 +20,7 @@ partial model BaseValve "Simple hydraulic valve (base class)"
   parameter SI.Efficiency eta_h = 0.9 "Hydraulic efficiency"
     annotation (Dialog(group = "Efficiency data", enable = ConstEfficiency));
   parameter Real lookup_table[:, :] = [0, 0.4; 0.2, 0.7; 0.5, 0.9; 0.95, 0.95; 1.0, 0.93]
-    "Look-up table for the turbine efficiency, described by a table matrix,
+    "Look-up table for the turbine/valve efficiency, described by a table matrix,
      where the first column is a pu value of the guide vane opening,
      and the second column is a pu value of the turbine efficiency."
     annotation (Dialog(group = "Efficiency data", enable = not ConstEfficiency));
