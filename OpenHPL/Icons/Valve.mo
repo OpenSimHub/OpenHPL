@@ -6,8 +6,7 @@ partial class Valve "Valve icon"
           lineColor={28,108,200},
           extent={{-100,-60},{100,-100}},
           textString="%name",
-          textStyle={TextStyle.Bold},
-          visible=vertical),
+          textStyle={TextStyle.Bold}),
         Polygon(
           points={{-90,40},{0,10},{90,40},{90,30},{0,0},{-90,30},{-90,40}},
           lineColor={0,0,0},
