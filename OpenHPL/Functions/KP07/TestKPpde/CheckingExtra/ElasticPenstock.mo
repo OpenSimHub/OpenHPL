@@ -21,21 +21,21 @@ model ElasticPenstock
   Real theta = 1.3;
   Real U[2 * N], F_d[N];
 public
-  BasicEquation basic(N = N, U = U, rho_atm = data.rho, A_atm = A_atm * ones(N), beta_total = data.beta_total, beta = data.beta, p_a = data.p_a);
+  BasicEquation basic(N = N, U = matrix(U), rho_atm = data.rho, A_atm = matrix(A_atm * ones(N)), beta_total = data.beta_total, beta = data.beta, p_a = data.p_a);
   // use this model for define main equations for specific problem, which (these eq.) depend on the state vaector.
   Functions.KP07.KPmethod kP(N = N, U = U, dx = dx, theta = theta, B = B, S_ = S_, F_ = F_, lam1 = lam1, lam2 = lam2, boundary = [p_1, mdot_R; p_2, mdot_V], boundaryCon = [true, true; false, true]);
   // specify all variables which is needed for using KP method for solve PDE
   BasicEquation basicMid(N = N, U = transpose([U_[1:2:8, :], U_[2:2:8, :]]), rho_atm = data.rho, A_atm = A_atm * ones(N, 4), beta_total = data.beta_total, beta = data.beta, p_a = data.p_a);
   // Use the model for main equations, but not with state vector, but with the piecewise linear reconstruction of it.
 initial equation
-  mdot = data.rho * Vdot_0 * ones(N, 1);
-  p_p = [p_1 + dp / 2:dp:p_1 + dp / 2 + dp * (N - 1)];
+  mdot = data.rho * Vdot_0 * ones(N);
+  p_p = p_1 + dp / 2:dp:p_1 + dp / 2 + dp * (N - 1);
 equation
   //  define state vector
-  U[1:N, 1] = p_p[:, 1];
-  U[N + 1:2 * N, 1] = mdot[:, 1];
+  U[1:N] = p_p[:];
+  U[N + 1:2 * N] = mdot[:];
   // Define variables interested vol. flow rate
-  Vdot = basic.Vdot;
+  Vdot = basic.Vdot[:, 1];
   // Define the piecewise linear reconstruction of states.
   U_ = kP.U_;
   //
@@ -49,10 +49,10 @@ equation
   F_ = [mdot_ ./ data.rho ./ A_atm ./ data.beta_total; mdot_ .* basicMid.v + basicMid.A .* p_];
   // source term of friction and gravity forces
   for i in 1:N loop
-    F_d[i, 1] = DarcyFriction.Friction(basic.v[i, 1], 2 * sqrt(basic.A[i, 1] / pi), dx, basic.rho[i, 1], data.mu, data.p_eps) / dx;
+    F_d[i] = DarcyFriction.Friction(basic.v[i, 1], 2 * sqrt(basic.A[i, 1] / pi), dx, basic.rho[i, 1], data.mu, data.p_eps) / dx;
   end for;
-  S_[1:N, 1] = vector(zeros(N, 1));
-  S_[N + 1:2 * N, 1] = vector(basic.F_ap * data.g * H / L - F_d);
+  S_[1:N] = vector(zeros(N));
+  S_[N + 1:2 * N] = vector(basic.F_ap[:, 1] * data.g * H / L - F_d);
   // define differential equation
   der(U) = kP.diff_eq;
   annotation (experiment(StopTime = 100),
