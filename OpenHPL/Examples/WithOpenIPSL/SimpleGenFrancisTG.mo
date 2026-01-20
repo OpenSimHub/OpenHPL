@@ -16,7 +16,7 @@ model SimpleGenFrancisTG "Synergy with OpenIPSL library(generator)"
     vertical=true,
     L=600,
     H=428.5,
-    D_i=3) constrainedby Interfaces.TwoContact
+    D_i=3) constrainedby Interfaces.TwoContacts
            annotation (Placement(transformation(
         origin={0,-50},
         extent={{-10,-10},{10,10}})));
@@ -86,7 +86,7 @@ model SimpleGenFrancisTG "Synergy with OpenIPSL library(generator)"
 equation
   connect(generator.w, wpu_to_wSI.u) annotation (Line(points={{-19,9},{-16,9},{-16,20},{-52.8,20}}, color={0,0,127}));
   connect(PSI_to_Ppu.u, turbine.P_out) annotation (
-    Line(points={{-65,-5},{-70,-5},{-70,-24},{32,-24},{32,-39}}, color = {0, 0, 127}));
+    Line(points={{-65,-5},{-70,-5},{-70,-24},{36,-24},{36,-61}}, color = {0, 0, 127}));
   connect(PSI_to_Ppu.y, generator.pm) annotation (Line(points={{-53.5,-5},{-42,-5}}, color={0,0,127}));
   connect(generator.vf, generator.vf0) annotation (Line(points={{-42,5},{-46,5},{-46,14},{-38,14},{-38,11}}, color={0,0,127}));
   connect(wpu_to_wSI.y, turbine.w_in) annotation (Line(points={{-66.6,20},{-80,20},{-80,-32},{16,-32},{16,-42},{20,-42}}, color={0,0,127}));
@@ -97,7 +97,8 @@ equation
   connect(penstock.i, surgeTank.o) annotation (Line(points={{-10,-50},{-20,-50}},color={28,108,200}));
   connect(surgeTank.i, intake.o) annotation (Line(points={{-40,-50},{-46,-50}}, color={28,108,200}));
   connect(intake.i, reservoir.o) annotation (Line(points={{-66,-50},{-70,-50}}, color={28,108,200}));
-  connect(tGTypeI.pm, turbine.u_t) annotation (Line(points={{13.2,-80},{32,-80},{32,-62}}, color={0,0,127}));
+  connect(tGTypeI.pm, turbine.u_t) annotation (Line(points={{13.2,-80},{24,-80},
+          {24,-62}},                                                                       color={0,0,127}));
   connect(tGTypeI.w, wpu_to_wSI.u) annotation (Line(points={{-14.4,-80},{-92,-80},{-92,32},{-16,32},{-16,20},{-52.8,20}}, color={0,0,127}));
   annotation (experiment(StopTime = 2000));
 end SimpleGenFrancisTG;

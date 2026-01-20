@@ -21,7 +21,7 @@ model SimpleValve "Model of a hydropower system with a simple turbine turbine"
     D_o=3,
     H=80,
     L=200,
-    vertical=true) constrainedby Interfaces.TwoContact annotation (Placement(transformation(origin={0,30}, extent={{-10,-10},{10,10}})));
+    vertical=true) constrainedby Interfaces.TwoContacts annotation (Placement(transformation(origin={0,30}, extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.SurgeTank surgeTank(
     H=30,
     L=30,

@@ -20,7 +20,7 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
     L=600,
     H=428.5,
     D_i=3,
-    D_o=3) constrainedby Interfaces.TwoContact
+    D_o=3) constrainedby Interfaces.TwoContacts
            annotation (Placement(transformation(
         origin={-30,0},
         extent={{-10,-10},{10,10}})));

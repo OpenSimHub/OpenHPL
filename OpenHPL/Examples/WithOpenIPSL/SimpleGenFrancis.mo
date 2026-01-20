@@ -16,7 +16,7 @@ model SimpleGenFrancis "Synergy with OpenIPSL library(generator)"
     vertical=true,
     L=600,
     H=428.5,
-    D_i=3) constrainedby Interfaces.TwoContact
+    D_i=3) constrainedby Interfaces.TwoContacts
            annotation (Placement(transformation(
         origin={0,-50},
         extent={{-10,-10},{10,10}})));
@@ -84,13 +84,13 @@ equation
   connect(fpu_to_fSI.y, governor.f) annotation (
     Line(points={{-53.4,-90},{-10,-90},{-10,-84},{0,-84}}, color = {0, 0, 127}));
   connect(governor.Y_gv, turbine.u_t) annotation (
-    Line(points={{23,-80},{32,-80},{32,-62}}, color = {0, 0, 127}));
+    Line(points={{23,-80},{24,-80},{24,-62}}, color = {0, 0, 127}));
   connect(governor.P_ref, power.y) annotation (
     Line(points={{0,-76},{-10,-76},{-10,-72},{-21.2,-72}}, color = {0, 0, 127}));
   connect(fpu_to_fSI.u, wpu_to_wSI.u) annotation (Line(points={{-67.2,-90},{-94,-90},{-94,30},{-48,30},{-48,20},{-52.8,20}}, color={0,0,127}));
   connect(generator.w, wpu_to_wSI.u) annotation (Line(points={{-19,9},{-16,9},{-16,20},{-52.8,20}}, color={0,0,127}));
   connect(PSI_to_Ppu.u, turbine.P_out) annotation (
-    Line(points={{-65,-5},{-70,-5},{-70,-24},{32,-24},{32,-39}}, color = {0, 0, 127}));
+    Line(points={{-65,-5},{-70,-5},{-70,-24},{36,-24},{36,-61}}, color = {0, 0, 127}));
   connect(PSI_to_Ppu.y, generator.pm) annotation (Line(points={{-53.5,-5},{-42,-5}}, color={0,0,127}));
   connect(generator.vf, generator.vf0) annotation (Line(points={{-42,5},{-46,5},{-46,14},{-38,14},{-38,11}}, color={0,0,127}));
   connect(wpu_to_wSI.y, turbine.w_in) annotation (Line(points={{-66.6,20},{-80,20},{-80,-32},{16,-32},{16,-42},{20,-42}}, color={0,0,127}));
