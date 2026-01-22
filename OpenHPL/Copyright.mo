@@ -1,7 +1,7 @@
 within OpenHPL;
 class Copyright "Disclaimer<html>
 <h5>OpenHPL:</h5>
-<p>Copyright &copy; 2019-2023</p>
+<p>Copyright &copy; 2019-2026</p>
 <ul>
 <li><a href=\"https://www.usn.no/english/\">University of South-Eastern Norway</a> (USN)</li>
 </ul>
