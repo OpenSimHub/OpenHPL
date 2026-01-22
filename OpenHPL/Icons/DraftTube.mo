@@ -11,7 +11,7 @@ partial class DraftTube "Draft tube icon"
           smooth=Smooth.Bezier,
           fillColor={175,175,175}),
                      Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-150,140},{150,100}},
           textString="%name",
           textStyle={TextStyle.Bold}),
@@ -54,7 +54,7 @@ partial class DraftTube "Draft tube icon"
         Line(
           points={{-85,39}},
           color={0,0,0},
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Line(points={{-85,49},{-85,90},{-77,90},{-77,48}}, color={0,0,0}),
         Line(points={{-41,49},{-41,90},{-34,90},{-34,49}}, color={0,0,0}),
         Line(points={{46,6}}, color={0,0,0}),

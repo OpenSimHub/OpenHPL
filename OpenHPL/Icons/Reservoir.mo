@@ -3,7 +3,7 @@ partial class Reservoir "Reservoir icon"
   annotation (
     Icon(coordinateSystem(preserveAspectRatio = false), graphics={ Rectangle(extent={{-100,100},{100,-100}}, lineColor={28,108,200}),
                                                            Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-150,90},{150,50}},
           textString="%name",
           textStyle={TextStyle.Bold}),

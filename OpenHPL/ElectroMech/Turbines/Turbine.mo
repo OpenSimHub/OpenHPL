@@ -47,13 +47,9 @@ there are inputs as the control signal for the valve opening and also output as 
 </html>"), Icon(graphics={Text(
           visible=enable_P_out,
           extent={{30,100},{50,80}},
-          lineColor={0,0,0},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="P"), Text(
           extent={{-96,100},{-60,80}},
-          lineColor={0,0,0},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="GVO")}));
 end Turbine;

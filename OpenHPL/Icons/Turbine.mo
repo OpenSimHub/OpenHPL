@@ -2,7 +2,7 @@ within OpenHPL.Icons;
 partial class Turbine "Turbine icon"
   annotation (
     Icon(graphics={
-        Text(lineColor={28,108,200},
+        Text(textColor={28,108,200},
           extent={{-100,-100},{100,-140}},
           textString="%name",
           textStyle={TextStyle.Bold}),
@@ -87,6 +87,6 @@ partial class Turbine "Turbine icon"
         Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
         Text(
           extent={{-80,90},{80,68}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="Turbine")}));
 end Turbine;

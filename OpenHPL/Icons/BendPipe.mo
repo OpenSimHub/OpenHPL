@@ -38,7 +38,7 @@ partial class BendPipe "Bend pipes icon."
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.None),
                      Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-150,100},{150,60}},
           textString="%name",
           textStyle={TextStyle.Bold}),

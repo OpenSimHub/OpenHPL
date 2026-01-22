@@ -49,20 +49,16 @@ equation
         Line(points={{-90,0},{-40,0},{32,60}}, color={0,0,0}),
         Line(points={{38,0},{88,0}}),
         Text(
-          lineColor={127,0,0},
+          textColor={127,0,0},
           extent={{-100,-110},{100,-150}},
           textStyle={TextStyle.Bold},
           textString="%name"),
         Text(
           extent={{-90,30},{-50,8}},
-          lineColor={0,0,0},
-          fillColor={238,46,47},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="gen"),
         Text(
           extent={{50,32},{90,10}},
-          lineColor={0,0,0},
-          fillColor={238,46,47},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="grid")}));
 end MCB;

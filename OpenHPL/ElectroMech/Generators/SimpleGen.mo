@@ -33,8 +33,6 @@ The generator can be loaded either:</p>
 </html>"), Icon(graphics={
         Text(
           extent={{-20,100},{20,86}},
-          lineColor={0,0,0},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="P_load")}));
 end SimpleGen;

@@ -19,7 +19,7 @@ You can obtain one at <a href=\"http://mozilla.org/MPL/2.0/\">http://mozilla.org
     Icon(graphics={
         Text(
           extent={{-100,140},{100,100}},
-          lineColor={0,127,0},
+          textColor={0,127,0},
           textString="%name%"),
         Ellipse(
           extent={{-100,100},{100,-100}},

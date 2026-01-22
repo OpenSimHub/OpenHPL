@@ -74,7 +74,7 @@ equation
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid),
         Text(
-          lineColor={127,0,0},
+          textColor={127,0,0},
           extent={{-100,-110},{100,-150}},
           textStyle={TextStyle.Bold},
           textString="%name")}));

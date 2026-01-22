@@ -3,7 +3,7 @@ partial class Valve "Valve icon"
   annotation (
     Icon(graphics={
         Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-100,-60},{100,-100}},
           textString="%name",
           textStyle={TextStyle.Bold}),
