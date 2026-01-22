@@ -3,6 +3,7 @@ partial class Surge "Surge tank/shaft icon"
   input SI.Length lds "Lenght of watercolumn in the surge shaft(for DynamicSelect)";
   input SI.Length Lds "Length of the surge shaft (for DynamicSelect)";
   annotation (
+    preferredView="icon",
     Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}),
                                                         graphics={
                      Text(

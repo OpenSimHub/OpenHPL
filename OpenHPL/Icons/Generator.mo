@@ -1,6 +1,7 @@
 within OpenHPL.Icons;
 partial class Generator "Generator icon"
   annotation (
+    preferredView="icon",
     Icon(graphics={
         Text(
           textColor={127,0,0},
