@@ -1,8 +1,8 @@
 within OpenHPL.Icons;
 partial class Fitting "Pipe fitting icon"
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}),
-                                                        graphics={
+    preferredView="icon",
+    Icon(graphics={
         Rectangle(
           extent={{-90,60},{10,-60}},
           lineColor={0,0,0},

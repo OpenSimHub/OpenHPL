@@ -4,8 +4,8 @@ partial class Pipe "Pipe icon"
     annotation(Dialog(group = "Icon"),
     choices(checkBox = true));
   annotation (
-    Icon(coordinateSystem(grid={1,1}),
-         graphics={
+    preferredView="icon",
+    Icon(graphics={
         Rectangle(
           extent={{-90,40},{90,-40}},
           lineColor={0,0,0},

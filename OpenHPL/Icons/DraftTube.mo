@@ -2,7 +2,8 @@ within OpenHPL.Icons;
 partial class DraftTube "Draft tube icon"
 
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}), graphics={
+    preferredView="icon",
+    Icon(graphics={
         Polygon(
           points={{-40,29},{-40,29}},
           lineColor={0,0,0},

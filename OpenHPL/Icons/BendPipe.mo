@@ -2,7 +2,8 @@ within OpenHPL.Icons;
 partial class BendPipe "Bend pipes icon."
 
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}), graphics={
+    preferredView="icon",
+    Icon(graphics={
         Ellipse(
           extent={{30,50},{80,-10}},
           fillPattern=FillPattern.Solid,

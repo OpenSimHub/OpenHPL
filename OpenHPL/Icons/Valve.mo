@@ -1,6 +1,7 @@
 within OpenHPL.Icons;
 partial class Valve "Valve icon"
   annotation (
+    preferredView="icon",
     Icon(graphics={
         Text(
           textColor={28,108,200},
