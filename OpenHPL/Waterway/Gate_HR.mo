@@ -2,7 +2,7 @@ within OpenHPL.Waterway;
 model Gate_HR "Model of a tainter gate (HEC-RAS)"
   outer Data data "Using standard class with system parameters";
   extends Icons.Gate(final sluice);
-  extends OpenHPL.Interfaces.ContactPort;
+  extends OpenHPL.Interfaces.TwoContacts;
 
   parameter SI.Height W "Width of the gated spillway"
     annotation (Dialog(group="Geometry"));
@@ -19,6 +19,7 @@ model Gate_HR "Model of a tainter gate (HEC-RAS)"
     annotation (Dialog(group="Coefficients"));
   SI.Height h_i "Inlet water level";
   SI.Height h_o "Outlet water level";
+  SI.MassFlowRate mdot "Mass flow rate";
   SI.VolumeFlowRate Vdot "Volume flow rate through the gate";
   Real H_ratio = h_o/h_i "Ratio of outlet to inlet height";
 
@@ -33,6 +34,8 @@ protected
   Real Cdx "Discharge coefficient tuned for a smooth transition between partially and fully submerged";
 
 equation
+  i.mdot+o.mdot = 0 "Mass balance";
+  mdot = i.mdot "Inlet direction for mdot";
   Vdot_free = sqrt(2*data.g)* W * T^TE * B^BE * h_i^HE "Free flow condition";
   Vdot_partial = sqrt(2*data.g)* W * T^TE * B^BE * (3*(h_i-h_o))^HE "Partially submerged";
   Vdot_full =  sqrt(2*data.g*(h_i-h_o))* W * B "Fully submerged";

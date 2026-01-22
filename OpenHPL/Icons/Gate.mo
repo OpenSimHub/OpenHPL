@@ -39,7 +39,7 @@ partial class Gate "Icons for the gate"
           fillPattern=FillPattern.Forward),
         Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
                      Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-90,100},{90,60}},
           textString="%name",
           textStyle={TextStyle.Bold}),

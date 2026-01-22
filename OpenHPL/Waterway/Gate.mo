@@ -2,7 +2,7 @@ within OpenHPL.Waterway;
 model Gate "Model of a sluice or tainter gate based on [Bollrich2019]"
   outer Data data "Using standard class with system parameters";
   extends Icons.Gate;
-  extends OpenHPL.Interfaces.ContactPort;
+  extends Interfaces.TwoContacts;
   import Modelica.Units.Conversions.to_deg;
   parameter SI.Height b "Width of the gate" annotation (Dialog(group="Common"));
   parameter SI.Length r "Radius of the gate arm" annotation (Dialog(enable=not sluice, group="Radial/Tainter"));
@@ -11,15 +11,16 @@ model Gate "Model of a sluice or tainter gate based on [Bollrich2019]"
   SI.Height h_2 "Outlet water level";
   SI.Height h_2_limit "Limit of free flow";
   SI.Area A = a*b "Area of the physical gate opening";
+  SI.MassFlowRate mdot "Mass flow rate";
   SI.VolumeFlowRate Vdot "Volume flow rate through the gate";
   Real mu_A "Discharge coefficient";
   Real psi "Contraction coefficient";
   //Real psi90 "Contraction coefficient for vertical gate";
   Real chi "Back-up coefficient";
   SI.Angle alpha = C.pi/2 - asin((h_h-a)/r) "Edge angle of the gate";
-    Real x,y,z;
-    Real h0_a = h_0/a;
-    Real h2_a = h_2/a;
+  Real x,y,z;
+  Real h0_a = h_0/a;
+  Real h2_a = h_2/a;
   Modelica.Blocks.Interfaces.RealInput a "Opening of the gate [m]" annotation (Placement(transformation(
           extent={{-20,-20},{20,20}},
           rotation=270,
@@ -44,6 +45,8 @@ equation
     chi = 1 "Free flow";
   end if;
 
+  i.mdot+o.mdot = 0 "Mass balance";
+  mdot = i.mdot "Inlet direction for mdot";
   Vdot = chi * mu_A * A * sqrt(2*data.g*h_0) "Volume flow rate through the gate";
   mdot = Vdot * data.rho "Mass flow rate through the gate";
   i.p = h_0 * data.g * data.rho + data.p_a "Inlet water pressure";
