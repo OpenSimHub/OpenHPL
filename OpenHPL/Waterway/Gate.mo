@@ -51,7 +51,9 @@ equation
   mdot = Vdot * data.rho "Mass flow rate through the gate";
   i.p = h_0 * data.g * data.rho + data.p_a "Inlet water pressure";
   o.p = h_2 * data.g * data.rho + data.p_a "Outlet water pressure";
-  annotation (Documentation(info="<html>
+  annotation (
+    preferredView="info",
+    Documentation(info="<html>
 <h4>Implementation</h4>
 <p>
 The calculation of the flow through the gate is approximated for two different regions and is based 

@@ -50,7 +50,9 @@ equation
   mdot = Vdot * data.rho "Mass flow rate through the gate";
   i.p = h_i * data.g * data.rho + data.p_a "Inlet water pressure";
   o.p = h_o * data.g * data.rho + data.p_a "Outlet water pressure";
-  annotation (Documentation(info="<html>
+  annotation (
+    preferredView="info",
+    Documentation(info="<html>
 <h4>Background</h4>
 <p>
 The Tainter Gate (also known as Radial Gate) is modelled based on a simplified calculation
