@@ -68,8 +68,6 @@ end Test01;
       Line(points = {{-44, 32}, {-26, 32}, {-26, 40}, {-8, 40}}, color = {0, 128, 255}));
     connect(Upstream.o, pipe3.i) annotation(
       Line(points = {{-44, 32}, {-32, 32}, {-32, 8}, {-10, 8}}, color = {0, 128, 255}));
-  annotation(
-      experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-06, Interval = 0.004));
-end Test02;
+  end Test02;
   
 end TestPipe;
