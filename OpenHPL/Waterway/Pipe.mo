@@ -5,7 +5,7 @@ model Pipe "Model of a pipe"
   extends OpenHPL.Interfaces.TwoContacts;
 
   // Geometrical parameters of the pipe:
-  parameter SI.Length H = 10 "Height difference from the inlet to the outlet" annotation (
+  parameter SI.Length H = 0 "Height difference from the inlet to the outlet" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Length L = 1000 "Length of the pipe" annotation (
     Dialog(group = "Geometry"));
@@ -23,50 +23,35 @@ model Pipe "Model of a pipe"
   
   SI.Velocity v "Average Water velocity";
   SI.Force F_f "Friction force";
-  //SI.Momentum M "Water momentum";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
   //SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
   SI.MassFlowRate mdot "Mass flow rate";
-  SI.VolumeFlowRate Vdot(start = Vdot_0) "Volume flow rate";
+  SI.VolumeFlowRate Vdot "Volume flow rate";
+ 
   protected
-    parameter SI.Diameter D_ = sqrt((4/C.pi)*A_) "Average diameter";
-    parameter SI.Mass m = data.rho * A_ * L      "Mass of water"; 
+    parameter SI.Diameter D_ = ( D_i + D_o )/2 "Average diameter";
     parameter SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
     parameter SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
-    parameter SI.Area A_ =  0.5 * (A_i + A_o) "Average cross-sectional area";
-    parameter Real delta=(D_i-D_o)/D_i "Contraction factor";
-    parameter Real cf=((0.5*delta+1)/(delta^2+2*delta+1)) "Conical pipe function";
+    parameter SI.Area A_ =  D_  ^ 2 * C.pi / 4 "Average cross-sectional area";
+    parameter Real delta=2*(D_i-D_o)/(D_i+D_o) "Contraction factor";
+    parameter Real cf=1+2*delta^2 "Conical pipe function";
     parameter Real cos_theta = H / L "Slope ratio";
     parameter Real phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
-    
-  
-
 
 initial equation
-  
   if SteadyState then
-    // der(M)= 0;
     der(mdot) = 0;
+  else
+    mdot=Vdot_0*data.rho;
   end if;
   algorithm
-    Modelica.Utilities.Streams.print("\nD> delta..........= "+String(delta)+"\n");
-    Modelica.Utilities.Streams.print("\nD> Cone function..= "+String(cf)+"\n");
-    assert( phi > 1.0 , "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
+    assert( phi < 1.0 , "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
 equation
   
   Vdot = mdot / data.rho "Volumetric flow rate through the pipe";
   v = Vdot / A_ "Average water velocity";
-  // v_o = Vdot / A_o "Outlet water velocity";
-  //M = data.rho * L * Vdot "Momentum of water";
- 
   F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)*cf "Friction force";
- /*
-  der(M) = data.rho * Vdot^2 * (1/A_i - 1/A_o)
-           + p_i * A_i - p_o * A_o
-           - F_f 
-           + m * data.g * cos_theta   "Momentum balance including friction loss";
-   */
   L * der(mdot)=(p_i+ data.rho *data.g * H)*A_i-p_o*A_o -F_f;
   p_i = i.p "Inlet pressure";
   p_o = o.p "Outlet pressure";
