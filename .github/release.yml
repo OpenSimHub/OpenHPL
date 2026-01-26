@@ -1,0 +1,66 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - dependabot
+  categories:
+    - title: 💥 BREAKING CHANGES
+      labels:
+        - breaking
+        - breaking-change
+        - BREAKING CHANGE
+        - breaking change
+        
+    - title: 🚀 Features
+      labels:
+        - feature
+        - enhancement
+        - feat
+        
+    - title: 🐛 Bug Fixes
+      labels:
+        - bug
+        - fix
+        - bugfix
+        
+    - title: 📚 Documentation
+      labels:
+        - documentation
+        - docs
+        
+    - title: ⚡ Performance Improvements
+      labels:
+        - performance
+        - perf
+        
+    - title: ♻️ Code Refactoring
+      labels:
+        - refactor
+        - refactoring
+        
+    - title: 🧪 Tests
+      labels:
+        - test
+        - tests
+        - testing
+        
+    - title: 🎨 Styling
+      labels:
+        - style
+        - styling
+        
+    - title: 🔨 Build System & CI
+      labels:
+        - build
+        - ci
+        - CI
+        
+    - title: 🔧 Chores & Maintenance
+      labels:
+        - chore
+        - maintenance
+        
+    - title: ⏪ Reverts
+      labels:
+        - revert
