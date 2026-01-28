@@ -42,8 +42,10 @@ model Pipe "Model of a pipe"
 initial equation
   if SteadyState then
     der(mdot) = 0;
-  else
+  /*else
+    Testing with no initialization for this case, to avoid conflicts with multiple branches. Should in princple be ok.
     mdot=Vdot_0*data.rho;
+    */
   end if;
   algorithm
     assert( phi < 1.0 , "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
