@@ -4,10 +4,28 @@ model Turbine "Simple turbine model with mechanical connectors"
   extends BaseClasses.Power2Torque(power(y=Wdot_s));
   extends Interfaces.TurbineContacts;
   extends Icons.Turbine;
-
+   //
    Modelica.Blocks.Math.Feedback lossCorrection annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+   parameter Boolean ConstEfficiency = true "If checked the constant efficiency eta_h is used,
+    otherwise specify lookup table for efficiency"
+    annotation (Dialog(group = "Efficiency data"), choices(checkBox = true));
+  parameter SI.Efficiency eta_h = 0.9 "Hydraulic efficiency"
+    annotation (Dialog(group = "Efficiency data", enable = ConstEfficiency));
+  parameter Real lookup_tablee[:, :] = [0, 0.4; 0.2, 0.7; 0.5, 0.9; 0.95, 0.95; 1.0, 0.93] "Look-up table for the turbine/valve efficiency, described by a table matrix, where the first column is a pu value of the guide vane opening, and the second column is a pu value of the turbine efficiency." annotation (Dialog(group = "Efficiency data", enable = not ConstEfficiency));
+   
+   Modelica.Blocks.Tables.CombiTable1Dv look_up_table(table = lookup_tablee, smoothness = Modelica.Blocks.Types.Smoothness.ContinuousDerivative, extrapolation =                Modelica.Blocks.Types.Extrapolation.LastTwoPoints) annotation(Placement(transformation(origin = {-76, -74}, extent={{-10,-10},{10,10}})));
+  output Modelica.Units.SI.EnergyFlowRate Wdot_s "Turbine power";
+protected
+  Modelica.Units.SI.EnergyFlowRate Kdot_i_tr "gross hydraulic power";
 equation
-
+  look_up_table.u[1] = u "Link the valve opening";
+  if ConstEfficiency then
+    Wdot_s = eta_h * Kdot_i_tr;
+  else
+    Wdot_s = look_up_table.y[1] * Kdot_i_tr;
+  end if;
+  Kdot_i_tr = dp * Vdot "Energy balance";
+  //
   connect(P_out, lossCorrection.y) annotation (Line(
       points={{40,110},{40,80},{-31,80}},
       color={0,0,127},
