@@ -1,4 +1,4 @@
-﻿within OpenHPL.Waterway;
+within OpenHPL.Waterway;
 model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
