@@ -45,7 +45,7 @@ package TestPipe
   annotation(
       experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
 end Test01;
-  
+
   model Test02
     extends AbstractTest;
     OpenHPL.Waterway.Pipe pipe1(H = 0, L = Ln, D_i = 0.8*Dn, D_o = 1.2*Dn) annotation(
@@ -71,5 +71,5 @@ end Test01;
   annotation(
       experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-06, Interval = 0.004));
 end Test02;
-  
+
 end TestPipe;

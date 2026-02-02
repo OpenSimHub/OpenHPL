@@ -1,4 +1,4 @@
-within OpenHPL.Waterway;
+﻿within OpenHPL.Waterway;
 model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
@@ -20,33 +20,32 @@ model Pipe "Model of a pipe"
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate of the pipe" annotation (Dialog(group="Initialization"));
 
-  
   SI.Velocity v "Average Water velocity";
   SI.Force F_f "Friction force";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
-  //SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
+  SI.Pressure dp=p_o-p_i "Pressure difference across the pipe";
   SI.MassFlowRate mdot "Mass flow rate";
   SI.VolumeFlowRate Vdot "Volume flow rate";
- 
-  protected
-    parameter SI.Diameter D_ = ( D_i + D_o )/2 "Average diameter";
+
+protected
+    parameter SI.Diameter D_ = ( D_i + D_o)  / 2 "Average diameter";
     parameter SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
     parameter SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
     parameter SI.Area A_ =  D_  ^ 2 * C.pi / 4 "Average cross-sectional area";
     parameter Real delta=2*(D_i-D_o)/(D_i+D_o) "Contraction factor";
     parameter Real cf=1+2*delta^2 "Conical pipe function";
     parameter Real cos_theta = H / L "Slope ratio";
-    parameter Real phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
+    parameter Modelica.Units.NonSI.Angle_deg phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
 
 initial equation
   if SteadyState then
     der(mdot) = 0;
   end if;
-  algorithm
-    assert( phi < 1.0 , "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
+algorithm
+    assert( phi < 1.0,  "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
 equation
-  
+
   Vdot = mdot / data.rho "Volumetric flow rate through the pipe";
   v = Vdot / A_ "Average water velocity";
   F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)*cf "Friction force";
@@ -57,7 +56,8 @@ equation
   mdot = i.mdot "Inlet direction for mdot";
 
   annotation (
-    Documentation(info= "<html><head></head><body><p>The simple model of the pipe gives possibilities
+    Documentation(info= "<html>
+    <p>The simple model of the pipe gives possibilities
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
     <p>This model is described by the momentum differential equation, which depends
     on pressure drop through the pipe together with friction and gravity forces.
@@ -75,5 +75,5 @@ equation
     <p>More info about the pipe model can be found in
         <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
     and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017a]</a>.</p><p>Updated formulation for non-equal inlet- and outlet diameter.</p><p><br></p><p><br></p>
-</body></html>"));
+    </html>"));
 end Pipe;
