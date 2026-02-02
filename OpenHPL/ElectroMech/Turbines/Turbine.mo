@@ -4,14 +4,6 @@ model Turbine "Simple turbine model with mechanical connectors"
   extends BaseClasses.Power2Torque(power(y=Wdot_s));
   extends Interfaces.TurbineContacts;
   extends Icons.Turbine;
- parameter Boolean ConstEfficiency = true "If checked the constant efficiency eta_h is used,
-       otherwise specify lookup table for efficiency" annotation(
-     Dialog(group = "Efficiency data"),
-     choices(checkBox = true));
-   parameter Modelica.Units.SI.Efficiency eta_h = 0.9 "Hydraulic efficiency" annotation(
-     Dialog(group = "Efficiency data", enable = ConstEfficiency));
-   parameter Real lookup_table[:, :] = [0, 0.4; 0.2, 0.7; 0.5, 0.9; 0.95, 0.95; 1.0, 0.93] "Look-up table for the turbine/valve efficiency, described by a table matrix, where the first column is a pu value of the guide vane opening,and the second column is a pu value of the turbine efficiency." annotation(
-     Dialog(group = "Efficiency data", enable = not ConstEfficiency));
 
   parameter Boolean ConstEfficiency = true
     "If checked the constant efficiency eta_h is used,
