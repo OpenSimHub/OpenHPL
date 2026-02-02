@@ -56,9 +56,9 @@ equation
     Documentation(info="<html>
 <h4>Implementation</h4>
 <p>
-The calculation of the flow through the gate is approximated for two different regions and is based 
-on <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>. 
-Equation numbers and figure numbers given below are in sync with the numbers of <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>. 
+The calculation of the flow through the gate is approximated for two different regions and is based
+on <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>.
+Equation numbers and figure numbers given below are in sync with the numbers of <a href=\"modelica://OpenHPL.UsersGuide.References\">[Bollrich2019]</a>.
 </p>
 <h5>Free flowing</h5>
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
@@ -78,7 +78,7 @@ $$Q_A = \\mu_A \\cdot A \\cdot \\sqrt{2g\\cdot h_0} \\tag{8.24} $$
 (valid for gate opening higher than the downstream water level)
 </p>
 <p>
-With 
+With
 </p>
 <dl><dd>Opening area</dd>
 <dt> $$ A = a\\cdot b $$ </dt>
@@ -93,7 +93,7 @@ With
 </dl>
 <blockquote>
 With:
-<ul> 
+<ul>
 <li> \\(a \\ldots\\) Vertical gate opening </li>
 <li> \\(h_h \\ldots\\) Height of the hinge above gate bottom\"</li>
 <li> \\(r \\ldots\\) Radius of the gate arm </li>
@@ -114,23 +114,23 @@ With:
 <p>
 $$Q_A = \\chi \\cdot \\mu_A \\cdot A \\cdot \\sqrt{2g\\cdot h_0} \\tag{8.29} $$
 
-With 
+With
 </p>
 <dl>
 <dd>Back-up coefficient</dd>
 <dt> $$ \\chi = \\sqrt{
               \\left(
-                   1 + \\frac{\\psi\\cdot a}{h_0} 
-                 \\right) \\cdot 
-                 \\left\\{ 
-                   \\left[ 
+                   1 + \\frac{\\psi\\cdot a}{h_0}
+                 \\right) \\cdot
+                 \\left\\{
+                   \\left[
                      1 - 2\\cdot\\frac{\\psi\\cdot a}{h_0} \\cdot
-                     \\left( 
+                     \\left(
                        1-\\frac{\\psi\\cdot a}{h_2}
                      \\right)
                    \\right]
-                   - \\sqrt{ 
-                       \\left[ 
+                   - \\sqrt{
+                       \\left[
                          1 - 2 \\cdot \\frac{\\psi\\cdot a}{h_0} \\cdot
                          \\left(
                            1-\\frac{\\psi\\cdot a}{h_2}
@@ -141,7 +141,7 @@ With
                            \\frac{h_2}{h_0}
                       \\right)^2
                       - 1
-                     } 
+                     }
                  \\right\\}
                } \\tag{8.28}$$ </dt>
 </dl>

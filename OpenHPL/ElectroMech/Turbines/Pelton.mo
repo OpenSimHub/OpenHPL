@@ -26,7 +26,7 @@ model Pelton "Model of the Pelton turbine"
                                 Placement(transformation(origin={-120,-80}, extent={{-20,-20},
             {20,20}})));
 protected
-  Modelica.Blocks.Interfaces.RealOutput p_out=Wdot_s   "Internal connector for output power" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealOutput p_out=Wdot_s "Internal connector for output power" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={40,90})));

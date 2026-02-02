@@ -98,7 +98,7 @@ equation
   connect(surgeTank.i, intake.o) annotation (Line(points={{-40,-50},{-46,-50}}, color={28,108,200}));
   connect(intake.i, reservoir.o) annotation (Line(points={{-66,-50},{-70,-50}}, color={28,108,200}));
   connect(tGTypeI.pm, turbine.u_t) annotation (Line(points={{13.2,-80},{24,-80},
-          {24,-62}},                                                                       color={0,0,127}));
+          {24,-62}}, color={0,0,127}));
   connect(tGTypeI.w, wpu_to_wSI.u) annotation (Line(points={{-14.4,-80},{-92,-80},{-92,32},{-16,32},{-16,20},{-52.8,20}}, color={0,0,127}));
   annotation (experiment(StopTime = 2000));
 end SimpleGenFrancisTG;

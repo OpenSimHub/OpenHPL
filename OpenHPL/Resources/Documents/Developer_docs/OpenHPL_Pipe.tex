@@ -18,7 +18,7 @@
 \author{BB}
 %
 \begin{document}
-\lstset{language=modelica} 	
+\lstset{language=modelica}
 
 \maketitle
 
@@ -35,7 +35,7 @@ This includes a class of test cases.
 %  https://docs.bentley.com/LiveContent/web/Bentley%20HAMMER%20SS6-v1/en/GUID-F87F1515-85CE-4FF3-9C5F-3AD5E427F125.html
 %  https://ocw.snu.ac.kr/sites/default/files/NOTE/HD%20Ch6-LC9.pdf
 %  https://pubs.aip.org/aip/pof/article-abstract/36/7/077105/3300578/Influence-of-the-rigid-water-column-assumption-on?redirectedFrom=fulltext
-% 
+%
 In the following transient change of pressure in a pipe is discussed. When the change is slow compared to the speed of sound, the elastic pressures waves in the medium can be ignored. This approach is often denoted rigid water column \cite{swiecicki64} and implies that the instantaneous flow rate is constant in all cross sections in the pipe
 \footnote{Since the compressibility of the medium is assumed to be constant, the density and hence the mass flow is also constant in all cross sections.}.
 The rigid water column momentum equation can be derived from Newtons first law:
@@ -62,19 +62,19 @@ where $f$ is the friction factor, commonly taken from the Moody diagram or vario
 %
 \begin{figure}[H] % The figure environment allows for captioning and floating
 	\centering % Centers the image within the figure environment
-	\includegraphics[width=0.9\textwidth]{01_pipe.png} 
+	\includegraphics[width=0.9\textwidth]{01_pipe.png}
 	\caption{Consider a pipe with inlet diameter $D_1$ and outlet diameter $D_2$ and length $L$.} % Caption for the image
 	\label{fig:pipe} % Label for cross-referencing
 \end{figure}
 %
 \subsection{Area change/conical pipe}
 %
-If the pipe is strongly conical (either diverging or converging) special loss models must be used as the there is a risk for separation or other special flow phenomena. 
+If the pipe is strongly conical (either diverging or converging) special loss models must be used as the there is a risk for separation or other special flow phenomena.
 
 \section{Today's implementation}
 % ---
 %\begin{comment}
-% 
+%
 \begin{lstlisting}
 within OpenHPL.Waterway;
 model Pipe "Model of a pipe"
@@ -108,7 +108,7 @@ Real cos_theta = H / L "Slope ratio";
 SI.Velocity v "Water velocity";
 SI.Velocity v_o "Outlet water velocity";
 SI.Force F_f "Friction force";
-SI.Force F_taper "Taper friction force"; 
+SI.Force F_taper "Taper friction force";
 SI.Momentum M "Water momentum";
 SI.Pressure p_i "Inlet pressure";
 SI.Pressure p_o "Outlet pressure";
@@ -162,8 +162,8 @@ end Pipe;
 Overall goal and checks:
 \begin{enumerate}
 	\item When inlet and outlet diameter is the same, should be identical to "simple pipe"
-	\item 
-\end{enumerate} 
+	\item
+\end{enumerate}
 %
 \section{Future development}
 %
@@ -176,7 +176,7 @@ Overall goal and checks:
 \label{sec:d_and_a}
 %
 Consider the pipe in figure \ref{fig:pipe_apendix} with inlet and outlet diameter $D_1$ and $D_2$. The corresponding areas are $A_1$ and $A_2$.
-The average diameter $\overline{D}$ is 
+The average diameter $\overline{D}$ is
 \[
 \overline{D}=\frac{1}{2}\left(D_1 + D_2\right)
 \]
@@ -184,7 +184,7 @@ The average area $\overline{A}$ is
 \[
 \overline{A}=\frac{1}{2}\left(A_1 + A_2\right)
 \]
-Since the area is a quadratic function of diameter, the mean area $\overline{A}$ is different than the area of the mean diameter. In the model 
+Since the area is a quadratic function of diameter, the mean area $\overline{A}$ is different than the area of the mean diameter. In the model
 \[
 \tilde{D}=\sqrt{\frac{4}{\pi}\overline{A}}
 \]
@@ -218,7 +218,7 @@ A\left(\overline{D}\right)=\frac{\pi}{4}\left(\frac{1}{2}\left(D_1 + D_2\right)\
 %
 \begin{figure}[H] % The figure environment allows for captioning and floating
 	\centering % Centers the image within the figure environment
-	\includegraphics[width=0.9\textwidth]{01_pipe.png} 
+	\includegraphics[width=0.9\textwidth]{01_pipe.png}
 	\caption{Consider a pipe with inlet diameter $D_1$ and outlet diameter $D_2$ and length $L$.} % Caption for the image
 	\label{fig:pipe_apendix} % Label for cross-referencing
 \end{figure}
@@ -226,23 +226,23 @@ A\left(\overline{D}\right)=\frac{\pi}{4}\left(\frac{1}{2}\left(D_1 + D_2\right)\
 \subsection{Friction loss of variable area pipe}
 %
 In general it is difficult to find a closed form equation for the friction force for a pipe with varying area that is completely universal.
-For a constant diameter pipe the friction force can be estimated using the traditional friction coefficient approach 
+For a constant diameter pipe the friction force can be estimated using the traditional friction coefficient approach
 %
 \[
 F_{f}= A \cdot \rho \cdot  g \cdot h_{f}= A \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D}\right) \frac{v^{2}}{2g} \right] =\frac{1}{A} \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D}\right) \frac{Q^{2}}{2g} \right]
 \]
 %
 where the he friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$.
-If the change in are is small compared to the pipe length, the friction force can be approximated as a sum of smaller pipes of length $dx \cdot L$, which in the limit of 
+If the change in are is small compared to the pipe length, the friction force can be approximated as a sum of smaller pipes of length $dx \cdot L$, which in the limit of
 $dx \rightarrow 0 $ becomes an integral.
 
-However, if the change i area is small compared to the pipe length we can approximate 
+However, if the change i area is small compared to the pipe length we can approximate
 
 \[
 F_{f}= \int_{0}^{1} \frac{1}{A(x)} \cdot \rho \cdot g \left[ f \cdot \left(\frac{L}{D(x)}\right) \frac{Q^{2}}{2g} \right] dx
 \]
 Assuming a linear diameter distribution from the inlet to the outlet
- 
+
  \[
  D\left(x\right)=D_{1}+\left(D_{2}-D_{1} \right)\cdot x= D_{1}\cdot\left(1+\delta\cdot x\right) \; \; x \in [0,1]
  \]
@@ -269,8 +269,8 @@ F_{f}=  f \cdot \left[\frac{2 \rho \cdot L \cdot Q^{2}}{A_{1} D_{1}} \right] \in
 \]
 %
  In principle the friction factor $f$ is a function of the Reynolds number $Re$ and relative roughness $\epsilon/D$. The Reynolds number depends on the local velocity (dependent on the local area) and the local diameter. In the current model this is ignored, and the mean velocity and diameter is used in the calculation.
- 
- 
+
+
 %
 \subsection{Kladd}
 %

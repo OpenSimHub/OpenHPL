@@ -22,7 +22,7 @@ model SimpleTurbine "Model of a hydropower system with a simple turbine turbine"
     H=80,
     L=200,
     vertical=true) constrainedby Interfaces.TwoContacts annotation (Placement(transformation(origin={0,30}, extent={{-10,-10},{10,10}})));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=20)   annotation (Placement(transformation(
+  OpenHPL.Waterway.SurgeTank surgeTank(h_0=20) annotation (Placement(transformation(
         origin={-30,30},
         extent={{-10,-10},{10,10}})));
   ElectroMech.Turbines.Turbine turbine(enable_nomSpeed=true)

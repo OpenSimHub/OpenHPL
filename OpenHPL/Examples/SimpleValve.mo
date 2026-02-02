@@ -25,7 +25,7 @@ model SimpleValve "Model of a hydropower system with a simple turbine turbine"
   OpenHPL.Waterway.SurgeTank surgeTank(
     H=30,
     L=30,
-    h_0=20)                                      annotation (Placement(transformation(
+    h_0=20) annotation (Placement(transformation(
         origin={-30,30},
         extent={{-10,-10},{10,10}})));
   inner OpenHPL.Data data(Vdot_0=3)
@@ -34,7 +34,7 @@ model SimpleValve "Model of a hydropower system with a simple turbine turbine"
         extent={{-10,-10},{10,10}})));
   Waterway.Valve valve(
     ValveCapacity=false,
-    C_v=1)               annotation (Placement(transformation(extent={{20,20},{40,40}})));
+    C_v=1) annotation (Placement(transformation(extent={{20,20},{40,40}})));
 equation
   connect(reservoir.o, intake.i) annotation (
     Line(points={{-80,30},{-70,30}}, color = {28, 108, 200}));
@@ -48,7 +48,7 @@ equation
   connect(control.y, valve.opening) annotation (Line(points={{1,70},{30,70},{30,38}}, color={0,0,127}));
   annotation (experiment(StopTime=1000), Documentation(info="<html>
 <p>
-Simple model of a water way with only a valve component. 
+Simple model of a water way with only a valve component.
 This can be used to investigate the effect of different opening and closing times in the waterway.
 </p>
 </html>"));

@@ -1,17 +1,17 @@
 %%
-%%   Syntax-Highlight-File `dtsyntax.sty' :: D.Töpel
+%%   Syntax-Highlight-File `dtsyntax.sty' :: D.Tï¿½pel
 %%  _______________________________________________________________
-%% |    
-%% |    Aufrufmöglichkeiten im Dokument :
-%% |    
+%% |
+%% |    Aufrufmï¿½glichkeiten im Dokument :
+%% |
 %% |    \begin[language=mcode|modelica|pearl|vhdl]{lstlisting}
 %% |      Syntax - Code
 %% |    \end{lstlisting}
-%% |    
+%% |
 %% |    ** oder **
 %% |
 %% |  	 \mcode|modelica|pearl|vhdl{Syntax - Code}
-%% |    
+%% |
 %% |    ** oder **
 %% |
 %% |    \lstinputlisting[language=mcode|modelica|pearl|vhdl]{YOUR-FILE.*}
@@ -19,14 +19,14 @@
 %%
 %%   For your convenience, this package has the following options:
 %%
-%%   -  bw  			|> Ausgabe in Schwarz, dafür Highlight in Fett
+%%   -  bw  			|> Ausgabe in Schwarz, dafï¿½r Highlight in Fett
 %%									 und Kursiv
-%%   
+%%
 %%   -  numbered  |> Angabe von Zeilennummern
 %%
 %%   -  framed  	|> Rahmen um den Code Block
 %%
-%%   -  final  		|> bitte selbst übersetzen ...
+%%   -  final  		|> bitte selbst ï¿½bersetzen ...
 %%					if you have ``gloablly'' set the draft option, the
 %%          listings package will not output the code at all.  to
 %%          force it to do so anyway, load this package with the
@@ -37,7 +37,7 @@
 %%  ________________________________________________________________
 %%
 %%	Grundlage dieses Style-Files ist die mcode.sty Datei, mit deren
-%%  Hilfe ein Syntax-Highlight für Matlab möglich ist.
+%%  Hilfe ein Syntax-Highlight fï¿½r Matlab mï¿½glich ist.
 %%
 %%  http://www.mathworks.com/matlabcentral/fileexchange/loadFile.do?objectId=8015&objectType=File
 %%
@@ -103,9 +103,9 @@
 	\fi
 \fi
 
-% check if textcomp has been loaded (this package is needed 
-% for upright quotes '' (instead of typographic ones `´)...
-\ifx\textasciigrave\undefined% 
+% check if textcomp has been loaded (this package is needed
+% for upright quotes '' (instead of typographic ones `ï¿½)...
+\ifx\textasciigrave\undefined%
 	\RequirePackage{textcomp}%
 \fi
 
@@ -125,7 +125,7 @@
 	comment=[l]\%,% 											% comments
 	morecomment=[l][{\color{green}\bfseries}]{\%\%},% % comments keywordstyle
 	morecomment=[l]...,% 									% comments
-	morestring=[m]',%   									% strings 
+	morestring=[m]',%   									% strings
 }[keywords,comments,strings]%
 
 
@@ -148,7 +148,7 @@
 		initial,noEvent,pre,reinit,sample,sign,sin,sinh,tan,tanh,terminal,Real},%
 	comment=[l]//,% 											% comments
 	morecomment=[s]{/*}{*/},% 					% comments
-	morestring=[b]',%   								% strings 
+	morestring=[b]',%   								% strings
 	morestring=[b]",%
 }[keywords,comments,strings]%
 
@@ -163,7 +163,7 @@
 		CHARACTER,CLOCK,CLOSE,CONT,CONTINUE,CONTROL,CONVERT,CREATED,CYCLIC,DATION,DECLARE,DCL,%
 		DIM,DIRECT,DISABLE,DUR,DURATION,DURING,ELSE,ENABLE,END,ENTER,EXIT,FIN,FIXED,FLOAT,FOR,%
 		FORBACK,FORMAT,FORWARD,FREE,FROM,GET,GLOBAL,GOTO,HRS,IDENT,IDENTICAL,IF,IN,INDUCE,INIT,%
-		INITIAL,INOUT,INTERRUPT,INV,IRPT,LEAVE,LENGTH,MAIN,MAX,MIN,MODEND,MODULE,NIL,NOCYCL,NOSTREAM,% 
+		INITIAL,INOUT,INTERRUPT,INV,IRPT,LEAVE,LENGTH,MAIN,MAX,MIN,MODEND,MODULE,NIL,NOCYCL,NOSTREAM,%
 		ON,OPEN,OPERATOR,OUT,PRECEDENCE,PRESET,PREVENT,PRIO,PRIORITY,PROBLEM,PROC,PROCEDURE,PUT,READ,%
 		REF,RELEASE,REPEAT,REQUEST,RESERVE,RESUME,RETURN,RETURNS,SEC,SEMA,SEND,SIGNAL,SPC,SPECIFY,%
 		STREAM,STRUCT,SUSPEND,SYSTEM,TAKE,TASK,TERMINATE,TFU,THEN,TO,TRIGGER,TYPE,UNTIL,WHEN,WHILE,WRITE,%
@@ -172,7 +172,7 @@
 		SKIP,SOP,SQRT,TAN,TANH,TOBIT,TOCHAR,TOFIXED,TOFLOAT,TRY,UPB},%
 	comment=[l]!,% 											% comments
 	morecomment=[s]{/*}{*/},% 					% comments
-	morestring=[m]',%   								% strings 
+	morestring=[m]',%   								% strings
 }[keywords,comments,strings]%
 
 
@@ -212,7 +212,7 @@
 		std_logic_arith,std,textio,CONV\_INTEGER,CONV\_STD\_LOGIC\_VECTOR},%
 	morekeywords=[5]{event,value},%
 	comment=[l]{--},% 									% comments
-	morestring=[m][\color{darkred}]',%  % strings 
+	morestring=[m][\color{darkred}]',%  % strings
 	morestring=[m][\color{darkred}]",%
 	alsoother={.},%otherkeywords
 	sensitive=false
@@ -235,14 +235,14 @@
 		keywordstyle=[5]\color{darkblue}\bfseries,	% keywords
 		commentstyle=\color{green},							% comments
 		stringstyle=\color{red}									% strings
-	}	
+	}
 \fi%bw
 
 \lstset{%
 	basicstyle={\ttfamily\footnotesize},  	% use font and smaller size \small \footnotesize
 	showstringspaces=false,									% do not emphasize spaces in strings
 	tabsize=4,															% number of spaces of a TAB
-	mathescape=false,%escapechar=§,					% escape to latex with §...§
+	mathescape=false,%escapechar=ï¿½,					% escape to latex with ï¿½...ï¿½
 	upquote=true,														% upright quotes
 	aboveskip={1.5\baselineskip},						% a bit of space above
 	columns=fixed,													% nice spacing -> fixed / flexible

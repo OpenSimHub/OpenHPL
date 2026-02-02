@@ -74,7 +74,7 @@ model Gate "Usage of the tainter gate"
 equation
   connect(upstream.o, gate_HR.i) annotation (Line(points={{-20,50},{-10,50}}, color={0,128,255}));
   connect(gate_HR.o, downstream.o) annotation (Line(points={{10,50},{20,50}}, color={0,128,255}));
-  connect(gateOpening.y, gate_HR.B) annotation (Line(points={{-19,80},{0,80},{0,62}},                 color={0,0,127}));
+  connect(gateOpening.y, gate_HR.B) annotation (Line(points={{-19,80},{0,80},{0,62}}, color={0,0,127}));
   connect(down_level.y, downstream.level) annotation (Line(points={{59,0},{54,0},{54,56},{42,56}}, color={0,0,127}));
   connect(upstream1.o, gate.i) annotation (Line(points={{-20,0},{-8,0}}, color={0,128,255}));
   connect(gate.o, downstream1.o) annotation (Line(points={{12,0},{20,0}}, color={0,128,255}));
