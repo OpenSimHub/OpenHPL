@@ -25,9 +25,7 @@ model SimpleTurbine "Model of a hydropower system with a simple turbine turbine"
   OpenHPL.Waterway.SurgeTank surgeTank(h_0=20)   annotation (Placement(transformation(
         origin={-30,30},
         extent={{-10,-10},{10,10}})));
-  ElectroMech.Turbines.Turbine turbine(
-    ValveCapacity=false,                        ConstEfficiency=false, enable_nomSpeed=true,
-    enable_f=false)
+  ElectroMech.Turbines.Turbine turbine(enable_nomSpeed=true)
     annotation (Placement(transformation(
         origin={30,10},
         extent={{-10,-10},{10,10}})));
