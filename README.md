@@ -12,11 +12,11 @@ More information about the library can be found in the [User's Guide](OpenHPL/Re
 
 ## Current release
 
-Download [OpenHPL v2.0.1 (2023-03-10)](../../releases/tag/v2.0.1)
+Download [OpenHPL v3.0.0 (2026-02-02)](../../releases/tag/v3.0.0)
 
 ## License
 
-Copyright &copy; 2019-2023
+Copyright &copy; 2019-2026
 * [University of South-Eastern Norway](https://www.usn.no/english/) (USN)
 
 This Source Code Form is subject to the terms of the [Mozilla Public License, v. 2.0](LICENSE).

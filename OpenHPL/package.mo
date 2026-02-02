@@ -5,7 +5,7 @@ package OpenHPL "Open-source hydropower library"
 
   annotation (
     version="3.0.0",
-    versionDate="2026-01-31",
+    versionDate="2026-02-02",
     Protection(access = Access.packageDuplicate),
     uses(OpenIPSL(version="3.0.0"), Modelica(version="4.0.0")),
     preferredView="info",
