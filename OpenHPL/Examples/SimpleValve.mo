@@ -34,9 +34,7 @@ model SimpleValve "Model of a hydropower system with a simple turbine turbine"
         extent={{-10,-10},{10,10}})));
   Waterway.Valve valve(
     ValveCapacity=false,
-    C_v=1,
-    ConstEfficiency=false,
-    WaterCompress=false) annotation (Placement(transformation(extent={{20,20},{40,40}})));
+    C_v=1)               annotation (Placement(transformation(extent={{20,20},{40,40}})));
 equation
   connect(reservoir.o, intake.i) annotation (
     Line(points={{-80,30},{-70,30}}, color = {28, 108, 200}));

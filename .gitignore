@@ -48,3 +48,12 @@ OpenHPL/Resources/Documents/UsersGuide_src/auto/
 OpenHPL/Resources/Documents/Nomenclature.html
 
 *.html
+
+
+# LaTeX intermdeiate documnts
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex.gz
+*.toc
