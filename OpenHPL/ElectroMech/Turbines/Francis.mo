@@ -83,6 +83,11 @@ model Francis "Model of the Francis turbine"
     Modelica.Blocks.Interfaces.RealInput w_in "Input angular velocity from the generator" annotation (
                                 Placement(transformation(origin={-120,-80}, extent={{-20,-20},
       {20,20}})));
+protected
+  Modelica.Blocks.Interfaces.RealOutput p_out = Wdot_s "Internal connector for output power" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={40,90})));
 equation
   // design algorithm for runner
     if GivenData then
@@ -205,8 +210,8 @@ equation
     p_tr2 = o.p;
     i.mdot+o.mdot=0;
     mdot=i.mdot;
-  // output mechanical power
-    P_out = Wdot_s;
+
+  connect(p_out, P_out) annotation (Line(points={{40,90},{40,110}}, color={0,0,127}));
     annotation (
         Documentation(info="<html>
 <p>
