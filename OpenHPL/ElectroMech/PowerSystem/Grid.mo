@@ -35,8 +35,8 @@ model Grid "Model of a mechanical grid equivalent"
   Modelica.Blocks.Math.Add dP2(k2=-1) annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         origin={-20,30})));
+  Modelica.Blocks.Math.Gain toHz(k=data.f_0) annotation (Placement(transformation(extent={{4,-56},{-8,-44}})));
 equation
-  connect(dF.u1, toHz.y) annotation (Line(points={{-22,-50},{84,-50},{84,-40},{78.6,-40}}, color={0,0,127}));
   connect(nomFrequency.y, dF.u2) annotation (Line(points={{-59,-70},{-30,-70},{-30,-58}}, color={0,0,127}));
   connect(dF.y, P.u2) annotation (Line(points={{-39,-50},{-94,-50},{-94,64},{-82,64}},color={0,0,127}));
   connect(Pload, P.u1) annotation (Line(points={{0,120},{0,88},{-90,88},{-90,76},{-82,76}}, color={0,0,127}));
@@ -46,6 +46,8 @@ equation
   connect(product.u2, P.u2) annotation (Line(points={{-25,64},{-28,64},{-28,44},{-94,44},{-94,64},{-82,64}}, color={0,0,127}));
   connect(Pload, dP2.u2) annotation (Line(points={{0,120},{0,26.4},{-12.8,26.4}}, color={0,0,127}));
   connect(product.y, dP2.u1) annotation (Line(points={{-13.5,67},{-8,67},{-8,33.6},{-12.8,33.6}}, color={0,0,127}));
+  connect(toHz.u, w_m2pu.y) annotation (Line(points={{5.2,-50},{84,-50},{84,-40},{78.6,-40}}, color={0,0,127}));
+  connect(toHz.y, dF.u1) annotation (Line(points={{-8.6,-50},{-22,-50}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
 <h4>Primary control</h4>
