@@ -42,10 +42,6 @@ model Pipe "Model of a pipe"
 initial equation
   if SteadyState then
     der(mdot) = 0;
-  /*else
-    Testing with no initialization for this case, to avoid conflicts with multiple branches. Should in princple be ok.
-    mdot=Vdot_0*data.rho;
-    */
   end if;
   algorithm
     assert( phi < 1.0 , "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
@@ -61,7 +57,7 @@ equation
   mdot = i.mdot "Inlet direction for mdot";
 
   annotation (
-    Documentation(info="<html><p>The simple model of the pipe gives possibilities
+    Documentation(info= "<html><head></head><body><p>The simple model of the pipe gives possibilities
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
     <p>This model is described by the momentum differential equation, which depends
     on pressure drop through the pipe together with friction and gravity forces.
@@ -78,6 +74,6 @@ equation
       up to 0.6 for sharp contractions.</p>
     <p>More info about the pipe model can be found in
         <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
-    and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017a]</a>.</p>
-</html>"));
+    and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017a]</a>.</p><p>Updated formulation for non-equal inlet- and outlet diameter.</p><p><br></p><p><br></p>
+</body></html>"));
 end Pipe;
