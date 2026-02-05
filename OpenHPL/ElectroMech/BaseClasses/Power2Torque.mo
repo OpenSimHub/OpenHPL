@@ -90,7 +90,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
     annotation (Placement(transformation(extent={{76,-6},{64,6}})));
   Modelica.Mechanics.Rotational.Components.IdealGear toSysSpeed(ratio=2/p) "Converts to system speed based on p = 2"
     annotation (Placement(transformation(extent={{24,-6},{36,6}})));
-  Modelica.Blocks.Sources.RealExpression nominalSpeed(y=1) if enable_nomSpeed
+  Modelica.Blocks.Sources.RealExpression nominalSpeed(y=f_0) if enable_nomSpeed
     annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
   Modelica.Blocks.Interfaces.RealInput f_in if enable_f_in and not enable_nomSpeed
     "Speed input of the unit [pu]"

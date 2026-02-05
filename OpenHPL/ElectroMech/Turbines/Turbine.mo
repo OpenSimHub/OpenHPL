@@ -1,7 +1,7 @@
 within OpenHPL.ElectroMech.Turbines;
 model Turbine "Simple turbine model with mechanical connectors"
   extends BaseClasses.BaseValve;
-  extends BaseClasses.Power2Torque(power(y=Wdot_s));
+  extends BaseClasses.Power2Torque(f_0=data.f_0, power(y=Wdot_s));
   extends Interfaces.TurbineContacts;
   extends Icons.Turbine;
 
