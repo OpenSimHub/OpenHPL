@@ -10,8 +10,8 @@ model SimpleTurbine "Model of a hydropower system with a simple turbine turbine"
     offset=1,
     startTime=500) annotation (
     Placement(transformation(origin={-10,70}, extent = {{-10, -10}, {10, 10}})));
-  OpenHPL.Waterway.Pipe intake(H=10, Vdot(fixed = true)) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
-  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+  OpenHPL.Waterway.Pipe intake(H=10, D_i=5) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
+  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600, D_i=5) annotation (Placement(transformation(extent={{50,-10},{70,10}})));
   OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,0},
         extent={{-10,10},{10,-10}},
@@ -22,10 +22,11 @@ model SimpleTurbine "Model of a hydropower system with a simple turbine turbine"
     H=80,
     L=200,
     vertical=true) constrainedby Interfaces.TwoContacts annotation (Placement(transformation(origin={0,30}, extent={{-10,-10},{10,10}})));
-  OpenHPL.Waterway.SurgeTank surgeTank(h_0=20) annotation (Placement(transformation(
+  OpenHPL.Waterway.SurgeTank surgeTank(H=25, L=30, h_0=20)
+    annotation (Placement(transformation(
         origin={-30,30},
         extent={{-10,-10},{10,10}})));
-  ElectroMech.Turbines.Turbine turbine(enable_nomSpeed=true)
+  ElectroMech.Turbines.Turbine turbine(ValveCapacity=false, enable_nomSpeed=true)
     annotation (Placement(transformation(
         origin={30,10},
         extent={{-10,-10},{10,10}})));

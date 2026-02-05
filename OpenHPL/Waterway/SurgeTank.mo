@@ -70,6 +70,9 @@ initial equation
     h = h_0;
   end if;
 equation
+   assert( h >= 0, "Water level h in surge tank must be greater than 0!",
+    AssertionLevel.error);
+
   der(m) = mdot "Mass balance";
   der(M) = Mdot+F "Momentum balance";
 
