@@ -16,30 +16,30 @@ Users will have to manually edit their existing models that were based on older 
 </p>
 <h5>💥 Breaking Changes</h5>
   <ul>
-    <li>Merge or consolidate TurbineContact and TurbineContacts2 <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/54\">#54</a></li>
-    <li>Remove calculated values from Interfaces <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/66\">#66</a></li>
-    <li>Correct the speed in and outputs of the base class for turbine, generator and grid <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/71\">#71</a></li>
+    <li>Merge or consolidate TurbineContact and TurbineContacts2 <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/54\">#54</a></li>
+    <li>Remove calculated values from Interfaces <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/66\">#66</a></li>
+    <li>Correct the speed in and outputs of the base class for turbine, generator and grid <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/71\">#71</a></li>
   </ul>
 <h5>🚀 Features</h5>
   <ul>
-     <li>Replaces image with improved SVG version <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/65\">#65</a></li>
-     <li>Add a valve model <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/59\">#59</a></li>
-     <li>Implementation of a Tainter Gate <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/60\">#60</a></li>
-     <li>BaseValve and Turbine update to avoid p_a=0 issues and non-linear closing law <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/70\">#70</a></li>
-     <li>Change to new defaults for more practical use <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/68\">#68</a></li>
-     <li>Update handling of diverging or converging pipe <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/69\">#69</a></li>
+     <li>Replaces image with improved SVG version <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/65\">#65</a></li>
+     <li>Add a valve model <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/59\">#59</a></li>
+     <li>Implementation of a Tainter Gate <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/60\">#60</a></li>
+     <li>BaseValve and Turbine update to avoid p_a=0 issues and non-linear closing law <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/70\">#70</a></li>
+     <li>Change to new defaults for more practical use <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/68\">#68</a></li>
+     <li>Update handling of diverging or converging pipe <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/69\">#69</a></li>
   </ul>
 
 <h5>🐛 Bug Fixes</h5>
   <ul>
-   <li>Protect Turbine control signal against division by zero error <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/56\">#56</a></li>
+   <li>Protect Turbine control signal against division by zero error <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/56\">#56</a></li>
   </ul>
 
 <h5>New Contributors</h5>
   <ul>
-     <li><a href=\"https://github.com/boerrebj\">@boerrebj</a> in <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/54\">#54</a></li>
-     <li><a href=\"https://github.com/pandeysudan1\">@pandeysudan1</a> in <a href=\"https://github.com/USN-OpenHPL/OpenHPL/pull/66\">#66</a></li>
+     <li><a href=\"https://github.com/boerrebj\">@boerrebj</a> in <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/54\">#54</a></li>
+     <li><a href=\"https://github.com/pandeysudan1\">@pandeysudan1</a> in <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/66\">#66</a></li>
  </ul>
- <p><strong>Full Changelog:</strong> <a href=\"https://github.com/USN-OpenHPL/OpenHPL/compare/v2.0.1...v3.0.0\">v2.0.1...v3.0.0</a></p>
+ <p><strong>Full Changelog:</strong> <a href=\"https://github.com/OpenSimHub/OpenHPL/compare/v2.0.1...v3.0.0\">v2.0.1...v3.0.0</a></p>
 </html>"));
 end v300;

@@ -3,7 +3,7 @@
 ## Project Overview
 OpenHPL is an open-source **Modelica hydropower library** for modeling hydropower systems of varying complexity. Models range from simple single-component tests to complete hydropower plants with turbines, generators, controllers, and integration with power systems (via OpenIPSL).
 
-**Key Repository:** [GitHub - OpenHPL](https://github.com/USN-OpenHPL/OpenHPL)
+**Key Repository:** [GitHub - OpenHPL](https://github.com/OpenSimHub/OpenHPL)
 **Documentation:** User's Guide at `OpenHPL/Resources/Documents/UsersGuide.pdf`
 
 ## Modelica-Specific Conventions
