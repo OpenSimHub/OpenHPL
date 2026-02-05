@@ -10,8 +10,8 @@ model SimpleValve "Model of a hydropower system with a simple turbine turbine"
     offset=1,
     startTime=500) annotation (
     Placement(transformation(origin={-10,70}, extent = {{-10, -10}, {10, 10}})));
-  OpenHPL.Waterway.Pipe intake(H=10, Vdot(fixed = true)) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
-  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600) annotation (Placement(transformation(extent={{50,20},{70,40}})));
+  OpenHPL.Waterway.Pipe intake(H=10, D_i=5) annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
+  OpenHPL.Waterway.Pipe discharge(H=0.5, L=600, D_i=5) annotation (Placement(transformation(extent={{50,20},{70,40}})));
   OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={90,30},
         extent={{-10,10},{10,-10}},
@@ -23,7 +23,7 @@ model SimpleValve "Model of a hydropower system with a simple turbine turbine"
     L=200,
     vertical=true) constrainedby Interfaces.TwoContacts annotation (Placement(transformation(origin={0,30}, extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.SurgeTank surgeTank(
-    H=30,
+    H=25,
     L=30,
     h_0=20) annotation (Placement(transformation(
         origin={-30,30},
