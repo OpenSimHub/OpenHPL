@@ -12,6 +12,7 @@ model Grid "Model of a mechanical grid equivalent"
   parameter Real mu=0 "Self-regulation [%/Hz]" annotation (Dialog(group="Electrical"));
 
   extends BaseClasses.Power2Torque(
+    f_0=data.f_0,
     final Pmax=1.2*Pgrid,
     final Ploss=0, final enable_nomSpeed=false,
                                    power(y=dP2.y));
