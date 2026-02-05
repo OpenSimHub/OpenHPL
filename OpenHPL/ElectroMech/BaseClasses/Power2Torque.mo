@@ -33,9 +33,15 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
   parameter SI.PerUnit f_0=1 "Initial speed of the unit"
     annotation (Dialog(group="Initialization"));
   parameter Boolean enable_nomSpeed = false "If checked, unit runs at fixed speed f_0"
-    annotation (choices(checkBox = true), Dialog(group = "Initialization"));
+    annotation (choices(checkBox = true),
+                Dialog(group = "Initialization", enable=not fixed_iniSpeed and not enable_f_in));
+  parameter Boolean fixed_iniSpeed = false "If checked, unit initialises with fixed speed.
+    When connecting several units mechanically only one can be fixed."
+    annotation (choices(checkBox = true),
+                Dialog(group = "Initialization", enable=not enable_nomSpeed and not enable_f_in));
   parameter Boolean enable_f_in=false "If checked, get a connector for speed input"
-    annotation (choices(checkBox = true), Dialog(group="Inputs", tab="I/O", enable=not enable_nomSpeed));
+    annotation (choices(checkBox = true),
+                Dialog(group="Inputs", tab="I/O", enable=not fixed_iniSpeed and not enable_nomSpeed));
   parameter Boolean enable_w = false "If checked, get a connector for angular velocity output"
     annotation (choices(checkBox = true), Dialog(group = "Outputs", tab="I/O"));
   parameter Boolean enable_f = false "If checked, get a connector for speed output"
@@ -48,7 +54,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={10,-20})));
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=if useH then 2*H*Pmax/f_0^2 else J, w(start=f_0*2*C.pi*data.f_0/(p/2), fixed=not enable_nomSpeed and not enable_f_in))
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=if useH then 2*H*Pmax/f_0^2 else J, w(start=f_0*2*C.pi*data.f_0/(p/2), fixed=not enable_nomSpeed and not enable_f_in and fixed_iniSpeed))
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Electrical.Machines.Losses.Friction friction(frictionParameters(PRef=Ploss, wRef=data.f_0*4*C.pi/p))
     annotation (Placement(transformation(extent={{0,60},{20,40}})));
