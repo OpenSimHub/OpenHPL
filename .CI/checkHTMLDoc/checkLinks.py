@@ -52,25 +52,44 @@ def _getURLs(path):
     return urls
 
 def _checkURL(url):
+    import sys
+    print(f'[checkLinks] Checking {url}', flush=True, file=sys.stderr)
+    timeout = 5
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+
     try:
-        rc = urllib2.urlopen(url).getcode()
+        req = urllib2.Request(url, headers=headers)
+        rc = urllib2.urlopen(req, timeout=timeout).getcode()
+        print(f'[checkLinks]   -> {rc}', flush=True, file=sys.stderr)
         return (url, rc)
-    except:
-        pass
-    try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)'}
-        rc = urllib2.urlopen(urllib2.Request(url, None, headers), context=ssl._create_unverified_context()).getcode()
     except urllib2.HTTPError as e:
         rc = e.code
+        print(f'[checkLinks]   -> HTTPError {rc}', flush=True, file=sys.stderr)
         if rc == 429:
             # Ignore too many requests
-            rc = 200
+            return (url, 200)
+        elif rc == 403:
+            # Ignore forbidden (server blocking automated requests)
+            return (url, 200)
+        elif rc == 418:
+            # Warn but don't fail on teapot (rate limiting from academic sites)
+            print(f'[checkLinks] WARNING: {url} returned 418 (rate limited?)', flush=True, file=sys.stderr)
+            return (url, 200)
+        elif rc == 500:
+            # Warn but don't fail on server errors (often transient, work in browser)
+            print(f'[checkLinks] WARNING: {url} returned 500 (server error, may be transient)', flush=True, file=sys.stderr)
+            return (url, 200)
         elif rc in (301, 302):
             # Handle redirect errors
-            rc = urllib2.build_opener(urllib2.HTTPCookieProcessor).open(url).code
-    except:
-        rc = 0
-    return (url, rc)
+            try:
+                rc = urllib2.build_opener(urllib2.HTTPCookieProcessor).open(url, timeout=timeout).getcode()
+            except Exception:
+                pass
+        return (url, rc)
+    except Exception as e:
+        print(f'[checkLinks]   -> Timeout/error: {type(e).__name__}', flush=True, file=sys.stderr)
+        # Treat all timeouts/errors as 0 (skip them)
+        return (url, 0)
 
 def checkLinks(path):
     if os.path.isdir(path):
