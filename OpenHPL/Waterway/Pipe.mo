@@ -92,16 +92,16 @@ equation
     <h5>Friction Specification</h5>
     <p>The pipe friction can be specified using one of three methods via the <code>friction_method</code> parameter:</p>
     <ul>
-    <li><b>Pipe Roughness (p_eps)</b>: Direct specification of absolute pipe roughness height (m).
+    <li><strong>Pipe Roughness (p_eps)</strong>: Direct specification of absolute pipe roughness height (m).
     Typical values: 0.0001-0.001 m for steel pipes, 0.001-0.003 m for concrete.</li>
-    <li><b>Moody Friction Factor (f)</b>: Dimensionless friction factor from Moody diagram.
+    <li><strong>Moody Friction Factor (f)</strong>: Dimensionless friction factor from Moody diagram.
     Typical values: 0.01-0.05. Converted to equivalent roughness using fully turbulent flow approximation:
     p_eps = 3.7·D·10<sup>-1/(2√f)</sup></li>
-    <li><b>Manning Coefficient</b>: Two notations are supported:
+    <li><strong>Manning Coefficient</strong>: Two notations are supported:
     <ul>
-    <li><b>Manning's M coefficient (Strickler)</b> [m<sup>1/3</sup>/s]: M = 1/n, typical values 60-110 for steel,
+    <li><strong>Manning's M coefficient (Strickler)</strong> [m<sup>1/3</sup>/s]: M = 1/n, typical values 60-110 for steel,
     30-60 for rock tunnels.</li>
-    <li><b>Manning's n coefficient</b> [s/m<sup>1/3</sup>]: Typical values 0.009-0.013 for smooth steel,
+    <li><strong>Manning's n coefficient</strong> [s/m<sup>1/3</sup>]: Typical values 0.009-0.013 for smooth steel,
     0.012-0.017 for concrete, 0.017-0.030 for rock tunnels.  Use checkbox <code>use_n</code> to enable this notation.</li>
     </ul>
     These are then converted using: p_eps = 7.66·n<sup>1.5</sup></li>
