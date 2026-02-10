@@ -1,4 +1,4 @@
-﻿within OpenHPL.Waterway;
+within OpenHPL.Waterway;
 model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
@@ -107,7 +107,7 @@ equation
     </ul>
     <p>The conversions are simplified for hydropower applications assuming fully turbulent flow,
     so they depend only on fixed pipe dimensions and the chosen friction coefficient.</p>
-    
+
     <h5>More info</h5>
     <p>More info about the pipe model can be found in
         <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
