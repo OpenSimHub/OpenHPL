@@ -23,7 +23,7 @@ record Data "Provides a data set of most common used settings"
     annotation (choices(checkBox = true), Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0 = 0 "Initial volume flow rate through the system"
     annotation (Dialog(group="Initialization"));
-  parameter SI.Frequency f_0 = 50 "Initial system frequency"
+  parameter SI.PerUnit f_0 = 1 "Initial unit speed"
     annotation (Dialog(group = "Initialization"));
   final parameter Boolean TempUse = false "If checked, the water temperature is not constant"
     annotation (choices(checkBox = true), Dialog(group = "Thermal behaviour (not yet implemented)",
