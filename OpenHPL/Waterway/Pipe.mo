@@ -1,4 +1,4 @@
-within OpenHPL.Waterway;
+﻿within OpenHPL.Waterway;
 model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
@@ -27,7 +27,7 @@ model Pipe "Model of a pipe"
     Dialog(group = "Friction", enable = friction_method == Types.FrictionMethod.ManningFriction), choices(checkBox=true));
   parameter Real n_manning(unit="s/m(1/3)", min=0) = 0.025 "Manning's n coefficient (typically 0.009-0.017 for steel/concrete, 0.017-0.030 for rock tunnels)" annotation (
     Dialog(group = "Friction", enable = friction_method == Types.FrictionMethod.ManningFriction and use_n));
-  
+
 
   // Steady state:
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
@@ -73,7 +73,7 @@ equation
   mdot = i.mdot "Inlet direction for mdot";
 
   annotation (
-    Documentation(info= "<html><head></head><body><p>The simple model of the pipe gives possibilities
+    Documentation(info="<html><p>The simple model of the pipe gives possibilities
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
     <p>This model is described by the momentum differential equation, which depends
     on pressure drop through the pipe together with friction and gravity forces.
@@ -103,7 +103,7 @@ equation
     <li><strong>Manning's n coefficient</strong> [s/m<sup>1/3</sup>]: Typical values 0.009-0.013 for smooth steel,
     0.012-0.017 for concrete, 0.017-0.030 for rock tunnels.  Use checkbox <code>use_n</code> to enable this notation.</li>
     </ul>
-    These are then converted using: p_eps = D_h*3.097 exp(-0.118/n) empirically derived from the&nbsp;Karman-Prandtl equation.</li>
+    These are then converted using: p_eps = D_h·3.097·e<sup>(-0.118/n)</sup> empirically derived from the&nbsp;Karman-Prandtl equation.</li>
     </ul>
     <p>The conversions are simplified for hydropower applications assuming fully turbulent flow,
     so they depend only on fixed pipe dimensions and the chosen friction coefficient.</p>
@@ -112,5 +112,5 @@ equation
     <p>More info about the pipe model can be found in
         <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
     and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017a]</a>.</p>
-    </body></html>"));
+    </html>"));
 end Pipe;
