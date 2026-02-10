@@ -45,7 +45,7 @@ protected
     parameter Real n_eff = if use_n then n_manning else 1/m_manning "Effective Manning's n coefficient";
     parameter SI.Height p_eps = if friction_method == Types.FrictionMethod.PipeRoughness then p_eps_input
                                  elseif friction_method == Types.FrictionMethod.MoodyFriction then 3.7 * D_ * 10^(-1/(2*sqrt(f_moody)))
-                                 else 7.66 * n_eff^1.5 "Equivalent pipe roughness height";
+                                 else D_*3.0971 *exp(-0.118/n_eff) "Equivalent pipe roughness height";
     parameter SI.Diameter D_ = ( D_i + D_o)  / 2 "Average diameter";
     parameter SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
     parameter SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
@@ -73,8 +73,7 @@ equation
   mdot = i.mdot "Inlet direction for mdot";
 
   annotation (
-    Documentation(info= "<html>
-    <p>The simple model of the pipe gives possibilities
+    Documentation(info= "<html><head></head><body><p>The simple model of the pipe gives possibilities
     for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
     <p>This model is described by the momentum differential equation, which depends
     on pressure drop through the pipe together with friction and gravity forces.
@@ -104,7 +103,7 @@ equation
     <li><strong>Manning's n coefficient</strong> [s/m<sup>1/3</sup>]: Typical values 0.009-0.013 for smooth steel,
     0.012-0.017 for concrete, 0.017-0.030 for rock tunnels.  Use checkbox <code>use_n</code> to enable this notation.</li>
     </ul>
-    These are then converted using: p_eps = 7.66·n<sup>1.5</sup></li>
+    These are then converted using: p_eps = D_h*3.097 exp(-0.118/n) empirically derived from the&nbsp;Karman-Prandtl equation.</li>
     </ul>
     <p>The conversions are simplified for hydropower applications assuming fully turbulent flow,
     so they depend only on fixed pipe dimensions and the chosen friction coefficient.</p>
@@ -113,5 +112,5 @@ equation
     <p>More info about the pipe model can be found in
         <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
     and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017a]</a>.</p>
-    </html>"));
+    </body></html>"));
 end Pipe;
