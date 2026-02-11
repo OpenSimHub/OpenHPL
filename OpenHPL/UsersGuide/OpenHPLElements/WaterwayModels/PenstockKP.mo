@@ -4,6 +4,15 @@ class PenstockKP "Elastic Penstock with KP Method"
 
   annotation (Documentation(info="<html>
 <h4>Pipe with Compressible Water and Elastic Walls</h4>
+
+<blockquote style=\"background-color: #ffffcc; border-left: 4px solid #ffcc00; padding: 10px; margin: 10px 0;\">
+<strong>Note on Model Evolution:</strong> The older <code>Penstock</code> model using the Staggered Grid scheme 
+is now marked as obsolete and should not be used for new models. The <code>PenstockKP</code> model documented 
+here, which implements the more accurate and numerically stable KP (Kurganov-Petrova) method, is the recommended 
+choice for all elastic penstock modeling. Existing models using <code>Penstock</code> should be migrated to 
+<code>PenstockKP</code> for improved accuracy and reliability.
+</blockquote>
+
 <p>
 Unlike simple conduits, the penstock has considerable pressure variation due to considerable height drop. 
 To make the model more realistic, compressible water and elastic walls are taken into account using 
