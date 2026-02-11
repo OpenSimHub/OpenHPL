@@ -2,3 +2,6 @@ Fitting
 DarcyFriction
 manningVelocity
 KP07
+deCasteljau
+WeightedControlPoints
+TurbineLookUp
