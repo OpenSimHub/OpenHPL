@@ -87,17 +87,17 @@ With
 <dt> $$ \\mu_A = \\frac{\\psi}{\\sqrt{1+\\frac{\\psi\\cdot a}{h_0}}} \\tag{8.23}$$ </dt>
 <dd>Contraction coefficient sluice gate (\\(\\alpha=90^\\circ\\))</dd>
 <dt> $$ \\psi_{90^\\circ}= \\frac{1}{1+0.64\\cdot \\sqrt{1-(a/h_0)^2}} \\tag{8.25}$$ </dt>
-<dd>Contraction coefficient radial gate (for \(a/h_0 \\rightarrow 0\))</dd>
+<dd>Contraction coefficient radial gate (for \\(a/h_0 \\rightarrow 0\\))</dd>
 <dt> $$ \\psi_0(\\alpha)= 1.3 -0.8\\cdot\\sqrt{1-\\left(\\frac{\\alpha -205^\\circ}{220^\\circ}\\right)^2} \\tag{8.25a}$$ </dt>
-<dd> The edge angle \(\\alpha\) of the gate </dd>
+<dd> The edge angle \\(\\alpha\\) of the gate </dd>
 <dt> $$ \\alpha = \\left( \\frac{\\pi}{2} - \\arcsin(\\frac{h_h-a}{r})\\right) \\cdot \\frac{180^\\circ}{\\pi} $$ </dt>
 </dl>
 <blockquote>
 With:
 <ul>
-<li> \(a \\ldots\) Vertical gate opening </li>
-<li> \(h_h \\ldots\) Height of the hinge above gate bottom</li>
-<li> \(r \\ldots\) Radius of the gate arm </li>
+<li> \\(a \\ldots\\) Vertical gate opening </li>
+<li> \\(h_h \\ldots\\) Height of the hinge above gate bottom</li>
+<li> \\(r \\ldots\\) Radius of the gate arm </li>
 </ul>
 </blockquote>
 
@@ -149,12 +149,11 @@ With
 
 <h5>Boundary between free and backed-up flow</h5>
 <p>
-The boundary of the height of the water level \(h_2\) behind the gate from which on the calculation switches to the backed-up flow (8.29) can be derived from:
+The boundary of the height of the water level \\(h_2\\) behind the gate from which on the calculation switches to the backed-up flow (8.29) can be derived from:
 
 $$ \\frac{h_2^*}{a} = \\frac{\\psi}{2} \\cdot \\left( \\sqrt{ 1 + \\frac{16}{\\psi\\cdot\\left(1+\\frac{\\psi\\cdot a}{h_0}\\right)}\\cdot\\frac{h_0}{a}} - 1 \\right) \\tag{8.26}$$
 
-So when \(\\frac{h_2}{a} \\geq \\frac{h_2^*}{a}\) then we have back-up flow.
+So when \\(\\frac{h_2}{a} \\geq \\frac{h_2^*}{a}\\) then we have back-up flow.
 </p>
-</html>",
-    __OpenModelica_infoHeader = "<script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML\"></script>"));
+</html>"));
 end Gate;

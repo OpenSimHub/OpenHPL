@@ -88,6 +88,5 @@ $$Q = C_{dx} A \\sqrt{2gH} \\tag{3}$$
 <strong>Note:</strong>
 The use of <code>Cdx</code> is different to the implementaion as done in HEC-RAS. This was done in order to have a smoother transition from the partially to fully submerged region.
 </p>
-</html>",
- __OpenModelica_infoHeader = "<script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML\"></script>"));
+</html>"));
 end Gate_HR;
