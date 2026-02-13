@@ -30,7 +30,7 @@ end Contact;
 In addition, some extensions of this water flow connector are developed for better use in the library:
 </p>
 
-<h6>TwoContacts</h6>
+<h5>TwoContacts</h5>
 <p>
 <code>TwoContacts</code> is an extension from the <code>Contact</code> model which provides a model of
 two connectors of inlet and outlet contacts:
@@ -42,7 +42,7 @@ partial model TwoContact \"Model of two connectors\"
 end TwoContact;
 </pre>
 
-<h6>TurbineContacts</h6>
+<h5>TurbineContacts</h5>
 <p>
 <code>TurbineContacts</code> is an extension from <code>TwoContacts</code> model and provides the real
 input and output connectors, additionally. This model is used for turbine modelling:

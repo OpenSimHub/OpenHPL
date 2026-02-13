@@ -22,25 +22,25 @@ Here, the dimensionless factor φ is the generalized friction factor. For a long
 Pressure drop equations are provided for different types of constrictions:
 </p>
 
-<h6>Square Reduction/Expansion Fittings</h6>
+<h5>Square Reduction/Expansion Fittings</h5>
 <p align=\"center\">
   <img src=\"modelica://OpenHPL/Resources/Images/SquaredReduction.svg\" alt=\"Square reduction\" width=\"300\"/>
   <img src=\"modelica://OpenHPL/Resources/Images/SquaredExpansion.svg\" alt=\"Square expansion\" width=\"300\"/>
 </p>
 
-<h6>Tapered Reduction/Expansion Fittings</h6>
+<h5>Tapered Reduction/Expansion Fittings</h5>
 <p align=\"center\">
   <img src=\"modelica://OpenHPL/Resources/Images/TaperedReduction.svg\" alt=\"Tapered reduction\" width=\"300\"/>
   <img src=\"modelica://OpenHPL/Resources/Images/TaperedExpansion.svg\" alt=\"Tapered expansion\" width=\"300\"/>
 </p>
 
-<h6>Rounded Reduction/Expansion Fittings</h6>
+<h5>Rounded Reduction/Expansion Fittings</h5>
 <p align=\"center\">
   <img src=\"modelica://OpenHPL/Resources/Images/RoundedReduction.svg\" alt=\"Rounded reduction\" width=\"300\"/>
   <img src=\"modelica://OpenHPL/Resources/Images/RoundedExpansion.svg\" alt=\"Rounded expansion\" width=\"300\"/>
 </p>
 
-<h6>Sharp/Thick Orifice Fittings</h6>
+<h5>Sharp/Thick Orifice Fittings</h5>
 <p align=\"center\">
   <img src=\"modelica://OpenHPL/Resources/Images/OrificeSharp.svg\" alt=\"Sharp orifice\" width=\"300\"/>
   <img src=\"modelica://OpenHPL/Resources/Images/OrificeThick.svg\" alt=\"Thick orifice\" width=\"300\"/>
