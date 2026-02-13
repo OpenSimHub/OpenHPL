@@ -28,7 +28,6 @@ simulator.log
 **/*.bbl
 **/*.blg
 **/*.log
-**/*.pdf
 **/*.synctex.gz
 **/*.toc
 

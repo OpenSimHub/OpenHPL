@@ -1,0 +1,2 @@
+The LaTeX sources for the UsersGuide_v1.0.0.pdf were removed after the OpenHPL v3.0.1 release.
+The are still present in the Git history, just switch to a point before the v3.0.1 release.
