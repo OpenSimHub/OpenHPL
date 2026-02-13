@@ -1,12 +1,16 @@
 within OpenHPL;
-package UsersGuide "User's Guide Version 1.0.0"
+package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
   annotation (preferredView="info", DocumentationClass=true, Documentation(info="<html>
-<h4>OpenHPL User's Guide</h4>
-<p align=\"center\">
-<img src=\"modelica://OpenHPL/Resources/Images/Library.png\" width=\"400\"/>
-</p>
+<blockquote style=\"background-color: #e8f4f8; border-left: 4px solid #0078d7; padding: 10px; margin: 10px 0;\">
+<strong>Documentation Structure:</strong> This User's Guide provides high-level information about the library,
+installation, examples, and guidance for model selection. <strong>Detailed technical documentation (equations,
+parameters, implementation details) is provided directly in each model class.</strong> Navigate to the specific
+model you're interested in (e.g., <a href=\"modelica://OpenHPL.Waterway.Pipe\">Pipe</a>,
+<a href=\"modelica://OpenHPL.ElectroMech.Turbines.Turbine\">Turbine</a>) to see complete technical documentation.
+</blockquote>
+
 <p>
 <strong>OpenHPL</strong> is an open-source hydropower library that consists of hydropower unit models
 and is encoded in Modelica. Modelica is a multi-domain as well as a component-oriented
@@ -37,25 +41,11 @@ e.g., connecting with the Open-Instance Power System Library <strong>OpenIPSL</s
 possible to model the electrical part for the hydropower system.
 </li>
 </ol>
-<p>
-A more detailed description is presented in the following subsections of this User's Guide,
-the <a href=\"modelica://OpenHPL/Resources/Documents/UsersGuide.pdf\">User's Guide PDF</a>
-and the PhD thesis [Vytvytskyi2019].
-</p>
-
-<h5>User's Guide Contents</h5>
-<ul>
-<li><a href=\"modelica://OpenHPL.UsersGuide.Introduction\">Introduction</a> &mdash; Overview of OpenHPL capabilities</li>
-<li><a href=\"modelica://OpenHPL.UsersGuide.Installation\">Installation</a> &mdash; Installation instructions for OpenModelica and OpenHPL</li>
-<li><a href=\"modelica://OpenHPL.UsersGuide.OpenHPLElements\">OpenHPL Elements</a> &mdash; Detailed description of library components</li>
-<li><a href=\"modelica://OpenHPL.UsersGuide.BasicExample\">Basic Example</a> &mdash; Step-by-step example for creating models</li>
-<li><a href=\"modelica://OpenHPL.UsersGuide.ReleaseNotes\">Release Notes</a> &mdash; Version history and changes</li>
-<li><a href=\"modelica://OpenHPL.UsersGuide.References\">References</a> &mdash; Citations and related publications</li>
-</ul>
 
 <h5>Acknowledgements</h5>
 <p>
-This work is supported by the <strong>Norwegian Research Council</strong> under the project <em>\"Hydropower Systems Design and Analysis\"</em> (HydroCen Grant No. 257588).
+The very first version 1.0.0 of this library was created as part of the PhD thesis <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2019]</a>,
+which was supported by the <strong>Norwegian Research Council</strong> under the project <em>\"Hydropower Systems Design and Analysis\"</em> (HydroCen Grant No. 257588).
 </p>
 </html>"));
 end UsersGuide;

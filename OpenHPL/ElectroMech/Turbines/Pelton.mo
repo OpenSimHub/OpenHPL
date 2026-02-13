@@ -58,16 +58,51 @@ equation
   connect(p_out, P_out) annotation (Line(points={{40,90},{40,110}}, color={0,0,127}));
     annotation (
         Documentation(info="<html>
-<p>This is a model of the Pelton turbine.
-This model is based on the Euler turbine equation.
-</p>
-<p>
-<em>The model has not been tested.</em></p>
+<h4>Pelton Turbine Model</h4>
+<p>Mechanistic Pelton turbine model based on the Euler turbine equation and impulse turbine principles.</p>
+
 <p align=\"center\">
-<img src=\"modelica://OpenHPL/Resources/Images/turbinepelton.svg\">
+<img src=\"modelica://OpenHPL/Resources/Images/turbinepelton.svg\" alt=\"Pelton turbine\" width=\"600\"/>
 </p>
-<p>More info about the model can be found in:
-<a href=\"modelica://OpenHPL/Resources/Documents/Turbines_model.pdf\">Resources/Documents/Turbines_model.pdf</a>
-</p>
+<p><em>Figure: Key concepts of the Pelton turbine.</em></p>
+
+<h5>Shaft Power</h5>
+<p>The shaft power \\(\\dot{W}_s\\) produced in the Pelton turbine is:</p>
+<p>$$ \\dot{W}_s=\\dot{m}v_R\\left[\\delta(u_\\delta)\\cdot v_1-v_R\\right]\\left(1-k\\cos\\beta\\right) $$</p>
+<p>where:</p>
+<ul>
+<li>\\(\\dot{m}\\) is the mass flow rate through the turbine</li>
+<li>\\(v_R = \\omega R\\) is the reference velocity (\\(R\\) = radius of rotor where flow hits the bucket, \\(\\omega\\) = angular velocity constrained by grid frequency)</li>
+<li>\\(v_1=\\frac{\\dot{V}}{A_1}\\) is water velocity at position \"1\" (end of nozzle), with \\(\\dot{V}\\) = volumetric flow rate and \\(A_1\\) = cross-sectional area</li>
+<li>\\(\\beta\\) is the reflection angle (typically \\(\\beta= 165^{\\circ}\\))</li>
+<li>\\(k<1\\) is a friction factor (typically \\(k\\in[0.8, 0.9]\\))</li>
+<li>\\(\\delta(u_\\delta)\\) represents deflector mechanism to reduce velocity and avoid over-speed</li>
+</ul>
+
+<h5>Total Work and Friction Losses</h5>
+<p>Total work rate removed through the turbine:</p>
+<p>$$ {\\dot{W}_t} = {\\dot{W}_s+\\dot{W}_{ft}} $$</p>
+<p>Friction losses:</p>
+<p>$$ \\dot{W}_{ft}=K\\left(1-k\\cos\\beta\\right)\\dot{m}v_R^2 $$</p>
+<p>with friction coefficient \\(K=0.25\\).</p>
+
+<h5>Nozzle Pressure Drop</h5>
+<p>Pressure drop across the nozzle (positions \"0\" and \"1\"):</p>
+<p>$$ \\Delta p_n=\\frac{1}{2}\\rho\\dot{V}\\left[\\dot{V}\\left(\\frac{1}{A_1^2(Y)}-\\frac{1}{A_0^2}\\right)+k_f\\right] $$</p>
+<p>where \\(A_0\\) is cross-sectional area at nozzle beginning, \\(A_1(Y)\\) is area at nozzle end (function of needle position Y), 
+and \\(k_f\\) is the nozzle friction loss coefficient.</p>
+
+<h5>Connectors</h5>
+<ul>
+<li><a href=\"modelica://OpenHPL.Interfaces.TurbineContacts\">TurbineContacts</a> for connection to waterway and electro-mechanical units</li>
+<li>RealInput connector for angular velocity (typically from generator)</li>
+</ul>
+
+<h5>Parameters</h5>
+<p>User specifies: turbine runner radius, nozzle input diameter, runner bucket angle, friction factors and coefficients, 
+deflector mechanism coefficient.</p>
+
+<p><em>Note: This model has not been tested.</em></p>
+<p>More info in: <a href=\"modelica://OpenHPL/Resources/Documents/Turbines_model.pdf\">Resources/Documents/Turbines_model.pdf</a></p>
 </html>"));
 end Pelton;

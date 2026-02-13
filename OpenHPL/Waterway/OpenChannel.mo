@@ -42,11 +42,50 @@ equation
   annotation (
     Documentation(info="<html>
 <p style=\"color: #ff0000;\"><em>Note: Currently under investigation for plausibility.</em></p>
-<p>This is a model for the open channel (river). Could be used for modelling of run-of-river hydropower plants. </p>
-<p>In this model it is assumed that the channel has the inlet and outlet from the bottom of the left and right sides, respectevely. </p>
-<p>That is why this open channel should be connected from both sides to the <a href=\"modelica://OpenHPL.Waterway.Pipe\">Pipe</a> elements. Connectors hold information about the inlet/outlet flow rate and the pressures that is defined as sum of atmospheric pressure and pressure of the water (depends on depth). </p>
-<p>As boundary conditions, at least two of the four quentities (inlet flow or depth and outlet flow or depth) should be used. </p>
-<p>Perhaps, this structure is not really useful and some modification should be done. This is still under discussion and has not been tested properly. </p>
-<p>More info about the original model can be found in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2015]</a>.</p>
+
+<h4>Open Channel Model</h4>
+<p>Model for open channels (rivers) that can be used for modeling run-of-river hydropower plants. 
+The channel inlet and outlet are assumed to be at the bottom of the left and right sides, respectively.</p>
+
+<h5>Governing Equations</h5>
+<p>The open channel model is based on the following partial differential equation:</p>
+<p>$$ \\frac{\\partial U}{\\partial t}+\\frac{\\partial F}{\\partial x} = S $$</p>
+<p>where:</p>
+<ul>
+<li>\\(U=\\left[\\begin{matrix}q & z\\end{matrix}\\right]^T\\)</li>
+<li>\\(F=\\left[\\begin{matrix}q & \\frac{q^2}{z-B}+\\frac{g}{2}\\left(z-B\\right)^2\\end{matrix}\\right]^T\\)</li>
+<li>\\(S=\\left[\\begin{matrix}0 & -g\\left(z-B\\right)\\frac{\\partial B}{\\partial x}-\\frac{gf_n^2q|q|\\left(w+2\\left(z-B\\right)\\right)^\\frac{4}{3}}{w^\\frac{4}{3}}\\frac{1}{\\left(z-B\\right)^\\frac{7}{3}}\\end{matrix}\\right]^T\\)</li>
+</ul>
+<p>with: \\(z=h+B\\), and \\(q=\\frac{\\dot{V}}{w}\\). Here, h is water depth in the channel, B is the channel bed elevation,
+q is the discharge per unit width w of the open channel. f<sub>n</sub> is the Manning's roughness coefficient.</p>
+
+<h5>Eigenvalues</h5>
+<p>The eigenvalues for this model are defined as:</p>
+<p>$$ \\lambda_{1,2}=u\\pm\\sqrt{gh} $$</p>
+<p>where u is the cross-section average water velocity.</p>
+
+<h5>Desingularization</h5>
+<p>In dry or nearly dry channel areas, velocity at cell centers is recomputed using the desingularization formula:</p>
+<p>$$ \\bar{u}_j=\\frac{2\\bar{h}_j\\bar{q}_j}{\\bar{h}_j^2+\\max\\left(\\bar{h}_j^2,\\epsilon^2\\right)} $$</p>
+<p>applied when \\(h_{i\\pm\\frac{1}{2}}^\\pm<\\epsilon\\) (typically ε = 1e⁻⁵).</p>
+
+<h5>Implementation</h5>
+<p>Similar to <a href=\"modelica://OpenHPL.Waterway.PenstockKP\">PenstockKP</a>, this model uses the KP method 
+(<a href=\"modelica://OpenHPL.Functions.KP07.KPmethod\">KPmethod</a> function) to discretize the PDEs into ODEs.</p>
+
+<p>Boundary conditions specify inlet and outlet flows per unit width q₁ and q₂. 
+Connectors should be connected to <a href=\"modelica://OpenHPL.Waterway.Pipe\">Pipe</a> elements from both sides.  
+Connectors provide inlet/outlet flow rates and pressures (sum of atmospheric pressure and water depth-dependent pressure).</p>
+
+<h5>Parameters</h5>
+<ul>
+<li>Geometry: channel length L and width w, bed height vector H at left/right sides</li>
+<li>Manning's roughness coefficient f<sub>n</sub></li>
+<li>Number of discretization cells N</li>
+<li>Initialization: initial flow rate \\(\\dot{V}_0\\) and water depth h₀ for each cell</li>
+</ul>
+
+<p><em>Note: This model is still under discussion and has not been tested properly.</em></p>
+<p>More details in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2015]</a>.</p>
 </html>"));
 end OpenChannel;

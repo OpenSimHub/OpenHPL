@@ -116,30 +116,68 @@ equation
   // diff. equation
   der(U) = KP.diff_eq;
   annotation (
-    Documentation(info="<html><p>This is a more detailed model for the pipe that mostly can be
-used for proper modelling of the penstock or other conduits.</p>
-<p>The model could include the elastic walls and compressible water
-and use discretization method based on Kurganov-Petrova central upwind scheme (KP).
-The geometry of the penstock is shown in the figure below:</p>
+    Documentation(info="<html>
+<h4>Elastic Penstock with KP Method</h4>
+
+<blockquote style=\"background-color: #ffffcc; border-left: 4px solid #ffcc00; padding: 10px; margin: 10px 0;\">
+<strong>Note:</strong> The older <a href=\"modelica://OpenHPL.Waterway.Penstock\">Penstock</a> model using the Staggered Grid scheme
+is now marked as obsolete. This <code>PenstockKP</code> model, which implements the more accurate and numerically stable
+KP (Kurganov-Petrova) method, is the recommended choice for all elastic penstock modeling.
+</blockquote>
+
+<p>This is a detailed model for the pipe that can be used for proper modelling of the penstock or other conduits.
+Unlike simple conduits, the penstock has considerable pressure variations due to substantial height drop.
+To make the model more realistic, compressible water and elastic walls are taken into account.</p>
+
+<h5>Compressibility</h5>
+<p>The isothermal compressibility β<sub>T</sub> relates density and pressure:</p>
+<p>$$ \\rho \\approx \\rho^\\mathrm{atm}(1 + \\beta_T(p - p^\\mathrm{atm})) $$</p>
+<p>Similarly for pipe cross-section area due to elastic walls:</p>
+<p>$$ A \\approx A^\\mathrm{atm}(1 + \\beta^\\mathrm{eq}(p - p^\\mathrm{atm})) $$</p>
+<p>The total compressibility β<sup>tot</sup> = β<sub>T</sub> + β<sup>eq</sup> is related to the speed of sound
+in water inside the pipe. The parameter <code>PipeElasticity</code> controls whether elastic walls are included.</p>
+
+<h5>PDE Formulation and KP Discretization</h5>
+<p>The model includes elastic walls and compressible water using the Kurganov-Petrova central upwind scheme (KP).
+Using the compressibility relationships, the ODEs for mass and momentum balances develop into PDEs:</p>
+<p>$$ \\frac{\\partial U}{\\partial t} + \\frac{\\partial F}{\\partial x} = S $$</p>
+<p>where \\(U = [p_\\mathrm{p}, \\dot{m}_\\mathrm{p}]^T\\) is the state vector containing pressure and mass flow rate.</p>
+
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\" style=\"width:50%\"></p>
-<p>Conservation laws are usually solved by the finite-volume methods.
-With the finite-volume method, we divide the grid into small control
-volumes or control cells and then apply the conservation laws.
-Here the pipe is divided in <code>N</code> segments, with input and
-output pressure as a boundary conditions.
-The given cell is denoted by <code>j</code>, i.e., it is the <code>j</code><sup>th</sup> cell.
-Cell average is calculated at the center of the cell and <code>U</code> denotes the
-average values of the conserved variables. The left and the right interfaces of the
-cell are denoted by <code>j-1/2</code> and <code>j+1/2</code> respectively.
- At each cell interface, the right(+)/left(-) point values are reconstructed.
-The letter <code>a</code>denotes the right and the left sided local speeds of propagation
-at the left/right interface of the cell.</p>
+<p><em>Figure: Geometry of the penstock model.</em></p>
+
+<p>Conservation laws are solved by finite-volume methods. The pipe is divided into <code>N</code> segments,
+with inlet and outlet pressures as boundary conditions. The given cell is denoted by <code>j</code> (the <code>j</code><sup>th</sup> cell).
+Cell averages are calculated at the center of the cell, and <code>U</code> denotes the average values of the conserved variables.
+The left and right interfaces are denoted by <code>j-1/2</code> and <code>j+1/2</code> respectively.
+At each cell interface, the right(+)/left(-) point values are reconstructed.</p>
+
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/kp.svg\" style=\"width:50%\"></p>
-<p>In order to determine the fluxes at the cell interface <code>H</code> and the
-source term <code>S</code>, the KP scheme is used, which is a second order scheme that is well balanced.</p>
+<p><em>Figure: Discretization scheme showing cell j with interfaces and reconstruction points.</em></p>
+
+<p>To determine the fluxes at the cell interface and the source term <code>S</code>, the KP scheme is used,
+which is a second-order scheme that is well-balanced.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/equations/KPScheme.svg\"></p>
-<p>More info about the KP pipe model can be found in can be found in
-<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>.
+
+<h5>Implementation</h5>
+<p>The <code>PenstockKP</code> model uses the <code>KP07.KPmethod</code> function to discretize PDEs into ODEs.
+The eigenvalues λ<sub>1,2</sub> determine the wave propagation speeds and are related to the speed of sound
+c = √(A<sub>p</sub>/(A<sub>p</sub><sup>atm</sup> ρ<sup>atm</sup> β<sup>tot</sup>)).</p>
+
+<h5>Parameters</h5>
+<p>User specifies:</p>
+<ul>
+<li>Geometry: length <code>L</code>, height difference <code>H</code>, inlet/outlet diameters <code>D_i</code>/<code>D_o</code>,
+roughness <code>p_eps</code></li>
+<li>Discretization: number of cells <code>N</code></li>
+<li>Model fidelity: <code>PipeElasticity</code> checkbox to enable/disable elastic walls</li>
+<li>Initialization: flow rate <code>Vdot_0</code> and pressure <code>p_p0</code> vectors, or <code>SteadyState</code> flag</li>
+</ul>
+
+<h5>More Information</h5>
+<p>More info about the KP penstock model can be found in
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a> and
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2019]</a>.
 </p>
 </html>"));
 end PenstockKP;

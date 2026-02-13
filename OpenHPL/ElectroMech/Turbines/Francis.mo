@@ -214,34 +214,64 @@ equation
   connect(p_out, P_out) annotation (Line(points={{40,90},{40,110}}, color={0,0,127}));
     annotation (
         Documentation(info="<html>
-<p>
-This is the Francis turbine model that gives possibilities for proper modelling of the Francis turbine.
-</p>
-<p>The mechanistic model is based on Euler equations for the Francis turbine.
-Besides hydraulic input and output, there are input as the control signal for the valve opening
-and also output as the turbine shaft power and input as angular velocity.
-</p>
+<h4>Francis Turbine Model</h4>
+
+<p>This is the Francis turbine model that gives possibilities for proper modelling of the Francis turbine.
+The mechanistic model is based on Euler equations for the Francis turbine.</p>
+
+<p>Besides hydraulic input and output, there are input as the control signal for the valve opening
+and also output as the turbine shaft power and input as angular velocity.</p>
+
 <p align=\"center\">
 <img src=\"modelica://OpenHPL/Resources/Images/turbinefrancis.svg\">
 </p>
+<p><em>Figure: Key quantities in the Francis turbine model showing inlet (1) and outlet (2) sections.</em></p>
+
+<h5>Euler Turbine Equations</h5>
+
+<p>The shaft power produced by the turbine is given by:</p>
+<p>$$ \\dot{W}_s = \\dot{m}\\omega \\left(R_1\\frac{\\dot{V}}{A_1}\\cot{\\alpha_1} - R_2\\left(\\omega R_2 + \\frac{\\dot{V}}{A_2}\\cot{\\beta_2}\\right)\\right) $$</p>
+
+<p>where ṁ and V̇ are mass and volumetric flow rates, ω is angular velocity, R<sub>1</sub> and R<sub>2</sub>
+are inlet and outlet radii, A<sub>1</sub> and A<sub>2</sub> are cross-sectional areas, α<sub>1</sub> is
+inlet guide vane angle, and β<sub>2</sub> is outlet blade angle.</p>
+
+<h5>Total Work and Efficiency</h5>
+
+<p>The total work rate is:</p>
+<p>$$ \\dot{W}_t = \\dot{W}_s + \\dot{W}_{ft} + \\Delta p_v \\dot{V} $$</p>
+<p>where Ẇ<sub>ft</sub> represents various friction losses (shock, whirl, wall friction),
+and Δp<sub>v</sub>V̇ accounts for guide vane pressure drop. Turbine efficiency \\(\\eta = \\dot{W}_s / \\dot{W}_t\\).</p>
+
+<h5>Turbine Design Algorithm</h5>
+
 <p>There is also available the runner design algorithm that can define all geometrical
-parameters based on the nominal parameters.</p><p>The turbine losses coefficients
-(<code>k_ft1</code>, <code>k_ft2</code>, <code>k_ft3</code>) can be also defined automatically.
-However, if some dynamic data from real turbine is available it is better to tune
-these parameters a bit more and use the defined values as a starting point.
-</p>
-<p>A model for servo that that runs the guide vane opening is also available.
-Furthermore it is possible to automatically generate all need parameters for the servo,
- or simply specify them.
-</p>
-<p>
-This mechanistic turbine model does not work really well for low loads (&lt;10% guide vane opening).
+parameters based on the nominal parameters (net head, flow rate, power, speed).
+The algorithm determines: outlet blade angle β<sub>2</sub>, runner radii R<sub>1</sub> and R<sub>2</sub>,
+runner width w<sub>1</sub>, and inlet blade angle β<sub>1</sub>.</p>
+
+<p>The turbine losses coefficients (<code>k_ft1</code>, <code>k_ft2</code>, <code>k_ft3</code>) can be also
+defined automatically. However, if some dynamic data from real turbine is available it is better to tune
+these parameters a bit more and use the defined values as a starting point.</p>
+
+<h5>Guide Vane Actuation</h5>
+
+<p>A model for servo that runs the guide vane opening is also available. A guide vane opening model relates
+actuator position Y to guide vane angle α<sub>1</sub> through geometric relationships. Furthermore it is
+possible to automatically generate all needed parameters for the servo, or simply specify them.</p>
+
+<h5>Low Load Performance</h5>
+
+<p>This mechanistic turbine model does not work really well for low loads (&lt;10% guide vane opening).
 However there is parameters that could be tuned for low load regimes.
 These are <code>u_min</code> and <code>k_ft4</code>.</p>
 
+<h5>More Information</h5>
+
 <p>More info about the mechanistic turbine model can be found in:
-<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2018]</a> and about
-the servo (also turbine model) in:
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2018]</a> and
+<a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2019]</a>.
+Additional details about the servo (and turbine model) are in:
 <a href=\"modelica://OpenHPL/Resources/Documents/Turbines_model.pdf\">Resources/Documents/Turbines_model.pdf</a>.</p>
 </html>"));
 end Francis;

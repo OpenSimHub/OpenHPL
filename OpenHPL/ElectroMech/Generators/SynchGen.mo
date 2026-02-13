@@ -109,8 +109,72 @@ equation
   // - W_fa;
   //
   annotation (
-    Documentation(info= "<html><p>This is a model of the generator that is connected to the grid.
-    This model could give some transient results. However, it is better to use generator models from IPSL.</p>
-    <p>More info about this model can be found in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Sharefi2011]</a>.</p>
-    </html>"));
+    Documentation(info= "<html>
+<h4>Synchronous Generator Model</h4>
+<p>Detailed synchronous generator model connected to the grid, based on d-q decomposition.</p>
+
+<h5>Voltage-Current Relation</h5>
+<p>$$ \\left[\\begin{matrix}R_a+R_e & x_q'+x_e\\\\ -x_d'-x_e & R_a+R_e\\end{matrix}\\right]\\left[\\begin{matrix}I_d \\\\ I_q\\end{matrix}\\right]= \\left[\\begin{matrix}E_d'+V_s\\sin\\delta_e \\\\ E_q'-V_s\\cos\\delta_e\\end{matrix}\\right] $$</p>
+<p>where:</p>
+<ul>
+<li>\\(R_a\\) and \\(R_e\\) are phase winding and equivalent network resistances</li>
+<li>\\(x_d\\), \\(x_q\\), \\(x_d'\\), \\(x_q'\\) are d-/q-axis normal and transient reactances</li>
+<li>\\(x_e\\) is equivalent network reactance</li>
+<li>\\(I_d\\), \\(I_q\\) are d-/q-axis currents</li>
+<li>\\(E_d'\\), \\(E_q'\\) are d-/q-axis transient voltages</li>
+<li>\\(V_s\\) is network RMS voltage</li>
+<li>\\(\\delta_e\\) is phase shift angle</li>
+</ul>
+
+<h5>Phase Shift Angle Dynamics</h5>
+<p>$$ \\frac{d\\delta_e}{dt} = (\\omega - \\omega_s)\\frac{n_p}{2} $$</p>
+<p>where \\(n_p\\) is number of poles, \\(\\omega\\) and \\(\\omega_s\\) are generator and grid angular velocities.</p>
+
+<h5>Swing Equation</h5>
+<p>$$ \\frac{d\\omega}{dt}=\\frac{\\dot{W}_s-P_e}{J\\omega} $$</p>
+
+<h5>Transient Operation</h5>
+<p>$$
+\\begin{array}{c}
+T_{qo}'\\frac{dE_d'}{dt} =-E_d' + (x_q' - x_q)I_q \\\\
+T_{do}'\\frac{dE_q'}{dt} = -E_q' + (x_d - x_d')I_d + E_f
+\\end{array}
+$$</p>
+<p>where \\(T_{do}'\\) and \\(T_{qo}'\\) are d-/q-axis transient open-circuit time constants.</p>
+
+<h5>Excitation System</h5>
+<p>Field voltage dynamics:</p>
+<p>$$ \\frac{dE_f}{dt} = \\frac{-E_f + K_E\\left(V_{tr}-V_t-V_{stab}\\right)}{T_E} $$</p>
+<p>where \\(K_E\\) is excitation system gain, \\(T_E\\) is excitation time constant, \\(V_{tr}\\) is voltage reference set point, 
+and \\(V_t = \\sqrt{\\left(E_d'-R_aI_d-x_q'I_q\\right)^2+\\left(E_q'-R_aI_q+x_d'I_d\\right)^2}\\) is terminal voltage.</p>
+
+<h5>Stabilization</h5>
+<p>$$ \\frac{dV_{stab}}{dt} = \\frac{-V_{stab} + K_F\\frac{dE_f}{dt}}{T_{FE}} $$</p>
+<p>where \\(K_F\\) is stabilizer gain and \\(T_{FE}\\) is stabilizer time constant.</p>
+
+<h5>Output Power</h5>
+<p>Active and reactive power:</p>
+<p>$$
+\\begin{array}{c}
+P_e = 3\\left(E_d'I_d+E_q'I_q\\right)\\\\
+Q_e = \\sqrt{9V_t^2I_t^2-P_e^2}
+\\end{array}
+$$</p>
+<p>where \\(I_t=\\sqrt{I_d^2+I_q^2}\\) is terminate current.</p>
+
+<h5>Connectors</h5>
+<ul>
+<li>RealInput: turbine shaft power</li>
+<li>RealOutput: angular velocity and frequency</li>
+</ul>
+
+<h5>Parameters</h5>
+<p>User specifies: nominal active/reactive powers, phase winding resistance, number of poles, network parameters 
+(equivalent resistance/reactance, RMS voltage, grid angular velocity), d-/q-axis reactances and time constants, 
+field voltage limits, excitation/stabilizer gains and time constants, moment of inertia, friction factor, and 
+initialization options.</p>
+
+<p><em>Note: For more advanced modeling, consider using generator models from <a href=\"modelica://OpenIPSL\">OpenIPSL</a>.</em></p>
+<p>More details in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Sharefi2011]</a>.</p>
+</html>"));
 end SynchGen;

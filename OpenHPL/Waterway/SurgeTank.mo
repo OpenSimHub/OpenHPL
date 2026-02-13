@@ -139,29 +139,62 @@ equation
   F_g = m * data.g * cos_theta;
  annotation (
     Documentation(info="<html>
-<p>The four different surge tank models can be chosen. </p>
-<p>These surge tanks are:</p>
+<h4>Surge Tank Model</h4>
+
+<p>The surge shaft/tank is modeled as a vertical open pipe with constant diameter together with a manifold
+connecting the conduit, surge volume, and penstock. Four different surge tank configurations are available:</p>
+
 <ol>
-<li>Simple surge tank</li>
-<li>Air cushion surge tank</li>
-<li>Throttle valve surge tank</li>
-<li>Sharp orifice surge tank</li>
+<li><strong>Simple surge tank</strong> - Basic vertical open pipe
+<p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STSimple.svg\"></p></li>
+<li><strong>Air cushion surge tank</strong> - Includes compressed air chamber
+<p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STAirCushion.svg\"></p></li>
+<li><strong>Throttle valve surge tank</strong> - With restricted throat section
+<p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STSharpOrifice.svg\"></p></li>
+<li><strong>Sharp orifice surge tank</strong> - With orifice restriction
+<p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STThrottleValve.svg\"></p></li>
 </ol>
-<p>All of the surge tanks are modeled using mass and momemtum balance. </p>
-<p>All of the surge tank can be shown below. </p>
 
-<p>This simple surge tank is shown below.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/STSimple.svg\"/></p>
 
-<p>The air cushion surge tank is shown below:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/STAirCushion.svg\"/></p>
+<h5>Mass and Momentum Balances</h5>
 
-<p>This sharp orifice surge tank is shown below.</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/STSharpOrifice.svg\"/></p>
+<p>All surge tank types are modeled using mass and momentum balance equations:</p>
+<p>$$ \\frac{dm}{dt} = \\dot{m}_\\mathrm{s,in} = \\rho \\dot{V} $$</p>
+<p>$$ \\frac{d(mv)}{dt} = \\dot{m}_\\mathrm{i}v_\\mathrm{i} + F_\\mathrm{p} + F_\\mathrm{g} + F_\\mathrm{f} $$</p>
 
-<p>The throttle valve surge tank is shown below:</p>
-<p><img src=\"modelica://OpenHPL/Resources/Images/STThrottleValve.svg\"/></p>
+<h5>Water Mass and Geometry</h5>
 
-<p>The simple surge tank model can be found in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
+<p>The water mass in the surge tank is: $$ m = \\rho V = \\rho lA = \\rho A\\frac{h}{\\cos\\theta} $$
+where ρ is water density, V is volume, h and l are height and length of water column,
+and A = πD²/4 is the cross-sectional area.</p>
+
+<p>Water velocities: $$ v = \\frac{\\dot{V}}{A}, \\quad v_\\mathrm{i} = \\frac{\\dot{V}}{A} $$</p>
+
+<h5>Force Terms</h5>
+
+<p><strong>Pressure force:</strong> $$ F_\\mathrm{p} = A(p_\\mathrm{i} - p^\\mathrm{atm}) $$
+where p<sub>i</sub> is inlet pressure and p<sup>atm</sup> is atmospheric pressure.</p>
+
+<p><strong>Gravity force:</strong> $$ F_\\mathrm{g} = m g \\cos\\theta $$
+where θ = arccos(H/L) is the slope angle.</p>
+
+<p><strong>Friction force:</strong> $$ F_\\mathrm{f} = -\\frac{1}{8}lf_\\mathrm{D}\\pi\\rho Dv|v| $$
+calculated using the Darcy friction factor f<sub>D,s</sub>.</p>
+
+<h5>Manifold Connection</h5>
+
+<p>The manifold preserves mass in steady-state: $$ \\dot{V}_\\mathrm{i} = \\dot{V}_\\mathrm{p} + \\dot{V} $$
+The manifold pressure is equal for all three connections. This is implemented via <code>ContactNode</code> connectors.</p>
+
+
+
+<h5>Parameters and Initialization</h5>
+
+<p>Required geometry parameters: length L, height H, diameter D,
+roughness p<sub>ε</sub>, and atmospheric pressure p<sup>atm</sup>. Initialize with flow rate V̇<sub>0</sub>
+and water height h<sub>0</sub>. Option for steady-state initialization is available.</p>
+
+<h5>More Information</h5>
+<p>More details in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
 </html>"));
 end SurgeTank;
