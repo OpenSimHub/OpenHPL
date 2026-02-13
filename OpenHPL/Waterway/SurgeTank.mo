@@ -159,8 +159,8 @@ connecting the conduit, surge volume, and penstock. Four different surge tank co
 <h5>Mass and Momentum Balances</h5>
 
 <p>All surge tank types are modeled using mass and momentum balance equations:</p>
-<p>$$ \\frac{dm}{dt} = \\dot{m}_\\mathrm{s,in} = \\rho \\dot{V} $$</p>
-<p>$$ \\frac{d(mv)}{dt} = \\dot{m}_\\mathrm{i}v_\\mathrm{i} + F_\\mathrm{p} + F_\\mathrm{g} + F_\\mathrm{f} $$</p>
+<p>$$ \\frac{\\mathrm{d}m}{\\mathrm{d}t} = \\dot{m}_\\mathrm{s,in} = \\rho \\dot{V} $$</p>
+<p>$$ \\frac{\\mathrm{d}(mv)}{\\mathrm{d}t} = \\dot{m}_\\mathrm{i}v_\\mathrm{i} + F_\\mathrm{p} + F_\\mathrm{g} + F_\\mathrm{f} $$</p>
 
 <h5>Water Mass and Geometry</h5>
 

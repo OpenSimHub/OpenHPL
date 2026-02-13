@@ -127,29 +127,29 @@ equation
 </ul>
 
 <h5>Phase Shift Angle Dynamics</h5>
-<p>$$ \\frac{d\\delta_e}{dt} = (\\omega - \\omega_s)\\frac{n_p}{2} $$</p>
+<p>$$ \\frac{\\mathrm{d}\\delta_e}{\\mathrm{d}t} = (\\omega - \\omega_s)\\frac{n_p}{2} $$</p>
 <p>where \\(n_p\\) is number of poles, \\(\\omega\\) and \\(\\omega_s\\) are generator and grid angular velocities.</p>
 
 <h5>Swing Equation</h5>
-<p>$$ \\frac{d\\omega}{dt}=\\frac{\\dot{W}_s-P_e}{J\\omega} $$</p>
+<p>$$ \\frac{\\mathrm{d}\\omega}{\\mathrm{d}t}=\\frac{\\dot{W}_s-P_e}{J\\omega} $$</p>
 
 <h5>Transient Operation</h5>
 <p>$$
 \\begin{array}{c}
-T_{qo}'\\frac{dE_d'}{dt} =-E_d' + (x_q' - x_q)I_q \\\\
-T_{do}'\\frac{dE_q'}{dt} = -E_q' + (x_d - x_d')I_d + E_f
+T_{qo}'\\frac{\\mathrm{d}E_d'}{\\mathrm{d}t} =-E_d' + (x_q' - x_q)I_q \\\\
+T_{do}'\\frac{\\mathrm{d}E_q'}{\\mathrm{d}t} = -E_q' + (x_d - x_d')I_d + E_f
 \\end{array}
 $$</p>
 <p>where \\(T_{do}'\\) and \\(T_{qo}'\\) are d-/q-axis transient open-circuit time constants.</p>
 
 <h5>Excitation System</h5>
 <p>Field voltage dynamics:</p>
-<p>$$ \\frac{dE_f}{dt} = \\frac{-E_f + K_E\\left(V_{tr}-V_t-V_{stab}\\right)}{T_E} $$</p>
+<p>$$ \\frac{\\mathrm{d}E_f}{\\mathrm{d}t} = \\frac{-E_f + K_E\\left(V_{tr}-V_t-V_{stab}\\right)}{T_E} $$</p>
 <p>where \\(K_E\\) is excitation system gain, \\(T_E\\) is excitation time constant, \\(V_{tr}\\) is voltage reference set point, 
 and \\(V_t = \\sqrt{\\left(E_d'-R_aI_d-x_q'I_q\\right)^2+\\left(E_q'-R_aI_q+x_d'I_d\\right)^2}\\) is terminal voltage.</p>
 
 <h5>Stabilization</h5>
-<p>$$ \\frac{dV_{stab}}{dt} = \\frac{-V_{stab} + K_F\\frac{dE_f}{dt}}{T_{FE}} $$</p>
+<p>$$ \\frac{\\mathrm{d}V_{stab}}{\\mathrm{d}t} = \\frac{-V_{stab} + K_F\\frac{\\mathrm{d}E_f}{\\mathrm{d}t}}{T_{FE}} $$</p>
 <p>where \\(K_F\\) is stabilizer gain and \\(T_{FE}\\) is stabilizer time constant.</p>
 
 <h5>Output Power</h5>

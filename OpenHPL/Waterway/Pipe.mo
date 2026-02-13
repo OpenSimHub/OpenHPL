@@ -86,10 +86,10 @@ small pressure variations.</p>
 <h5>Mass and Momentum Balance</h5>
 
 <p><strong>Mass Balance:</strong> For incompressible water, the mass in the filled pipe is constant:</p>
-<p>$$ \\frac{dm_\\mathrm{c}}{dt} = \\dot{m}_\\mathrm{c,in} - \\dot{m}_\\mathrm{c,out} = 0 $$</p>
+<p>$$ \\frac{\\mathrm{d}m_\\mathrm{c}}{\\mathrm{d}t} = \\dot{m}_\\mathrm{c,in} - \\dot{m}_\\mathrm{c,out} = 0 $$</p>
 
 <p><strong>Momentum Balance:</strong> The momentum balance is expressed as:</p>
-<p>$$ \\frac{dM_\\mathrm{c}}{dt} = \\dot{M}_\\mathrm{c,in} - \\dot{M}_\\mathrm{c,out} + F_\\mathrm{p,c} + F_\\mathrm{g,c} + F_\\mathrm{f,c} $$</p>
+<p>$$ \\frac{\\mathrm{d}M_\\mathrm{c}}{\\mathrm{d}t} = \\dot{M}_\\mathrm{c,in} - \\dot{M}_\\mathrm{c,out} + F_\\mathrm{p,c} + F_\\mathrm{g,c} + F_\\mathrm{f,c} $$</p>
 <p>where:</p>
 <ul>
 <li>M<sub>c</sub> = m<sub>c</sub> v<sub>c</sub> is the momentum</li>

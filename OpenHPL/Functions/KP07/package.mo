@@ -33,7 +33,7 @@ With the finite volume method, we divide the grid into small control volumes/cel
 conservation laws. The semi-discrete (time-dependent ODEs) central-upwind scheme can be written as:
 </p>
 <p>
-$$ \\frac{d}{dt}\\bar{U}_j(t) = -\\frac{H_{j+\\frac{1}{2}}(t) - H_{j-\\frac{1}{2}}(t)}{\\Delta x} + \\bar{S}_j(t) $$
+$$ \\frac{\\mathrm{d}}{\\mathrm{d}t}\\bar{U}_j(t) = -\\frac{H_{j+\\frac{1}{2}}(t) - H_{j-\\frac{1}{2}}(t)}{\\Delta x} + \\bar{S}_j(t) $$
 </p>
 <p>
 Here, Ū<sub>j</sub> are the cell centre average values, while H<sub>j±1/2</sub>(t) are the central 

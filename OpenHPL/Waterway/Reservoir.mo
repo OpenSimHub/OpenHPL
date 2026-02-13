@@ -107,8 +107,8 @@ the reservoir outlet pressure is simply:</p>
 
 <p><strong>Detailed Model:</strong> For a detailed model with dynamics and inflow,
 the mass and momentum balances are:</p>
-<p>$$ H\\frac{d\\dot{m}}{dt} = \\frac{\\rho}{A}\\dot{V}^2 + A(p_\\mathrm{atm}-p_\\mathrm{o}) + \\rho gHA - F_\\mathrm{f,r} $$</p>
-<p>$$ \\frac{dm}{dt} = \\dot{m}_\\mathrm{i} - \\dot{m}_\\mathrm{o} $$</p>
+<p>$$ H\\frac{\\mathrm{d}\\dot{m}}{\\mathrm{d}t} = \\frac{\\rho}{A}\\dot{V}^2 + A(p_\\mathrm{atm}-p_\\mathrm{o}) + \\rho gHA - F_\\mathrm{f,r} $$</p>
+<p>$$ \\frac{\\mathrm{d}m}{\\mathrm{d}t} = \\dot{m}_\\mathrm{i} - \\dot{m}_\\mathrm{o} $$</p>
 <p>where ṁ is the reservoir mass flow rate, A is the cross-sectional area,
 p<sub>atm</sub> and p<sub>o</sub> are atmospheric and outlet pressures, and F<sub>f,r</sub> is
 the friction term (typically small for large reservoirs).</p>

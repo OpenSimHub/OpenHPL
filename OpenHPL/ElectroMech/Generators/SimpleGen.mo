@@ -23,7 +23,7 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
 where ω<sub>a</sub> is angular velocity and J<sub>a</sub> is moment of inertia.</p>
 
 <p>From energy balance:</p>
-<p>$$ \\frac{dK_a}{dt} = \\dot{W}_s - \\dot{W}_{f,a} - \\dot{W}_g $$</p>
+<p>$$ \\frac{\\mathrm{d}K_a}{\\mathrm{d}t} = \\dot{W}_s - \\dot{W}_{f,a} - \\dot{W}_g $$</p>
 <p>where:</p>
 <ul>
 <li>Ẇ<sub>s</sub> is turbine shaft power</li>

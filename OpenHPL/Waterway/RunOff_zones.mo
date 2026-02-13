@@ -136,7 +136,7 @@ each elevation zone. Using the mass balance, the change in the dry snow storage 
 as follows:
 </p>
 <p>
-$$ \\frac{dV_\\mathrm{s,d}}{dt}=\\dot{V}_\\mathrm{p,s}-\\dot{V}_\\mathrm{d2w} $$
+$$ \\frac{\\mathrm{d}V_\\mathrm{s,d}}{\\mathrm{d}t}=\\dot{V}_\\mathrm{p,s}-\\dot{V}_\\mathrm{d2w} $$
 </p>
 <p>
 Here, the flow of the precipitation in the form of snow is denoted as \\(\\dot{V}_\\mathrm{p,s}\\). This precipitation 
@@ -188,7 +188,7 @@ from the snow-free areas. The net runoff to the next segment (upper zone) is als
 the volume of the soil moisture storage, \\(V_\\mathrm{s,m}\\), is found as follows:
 </p>
 <p>
-$$ \\frac{dV_\\mathrm{s,m}}{dt}=\\dot{V}_\\mathrm{s2s}-\\dot{V}_\\mathrm{s2u}-\\alpha_\\mathrm{e}\\dot{V}_\\mathrm{s,e} $$
+$$ \\frac{\\mathrm{d}V_\\mathrm{s,m}}{\\mathrm{d}t}=\\dot{V}_\\mathrm{s2s}-\\dot{V}_\\mathrm{s2u}-\\alpha_\\mathrm{e}\\dot{V}_\\mathrm{s,e} $$
 </p>
 <p>
 Here, \\(\\dot{V}_\\mathrm{s2u}\\) is the net runoff to the next segment (the upper zone). \\(\\dot{V}_\\mathrm{s,e}\\) 
@@ -234,7 +234,7 @@ evapotranspiration from the lakes in the catchment area are also taken into acco
 The upper zone characterises components with quick runoff. The following mass balance is used for the upper zone description:
 </p>
 <p>
-$$ \\frac{dV_\\mathrm{u,w}}{dt}=\\dot{V}_\\mathrm{s2u}-\\dot{V}_\\mathrm{u2l}-\\dot{V}_\\mathrm{u2s}-\\dot{V}_\\mathrm{u2q} $$
+$$ \\frac{\\mathrm{d}V_\\mathrm{u,w}}{\\mathrm{d}t}=\\dot{V}_\\mathrm{s2u}-\\dot{V}_\\mathrm{u2l}-\\dot{V}_\\mathrm{u2s}-\\dot{V}_\\mathrm{u2q} $$
 </p>
 <p>
 Here, \\(V_\\mathrm{u,w}\\) is the water volume in the upper zone that depends on the saturation threshold, s<sub>T</sub>, 
@@ -266,7 +266,7 @@ The lower zone characterises the lake and the groundwater storages and defines t
 The following mass balance equation is used for the lower zone description:
 </p>
 <p>
-$$ \\frac{dV_\\mathrm{l,w}}{dt}=\\dot{V}_\\mathrm{u2l}+a_\\mathrm{L}\\dot{V}_\\mathrm{p}-\\dot{V}_\\mathrm{l2b}-a_\\mathrm{L}\\dot{V}_\\mathrm{e} $$
+$$ \\frac{\\mathrm{d}V_\\mathrm{l,w}}{\\mathrm{d}t}=\\dot{V}_\\mathrm{u2l}+a_\\mathrm{L}\\dot{V}_\\mathrm{p}-\\dot{V}_\\mathrm{l2b}-a_\\mathrm{L}\\dot{V}_\\mathrm{e} $$
 </p>
 <p>
 The water volume in the lower zone is denoted as \\(V_\\mathrm{l,w}\\). As mentioned previously, \\(\\dot{V}_\\mathrm{p}\\) 
