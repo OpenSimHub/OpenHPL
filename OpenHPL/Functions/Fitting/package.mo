@@ -1,19 +1,19 @@
 within OpenHPL.Functions;
 package Fitting "Functions for pipe fitting"
   extends Modelica.Icons.UtilitiesPackage;
-  
+
  annotation (Documentation(info="<html>
 <h4>Fitting</h4>
 <p>
-The functions for defining the pressure drop in various pipe fittings are described here. Due to different 
-constrictions in the pipes, it is of interest to define losses in these fittings. This can be done based 
+The functions for defining the pressure drop in various pipe fittings are described here. Due to different
+constrictions in the pipes, it is of interest to define losses in these fittings. This can be done based
 on friction pressure drop which can be calculated as:
 </p>
 <p>
 $$ \\Delta p_\\mathrm{f} = \\frac{1}{2}\\varphi\\rho v|v| $$
 </p>
 <p>
-Here, the dimensionless factor φ is the generalized friction factor. For a long, straight pipe, 
+Here, the dimensionless factor φ is the generalized friction factor. For a long, straight pipe,
 φ = f<sub>D</sub> L/D.
 </p>
 
@@ -48,7 +48,7 @@ Pressure drop equations are provided for different types of constrictions:
 
 <h5>Implementation</h5>
 <p>
-Based on the presented equations for the calculation of the dimensionless factor φ in various fittings, 
+Based on the presented equations for the calculation of the dimensionless factor φ in various fittings,
 a set of functions is encoded in the <code>Fitting</code> package, such as:
 </p>
 <ul>
@@ -62,8 +62,8 @@ a set of functions is encoded in the <code>Fitting</code> package, such as:
 </ul>
 
 <p>
-All these functions receive the Reynolds number N<sub>Re</sub>, diameters of first and second pipes 
-D<sub>1</sub> and D<sub>2</sub>, and the pipe roughness height ε. Then, based on the appropriate 
+All these functions receive the Reynolds number N<sub>Re</sub>, diameters of first and second pipes
+D<sub>1</sub> and D<sub>2</sub>, and the pipe roughness height ε. Then, based on the appropriate
 equations, these functions provide value for the dimensionless factor φ.
 </p>
 
@@ -90,8 +90,8 @@ end SquareReduction;
 </pre>
 
 <p>
-Another function, <code>FittingPhi</code>, calls the specific fitting functions based on a 
+Another function, <code>FittingPhi</code>, calls the specific fitting functions based on a
 <code>FittingType</code> parameter to provide the dimensionless factor φ for any fitting type.
 </p>
-</html>"));  
+</html>"));
 end Fitting;

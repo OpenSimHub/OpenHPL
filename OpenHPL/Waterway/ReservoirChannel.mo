@@ -36,7 +36,7 @@ equation
 <p>A more detailed reservoir model based on the open channel model, where the channel bed is assumed to be flat (no slope).</p>
 
 <h5>Description</h5>
-<p>This model extends the <a href=\"modelica://OpenHPL.Waterway.OpenChannel\">OpenChannel</a> functionality for reservoir applications. 
+<p>This model extends the <a href=\"modelica://OpenHPL.Waterway.OpenChannel\">OpenChannel</a> functionality for reservoir applications.
 The flatbed assumption simplifies the model for reservoir scenarios where bed slope effects are negligible.</p>
 
 <h5>Parameters</h5>
@@ -48,7 +48,7 @@ The flatbed assumption simplifies the model for reservoir scenarios where bed sl
 </ul>
 
 <h5>Connectors</h5>
-<p>Uses the <a href=\"modelica://OpenHPL.Interfaces.Contact\">Contact</a> connector providing outlet pressure and flow rate 
+<p>Uses the <a href=\"modelica://OpenHPL.Interfaces.Contact\">Contact</a> connector providing outlet pressure and flow rate
 information, which can be connected to other waterway units.</p>
 
 <p><em>Note: Has not been tested properly.</em></p>

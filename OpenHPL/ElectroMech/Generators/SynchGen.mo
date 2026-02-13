@@ -145,7 +145,7 @@ $$</p>
 <h5>Excitation System</h5>
 <p>Field voltage dynamics:</p>
 <p>$$ \\frac{\\mathrm{d}E_f}{\\mathrm{d}t} = \\frac{-E_f + K_E\\left(V_{tr}-V_t-V_{stab}\\right)}{T_E} $$</p>
-<p>where \\(K_E\\) is excitation system gain, \\(T_E\\) is excitation time constant, \\(V_{tr}\\) is voltage reference set point, 
+<p>where \\(K_E\\) is excitation system gain, \\(T_E\\) is excitation time constant, \\(V_{tr}\\) is voltage reference set point,
 and \\(V_t = \\sqrt{\\left(E_d'-R_aI_d-x_q'I_q\\right)^2+\\left(E_q'-R_aI_q+x_d'I_d\\right)^2}\\) is terminal voltage.</p>
 
 <h5>Stabilization</h5>
@@ -169,9 +169,9 @@ $$</p>
 </ul>
 
 <h5>Parameters</h5>
-<p>User specifies: nominal active/reactive powers, phase winding resistance, number of poles, network parameters 
-(equivalent resistance/reactance, RMS voltage, grid angular velocity), d-/q-axis reactances and time constants, 
-field voltage limits, excitation/stabilizer gains and time constants, moment of inertia, friction factor, and 
+<p>User specifies: nominal active/reactive powers, phase winding resistance, number of poles, network parameters
+(equivalent resistance/reactance, RMS voltage, grid angular velocity), d-/q-axis reactances and time constants,
+field voltage limits, excitation/stabilizer gains and time constants, moment of inertia, friction factor, and
 initialization options.</p>
 
 <p><em>Note: For more advanced modeling, consider using generator models from <a href=\"modelica://OpenIPSL\">OpenIPSL</a>.</em></p>

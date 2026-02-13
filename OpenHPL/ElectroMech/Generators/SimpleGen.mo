@@ -19,7 +19,7 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
 <p>Simple model of an ideal generator with friction based on angular momentum balance.</p>
 
 <h5>Energy Balance</h5>
-<p>The kinetic energy stored in the rotating generator is \\(K_a = \\frac{1}{2}J_a\\omega_a^2\\), 
+<p>The kinetic energy stored in the rotating generator is \\(K_a = \\frac{1}{2}J_a\\omega_a^2\\),
 where ω<sub>a</sub> is angular velocity and J<sub>a</sub> is moment of inertia.</p>
 
 <p>From energy balance:</p>
@@ -44,7 +44,7 @@ where ω<sub>a</sub> is angular velocity and J<sub>a</sub> is moment of inertia.
 <h5>Loading Options</h5>
 <p>The generator can be loaded either:</p>
 <ul>
-<li>via the mechanical shaft connector (e.g., using the <a href=\"modelica://OpenHPL.ElectroMech.PowerSystem.Grid\">Grid</a> model). 
+<li>via the mechanical shaft connector (e.g., using the <a href=\"modelica://OpenHPL.ElectroMech.PowerSystem.Grid\">Grid</a> model).
 Set <code>Pload</code> input to 0 in this case.</li>
 <li>or via the input connector <code>Pload</code> specifying the connected electrical load.</li>
 </ul>

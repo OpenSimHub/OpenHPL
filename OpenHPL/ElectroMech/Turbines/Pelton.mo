@@ -89,7 +89,7 @@ equation
 <h5>Nozzle Pressure Drop</h5>
 <p>Pressure drop across the nozzle (positions \"0\" and \"1\"):</p>
 <p>$$ \\Delta p_n=\\frac{1}{2}\\rho\\dot{V}\\left[\\dot{V}\\left(\\frac{1}{A_1^2(Y)}-\\frac{1}{A_0^2}\\right)+k_f\\right] $$</p>
-<p>where \\(A_0\\) is cross-sectional area at nozzle beginning, \\(A_1(Y)\\) is area at nozzle end (function of needle position Y), 
+<p>where \\(A_0\\) is cross-sectional area at nozzle beginning, \\(A_1(Y)\\) is area at nozzle end (function of needle position Y),
 and \\(k_f\\) is the nozzle friction loss coefficient.</p>
 
 <h5>Connectors</h5>
@@ -99,7 +99,7 @@ and \\(k_f\\) is the nozzle friction loss coefficient.</p>
 </ul>
 
 <h5>Parameters</h5>
-<p>User specifies: turbine runner radius, nozzle input diameter, runner bucket angle, friction factors and coefficients, 
+<p>User specifies: turbine runner radius, nozzle input diameter, runner bucket angle, friction factors and coefficients,
 deflector mechanism coefficient.</p>
 
 <p><em>Note: This model has not been tested.</em></p>

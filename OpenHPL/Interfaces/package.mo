@@ -4,17 +4,17 @@ package Interfaces "Basic interface components"
 annotation (Documentation(info="<html>
 <h4>Interfaces</h4>
 <p>
- In the <strong>OpenHPL</strong>, 
-two types of connectors are typically used. The first type is the standard Modelica real input/output 
-connector, the other type is a set of connectors that represent the water flow and are modelled similar 
-to the connection in an electrical circuit with voltage and current, or similar to the idea of potential 
+ In the <strong>OpenHPL</strong>,
+two types of connectors are typically used. The first type is the standard Modelica real input/output
+connector, the other type is a set of connectors that represent the water flow and are modelled similar
+to the connection in an electrical circuit with voltage and current, or similar to the idea of potential
 and flow in Bond Graph models.
 </p>
 
 <h5>Contact Connector</h5>
 <p>
-The water flow connector which is called <code>Contact</code> in the library, contains information about 
-the pressure in the connector and mass flow rate that flows through the connector. An example of a 
+The water flow connector which is called <code>Contact</code> in the library, contains information about
+the pressure in the connector and mass flow rate that flows through the connector. An example of a
 Modelica code for defining the <code>Contact</code> connector looks as follows:
 </p>
 <pre>
@@ -32,7 +32,7 @@ In addition, some extensions of this water flow connector are developed for bett
 
 <h6>TwoContacts</h6>
 <p>
-<code>TwoContacts</code> is an extension from the <code>Contact</code> model which provides a model of 
+<code>TwoContacts</code> is an extension from the <code>Contact</code> model which provides a model of
 two connectors of inlet and outlet contacts:
 </p>
 <pre>
@@ -44,7 +44,7 @@ end TwoContact;
 
 <h6>TurbineContacts</h6>
 <p>
-<code>TurbineContacts</code> is an extension from <code>TwoContacts</code> model and provides the real 
+<code>TurbineContacts</code> is an extension from <code>TwoContacts</code> model and provides the real
 input and output connectors, additionally. This model is used for turbine modelling:
 </p>
 <pre>

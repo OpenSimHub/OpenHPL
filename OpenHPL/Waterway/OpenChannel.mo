@@ -44,7 +44,7 @@ equation
 <p style=\"color: #ff0000;\"><em>Note: Currently under investigation for plausibility.</em></p>
 
 <h4>Open Channel Model</h4>
-<p>Model for open channels (rivers) that can be used for modeling run-of-river hydropower plants. 
+<p>Model for open channels (rivers) that can be used for modeling run-of-river hydropower plants.
 The channel inlet and outlet are assumed to be at the bottom of the left and right sides, respectively.</p>
 
 <h5>Governing Equations</h5>
@@ -70,11 +70,11 @@ q is the discharge per unit width w of the open channel. f<sub>n</sub> is the Ma
 <p>applied when \\(h_{i\\pm\\frac{1}{2}}^\\pm<\\epsilon\\) (typically ε = 1e⁻⁵).</p>
 
 <h5>Implementation</h5>
-<p>Similar to <a href=\"modelica://OpenHPL.Waterway.PenstockKP\">PenstockKP</a>, this model uses the KP method 
+<p>Similar to <a href=\"modelica://OpenHPL.Waterway.PenstockKP\">PenstockKP</a>, this model uses the KP method
 (<a href=\"modelica://OpenHPL.Functions.KP07.KPmethod\">KPmethod</a> function) to discretize the PDEs into ODEs.</p>
 
-<p>Boundary conditions specify inlet and outlet flows per unit width q₁ and q₂. 
-Connectors should be connected to <a href=\"modelica://OpenHPL.Waterway.Pipe\">Pipe</a> elements from both sides.  
+<p>Boundary conditions specify inlet and outlet flows per unit width q₁ and q₂.
+Connectors should be connected to <a href=\"modelica://OpenHPL.Waterway.Pipe\">Pipe</a> elements from both sides.
 Connectors provide inlet/outlet flow rates and pressures (sum of atmospheric pressure and water depth-dependent pressure).</p>
 
 <h5>Parameters</h5>
