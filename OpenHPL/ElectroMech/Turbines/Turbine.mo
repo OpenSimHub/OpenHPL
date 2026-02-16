@@ -43,7 +43,7 @@ equation
   connect(lossCorrection.u1, power.y) annotation (Line(points={{-48,80},{-88,80},{-88,30},{-81,30}},color={0,0,127}));
   connect(frictionLoss.power, lossCorrection.u2) annotation (Line(points={{-1,12},{-40,12},{-40,72}},color={0,0,127}));
   connect(u_t, u) annotation (Line(points={{-80,120},{-80,90},{0,90},{0,70}},color={0,0,127}));
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Simple Turbine Model</h4>
 

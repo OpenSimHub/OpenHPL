@@ -34,12 +34,12 @@ equation
   Vdot = mdot/data.rho;
   dp*(C_v_*max(epsilon, u^alpha))^2 = Vdot*abs(Vdot) "Valve equation for pressure drop";
   dp = i.p - o.p "Link the pressure drop to the ports";
-  annotation ( Documentation(info="<html>
+  annotation (preferredView="info", Documentation(info="<html>
 <p>
 This is a partial, simple model of hydraulic valve. &nbsp;</p><p>This model is based on the energy balance of a valve.
 </p>
 <ul>
-<li>Mass flow is equal at innflow and outflow</li>
+<li>Mass flow is equal at inflow and outflow</li>
 <li>The head loss and pressure difference is proportional to square of velocity</li>
 </ul>
 <p>
@@ -49,7 +49,7 @@ Specifically:
 <p>
 The function f(opening) is expressed as:
 </p>
-<p>$$ f(\\mathrm{opening}) = \\left( C_\\mathrm{v} \\cdot \\mathrm{max}(\\epsilon, u^\\alpha\\right)^2 $$</p>
+<p>$$ f(\\mathrm{opening}) = \\left( C_\\mathrm{v} \\cdot \\mathrm{max}(\\epsilon, u^\\alpha)\\right)^2 $$</p>
 <p>
 When \\(\\alpha\\) is 1, this implies a linear relation between closing and head loss.
 </p>

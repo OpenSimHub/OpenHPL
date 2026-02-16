@@ -72,7 +72,7 @@ equation
   i.mdot+o.mdot = 0 "Mass balance";
   mdot = i.mdot "Inlet direction for mdot";
 
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Simple Pipe Model</h4>
 

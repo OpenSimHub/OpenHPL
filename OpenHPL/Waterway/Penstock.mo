@@ -83,7 +83,7 @@ equation
   // volumetric flow rates for all cells
   V_p_out = mdot ./ rho_m;
   V_p_out_end = mdot_V / (data.rho * (1 + data.beta * (p_o - data.p_a)));
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html><head></head><body><p>This is a more detaied model of the pipe that can be use for proper modeling of penstock. (This model does not work well. Instead PenstockKP model can be used.)</p><p>The model for the penstock with the elastic walls and compressible water with simple discretization method (Staggered grid). The geometry of the penstock is described due to figure:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"></p>
 <p>Conservation laws are usually solved by Finite-volume methods. With the Finite volume method, we divide the grid into small control volumes or control cells and then apply the conservation laws. The discretization method is based on Staggered grid scheme, where the penstock is divided in <em>N</em> segments, with input and output pressure as a boundary conditions. Can be describe as the follow figure:</p>

@@ -53,7 +53,7 @@ equation
       points={{-39,-20},{10,-20}},
       color={0,0,127},
       pattern=LinePattern.Dot));
-  annotation (Documentation(info="<html>
+  annotation (preferredView="info", Documentation(info="<html>
 Can be used as an ideal volume flow source. Either with a fixed volume flow defined by <code>Vdot_0</code>
 or via the input connector <code>inFlow</code>.
 In addition the input can be passed through a first order filter which is sometimes necessary

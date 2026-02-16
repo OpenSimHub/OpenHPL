@@ -212,7 +212,7 @@ equation
     mdot=i.mdot;
 
   connect(p_out, P_out) annotation (Line(points={{40,90},{40,110}}, color={0,0,127}));
-    annotation (
+    annotation (preferredView="info",
         Documentation(info="<html>
 <h4>Francis Turbine Model</h4>
 

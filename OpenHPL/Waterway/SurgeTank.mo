@@ -137,7 +137,7 @@ equation
   i.p = o.p "Inlet and outlet pressure equality";
   mdot = i.mdot+o.mdot "Mass balance";
   F_g = m * data.g * cos_theta;
- annotation (
+ annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Surge Tank Model</h4>
 

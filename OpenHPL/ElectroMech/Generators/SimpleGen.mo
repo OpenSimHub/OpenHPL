@@ -13,7 +13,7 @@ model SimpleGen "Model of a simple generator with mechanical connectors"
         rotation=270,
         origin={0,120})));
 
-  annotation (
+  annotation (preferredView="info",
     Documentation(info= "<html>
 <h4>Simple Generator Model</h4>
 <p>Simple model of an ideal generator with friction based on angular momentum balance.</p>

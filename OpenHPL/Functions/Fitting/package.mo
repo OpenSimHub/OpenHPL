@@ -2,7 +2,7 @@ within OpenHPL.Functions;
 package Fitting "Functions for pipe fitting"
   extends Modelica.Icons.UtilitiesPackage;
 
- annotation (Documentation(info="<html>
+ annotation (preferredView="info", Documentation(info="<html>
 <h4>Fitting</h4>
 <p>
 The functions for defining the pressure drop in various pipe fittings are described here. Due to different

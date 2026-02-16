@@ -14,7 +14,7 @@ model Valve "Simple hydraulic valve"
         origin={0,80})));
 equation
   connect(opening, u) annotation (Line(points={{0,120},{0,70}}, color={0,0,127}));
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Hydraulic Valve Model</h4>
 

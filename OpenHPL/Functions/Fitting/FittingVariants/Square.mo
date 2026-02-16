@@ -24,7 +24,7 @@ algorithm
       phi := (1 + 0.8*f_D)*(1 - (D_i/D_o)^2)^2;
     end if;
   end if;
-  annotation (Documentation(info="<html>
+  annotation (preferredView="info", Documentation(info="<html>
 <p>Calculates the dimension factor <strong>&phi;</strong> for square reduction/expansion.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\"><tr>
 <td><p><em>Squared Reduction:</em></p></td>

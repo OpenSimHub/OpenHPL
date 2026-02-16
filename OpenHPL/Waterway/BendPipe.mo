@@ -23,7 +23,7 @@ equation
   o.p = i.p - dp "Pressure of the output connector";
   i.mdot + o.mdot = 0 "Mass balance";
   mdot = i.mdot "Flow direction";
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <p>Usually minor head losses in pipes are considered to be due to fittings, diffusers, nozzles, bend in pipes, etc. We are more interested in head loss due to bend pipes for this model.</p>
 <p>A typical loss coefficient value for flanged and threaded elbows, tees, gates, valves, etc., can be taken as,</p>

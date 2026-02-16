@@ -108,7 +108,7 @@ equation
   der(w) = (Wdot_ts - Pe) / (J * w);
   // - W_fa;
   //
-  annotation (
+  annotation (preferredView="info",
     Documentation(info= "<html>
 <h4>Synchronous Generator Model</h4>
 <p>Detailed synchronous generator model connected to the grid, based on d-q decomposition.</p>

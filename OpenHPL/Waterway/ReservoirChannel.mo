@@ -31,7 +31,7 @@ equation
   o.mdot =-q*W*data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
   annotation (
-    Documentation(info="<html>
+    Documentation(preferredView="info", info="<html>
 <h4>Reservoir Channel Model</h4>
 <p>A more detailed reservoir model based on the open channel model, where the channel bed is assumed to be flat (no slope).</p>
 

@@ -2,7 +2,7 @@ within OpenHPL;
 package Waterway "Different components of the hydropower system"
   extends OpenHPL.Icons.Water;
 
- annotation (Documentation(info="<html>
+ annotation (preferredView="info", Documentation(info="<html>
 <h4>Waterway Models</h4>
 <p>
 A typical structure of the waterway of the hydropower system includes reservoirs, conduits (intake race,

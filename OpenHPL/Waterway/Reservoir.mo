@@ -78,7 +78,7 @@ equation
 
    o.mdot = -data.rho * Vdot_o "Output flow connector";
   //o.T = T_0 "TBD: Output temperature connector";
-  annotation (Documentation(info="<html>
+  annotation (preferredView="info", Documentation(info="<html>
 <h4>Reservoir Model</h4>
 
 <p>Simple model of the reservoir with different options for modeling the water source of a hydropower system.</p>

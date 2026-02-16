@@ -15,8 +15,8 @@ algorithm
     a_pm[i] := max(max(lamda1[i, 4], lamda1[i, 3]), 0);
   end for;
   A := [a_mp, a_pp, a_mm, a_pm];
-  annotation (
+  annotation (preferredView="info",
     Documentation(info = "<html>
-<p>The mode lfor defining the the one-sided local speed of propagations. Estimated as the largest and the smallest eigen values of the Jacobian of the system.</p>
+<p>The model for defining the the one-sided local speed of propagations. Estimated as the largest and the smallest eigen values of the Jacobian of the system.</p>
 </html>"));
 end SpeedPropagationApipeF;

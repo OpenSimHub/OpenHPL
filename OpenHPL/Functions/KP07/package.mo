@@ -2,7 +2,7 @@ within OpenHPL.Functions;
 package KP07 "Methods for KP07 scheme"
   extends Modelica.Icons.UtilitiesPackage;
 
-  annotation (Documentation(info="<html>
+  annotation (preferredView="info", Documentation(info="<html>
 <h4>KP Scheme</h4>
 <p>
 Functions for solving PDEs in Modelica are described here. The Kurganov-Petrova (KP) scheme is a

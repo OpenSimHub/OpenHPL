@@ -32,7 +32,7 @@ equation
   U_pp[2, N] = if bounCon[2, 2] then boun[2, 2] else mdot_ghosts[N + 3] - dx * s[2, N + 2] / 2;
   // output vector U_
   U_ = [U_mp; U_pp; U_mm; U_pm];
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <p>The piecewise linear reconstruction model, where the values of the left and the right interfaces of the cell (j-1/2 and j+1/2) at the right(+)/left(-) point values are defined.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_piecewise.svg\"/></p>

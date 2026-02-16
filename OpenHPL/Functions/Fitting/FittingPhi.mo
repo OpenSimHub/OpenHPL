@@ -48,7 +48,7 @@ algorithm
       D_o,
       L);
   end if;
-  annotation (
+  annotation (preferredView="info",
     Documentation(info = "<html>
 <p>Define dimension factor &phi; for different types of fittings.</p>
 </html>"));

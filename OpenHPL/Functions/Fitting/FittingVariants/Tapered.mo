@@ -36,7 +36,7 @@ algorithm
       phi := Square(N_Re,p_eps,D_i,D_o);
     end if;
   end if;
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <p>Calculates the dimension factor &phi; for Tapered reduction/expansion.
  The tapered angle &theta; should be specified.</p>

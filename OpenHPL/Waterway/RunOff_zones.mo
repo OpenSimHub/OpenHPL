@@ -107,7 +107,7 @@ equation
   F_e = (flow_var.y[1] - Vdot_tot) ^ 2;
   R2 = 1 - F_e / F_o;
   Vdot_runoff = Vdot_tot;
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <p>
 Similar to many other hydrological models, the HBV model is based on the land phase of the hydrological (water) cycle.

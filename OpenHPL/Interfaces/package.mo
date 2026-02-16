@@ -1,7 +1,7 @@
 within OpenHPL;
 package Interfaces "Basic interface components"
   extends Modelica.Icons.InterfacesPackage;
-annotation (Documentation(info="<html>
+annotation (preferredView="info", Documentation(info="<html>
 <h4>Interfaces</h4>
 <p>
  In the <strong>OpenHPL</strong>,

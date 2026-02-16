@@ -126,7 +126,7 @@ equation
   //else
   //  der(Y_gv) = u / T_g;
   //end if;
-   annotation (Documentation(info="<html>
+   annotation (preferredView="info", Documentation(info="<html>
 <h4>Governor</h4>
 <p>
 Here, a simple model of the governor that controls the guide vane opening in the turbine based on the reference power
