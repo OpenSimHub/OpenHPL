@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:ns1="http://wanglongqi.github.io/WriteTeX"
-   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    sodipodi:docname="STAirCushion.svg"
-   inkscape:version="1.0.1 (1.0.1+r73)"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    id="svg8"
    version="1.1"
    viewBox="0 0 54.450404 41.647557"
    height="92.550125mm"
-   width="121.00089mm">
+   width="121.00089mm"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:ns1="http://wanglongqi.github.io/WriteTeX">
   <defs
      id="defs2">
     <marker
@@ -284,7 +283,7 @@
     </marker>
     <linearGradient
        id="linearGradient5977"
-       osb:paint="solid">
+       inkscape:swatch="solid">
       <stop
          style="stop-color:#0062cf;stop-opacity:1;"
          offset="0"
@@ -530,36 +529,6 @@
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
          transform="scale(0.6)" />
     </marker>
-    <meshgradient
-       inkscape:collect="always"
-       id="meshgradient13390"
-       gradientUnits="userSpaceOnUse"
-       x="92.675705"
-       y="206.93016"
-       gradientTransform="matrix(0.26458333,0,0,0.26458333,145.86811,408.601)">
-      <meshrow
-         id="meshrow13402">
-        <meshpatch
-           id="meshpatch13400">
-          <stop
-             id="stop13392"
-             style="stop-color:#ffffff;stop-opacity:1"
-             path="c 0.824081,0  1.64816,0  2.47224,0" />
-          <stop
-             id="stop13394"
-             style="stop-color:#f21313;stop-opacity:1"
-             path="c 0,0.467722  0,0.935443  0,1.40316" />
-          <stop
-             id="stop13396"
-             style="stop-color:#ffffff;stop-opacity:1"
-             path="c -0.824081,0  -1.64816,0  -2.47224,0" />
-          <stop
-             id="stop13398"
-             style="stop-color:#f21313;stop-opacity:1"
-             path="c 0,-0.467722  0,-0.935443  0,-1.40316" />
-        </meshpatch>
-      </meshrow>
-    </meshgradient>
     <marker
        inkscape:stockid="Arrow2Mstart"
        orient="auto"
@@ -644,14 +613,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.5231327"
-     inkscape:cx="293.99542"
-     inkscape:cy="177.30878"
+     inkscape:cx="294.07886"
+     inkscape:cy="177.16072"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1173"
-     inkscape:window-x="1920"
+     inkscape:window-width="5120"
+     inkscape:window-height="1403"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      showguides="false"
@@ -660,12 +629,18 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      scale-x="0.45"
-     inkscape:document-rotation="0">
+     inkscape:document-rotation="0"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
     <inkscape:grid
        id="grid5708"
        type="xygrid"
        originx="-21.125239"
-       originy="330.68208" />
+       originy="330.68208"
+       spacingy="1"
+       spacingx="1"
+       units="mm" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -675,7 +650,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -701,15 +676,6 @@
        height="1.403165"
        x="91.07209"
        y="205.72745"
-       inkscape:export-xdpi="699.71716"
-       inkscape:export-ydpi="699.71716" />
-    <rect
-       style="fill:url(#meshgradient13390);fill-opacity:1;stroke-width:0.01;stroke-miterlimit:4;stroke-dasharray:none"
-       id="rect13133-5"
-       width="2.4722431"
-       height="1.403165"
-       x="98.923134"
-       y="209.70309"
        inkscape:export-xdpi="699.71716"
        inkscape:export-ydpi="699.71716" />
     <rect

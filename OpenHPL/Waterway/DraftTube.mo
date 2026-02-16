@@ -153,7 +153,7 @@ equation
   p_o = o.p;
   i.mdot+o.mdot=0;
   mdot = i.mdot;
-  annotation (Documentation(info="<html>
+  annotation (preferredView="info", Documentation(info="<html>
     <p>Two of the draft tubes are modeled using <em>Momentum balance</em>.
     They are:</p>
 <ul>

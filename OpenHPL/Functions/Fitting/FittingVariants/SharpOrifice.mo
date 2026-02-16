@@ -14,7 +14,7 @@ algorithm
   else
     phi := (2.72 + (D_o / D_i) ^ 2 * 4000 / (N_Re + Modelica.Constants.eps)) * phi_0;
   end if;
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
     <p>Calculates the dimension factor &phi; for Sharp Orifice.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\">

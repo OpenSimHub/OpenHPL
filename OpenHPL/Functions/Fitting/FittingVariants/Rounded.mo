@@ -13,7 +13,7 @@ algorithm
     /* Rounded Expansion (same as Square Expansion) */
     phi := Square(N_Re,p_eps,D_i,D_o);
   end if;
-  annotation (Documentation(info="<html>
+  annotation (preferredView="info", Documentation(info="<html>
 <p>Define dimension factor &phi; for Rounded Reduction. Rounded Expansion is the same as Squared Expansion.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\">
 <tr>

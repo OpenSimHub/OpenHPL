@@ -49,7 +49,7 @@ equation
   connect(product.y, dP2.u1) annotation (Line(points={{-13.5,67},{-8,67},{-8,33.6},{-12.8,33.6}}, color={0,0,127}));
   connect(toHz.u, w_m2pu.y) annotation (Line(points={{5.2,-50},{84,-50},{84,-40},{78.6,-40}}, color={0,0,127}));
   connect(toHz.y, dF.u1) annotation (Line(points={{-8.6,-50},{-22,-50}}, color={0,0,127}));
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Primary control</h4>
 <h5>Network Power-Frequency Characteristic</h5>

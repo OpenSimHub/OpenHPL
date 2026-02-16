@@ -31,7 +31,26 @@ equation
   o.mdot =-q*W*data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
   annotation (
-    Documentation(info="<html><p>This is a model for the reservoir, based on the open channel (river) model.</p>
-<p><em>Has not been tested properly.</em></p>
+    Documentation(preferredView="info", info="<html>
+<h4>Reservoir Channel Model</h4>
+<p>A more detailed reservoir model based on the open channel model, where the channel bed is assumed to be flat (no slope).</p>
+
+<h5>Description</h5>
+<p>This model extends the <a href=\"modelica://OpenHPL.Waterway.OpenChannel\">OpenChannel</a> functionality for reservoir applications.
+The flatbed assumption simplifies the model for reservoir scenarios where bed slope effects are negligible.</p>
+
+<h5>Parameters</h5>
+<ul>
+<li>Geometry: channel (reservoir) length L and width w</li>
+<li>Height vector H of reservoir bed with equal heights from left and right sides (ensuring flat bed)</li>
+<li>Number of discretization cells N</li>
+<li>Initialization: initial water depth h₀ in the reservoir</li>
+</ul>
+
+<h5>Connectors</h5>
+<p>Uses the <a href=\"modelica://OpenHPL.Interfaces.Contact\">Contact</a> connector providing outlet pressure and flow rate
+information, which can be connected to other waterway units.</p>
+
+<p><em>Note: Has not been tested properly.</em></p>
 </html>"));
 end ReservoirChannel;

@@ -53,7 +53,7 @@ equation
   o.p = i.p - dp "Pressure of the output connector";
   i.mdot+o.mdot = 0 "Mass balance";
   mdot = i.mdot "Flow direction";
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
     <p>Various possibilities of the fittings for the pipes with different diameters
     and also the orifices in the pipe.

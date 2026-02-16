@@ -13,7 +13,7 @@ algorithm
   if L / D_o <= 5 then
     phi := (0.584 + 0.0936 / ((L / D_o) ^ 1.5 + 0.225)) * phi_0;
   end if;
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
     <p>Define dimension factor &phi; for Thick Orifice.
     Orifice length should be provided and this length should not be greater than 5D<sub>o</sub>.</p>

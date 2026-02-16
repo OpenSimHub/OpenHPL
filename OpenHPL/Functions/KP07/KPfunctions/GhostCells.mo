@@ -27,7 +27,7 @@ equation
   p_[3:N + 2] = p;
   mdot_[3:N + 2] = mdot;
   U_ = vector([p_; mdot_]);
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <p>The model for defining the ghost cells. It can be observed that for a given <code>j<sup>th</sup></code> cell, information from the neighbouring cells <em>j-1</em> and <em>j-2</em> (to the left) and <em>j+1</em> and<em> j+2</em> (to the right) are required for calculating the flux integrals.</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/ghosts.svg\"/></p>

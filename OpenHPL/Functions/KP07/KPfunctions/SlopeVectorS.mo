@@ -33,7 +33,7 @@ equation
     //        s[2,i] = 0;
     //      end if;
   end for;
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <p>The model for defining the slope <em>s<sub>j</sub></em> of the reconstructed function in each cell, which is computed using a limiter function to obtain a non-oscillatory nature of the reconstruction. The KP07 scheme utilizes the generalized minmod limiter:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/equations/KP_slope.svg\"/></p>

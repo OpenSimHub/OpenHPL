@@ -43,35 +43,49 @@ equation
   connect(lossCorrection.u1, power.y) annotation (Line(points={{-48,80},{-88,80},{-88,30},{-81,30}},color={0,0,127}));
   connect(frictionLoss.power, lossCorrection.u2) annotation (Line(points={{-1,12},{-40,12},{-40,72}},color={0,0,127}));
   connect(u_t, u) annotation (Line(points={{-80,120},{-80,90},{0,90},{0,70}},color={0,0,127}));
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
-<p>
-This is a simple model of the turbine that give possibilities for simplified
-modelling of the turbine unit. The model can use a constant efficiency or varying
-efficiency from a lookup-table.
-This model does not include any information about rotational speed of the runner.
-</p>
-<p>
-This model is based on the energy balance and a simple valve-like expression.
-The guide vane 'valve capacity' should be used for this valve-like expression and can either be specified
-directly by the user by specifying <code>C_v</code> or it will be calculated from
-the Nominal turbinenet head <code>H_n</code> and nominal flow rate
-<code>Vdot_n</code>.
-</p>
-<p>
-The turbine efficiency is in per-unit values from 0 to 1, where 1 means that there are no losses in the turbine.
-The output mechanical power is defined as multiplication of the turbine efficiency and the total possible power:
-</p>
-<blockquote>
-<pre>turbine_pressure_drop * turbine_flow_rate</pre>
-</blockquote>
-<p>Besides hydraulic input and output,
-there are inputs as the control signal for the valve opening and also output as the turbine shaft power.
-</p>
+<h4>Simple Turbine Model</h4>
+
+<p>This is a simple model of the turbine that gives possibilities for simplified
+modelling of the turbine unit. The model is based on a look-up table for turbine efficiency
+vs. guide vane opening.</p>
 
 <p align=\"center\">
 <img src=\"modelica://OpenHPL/Resources/Images/turbinepic.svg\">
-</p><h5>References</h5><p>More info about the model can be found in:&nbsp;<a href=\"modelica://OpenHPL/Resources/Documents/Report.docx\">Resources/Report/Report.docx</a></p>
+</p>
+<p><em>Figure: Simple turbine model schematic.</em></p>
+
+<h5>Power Calculation</h5>
+
+<p>The mechanical turbine shaft power is:</p>
+<p>$$ \\dot{W}_\\mathrm{tr} = \\eta_\\mathrm{h} \\Delta p_\\mathrm{tr} \\dot{V}_\\mathrm{tr} $$</p>
+<p>where η<sub>h</sub> is hydraulic efficiency (from lookup table or constant value),
+Δp<sub>tr</sub> is pressure drop, and V̇<sub>tr</sub> is volumetric flow rate.</p>
+
+<p>The turbine efficiency is in per-unit values from 0 to 1, where 1 means that there are
+no losses. The model can use a constant efficiency or varying efficiency from a lookup-table.</p>
+
+<h5>Flow Relationship</h5>
+
+<p>This model is based on the energy balance and a simple valve-like expression.
+The turbine flow rate relates to pressure drop through:</p>
+<p>$$ \\dot{V}_\\mathrm{tr} = C_\\mathrm{v} u_\\mathrm{v} \\sqrt{\\frac{\\Delta p_\\mathrm{tr}}{p^\\mathrm{atm}}} $$</p>
+<p>where C<sub>v</sub> is the guide vane \"valve capacity\", u<sub>v</sub> is guide vane opening
+signal (0 to 1), and p<sup>atm</sup> is atmospheric pressure.</p>
+
+<p>The guide vane valve capacity can either be specified directly by the user via <code>C_v</code>
+or it will be calculated from the nominal turbine net head <code>H_n</code> and nominal flow rate
+<code>Vdot_n</code>.</p>
+
+<h5>Usage</h5>
+
+<p>Besides hydraulic input and output, there are inputs as the control signal for the valve
+opening and also output as the turbine shaft power.</p>
+
+<h5>More Information</h5>
+<p>More info about the model can be found in: <a href=\"modelica://OpenHPL/Resources/Documents/Report.docx\">Resources/Report/Report.docx</a>
+and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2019]</a>.</p>
 </html>"), Icon(graphics={Text(
           visible=enable_P_out,
           extent={{30,100},{50,80}},

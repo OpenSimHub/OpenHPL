@@ -72,45 +72,68 @@ equation
   i.mdot+o.mdot = 0 "Mass balance";
   mdot = i.mdot "Inlet direction for mdot";
 
-  annotation (
-    Documentation(info="<html><p>The simple model of the pipe gives possibilities
-    for easy modelling of different conduit: intake race, penstock, tail race, etc.</p>
-    <p>This model is described by the momentum differential equation, which depends
-    on pressure drop through the pipe together with friction and gravity forces.
-    The main defined variable is volumetric flow rate <code>Vdot</code>.</p>
-    <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"> </p>
-    <p>In this pipe model, the flow rate changes simultaneously in the whole pipe
-    (an information about the speed of wave propagation is not included here).
-    Water pressures can be shown just in the boundaries of pipe
-    (inlet and outlet pressure from connectors).</p>
-    <p>It should be noted that this pipe model provides possibilities for modelling
-    of pipes with both a positive and a negative slopes (positive or negative height difference).</p>
-    <p>If the pipe is slightly tapered then this can be taken into account by adjusting
-    <code>K_c</code> based on your taper geometry: 0.05–0.15 for gentle cones,
-      up to 0.6 for sharp contractions.</p>
-    <h5>Friction Specification</h5>
-    <p>The pipe friction can be specified using one of three methods via the <code>friction_method</code> parameter:</p>
-    <ul>
-    <li><strong>Pipe Roughness (p_eps)</strong>: Direct specification of absolute pipe roughness height (m).
-    Typical values: 0.0001-0.001 m for steel pipes, 0.001-0.003 m for concrete.</li>
-    <li><strong>Moody Friction Factor (f)</strong>: Dimensionless friction factor from Moody diagram.
-    Typical values: 0.01-0.05. Converted to equivalent roughness using fully turbulent flow approximation:
-    p_eps = 3.7·D·10<sup>-1/(2√f)</sup></li>
-    <li><strong>Manning Coefficient</strong>: Two notations are supported:
-    <ul>
-    <li><strong>Manning's M coefficient (Strickler)</strong> [m<sup>1/3</sup>/s]: M = 1/n, typical values 60-110 for steel,
-    30-60 for rock tunnels.</li>
-    <li><strong>Manning's n coefficient</strong> [s/m<sup>1/3</sup>]: Typical values 0.009-0.013 for smooth steel,
-    0.012-0.017 for concrete, 0.017-0.030 for rock tunnels.  Use checkbox <code>use_n</code> to enable this notation.</li>
-    </ul>
-    These are then converted using: p_eps = D_h·3.097·e<sup>(-0.118/n)</sup> empirically derived from the&nbsp;Karman-Prandtl equation.</li>
-    </ul>
-    <p>The conversions are simplified for hydropower applications assuming fully turbulent flow,
-    so they depend only on fixed pipe dimensions and the chosen friction coefficient.</p>
+  annotation (preferredView="info",
+    Documentation(info="<html>
+<h4>Simple Pipe Model</h4>
 
-    <h5>More info</h5>
-    <p>More info about the pipe model can be found in
-        <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
-    and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017a]</a>.</p>
-    </html>"));
+<p>The simple model of the pipe gives possibilities for easy modelling of different conduit: intake race,
+penstock, tail race, etc. The model assumes incompressible water and inelastic walls since there are only
+small pressure variations.</p>
+
+<p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"> </p>
+<p><em>Figure: Model for flow through a pipe.</em></p>
+
+<h5>Mass and Momentum Balance</h5>
+
+<p><strong>Mass Balance:</strong> For incompressible water, the mass in the filled pipe is constant:</p>
+<p>$$ \\frac{\\mathrm{d}m_\\mathrm{c}}{\\mathrm{d}t} = \\dot{m}_\\mathrm{c,in} - \\dot{m}_\\mathrm{c,out} = 0 $$</p>
+
+<p><strong>Momentum Balance:</strong> The momentum balance is expressed as:</p>
+<p>$$ \\frac{\\mathrm{d}M_\\mathrm{c}}{\\mathrm{d}t} = \\dot{M}_\\mathrm{c,in} - \\dot{M}_\\mathrm{c,out} + F_\\mathrm{p,c} + F_\\mathrm{g,c} + F_\\mathrm{f,c} $$</p>
+<p>where:</p>
+<ul>
+<li>M<sub>c</sub> = m<sub>c</sub> v<sub>c</sub> is the momentum</li>
+<li>F<sub>p,c</sub> is the pressure force due to inlet/outlet pressure difference</li>
+<li>F<sub>g,c</sub> = m<sub>c</sub> g cos θ<sub>c</sub> is the gravity force</li>
+<li>F<sub>f,c</sub> is the friction force calculated using the Darcy friction factor</li>
+</ul>
+
+<p>This model is described by the momentum differential equation, which depends on pressure drop through the pipe
+together with friction and gravity forces. The main defined variable is volumetric flow rate <code>Vdot</code>.</p>
+
+<p>In this pipe model, the flow rate changes simultaneously in the whole pipe (information about the speed of wave
+propagation is not included). Water pressures are shown at the pipe boundaries (inlet and outlet pressure from connectors).</p>
+
+<h5>Features</h5>
+<p>It should be noted that this pipe model provides possibilities for modelling of pipes with both positive and negative
+slopes (positive or negative height difference).</p>
+
+<p>If the pipe is slightly tapered then this can be taken into account by adjusting <code>K_c</code> based on your
+taper geometry: 0.05–0.15 for gentle cones, up to 0.6 for sharp contractions.</p>
+
+<h5>Friction Specification</h5>
+<p>The pipe friction can be specified using one of three methods via the <code>friction_method</code> parameter:</p>
+<ul>
+<li><strong>Pipe Roughness (p_eps)</strong>: Direct specification of absolute pipe roughness height (m).
+Typical values: 0.0001-0.001 m for steel pipes, 0.001-0.003 m for concrete.</li>
+<li><strong>Moody Friction Factor (f)</strong>: Dimensionless friction factor from Moody diagram.
+Typical values: 0.01-0.05. Converted to equivalent roughness using fully turbulent flow approximation:
+p_eps = 3.7·D·10<sup>-1/(2√f)</sup></li>
+<li><strong>Manning Coefficient</strong>: Two notations are supported:
+<ul>
+<li><strong>Manning's M coefficient (Strickler)</strong> [m<sup>1/3</sup>/s]: M = 1/n, typical values 60-110 for steel,
+30-60 for rock tunnels.</li>
+<li><strong>Manning's n coefficient</strong> [s/m<sup>1/3</sup>]: Typical values 0.009-0.013 for smooth steel,
+0.012-0.017 for concrete, 0.017-0.030 for rock tunnels.  Use checkbox <code>use_n</code> to enable this notation.</li>
+</ul>
+These are then converted using: p_eps = D_h·3.097·e<sup>(-0.118/n)</sup> empirically derived from the&nbsp;Karman-Prandtl equation.</li>
+</ul>
+<p>The conversions are simplified for hydropower applications assuming fully turbulent flow,
+so they depend only on fixed pipe dimensions and the chosen friction coefficient.</p>
+
+<h5>More Information</h5>
+<p>More info about the pipe model can be found in
+    <a href=\"modelica://OpenHPL.UsersGuide.References\">[Vytvytskyi2017]</a>
+and <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017a]</a>.</p>
+</html>"));
 end Pipe;

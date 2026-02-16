@@ -78,18 +78,39 @@ equation
 
    o.mdot = -data.rho * Vdot_o "Output flow connector";
   //o.T = T_0 "TBD: Output temperature connector";
-  annotation ( Documentation(info="<html>
-<p>Simple model of the reservoir with different options:</p>
-<ul>
-<li><em>Default</em>: Container with an initial water level of <code>H_0</code>.
- The water level will vary according to the outlet volume flow rate.</li>
-<li><code>useLevel</code>: The water level is determined by the <code>level</code> input.</li>
-<li><code>useInflow</code>: Reservoir starts with an initial water level of <code>H_0</code>
- but uses the <code>inflow</code> input as additional water source (can also be negative
-to simulate evaporation.</li>
-</ul>
-<p>
+  annotation (preferredView="info", Documentation(info="<html>
+<h4>Reservoir Model</h4>
+
+<p>Simple model of the reservoir with different options for modeling the water source of a hydropower system.</p>
+
+<p align=\"center\">
 <img src=\"modelica://OpenHPL/Resources/Images/Reservoir.svg\">
 </p>
+<p><em>Figure: Reservoir model schematic.</em></p>
+
+<h5>Model Variants</h5>
+<ul>
+<li><em>Default (Simple)</em>: Container with an initial water level of <code>H_0</code>.
+ The water level will vary according to the outlet volume flow rate.</li>
+<li><code>useLevel</code>: The water level is determined by the <code>level</code> input signal,
+allowing external control of the (varying) reservoir levels.</li>
+<li><code>useInflow</code>: Reservoir starts with an initial water level of <code>H_0</code>
+ but uses the <code>inflow</code> input as additional water source (can also be negative
+to simulate evaporation or other losses).</li>
+</ul>
+
+<h5>Governing Equations</h5>
+
+<p><strong>Simplified Model:</strong> In the simple case with constant or slowly varying reservoir level,
+the reservoir outlet pressure is simply:</p>
+<p>$$ p_\\mathrm{o} = p_\\mathrm{atm} + \\rho g H $$</p>
+
+<p><strong>Detailed Model:</strong> For a detailed model with dynamics and inflow,
+the mass and momentum balances are:</p>
+<p>$$ H\\frac{\\mathrm{d}\\dot{m}}{\\mathrm{d}t} = \\frac{\\rho}{A}\\dot{V}^2 + A(p_\\mathrm{atm}-p_\\mathrm{o}) + \\rho gHA - F_\\mathrm{f,r} $$</p>
+<p>$$ \\frac{\\mathrm{d}m}{\\mathrm{d}t} = \\dot{m}_\\mathrm{i} - \\dot{m}_\\mathrm{o} $$</p>
+<p>where ṁ is the reservoir mass flow rate, A is the cross-sectional area,
+p<sub>atm</sub> and p<sub>o</sub> are atmospheric and outlet pressures, and F<sub>f,r</sub> is
+the friction term (typically small for large reservoirs).</p>
 </html>"));
 end Reservoir;

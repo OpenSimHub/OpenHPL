@@ -80,7 +80,7 @@ equation
   F_e = (flow_var - Vdot_tot) ^ 2;
   R2 = 1 - F_e / F_o;
   Vdot_runoff = Vdot_tot;
-  annotation (
+  annotation (preferredView="info",
     Documentation(info="<html>
 <p>This is the same hydrology model that is based on the HBV hydrological model.</p>
 <p>This model can be used to define the inflow (runoff) to the reservoir.
