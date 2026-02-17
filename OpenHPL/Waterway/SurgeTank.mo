@@ -149,9 +149,9 @@ connecting the conduit, surge volume, and penstock. Four different surge tank co
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STSimple.svg\"></p></li>
 <li><strong>Air cushion surge tank</strong> - Includes compressed air chamber
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STAirCushion.svg\"></p></li>
-<li><strong>Throttle valve surge tank</strong> - With restricted throat section
-<p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STSharpOrifice.svg\"></p></li>
 <li><strong>Sharp orifice surge tank</strong> - With orifice restriction
+<p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STSharpOrifice.svg\"></p></li>
+<li><strong>Throttle valve surge tank</strong> - With restricted throat section
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STThrottleValve.svg\"></p></li>
 </ol>
 
