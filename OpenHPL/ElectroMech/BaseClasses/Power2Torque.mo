@@ -67,7 +67,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={-50,-40})));
-  Modelica.Blocks.Math.Gain w_m2pu(k=(p/2)/(2*C.pi*data.f_0))
+  Modelica.Blocks.Math.Gain w_m2pu(k=(p/2)/(2*C.pi*data.f_grid))
     annotation (Placement(transformation(extent={{66,-46},{78,-34}})));
   Modelica.Blocks.Nonlinear.Limiter torqueLimit(uMax=Pmax/f_0)
     annotation (Placement(transformation(
@@ -101,7 +101,7 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
   Modelica.Blocks.Interfaces.RealInput f_in if enable_f_in and not enable_nomSpeed
     "Speed input of the unit [pu]"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},rotation=90,origin={-80,-120})));
-  Modelica.Blocks.Math.Gain pu2w_s(k=2*C.pi*data.f_0) if enable_f_in or enable_nomSpeed
+  Modelica.Blocks.Math.Gain pu2w_s(k=2*C.pi*data.f_grid) if enable_f_in or enable_nomSpeed
     annotation (Placement(transformation(extent={{40,-90},{60,-70}})));
 
 equation
