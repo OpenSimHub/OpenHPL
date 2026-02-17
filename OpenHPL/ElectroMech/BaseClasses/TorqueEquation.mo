@@ -44,7 +44,7 @@ partial model TorqueEquation
     Placement(transformation(extent = {{0, 60}, {20, 40}})));
   Modelica.Mechanics.Rotational.Components.Fixed fixed annotation(
     Placement(transformation(extent = {{20, 50}, {40, 70}})));
- Modelica.Blocks.Math.Gain w_m2pu(k = (p/2)/(2*Modelica.Constants.pi*data.f_0)) annotation(
+  Modelica.Blocks.Math.Gain w_m2pu(k = (p/2)/(data.f_grid*2*Modelica.Constants.pi)) "Convert from rad/s to pu" annotation(
     Placement(transformation(extent = {{66, -46}, {78, -34}})));
   Modelica.Blocks.Interfaces.RealOutput f if enable_f "Speed output of the unit [pu]" annotation(
     Placement(transformation(extent = {{100, -50}, {120, -30}}), iconTransformation(extent = {{100, -50}, {120, -30}})));
@@ -64,12 +64,12 @@ partial model TorqueEquation
     Placement(transformation(extent = {{-10, -80}, {10, -60}})));
   Modelica.Blocks.Interfaces.RealInput f_in if enable_f_in and not enable_nomSpeed "Speed input of the unit [pu]" annotation(
     Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-80, -120})));
-  Modelica.Blocks.Math.Gain pu2w_s(k = 2*Modelica.Constants.pi*data.f_0) if enable_f_in or enable_nomSpeed annotation(
+  Modelica.Blocks.Math.Gain pu2w_s(k = 2*Modelica.Constants.pi*data.f_grid) if enable_f_in or enable_nomSpeed annotation(
     Placement(transformation(extent = {{40, -90}, {60, -70}})));
   protected
    Modelica.Mechanics.Rotational.Sources.Torque torque_transfer annotation(
     Placement(transformation(extent = {{-36, -6}, {-24, 6}})));
-  
+   
 equation
   connect(w, speedSensor.w) annotation(
     Line(points = {{110, 40}, {40, 40}, {40, -42}, {10, -42}, {10, -39}}, color = {0, 0, 127}, pattern = LinePattern.Dash));
@@ -105,6 +105,6 @@ equation
     Line(points = {{-80, 30}, {-94, 30}, {-94, 0}, {-38, 0}}, color = {0, 0, 127}));
   annotation(
     Icon(graphics = {Text(visible = enable_w, extent = {{80, 50}, {100, 30}}, textColor = {0, 0, 0}, textString = "w"), Text(visible = enable_f, extent = {{80, -30}, {100, -50}}, textColor = {0, 0, 0}, textString = "f"), Text(visible = enable_f_in, extent = {{-100, -70}, {-60, -90}}, textColor = {0, 0, 0}, textString = "f_in")}),
-Documentation(info = "<html><head></head><body><p>Abstract (partial) base class for including the torque equation:<br> $$ J\frac{d\omega}{dt}=T $$ <br>In the future this base class can replace <font face=\"Courier\">Power2Torque</font> in the turbine models to avoid the issue at zero speed. This class is also better suited for fundamental or mechanistic turbine models.</p></body></html>"));
+Documentation(info = "<html><head></head><body><p>Abstract (partial) base class for including the torque equation:<br> $$ J\\frac{d\\omega}{dt}=T $$ <br>In the future this base class can replace <font face=\"Courier\">Power2Torque</font> in the turbine models to avoid the issue at zero speed. This class is also better suited for fundamental or mechanistic turbine models.</p></body></html>"));
 
 end TorqueEquation;
