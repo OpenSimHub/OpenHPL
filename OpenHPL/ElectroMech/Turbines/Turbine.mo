@@ -11,13 +11,14 @@ model Turbine "Simple turbine model with mechanical connectors"
     annotation (Dialog(group = "Efficiency data"), choices(checkBox = true));
   parameter SI.Efficiency eta_h = 0.9 "Hydraulic efficiency"
     annotation (Dialog(group = "Efficiency data", enable = ConstEfficiency));
-  parameter Real lookup_table[:, :] = [0, 0.4; 0.2, 0.7; 0.5, 0.9; 0.95, 0.95; 1.0, 0.93]
-    "Look-up table for the turbine/valve efficiency, described by a table matrix, where the first column is a pu value of the guide vane opening, and the second column is a pu value of the turbine efficiency."
-    annotation (Dialog(group = "Efficiency data", enable = not ConstEfficiency));
+  replaceable parameter Types.Efficiency VarEfficiency constrainedby Types.Efficiency
+    "Look-up table for the turbine efficiency, described by a table matrix,
+     where the first column is a pu value of the opening, and the second column is a pu value of the turbine efficiency."
+    annotation(choicesAllMatching=true, Dialog(group = "Efficiency data", enable = not ConstEfficiency));
   Modelica.Blocks.Math.Feedback lossCorrection
   annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
   Modelica.Blocks.Tables.CombiTable1Dv efficiencyCurve(
-    table=lookup_table,
+    table=VarEfficiency.EffTable,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative,
     extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
     "Efficiency curve of the turbine"
