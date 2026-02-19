@@ -58,6 +58,8 @@ protected
 initial equation
   if SteadyState then
     der(mdot) = 0;
+  else
+    Vdot=Vdot_0;
   end if;
 algorithm
     assert( phi < 1.0,  "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
