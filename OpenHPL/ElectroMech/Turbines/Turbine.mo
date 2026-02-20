@@ -11,7 +11,7 @@ model Turbine "Simple turbine model with mechanical connectors"
     annotation (Dialog(group = "Efficiency data"), choices(checkBox = true));
   parameter SI.Efficiency eta_h = 0.9 "Hydraulic efficiency"
     annotation (Dialog(group = "Efficiency data", enable = ConstEfficiency));
-  replaceable parameter Types.Efficiency VarEfficiency constrainedby Types.Efficiency
+  replaceable parameter OpenHPL.Types.Efficiency VarEfficiency constrainedby OpenHPL.Types.Efficiency
     "Look-up table for the turbine efficiency, described by a table matrix,
      where the first column is a pu value of the opening, and the second column is a pu value of the turbine efficiency."
     annotation(choicesAllMatching=true, Dialog(group = "Efficiency data", enable = not ConstEfficiency));
