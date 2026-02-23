@@ -1,4 +1,5 @@
 TestPipe
+TorqueEquation
 OpenChannel
 Reservoir
 TestMCB
@@ -71,5 +72,3 @@ HPSTSimple
 HPSTAirCushion
 HPSTSharpOrifice
 HPSTThrottleValve
-TestPipe
-TorqueEquation
