@@ -52,8 +52,6 @@ partial model TorqueEquation
     Placement(transformation(extent = {{100, 30}, {120, 50}}), iconTransformation(extent = {{100, 30}, {120, 50}})));
   Modelica.Mechanics.Rotational.Interfaces.Flange_b flange "Flange of right shaft" annotation(
     Placement(transformation(extent = {{40, -10}, {60, 10}}), iconTransformation(extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.RealExpression torque annotation(
-    Placement(transformation(extent = {{-60, 20}, {-80, 40}})));
   Modelica.Mechanics.Rotational.Sensors.PowerSensor frictionLoss annotation(
     Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 270, origin = {10, 20})));
   Modelica.Mechanics.Rotational.Sources.Speed setSpeed if enable_nomSpeed or enable_f_in annotation(
@@ -67,7 +65,7 @@ partial model TorqueEquation
   Modelica.Blocks.Math.Gain pu2w_s(k = 2*Modelica.Constants.pi*data.f_grid) if enable_f_in or enable_nomSpeed annotation(
     Placement(transformation(extent = {{40, -90}, {60, -70}})));
   protected
-   Modelica.Mechanics.Rotational.Sources.Torque torque_transfer annotation(
+   Modelica.Mechanics.Rotational.Sources.Torque torque annotation(
     Placement(transformation(extent = {{-36, -6}, {-24, 6}})));
 equation
   connect(w, speedSensor.w) annotation(
@@ -80,7 +78,7 @@ equation
     Line(points = {{0, 0}, {10, 0}, {10, -10}}));
   connect(friction.support, fixed.flange) annotation(
     Line(points = {{10, 60}, {10, 70}, {30, 70}, {30, 60}}, color = {0, 0, 0}));
-  connect(torque_transfer.flange, inertia.flange_a) annotation(
+  connect(torque.flange, inertia.flange_a) annotation(
     Line(points = {{-24, 0}, {-20, 0}}, color = {0, 0, 0}));
   connect(w, w) annotation(
     Line(points = {{110, 40}, {105, 40}, {105, 40}, {110, 40}}, color = {0, 0, 127}));
@@ -100,8 +98,6 @@ equation
     Line(points = {{38, -80}, {28, -80}, {28, -90}, {-80, -90}, {-80, -120}}, color = {0, 0, 127}, pattern = LinePattern.Dash));
   connect(nominalSpeed.y, pu2w_s.u) annotation(
     Line(points = {{11, -70}, {28, -70}, {28, -80}, {38, -80}}, color = {0, 0, 127}, pattern = LinePattern.Dash));
-  connect(torque.y, torque_transfer.tau) annotation(
-    Line(points = {{-80, 30}, {-94, 30}, {-94, 0}, {-38, 0}}, color = {0, 0, 127}));
   annotation(
     Icon(graphics = {Text(visible = enable_w, extent = {{80, 50}, {100, 30}}, textColor = {0, 0, 0}, textString = "w"), Text(visible = enable_f, extent = {{80, -30}, {100, -50}}, textColor = {0, 0, 0}, textString = "f"), Text(visible = enable_f_in, extent = {{-100, -70}, {-60, -90}}, textColor = {0, 0, 0}, textString = "f_in")}),
 Documentation(info = "<html>
