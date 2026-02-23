@@ -37,7 +37,7 @@ partial model TorqueEquation
     Dialog(group = "Outputs", tab = "I/O"));
   
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation(
-    Placement(transformation(origin = {10, -28}, extent = {{10, -10}, {-10, 10}}, rotation = 90)));
+    Placement(transformation(origin = {10, -20}, extent = {{10, -10}, {-10, 10}}, rotation = 90)));
   Modelica.Mechanics.Rotational.Components.Inertia inertia(J = if useH then 2*H*Pmax/f_0^2 else J, w(start = f_0*2*Modelica.Constants.pi*data.f_0/(p/2), fixed = not enable_nomSpeed and not enable_f_in and fixed_iniSpeed)) annotation(
     Placement(transformation(extent = {{-20, -10}, {0, 10}})));
   Modelica.Electrical.Machines.Losses.Friction friction(frictionParameters(PRef = Ploss, wRef = data.f_0*4*C.pi/p)) annotation(
@@ -69,16 +69,15 @@ partial model TorqueEquation
   protected
    Modelica.Mechanics.Rotational.Sources.Torque torque_transfer annotation(
     Placement(transformation(extent = {{-36, -6}, {-24, 6}})));
-   
 equation
   connect(w, speedSensor.w) annotation(
-    Line(points = {{110, 40}, {40, 40}, {40, -42}, {10, -42}, {10, -39}}, color = {0, 0, 127}, pattern = LinePattern.Dash));
+    Line(points = {{110, 40}, {40, 40}, {40, -40}, {10, -40}, {10, -31}}, color = {0, 0, 127}, pattern = LinePattern.Dash));
   connect(w_m2pu.u, speedSensor.w) annotation(
-    Line(points = {{64.8, -40}, {64.8, -42}, {10, -42}, {10, -39}}, color = {0, 0, 127}));
+    Line(points = {{64.8, -40}, {10, -40}, {10, -31}}, color = {0, 0, 127}));
   connect(f, w_m2pu.y) annotation(
     Line(points = {{110, -40}, {78.6, -40}}, color = {0, 0, 127}, pattern = LinePattern.Dash));
   connect(inertia.flange_b, speedSensor.flange) annotation(
-    Line(points = {{0, 0}, {0, -2}, {10, -2}, {10, -18}}));
+    Line(points = {{0, 0}, {10, 0}, {10, -10}}));
   connect(friction.support, fixed.flange) annotation(
     Line(points = {{10, 60}, {10, 70}, {30, 70}, {30, 60}}, color = {0, 0, 0}));
   connect(torque_transfer.flange, inertia.flange_a) annotation(
@@ -105,6 +104,16 @@ equation
     Line(points = {{-80, 30}, {-94, 30}, {-94, 0}, {-38, 0}}, color = {0, 0, 127}));
   annotation(
     Icon(graphics = {Text(visible = enable_w, extent = {{80, 50}, {100, 30}}, textColor = {0, 0, 0}, textString = "w"), Text(visible = enable_f, extent = {{80, -30}, {100, -50}}, textColor = {0, 0, 0}, textString = "f"), Text(visible = enable_f_in, extent = {{-100, -70}, {-60, -90}}, textColor = {0, 0, 0}, textString = "f_in")}),
-Documentation(info = "<html><head></head><body><p>Abstract (partial) base class for including the torque equation:<br> $$ J\\frac{d\\omega}{dt}=T $$ <br>In the future this base class can replace <font face=\"Courier\">Power2Torque</font> in the turbine models to avoid the issue at zero speed. This class is also better suited for fundamental or mechanistic turbine models.</p></body></html>"));
+Documentation(info = "<html>
+<p>
+Abstract (partial) base class for including the torque equation:
+</p> 
+<p>
+$$ J \\frac{\\mathrm{d}\\omega}{\\mathrm{d}t} = T $$
+</p>
+<p>
+In the future this base class can replace <code>Power2Torque</code> in the turbine models to avoid the issue at zero speed. This class is also better suited for fundamental or mechanistic turbine models.
+</p>
+</html>"));
 
 end TorqueEquation;
