@@ -2,7 +2,7 @@ within OpenHPL.ElectroMech.BaseClasses;
 
 partial model TorqueEquation
   outer OpenHPL.Data data "Using standard class with global parameters";
-  //
+
   parameter Boolean useH = false "If checked, calculate the inertia from a given H value" annotation(
     Dialog(group = "Mechanical"),
     choices(checkBox = true));
@@ -38,13 +38,13 @@ partial model TorqueEquation
   
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation(
     Placement(transformation(origin = {10, -20}, extent = {{10, -10}, {-10, 10}}, rotation = 90)));
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(J = if useH then 2*H*Pmax/f_0^2 else J, w(start = f_0*2*Modelica.Constants.pi*data.f_0/(p/2), fixed = not enable_nomSpeed and not enable_f_in and fixed_iniSpeed)) annotation(
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(J = if useH then 2*H*Pmax/f_0^2 else J, w(start = f_0*2*C.pi*data.f_0/(p/2), fixed = not enable_nomSpeed and not enable_f_in and fixed_iniSpeed)) annotation(
     Placement(transformation(extent = {{-20, -10}, {0, 10}})));
   Modelica.Electrical.Machines.Losses.Friction friction(frictionParameters(PRef = Ploss, wRef = data.f_0*4*C.pi/p)) annotation(
     Placement(transformation(extent = {{0, 60}, {20, 40}})));
   Modelica.Mechanics.Rotational.Components.Fixed fixed annotation(
     Placement(transformation(extent = {{20, 50}, {40, 70}})));
-  Modelica.Blocks.Math.Gain w_m2pu(k = (p/2)/(data.f_grid*2*Modelica.Constants.pi)) "Convert from rad/s to pu" annotation(
+  Modelica.Blocks.Math.Gain w_m2pu(k = (p/2)/(data.f_grid*2*C.pi)) "Convert from rad/s to pu" annotation(
     Placement(transformation(extent = {{66, -46}, {78, -34}})));
   Modelica.Blocks.Interfaces.RealOutput f if enable_f "Speed output of the unit [pu]" annotation(
     Placement(transformation(extent = {{100, -50}, {120, -30}}), iconTransformation(extent = {{100, -50}, {120, -30}})));
@@ -62,7 +62,7 @@ partial model TorqueEquation
     Placement(transformation(extent = {{-10, -80}, {10, -60}})));
   Modelica.Blocks.Interfaces.RealInput f_in if enable_f_in and not enable_nomSpeed "Speed input of the unit [pu]" annotation(
     Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-80, -120})));
-  Modelica.Blocks.Math.Gain pu2w_s(k = 2*Modelica.Constants.pi*data.f_grid) if enable_f_in or enable_nomSpeed annotation(
+  Modelica.Blocks.Math.Gain pu2w_s(k = 2*C.pi*data.f_grid) if enable_f_in or enable_nomSpeed annotation(
     Placement(transformation(extent = {{40, -90}, {60, -70}})));
   protected
    Modelica.Mechanics.Rotational.Sources.Torque torque annotation(
