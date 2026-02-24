@@ -15,20 +15,17 @@ model Pipes "Example of contracting, contstant and expanding pipe diameters"
     D_i=0.8*Dn,
     D_o=1.2*Dn,
     H=0,
-    L=1000,
-    p_eps(displayUnit="mm") = 0) annotation (Placement(transformation(origin={0,20}, extent={{-10,-10},{10,10}})));
+    L=1000) annotation (Placement(transformation(origin={0,20}, extent={{-10,-10},{10,10}})));
     OpenHPL.Waterway.Pipe pipeConstant(
     D_i=Dn,
     D_o=Dn,
     H=0,
-    L=1000,
-    p_eps(displayUnit="mm") = 0) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    L=1000) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     OpenHPL.Waterway.Pipe pipeContracting(
     D_i=1.2*Dn,
     D_o=0.8*Dn,
     H=0,
-    L=1000,
-    p_eps(displayUnit="mm") = 0) annotation (Placement(transformation(origin={0,-20}, extent={{-10,-10},{10,10}})));
+    L=1000) annotation (Placement(transformation(origin={0,-20}, extent={{-10,-10},{10,10}})));
 
 equation
   connect(Upstream.o, pipeExpanding.i) annotation (Line(points={{-40,0},{-28,0},{-28,20},{-10,20}}, color={0,128,255}));
