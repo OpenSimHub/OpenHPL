@@ -1,18 +1,27 @@
 # OpenHPL
 
-OpenHPL is an open-source hydropower library that consists of hydropower unit models and is modelled using Modelica.
+OpenHPL is an open-source **Modelica hydropower library** for modelling hydropower systems of varying complexity, from simple single-component tests to complete hydropower plants with integrated power system controls.
 
 ## Library description
 
-The OpenHPL makes it possible to model hydropower systems of different complexity and connect them
-with models from other libraries, e.g., with models of the power system or other power generating
-sources.
+The OpenHPL library provides comprehensive models for:
 
-More information about the library can be found in the [User's Guide](OpenHPL/Resources/Documents/UsersGuide.pdf) and the following [PhD Thesis](http://hdl.handle.net/11250/2608105).
+- **Hydraulic Components** (`Waterway` package): Penstocks, pipes, reservoirs, surge tanks, open channels, gates, and valves
+- **Turbines**: Simple turbine models, Francis turbines, and Pelton turbines with realistic performance characteristics
+- **Generators**: Simple generators and synchronous generators for power output modelling
+- **Power System Integration**: Grid models with frequency-droop control, seamlessly integrated via OpenIPSL
+- **Controllers**: Governor and hydraulic control systems for load governing and system stability
+- **Advanced Features**: Elastic penstock modelling using the KP method for pressure transients, discretised flow components for detailed hydraulics
+
+OpenHPL makes it possible to model hydropower systems of different complexity and connect them with models from other libraries, e.g., with models of the power system or other power generating sources. The library is built on Modelica 4.0.0 and integrates with OpenIPSL for power system analysis.
 
 ## Current release
 
 Download [OpenHPL v3.0.1 (2026-02-05)](../../releases/tag/v3.0.1)
+
+### Acknowledgements
+
+The very first version 1.0.0 of this library was created as part of the PhD thesis [Vytvytskyi2019](http://hdl.handle.net/11250/2608105), which was supported by the Norwegian Research Council under the project "Hydropower Systems Design and Analysis" (HydroCen Grant No. 257588).
 
 ## License
 
