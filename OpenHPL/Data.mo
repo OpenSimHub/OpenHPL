@@ -19,6 +19,7 @@ record Data "Provides a data set of most common used settings"
     annotation (Dialog(group = "Waterway properties"));
   parameter SI.Compressibility beta_total = 1 / (rho*1000^2) "Total compressibility"
    annotation (Dialog(group = "Waterway properties"));
+  parameter SI.Frequency f_grid=50 "Grid frequency"  annotation (Dialog(group = "System properties"));
   parameter Boolean SteadyState=false "If checked, simulation starts in steady state"
     annotation (choices(checkBox = true), Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0 = 0 "Initial volume flow rate through the system"
