@@ -38,7 +38,8 @@ partial model Power2Torque "Converts a power signal to a torque in the rotationa
     Placement(transformation(extent = {{-76, -6}, {-64, 6}})));
   Modelica.Blocks.Nonlinear.Limiter div0protect(uMax = Modelica.Constants.inf, uMin = Modelica.Constants.small) annotation(
     Placement(transformation(extent = {{-6, -6}, {6, 6}}, rotation = 180, origin = {-50, -40})));
-  Modelica.Blocks.Nonlinear.Limiter torqueLimit(uMax = Pmax/f_0) annotation(
+  Modelica.Blocks.Nonlinear.Limiter torqueLimit(uMax=Pmax/(2*C.pi*f_nom))
+                                                                 annotation (
     Placement(transformation(extent = {{6, 6}, {-6, -6}}, rotation = 180, origin = {-50, 0})));
   Modelica.Blocks.Sources.RealExpression power annotation(
     Placement(transformation(extent = {{-60, 20}, {-80, 40}})));
