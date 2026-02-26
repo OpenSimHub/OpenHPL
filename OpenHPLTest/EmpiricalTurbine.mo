@@ -15,7 +15,8 @@ package EmpiricalTurbine
       equation
         curvePoint = OpenHPL.Functions.deCasteljau(time, ndim, controlPoints);
     annotation(
-        experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.001));
+        experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.001),
+  Documentation(info = "<html><head></head><body>Basic test of evaluation of Bezier curve using deCasteljau algorithm.<div><br></div><div><br></div></body></html>"));
 end  Test01_BezierCurve;
     //
     model Test02_ControlPoints
@@ -79,7 +80,8 @@ end Test02_ControlPoints;
     opening = 0.6;
    (Qt, Tt) = OpenHPL.Functions.TurbineLookUp(Ht, nrps, opening, td, tc);
     annotation(
-        experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.001));
+        experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.001),
+  Documentation(info = "<html><head></head><body>Basic test of Empirical turbine mode. The head is kept constant, the speed is a linear function of time, and the flow and torque is computed from the model.</body></html>"));
 end Test01_TurbineLookUp;
   //
    model Test02_Turbin
@@ -101,7 +103,7 @@ end Test01_TurbineLookUp;
       Placement(transformation(origin = {-46, 28}, extent = {{-10, -10}, {10, 10}})));
     OpenHPL.Waterway.Reservoir undervann(h_0 = 0.0, constantLevel = true) annotation(
       Placement(transformation(origin = {72, -16}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
-    OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine(turbineData = td, turbineCharacteristics = tc, SteadyState = false, enable_nomSpeed = true) annotation(
+    OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine(turbineData = td, turbineCharacteristics = tc, SteadyState = false, enable_nomSpeed = false, f_0 = 0.2, enable_f = true) annotation(
       Placement(transformation(origin = {12, 12}, extent = {{-10, -10}, {10, 10}})));
     Modelica.Blocks.Sources.Constant const(k = 0.603) annotation(
       Placement(transformation(origin = {52, 72}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
@@ -113,7 +115,9 @@ end Test01_TurbineLookUp;
     connect(const.y, turbine.u_t) annotation(
       Line(points = {{41, 72}, {4, 72}, {4, 24}}, color = {0, 0, 127}));
   
-  end Test02_Turbin;
+  annotation(
+        Documentation(info = "<html><head></head><body>Basic test of EpiricalTurbine model. Opening is kept constant.<div><br></div></body></html>"));
+end Test02_Turbin;
   
   //
    model Test03_Turbin
