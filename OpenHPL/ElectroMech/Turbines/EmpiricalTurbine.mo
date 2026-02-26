@@ -7,7 +7,7 @@ model EmpiricalTurbine
   //
   parameter Boolean SteadyState = false "If true, starts in steady state" annotation(
     Dialog(group = "Initialization"));
-  parameter OpenHPL.Types.HillChart hillChart;
+  parameter OpenHPL.Types.TurbineCharacteristics turbineCharacteristics;
   parameter OpenHPL.Types.TurbineData turbineData;
   SI.Length Ht "Turbine head";
   SI.VolumeFlowRate Qt "Turbine flow rate";
@@ -20,7 +20,7 @@ equation
   Ht = (i.p - o.p)/(data.rho*data.g);
   i.mdot + o.mdot = 0;
   i.mdot = Qt*data.rho;
-  (Qt, Tt) = OpenHPL.Functions.TurbineLookUp(Ht, nrps, opening, turbineData, hillChart);  
+  (Qt, Tt) = OpenHPL.Functions.TurbineLookUp(Ht, nrps, opening, turbineData, turbineCharacteristics);  
 annotation(
     Documentation(info = "<html><head></head><body>Turbine model based on normalized, empirical turbine characteristics and turbine data for the best efficiency point.</body></html>"));
 end EmpiricalTurbine;

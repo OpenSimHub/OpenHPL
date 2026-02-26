@@ -5,7 +5,7 @@ extends Modelica.Icons.Function;
   /*
   */
   input Real opening;
-  input OpenHPL.Types.HillChart hc "Hill chart";
+  input OpenHPL.Types.TurbineCharacteristics hc "Turbine characteristics";
   output Real data[hc.nPoints, hc.nDim];
 protected
   Real td[hc.nPoints, hc.nDim];

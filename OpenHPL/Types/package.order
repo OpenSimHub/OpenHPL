@@ -4,5 +4,6 @@ Fitting
 FrictionMethod
 Lambda
 SurgeTank
-HillChart
 TurbineData
+TurbineCharacteristics
+ReactionTurbines

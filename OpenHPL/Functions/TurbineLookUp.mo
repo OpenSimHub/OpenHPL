@@ -7,7 +7,7 @@ function TurbineLookUp
   input SI.Frequency nrps;
   input Real opening;
   input OpenHPL.Types.TurbineData td "Turbine data";
-  input OpenHPL.Types.HillChart hc "Hill chart";
+  input OpenHPL.Types.TurbineCharacteristics hc "Turbine characteristics";
   output SI.VolumeFlowRate Qt "Discharge";
   output SI.Torque Tt "Hydraulic torque";
 protected
