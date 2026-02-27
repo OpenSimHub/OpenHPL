@@ -25,7 +25,7 @@ for k in 1:ndim loop
   point[k] := temp[1, k];
 end for;
 annotation(
-    Documentation(info = "<html><head></head><body>Implementation of Bezier curve evaluation using the deCasteljau algorithm.<div>At the moment only one single Bezier curve per parameter dimension is assumed, but the order of the curve is arbritray, but define by the number of control points (e.g. curve order = number of control points - 1).</div></body></html>"));
+    Documentation(info = "<html><head></head><body>Implementation of Bezier curve evaluation using the deCasteljau algorithm.<br/>At the moment only one single Bezier curve per parameter dimension is assumed, but the order of the curve is arbritray, but define by the number of control points (e.g. curve order = number of control points - 1).</body></html>"));
 
 
 end deCasteljau;
