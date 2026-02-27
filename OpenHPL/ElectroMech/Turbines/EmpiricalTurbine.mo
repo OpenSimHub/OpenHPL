@@ -17,10 +17,10 @@ protected
   Real opening;
   SI.Frequency nrps "Rotational speed (in rotations per seconds)";
 equation
-  Ht = (i.p - o.p)/(data.rho*data.g);
+  Ht = abs(i.p - o.p)/(data.rho*data.g);
   i.mdot + o.mdot = 0;
   i.mdot = Qt*data.rho;
   (Qt, Tt) = OpenHPL.Functions.TurbineLookUp(Ht, nrps, opening, turbineData, turbineCharacteristics);  
 annotation(
-    Documentation(info = "<html><head></head><body>Turbine model based on normalized, empirical turbine characteristics and turbine data for the best efficiency point.</body></html>"));
+    Documentation(info = "<html><head></head><body>Turbine model based on normalized, empirical turbine characteristics and turbine data for the best efficiency point.<div>In this intial release, the turbine characteristics and tubine data must be constructed separately passed to the model. This may change in future releases.</div></body></html>"));
 end EmpiricalTurbine;

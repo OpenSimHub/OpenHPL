@@ -31,7 +31,8 @@ protected
   Integer itr;
 algorithm
   controlPoints:=WeightedControlPoints(opening,hc);
-  target:=((nrps*td.Dn)/sqrt(Ht*td.g))/((td.nrps*td.Dn)/sqrt(td.Hbep*td.g));
+  // Modelica.Utilities.Streams.print("Ht = " + String(Ht));
+  target:=((nrps*td.Dn)/sqrt(max(abs(Ht),eps)*td.g))/((td.nrps*td.Dn)/sqrt(td.Hbep*td.g));
   a:=0;
   b:=1;
   itr:=0;
