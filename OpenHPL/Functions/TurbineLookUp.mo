@@ -68,7 +68,7 @@ algorithm
   Tt := (cP1[3] + cP2[3])*0.5*(td.Tbep*(Ht/td.Hbep));
 
 annotation(
-    Documentation(info = "<html><head></head><body><p>Compute the physical discharge (Q) and torque (T) based on the turbine speed [nrps], turbine head [Ht] and opening. The algorithm is briely summarized below.<ol><li>Find the actual charateristic curve by weighted interpolation of the two closest curves</li><li>Use golden section search to find the correct position along the speed curve</li><li>Compute physcal discharge and torque based on normalized unit data and the turbine information</li></ol>At the moment the algorithm  assumes that \\(n_{ED}\\) is monotonously increasing as function of the parametric value and is not able to handle s-shaped curves.</p></body></html>"));
+    Documentation(info ="<html><head></head><body><p>Compute the physical discharge (Q) and torque (T) based on the turbine speed [nrps], turbine head [Ht] and opening. The algorithm is briely summarized below.<ol><li>Find the actual charateristic curve by weighted interpolation of the two closest curves</li><li>Use golden section search to find the correct position along the speed curve</li><li>Compute physcal discharge and torque based on normalized unit data and the turbine information</li></ol>At the moment the algorithm  assumes that \\(n_{ED}\\) is monotonously increasing as function of the parametric value and is not able to handle s-shaped curves.</p></body></html>"));
 
 
 end TurbineLookUp;
