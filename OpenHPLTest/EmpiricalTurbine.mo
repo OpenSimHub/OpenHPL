@@ -51,18 +51,34 @@ package EmpiricalTurbine
   package TurbineTest
     extends Modelica.Icons.ExamplesPackage;
     import SI = Modelica.Units.SI;
-
-    model Test01_TurbineLookUp
+    
+    partial model AbstractTurbineTest
       extends Modelica.Icons.Example;
-    protected
-      constant Integer NC = 5;
+       inner OpenHPL.Data data annotation(
+        Placement(transformation(origin = {-84, 82}, extent = {{-10, -10}, {10, 10}})));
+      protected
+        constant Integer NC = 11;
+        constant Integer NP = 6;
+        constant Integer ND = 3;
+        parameter Real openingArray[NC] = {0.014, 0.030, 0.050, 0.100, 0.200, 0.300, 0.400, 0.500, 0.601, 0.800, 1.000};
+        parameter Real controlPoints[NC, NP, ND] = {{{0.00, 0.07, 0.07}, {0.30, 0.10, 0.07}, {0.54, -0.07, -0.03}, {0.92, 0.25, 0.13}, {1.13, -0.11, -0.17}, {1.43, -0.06, -0.31}}, {{0.00, 0.11, 0.15}, {0.32, 0.15, 0.17}, {0.51, -0.06, -0.09}, {1.00, 0.35, 0.35}, {1.11, -0.12, -0.30}, {1.43, -0.09, -0.31}}, {{0.00, 0.15, 0.23}, {0.34, 0.21, 0.24}, {0.47, -0.08, -0.01}, {1.07, 0.46, 0.35}, {1.09, -0.15, -0.24}, {1.43, -0.11, -0.37}}, {{0.00, 0.27, 0.45}, {0.37, 0.30, 0.40}, {0.40, 0.05, 0.30}, {1.38, 0.60, 0.26}, {0.97, -0.19, -0.17}, {1.43, -0.13, -0.42}}, {{0.00, 0.51, 0.92}, {0.40, 0.53, 0.80}, {0.45, 0.31, 0.83}, {1.48, 0.75, 0.14}, {0.99, -0.14, -0.06}, {1.44, -0.17, -0.49}}, {{0.00, 0.77, 1.41}, {0.44, 0.79, 1.23}, {0.51, 0.56, 1.29}, {1.62, 0.82, -0.14}, {0.99, -0.05, 0.11}, {1.43, -0.18, -0.51}}, {{0.00, 1.01, 1.87}, {0.48, 1.05, 1.70}, {0.56, 0.74, 1.46}, {1.68, 0.84, -0.35}, {1.03, 0.06, 0.23}, {1.43, -0.19, -0.53}}, {{0.00, 1.25, 2.27}, {0.52, 1.26, 1.99}, {0.63, 1.00, 1.84}, {1.70, 0.83, -0.64}, {1.08, 0.17, 0.35}, {1.43, -0.18, -0.52}}, {{0.00, 1.46, 2.60}, {0.53, 1.45, 2.33}, {0.77, 1.19, 1.80}, {1.63, 0.86, -0.58}, {1.13, 0.24, 0.31}, {1.43, -0.17, -0.52}}, {{0.00, 1.79, 3.06}, {0.55, 1.78, 2.77}, {0.99, 1.43, 1.67}, {1.53, 0.94, -0.59}, {1.20, 0.31, 0.28}, {1.45, -0.16, -0.54}}, {{0.00, 2.10, 3.41}, {0.59, 2.02, 2.99}, {1.05, 1.63, 1.56}, {1.53, 1.04, -0.47}, {1.22, 0.40, 0.24}, {1.45, -0.13, -0.54}}};
+        /*
+        constant Integer NC = 5;
       constant Integer NP = 4;
       constant Integer ND = 3;
       parameter Real openingArray[NC] = {0.10, 0.25, 0.50, 0.75, 1.00};
       parameter Real controlPoints[NC, NP, ND] = {{{0.00, 0.18, 0.26}, {0.41, 0.10, 0.17}, {1.04, 0.31, 0.25}, {1.32, -0.04, -0.21}}, {{0.00, 0.44, 0.73}, {0.43, 0.37, 0.67}, {1.27, 0.55, 0.29}, {1.38, 0.00, -0.19}}, {{0.00, 0.91, 1.55}, {0.59, 0.89, 1.33}, {1.57, 0.79, 0.19}, {1.51, 0.00, -0.29}}, {{0.00, 1.30, 2.11}, {0.78, 1.33, 1.77}, {1.72, 0.92, -0.12}, {1.58, 0.00, -0.28}}, {{0.00, 1.57, 2.41}, {0.92, 1.63, 1.91}, {1.82, 1.02, -0.30}, {1.63, 0.00, -0.35}}};
-      parameter OpenHPL.Types.TurbineData td(Dn = 1.59, nrps = 8.33, Hbep = 425.0, Qbep = 23.95, Tbep = 1.718E+06, openingBep = 0.601, g = 9.81, rho = 997.0);
-      parameter OpenHPL.Types.TurbineCharacteristics tc(nCurves = NC, nPoints = NP, nDim = ND, opening = openingArray, data = controlPoints);
-    public
+        */
+        parameter OpenHPL.Types.TurbineCharacteristics tc(nCurves = NC, nPoints = NP, nDim = ND, opening = openingArray, data = controlPoints);
+        public
+        parameter OpenHPL.Types.TurbineData turbineData(Dn = 1.59, nrps = 8.33, Hbep = 425.0, Qbep = 23.95, Tbep = 1.718E+06, openingBep = 0.601, g = data.g, rho = data.rho) annotation(
+        Placement(transformation(origin = {-82, 54}, extent = {{-10, -10}, {10, 10}})));
+      
+        
+   end AbstractTurbineTest;
+
+    model Test01_TurbineLookUp
+      extends AbstractTurbineTest;
     public
       Real opening;
       SI.Length Ht "Turbine head";
@@ -73,7 +89,7 @@ package EmpiricalTurbine
       Ht = 425.0;
       nrps = 1.0e-03 + 8.33*time*1.4;
       opening = 0.6;
-      (Qt, Tt) = OpenHPL.Functions.TurbineLookUp(Ht, nrps, opening, td, tc);
+      (Qt, Tt) = OpenHPL.Functions.TurbineLookUp(Ht, nrps, opening, turbineData, tc);
       annotation(
         experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.001),
         Documentation(info = "<html><head></head><body>Basic test of &nbsp;the turbine lookup function. The head is kept constant, the speed is a linear function of time, and the flow and torque is computed from the model.<div>Running the model the turbine flow Qt or turbine torque Tt can be ploted as function of time.</div></body></html>"));
@@ -82,19 +98,7 @@ package EmpiricalTurbine
     //
 
     model Test02_Turbin
-      extends Modelica.Icons.Example;
-      inner OpenHPL.Data data annotation(
-        Placement(transformation(origin = {-84, 82}, extent = {{-10, -10}, {10, 10}})));
-    protected
-      constant Integer NC = 5;
-      constant Integer NP = 4;
-      constant Integer ND = 3;
-      parameter Real openingArray[NC] = {0.10, 0.25, 0.50, 0.75, 1.00};
-      parameter Real controlPoints[NC, NP, ND] = {{{0.00, 0.18, 0.26}, {0.41, 0.10, 0.17}, {1.04, 0.31, 0.25}, {1.32, -0.04, -0.21}}, {{0.00, 0.44, 0.73}, {0.43, 0.37, 0.67}, {1.27, 0.55, 0.29}, {1.38, 0.00, -0.19}}, {{0.00, 0.91, 1.55}, {0.59, 0.89, 1.33}, {1.57, 0.79, 0.19}, {1.51, 0.00, -0.29}}, {{0.00, 1.30, 2.11}, {0.78, 1.33, 1.77}, {1.72, 0.92, -0.12}, {1.58, 0.00, -0.28}}, {{0.00, 1.57, 2.41}, {0.92, 1.63, 1.91}, {1.82, 1.02, -0.30}, {1.63, 0.00, -0.35}}};
-      parameter OpenHPL.Types.TurbineCharacteristics tc(nCurves = NC, nPoints = NP, nDim = ND, opening = openingArray, data = controlPoints);
-    public
-      parameter OpenHPL.Types.TurbineData turbineData(Dn = 1.59, nrps = 8.33, Hbep = 425.0, Qbep = 23.95, Tbep = 1.718E+06, openingBep = 0.601, g = data.g, rho = data.rho) annotation(
-        Placement(transformation(origin = {-82, 54}, extent = {{-10, -10}, {10, 10}})));
+    extends AbstractTurbineTest;
       OpenHPL.Waterway.Reservoir overvann(h_0 = 425.0, constantLevel = true) annotation(
         Placement(transformation(origin = {-46, 28}, extent = {{-10, -10}, {10, 10}})));
       OpenHPL.Waterway.Reservoir undervann(h_0 = 0.0, constantLevel = true) annotation(
@@ -118,21 +122,11 @@ package EmpiricalTurbine
     //
 
     model Test03_Turbin
-      extends Modelica.Icons.Example;
-      inner OpenHPL.Data data annotation(
-        Placement(transformation(origin = {-46, 62}, extent = {{-10, -10}, {10, 10}})));
+       extends AbstractTurbineTest;
+    
+      public
       OpenHPL.Waterway.Pipe tunnel(H = 0, L = 2000, p_eps_input(displayUnit = "mm") = 1e-4, D_i = 4.6, SteadyState = true, Vdot_0 = 20.5) annotation(
         Placement(transformation(origin = {-44, 32}, extent = {{-10, -10}, {10, 10}})));
-      parameter OpenHPL.Types.TurbineData turbineData(Dn = 1.59, nrps = 8.33, Hbep = 425.0, Qbep = 23.95, Tbep = 1.718E+06, openingBep = 0.601, g = data.g, rho = data.rho) annotation(
-        Placement(transformation(origin = {-82, 62}, extent = {{-10, -10}, {10, 10}})));
-    protected
-      constant Integer NC = 5;
-      constant Integer NP = 4;
-      constant Integer ND = 3;
-      parameter Real openingArray[NC] = {0.10, 0.25, 0.50, 0.75, 1.00};
-      parameter Real controlPoints[NC, NP, ND] = {{{0.00, 0.18, 0.26}, {0.41, 0.10, 0.17}, {1.04, 0.31, 0.25}, {1.32, -0.04, -0.21}}, {{0.00, 0.44, 0.73}, {0.43, 0.37, 0.67}, {1.27, 0.55, 0.29}, {1.38, 0.00, -0.19}}, {{0.00, 0.91, 1.55}, {0.59, 0.89, 1.33}, {1.57, 0.79, 0.19}, {1.51, 0.00, -0.29}}, {{0.00, 1.30, 2.11}, {0.78, 1.33, 1.77}, {1.72, 0.92, -0.12}, {1.58, 0.00, -0.28}}, {{0.00, 1.57, 2.41}, {0.92, 1.63, 1.91}, {1.82, 1.02, -0.30}, {1.63, 0.00, -0.35}}};
-      parameter OpenHPL.Types.TurbineCharacteristics tc(nCurves = NC, nPoints = NP, nDim = ND, opening = openingArray, data = controlPoints);
-      public
       
       OpenHPL.Waterway.Reservoir overvann(h_0 = 425.0, constantLevel = true) annotation(
         Placement(transformation(origin = {-80, 32}, extent = {{-10, -10}, {10, 10}})));
@@ -159,26 +153,18 @@ package EmpiricalTurbine
     //
 
     model Test04_Turbin
-      extends Modelica.Icons.Example;
-      inner OpenHPL.Data data annotation(
-        Placement(transformation(origin = {-46, 62}, extent = {{-10, -10}, {10, 10}})));
-    protected
-      constant Integer NC = 5;
-      constant Integer NP = 4;
-      constant Integer ND = 3;
-      parameter Real openingArray[NC] = {0.10, 0.25, 0.50, 0.75, 1.00};
-      parameter Real controlPoints[NC, NP, ND] = {{{0.00, 0.18, 0.26}, {0.41, 0.10, 0.17}, {1.04, 0.31, 0.25}, {1.32, -0.04, -0.21}}, {{0.00, 0.44, 0.73}, {0.43, 0.37, 0.67}, {1.27, 0.55, 0.29}, {1.38, 0.00, -0.19}}, {{0.00, 0.91, 1.55}, {0.59, 0.89, 1.33}, {1.57, 0.79, 0.19}, {1.51, 0.00, -0.29}}, {{0.00, 1.30, 2.11}, {0.78, 1.33, 1.77}, {1.72, 0.92, -0.12}, {1.58, 0.00, -0.28}}, {{0.00, 1.57, 2.41}, {0.92, 1.63, 1.91}, {1.82, 1.02, -0.30}, {1.63, 0.00, -0.35}}};
-      parameter OpenHPL.Types.TurbineData td(Dn = 1.59, nrps = 8.33, Hbep = 425.0, Qbep = 23.95, Tbep = 1.718E+06, openingBep = 0.601, g = 9.81, rho = 997.0);
-      parameter OpenHPL.Types.TurbineCharacteristics tc(nCurves = NC, nPoints = NP, nDim = ND, opening = openingArray, data = controlPoints);
-    public
+       extends AbstractTurbineTest;
+       public
       OpenHPL.Waterway.Reservoir overvann(h_0 = 425.0, constantLevel = true) annotation(
         Placement(transformation(origin = {-46, 28}, extent = {{-10, -10}, {10, 10}})));
       OpenHPL.Waterway.Reservoir undervann(h_0 = 0.0, constantLevel = true) annotation(
         Placement(transformation(origin = {72, -16}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
-      OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine(turbineData = td, turbineCharacteristics = tc, SteadyState = false, enable_nomSpeed = true) annotation(
+      OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine(turbineData = turbineData, turbineCharacteristics = tc, SteadyState = false, enable_nomSpeed = false, f_0 = 1.0, enable_f = true) annotation(
         Placement(transformation(origin = {12, 12}, extent = {{-10, -10}, {10, 10}})));
-      Modelica.Blocks.Sources.Ramp ramp(height = 1, duration = 10, offset = 0, startTime = 0.1) annotation(
+      Modelica.Blocks.Sources.Ramp ramp(height = -1, duration = 10, offset = 1, startTime = 2) annotation(
         Placement(transformation(origin = {52, 72}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
+      parameter OpenHPL.Types.TurbineData turbineData(Dn = 1.59, nrps = 8.33, Hbep = 425.0, Qbep = 23.95, Tbep = 1.718E+06, openingBep = 0.601, g = data.g, rho = data.rho) annotation(
+        Placement(transformation(origin = {-80, 44}, extent = {{-12, 24}, {6, 6}})));
     equation
       connect(overvann.o, turbine.i) annotation(
         Line(points = {{-36, 28}, {-20, 28}, {-20, 12}, {2, 12}}, color = {0, 128, 255}));
@@ -186,6 +172,34 @@ package EmpiricalTurbine
         Line(points = {{22, 12}, {28, 12}, {28, -16}, {62, -16}}, color = {0, 128, 255}));
       connect(ramp.y, turbine.u_t) annotation(
         Line(points = {{41, 72}, {4, 72}, {4, 24}}, color = {0, 0, 127}));
-    end Test04_Turbin;
+    annotation(
+        experiment(StartTime = 0, StopTime = 15, Tolerance = 1e-06, Interval = 0.01));
+end Test04_Turbin;
+    //
+    model Test05_Turbin
+      extends AbstractTurbineTest;
+      //
+      public
+      OpenHPL.Waterway.Reservoir overvann(h_0 = 425.0, constantLevel = true) annotation(
+        Placement(transformation(origin = {-82, 12}, extent = {{-10, -10}, {10, 10}})));
+      OpenHPL.Waterway.Reservoir undervann(h_0 = 0.0, constantLevel = true) annotation(
+        Placement(transformation(origin = {72, -16}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
+      OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine(turbineData = turbineData, turbineCharacteristics = tc, SteadyState = false, enable_nomSpeed = true) annotation(
+        Placement(transformation(origin = {12, 12}, extent = {{-10, -10}, {10, 10}})));
+       OpenHPL.Waterway.Pipe tunnel(H = 0, L = 2000, p_eps_input(displayUnit = "mm") = 1e-4, D_i = 4.6, SteadyState = true, Vdot_0 = 20.5) annotation(
+          Placement(transformation(origin = {-42, 12}, extent = {{-10, -10}, {10, 10}})));
+        
+      Modelica.Blocks.Sources.Ramp ramp(height = 1, duration = 10, offset = 0, startTime = 0.1) annotation(
+        Placement(transformation(origin = {52, 72}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
+    equation
+      connect(turbine.o, undervann.o) annotation(
+        Line(points = {{22, 12}, {28, 12}, {28, -16}, {62, -16}}, color = {0, 128, 255}));
+      connect(ramp.y, turbine.u_t) annotation(
+        Line(points = {{41, 72}, {4, 72}, {4, 24}}, color = {0, 0, 127}));
+    connect(overvann.o, tunnel.i) annotation(
+        Line(points = {{-72, 12}, {-52, 12}}, color = {0, 128, 255}));
+    connect(tunnel.o, turbine.i) annotation(
+        Line(points = {{-32, 12}, {2, 12}}, color = {0, 128, 255}));
+    end Test05_Turbin;
   end TurbineTest;
 end EmpiricalTurbine;
