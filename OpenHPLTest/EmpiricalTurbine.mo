@@ -3,6 +3,12 @@ within OpenHPLTest;
 package EmpiricalTurbine
   extends Modelica.Icons.ExamplesPackage;
 
+  class Information
+  extends Modelica.Icons.Information;
+    annotation(
+      Documentation(info = "<html><head></head><body>The EmpiricalTurbine test package contains a series of test models for documeting and validating the implementation of the EmpiricalTurbine model.<div>There are two sub-packages:</div><div><ul><li>TestBasicFunctions - testing of the Bezier spline algorithm, the search algorithm and the blening function (to find intermediate curves)</li><li>TurbineTetst - collection of gradually more complex test cases using the EmpiricalTurbine model</li></ul>At the moment there are som robustness issues with the model. In the default configuration Test03_Turbine have issues with convergens at time t=0.34 with the message <pre>Homotopy solver Newton iteration: Maximum number of iterations reached at time 0.340000, but no root found.</pre> The following documents testing and investigations to resovle this.</div>The&nbsp;<a href=\"https://en.wikipedia.org/wiki/Homotopy_analysis_method\">Homotopy analysis method</a> is </body></html>"));
+  end Information;
+
   package TestBasicFunctions
     extends Modelica.Icons.ExamplesPackage;
     //
@@ -97,7 +103,7 @@ package EmpiricalTurbine
 
     //
 
-    model Test02_Turbin
+    model Test02_Turbine
     extends AbstractTurbineTest;
       OpenHPL.Waterway.Reservoir overvann(h_0 = 425.0, constantLevel = true) annotation(
         Placement(transformation(origin = {-46, 28}, extent = {{-10, -10}, {10, 10}})));
@@ -117,11 +123,11 @@ package EmpiricalTurbine
       annotation(
         Documentation(info = "<html><head></head><body>Basic test of EpiricalTurbine model. Opening is kept constant.<div>Initial speed f_0 is set to 0.2 and the turbine is permitted to speed up as function of computed turbine torque Tt.<br><div><br></div></div></body></html>"),
         experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-06, Interval = 0.001));
-    end Test02_Turbin;
+    end Test02_Turbine;
 
     //
 
-    model Test03_Turbin
+    model Test03_Turbine
        extends AbstractTurbineTest;
     
       public
@@ -146,13 +152,15 @@ package EmpiricalTurbine
       connect(tunnel.o, turbine.i) annotation(
         Line(points = {{-34, 32}, {-24, 32}, {-24, 12}, {2, 12}}, color = {0, 128, 255}));
       annotation(
-        experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-06, Interval = 0.01),
-        Documentation(info = "<html><head></head><body>Generic test with penstock and emprical turbine model. The opening is kept fixed and the unit is allowed to speed up to runaway.</body></html>"));
-    end Test03_Turbin;
+        experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-06, Interval = 0.1),
+        Documentation(info = "<html><head></head><body>Generic test with penstock and emprical turbine model. The opening is kept fixed and the unit is allowed to speed up to runaway.</body></html>"),
+  __OpenModelica_commandLineOptions = "--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian",
+  __OpenModelica_simulationFlags(lv = "LOG_STDOUT,LOG_ASSERT,LOG_STATS", s = "dassl", noHomotopyOnFirstTry = "()",homMaxNewtonSteps= "50",homMaxTries="30",variableFilter = ".*"));
+    end Test03_Turbine;
 
     //
 
-    model Test04_Turbin
+    model Test04_Turbine
        extends AbstractTurbineTest;
        public
       OpenHPL.Waterway.Reservoir overvann(h_0 = 425.0, constantLevel = true) annotation(
@@ -174,9 +182,9 @@ package EmpiricalTurbine
         Line(points = {{41, 72}, {4, 72}, {4, 24}}, color = {0, 0, 127}));
     annotation(
         experiment(StartTime = 0, StopTime = 15, Tolerance = 1e-06, Interval = 0.01));
-end Test04_Turbin;
+end Test04_Turbine;
     //
-    model Test05_Turbin
+    model Test05_Turbine
       extends AbstractTurbineTest;
       //
       public
@@ -200,6 +208,6 @@ end Test04_Turbin;
         Line(points = {{-72, 12}, {-52, 12}}, color = {0, 128, 255}));
     connect(tunnel.o, turbine.i) annotation(
         Line(points = {{-32, 12}, {2, 12}}, color = {0, 128, 255}));
-    end Test05_Turbin;
+    end Test05_Turbine;
   end TurbineTest;
 end EmpiricalTurbine;
