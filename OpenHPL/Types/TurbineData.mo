@@ -1,5 +1,4 @@
 within OpenHPL.Types;
-
 record TurbineData
  extends Modelica.Icons.Record;
       //
@@ -11,11 +10,15 @@ record TurbineData
       parameter Real openingBep "Best efficiency opening";
       parameter SI.Acceleration g;
       parameter SI.Density rho;
-      
+
       annotation(
-        Documentation(info = "<html><head></head><body>Data record with key turbine information. Used together with the normalized turbine characteristics to calculate physical values.<div><br></div><table><thead>
+    Documentation(info = "<html>
+<p>Data record with key turbine information. Used together with the normalized turbine characteristics to calculate physical values.</p>
+<table>
+<thead>
 <tr><th>Variable</th><th>Description</th></tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr><td>Dn [m]</td><td>Nominal diameter</td></tr>
 <tr><td>nrps [1/s]</td><td>Best efficiency rotational speed</td></tr>
 <tr><td>Hbep [m]</td><td>Best efficiency head</td></tr>
@@ -23,6 +26,6 @@ record TurbineData
 <tr><td>Tbep [Nm]</td><td>Best efficiency torque</td></tr>
 <tr><td>openingBep [-]</td><td>Normalize best efficiency opening (must be between 0 and 1)</td></tr>
 </tbody>
-</table></body></html>"));
-   
+</table></html>"));
+
 end TurbineData;
