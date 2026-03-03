@@ -21,5 +21,8 @@ equation
   (Qt, Tt) = OpenHPL.Functions.TurbineLookUp(Ht, nrps, opening, turbineData, turbineCharacteristics);
   connect(realExpression.y, torque.tau) annotation (Line(points={{-49,0},{-37.2,0}}, color={0,0,127}));
 annotation (
-    Documentation(info = "<html><head></head><body>Turbine model based on normalized, empirical turbine characteristics and turbine data for the best efficiency point.<div>In this intial release, the turbine characteristics and tubine data must be constructed separately passed to the model. This may change in future releases.</div></body></html>"));
+    Documentation(info = "<html>
+<p>Turbine model based on normalized, empirical turbine characteristics and turbine data for the best efficiency point.</p>
+<p>In this intial release, the turbine characteristics and tubine data must be constructed separately passed to the model. This may change in future releases.</p>
+</html>"));
 end EmpiricalTurbine;
