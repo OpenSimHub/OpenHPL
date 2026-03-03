@@ -1,5 +1,4 @@
 within OpenHPL.Functions;
-
 function deCasteljau
  extends Modelica.Icons.Function;
   input Real t "Parameter between 0 and 1";
@@ -25,7 +24,11 @@ for k in 1:ndim loop
   point[k] := temp[1, k];
 end for;
 annotation(
-    Documentation(info = "<html><head></head><body>Implementation of Bezier curve evaluation using the deCasteljau algorithm.<br/>At the moment only one single Bezier curve per parameter dimension is assumed, but the order of the curve is arbritray, but define by the number of control points (e.g. curve order = number of control points - 1).</body></html>"));
-
-
+Documentation(info = "<html>
+<p>
+Implementation of Bezier curve evaluation using the deCasteljau algorithm.<p>
+<p>At the moment only one single Bezier curve per parameter dimension is assumed, 
+but the order of the curve is arbritray, but define by the number of control points 
+(e.g., curve order = number of control points - 1).</p>
+</html>"));
 end deCasteljau;
