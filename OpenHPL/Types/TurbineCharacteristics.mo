@@ -21,7 +21,7 @@ a number of normalized openings.</p>
 <ul>
 <li><font color=\"#0000ff\">opening[nCurves]</font> - gives the opening \\(\\in [0,1]\\) for each curve. It is assumed that the array is sorted from smallest to larges value.</li>
 <li><font color=\"#0000ff\">data[nCurves, nPoints, nDim]</font> - gives the Bezier control points for each curve and each parameter (nED,QED,TED).</li>
-<ul>
+</ul>
 </html>"));
 
 end TurbineCharacteristics;
