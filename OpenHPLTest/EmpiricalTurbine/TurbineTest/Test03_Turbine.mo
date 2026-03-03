@@ -10,7 +10,7 @@ public
     Placement(transformation(origin = {-80, 32}, extent = {{-10, -10}, {10, 10}})));
   OpenHPL.Waterway.Reservoir undervann(h_0 = 0.0, constantLevel = true) annotation (
     Placement(transformation(origin = {72, -16}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
-  OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine(turbineData = turbineData, turbineCharacteristics = tc, SteadyState = false, enable_nomSpeed = false, enable_f = true, f_0 = 0.2) annotation (
+  OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine(turbineData = turbineData, turbineCharacteristics = tc,                      enable_nomSpeed = false, enable_f = true, f_0 = 0.2) annotation (
     Placement(transformation(origin = {12, 12}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant const(k = 0.603) annotation (
     Placement(transformation(origin = {52, 72}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
