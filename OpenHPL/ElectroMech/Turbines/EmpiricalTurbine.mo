@@ -9,7 +9,7 @@ model EmpiricalTurbine
     Dialog(group = "Initialization"));
   parameter OpenHPL.Types.TurbineCharacteristics turbineCharacteristics;
   parameter OpenHPL.Types.TurbineData turbineData;
-  SI.Length Ht "Turbine head";
+  SI.Length Ht(start=100) "Turbine head";
   SI.VolumeFlowRate Qt "Turbine flow rate";
   
   SI.Torque Tt "Turbine torque";
