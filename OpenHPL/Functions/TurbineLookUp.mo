@@ -65,7 +65,8 @@ algorithm
   end while;
   Qt := (cP1[2] + cP2[2])*0.5*(td.Qbep*sqrt(Ht/td.Hbep));
   Tt := (cP1[3] + cP2[3])*0.5*(td.Tbep*(Ht/td.Hbep));
-
+  Modelica.Utilities.Streams.print(String(Ht) + "\t" + String(nrps)+ "\t" + String(itr),"TurbineLookUp.log");
+  
 annotation(
   Documentation(info="<html>
 <p>Compute the physical discharge (Q) and torque (T) based on the turbine speed [nrps], 
