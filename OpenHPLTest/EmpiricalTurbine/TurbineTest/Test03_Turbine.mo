@@ -24,7 +24,7 @@ equation
   connect(tunnel.o, turbine.i) annotation (
     Line(points = {{-34, 32}, {-24, 32}, {-24, 12}, {2, 12}}, color = {0, 128, 255}));
   annotation (
-    experiment(StartTime = 0, StopTime = 10.0, Tolerance = 1e-06, Interval = 0.2000),
+    experiment(StartTime = 0, StopTime = 20.0, Tolerance = 1e-06, Interval = 0.02000),
     Documentation(info = "<html><head></head><body>Generic test with penstock and emprical turbine model. The opening is kept fixed and the unit is allowed to speed up to runaway.</body></html>"),
     __OpenModelica_commandLineOptions="--matchingAlgorithm=PFPlusExt --indexReductionMethod=dynamicStateSelection -d=initialization,NLSanalyticJacobian",
     __OpenModelica_simulationFlags(
