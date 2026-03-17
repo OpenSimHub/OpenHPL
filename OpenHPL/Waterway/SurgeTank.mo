@@ -22,6 +22,12 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
   parameter SI.Length L_t = 5 "If Throttle value type: Length of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
+  // Creek intake parameters
+  parameter Boolean useCreekIntake=false   "If checked, includes a creek intake connector" annotation (
+    Dialog(group = "Creek intake"),
+    choices(checkBox = true));
+  parameter SI.Height H_creek=H   "Height of the creek intake above the surge tank base" annotation (
+    Dialog(group = "Creek intake", enable = useCreekIntake));
 
   // Condition for steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
@@ -32,7 +38,7 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Initialization"));
   parameter SI.Pressure p_ac = 4*data.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
     Dialog(group = "Initialization",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
-  parameter SI.Temperature T_ac(displayUnit="degC") = 298.15 "Initial air-cushion temperature"
+  parameter SI.Temperature T_ac(displayUnit="degC")=298.15   "Initial air-cushion temperature"
     annotation (Dialog(group = "Initialization", enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
   //possible parameters for temperature variation. Not finished...
   //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
@@ -60,7 +66,14 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.VolumeFlowRate Vdot(start = Vdot_0, fixed=true) "Volume flow rate";
   // variables for temperature. Not in use for now...
   // Real W_f, W_e;
-  // connector (acquisition of algebraic variable, mass flow rate mdot, and node pressure (manifold pressure) p_n)
+  // Creek intake connector
+  Interfaces.Contact_i creek(
+    p = p_t + data.rho * data.g * (h - H_creek),
+    mdot = mdot_creek) if useCreekIntake "Creek intake connector (connects to VolumeFlowSource)"
+    annotation (Placement(transformation(extent = {{-10, 90}, {10, 110}})));
+
+protected
+  SI.MassFlowRate mdot_creek "Creek mass flow rate (zero when creek connector is absent)";
 
 initial equation
   if SteadyState then
@@ -73,7 +86,6 @@ equation
    assert( h >= 0, "Water level h in surge tank must be greater than 0!",
     AssertionLevel.error);
 
-  der(m) = mdot "Mass balance";
   der(M) = Mdot+F "Momentum balance";
 
   if SurgeTankType == OpenHPL.Types.SurgeTank.STSimple then
@@ -135,8 +147,13 @@ equation
   F = F_p - F_f - F_g;
   p_b = i.p "Linking bottom node pressure to connector";
   i.p = o.p "Inlet and outlet pressure equality";
-  mdot = i.mdot+o.mdot "Mass balance";
+
+  if not useCreekIntake then
+    mdot_creek = 0;
+  end if;
+  der(m) = mdot + mdot_creek "Mass balance";
   F_g = m * data.g * cos_theta;
+  mdot = i.mdot + o.mdot "Mass balance at manifold (bottom junction)";
  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Surge Tank Model</h4>
@@ -186,7 +203,18 @@ calculated using the Darcy friction factor f<sub>D,s</sub>.</p>
 <p>The manifold preserves mass in steady-state: $$ \\dot{V}_\\mathrm{i} = \\dot{V}_\\mathrm{p} + \\dot{V} $$
 The manifold pressure is equal for all three connections. This is implemented via <code>ContactNode</code> connectors.</p>
 
+<h5>Creek Intake</h5>
 
+<p>When <code>useCreekIntake = true</code>, an additional inlet connector <code>creek</code> becomes active.
+This connector can be attached to a <code>VolumeFlowSource</code> to model lateral inflow
+(e.g., a creek or groundwater seepage) entering the surge tank. The parameter <code>H_creek</code>
+specifies the height of the intake above the surge tank base (default H = at the top of the surge tank,
+not relavant if a volume flow source is connected).
+The connector pressure is set hydrostatically from the water surface down to the intake elevation,
+so it correctly follows the actual water level <code>h</code> in the tank:</p>
+<p>$$ p_\\mathrm{creek} = p_\\mathrm{t} + \\rho g (h - H_\\mathrm{creek}) $$</p>
+<p>The creek inflow is included in the mass balance:</p>
+<p>$$ \\frac{\\mathrm{d}m}{\\mathrm{d}t} = \\rho \\dot{V} + \\dot{m}_\\mathrm{creek} $$</p>
 
 <h5>Parameters and Initialization</h5>
 
