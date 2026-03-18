@@ -18,5 +18,5 @@ equation
     Line(points = {{41, 72}, {4, 72}, {4, 24}}, color = {0, 0, 127}));
   annotation (
     Documentation(info = "<html><head></head><body>Basic test of EpiricalTurbine model. Opening is kept constant.<div>Initial speed f_0 is set to 0.2 and the turbine is permitted to speed up as function of computed turbine torque Tt.<br><div><br></div></div></body></html>"),
-    experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-06, Interval = 0.001));
+    experiment(StartTime = 0, StopTime = 30, Tolerance = 1e-06, Interval = 0.001));
 end Test02_Turbine;
