@@ -217,8 +217,5 @@ so it correctly follows the actual water level <code>h</code> in the tank:</p>
 <p>Required geometry parameters: length L, height H, diameter D,
 roughness p<sub>ε</sub>, and atmospheric pressure p<sup>atm</sup>. Initialize with flow rate V̇<sub>0</sub>
 and water height h<sub>0</sub>. Option for steady-state initialization is available.</p>
-
-<h5>More Information</h5>
-<p>More details in <a href=\"modelica://OpenHPL.UsersGuide.References\">[Splavska2017]</a>.</p>
 </html>"));
 end SurgeTank;
