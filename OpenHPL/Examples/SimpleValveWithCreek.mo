@@ -52,8 +52,8 @@ equation
     experiment(StopTime = 1000),
     Documentation(info = "<html>
 <p>
-Simple model of a water way with only a valve component.
-This can be used to investigate the effect of different opening and closing times in the waterway.
+Simple model of a water way with one creek intake.
+This can be used to investigate the effects of a creek intake.
 </p>
 </html>"));
 end SimpleValveWithCreek;
