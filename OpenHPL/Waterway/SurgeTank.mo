@@ -1,13 +1,18 @@
-within OpenHPL.Waterway;
+﻿within OpenHPL.Waterway;
 model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Surge(lds=l, Lds=L);
   extends OpenHPL.Interfaces.TwoContacts;
   import Modelica.Constants.pi;
 
+  parameter Boolean useCreekIntake=false   "If checked, includes a creek intake connector" annotation (
+    Dialog(group = "Creek intake"),
+    choices(checkBox = true));
+  parameter SI.Height H_creek=H   "Height of the creek intake above the surge tank base" annotation (
+    Dialog(group = "Creek intake", enable = useCreekIntake));
+
   parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank" annotation (
     Dialog(group = "Surge tank types"));
-  // Geometrical parameters of the surge tank
   parameter SI.Height H = 120 "Vertical component of the length of the surge shaft" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Length L = 140 "Length of the surge shaft" annotation (
@@ -22,16 +27,8 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
   parameter SI.Length L_t = 5 "If Throttle value type: Length of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
-  // Creek intake parameters
-  parameter Boolean useCreekIntake=false   "If checked, includes a creek intake connector" annotation (
-    Dialog(group = "Creek intake"),
-    choices(checkBox = true));
-  parameter SI.Height H_creek=H   "Height of the creek intake above the surge tank base" annotation (
-    Dialog(group = "Creek intake", enable = useCreekIntake));
 
-  // Condition for steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
-  // steady state values for flow rate and water level in surge tank
   parameter SI.VolumeFlowRate Vdot_0 = 0 "Initial volume flow rate in the surge tank" annotation (
     Dialog(group = "Initialization"));
   parameter SI.Height h_0 = 69.9 "Initial water level in the surge tank" annotation (
@@ -40,10 +37,7 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Initialization",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
   parameter SI.Temperature T_ac(displayUnit="degC")=298.15   "Initial air-cushion temperature"
     annotation (Dialog(group = "Initialization", enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
-  //possible parameters for temperature variation. Not finished...
-  //parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
-  //parameter SI.Temperature T_i = data.T_i "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
-  // variables
+
   SI.Mass m "Water mass";
   SI.MassFlowRate mdot "Mass flow rate";
   SI.Mass m_a = p_ac*A*(L-h_0/cos_theta)*data.M_a/(Modelica.Constants.R*T_ac) "Air mass inside surge tank";
@@ -61,12 +55,9 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.Pressure p_t "Pressure at top of the surge tank";
   SI.Pressure p_b "Pressure at bottom of the surge tank";
   Real phiSO "Dimensionless factor based on the type of fitting ";
-  // initial values for differential variables
   SI.Height h(start = h_0) "Water height in the surge tank";
   SI.VolumeFlowRate Vdot(start = Vdot_0, fixed=true) "Volume flow rate";
-  // variables for temperature. Not in use for now...
-  // Real W_f, W_e;
-  // Creek intake connector
+
   Interfaces.Contact_i creek(
     p = p_t + data.rho * data.g * (h - H_creek),
     mdot = mdot_creek) if useCreekIntake "Creek intake connector (connects to VolumeFlowSource)"
@@ -82,11 +73,27 @@ initial equation
   else
     h = h_0;
   end if;
+
 equation
-   assert( h >= 0, "Water level h in surge tank must be greater than 0!",
+  assert( h >= 0, "Water level h in surge tank must be greater than 0!",
     AssertionLevel.error);
 
+  p_b = i.p "Linking bottom node pressure to connector";
+  i.p = o.p "Inlet and outlet pressure equality";
+
+  F_g = m * data.g * cos_theta "Gravitational force";
+  F = F_p - F_f - F_g "Acting forces";
+
+  Mdot = mdot * v;
   der(M) = Mdot+F "Momentum balance";
+  mdot = data.rho * Vdot;
+  mdot = i.mdot + o.mdot "Mass balance";
+
+  if not useCreekIntake then
+    mdot_creek = 0;
+  end if "Conditional creek intake equation balance";
+
+  der(m) = mdot + mdot_creek "Mass balance";
 
   if SurgeTankType == OpenHPL.Types.SurgeTank.STSimple then
     v = Vdot / A;
@@ -142,18 +149,7 @@ equation
     end if;
     p_t = data.p_a;
   end if;
-  mdot = data.rho * Vdot;
-  Mdot = mdot * v;
-  F = F_p - F_f - F_g;
-  p_b = i.p "Linking bottom node pressure to connector";
-  i.p = o.p "Inlet and outlet pressure equality";
 
-  if not useCreekIntake then
-    mdot_creek = 0;
-  end if;
-  der(m) = mdot + mdot_creek "Mass balance";
-  F_g = m * data.g * cos_theta;
-  mdot = i.mdot + o.mdot "Mass balance at manifold (bottom junction)";
  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Surge Tank Model</h4>
