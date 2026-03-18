@@ -20,5 +20,5 @@ equation
   connect(ramp.y, turbine.u_t) annotation (
     Line(points = {{41, 72}, {4, 72}, {4, 24}}, color = {0, 0, 127}));
 annotation (
-    experiment(StartTime = 0, StopTime = 15, Tolerance = 1e-06, Interval = 0.01));
+    experiment(StartTime = 0, StopTime = 25, Tolerance = 1e-06, Interval = 0.01));
 end Test04_Turbine;
