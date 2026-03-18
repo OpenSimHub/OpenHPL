@@ -3,7 +3,6 @@ model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Surge(lds=l, Lds=L);
   extends OpenHPL.Interfaces.TwoContacts;
-  import Modelica.Constants.pi;
 
   parameter Boolean useCreekIntake=false   "If checked, includes a creek intake connector" annotation (
     Dialog(group = "Creek intake"),
@@ -44,8 +43,8 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.Momentum M "Water momentum";
   SI.Force Mdot "Difference in influent and effulent momentum";
   SI.Force F "Total force acting in the surge tank";
-  SI.Area A = (pi*D ^ 2) / 4 "Cross sectional area of the surge tank";
-  SI.Area A_t = (pi*D_t ^ 2) / 4 "Cross sectional area of the throttle valve surge tank";
+  SI.Area A = (C.pi*D ^ 2) / 4 "Cross sectional area of the surge tank";
+  SI.Area A_t = (C.pi*D_t ^ 2) / 4 "Cross sectional area of the throttle valve surge tank";
   SI.Length l = h / cos_theta "Length of water in the surge tank";
   Real cos_theta = H / L "Slope ratio";
   SI.Velocity v "Water velocity";
