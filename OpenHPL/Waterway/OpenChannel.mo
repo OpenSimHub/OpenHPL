@@ -159,5 +159,4 @@ local water surface slope. This captures water level variations along the channe
 <p>Inlet and outlet connectors carry pressure and mass flow rate.
 Connect upstream to the inlet <code>i</code> and downstream to the outlet <code>o</code>.</p>
 </html>"));
-
 end OpenChannel;
