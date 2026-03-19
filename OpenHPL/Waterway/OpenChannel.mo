@@ -7,12 +7,15 @@ model OpenChannel "Open channel model with optional spatial discretization"
   // Geometry
   parameter SI.Length L = 5000 "Channel length" annotation (Dialog(group = "Geometry"));
   parameter SI.Length W = 10 "Channel width" annotation (Dialog(group = "Geometry"));
-  parameter SI.Height H_i = 10 "Bed elevation at inlet" annotation (Dialog(group = "Geometry"));
-  parameter SI.Height H_o = 0 "Bed elevation at outlet" annotation (Dialog(group = "Geometry"));
+  parameter SI.Length H = 10 "Bed elevation difference between inlet and outlet (positive = downhill inlet to outlet)" annotation (Dialog(group = "Geometry"));
 
   // Friction
-  parameter Real n_manning(unit = "s/m(1/3)") = 0.03 "Manning's roughness coefficient n"
-    annotation (Dialog(group = "Friction"));
+  parameter Real m_manning(unit="m(1/3)/s", min=0) = 33 "Manning M (Strickler) coefficient M=1/n (typically 60-110 for steel, 30-60 for rock tunnels)" annotation (
+    Dialog(group = "Friction", enable = not use_n));
+  parameter Boolean use_n = true "If true, use Mannings coefficient n (=1/M) instead of Manning's M (Strickler)" annotation (
+    Dialog(group = "Friction"), choices(checkBox=true));
+  parameter Real n_manning(unit="s/m(1/3)", min=0) = 0.03 "Manning's n coefficient (typically 0.009-0.017 for steel/concrete, 0.017-0.030 for rock tunnels)" annotation (
+    Dialog(group = "Friction", enable = use_n));
 
   // Discretization
   parameter Boolean useSections = false "If true, discretize the channel into N sections with varying water levels"
@@ -42,22 +45,9 @@ model OpenChannel "Open channel model with optional spatial discretization"
   SI.Velocity v_sec[if useSections then N else 0] "Velocity in each section";
 
 protected
-  parameter SI.Height dH = H_i - H_o "Total height difference (positive = downhill inlet to outlet)";
+  parameter Real n_eff(unit="s/m(1/3)") = if use_n then n_manning else 1/m_manning "Effective Manning's n coefficient";
   parameter SI.Length dx = L / max(N, 1) "Section length";
-  parameter Real slope(unit = "1") = dH / L "Bed slope";
-
-  function manningVelocity "Compute velocity from Manning's equation"
-    input SI.Height h "Water depth";
-    input Real S "Slope (bed slope + water surface gradient)";
-    input SI.Length w "Channel width";
-    input Real n "Manning's roughness coefficient";
-    output SI.Velocity v "Flow velocity";
-  protected
-    SI.Length R_h "Hydraulic radius";
-  algorithm
-    R_h := w * h / (w + 2 * h);
-    v := sign(S) * R_h ^ (2.0 / 3) * abs(S) ^ 0.5 / n;
-  end manningVelocity;
+  parameter SI.PerUnit slope = H / L "Bed slope";
 
 initial equation
   if SteadyState then
@@ -76,9 +66,8 @@ initial equation
   end if;
 
 equation
-  // ----- Connector pressures -----
-  p_i = i.p;
-  p_o = o.p;
+  p_i = i.p "Inlet connector pressure";
+  p_o = o.p "Outlet connector pressure";
 
   // ----- Mass balance: incompressible, no storage in bulk -----
   i.mdot + o.mdot = 0;
@@ -88,52 +77,48 @@ equation
   if useSections then
     // ===== Sectional mode: N sections with individual water levels =====
 
-    // Average depth and velocity from sections
-    h_avg = sum(h_sec) / N;
-    v = Vdot / (W * h_avg);
+    h_avg = sum(h_sec) / N "Average depth from sections";
+    v = Vdot / (W * h_avg) "Average velocity from sections";
 
-    // Friction for overall momentum (Manning formula over full length)
-    F_f = data.rho * data.g * n_manning ^ 2 * v * abs(v) * L
-          * (W + 2 * h_avg) ^ (4.0 / 3) / (W * h_avg) ^ (4.0 / 3);
+    F_f = data.rho * data.g * n_eff ^ 2 * v * abs(v) * L
+          * (W + 2 * h_avg) ^ (4.0 / 3) / (W * h_avg) ^ (4.0 / 3)
+          "Friction for overall momentum (Manning formula over full length)";
 
-    // Overall momentum balance determines flow rate
-    L * der(mdot) = (p_i - p_o) * W * h_avg + data.rho * data.g * dH * W * h_avg - F_f;
+    L * der(mdot) = (p_i - p_o) * W * h_avg + data.rho * data.g * H * W * h_avg - F_f
+                    "Overall momentum balance determines flow rate";
 
-    // Section velocities
     for j in 1:N loop
-      v_sec[j] = Vdot / (W * h_sec[j]);
+      v_sec[j] = Vdot / (W * h_sec[j]) "Section velocities";
     end for;
 
     // Water level dynamics per section: continuity for free surface
-    //   W * dx * dh/dt = Qdot_in - Qdot_out
-    // where Qdot_in is driven by upstream depth and Qdot_out by downstream depth
+    //   W * dx * H/dt = Vdot_in - Vdot_out
+    // where Vdot_in is driven by upstream depth and Vdot_out by downstream depth
     // using Manning equation locally for inter-section flow
     for j in 1:N loop
       W * dx * der(h_sec[j]) =
         (if j == 1 then Vdot
-         else W * h_sec[j - 1] * manningVelocity(h_sec[j - 1], slope
-              + (h_sec[j - 1] - h_sec[j]) / dx, W, n_manning))
+         else W * h_sec[j - 1] * Functions.manningVelocity(h_sec[j - 1], slope
+              + (h_sec[j - 1] - h_sec[j]) / dx, W, n_eff))
         -
         (if j == N then Vdot
-         else W * h_sec[j] * manningVelocity(h_sec[j], slope
-              + (h_sec[j] - h_sec[j + 1]) / dx, W, n_manning));
+         else W * h_sec[j] * Functions.manningVelocity(h_sec[j], slope
+              + (h_sec[j] - h_sec[j + 1]) / dx, W, n_eff));
     end for;
 
   else
     // ===== Lumped mode: single control volume =====
 
-    // Water depth from connector pressures (average of inlet and outlet)
-    h_avg = max((p_i + p_o) / (2 * data.rho * data.g), 0.01);
+    h_avg = max((p_i + p_o) / (2 * data.rho * data.g), 0.01)
+            "Water depth from connector pressures (average of inlet and outlet)";
 
     v = Vdot / (W * h_avg);
 
-    // Friction force using Manning equation for the full channel
-    F_f = data.rho * data.g * n_manning ^ 2 * v * abs(v) * L
-          * (W + 2 * h_avg) ^ (4.0 / 3) / (W * h_avg) ^ (4.0 / 3);
-
-    // Momentum balance
-    L * der(mdot) = (p_i - p_o) * W * h_avg + data.rho * data.g * dH * W * h_avg - F_f;
-
+    F_f = data.rho * data.g * n_eff ^ 2 * v * abs(v) * L
+          * (W + 2 * h_avg) ^ (4.0 / 3) / (W * h_avg) ^ (4.0 / 3)
+          "Friction force using Manning equation for the full channel";
+    L * der(mdot) = (p_i - p_o) * W * h_avg + data.rho * data.g * H * W * h_avg - F_f
+                    "Momentum balance";
   end if;
 
   annotation (
@@ -146,8 +131,8 @@ The channel connects an upstream and downstream component via standard
 
 <h5>Geometry</h5>
 <p>The channel is defined by its length <code>L</code>, width <code>W</code>, and
-the bed elevations at inlet (<code>H_i</code>) and outlet (<code>H_o</code>).
-The bed slope is computed as (H_i &minus; H_o)/L.</p>
+the difference in bed elevations between inlet and outlet <code>H</code>.
+The bed slope is computed as H/L.</p>
 
 <h5>Governing Equations</h5>
 <p>The model is based on the momentum balance for incompressible flow:</p>
@@ -174,5 +159,4 @@ local water surface slope. This captures water level variations along the channe
 <p>Inlet and outlet connectors carry pressure and mass flow rate.
 Connect upstream to the inlet <code>i</code> and downstream to the outlet <code>o</code>.</p>
 </html>"));
-
 end OpenChannel;

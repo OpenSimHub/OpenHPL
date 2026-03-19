@@ -17,7 +17,7 @@ model OpenChannel "Model of a hydropower system with open channel model"
         origin={-90,90},
         extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.OpenChannel openChannel(
-    H_i=2,
+    H=2,
     useSections=true,                      N=10) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe pipe(H=0, L=10) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 equation
