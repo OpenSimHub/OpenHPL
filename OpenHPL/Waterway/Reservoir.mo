@@ -4,6 +4,8 @@ model Reservoir "Model of the reservoir"
   extends OpenHPL.Icons.Reservoir;
   parameter SI.Height h_0=50 "Initial water level above intake"
     annotation (Dialog(group="Setup", enable=not useLevel));
+  parameter SI.Height z_0=0 "Elevation of the reservoir outlet (sets absolute reference)"
+    annotation (Dialog(group="Geometry"));
   parameter Boolean constantLevel=false "If checked, the reservoir keeps the constant water level h_0"
     annotation (
     Dialog(group="Setup", enable=not (useInflow or useLevel)),
@@ -77,6 +79,7 @@ equation
   end if;
 
    o.mdot = -data.rho * Vdot_o "Output flow connector";
+  o.z = z_0 "Set absolute elevation at outlet";
   //o.T = T_0 "TBD: Output temperature connector";
   annotation (preferredView="info", Documentation(info="<html>
 <h4>Reservoir Model</h4>

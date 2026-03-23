@@ -3,8 +3,20 @@ connector Contact "Water flow connector"
   SI.Pressure p "Contact pressure";
   //SI.Temperature T "Contact temperature";
   flow SI.MassFlowRate mdot "Mass flow rate through the contact";
+  SI.Height z "Elevation at connection point";
   annotation (
     Documentation(info = "<html>
-<p>Contact is a basic water flow connector, which consists of water pressure and mass flow rate through the connector (positive if water is flowing into connector and negative if flowing out).</p>
+<p>Contact is a basic water flow connector, which consists of water pressure, mass flow rate,
+and elevation at the connector (positive if water is flowing into connector and negative if flowing out).</p>
+
+<h5>Variables</h5>
+<ul>
+<li><code>p</code> &ndash; Pressure (potential variable, equated across connections)</li>
+<li><code>mdot</code> &ndash; Mass flow rate (flow variable, summed to zero across connections)</li>
+<li><code>z</code> &ndash; Elevation (potential variable, equated across connections).
+Each component provides an equation relating its connector elevations,
+enabling automatic propagation of absolute elevation through the system.
+Source components (e.g., Reservoir) set the absolute reference elevation.</li>
+</ul>
 </html>"));
 end Contact;

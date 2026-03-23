@@ -54,6 +54,7 @@ equation
   // Flow rate connectors
     i.mdot+o.mdot=0;
     mdot=i.mdot;
+    o.z = i.z "Elevation propagation: no height change across turbine";
 
   connect(p_out, P_out) annotation (Line(points={{40,90},{40,110}}, color={0,0,127}));
     annotation (preferredView="info",

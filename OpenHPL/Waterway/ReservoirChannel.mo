@@ -11,6 +11,8 @@ model ReservoirChannel "Reservoir model based on open channel model"
   parameter SI.Height H[2] = {2, 2} "Reservoir bed height from left and right side";
   // initialization
   parameter SI.Height h_0=50 "Initial water level of the reservoir";
+  parameter SI.Height z_0=0 "Elevation of the reservoir outlet"
+    annotation (Dialog(group="Geometry"));
   // condition of steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state";
   // variables
@@ -30,6 +32,7 @@ equation
   // boundaries
   o.mdot =-q*W*data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
+  o.z = z_0 "Set absolute elevation at outlet";
   annotation (
     Documentation(preferredView="info", info="<html>
 <h4>Reservoir Channel Model</h4>

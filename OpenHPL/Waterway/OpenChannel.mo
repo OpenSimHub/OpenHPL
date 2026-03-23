@@ -39,6 +39,7 @@ equation
 // presurre boundaries
   i.p = h[1] * data.g * data.rho + data.p_a;
   o.p = h[N] * data.g * data.rho + data.p_a;
+  o.z = i.z - (H[1] - H[2]) "Elevation propagation: channel bed drops from H[1] to H[2]";
   annotation (preferredView="info",
     Documentation(info="<html>
 <p style=\"color: #ff0000;\"><em>Note: Currently under investigation for plausibility.</em></p>

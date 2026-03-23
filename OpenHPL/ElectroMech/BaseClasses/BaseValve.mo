@@ -34,6 +34,7 @@ equation
   Vdot = mdot/data.rho;
   dp*(C_v_*max(epsilon, u^alpha))^2 = Vdot*abs(Vdot) "Valve equation for pressure drop";
   dp = i.p - o.p "Link the pressure drop to the ports";
+  o.z = i.z "Elevation propagation: no height change across valve";
   annotation (preferredView="info", Documentation(info="<html>
 <p>
 This is a partial, simple model of hydraulic valve. &nbsp;</p><p>This model is based on the energy balance of a valve.

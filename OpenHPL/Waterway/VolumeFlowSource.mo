@@ -11,6 +11,8 @@ model VolumeFlowSource "Volume flow source (either fixed or variable)"
     annotation (choices(checkBox = true),Dialog(enable=useInput));
   parameter SI.Time T_f=0.01 "Time constant of the first order filter."
     annotation (Dialog(enable=useInput and useFilter));
+  parameter SI.Height z_0=0 "Elevation of the outlet connection"
+    annotation (Dialog(group="Geometry"));
 
   Interfaces.Contact_o o "Outlet flow connector"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
@@ -36,6 +38,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dot));
   o.mdot = -data.rho*Vdot;
+  o.z = z_0 "Set absolute elevation at outlet";
   connect(constantVolumeFlow.y, Vdot) annotation (Line(points={{-39,40},{40,40},{40,0},{80,0}}, color={0,0,127}));
   connect(firstOrder.u, outFlow) annotation (Line(
       points={{-62,-20},{-80,-20},{-80,0},{-120,0}},
