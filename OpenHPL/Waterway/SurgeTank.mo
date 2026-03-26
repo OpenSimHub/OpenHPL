@@ -12,25 +12,25 @@ model SurgeTank "Model of the surge tank/shaft"
 
   parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank" annotation (
     Dialog(group = "Surge tank types"));
-  parameter SI.Height H = 120 "Vertical component of the length of the surge shaft" annotation (
+  parameter SI.Height H = 100 "Vertical component of the length of the surge shaft" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Length L = 140 "Length of the surge shaft" annotation (
+  parameter SI.Length L = H "Length of the surge shaft" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Diameter D = 3.4 "Diameter of the surge shaft" annotation (
+  parameter SI.Diameter D = 3 "Diameter of the surge shaft" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Diameter D_so = 1.7 "If Sharp orifice type: Diameter of sharp orifice" annotation (
+  parameter SI.Diameter D_so = D "If Sharp orifice type: Diameter of sharp orifice" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
-  parameter SI.Diameter D_t = 1.7 "If Throttle value type: Diameter of throat" annotation (
+  parameter SI.Diameter D_t = D "If Throttle value type: Diameter of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
-  parameter SI.Length L_t = 5 "If Throttle value type: Length of throat" annotation (
+  parameter SI.Length L_t = L "If Throttle value type: Length of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
 
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0 = 0 "Initial volume flow rate in the surge tank" annotation (
     Dialog(group = "Initialization"));
-  parameter SI.Height h_0 = 69.9 "Initial water level in the surge tank" annotation (
+  parameter SI.Height h_0 = 50 "Initial water level in the surge tank" annotation (
     Dialog(group = "Initialization"));
   parameter SI.Pressure p_ac = 4*data.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
     Dialog(group = "Initialization",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
