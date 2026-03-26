@@ -8,7 +8,7 @@ partial class Surge "Surge tank/shaft icon"
                                                         graphics={
                      Text(
           textColor={28,108,200},
-          extent={{-150,140},{150,100}},
+          extent={{-150,-60},{150,-100}},
           textString="%name",
           textStyle={TextStyle.Bold}),
         Rectangle(
