@@ -129,11 +129,11 @@ equation
       M = m * v;
       F_f = Functions.DarcyFriction.Friction(v, D_t, l, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(v) * v;
       phiSO = 0;
-      F_p = (p_b - p_t) * A;
+      F_p = (p_b - p_t) * A_t;
     else
-      v = Vdot * (1 / A_t + 1 / A) / 2;
+      v = Vdot * l / (A_t * L_t + A * (l - L_t));
       m = data.rho * (A_t * L_t + A * (l - L_t));
-      M = data.rho * (A_t * L_t*Vdot/A_t + A * (l - L_t)*Vdot/A);
+      M = m * v;
       if v > 0 then
         F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D, l - L_t, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(Vdot/A_t) * Vdot/A_t;
         phiSO = Functions.Fitting.FittingPhi(Vdot/A_t, D_t, D, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.Square);
