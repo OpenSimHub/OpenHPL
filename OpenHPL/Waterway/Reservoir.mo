@@ -80,6 +80,7 @@ equation
 
    o.mdot = -data.rho * Vdot_o "Output flow connector";
   o.z = z_0 "Set absolute elevation at outlet";
+  o.gz = 0 "Elevation auxiliary variable";
   //o.T = T_0 "TBD: Output temperature connector";
   annotation (preferredView="info", Documentation(info="<html>
 <h4>Reservoir Model</h4>

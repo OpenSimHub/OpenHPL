@@ -4,6 +4,7 @@ connector Contact "Water flow connector"
   //SI.Temperature T "Contact temperature";
   flow SI.MassFlowRate mdot "Mass flow rate through the contact";
   SI.Height z "Elevation at connection point";
+  flow Real gz(unit="m2/s") "Auxiliary elevation flow variable (always zero, for connector balance)";
   annotation (
     Documentation(info = "<html>
 <p>Contact is a basic water flow connector, which consists of water pressure, mass flow rate,

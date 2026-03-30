@@ -39,6 +39,7 @@ equation
       pattern=LinePattern.Dot));
   o.mdot = -data.rho*Vdot;
   o.z = z_0 "Set absolute elevation at outlet";
+  o.gz = 0 "Elevation auxiliary variable";
   connect(constantVolumeFlow.y, Vdot) annotation (Line(points={{-39,40},{40,40},{40,0},{80,0}}, color={0,0,127}));
   connect(firstOrder.u, outFlow) annotation (Line(
       points={{-62,-20},{-80,-20},{-80,0},{-120,0}},

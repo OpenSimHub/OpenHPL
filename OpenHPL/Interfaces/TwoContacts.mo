@@ -6,6 +6,8 @@ partial model TwoContacts "Model of two connectors"
   Contact_o o "Outlet contact (positive design flow direction is from i to o)"
                                annotation (
     Placement(transformation(extent={{90,-10},{110,10}})));
+equation
+  i.gz = 0 "Elevation auxiliary variable (no elevation source/sink at this connection point)";
   annotation (
     Documentation(info = "<html>
     <p>TwoContact is a partial model, which consists of two Contacts <em>i</em>and <em>o</em>.

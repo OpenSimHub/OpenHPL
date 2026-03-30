@@ -59,7 +59,8 @@ model SurgeTank "Model of the surge tank/shaft"
 
   Interfaces.Contact_i creek(
     p = p_t + data.rho * data.g * (h - H_creek),
-    mdot = mdot_creek) if useCreekIntake "Creek intake connector (connects to VolumeFlowSource)"
+    mdot = mdot_creek,
+    gz = 0) if useCreekIntake "Creek intake connector (connects to VolumeFlowSource)"
     annotation (Placement(transformation(extent = {{-10, 90}, {10, 110}})));
 
 protected
