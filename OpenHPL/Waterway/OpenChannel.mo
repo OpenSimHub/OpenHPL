@@ -30,6 +30,8 @@ model OpenChannel "Open channel model (use KP scheme)"
     boundaryValues=[h_0[1] + H[1],Vdot_i/W; h_0[N] + H[2],Vdot_o/W],
     boundaryCondition=BoundaryCondition,
     SteadyState=SteadyState) annotation (Placement(transformation(extent={{-10,-8},{10,12}})));
+initial equation
+  o.z = i.z - (H[1] - H[2]) "Elevation propagation: channel bed drops from H[1] to H[2]";
 equation
 // define a vector of the water depth in the channel
   h = openChannel.h;
@@ -39,7 +41,6 @@ equation
 // presurre boundaries
   i.p = h[1] * data.g * data.rho + data.p_a;
   o.p = h[N] * data.g * data.rho + data.p_a;
-  o.z = i.z - (H[1] - H[2]) "Elevation propagation: channel bed drops from H[1] to H[2]";
   annotation (preferredView="info",
     Documentation(info="<html>
 <p style=\"color: #ff0000;\"><em>Note: Currently under investigation for plausibility.</em></p>

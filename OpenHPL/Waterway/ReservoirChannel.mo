@@ -13,6 +13,8 @@ model ReservoirChannel "Reservoir model based on open channel model"
   parameter SI.Height h_0=50 "Initial water level of the reservoir";
   parameter SI.Height z_0=0 "Elevation of the reservoir outlet"
     annotation (Dialog(group="Geometry"));
+  parameter Boolean fixElevation=true "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
+    annotation (Dialog(group="Geometry"), choices(checkBox=true));
   // condition of steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state";
   // variables
@@ -28,11 +30,14 @@ model ReservoirChannel "Reservoir model based on open channel model"
     boundaryValues=[h_0 + H[1],q; h_0 + H[2],q],
     boundaryCondition=[true,true; false,true],
     SteadyState=SteadyState) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+initial equation
+  if fixElevation then
+    o.z = z_0;
+  end if;
 equation
   // boundaries
   o.mdot =-q*W*data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
-  o.z = z_0 "Set absolute elevation at outlet";
   o.gz = 0 "Elevation auxiliary variable";
   annotation (
     Documentation(preferredView="info", info="<html>

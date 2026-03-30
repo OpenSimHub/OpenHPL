@@ -30,6 +30,8 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={40,90})));
+initial equation
+  o.z = i.z "Elevation propagation: no height change across turbine";
 equation
   // Condition for inlet water compressibility
     if not CompElas then
@@ -54,7 +56,6 @@ equation
   // Flow rate connectors
     i.mdot+o.mdot=0;
     mdot=i.mdot;
-    o.z = i.z "Elevation propagation: no height change across turbine";
 
   connect(p_out, P_out) annotation (Line(points={{40,90},{40,110}}, color={0,0,127}));
     annotation (preferredView="info",

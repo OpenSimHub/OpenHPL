@@ -59,8 +59,7 @@ model SurgeTank "Model of the surge tank/shaft"
 
   Interfaces.Contact_i creek(
     p = p_t + data.rho * data.g * (h - H_creek),
-    mdot = mdot_creek,
-    gz = 0) if useCreekIntake "Creek intake connector (connects to VolumeFlowSource)"
+    mdot = mdot_creek) if useCreekIntake "Creek intake connector (connects to VolumeFlowSource)"
     annotation (Placement(transformation(extent = {{-10, 90}, {10, 110}})));
 
 protected
@@ -73,6 +72,7 @@ initial equation
   else
     h = h_0;
   end if;
+  o.z = i.z "Elevation at surge tank inlet and outlet are equal";
 
 equation
   assert( h >= 0, "Water level h in surge tank must be greater than 0!",
@@ -156,7 +156,6 @@ equation
   i.p = o.p "Inlet and outlet pressure equality";
   mdot = i.mdot+o.mdot "Mass balance";
   F_g = m * data.g * cos_theta;
-  o.z = i.z "Elevation at surge tank inlet and outlet are equal";
  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Surge Tank Model</h4>

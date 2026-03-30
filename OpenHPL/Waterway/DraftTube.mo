@@ -91,6 +91,7 @@ initial equation
     Vdot = Vdot_0;
     //n.T = p.T;
   end if;
+  o.z = i.z - H "Elevation propagation: outlet is H below inlet";
 equation
   der(M) = Mdot + F "Momentum balance";
   if DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser then
@@ -153,7 +154,6 @@ equation
   p_o = o.p;
   i.mdot+o.mdot=0;
   mdot = i.mdot;
-  o.z = i.z - H "Elevation propagation: outlet is H below inlet";
   annotation (preferredView="info", Documentation(info="<html>
     <p>Two of the draft tubes are modeled using <em>Momentum balance</em>.
     They are:</p>

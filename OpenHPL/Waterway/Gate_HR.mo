@@ -33,6 +33,8 @@ protected
   SI.VolumeFlowRate Vdot_full "Fully submerged base volume flow rate through the gate";
   Real Cdx "Discharge coefficient tuned for a smooth transition between partially and fully submerged";
 
+initial equation
+  o.z = i.z "Elevation propagation: gate at same elevation";
 equation
   i.mdot+o.mdot = 0 "Mass balance";
   mdot = i.mdot "Inlet direction for mdot";
@@ -50,7 +52,6 @@ equation
   mdot = Vdot * data.rho "Mass flow rate through the gate";
   i.p = h_i * data.g * data.rho + data.p_a "Inlet water pressure";
   o.p = h_o * data.g * data.rho + data.p_a "Outlet water pressure";
-  o.z = i.z "Elevation propagation: gate at same elevation";
   annotation (
     preferredView="info",
     Documentation(info="<html>

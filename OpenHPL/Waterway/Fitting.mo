@@ -21,6 +21,8 @@ model Fitting "Different pipes fitting"
   Real phi "Dimensionless factor based on the type of fitting ";
   /* Connector */
   extends OpenHPL.Interfaces.TwoContacts;
+initial equation
+  o.z = i.z "Elevation propagation: no height change across fitting";
 equation
   v = mdot / data.rho / A;
   if v>=0 then
@@ -53,7 +55,6 @@ equation
   o.p = i.p - dp "Pressure of the output connector";
   i.mdot+o.mdot = 0 "Mass balance";
   mdot = i.mdot "Flow direction";
-  o.z = i.z "Elevation propagation: no height change across fitting";
   annotation (preferredView="info",
     Documentation(info="<html>
     <p>Various possibilities of the fittings for the pipes with different diameters

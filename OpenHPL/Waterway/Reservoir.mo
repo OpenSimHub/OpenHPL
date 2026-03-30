@@ -6,6 +6,8 @@ model Reservoir "Model of the reservoir"
     annotation (Dialog(group="Setup", enable=not useLevel));
   parameter SI.Height z_0=0 "Elevation of the reservoir outlet (sets absolute reference)"
     annotation (Dialog(group="Geometry"));
+  parameter Boolean fixElevation=true "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
+    annotation (Dialog(group="Geometry"), choices(checkBox=true));
   parameter Boolean constantLevel=false "If checked, the reservoir keeps the constant water level h_0"
     annotation (
     Dialog(group="Setup", enable=not (useInflow or useLevel)),
@@ -52,6 +54,9 @@ initial equation
    if not useLevel then
     h = h_0;
    end if;
+  if fixElevation then
+    o.z = z_0;
+  end if;
 equation
   A =h * (W +h * Modelica.Math.tan(alpha))
     "Vertical cross section of the reservoir";
@@ -79,7 +84,6 @@ equation
   end if;
 
    o.mdot = -data.rho * Vdot_o "Output flow connector";
-  o.z = z_0 "Set absolute elevation at outlet";
   o.gz = 0 "Elevation auxiliary variable";
   //o.T = T_0 "TBD: Output temperature connector";
   annotation (preferredView="info", Documentation(info="<html>

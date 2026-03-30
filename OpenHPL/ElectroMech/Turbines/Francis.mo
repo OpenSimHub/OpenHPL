@@ -88,6 +88,8 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={40,90})));
+initial equation
+  o.z = i.z "Elevation propagation: no height change across turbine";
 equation
   // design algorithm for runner
     if GivenData then
@@ -210,7 +212,6 @@ equation
     p_tr2 = o.p;
     i.mdot+o.mdot=0;
     mdot=i.mdot;
-    o.z = i.z "Elevation propagation: no height change across turbine";
 
   connect(p_out, P_out) annotation (Line(points={{40,90},{40,110}}, color={0,0,127}));
     annotation (preferredView="info",
