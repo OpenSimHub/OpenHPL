@@ -13,10 +13,10 @@ model RunOff "Run off model. (with 10 height zones)"
     annotation (Dialog(group="Physically-based parameters"));
   parameter Real k_m(unit="m/deg/s") = 4e-3 / 86400 "Melting factor"
     annotation (Dialog(group = "Physically-based parameters"));
-  parameter SI.Volume g_T = 150e-3 "Ground saturation threshold"
+  parameter SI.Length g_T = 150e-3 "Ground saturation threshold"
     annotation (Dialog(group = "Physically-based parameters"));
 
-  parameter SI.Volume s_T = 20e-3 "Soil zone saturation threshold"
+  parameter SI.Length s_T = 20e-3 "Soil zone saturation threshold"
     annotation (Dialog(group = "Empirical parameters"));
   parameter SI.Frequency a_1 = 0.547 / 86400 "Discharge frequency for surface runoff"
     annotation (Dialog(group = "Empirical parameters"));
@@ -24,7 +24,7 @@ model RunOff "Run off model. (with 10 height zones)"
     annotation (Dialog(group = "Empirical parameters"));
   parameter SI.Frequency a_3 = 0.0462 / 86400 "Discharge frequency for base runoff"
     annotation (Dialog(group = "Empirical parameters"));
-  parameter SI.VolumeFlowRate PERC = 0.6e-3 / 86400 "Percolation from soil zone to base zone"
+  parameter SI.Velocity PERC = 0.6e-3 / 86400 "Percolation from soil zone to base zone"
     annotation (Dialog(group = "Empirical parameters"));
   parameter Real beta = 2 "Ground zone shape coefficient"
     annotation (Dialog(group = "Empirical parameters"));
@@ -71,27 +71,27 @@ model RunOff "Run off model. (with 10 height zones)"
   parameter Integer columns_flow[:] = {2} "Column with real observed run off"
      annotation (Dialog(tab = "Input data", group = "Real run off", enable=not useInput));
 
-  SI.Volume V_s_w[N] "Water content in soil zone";
-  SI.Volume V_b_w[N] "Water content in base zone";
-  SI.Volume V_g_w[N] "Water content in ground zone";
-  SI.Volume V_s_d[N] "Dry snow";
+  SI.Length V_s_w[N] "Water content in soil zone per Area";
+  SI.Length V_b_w[N] "Water content in base zone per Area";
+  SI.Length V_g_w[N] "Water content in ground zone per Area";
+  SI.Length V_s_d[N] "Dry snow";
   SI.VolumeFlowRate Vdot_tot "Total runoff";
-  SI.VolumeFlowRate Vdot_s2b[N] "Runoff rate from soil zone to base zone";
-  SI.VolumeFlowRate Vdot_pl[N] "Precipitation in lake";
-  SI.VolumeFlowRate Vdot_b2br[N] "Runoff rate from base zone t obase runoff";
-  SI.VolumeFlowRate Vdot_l_e[N] "Rate of evapotranspiration from lake";
-  SI.VolumeFlowRate Vdot_g2s[N] "Runoff rate from ground zone to soil zone";
-  SI.VolumeFlowRate Vdot_s2sr[N] "Runoff rate from soil zone to surface runoff";
-  SI.VolumeFlowRate Vdot_s2fr[N] "Runoff rate from soil zone to fast runoff";
-  SI.VolumeFlowRate Vdot_s2g[N] "Runoff rate from snow zone to ground zone";
-  SI.VolumeFlowRate Vdot_g_e[N] "Evapotranspiration rate from ground zone";
-  SI.VolumeFlowRate Vdot_p_r[N] "Precipitation in mainland in the form of snow";
-  SI.VolumeFlowRate Vdot_d2w[N] "Melting rate from dry snow form to water snow form";
-  SI.VolumeFlowRate Vdot_p_s[N] "Precipitation in mainland in the form of snow";
-  SI.VolumeFlowRate Vdot_epot[N] "Evapotranspiration";
+  SI.Velocity Vdot_s2b[N] "Runoff rate from soil zone to base zone";
+  SI.Velocity Vdot_pl[N] "Precipitation in lake";
+  SI.Velocity Vdot_b2br[N] "Runoff rate from base zone to base runoff";
+  SI.Velocity Vdot_l_e[N] "Rate of evapotranspiration from lake";
+  SI.Velocity Vdot_g2s[N] "Runoff rate from ground zone to soil zone";
+  SI.Velocity Vdot_s2sr[N] "Runoff rate from soil zone to surface runoff";
+  SI.Velocity Vdot_s2fr[N] "Runoff rate from soil zone to fast runoff";
+  SI.Velocity Vdot_s2g[N] "Runoff rate from snow zone to ground zone";
+  SI.Velocity Vdot_g_e[N] "Evapotranspiration rate from ground zone";
+  SI.Velocity Vdot_p_r[N] "Precipitation in mainland in the form of snow";
+  SI.Velocity Vdot_d2w[N] "Melting rate from dry snow form to water snow form";
+  SI.Velocity Vdot_p_s[N] "Precipitation in mainland in the form of snow";
+  SI.Velocity Vdot_epot[N] "Evapotranspiration";
 
   Modelica.Units.NonSI.Temperature_degC T[N] "Ambient temperature";
-  SI.VolumeFlowRate Vdot_p[N] "Precipitation";
+  SI.Velocity Vdot_p[N] "Precipitation";
   Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Small error, m";
 
   Modelica.Blocks.Sources.CombiTimeTable temp_var(tableOnFile = true, columns = columns_temp, tableName = tableName_temp, fileName = fileName_temp);
