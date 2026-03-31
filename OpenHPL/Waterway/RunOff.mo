@@ -100,12 +100,18 @@ model RunOff "Run off model. (with 10 height zones)"
   Modelica.Blocks.Sources.CombiTimeTable month_temp(tableOnFile = true, fileName = fileName_month_temp, columns = columns_month_temp, tableName = tableName_month_temp);
   Modelica.Blocks.Sources.CombiTimeTable flow_var(tableOnFile = true, fileName = fileName_flow, columns = columns_flow, tableName = tableName_flow);
 
-  Modelica.Blocks.Interfaces.RealInput temp_input[N] "Zone temperature [degC]";
-  Modelica.Blocks.Interfaces.RealInput prec_input[N] "Zone precipitation [mm/day]";
-  Modelica.Blocks.Interfaces.RealInput evap_input "Potential evapotranspiration [mm/day]";
-  Modelica.Blocks.Interfaces.RealInput month_temp_input[N] "Monthly average zone temperature [degC]";
-  Modelica.Blocks.Interfaces.RealInput flow_input "Observed flow for R2 calculation [m3/s]";
-
+  Modelica.Blocks.Interfaces.RealInput temp_input[N] if useInput "Zone temperature [degC]";
+  Modelica.Blocks.Interfaces.RealInput prec_input[N] if useInput "Zone precipitation [mm/day]";
+  Modelica.Blocks.Interfaces.RealInput evap_input if useInput "Potential evapotranspiration [mm/day]";
+  Modelica.Blocks.Interfaces.RealInput month_temp_input[N] if useInput "Monthly average zone temperature [degC]";
+  Modelica.Blocks.Interfaces.RealInput flow_input if useInput "Observed flow for R2 calculation [m3/s]";
+protected
+  Modelica.Blocks.Interfaces.RealInput temp_internal[N] "Internal: zone temperature";
+  Modelica.Blocks.Interfaces.RealInput prec_internal[N] "Internal: zone precipitation";
+  Modelica.Blocks.Interfaces.RealInput evap_internal "Internal: potential evapotranspiration";
+  Modelica.Blocks.Interfaces.RealInput month_temp_internal[N] "Internal: monthly average zone temperature";
+  Modelica.Blocks.Interfaces.RealInput flow_internal "Internal: observed flow";
+public
   Modelica.Blocks.Interfaces.RealOutput Vdot_runoff "Output connector"
     annotation (
     Placement(transformation(extent = {{100, -10}, {120, 10}})));
@@ -117,13 +123,8 @@ initial equation
 equation
   Vdot_tot = sum(A .* (Vdot_b2br + Vdot_s2sr + Vdot_s2fr)) "Total runoff";
   for i in 1:N loop
-    if useInput then
-      T[i] = temp_input[i];
-      Vdot_p[i] = prec_input[i] * 1e-3 / 86400;
-    else
-      T[i] = temp_var.y[i];
-      Vdot_p[i] = prec_var.y[i] * 1e-3 / 86400;
-    end if;
+    T[i] = temp_internal[i];
+    Vdot_p[i] = prec_internal[i] * 1e-3 / 86400;
     der(V_s_d[i]) = Vdot_p_s[i] - Vdot_d2w[i];
     Vdot_p_s[i] = if T[i] <= T_t then Vdot_p[i] * PCORR * SCORR * (1 - a_L[i]) else 0;
     Vdot_p_r[i] = if T[i] > T_t then Vdot_p[i] * PCORR * (1 - a_L[i]) else 0;
@@ -132,11 +133,7 @@ equation
 
     der(V_g_w[i]) = Vdot_s2g[i] - Vdot_g2s[i] - a_e[i] .* Vdot_g_e[i] "Ground zone (Soil moisure)";
     Vdot_g2s[i] = if V_g_w[i] >= 0 and V_g_w[i] < g_T then (V_g_w[i] / g_T) ^ beta * Vdot_s2g[i] else Vdot_s2g[i];
-    if useInput then
-      Vdot_epot[i] = evap_input * 1e-3 / 86400 * (1 + CE * (T[i] - month_temp_input[i]));
-    else
-      Vdot_epot[i] = evap_var.y[1] * 1e-3 / 86400 * (1 + CE * (T[i] - month_temp.y[i]));
-    end if;
+    Vdot_epot[i] = evap_internal * 1e-3 / 86400 * (1 + CE * (T[i] - month_temp_internal[i]));
     Vdot_g_e[i] = if V_g_w[i] < g_T then V_g_w[i] / g_T * Vdot_epot[i] else Vdot_epot[i];
     a_e[i] = if V_s_d[i] < err then 1 else 0;
 
@@ -152,20 +149,20 @@ equation
     Vdot_l_e[i] = a_L[i] * Vdot_epot[i];
   end for;
 
-  if useInput then
-    F_o = (flow_input - 17.230144) ^ 2;
-    F_e = (flow_input - Vdot_tot) ^ 2;
-  else
-    F_o = (flow_var.y[1] - 17.230144) ^ 2;
-    F_e = (flow_var.y[1] - Vdot_tot) ^ 2;
-  end if;
+  connect(temp_input, temp_internal);
+  connect(prec_input, prec_internal);
+  connect(evap_input, evap_internal);
+  connect(month_temp_input, month_temp_internal);
+  connect(flow_input, flow_internal);
   if not useInput then
-    temp_input = zeros(N);
-    prec_input = zeros(N);
-    evap_input = 0;
-    month_temp_input = zeros(N);
-    flow_input = 0;
+    temp_internal = temp_var.y;
+    prec_internal = prec_var.y;
+    evap_internal = evap_var.y[1];
+    month_temp_internal = month_temp.y;
+    flow_internal = flow_var.y[1];
   end if;
+  F_o = (flow_internal - 17.230144) ^ 2;
+  F_e = (flow_internal - Vdot_tot) ^ 2;
   R2 = 1 - F_e / F_o;
   Vdot_runoff = Vdot_tot;
   annotation (preferredView="info",
