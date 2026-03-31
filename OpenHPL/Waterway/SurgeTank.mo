@@ -148,13 +148,6 @@ equation
     end if;
     p_t = data.p_a;
   end if;
-  mdot = data.rho * Vdot;
-  Mdot = mdot * v;
-  F = F_p - F_f - F_g;
-  p_b = i.p "Linking bottom node pressure to connector";
-  i.p = o.p "Inlet and outlet pressure equality";
-  mdot = i.mdot+o.mdot "Mass balance";
-  F_g = m * data.g * cos_theta;
   o.z = i.z "Elevation at surge tank inlet and outlet are equal";
  annotation (preferredView="info",
     Documentation(info="<html>
