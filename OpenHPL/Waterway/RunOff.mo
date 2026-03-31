@@ -1,21 +1,21 @@
 within OpenHPL.Waterway;
-model RunOff_zones "Run off model. (with 10 height zones)"
+model RunOff "Run off model. (with 10 height zones)"
   extends OpenHPL.Icons.RunOff;
-  
-  parameter Integer N = 10 "Number of height zones" 
+
+  parameter Integer N = 10 "Number of height zones"
     annotation (Dialog(group = "Geometry"));
-  parameter SI.Area A[N] = ones(N) * 41.3e6 "Catchment area" 
+  parameter SI.Area A[N] = ones(N) * 41.3e6 "Catchment area"
     annotation (Dialog(group = "Geometry"));
   parameter SI.PerUnit a_L[N] = {15.43, 3.97, 1.79, 0.81, 1.27, 1.44, 1.03, 2.32, 1.31, 0.57} .* 1e6 ./ A "Fractional area covered by lakes"
     annotation (Dialog(group = "Geometry"));
-  
-  parameter Modelica.Units.NonSI.Temperature_degC T_t=1 "Threshold temperature" 
+
+  parameter Modelica.Units.NonSI.Temperature_degC T_t=1 "Threshold temperature"
     annotation (Dialog(group="Physically-based parameters"));
   parameter Real k_m(unit="m/deg/s") = 4e-3 / 86400 "Melting factor"
     annotation (Dialog(group = "Physically-based parameters"));
   parameter SI.Volume g_T = 150e-3 "Ground saturation threshold"
     annotation (Dialog(group = "Physically-based parameters"));
-  
+
   parameter SI.Volume s_T = 20e-3 "Soil zone saturation threshold"
     annotation (Dialog(group = "Empirical parameters"));
   parameter SI.Frequency a_1 = 0.547 / 86400 "Discharge frequency for surface runoff"
@@ -34,7 +34,7 @@ model RunOff_zones "Run off model. (with 10 height zones)"
     annotation (Dialog(group = "Empirical parameters"));
   parameter Real CE(unit="1/deg") = 0.04 "Model parameter for adjusted evapotranspiration"
     annotation (Dialog(group = "Empirical parameters"));
-    
+
   parameter Boolean useInput = false "If true, meteorological data is provided via input variables instead of data files"
     annotation (Dialog(tab = "Input data"), choices(checkBox = true));
   parameter String fileName_temp = Modelica.Utilities.Files.loadResource("modelica://OpenHPL/Resources/Tables/Temp_var.txt") "File with temperature variations in different height zones"
@@ -99,14 +99,14 @@ model RunOff_zones "Run off model. (with 10 height zones)"
   Modelica.Blocks.Sources.CombiTimeTable evap_var(tableOnFile = true, fileName = fileName_evap, columns = columns_evap, tableName = tableName_evap) if not useInput;
   Modelica.Blocks.Sources.CombiTimeTable month_temp(tableOnFile = true, fileName = fileName_month_temp, columns = columns_month_temp, tableName = tableName_month_temp) if not useInput;
   Modelica.Blocks.Sources.CombiTimeTable flow_var(tableOnFile = true, fileName = fileName_flow, columns = columns_flow, tableName = tableName_flow) if not useInput;
-  
+
   input Real temp_input[N] if useInput "Zone temperature [degC]";
   input Real prec_input[N] if useInput "Zone precipitation [mm/day]";
   input Real evap_input if useInput "Potential evapotranspiration [mm/day]";
   input Real month_temp_input[N] if useInput "Monthly average zone temperature [degC]";
   input Real flow_input if useInput "Observed flow for R2 calculation [m3/s]";
- 
-  Modelica.Blocks.Interfaces.RealOutput Vdot_runoff "Output connector" 
+
+  Modelica.Blocks.Interfaces.RealOutput Vdot_runoff "Output connector"
     annotation (
     Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{80, -20}, {120, 20}})));
 initial equation
@@ -129,7 +129,7 @@ equation
     Vdot_p_r[i] = if T[i] > T_t then Vdot_p[i] * PCORR * (1 - a_L[i]) else 0;
     Vdot_d2w[i] = if T[i] > T_t and V_s_d[i] >= 0 then k_m * (T[i] - T_t) * (1 - a_L[i]) else 0;
     Vdot_s2g[i] = Vdot_p_r[i] + Vdot_d2w[i];
-    
+
     der(V_g_w[i]) = Vdot_s2g[i] - Vdot_g2s[i] - a_e[i] .* Vdot_g_e[i] "Ground zone (Soil moisure)";
     Vdot_g2s[i] = if V_g_w[i] >= 0 and V_g_w[i] < g_T then (V_g_w[i] / g_T) ^ beta * Vdot_s2g[i] else Vdot_s2g[i];
     if useInput then
@@ -139,19 +139,19 @@ equation
     end if;
     Vdot_g_e[i] = if V_g_w[i] < g_T then V_g_w[i] / g_T * Vdot_epot[i] else Vdot_epot[i];
     a_e[i] = if V_s_d[i] < err then 1 else 0;
-    
+
     der(V_s_w[i]) = Vdot_g2s[i] - a_sw[i] * Vdot_s2b[i] - Vdot_s2sr[i] - Vdot_s2fr[i] "Soil zone (Upprec zone)";
     Vdot_s2b[i] = (1 - a_L[i]) * PERC;
     Vdot_s2sr[i] = if V_s_w[i] > s_T then a_1 * (V_s_w[i] - s_T) else 0;
     Vdot_s2fr[i] = a_2 * V_s_w[i];
     a_sw[i] = if Vdot_g2s[i] < Vdot_s2b[i] then 0 else 1;
-    
+
     der(V_b_w[i]) = Vdot_s2b[i] + Vdot_pl[i] - Vdot_b2br[i] - Vdot_l_e[i] "Basement zone (Lower zone)";
     Vdot_pl[i] = a_L[i] * Vdot_p[i];
     Vdot_b2br[i] = a_3 * V_b_w[i];
     Vdot_l_e[i] = a_L[i] * Vdot_epot[i];
   end for;
- 
+
   if useInput then
     F_o = (flow_input - 17.230144) ^ 2;
     F_e = (flow_input - Vdot_tot) ^ 2;
@@ -371,4 +371,4 @@ recession constant for the base runoff in lower zone. Finally, the user can also
 the data for the <code>CombiTimeTable</code> models are stored.
 </p>
 </html>"));
-end RunOff_zones;
+end RunOff;
