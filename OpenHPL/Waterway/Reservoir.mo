@@ -84,7 +84,9 @@ equation
   end if;
 
    o.mdot = -data.rho * Vdot_o "Output flow connector";
-  o.gz = 0 "Elevation auxiliary variable";
+  if fixElevation then
+    o.gz = 0 "Elevation reference: this component is the root of the connected elevation set";
+  end if;
   //o.T = T_0 "TBD: Output temperature connector";
   annotation (preferredView="info", Documentation(info="<html>
 <h4>Reservoir Model</h4>

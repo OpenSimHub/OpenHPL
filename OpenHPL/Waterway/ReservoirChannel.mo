@@ -38,7 +38,9 @@ equation
   // boundaries
   o.mdot =-q*W*data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
-  o.gz = 0 "Elevation auxiliary variable";
+  if fixElevation then
+    o.gz = 0 "Elevation reference: this component is the root of the connected elevation set";
+  end if;
   annotation (
     Documentation(preferredView="info", info="<html>
 <h4>Reservoir Channel Model</h4>

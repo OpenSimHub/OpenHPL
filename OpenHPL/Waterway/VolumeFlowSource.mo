@@ -44,7 +44,9 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dot));
   o.mdot = -data.rho*Vdot;
-  o.gz = 0 "Elevation auxiliary variable";
+  if fixElevation then
+    o.gz = 0 "Elevation reference: this component is the root of the connected elevation set";
+  end if;
   connect(constantVolumeFlow.y, Vdot) annotation (Line(points={{-39,40},{40,40},{40,0},{80,0}}, color={0,0,127}));
   connect(firstOrder.u, outFlow) annotation (Line(
       points={{-62,-20},{-80,-20},{-80,0},{-120,0}},
