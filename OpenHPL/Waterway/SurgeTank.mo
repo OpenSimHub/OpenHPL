@@ -30,7 +30,7 @@ model SurgeTank "Model of the surge tank/shaft"
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0 = 0 "Initial volume flow rate in the surge tank" annotation (
     Dialog(group = "Initialization"));
-  parameter SI.Height h_0 = 50 "Initial water level in the surge tank" annotation (
+  parameter SI.Height h_0 = 50 "Initial water level in the surge tank above inlet" annotation (
     Dialog(group = "Initialization"));
   parameter SI.Pressure p_ac = 4*data.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
     Dialog(group = "Initialization",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
@@ -55,6 +55,7 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.Pressure p_b "Pressure at bottom of the surge tank";
   Real phiSO "Dimensionless factor based on the type of fitting ";
   SI.Height h(start = h_0) "Water height in the surge tank";
+  SI.Height h_abs = h + o.z "Absolute water level";
   SI.VolumeFlowRate Vdot(start = Vdot_0, fixed=true) "Volume flow rate";
 
   Interfaces.Contact_i creek(

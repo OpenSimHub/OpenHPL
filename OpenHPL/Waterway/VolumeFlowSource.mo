@@ -11,11 +11,10 @@ model VolumeFlowSource "Volume flow source (either fixed or variable)"
     annotation (choices(checkBox = true),Dialog(enable=useInput));
   parameter SI.Time T_f=0.01 "Time constant of the first order filter."
     annotation (Dialog(enable=useInput and useFilter));
-  parameter SI.Height z_0=0 "Elevation of the outlet connection"
-    annotation (Dialog(group="Geometry"));
-  parameter Boolean fixElevation=true "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
+  parameter Boolean fixElevation=false "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
     annotation (Dialog(group="Geometry"), choices(checkBox=true));
-
+  parameter SI.Height z_0=0 "Elevation of the outlet connection"
+    annotation (Dialog(group="Geometry", enable=fixElevation));
   Interfaces.Contact_o o "Outlet flow connector"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealInput outFlow if useInput "Conditional input for defining the outlet flow [m3/s]"

@@ -4,10 +4,10 @@ model Reservoir "Model of the reservoir"
   extends OpenHPL.Icons.Reservoir;
   parameter SI.Height h_0=50 "Initial water level above intake"
     annotation (Dialog(group="Setup", enable=not useLevel));
-  parameter SI.Height z_0=0 "Elevation of the reservoir outlet (sets absolute reference)"
-    annotation (Dialog(group="Geometry"));
-  parameter Boolean fixElevation=true "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
+  parameter Boolean fixElevation=false "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
     annotation (Dialog(group="Geometry"), choices(checkBox=true));
+  parameter SI.Height z_0=0 "Elevation of the reservoir outlet (sets absolute reference)"
+    annotation (Dialog(group="Geometry", enable=fixElevation));
   parameter Boolean constantLevel=false "If checked, the reservoir keeps the constant water level h_0"
     annotation (
     Dialog(group="Setup", enable=not (useInflow or useLevel)),
@@ -42,6 +42,7 @@ model Reservoir "Model of the reservoir"
   SI.Momentum M "Water momentum";
   SI.Force F_f "Friction force";
   SI.Height h "Water level";
+  SI.Height h_abs = h + o.z "Absolute water level";
   SI.Pressure p_o "Outlet pressure";
 
   OpenHPL.Interfaces.Contact_o o(p=p_o) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
