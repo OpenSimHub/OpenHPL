@@ -94,17 +94,17 @@ model RunOff "Run off model. (with 10 height zones)"
   SI.VolumeFlowRate Vdot_p[N] "Precipitation";
   Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Small error, m";
 
-  Modelica.Blocks.Sources.CombiTimeTable temp_var(tableOnFile = true, columns = columns_temp, tableName = tableName_temp, fileName = fileName_temp) if not useInput;
-  Modelica.Blocks.Sources.CombiTimeTable prec_var(tableOnFile = true, fileName = fileName_prec, columns = columns_prec, tableName = tableName_prec) if not useInput;
-  Modelica.Blocks.Sources.CombiTimeTable evap_var(tableOnFile = true, fileName = fileName_evap, columns = columns_evap, tableName = tableName_evap) if not useInput;
-  Modelica.Blocks.Sources.CombiTimeTable month_temp(tableOnFile = true, fileName = fileName_month_temp, columns = columns_month_temp, tableName = tableName_month_temp) if not useInput;
-  Modelica.Blocks.Sources.CombiTimeTable flow_var(tableOnFile = true, fileName = fileName_flow, columns = columns_flow, tableName = tableName_flow) if not useInput;
+  Modelica.Blocks.Sources.CombiTimeTable temp_var(tableOnFile = true, columns = columns_temp, tableName = tableName_temp, fileName = fileName_temp);
+  Modelica.Blocks.Sources.CombiTimeTable prec_var(tableOnFile = true, fileName = fileName_prec, columns = columns_prec, tableName = tableName_prec);
+  Modelica.Blocks.Sources.CombiTimeTable evap_var(tableOnFile = true, fileName = fileName_evap, columns = columns_evap, tableName = tableName_evap);
+  Modelica.Blocks.Sources.CombiTimeTable month_temp(tableOnFile = true, fileName = fileName_month_temp, columns = columns_month_temp, tableName = tableName_month_temp);
+  Modelica.Blocks.Sources.CombiTimeTable flow_var(tableOnFile = true, fileName = fileName_flow, columns = columns_flow, tableName = tableName_flow);
 
-  Modelica.Blocks.Interfaces.RealInput temp_input[N] if useInput "Zone temperature [degC]";
-  Modelica.Blocks.Interfaces.RealInput prec_input[N] if useInput "Zone precipitation [mm/day]";
-  Modelica.Blocks.Interfaces.RealInput evap_input if useInput "Potential evapotranspiration [mm/day]";
-  Modelica.Blocks.Interfaces.RealInput month_temp_input[N] if useInput "Monthly average zone temperature [degC]";
-  Modelica.Blocks.Interfaces.RealInput flow_input if useInput "Observed flow for R2 calculation [m3/s]";
+  Modelica.Blocks.Interfaces.RealInput temp_input[N] "Zone temperature [degC]";
+  Modelica.Blocks.Interfaces.RealInput prec_input[N] "Zone precipitation [mm/day]";
+  Modelica.Blocks.Interfaces.RealInput evap_input "Potential evapotranspiration [mm/day]";
+  Modelica.Blocks.Interfaces.RealInput month_temp_input[N] "Monthly average zone temperature [degC]";
+  Modelica.Blocks.Interfaces.RealInput flow_input "Observed flow for R2 calculation [m3/s]";
 
   Modelica.Blocks.Interfaces.RealOutput Vdot_runoff "Output connector"
     annotation (
@@ -158,6 +158,13 @@ equation
   else
     F_o = (flow_var.y[1] - 17.230144) ^ 2;
     F_e = (flow_var.y[1] - Vdot_tot) ^ 2;
+  end if;
+  if not useInput then
+    temp_input = zeros(N);
+    prec_input = zeros(N);
+    evap_input = 0;
+    month_temp_input = zeros(N);
+    flow_input = 0;
   end if;
   R2 = 1 - F_e / F_o;
   Vdot_runoff = Vdot_tot;
