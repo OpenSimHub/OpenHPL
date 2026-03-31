@@ -11,7 +11,7 @@ model RunOff "Run off model. (with 10 height zones)"
 
   parameter Modelica.Units.NonSI.Temperature_degC T_t=1 "Threshold temperature"
     annotation (Dialog(group="Physically-based parameters"));
-  parameter Real k_m(unit="m/deg/s") = 4e-3 / 86400 "Melting factor"
+  parameter Real k_m(unit="m/(deg.s)") = 4e-3 / 86400 "Melting factor"
     annotation (Dialog(group = "Physically-based parameters"));
   parameter SI.Length g_T = 150e-3 "Ground saturation threshold"
     annotation (Dialog(group = "Physically-based parameters"));
