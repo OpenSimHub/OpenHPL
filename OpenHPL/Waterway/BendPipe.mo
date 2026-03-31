@@ -16,8 +16,6 @@ model BendPipe "Bend in pipes"
   SI.Pressure dp "Pressure drop of fitting";
   SI.MassFlowRate mdot "Mass flow rate";
   extends OpenHPL.Interfaces.TwoContacts;
-initial equation
-  o.z = i.z "Elevation propagation: no height change across bend";
 equation
   v = mdot / data.rho / A;
   dp = K_L * 0.5 * data.rho * v^2;
@@ -25,6 +23,7 @@ equation
   o.p = i.p - dp "Pressure of the output connector";
   i.mdot + o.mdot = 0 "Mass balance";
   mdot = i.mdot "Flow direction";
+  o.z = i.z "Elevation propagation: no height change across bend";
   annotation (preferredView="info",
     Documentation(info="<html>
 <p>Usually minor head losses in pipes are considered to be due to fittings, diffusers, nozzles, bend in pipes, etc. We are more interested in head loss due to bend pipes for this model.</p>

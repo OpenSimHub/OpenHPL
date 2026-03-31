@@ -30,15 +30,12 @@ model ReservoirChannel "Reservoir model based on open channel model"
     boundaryValues=[h_0 + H[1],q; h_0 + H[2],q],
     boundaryCondition=[true,true; false,true],
     SteadyState=SteadyState) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-initial equation
-  if fixElevation then
-    o.z = z_0;
-  end if;
 equation
   // boundaries
   o.mdot =-q*W*data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
   if fixElevation then
+    o.z = z_0 "Set absolute elevation at outlet";
     o.gz = 0 "Elevation reference: this component is the root of the connected elevation set";
   end if;
   annotation (

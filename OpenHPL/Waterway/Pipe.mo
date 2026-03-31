@@ -61,7 +61,6 @@ initial equation
   else
     Vdot=Vdot_0;
   end if;
-  o.z = i.z - H "Elevation propagation: outlet is H below inlet";
 algorithm
     assert( phi < 1.0,  "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
 equation
@@ -74,6 +73,7 @@ equation
   p_o = o.p "Outlet pressure";
   i.mdot+o.mdot = 0 "Mass balance";
   mdot = i.mdot "Inlet direction for mdot";
+  o.z = i.z - H "Elevation propagation: outlet is H below inlet";
 
   annotation (preferredView="info",
     Documentation(info="<html>

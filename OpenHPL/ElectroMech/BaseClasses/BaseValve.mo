@@ -28,14 +28,13 @@ protected
     annotation (Placement(transformation(origin = {0, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 270), iconTransformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 80})));
   constant Real epsilon = 5.0e-5 "Constant to ensure robust expression for dp vs flow. Trial and error to find suitable value.";
 
-initial equation
-  o.z = i.z "Elevation propagation: no height change across valve";
 equation
   i.mdot + o.mdot = 0;
   mdot = i.mdot;
   Vdot = mdot/data.rho;
   dp*(C_v_*max(epsilon, u^alpha))^2 = Vdot*abs(Vdot) "Valve equation for pressure drop";
   dp = i.p - o.p "Link the pressure drop to the ports";
+  o.z = i.z "Elevation propagation: no height change across valve";
   annotation (preferredView="info", Documentation(info="<html>
 <p>
 This is a partial, simple model of hydraulic valve. &nbsp;</p><p>This model is based on the energy balance of a valve.

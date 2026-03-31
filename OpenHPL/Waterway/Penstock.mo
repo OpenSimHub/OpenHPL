@@ -33,7 +33,6 @@ initial equation
   mdot_V = data.rho * Vdot_0;
   mdot = data.rho * Vdot_0 * ones(N - 2);
   p_ = p_i + dp:dp:p_i + dp * (N - 1);
-  o.z = i.z - H "Outlet elevation is H below inlet";
 equation
   // Pipe flow rate
   mdot_R = i.mdot;
@@ -84,6 +83,7 @@ equation
   // volumetric flow rates for all cells
   V_p_out = mdot ./ rho_m;
   V_p_out_end = mdot_V / (data.rho * (1 + data.beta * (p_o - data.p_a)));
+  o.z = i.z - H "Outlet elevation is H below inlet";
   annotation (preferredView="info",
     Documentation(info="<html><head></head><body><p>This is a more detaied model of the pipe that can be use for proper modeling of penstock. (This model does not work well. Instead PenstockKP model can be used.)</p><p>The model for the penstock with the elastic walls and compressible water with simple discretization method (Staggered grid). The geometry of the penstock is described due to figure:</p>
 <p><img src=\"modelica://OpenHPL/Resources/Images/pipe.svg\"></p>

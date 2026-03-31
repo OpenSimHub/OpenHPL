@@ -34,10 +34,6 @@ protected
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   Modelica.Blocks.Interfaces.RealOutput filtered if useFilter "filtered input"
     annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
-initial equation
-  if fixElevation then
-    o.z = z_0;
-  end if;
 equation
   connect(filtered, Vdot) annotation (Line(
       points={{10,-20},{40,-20},{40,0},{80,0}},
@@ -45,6 +41,7 @@ equation
       pattern=LinePattern.Dot));
   o.mdot = -data.rho*Vdot;
   if fixElevation then
+    o.z = z_0 "Set absolute elevation at outlet";
     o.gz = 0 "Elevation reference: this component is the root of the connected elevation set";
   end if;
   connect(constantVolumeFlow.y, Vdot) annotation (Line(points={{-39,40},{40,40},{40,0},{80,0}}, color={0,0,127}));

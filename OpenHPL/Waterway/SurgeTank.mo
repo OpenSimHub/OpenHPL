@@ -72,7 +72,6 @@ initial equation
   else
     h = h_0;
   end if;
-  o.z = i.z "Elevation at surge tank inlet and outlet are equal";
 
 equation
   assert( h >= 0, "Water level h in surge tank must be greater than 0!",
@@ -156,6 +155,7 @@ equation
   i.p = o.p "Inlet and outlet pressure equality";
   mdot = i.mdot+o.mdot "Mass balance";
   F_g = m * data.g * cos_theta;
+  o.z = i.z "Elevation at surge tank inlet and outlet are equal";
  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Surge Tank Model</h4>

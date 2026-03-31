@@ -54,7 +54,6 @@ initial equation
     mdot[2:N - 1] = data.rho * Vdot_0[2:N - 1];
     p_p = p_p0;
   end if;
-  o.z = i.z - H "Outlet elevation is H below inlet";
 equation
   // Pipe flow rate
   mdot_R = i.mdot;
@@ -116,6 +115,7 @@ equation
   S_[N + 1:2 * N] = F_ap * data.g * H / L - F_f / dx;
   // diff. equation
   der(U) = KP.diff_eq;
+  o.z = i.z - H "Outlet elevation is H below inlet";
   annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Elastic Penstock with KP Method</h4>

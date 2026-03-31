@@ -25,8 +25,6 @@ model Gate "Model of a sluice or tainter gate based on [Bollrich2019]"
           extent={{-20,-20},{20,20}},
           rotation=270,
           origin={0,120})));
-initial equation
-  o.z = i.z "Elevation propagation: gate at same elevation";
 equation
   mu_A = psi/sqrt(1+psi*a/h_0);
   if sluice then
@@ -53,6 +51,7 @@ equation
   mdot = Vdot * data.rho "Mass flow rate through the gate";
   i.p = h_0 * data.g * data.rho + data.p_a "Inlet water pressure";
   o.p = h_2 * data.g * data.rho + data.p_a "Outlet water pressure";
+  o.z = i.z "Elevation propagation: gate at same elevation";
   annotation (
     preferredView="info",
     Documentation(info="<html>

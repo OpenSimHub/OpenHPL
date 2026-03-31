@@ -54,9 +54,6 @@ initial equation
    if not useLevel then
     h = h_0;
    end if;
-  if fixElevation then
-    o.z = z_0;
-  end if;
 equation
   A =h * (W +h * Modelica.Math.tan(alpha))
     "Vertical cross section of the reservoir";
@@ -85,6 +82,7 @@ equation
 
    o.mdot = -data.rho * Vdot_o "Output flow connector";
   if fixElevation then
+    o.z = z_0 "Set absolute elevation at outlet";
     o.gz = 0 "Elevation reference: this component is the root of the connected elevation set";
   end if;
   //o.T = T_0 "TBD: Output temperature connector";
