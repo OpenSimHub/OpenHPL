@@ -350,25 +350,34 @@ the base, quick and surface runoffs are added together.
 
 <h5>Implementation</h5>
 <p>
-This hydrology model is encoded in the <em>OpenHPL</em> library as the <code>RunOff_zones</code> unit where the main
+This hydrology model is encoded in the <em>OpenHPL</em> library as the <code>RunOff</code> unit where the main
 defined variable is the total runoff from the catchment. This unit uses the standard Modelica connector <code>RealOutput</code>
 connector as an output from the model that can be connected to, for example, simple reservoir model <code>Reservoir</code> unit.
 </p>
 
 <p>
-In order to get historic information about the air temperature, precipitation, and potential evapotranspiration for each
-of the elevation zones, the standard Modelica <code>CombiTimeTable</code> source models are used in order to read this
-data from the text files.
+Meteorological inputs (air temperature, precipitation, potential evapotranspiration, and monthly average temperature for
+each elevation zone) can be provided in two ways, controlled by the boolean parameter <code>useInput</code>:
 </p>
+<ul>
+<li>When <code>useInput = false</code> (default), historic data is read from text files using the standard Modelica
+<code>CombiTimeTable</code> source models. The file names and table names are specified via the parameters in the
+<em>Input data</em> tab.</li>
+<li>When <code>useInput = true</code>, the inputs are supplied through <code>input Real</code> connectors
+(<code>temp_input</code>, <code>prec_input</code>, <code>evap_input</code>, <code>month_temp_input</code>, and
+<code>flow_input</code>), allowing the model to be driven by external signals at runtime.</li>
+</ul>
 
 <h5>Parameters</h5>
 <p>
-When the <code>RunOff_zones</code> unit is in use, the user can specify the required geometry parameters for the catchment:
+When the <code>RunOff</code> unit is in use, the user can specify the required geometry parameters for the catchment:
 the number of elevation zones, all hydrology parameters such as threshold temperatures, degree-day factor, precipitation
 correction coefficients, field capacity and β parameter in soil moisture routine, threshold level for quick runoff in upper
 zone, percolation from upper zone to lower zone, recession constants for the surface and quick runoffs in upper zone, and
-recession constant for the base runoff in lower zone. Finally, the user can also specify the info about the text files where
-the data for the <code>CombiTimeTable</code> models are stored.
+recession constant for the base runoff in lower zone. The boolean parameter <code>useInput</code> selects whether
+meteorological data is read from files (<code>false</code>) or supplied via input connectors (<code>true</code>). When
+<code>useInput = false</code>, the user can also specify the text files where the data for the
+<code>CombiTimeTable</code> models are stored.
 </p>
 </html>"));
 end RunOff;
