@@ -5,18 +5,18 @@ model RunOff_zones "Run off model. (with 10 height zones)"
   parameter Integer N = 10 "# of height zones" annotation (
     Dialog(group = "Geometry"));
   // parameters of the hydrology model
-  parameter Modelica.Units.NonSI.Temperature_degC T_t=-3.91223331e-01 "Threshold temperature" annotation (Dialog(group="Physically-based parameters"));
+  parameter Modelica.Units.NonSI.Temperature_degC T_t=1 "Threshold temperature" annotation (Dialog(group="Physically-based parameters"));
   parameter SI.Area A[N] = ones(N) * 41.3e6 "Catchment area" annotation (
     Dialog(group = "Geometry"));
-  parameter Real s_T = 3.99187122e-02 "Soil zone saturation threshold, m" annotation (
-    Dialog(group = "Empirical parameters")), a_1 = 2.31870660e-06 "Discharge frequency for surface runoff, 1/sec" annotation (
-    Dialog(group = "Empirical parameters")), a_2 = 4.62497942e-06 "Discharge frequency for fast runoff, 1/sec" annotation (
-    Dialog(group = "Empirical parameters")), a_3 = 1.15749393e-06 "Discharge frequency for base runoff, 1/sec" annotation (
+  parameter Real s_T = 20e-3 "Soil zone saturation threshold, m" annotation (
+    Dialog(group = "Empirical parameters")), a_1 = 0.547 / 86400 "Discharge frequency for surface runoff, 1/sec" annotation (
+    Dialog(group = "Empirical parameters")), a_2 = 0.489 / 86400 "Discharge frequency for fast runoff, 1/sec" annotation (
+    Dialog(group = "Empirical parameters")), a_3 = 0.0462 / 86400 "Discharge frequency for base runoff, 1/sec" annotation (
     Dialog(group = "Empirical parameters")), a_L[N] = {15.43, 3.97, 1.79, 0.81, 1.27, 1.44, 1.03, 2.32, 1.31, 0.57} .* 1e6 ./ A "Fractional area covered by lakes, -" annotation (
-    Dialog(group = "Geometry")), g_T = 1.50394570e-01 "Ground saturation threshold, m" annotation (
-    Dialog(group = "Physically-based parameters")), PERC = 5.79256691e-09 "preccolation from soil zone to base zone, m/sec" annotation (
-    Dialog(group = "Empirical parameters")), beta = 1.00291469e+00 "Ground zone shape coefficient, -" annotation (
-    Dialog(group = "Empirical parameters")), k_m = 3.47554015e-08 "Melting factor, m/deg/sec" annotation (
+    Dialog(group = "Geometry")), g_T = 150e-3 "Ground saturation threshold, m" annotation (
+    Dialog(group = "Physically-based parameters")), PERC = 0.6e-3 / 86400 "Percolation from soil zone to base zone, m/sec" annotation (
+    Dialog(group = "Empirical parameters")), beta = 2 "Ground zone shape coefficient, -" annotation (
+    Dialog(group = "Empirical parameters")), k_m = 4e-3 / 86400 "Melting factor, m/deg/sec" annotation (
     Dialog(group = "Physically-based parameters")), PCORR = 1.05 "Precipitation correction - Rainfall, -" annotation (
     Dialog(group = "Empirical parameters")), SCORR = 1.2 "Precipitation correction - Snowfall, -" annotation (
     Dialog(group = "Empirical parameters")), CE = 0.04 "Model parameter for adjusted evapotranspiration, 1/deg" annotation (
@@ -42,6 +42,8 @@ model RunOff_zones "Run off model. (with 10 height zones)"
     Dialog(tab = "Evapotranspiration")), columns_month_temp[:] = 2:N + 1 "Columns with monthly average temperature variations for different height zones" annotation (
     Dialog(tab = "Evapotranspiration")), columns_flow[:] = {2} "Column with real observed run off" annotation (
     Dialog(tab = "Real run off"));
+  parameter Boolean useInput = false "If true, meteorological data is provided via input variables instead of data files"
+    annotation (Dialog(group = "Input"), choices(checkBox = true));
   // variables
   SI.Height V_s_w[N] "Water content in soil zone", V_b_w[N] "Water content in base zone", V_g_w[N] "Water content in ground zone", V_s_d[N] "Dry snow";
   //V_s_s[N] "Soggy snow";
@@ -52,11 +54,16 @@ model RunOff_zones "Run off model. (with 10 height zones)"
   SI.Velocity Vdot_p[N] "Precipitation";
   Real a_e[N], a_sw[N], F_o, F_e, R2, err = 0.5e-3 "Small error, m";
   // using  data
-  Modelica.Blocks.Sources.CombiTimeTable temp_var(tableOnFile = true, columns = columns_temp, tableName = tableName_temp, fileName = fileName_temp);
-  Modelica.Blocks.Sources.CombiTimeTable prec_var(tableOnFile = true, fileName = fileName_prec, columns = columns_prec, tableName = tableName_prec);
-  Modelica.Blocks.Sources.CombiTimeTable evap_var(tableOnFile = true, fileName = fileName_evap, columns = columns_evap, tableName = tableName_evap);
-  Modelica.Blocks.Sources.CombiTimeTable month_temp(tableOnFile = true, fileName = fileName_month_temp, columns = columns_month_temp, tableName = tableName_month_temp);
-  Modelica.Blocks.Sources.CombiTimeTable flow_var(tableOnFile = true, fileName = fileName_flow, columns = columns_flow, tableName = tableName_flow);
+  Modelica.Blocks.Sources.CombiTimeTable temp_var(tableOnFile = true, columns = columns_temp, tableName = tableName_temp, fileName = fileName_temp) if not useInput;
+  Modelica.Blocks.Sources.CombiTimeTable prec_var(tableOnFile = true, fileName = fileName_prec, columns = columns_prec, tableName = tableName_prec) if not useInput;
+  Modelica.Blocks.Sources.CombiTimeTable evap_var(tableOnFile = true, fileName = fileName_evap, columns = columns_evap, tableName = tableName_evap) if not useInput;
+  Modelica.Blocks.Sources.CombiTimeTable month_temp(tableOnFile = true, fileName = fileName_month_temp, columns = columns_month_temp, tableName = tableName_month_temp) if not useInput;
+  Modelica.Blocks.Sources.CombiTimeTable flow_var(tableOnFile = true, fileName = fileName_flow, columns = columns_flow, tableName = tableName_flow) if not useInput;
+  input Real temp_input[N] if useInput "Zone temperature [degC]";
+  input Real prec_input[N] if useInput "Zone precipitation [mm/day]";
+  input Real evap_input if useInput "Potential evapotranspiration [mm/day]";
+  input Real month_temp_input[N] if useInput "Monthly average zone temperature [degC]";
+  input Real flow_input if useInput "Observed flow for R2 calculation [m3/s]";
   // connector
   Modelica.Blocks.Interfaces.RealOutput Vdot_runoff annotation (
     Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{80, -20}, {120, 20}})));
@@ -72,14 +79,14 @@ equation
   Vdot_tot = sum(A .* (Vdot_b2br + Vdot_s2sr + Vdot_s2fr));
   for i in 1:N loop
     // Snow zone (Snow rourine)
-    T[i] = temp_var.y[i];
-    Vdot_p[i] = prec_var.y[i] * 1e-3 / 86400;
+    T[i] = if useInput then temp_input[i] else temp_var.y[i];
+    Vdot_p[i] = (if useInput then prec_input[i] else prec_var.y[i]) * 1e-3 / 86400;
     der(V_s_d[i]) = Vdot_p_s[i] - Vdot_d2w[i];
     // + Vdot_w2d[i];
     //der(V_s_s[i]) = Vdot_p_r[i] - Vdot_w2d[i] + Vdot_d2w[i] - Vdot_s2g[i];
     Vdot_p_s[i] = if T[i] <= T_t then Vdot_p[i] * PCORR * SCORR * (1 - a_L[i]) else 0;
     Vdot_p_r[i] = if T[i] > T_t then Vdot_p[i] * PCORR * (1 - a_L[i]) else 0;
-    Vdot_d2w[i] = if T[i] > T_t and V_s_d[i] >= err * 1e-2 then k_m * (T[i] - T_t) * (1 - a_L[i]) else 0;
+    Vdot_d2w[i] = if T[i] > T_t and V_s_d[i] >= 0 then k_m * (T[i] - T_t) * (1 - a_L[i]) else 0;
     //Vdot_w2d[i] = if T[i]<=T_t and V_s_s[i]>=0 then k_m*(T_t-T[i]) else 0;
     //Vdot_s2g[i] = if T[i]>T_t and V_s_s[i]<err*1e-5 and V_s_d[i]<err then Vdot_p_r[i] elseif V_s_s[i]>=err and V_s_d[i]>=err then (1+a_w)*Vdot_d2w[i]+Vdot_p_r[i] else 0;
     Vdot_s2g[i] = Vdot_p_r[i] + Vdot_d2w[i];
@@ -87,7 +94,7 @@ equation
     //der(V_g_w[i]) = Vdot_s2g[i] -Vdot_g2s[i] - (1-a)*Vdot_g_e[i];
     der(V_g_w[i]) = Vdot_s2g[i] - Vdot_g2s[i] - a_e[i] .* Vdot_g_e[i];
     Vdot_g2s[i] = if V_g_w[i] >= 0 and V_g_w[i] < g_T then (V_g_w[i] / g_T) ^ beta * Vdot_s2g[i] else Vdot_s2g[i];
-    Vdot_epot[i] = evap_var.y[1] * 1e-3 / 86400 * (1 + CE * (T[i] - month_temp.y[i]));
+    Vdot_epot[i] = (if useInput then evap_input else evap_var.y[1]) * 1e-3 / 86400 * (1 + CE * (T[i] - (if useInput then month_temp_input[i] else month_temp.y[i])));
     Vdot_g_e[i] = if V_g_w[i] < g_T then V_g_w[i] / g_T * Vdot_epot[i] else Vdot_epot[i];
     a_e[i] = if V_s_d[i] < err then 1 else 0;
     // Soil zone (Upprec zone)
@@ -103,8 +110,8 @@ equation
     Vdot_l_e[i] = a_L[i] * Vdot_epot[i];
   end for;
   // Error
-  F_o = (flow_var.y[1] - 17.230144) ^ 2;
-  F_e = (flow_var.y[1] - Vdot_tot) ^ 2;
+  F_o = ((if useInput then flow_input else flow_var.y[1]) - 17.230144) ^ 2;
+  F_e = ((if useInput then flow_input else flow_var.y[1]) - Vdot_tot) ^ 2;
   R2 = 1 - F_e / F_o;
   Vdot_runoff = Vdot_tot;
   annotation (preferredView="info",
