@@ -108,7 +108,7 @@ model RunOff "Run off model. (with 10 height zones)"
 
   Modelica.Blocks.Interfaces.RealOutput Vdot_runoff "Output connector"
     annotation (
-    Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{80, -20}, {120, 20}})));
+    Placement(transformation(extent = {{100, -10}, {120, 10}})));
 initial equation
   V_s_d = zeros(N);
   V_g_w = zeros(N);
