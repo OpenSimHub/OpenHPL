@@ -100,11 +100,11 @@ model RunOff "Run off model. (with 10 height zones)"
   Modelica.Blocks.Sources.CombiTimeTable month_temp(tableOnFile = true, fileName = fileName_month_temp, columns = columns_month_temp, tableName = tableName_month_temp) if not useInput;
   Modelica.Blocks.Sources.CombiTimeTable flow_var(tableOnFile = true, fileName = fileName_flow, columns = columns_flow, tableName = tableName_flow) if not useInput;
 
-  input Real temp_input[N] if useInput "Zone temperature [degC]";
-  input Real prec_input[N] if useInput "Zone precipitation [mm/day]";
-  input Real evap_input if useInput "Potential evapotranspiration [mm/day]";
-  input Real month_temp_input[N] if useInput "Monthly average zone temperature [degC]";
-  input Real flow_input if useInput "Observed flow for R2 calculation [m3/s]";
+  Modelica.Blocks.Interfaces.RealInput temp_input[N] if useInput "Zone temperature [degC]";
+  Modelica.Blocks.Interfaces.RealInput prec_input[N] if useInput "Zone precipitation [mm/day]";
+  Modelica.Blocks.Interfaces.RealInput evap_input if useInput "Potential evapotranspiration [mm/day]";
+  Modelica.Blocks.Interfaces.RealInput month_temp_input[N] if useInput "Monthly average zone temperature [degC]";
+  Modelica.Blocks.Interfaces.RealInput flow_input if useInput "Observed flow for R2 calculation [m3/s]";
 
   Modelica.Blocks.Interfaces.RealOutput Vdot_runoff "Output connector"
     annotation (
