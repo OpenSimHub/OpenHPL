@@ -6,7 +6,7 @@ model Reservoir "Model of the reservoir"
     annotation (Dialog(group="Setup", enable=not useLevel));
   parameter Boolean fixElevation=false "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
     annotation (Dialog(group="Geometry"), choices(checkBox=true));
-  parameter SI.Height z_0=0 "Elevation of the reservoir outlet (sets absolute reference)"
+  parameter SI.Position z_0=0 "Elevation of the reservoir outlet (sets absolute reference)"
     annotation (Dialog(group="Geometry", enable=fixElevation));
   parameter Boolean constantLevel=false "If checked, the reservoir keeps the constant water level h_0"
     annotation (
@@ -42,7 +42,7 @@ model Reservoir "Model of the reservoir"
   SI.Momentum M "Water momentum";
   SI.Force F_f "Friction force";
   SI.Height h "Water level";
-  SI.Height h_abs = h + o.z "Absolute water level";
+  SI.Height h_abs = h + o.elevation.z "Absolute water level";
   SI.Pressure p_o "Outlet pressure";
 
   OpenHPL.Interfaces.Contact_o o(p = p_o, showElevation = data.showElevation) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
@@ -83,8 +83,13 @@ equation
 
    o.mdot = -data.rho * Vdot_o "Output flow connector";
   if fixElevation then
-    o.z = z_0 "Set absolute elevation at outlet";
-    o.gz = 0 "Elevation reference: this component is the root of the connected elevation set";
+    Connections.root(o.elevation) "This reservoir is the definite elevation reference root";
+    o.elevation.z = z_0 "Set absolute elevation at outlet";
+  else
+    Connections.potentialRoot(o.elevation) "May become root if no other component defines the elevation";
+    if Connections.isRoot(o.elevation) then
+      o.elevation.z = 0 "Default elevation when this reservoir is automatically selected as root";
+    end if;
   end if;
   //o.T = T_0 "TBD: Output temperature connector";
   annotation (preferredView="info", Documentation(info="<html>

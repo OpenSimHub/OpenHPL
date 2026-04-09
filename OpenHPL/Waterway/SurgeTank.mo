@@ -55,7 +55,7 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.Pressure p_b "Pressure at bottom of the surge tank";
   Real phiSO "Dimensionless factor based on the type of fitting ";
   SI.Height h(start = h_0) "Water height in the surge tank";
-  SI.Height h_abs = h + o.z "Absolute water level";
+  SI.Height h_abs = h + o.elevation.z "Absolute water level";
   SI.VolumeFlowRate Vdot(start = Vdot_0, fixed=true) "Volume flow rate";
 
   Interfaces.Contact_i creek(
@@ -149,7 +149,7 @@ equation
     end if;
     p_t = data.p_a;
   end if;
-  o.z = i.z "Elevation at surge tank inlet and outlet are equal";
+  o.elevation.z = i.elevation.z "Elevation at surge tank inlet and outlet are equal";
  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Surge Tank Model</h4>

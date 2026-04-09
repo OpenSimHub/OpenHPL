@@ -11,7 +11,7 @@ model ReservoirChannel "Reservoir model based on open channel model"
   parameter SI.Height H[2] = {2, 2} "Reservoir bed height from left and right side";
   // initialization
   parameter SI.Height h_0=50 "Initial water level of the reservoir";
-  parameter SI.Height z_0=0 "Elevation of the reservoir outlet"
+  parameter SI.Position z_0=0 "Elevation of the reservoir outlet"
     annotation (Dialog(group="Geometry"));
   parameter Boolean fixElevation=true "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
     annotation (Dialog(group="Geometry"), choices(checkBox=true));
@@ -35,8 +35,13 @@ equation
   o.mdot =-q*W*data.rho;
   o.p = data.p_a + data.rho * data.g * openChannel.h[N];
   if fixElevation then
-    o.z = z_0 "Set absolute elevation at outlet";
-    o.gz = 0 "Elevation reference: this component is the root of the connected elevation set";
+    Connections.root(o.elevation) "This reservoir is the elevation reference root";
+    o.elevation.z = z_0 "Set absolute elevation at outlet";
+  else
+    Connections.potentialRoot(o.elevation) "May become root if no other root exists";
+    if Connections.isRoot(o.elevation) then
+      o.elevation.z = 0 "Default elevation if this becomes root";
+    end if;
   end if;
   annotation (
     Documentation(preferredView="info", info="<html>

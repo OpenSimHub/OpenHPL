@@ -73,7 +73,7 @@ equation
   p_o = o.p "Outlet pressure";
   i.mdot+o.mdot = 0 "Mass balance";
   mdot = i.mdot "Inlet direction for mdot";
-  o.z = i.z - H "Elevation propagation: outlet is H below inlet";
+  o.elevation.z = i.elevation.z - H "Elevation propagation: outlet is H below inlet";
 
   annotation (preferredView="info",
     Documentation(info="<html>

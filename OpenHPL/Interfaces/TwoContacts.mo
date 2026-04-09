@@ -8,7 +8,7 @@ partial model TwoContacts "Model of two connectors"
                                annotation (
     Placement(transformation(extent={{90,-10},{110,10}})));
 equation
-  o.gz = i.gz "Elevation auxiliary variable: propagate gz from inlet to outlet";
+  Connections.branch(i.elevation, o.elevation) "Elevation graph: inlet and outlet are in the same connected set";
   annotation (
     Documentation(info = "<html>
     <p>TwoContact is a partial model, which consists of two Contacts <em>i</em>and <em>o</em>.
