@@ -5,26 +5,26 @@ model Pipes "Example of contracting, contstant and expanding pipe diameters"
     inner OpenHPL.Data data annotation (
       Placement(transformation(origin={-90,90}, extent={{-10,-10},{10,10}})));
     parameter SI.Diameter Dn=0.3568 "Nominal Diameter";
-    Waterway.Reservoir Upstream(h_0 = 100.0, constantLevel=true)
+    Waterway.Reservoir Upstream(h_0 = 100.0, constantLevel=true, fixElevation = true, z_0 = 10)
                                                             annotation (
       Placement(transformation(origin={-50,0}, extent={{-10,-10},{10,10}})));
-    Waterway.Reservoir Downstream(h_0 = 0.0, constantLevel=true)
+    Waterway.Reservoir Downstream(h_0 = 0.0, constantLevel=true, fixElevation = false)
                                                                annotation (
       Placement(transformation(origin={50,0}, extent={{10,-10},{-10,10}}, rotation = -0)));
     OpenHPL.Waterway.Pipe pipeExpanding(
     D_i=0.8*Dn,
     D_o=1.2*Dn,
-    H=0,
+    H= 10,
     L=1000) annotation (Placement(transformation(origin={0,20}, extent={{-10,-10},{10,10}})));
     OpenHPL.Waterway.Pipe pipeConstant(
     D_i=Dn,
     D_o=Dn,
-    H=0,
+    H= 10,
     L=1000) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     OpenHPL.Waterway.Pipe pipeContracting(
     D_i=1.2*Dn,
     D_o=0.8*Dn,
-    H=0,
+    H= 10,
     L=1000) annotation (Placement(transformation(origin={0,-20}, extent={{-10,-10},{10,10}})));
 
 equation

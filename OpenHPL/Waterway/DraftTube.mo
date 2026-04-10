@@ -153,6 +153,7 @@ equation
   p_o = o.p;
   i.mdot+o.mdot=0;
   mdot = i.mdot;
+  o.elevation.z = i.elevation.z - H "Elevation propagation: outlet is H below inlet";
   annotation (preferredView="info", Documentation(info="<html>
     <p>Two of the draft tubes are modeled using <em>Momentum balance</em>.
     They are:</p>

@@ -2,7 +2,7 @@ within OpenHPL.Examples;
 model SimpleValveWithCreek
   "Model of a hydropower system with a simple turbine turbine"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0 = 10, constantLevel = false) annotation(
+  Waterway.Reservoir reservoir(h_0 = 10, constantLevel = false, fixElevation = true, z_0 = 110) annotation(
     Placement(transformation(origin = {-90, 30}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Ramp control(duration = 30, height = 0.5, offset = 0, startTime = 500e6) annotation(
     Placement(transformation(origin={-10,0},    extent = {{-10, -10}, {10, 10}})));
@@ -15,7 +15,7 @@ model SimpleValveWithCreek
   replaceable Waterway.Pipe penstock(D_i = 3, D_o = 3, H = 80, L = 200, vertical = true)
                                                                                   constrainedby Interfaces.TwoContacts annotation(
      Placement(transformation(origin={60,30},   extent = {{-10, -10}, {10, 10}})));
-  Waterway.SurgeTank creekIntake(H = 25, L = 30, h_0 = 20, useCreekIntake = true) annotation(
+  Waterway.SurgeTank creekIntake(H = 25, L = 30, h_0 = 20) annotation(
     Placement(transformation(origin = {-30, 30}, extent = {{-10, -10}, {10, 10}})));
   inner Data data(Vdot_0 = 0) annotation(
     Placement(transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}})));
@@ -49,7 +49,7 @@ equation
   connect(penstock.o, valve.i) annotation (Line(points={{70,30},{80,30},{80,10},
           {8,10},{8,-20},{20,-20}}, color={0,128,255}));
   annotation(
-    experiment(StopTime = 1000),
+    experiment(StopTime = 1000, StartTime = 0, Tolerance = 1e-06, Interval = 2),
     Documentation(info = "<html>
 <p>
 Simple model of a water way with one creek intake.

@@ -51,6 +51,7 @@ equation
   mdot = Vdot * data.rho "Mass flow rate through the gate";
   i.p = h_0 * data.g * data.rho + data.p_a "Inlet water pressure";
   o.p = h_2 * data.g * data.rho + data.p_a "Outlet water pressure";
+  o.elevation.z = i.elevation.z "Elevation propagation: gate at same elevation";
   annotation (
     preferredView="info",
     Documentation(info="<html>
