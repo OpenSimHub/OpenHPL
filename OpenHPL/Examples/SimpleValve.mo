@@ -1,7 +1,7 @@
 within OpenHPL.Examples;
 model SimpleValve "Model of a hydropower system with a simple turbine turbine"
   extends Modelica.Icons.Example;
-  OpenHPL.Waterway.Reservoir reservoir(h_0=10) annotation (Placement(transformation(
+  OpenHPL.Waterway.Reservoir reservoir(h_0 = 10, fixElevation = true, z_0 = 100) annotation (Placement(transformation(
         origin={-90,30},
         extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(
@@ -46,7 +46,7 @@ equation
   connect(penstock.o, valve.i) annotation (Line(points={{10,30},{20,30}}, color={0,128,255}));
   connect(valve.o, discharge.i) annotation (Line(points={{40,30},{50,30}}, color={0,128,255}));
   connect(control.y, valve.opening) annotation (Line(points={{1,70},{30,70},{30,38}}, color={0,0,127}));
-  annotation (experiment(StopTime=1000), Documentation(info="<html>
+  annotation (experiment(StopTime = 1000, StartTime = 0, Tolerance = 1e-06, Interval = 2), Documentation(info="<html>
 <p>
 Simple model of a water way with only a valve component.
 This can be used to investigate the effect of different opening and closing times in the waterway.

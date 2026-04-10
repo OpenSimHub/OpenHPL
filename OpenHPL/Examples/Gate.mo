@@ -1,7 +1,7 @@
 within OpenHPL.Examples;
 model Gate "Usage of the tainter gate"
   extends Modelica.Icons.Example;
-  inner Data data(SteadyState = true, Vdot_0 = 75) annotation (
+  inner Data data(SteadyState = true, Vdot_0 = 75, showElevation = false) annotation (
     Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   Modelica.Blocks.Sources.Ramp gateOpening(
     height=0,
@@ -12,7 +12,7 @@ model Gate "Usage of the tainter gate"
     constantLevel=false,
     useLevel=true,
     L=10,
-    W=10) annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
+    W=10, fixElevation = true) annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
   Waterway.Reservoir downstream(
     h_0=4,
     constantLevel=false,
@@ -32,7 +32,7 @@ model Gate "Usage of the tainter gate"
     constantLevel=false,
     useLevel=true,
     L=10,
-    W=10) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+    W=10, fixElevation = true) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Waterway.Reservoir downstream1(
     h_0=4,
     constantLevel=false,
@@ -51,7 +51,7 @@ model Gate "Usage of the tainter gate"
     constantLevel=false,
     useLevel=true,
     L=10,
-    W=10) annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+    W=10, fixElevation = true) annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
   Waterway.Reservoir downstream2(
     h_0=4,
     constantLevel=false,

@@ -1,7 +1,7 @@
 within OpenHPL.Examples;
 model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(h_0=48) annotation (Placement(transformation(
+  Waterway.Reservoir reservoir(h_0 = 48, fixElevation = true) annotation (Placement(transformation(
         origin={-90,50},
         extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp control(
@@ -57,7 +57,7 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
               annotation (Placement(transformation(
         origin={30,0},
         extent={{-10,-10},{10,10}})));
-  inner OpenHPL.Data data(Vdot_0=4.54) annotation (Placement(transformation(
+  inner OpenHPL.Data data(SteadyState = false)  annotation (Placement(transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}})));
   Waterway.Fitting fitting(
@@ -86,5 +86,5 @@ equation
     Line(points={{80,6.66134e-16},{80,0},{70,0}}, color = {28, 108, 200}));
   connect(penstock.o, fitting.i) annotation (
     Line(points={{-20,0},{-12,0}}, color = {28, 108, 200}));
-  annotation (experiment(StopTime=1000));
+  annotation (experiment(StopTime = 1000, StartTime = 0, Tolerance = 1e-06, Interval = 2));
 end SimpleGenFrancis;

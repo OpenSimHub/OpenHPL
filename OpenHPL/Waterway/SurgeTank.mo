@@ -4,20 +4,18 @@ model SurgeTank "Model of the surge tank/shaft"
   extends OpenHPL.Icons.Surge(lds=l, Lds=L);
   extends OpenHPL.Interfaces.TwoContacts;
 
-  parameter Boolean useCreekIntake=false   "If checked, includes a creek intake connector" annotation (
-    Dialog(group = "Creek intake"),
-    choices(checkBox = true));
-  parameter SI.Height H_creek=H   "Height of the creek intake above the surge tank base" annotation (
-    Dialog(group = "Creek intake", enable = useCreekIntake));
+  parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank"
+    annotation (Dialog(group = "Surge tank types"));
+  parameter SI.Height H = 100 "Vertical component of the length of the surge shaft"
+    annotation (Dialog(group = "Geometry"));
+  parameter SI.Length L = H "Length of the surge shaft"
+    annotation (Dialog(group = "Geometry"));
+  parameter SI.Diameter D = 3 "Diameter of the surge shaft"
+    annotation (Dialog(group = "Geometry"));
+  parameter SI.Position H_creek=H   "Position of the creek intake above the surge tank base"
+    annotation (Dialog(group = "Geometry"));
 
-  parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank" annotation (
-    Dialog(group = "Surge tank types"));
-  parameter SI.Height H = 100 "Vertical component of the length of the surge shaft" annotation (
-    Dialog(group = "Geometry"));
-  parameter SI.Length L = H "Length of the surge shaft" annotation (
-    Dialog(group = "Geometry"));
-  parameter SI.Diameter D = 3 "Diameter of the surge shaft" annotation (
-    Dialog(group = "Geometry"));
+
   parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Diameter D_so = D "If Sharp orifice type: Diameter of sharp orifice" annotation (
@@ -55,12 +53,12 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.Pressure p_b "Pressure at bottom of the surge tank";
   Real phiSO "Dimensionless factor based on the type of fitting ";
   SI.Height h(start = h_0) "Water height in the surge tank";
-  SI.Height h_abs = h + o.elevation.z "Absolute water level";
+  SI.Position h_abs = h + o.elevation.z "Absolute water level";
   SI.VolumeFlowRate Vdot(start = Vdot_0, fixed=true) "Volume flow rate";
 
   Interfaces.Contact_i creek(
     p = p_t + data.rho * data.g * (h - H_creek),
-    mdot = mdot_creek) if useCreekIntake "Creek intake connector (connects to VolumeFlowSource)"
+    mdot = mdot_creek) "Creek intake connector (connects to VolumeFlowSource)"
     annotation (Placement(transformation(extent = {{-10, 90}, {10, 110}})));
 
 protected
@@ -88,10 +86,6 @@ equation
   der(M) = Mdot+F "Momentum balance";
   mdot = data.rho * Vdot;
   mdot = i.mdot + o.mdot "Mass balance";
-
-  if not useCreekIntake then
-    mdot_creek = 0;
-  end if "Conditional creek intake equation balance";
 
   der(m) = mdot + mdot_creek "Mass balance";
 
@@ -149,8 +143,10 @@ equation
     end if;
     p_t = data.p_a;
   end if;
+  Connections.branch(creek.elevation, o.elevation);
+  creek.elevation.z = o.elevation.z + H_creek "Creek elevation relative to surge tank base";
   o.elevation.z = i.elevation.z "Elevation at surge tank inlet and outlet are equal";
- annotation (preferredView="info",
+  annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Surge Tank Model</h4>
 
@@ -201,14 +197,20 @@ The manifold pressure is equal for all three connections. This is implemented vi
 
 <h5>Creek Intake</h5>
 
-<p>When <code>useCreekIntake = true</code>, an additional inlet connector <code>creek</code> becomes active.
-This connector can be attached to a <code>VolumeFlowSource</code> to model lateral inflow
-(e.g., a creek or groundwater seepage) entering the surge tank. The parameter <code>H_creek</code>
-specifies the height of the intake above the surge tank base (default H = at the top of the surge tank,
-not relavant if a volume flow source is connected).
-The connector pressure is set hydrostatically from the water surface down to the intake elevation,
+<p>The surge tank has a <code>creek</code> inlet connector that can be attached to a
+<code>VolumeFlowSource</code> to model lateral inflow (e.g., a creek or groundwater seepage)
+entering the surge tank. The connector is always present; when left unconnected,
+the flow is zero by Modelica's default flow-variable semantics and has no effect on
+the model. The parameter <code>H_creek</code> specifies the height of the intake above
+the surge tank base (default: equal to H). The boolean <code>useCreekIntake</code> controls
+the visibility of <code>H_creek</code> in the parameter dialog.</p>
+<p>The connector pressure is set hydrostatically from the water surface down to the intake elevation,
 so it correctly follows the actual water level <code>h</code> in the tank:</p>
 <p>$$ p_\\mathrm{creek} = p_\\mathrm{t} + \\rho g (h - H_\\mathrm{creek}) $$</p>
+<p>The creek connector participates in the overconstrained elevation graph via
+<code>Connections.branch(creek.elevation, o.elevation)</code>, ensuring that its elevation
+is consistent with the rest of the waterway:
+$$ z_\\mathrm{creek} = z_\\mathrm{o} + H_\\mathrm{creek} $$</p>
 <p>The creek inflow is included in the mass balance:</p>
 <p>$$ \\frac{\\mathrm{d}m}{\\mathrm{d}t} = \\rho \\dot{V} + \\dot{m}_\\mathrm{creek} $$</p>
 
