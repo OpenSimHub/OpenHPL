@@ -11,8 +11,11 @@ model VolumeFlowSource "Volume flow source (either fixed or variable)"
     annotation (choices(checkBox = true),Dialog(enable=useInput));
   parameter SI.Time T_f=0.01 "Time constant of the first order filter."
     annotation (Dialog(enable=useInput and useFilter));
-
-  Interfaces.Contact_o o "Outlet flow connector"
+  parameter Boolean fixElevation=false "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"
+    annotation (Dialog(group="Geometry"), choices(checkBox=true));
+  parameter SI.Position z_0=0 "Elevation of the outlet connection"
+    annotation (Dialog(group="Geometry", enable=fixElevation));
+  Interfaces.Contact_o o(showElevation = data.showElevation)  "Outlet flow connector"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealInput outFlow if useInput "Conditional input for defining the outlet flow [m3/s]"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -36,6 +39,15 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dot));
   o.mdot = -data.rho*Vdot;
+  if fixElevation then
+    Connections.root(o.elevation) "This source is the elevation reference root";
+    o.elevation.z = z_0 "Set absolute elevation at outlet";
+  else
+    Connections.potentialRoot(o.elevation) "May become root if no other root exists";
+    if Connections.isRoot(o.elevation) then
+      o.elevation.z = 0 "Default elevation if this becomes root";
+    end if;
+  end if;
   connect(constantVolumeFlow.y, Vdot) annotation (Line(points={{-39,40},{40,40},{40,0},{80,0}}, color={0,0,127}));
   connect(firstOrder.u, outFlow) annotation (Line(
       points={{-62,-20},{-80,-20},{-80,0},{-120,0}},

@@ -1,9 +1,7 @@
 within OpenHPL.Examples;
 model SimpleGen "Model of a hydropower system with a simple turbine turbine and generator"
   extends SimpleTurbine(
-                 turbine(
-      enable_nomSpeed=false,
-      enable_P_out=true));
+                 turbine(enable_nomSpeed = false, enable_P_out = true), reservoir(fixElevation = true, z_0 = 100));
   ElectroMech.Generators.SimpleGen simpleGen annotation (Placement(transformation(extent={{20,50},{40,70}})));
   Modelica.Blocks.Math.Gain loadLevel(k=1) annotation (Placement(transformation(extent={{72,70},{52,90}})));
 equation
@@ -12,5 +10,5 @@ equation
   connect(simpleGen.flange, turbine.flange) annotation (Line(
       points={{30,60},{30,10}},
       color={0,0,0}));
-  annotation (experiment(StopTime=1000));
+  annotation (experiment(StopTime = 1000, StartTime = 0, Tolerance = 1e-06, Interval = 2));
 end SimpleGen;

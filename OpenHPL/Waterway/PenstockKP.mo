@@ -115,6 +115,7 @@ equation
   S_[N + 1:2 * N] = F_ap * data.g * H / L - F_f / dx;
   // diff. equation
   der(U) = KP.diff_eq;
+  o.elevation.z = i.elevation.z - H "Outlet elevation is H below inlet";
   annotation (preferredView="info",
     Documentation(info="<html>
 <h4>Elastic Penstock with KP Method</h4>
