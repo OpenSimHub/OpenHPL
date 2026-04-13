@@ -32,6 +32,8 @@ model Pipe "Model of a pipe"
   // Steady state:
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate of the pipe" annotation (Dialog(group="Initialization"));
+  parameter Boolean useInitialFlow=true "If false, skip initial equation for flow (e.g., when flow is imposed by a source)"
+    annotation (Dialog(group="Initialization"), choices(checkBox=true));
 
   SI.Velocity v "Average Water velocity";
   SI.Force F_f "Friction force";
@@ -56,10 +58,12 @@ protected
     parameter Modelica.Units.NonSI.Angle_deg phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
 
 initial equation
-  if SteadyState then
-    der(mdot) = 0;
-  else
-    Vdot=Vdot_0;
+  if useInitialFlow then
+    if SteadyState then
+      der(mdot) = 0;
+    else
+      Vdot=Vdot_0;
+    end if;
   end if;
 algorithm
     assert( phi < 1.0,  "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
@@ -133,6 +137,13 @@ These are then converted using: p_eps = D_h·3.097·e<sup>(-0.118/n)</sup> empir
 </ul>
 <p>The conversions are simplified for hydropower applications assuming fully turbulent flow,
 so they depend only on fixed pipe dimensions and the chosen friction coefficient.</p>
+
+<h5>Initialization</h5>
+<p>By default, the pipe provides an initial equation for the flow rate: either <code>der(mdot) = 0</code>
+(steady state) or <code>Vdot = Vdot_0</code>. When the pipe is connected to a component that already
+imposes the flow (e.g., <code>VolumeFlowSource</code>), these initial equations become redundant and may
+cause an over-determined initialization problem in some tools (e.g., Dymola). Set
+<code>useInitialFlow = false</code> to disable the initial equation in such cases.</p>
 
 <h5>More Information</h5>
 <p>More info about the pipe model can be found in
