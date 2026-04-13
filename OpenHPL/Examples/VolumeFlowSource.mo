@@ -4,8 +4,8 @@ model VolumeFlowSource "Example demonstrating the use of VolumeFlowSource"
   OpenHPL.Waterway.Reservoir tail1 annotation (Placement(transformation(extent={{60,30},{40,50}})));
   inner OpenHPL.Data data(SteadyState = true)  annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   OpenHPL.Waterway.VolumeFlowSource volumeFlowConstant(fixElevation = true)  annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-  Waterway.Pipe pipe1(H=0, useInitialEquation=false) annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  Waterway.Pipe pipe2(H=0, useInitialEquation=false) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Waterway.Pipe pipe1(H=0, useInitialFlow=false) annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+  Waterway.Pipe pipe2(H=0, useInitialFlow=false) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Reservoir tail2 annotation (Placement(transformation(extent={{60,-10},{40,10}})));
   OpenHPL.Waterway.VolumeFlowSource volumeFlowInput(useInput=true, useFilter=false, fixElevation = true) annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
   Modelica.Blocks.Sources.Sine sine(f = 0.01, offset = 1) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
@@ -14,7 +14,7 @@ model VolumeFlowSource "Example demonstrating the use of VolumeFlowSource"
         1.468578339; 62,1.445258141; 63,1.381029367; 64,1.308333635; 65,1.429936647; 66,1.324193954; 67,1.215524554; 68,1.132795691; 69,1.039966226; 70,0.957139969; 71,0.881121516; 72,0.764806509; 73,0.679720461; 74,1.153712869; 75,1.617045045; 76,1.342065096; 77,1.21108222; 78,1.097126365; 79,0.956687152; 80,0.846820831; 81,0.726776063; 82,0.637088716; 83,0.566960931; 84,0; 85,0.081746899; 86,0.287258357; 87,0.440648884; 88,0.623197138; 89,0.745818675; 90,0.877141893; 91,1.14376235; 92,1.091307402;
         93,1.166081309; 94,1.204966307; 95,1.155335188; 96,1.090149403; 97,1.023901701; 98,0.955312788; 99,0.895717919; 100,0.781589091; 101,0.711237729; 102,0.642216742; 103,0.592425168; 104,0.53075856; 105,0.470919639; 106,0.424907953; 107,0.379154414; 108,0.341206133; 109,0.313439339; 110,0.291419089; 111,0.282484144], extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
                                                                      annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
-  Waterway.Pipe pipe3(H=0, useInitialEquation=false) annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+  Waterway.Pipe pipe3(H=0, useInitialFlow=false) annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   Waterway.Reservoir tail3 annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
   Waterway.VolumeFlowSource volumeFlowFiltered(useInput=true, useFilter=true, fixElevation = true) annotation (Placement(transformation(extent={{-48,-50},{-28,-30}})));
 equation
