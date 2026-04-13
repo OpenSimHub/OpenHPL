@@ -1,7 +1,8 @@
-within OpenHPL.Waterway;
+﻿within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
   outer OpenHPL.Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe( vertical=true);
+  extends Types.FrictionSpec(   final D_h = (D_i + D_o) / 2);
   import Modelica.Constants.pi;
   // geometrical parameters of the pipe
   parameter SI.Height H = 420 "Height difference from the inlet to the outlet of the pipe" annotation (
@@ -11,8 +12,6 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   parameter SI.Diameter D_i = 3.3 "Diametr from the inlet side of the pipe" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Diameter D_o = D_i "Diametr from the outlet side of the pipe" annotation (
-    Dialog(group = "Geometry"));
-  parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
     Dialog(group = "Geometry"));
   // condition of steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
