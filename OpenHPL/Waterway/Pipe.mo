@@ -32,6 +32,8 @@ model Pipe "Model of a pipe"
   // Steady state:
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial flow rate of the pipe" annotation (Dialog(group="Initialization"));
+  parameter Boolean useInitialEquation=true "If false, skip initial equation for flow (e.g., when flow is imposed by a source)"
+    annotation (Dialog(group="Initialization"), choices(checkBox=true));
 
   SI.Velocity v "Average Water velocity";
   SI.Force F_f "Friction force";
@@ -56,10 +58,12 @@ protected
     parameter Modelica.Units.NonSI.Angle_deg phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
 
 initial equation
-  if SteadyState then
-    der(mdot) = 0;
-  else
-    Vdot=Vdot_0;
+  if useInitialEquation then
+    if SteadyState then
+      der(mdot) = 0;
+    else
+      Vdot=Vdot_0;
+    end if;
   end if;
 algorithm
     assert( phi < 1.0,  "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
