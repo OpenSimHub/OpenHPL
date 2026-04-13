@@ -60,7 +60,7 @@ model HPAllTypeFittingsTest "Test for comparing fitting behaviour"
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{40,-30},{60,-10}})));
   OpenHPL.Waterway.Pipe pipe6(
-    vertical=false,
+    slanted=false,
     H=5,
     L=100,
     D_i=4) annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));

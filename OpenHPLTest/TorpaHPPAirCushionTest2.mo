@@ -17,7 +17,7 @@ model TorpaHPPAirCushionTest2 "Test case for air cushion surge tank from Torpa h
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(transformation(
+    slanted=true) annotation (Placement(transformation(
         origin={0,30},
         extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(

@@ -30,7 +30,7 @@ model HPSTSimple
     D_o=4,
     H=300,
     L=500,
-    vertical=true) annotation (Placement(transformation(
+    slanted=true) annotation (Placement(transformation(
         origin={0,30},
         extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Turbine turbine(

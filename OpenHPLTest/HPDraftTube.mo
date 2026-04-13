@@ -21,7 +21,7 @@ model HPDraftTube "Testing the draft tube models."
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(transformation(
+    slanted=true) annotation (Placement(transformation(
         origin={2,50},
         extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.SurgeTank surgeTank(h_0=69.9) annotation (Placement(transformation(
@@ -48,7 +48,7 @@ model HPDraftTube "Testing the draft tube models."
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(transformation(origin={0,-10}, extent={{-10,-10},{10,10}})));
+    slanted=true) annotation (Placement(transformation(origin={0,-10}, extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.SurgeTank surgeTank1(h_0=69.9) annotation (Placement(transformation(origin={-30,-10}, extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Turbine turbine1(C_v=3.7, ConstEfficiency=false) annotation (Placement(transformation(origin={30,-20}, extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.DraftTube draftTube1(
@@ -74,7 +74,7 @@ model HPDraftTube "Testing the draft tube models."
     D_o=3,
     H=428.5,
     L=600,
-    vertical=true) annotation (Placement(transformation(origin={2,-70}, extent={{-10,-10},{10,10}})));
+    slanted=true) annotation (Placement(transformation(origin={2,-70}, extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.SurgeTank surgeTank2(h_0=69.9) annotation (Placement(transformation(origin={-30,-70}, extent={{-10,-10},{10,10}})));
   OpenHPL.ElectroMech.Turbines.Turbine turbine2(C_v=3.7, ConstEfficiency=false) annotation (Placement(transformation(origin={32,-80}, extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.DraftTube draftTube2(

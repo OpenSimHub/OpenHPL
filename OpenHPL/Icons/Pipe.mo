@@ -1,6 +1,6 @@
 within OpenHPL.Icons;
 partial class Pipe "Pipe icon"
-  parameter Boolean vertical=false "Display vertical icon instead"
+  parameter Boolean slanted=false "Display slanted icon instead"
     annotation(Dialog(group = "Icon"),
     choices(checkBox = true));
   annotation (
@@ -11,37 +11,37 @@ partial class Pipe "Pipe icon"
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={175,175,175},
-          visible=not vertical),
+          visible=not slanted),
         Rectangle(
           extent={{-90,30},{90,-30}},
           lineColor={28,108,200},
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
-          visible=not vertical),
+          visible=not slanted),
         Rectangle(
           extent={{-85,30},{85,-30}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={175,175,175},
           rotation=-45,
-          visible=vertical),
+          visible=slanted),
         Rectangle(
           extent={{-85,20},{85,-20}},
           lineColor={28,108,200},
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           rotation=-45,
-          visible=vertical),
+          visible=slanted),
         Text(
           textColor={28,108,200},
           extent={{-150,140},{150,100}},
           textString="%name",
           textStyle={TextStyle.Bold},
-          visible=vertical),
+          visible=slanted),
         Text(
           textColor={28,108,200},
           extent={{-150,90},{150,50}},
           textString="%name",
           textStyle={TextStyle.Bold},
-          visible=not vertical)}));
+          visible=not slanted)}));
 end Pipe;

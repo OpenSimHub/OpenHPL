@@ -17,7 +17,7 @@ model SimpleGenTG "Synergy with OpenIPSL library(generator)"
         rotation=180)));
   replaceable
   Waterway.Pipe penstock(
-    vertical=true,
+    slanted=true,
     L=600,
     H=428.5,
     D_i=3) constrainedby Interfaces.TwoContacts

@@ -8,7 +8,7 @@ model HPTaperedFittingsTest "Test for comparing fitting behaviour"
     D_o=4,
     L=4) annotation (Placement(transformation(extent={{-10,50},{10,70}})));
   OpenHPL.Waterway.Pipe pipe1(
-    vertical=false,
+    slanted=false,
     H=5,
     L=100,
     D_i=2) annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
