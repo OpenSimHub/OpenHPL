@@ -24,7 +24,7 @@ model TorpaHPPAirCushionTest "Test case for air cushion surge tank from Torpa hy
     D_o=6.56,
     H=8.6,
     L=250,
-    vertical=true,
+    slanted=true,
     p_eps=0.005) annotation (Placement(transformation(
         origin={0,30},
         extent={{-10,-10},{10,10}})));

@@ -16,7 +16,7 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
   ElectroMech.Generators.SynchGen generator(P_op=100e6, UseFrequencyOutput=false) annotation (Placement(transformation(extent={{40,-40},{20,-20}})));
   replaceable
   Waterway.Pipe penstock(
-    vertical=true,
+    slanted=true,
     L=600,
     H=428.5,
     D_i=3,
