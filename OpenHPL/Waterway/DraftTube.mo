@@ -2,6 +2,7 @@ within OpenHPL.Waterway;
 model DraftTube "Model of a draft tube for reaction turbines"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.DraftTube;
+  extends Types.FrictionSpec(   final D_h = 0.5 * (D_i + D_o));
   import Modelica.Constants.pi;
   parameter Types.DraftTube DraftTubeType = OpenHPL.Types.DraftTube.ConicalDiffuser "Types of draft tube" annotation (
     Dialog(group = "Draft tube types"));
@@ -29,8 +30,6 @@ model DraftTube "Model of a draft tube for reaction turbines"
              choice = 45 "45°",
              choice = 60 "60°",
              choice = 90 "90°"));
-  parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
-    Dialog(group = "Geometry"));
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   parameter SI.VolumeFlowRate Vdot_0=data.Vdot_0 "Initial volume flow rate" annotation (Dialog(group="Initialization"));
 

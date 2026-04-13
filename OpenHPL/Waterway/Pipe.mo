@@ -3,6 +3,7 @@ model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
   extends OpenHPL.Interfaces.TwoContacts;
+  extends Types.FrictionSpec(   final D_h = (D_i + D_o) / 2);
 
   // Geometrical parameters of the pipe:
   parameter SI.Length H = 0 "Height difference from the inlet to the outlet" annotation (
@@ -13,21 +14,6 @@ model Pipe "Model of a pipe"
     Dialog(group = "Geometry"));
   parameter SI.Diameter D_o = D_i "Diameter of the outlet side" annotation (
     Dialog(group = "Geometry"));
-
-  // Friction specification:
-  parameter Types.FrictionMethod friction_method = Types.FrictionMethod.PipeRoughness "Method for specifying pipe friction" annotation (
-    Dialog(group = "Friction"));
-  parameter SI.Height p_eps_input = data.p_eps "Pipe roughness height (absolute)" annotation (
-    Dialog(group = "Friction", enable = friction_method == Types.FrictionMethod.PipeRoughness));
-  parameter Real f_moody(min=0) = 0.02 "Moody friction factor (dimensionless, typically 0.01-0.05)" annotation (
-    Dialog(group = "Friction", enable = friction_method == Types.FrictionMethod.MoodyFriction));
-  parameter Real m_manning(unit="m(1/3)/s", min=0) = 40 "Manning M (Strickler) coefficient M=1/n (typically 60-110 for steel, 30-60 for rock tunnels)" annotation (
-    Dialog(group = "Friction", enable = friction_method == Types.FrictionMethod.ManningFriction and not use_n));
-  parameter Boolean use_n = false "If true, use Mannings coefficient n (=1/M) instead of Manning's M (Strickler)" annotation (
-    Dialog(group = "Friction", enable = friction_method == Types.FrictionMethod.ManningFriction), choices(checkBox=true));
-  parameter Real n_manning(unit="s/m(1/3)", min=0) = 0.025 "Manning's n coefficient (typically 0.009-0.017 for steel/concrete, 0.017-0.030 for rock tunnels)" annotation (
-    Dialog(group = "Friction", enable = friction_method == Types.FrictionMethod.ManningFriction and use_n));
-
 
   // Steady state:
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
@@ -44,10 +30,6 @@ model Pipe "Model of a pipe"
   SI.VolumeFlowRate Vdot "Volume flow rate";
 
 protected
-    parameter Real n_eff = if use_n then n_manning else 1/m_manning "Effective Manning's n coefficient";
-    parameter SI.Height p_eps = if friction_method == Types.FrictionMethod.PipeRoughness then p_eps_input
-                                 elseif friction_method == Types.FrictionMethod.MoodyFriction then 3.7 * D_ * 10^(-1/(2*sqrt(f_moody)))
-                                 else D_*3.0971 *exp(-0.118/n_eff) "Equivalent pipe roughness height";
     parameter SI.Diameter D_ = ( D_i + D_o)  / 2 "Average diameter";
     parameter SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
     parameter SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
@@ -119,24 +101,8 @@ slopes (positive or negative height difference).</p>
 taper geometry: 0.05–0.15 for gentle cones, up to 0.6 for sharp contractions.</p>
 
 <h5>Friction Specification</h5>
-<p>The pipe friction can be specified using one of three methods via the <code>friction_method</code> parameter:</p>
-<ul>
-<li><strong>Pipe Roughness (p_eps)</strong>: Direct specification of absolute pipe roughness height (m).
-Typical values: 0.0001-0.001 m for steel pipes, 0.001-0.003 m for concrete.</li>
-<li><strong>Moody Friction Factor (f)</strong>: Dimensionless friction factor from Moody diagram.
-Typical values: 0.01-0.05. Converted to equivalent roughness using fully turbulent flow approximation:
-p_eps = 3.7·D·10<sup>-1/(2√f)</sup></li>
-<li><strong>Manning Coefficient</strong>: Two notations are supported:
-<ul>
-<li><strong>Manning's M coefficient (Strickler)</strong> [m<sup>1/3</sup>/s]: M = 1/n, typical values 60-110 for steel,
-30-60 for rock tunnels.</li>
-<li><strong>Manning's n coefficient</strong> [s/m<sup>1/3</sup>]: Typical values 0.009-0.013 for smooth steel,
-0.012-0.017 for concrete, 0.017-0.030 for rock tunnels.  Use checkbox <code>use_n</code> to enable this notation.</li>
-</ul>
-These are then converted using: p_eps = D_h·3.097·e<sup>(-0.118/n)</sup> empirically derived from the&nbsp;Karman-Prandtl equation.</li>
-</ul>
-<p>The conversions are simplified for hydropower applications assuming fully turbulent flow,
-so they depend only on fixed pipe dimensions and the chosen friction coefficient.</p>
+<p>Friction is specified via the inherited <a href=\"modelica://OpenHPL.Waterway.BaseClasses.FrictionSpec\">FrictionSpec</a>
+base class, which supports pipe roughness, Moody friction factor, and Manning coefficient methods.</p>
 
 <h5>Initialization</h5>
 <p>By default, the pipe provides an initial equation for the flow rate: either <code>der(mdot) = 0</code>

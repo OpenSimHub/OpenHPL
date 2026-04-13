@@ -3,6 +3,7 @@ model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Surge(lds=l, Lds=L);
   extends OpenHPL.Interfaces.TwoContacts;
+  extends Types.FrictionSpec(   final D_h = D);
 
   parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank"
     annotation (Dialog(group = "Surge tank types"));
@@ -16,8 +17,6 @@ model SurgeTank "Model of the surge tank/shaft"
     annotation (Dialog(group = "Geometry"));
 
 
-  parameter SI.Height p_eps = data.p_eps "Pipe roughness height" annotation (
-    Dialog(group = "Geometry"));
   parameter SI.Diameter D_so = D "If Sharp orifice type: Diameter of sharp orifice" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
   parameter SI.Diameter D_t = D "If Throttle value type: Diameter of throat" annotation (
@@ -113,9 +112,9 @@ equation
     F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
     F_p = (p_b - p_t) * A;
     if v >= 0 then
-      phiSO = Functions.Fitting.FittingPhi(v, D, D_so, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v, D, D_so, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.SharpOrifice);
     else
-      phiSO = Functions.Fitting.FittingPhi(v, D_so, D, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v, D_so, D, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.SharpOrifice);
     end if;
   elseif SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve then
     if l <= L_t then
@@ -131,10 +130,10 @@ equation
       M = m * v;
       if v > 0 then
         F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D, l - L_t, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(Vdot/A_t) * Vdot/A_t;
-        phiSO = Functions.Fitting.FittingPhi(Vdot/A_t, D_t, D, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.Square);
+        phiSO = Functions.Fitting.FittingPhi(Vdot/A_t, D_t, D, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.Square);
       elseif v < 0 then
         F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D, l - L_t, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(Vdot/A) * Vdot/A;
-        phiSO = Functions.Fitting.FittingPhi(Vdot/A, D, D_t, L, 90, data.rho, data.mu, data.p_eps, OpenHPL.Types.Fitting.Square);
+        phiSO = Functions.Fitting.FittingPhi(Vdot/A, D, D_t, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.Square);
       else
         F_f = 0;
         phiSO = 0;

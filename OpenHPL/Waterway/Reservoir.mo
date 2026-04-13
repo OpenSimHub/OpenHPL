@@ -1,4 +1,4 @@
-﻿within OpenHPL.Waterway;
+within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
   outer Data data "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
