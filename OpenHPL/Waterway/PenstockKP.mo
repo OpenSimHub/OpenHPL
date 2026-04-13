@@ -1,4 +1,4 @@
-﻿within OpenHPL.Waterway;
+within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
   outer OpenHPL.Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe( vertical=true);

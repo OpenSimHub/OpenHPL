@@ -1,4 +1,4 @@
-﻿within OpenHPL.Waterway;
+within OpenHPL.Waterway;
 model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Surge(lds=l, Lds=L);
