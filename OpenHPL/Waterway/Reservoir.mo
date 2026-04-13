@@ -1,4 +1,4 @@
-within OpenHPL.Waterway;
+﻿within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
   outer Data data "using standard class with constants";
   extends OpenHPL.Icons.Reservoir;
@@ -42,7 +42,7 @@ model Reservoir "Model of the reservoir"
   SI.Momentum M "Water momentum";
   SI.Force F_f "Friction force";
   SI.Height h "Water level";
-  SI.Height h_abs = h + o.elevation.z "Absolute water level";
+  SI.Position h_abs = h + o.elevation.z "Absolute water level";
   SI.Pressure p_o "Outlet pressure";
 
   OpenHPL.Interfaces.Contact_o o(p = p_o, showElevation = data.showElevation) "Outflow from reservoir" annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));

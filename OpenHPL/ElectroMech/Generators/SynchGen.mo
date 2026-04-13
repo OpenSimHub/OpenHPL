@@ -35,6 +35,8 @@ model SynchGen "Simple model of the generator connected to the grid"
     Dialog(group = "Mechanical part"));
   parameter Real k_b = 1000 "Friction factor in the generator bearing box, W*s3/rad3" annotation (
     Dialog(group = "Mechanical part"));
+  parameter SI.AngularVelocity w_min = Wm_op * 1e-3 "Minimum angular velocity to prevent division by zero" annotation (
+    Dialog(group = "Mechanical part"));
   parameter Boolean UseFrequencyOutput = true "If checked - get a connector for frequency output" annotation (
     choices(checkBox = true),
     Dialog(group = "Network")), SelfInitialization = false "If checked - specify initial values" annotation (
@@ -89,7 +91,7 @@ equation
   Vt = sqrt((EEd - Ra * Id - xxq * Iq) ^ 2 + (EEq - Ra * Iq + xxd * Id) ^ 2);
   It = sqrt(Id ^ 2 + Iq ^ 2);
   Pe = 3 * (EEd * Id + EEq * Iq);
-  Qe = sqrt(9 * Vt ^ 2 * It ^ 2 - Pe ^ 2);
+  Qe = sqrt(noEvent(max(9 * Vt ^ 2 * It ^ 2 - Pe ^ 2, 0)));
   // dynamic equations
   TTqo * der(EEd) = (-EEd) + (xxq - xq) * Iq;
   TTdo * der(EEq) = (-EEq) + (xd - xxd) * Id + Ef;
@@ -105,7 +107,7 @@ equation
   der(Vstabilizer) = ((-Vstabilizer) + KF * der(Ef)) / TFE;
   // Mechanical equation
   W_fa = 0.5 * k_b * w ^ 2;
-  der(w) = (Wdot_ts - Pe) / (J * w);
+  der(w) = (Wdot_ts - Pe) / (J * noEvent(max(w, w_min)));
   // - W_fa;
   //
   annotation (preferredView="info",

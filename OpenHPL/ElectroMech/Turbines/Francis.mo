@@ -85,6 +85,7 @@ model Francis "Model of the Francis turbine"
                                 Placement(transformation(origin={-120,-80}, extent={{-20,-20},
       {20,20}})));
 protected
+  parameter SI.VolumeFlowRate Vdot_eps = Vdot_n * 1e-4 "Small flow rate to regularize equations at zero flow";
   Modelica.Blocks.Interfaces.RealOutput p_out = Wdot_s "Internal connector for output power" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -197,16 +198,16 @@ equation
     alpha1 = phi - psi;
   // Blade angles relation
     cot_a1 = 1 / Modelica.Math.tan(alpha1);
-    cot_a2 = cot_b2 + w * R_2 / (Vdot / A_2);
+    cot_a2 = cot_b2 + w * R_2 / (noEvent(max(Vdot, Vdot_eps)) / A_2);
     cot_b1 =1/Modelica.Math.tan(Modelica.Units.Conversions.from_deg(beta1));
     cot_b2 =1/Modelica.Math.tan(Modelica.Units.Conversions.from_deg(beta2));
-    cot_g1 = cot_a1 - w * R_1 / (Vdot / A_1);
+    cot_g1 = cot_a1 - w * R_1 / (noEvent(max(Vdot, Vdot_eps)) / A_1);
   // pressure drop through the turbine
-    dp_r * Vdot + 0.5 * mdot * Vdot ^ 2 * (1 / A_0 ^ 2 - 1 / A_2 ^ 2) = Wdot_t;
+    dp_r * noEvent(max(Vdot, Vdot_eps)) + 0.5 * mdot * Vdot ^ 2 * (1 / A_0 ^ 2 - 1 / A_2 ^ 2) = Wdot_t;
     Wdot_t = Wdot_s + Wdot_ft;
     dp_r = p_r1 - p_tr2;
   // turbine efficiency
-    coef = Wdot_s / Wdot_t;
+    coef = if noEvent(abs(Wdot_t) > 1e-6) then Wdot_s / Wdot_t else 0;
   // connectors
     p_tr2 = o.p;
     i.mdot+o.mdot=0;

@@ -15,7 +15,9 @@ protected
   SI.ReynoldsNumber N_Re;
 algorithm
   N_Re := rho * abs(v) * D_i / mu;
-  if fit_type == Types.Fitting.Square then
+  if N_Re <= 0 then
+    phi := 0;
+  elseif fit_type == Types.Fitting.Square then
     phi :=FittingVariants.Square(
       N_Re,
       p_eps,
