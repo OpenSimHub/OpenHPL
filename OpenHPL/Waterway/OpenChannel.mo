@@ -36,12 +36,14 @@ model OpenChannel "Open channel model with optional spatial discretization"
   SI.VolumeFlowRate Vdot "Volume flow rate";
   SI.Velocity v "Average water velocity";
   SI.Height h_avg "Average water depth in the channel";
+  SI.Position h_avg_abs = h_avg + o.elevation.z "Absolute average water level";
   SI.Pressure p_i "Inlet pressure";
   SI.Pressure p_o "Outlet pressure";
   SI.Force F_f "Friction force";
 
   // Variables — sectional (only meaningful when useSections = true)
   SI.Height h_sec[if useSections then N else 0] "Water depth in each section";
+  SI.Position h_sec_abs[size(h_sec,1)] = h_sec .+ o.elevation.z "Absolute water level in each section";
   SI.Velocity v_sec[if useSections then N else 0] "Velocity in each section";
 
 protected
@@ -73,6 +75,7 @@ equation
   i.mdot + o.mdot = 0;
   mdot = i.mdot;
   Vdot = mdot / data.rho;
+  o.elevation.z = i.elevation.z - H "Elevation propagation: outlet is H below inlet";
 
   if useSections then
     // ===== Sectional mode: N sections with individual water levels =====
