@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
-  extends OpenHPL.Icons.Surge(lds=l, Lds=L);
+  extends OpenHPL.Icons.Surge(h_ds=h, H_ds=H, h_abs_ds=h_abs, show=data.showElevation);
   extends OpenHPL.Interfaces.TwoContacts;
   extends Types.FrictionSpec(   final D_h = D);
 

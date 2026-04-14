@@ -24,7 +24,7 @@ arbitrary topologies including parallel pipes and loops.</li>
 </ul>
 </html>"),
   Icon(graphics = {
-    Text(origin = {0, -175},
+    Text(origin = {0, 175},
          textColor = {0, 85, 255},
          extent = {{-100, 100}, {100, -100}},
          textString = DynamicSelect("", if showElevation then String(elevation.z) else ""))}));
