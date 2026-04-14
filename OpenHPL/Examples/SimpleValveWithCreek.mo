@@ -12,7 +12,7 @@ model SimpleValveWithCreek
     Placement(transformation(origin={0,-50},      extent = {{50, 20}, {70, 40}})));
   Waterway.Reservoir tail(h_0 = 5) annotation(
     Placement(transformation(origin = {90, -20}, extent = {{-10, 10}, {10, -10}}, rotation = 180)));
-  replaceable Waterway.Pipe penstock(D_i = 3, D_o = 3, H = 80, L = 200, vertical = true)
+  replaceable Waterway.Pipe penstock(D_i = 3, D_o = 3, H = 80, L = 200, slanted = true)
                                                                                   constrainedby Interfaces.TwoContacts annotation(
      Placement(transformation(origin={60,30},   extent = {{-10, -10}, {10, 10}})));
   Waterway.SurgeTank creekIntake(H = 25, L = 30, h_0 = 20) annotation(
