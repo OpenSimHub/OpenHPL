@@ -1,7 +1,7 @@
 within OpenHPL.Waterway;
 model Reservoir "Model of the reservoir"
   outer Data data "using standard class with constants";
-  extends OpenHPL.Icons.Reservoir;
+  extends OpenHPL.Icons.Reservoir(h_abs_ds=h_abs,show=data.showElevation);
   parameter SI.Height h_0=50 "Initial water level above intake"
     annotation (Dialog(group="Setup", enable=not useLevel));
   parameter Boolean fixElevation=false "If true (fixed), z_0 is enforced as initial value; if false (derived), elevation is determined by connected topology"

@@ -1,51 +1,85 @@
 within OpenHPL.Icons;
+
 partial class Surge "Surge tank/shaft icon"
-  input SI.Length lds "Lenght of watercolumn in the surge shaft(for DynamicSelect)";
-  input SI.Length Lds "Length of the surge shaft (for DynamicSelect)";
-  annotation (
-    preferredView="icon",
-    Icon(coordinateSystem(preserveAspectRatio=false, grid={1,1}),
-                                                        graphics={
-                     Text(
-          textColor={28,108,200},
-          extent={{-150,-60},{150,-100}},
-          textString="%name",
-          textStyle={TextStyle.Bold}),
+  input SI.Length h_ds "Height of watercolumn in the surge shaft (for DynamicSelect)";
+  input SI.Length H_ds "Height of the surge shaft (for DynamicSelect)";
+  input SI.Position h_abs_ds "Absolut height of watercolumn in the surge shaft (for DynamicSelect)";
+  input Boolean show "Show additional level info";
+
+  annotation(
+    preferredView = "icon",
+    Icon(
+      coordinateSystem(preserveAspectRatio = false, grid = {1, 1}),
+      graphics = {
+        Text(
+          origin = {0, 10},
+          textColor = {28, 108, 200},
+          extent = {{-150, -60}, {150, -100}},
+          textString = "%name",
+          textStyle = {TextStyle.Bold}
+        ),
         Rectangle(
-          extent={{-90,30},{90,-50}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          fillColor={175,175,175}),
+          origin = {0, 10},
+          fillColor = {175, 175, 175},
+          fillPattern = FillPattern.Solid,
+          extent = {{-90, 30}, {90, -50}}
+        ),
         Rectangle(
-          extent={{-90,20},{90,-40}},
-          lineColor={28,108,200},
-          fillColor={0,128,255},
-          fillPattern=FillPattern.Solid),
+          origin = {0, 10},
+          lineColor = {28, 108, 200},
+          fillColor = {0, 128, 255},
+          fillPattern = FillPattern.Solid,
+          extent = {{-90, 20}, {90, -40}}
+        ),
         Rectangle(
-          extent={{-40,90},{40,30}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          fillColor={175,175,175},
-          pattern=LinePattern.None),
+          origin = {0, 10},
+          fillColor = {175, 175, 175},
+          pattern = LinePattern.None,
+          fillPattern = FillPattern.Solid,
+          extent = {{-40, 90}, {40, 30}}
+        ),
         Rectangle(
-          extent={{-30,90},{30,20}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          fillColor={255,255,255},
-          pattern=LinePattern.None),
+          origin = {0, 10},
+          fillColor = {255, 255, 255},
+          pattern = LinePattern.None,
+          fillPattern = FillPattern.Solid,
+          extent = {{-30, 90}, {30, 20}}
+        ),
         Rectangle(
-          extent=DynamicSelect({{-30,60},{30,18}},
-                {{-30,(20+70*lds/Lds)},{30,18}}),
-          lineColor={28,108,200},
-          fillColor={0,128,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
+          lineColor = {28, 108, 200},
+          fillColor = {0, 128, 255},
+          pattern = LinePattern.None,
+          fillPattern = FillPattern.Solid,
+          extent = DynamicSelect({{-30, 60}, {30, 30}}, {{-30, 30 + 70*h_ds/H_ds}, {30, 30}})
+        ),
         Rectangle(
-          extent={{-30,90},{30,80}},
-          lineColor={0,0,0},
-          pattern=LinePattern.None),
-        Line(points={{-40,30},{-40,90},{-30,90},{-30,20},{-90,20}}, color={0,0,0}),
-        Line(points={{-90,-41}}, color={0,0,0}),
-        Line(points={{-90,-40},{90,-40}}, color={0,0,0}),
-        Line(points={{40,30},{40,90},{30,90},{30,20},{90,20}}, color={0,0,0})}));
+          origin = {0, 10},
+          pattern = LinePattern.None,
+          extent = {{-30, 90}, {30, 80}}
+        ),
+        Line(
+          origin = {0, 10},
+          points = {{-40, 30}, {-40, 90}, {-30, 90}, {-30, 20}, {-90, 20}}
+        ),
+        Line(
+          origin = {0, 10},
+          points = {{-90, -41}}
+        ),
+        Line(
+          origin = {0, 10},
+          points = {{-90, -40}, {90, -40}}
+        ),
+        Line(
+          origin = {0, 10},
+          points = {{40, 30}, {40, 90}, {30, 90}, {30, 20}, {90, 20}}
+        ),
+        Text(
+          visible = show,
+          textColor = {255, 255, 255},
+          extent = {{-30, 50}, {30, 30}},
+          textString = DynamicSelect("(level)", "(" + String(h_abs_ds, ".1f") + ")")
+        )
+      }
+    )
+  );
 end Surge;
