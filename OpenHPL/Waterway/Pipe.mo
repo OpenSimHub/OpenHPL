@@ -31,8 +31,7 @@ model Pipe "Model of a pipe"
 
 protected
     parameter SI.Diameter D_ = ( D_i + D_o)  / 2 "Average diameter";
-    parameter SI.Area A_i = D_i ^ 2 * C.pi / 4 "Inlet cross-sectional area";
-    parameter SI.Area A_o = D_o ^ 2 * C.pi / 4 "Outlet cross-sectional area";
+    
     parameter SI.Area A_ =  D_  ^ 2 * C.pi / 4 "Average cross-sectional area";
     parameter Real delta=2*(D_i-D_o)/(D_i+D_o) "Contraction factor";
     parameter Real cf=1+2*delta^2 "Conical pipe function";
@@ -54,7 +53,7 @@ equation
   Vdot = mdot / data.rho "Volumetric flow rate through the pipe";
   v = Vdot / A_ "Average water velocity";
   F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)*cf "Friction force";
-  L * der(mdot)=(p_i+ data.rho *data.g * H)*A_i-p_o*A_o -F_f;
+  L * der(mdot)=(p_i+ data.rho *data.g * H-p_o)*A_ -F_f;
   p_i = i.p "Inlet pressure";
   p_o = o.p "Outlet pressure";
   i.mdot+o.mdot = 0 "Mass balance";
