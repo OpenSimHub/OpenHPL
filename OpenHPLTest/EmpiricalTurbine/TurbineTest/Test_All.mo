@@ -15,7 +15,7 @@ Test_Turbine_Charactersistics T5(Hn=500) annotation(
     Placement(transformation(origin = {-60, 10}, extent = {{-10, -10}, {10, 10}})));
 
 Test_Turbine_Charactersistics T6(Hn=600) annotation(
-    Placement(transformation(origin = {-60, 10}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {-60, -10}, extent = {{-10, -10}, {10, 10}})));
 equation
 //
 annotation(
