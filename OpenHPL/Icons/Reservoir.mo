@@ -30,6 +30,6 @@ partial class Reservoir "Reservoir icon"
           textColor={28,108,200},
           origin = {0, -60},
           extent = {{-100, 20}, {100, -20}},
-          textString = DynamicSelect("(level)", "("+String(h_abs_ds, ".1f") + ")"),
+          textString = DynamicSelect("(level)", "("+String(h_abs_ds, format=".1f") + ")"),
           textStyle = {TextStyle.Italic})}));
 end Reservoir;

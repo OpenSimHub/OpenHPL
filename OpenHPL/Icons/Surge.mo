@@ -77,7 +77,7 @@ partial class Surge "Surge tank/shaft icon"
           visible = show,
           textColor = {255, 255, 255},
           extent = {{-30, 50}, {30, 30}},
-          textString = DynamicSelect("(level)", "(" + String(h_abs_ds, ".1f") + ")")
+          textString = DynamicSelect("(level)", "(" + String(h_abs_ds, format=".1f") + ")")
         )
       }
     )
