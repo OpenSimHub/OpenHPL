@@ -3,7 +3,7 @@ within OpenHPLTest.EmpiricalTurbine.TurbineTest;
 model Test_Turbine_Charactersistics
   extends Modelica.Icons.Example;
   //
-  parameter Modelica.Units.SI.Height Hn=600;
+  parameter Modelica.Units.SI.Height Hn=300;
   Test05_Turbine t01(opening=0.1,Hn=Hn) annotation(
     Placement(transformation(origin = {-60, 82}, extent = {{-10, -10}, {10, 10}})));
   Test05_Turbine t02(opening=0.2,Hn=Hn) annotation(

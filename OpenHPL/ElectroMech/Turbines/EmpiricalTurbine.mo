@@ -20,8 +20,8 @@ model EmpiricalTurbine
   parameter SI.Torque Tt_n=P_n/(2*C.pi*nrps_n) "Noninal turbine torque";
   
   parameter Real NQE=4.0*H_n^(-2./3.) "Specific speed based on empirical relartion";
-  parameter Real kappa=1.351-0.857*NQE;
-  parameter Real nRA=1.5+NQE*5 "Normalized runaway speed us function of specific speed";
+  parameter Real kappa=max(1.351-0.857*NQE,1.05);
+  parameter Real nRA=min(1.5+NQE*5,2.6) "Normalized runaway speed us function of specific speed";
   parameter Real dQdn=0.4222+0.3179*Modelica.Math.log(NQE);
   parameter SI.Frequency nrps_n=2*data.f_grid/p "Nominal turbine speed [rps]";
   SI.Frequency nrps=speedSensor.w/(2*C.pi) "Rotational speed (in revolutions per seconds)";
@@ -35,7 +35,7 @@ equation
   dp = i.p - o.p;
   
   Vdot*abs(Vdot)= dp*(Ct*max(epsilon, abs(u_t)^alpha)*(1+dQdn*(max(nrps/(nrps_n*nRA),epsilon)^beta)))^2;
-  Tt=Tt_n*(dp/(H_n*(rho*g)))*(Vdot/Vdot_n)*(1-(nrps/(nrps_n*nRA*1.2))^5);
+  Tt=Tt_n*(1-0.1*(dp/(H_n*(rho*g)))^2)*(Vdot/Vdot_n)*(1-(nrps/(nrps_n*nRA*1.2))^5);
   connect(realExpression.y, torque.tau) annotation (Line(points={{-49,0},{-37.2,0}}, color={0,0,127}));
 annotation (
     Documentation(info = "<html><head></head><body><p>Simplified empirical turbine model for single-regulated reaction turbine (Francis and propeller turbine). The turbine is specified by giving the nominal head H_n and nominale power P_n. All remaining values are determined from empirical relations. The throtling effect of high head Francis turbines is included in the model. However, the exact characteristics should be treated with caution and will need more empirical tuning in future releases.
