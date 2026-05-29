@@ -44,6 +44,5 @@ annotation (
 <img src=\"modelica://OpenHPL/Resources/Images/EmpiricalTurbine.svg\">
 </p>
 <p><em>Figure: Example of throtling effect for a high head Francis unit. Discharge as function of speed (pu).</em></p>
-   
-<p></p></body></html>"));
+</body></html>"));
 end EmpiricalTurbine;
