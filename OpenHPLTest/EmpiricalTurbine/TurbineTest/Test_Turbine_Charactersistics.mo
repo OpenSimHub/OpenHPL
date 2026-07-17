@@ -24,7 +24,7 @@ model Test_Turbine_Charactersistics
     Placement(transformation(origin = {48, 8}, extent = {{-10, -10}, {10, 10}})));
   Test05_Turbine t10(opening=1.0,Hn=Hn) annotation(
     Placement(transformation(origin = {-58, -28}, extent = {{-10, -10}, {10, 10}})));
-  
+
 equation
 
 annotation(
