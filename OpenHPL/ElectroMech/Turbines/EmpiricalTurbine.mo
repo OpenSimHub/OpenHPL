@@ -38,8 +38,8 @@ equation
 annotation (Documentation(info="<html>
 <p>Simplified empirical turbine model for single-regulated reaction turbine (Francis and propeller turbine). The turbine is specified by giving the nominal head H_n and nominal power P_n. All remaining values are determined from empirical relations. The throttling effect of high head Francis turbines is included in the model. However, the exact characteristics should be treated with caution and will need more empirical tuning in future releases. In particular the speed rise and runaway curve is not fully validated.</p>
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/EmpiricalTurbine01.svg\"/></p>
-<p><i>Figure 1: Example of throttling effect for a high head Francis unit. Discharge as function of speed [pu].</i></p>
+<p><em>Figure 1: Example of throttling effect for a high head Francis unit. Discharge as function of speed [pu].</em></p>
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/EmpiricalTurbine02.svg\"/></p>
-<p><i>Figure 2: Variation of turbine characteristics as function of head of the turbine characteristics. Discharge as function of speed [pu].</i></p>
+<p><em>Figure 2: Variation of turbine characteristics as function of head of the turbine characteristics. Discharge as function of speed [pu].</em></p>
 </html>"));
 end EmpiricalTurbine;
