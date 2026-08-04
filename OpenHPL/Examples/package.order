@@ -11,4 +11,5 @@ PowerSystemSimple
 VolumeFlowSource
 Gate
 Pipes
+OpenChannel
 WithOpenIPSL
