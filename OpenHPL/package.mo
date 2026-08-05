@@ -4,8 +4,9 @@ package OpenHPL "Open-source hydropower library"
   import Modelica.Units.SI;
 
   annotation (
-    version="3.x.x-dev",
-    versionDate="2026-xx-xx",
+    version="4.0.0",
+    versionDate="2026-08-24",
+    conversion(from(version={"3.0.0","3.0.1"}, script="modelica://OpenHPL/Resources/Scripts/ConvertOpenHPL_from_3.0.x_to_4.0.0.mos")),
     Protection(access = Access.packageDuplicate),
     uses(OpenIPSL(version="3.0.0"), Modelica(version="4.0.0")),
     preferredView="info",
