@@ -7,23 +7,21 @@ model DraftTube "Model of a draft tube for reaction turbines"
   parameter Types.DraftTube DraftTubeType = OpenHPL.Types.DraftTube.ConicalDiffuser "Types of draft tube" annotation (
     Dialog(group = "Draft tube types"));
 
-  // geometrical parameters of the draft tube
-  parameter SI.Length H = 7 "Vertical height of conical diffuser" annotation (
+  // Geometrical parameters of the draft tube
+  parameter SI.Length H = 7 "Vertical drop from inlet to outlet (conical diffuser)" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
-  parameter SI.Length L = 7.017 "Slant height of conical diffuser, for conical diffuser L=H/cos(diffusion_angle/2), diffusion_anlge=8" annotation (
+  parameter SI.Length L = 7.017 "Centerline/slant length (conical diffuser). Inclination is derived from H and L." annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
   parameter SI.Diameter D_i = 4 "Diameter of the inlet side" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Diameter D_o = 4.978 "Diameter of the outlet side, for conical diffuser D_o=D_i+2*H*tan(diffusion_angle/2)" annotation (
+  parameter SI.Diameter D_o = 4.978 "Diameter of the outlet side" annotation (
     Dialog(group = "Geometry"));
 
-  parameter SI.Length L_m = 4 "Length of Main section of Moody spreading pipe" annotation (
+  parameter SI.Length L_m = 4 "Length of main section (Moody spreading pipe)" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
-  parameter SI.Length L_b = 3 "Length of Branch section of Moody spreading pipe" annotation (
+  parameter SI.Length L_b = 3 "Length of branch section (Moody spreading pipe)" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
-
-  parameter Modelica.Units.NonSI.Angle_deg theta=5 "Angle at which conical diffuser is inclined" annotation (Dialog(group="Geometry", enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
-  parameter Integer theta_moody = 30 "Angle in deg at which Moody spreading pipes are branched."
+  parameter Integer theta_moody = 30 "Branch angle in deg for Moody spreading pipe"
    annotation (Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe),
     choices( choice = 15 "15°",
              choice = 30 "30°",
@@ -73,8 +71,7 @@ model DraftTube "Model of a draft tube for reaction turbines"
   SI.VolumeFlowRate Vdot(start = Vdot_0, fixed = true) "Volume flow rate";
   SI.VolumeFlowRate Vdot_b "Volume flow rate for Branch section of Moody spreading pipes";
 
-  Real cos_theta = cos(Modelica.Units.Conversions.from_deg(
-                                               theta)) "Calculating cos_theta";
+  Real cos_theta = H / L "Slope ratio for conical diffuser";
   Real cos_theta_moody = cos(Modelica.Units.Conversions.from_deg(
                                                      theta_moody)) "Calculating cos_theta_moody";
   Real cos_theta_moody_by_2 = cos(Modelica.Units.Conversions.from_deg(
@@ -91,8 +88,13 @@ initial equation
     //n.T = p.T;
   end if;
 equation
+  assert(D_i > 0 and D_o > 0, "DraftTube diameters D_i and D_o must be > 0.", AssertionLevel.error);
+
   der(M) = Mdot + F "Momentum balance";
   if DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser then
+    assert(L > 0, "ConicalDiffuser geometry requires L > 0.", AssertionLevel.error);
+    assert(abs(H) <= L, "ConicalDiffuser geometry must satisfy abs(H) <= L.", AssertionLevel.error);
+
     M = m*v;
     m = data.rho*V "Mass of water inside the draft tube";
     m_m=0;m_b=0; // Unimportant for conical diffuser
@@ -116,7 +118,7 @@ equation
   elseif DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe then
     // Taking momentum balance only on y-direction
     M = m_m*v_m+2*m_b*v_b*cos_theta_moody_by_2;
-    m_m=data.rho*A_i*L_m; m_b=data.rho*A_o*L_m;
+    m_m=data.rho*A_i*L_m; m_b=data.rho*A_o*L_b;
     m = m_m+2*m_b;
     v_m = Vdot/A_i; v_b=A_i/(2*A_o)*v_m; v=v_m;
     V = A_i*L_m+2*A_o*L_b;
@@ -154,8 +156,13 @@ equation
   mdot = i.mdot;
   o.elevation.z = i.elevation.z - H "Elevation propagation: outlet is H below inlet";
   annotation (preferredView="info", Documentation(info="<html>
-    <p>Two of the draft tubes are modeled using <em>Momentum balance</em>.
-    They are:</p>
+    <p>Two draft tube variants are modeled using <em>momentum balance</em>.</p>
+<p><strong>Parameterization:</strong></p>
+<ul>
+<li><strong>Conical diffuser:</strong> use <code>H</code>, <code>L</code>, <code>D_i</code>, and <code>D_o</code>. The inclination is derived internally from the slope ratio <code>H/L</code>.</li>
+<li><strong>Moody spreading pipe:</strong> use <code>L_m</code>, <code>L_b</code>, <code>D_i</code>, <code>D_o</code>, and <code>theta_moody</code>.</li>
+</ul>
+<p>They are:</p>
 <ul>
 <li><strong>Conical diffuser:</strong> It is the most well-know draft tube which has efficiency of around 90&percnt; and mostly used for low head reaction turbines.</li>
 <li><strong>Moody spreading draft tubes:</strong> When conical diffuser length exceeds beyond its stability for high head reaction turbines, either a elbow type draft tube is used which has around 70&percnt; of efficiency. However, other choice is to use Moody spreading draft tube that has efficiency of around 80&percnt;. The construction and design of Moody spreading draft tube is daunting and time consuming but it is mostly chosen for handling water whril at turbine&apos;s outlet.</li>
