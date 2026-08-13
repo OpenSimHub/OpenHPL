@@ -22,8 +22,8 @@ model EmpiricalTurbine
   parameter SI.Frequency nrps_n=2*data.f_grid/p "Nominal turbine speed [rps]";
   SI.Frequency nrps=speedSensor.w/(2*C.pi) "Rotational speed (in revolutions per seconds)";
   parameter Real Ct =Vdot_n/sqrt(H_n*data.g*data.rho) "Nominal turbine discharge coefficient";
-  constant Real alpha=1.5;
-  constant Real beta=3.5;
+  constant Real alpha=1.5 "Empirical exponent for the guide-vane opening/discharge characteristic";
+  constant Real beta=3.5 "Empirical exponent for the normalized speed/discharge characteristic";
   constant Real tau_1=0.1 "First parameter in empirical torque equation";
   constant Real epsilon = 5.0e-5 "Constant to ensure robust expression for dp vs flow. Trial and error to find suitable value.";
 
