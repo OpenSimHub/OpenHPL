@@ -4,6 +4,7 @@ model EmpiricalTurbine
   parameter SI.Power P_n( displayUnit = "MW")= 1.e+06 "Nominal power"  annotation (Dialog(group = "Nominal values"));
   extends OpenHPL.ElectroMech.BaseClasses.TorqueEquation;
   extends OpenHPL.Interfaces.TurbineContacts;
+  extends Interfaces.TwoContacts;
   extends OpenHPL.Icons.Turbine;
 
   SI.VolumeFlowRate Vdot "Turbine flow rate";
