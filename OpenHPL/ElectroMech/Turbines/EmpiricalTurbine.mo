@@ -34,7 +34,7 @@ equation
   dp = i.p - o.p;
   Vdot*abs(Vdot)= dp*(Ct*max(epsilon, abs(u_t)^alpha)*(1+dQdn*(max(nrps/(nrps_n*nRA),epsilon)^beta)))^2;
   Tt=Tt_n*(Vdot/Vdot_n)*(1-tau_1*(dp/(H_n*(data.rho*data.g)))^2)*(1-(nrps/(nrps_n*nRA))^5);
-
+  o.elevation.z = i.elevation.z "Elevation propagation: no height change across valve";
   connect(realExpression.y, torque.tau) annotation (Line(points={{-49,0},{-37.2,0}}, color={0,0,127}));
 annotation (Documentation(info="<html>
 <p>Simplified empirical turbine model for single-regulated reaction turbine (Francis and propeller turbine). The turbine is specified by giving the nominal head H_n and nominal power P_n. All remaining values are determined from empirical relations. The throttling effect of high head Francis turbines is included in the model. However, the exact characteristics should be treated with caution and will need more empirical tuning in future releases. In particular the speed rise and runaway curve is not fully validated.</p>
