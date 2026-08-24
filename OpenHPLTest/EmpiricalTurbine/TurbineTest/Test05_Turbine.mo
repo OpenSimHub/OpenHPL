@@ -13,19 +13,19 @@ model Test05_Turbine
     Placement(transformation(origin = {-80, 26}, extent = {{-10, -10}, {10, 10}})));
   OpenHPL.Waterway.Reservoir undervann(h_0 = 0, constantLevel = true) annotation (
     Placement(transformation(origin = {72, -16}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
-  OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine( H_n = Hn, P_n = 1e7, p = 18,enable_nomSpeed = true, enable_f = true, f_0 = 1, fixed_iniSpeed = false)  annotation (
+  OpenHPL.ElectroMech.Turbines.EmpiricalTurbine turbine( H_n = Hn, P_n = 1e7, p = 18,enable_nomSpeed = true, enable_f = true, f_0 = 1, fixed_iniSpeed = false) annotation (
     Placement(transformation(origin = {12, 12}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.Ramp ramp(height = -1, duration = 10, offset = 1, startTime = 5)  annotation(
+  Modelica.Blocks.Sources.Ramp ramp(height = -1, duration = 10, offset = 1, startTime = 5) annotation(
     Placement(transformation(origin = {-26, 76}, extent = {{-10, -10}, {10, 10}})));
- OpenHPL.Waterway.Pipe pipe(H = 0, L = 1000, D_i = 1.128379167)                                     annotation(
+ OpenHPL.Waterway.Pipe pipe(H = 0, L = 1000, D_i = 1.128379167) annotation(
     Placement(transformation(origin = {-38, 18}, extent = {{-10, -10}, {10, 10}})));
  OpenHPL.Waterway.Reservoir ov2(constantLevel = true, h_0 = Hn) annotation(
     Placement(transformation(origin = {-80, -30}, extent = {{-10, -10}, {10, 10}})));
  OpenHPL.Waterway.Reservoir uv2(constantLevel = true, h_0 = 0) annotation(
     Placement(transformation(origin = {70, -74}, extent = {{10, -10}, {-10, 10}})));
- OpenHPL.Waterway.Pipe pipe2(D_i = 1.128379167, H = 0, L = 1000)                                    annotation(
+ OpenHPL.Waterway.Pipe pipe2(D_i = 1.128379167, H = 0, L = 1000) annotation(
     Placement(transformation(origin = {-36, -30}, extent = {{-10, -10}, {10, 10}})));
- OpenHPL.ElectroMech.Turbines.Turbine turb2(ValveCapacity = false, H_n = Hn, Vdot_n = 2.15, f_0 = 1, enable_nomSpeed = true, enable_f = true)  annotation(
+ OpenHPL.ElectroMech.Turbines.Turbine turb2(ValveCapacity = false, H_n = Hn, Vdot_n = 2.15, f_0 = 1, enable_nomSpeed = true, enable_f = true) annotation(
     Placement(transformation(origin = {4, -42}, extent = {{-10, -10}, {10, 10}})));
 equation
   Ht1 = turbine.dp/(data.rho*data.g);

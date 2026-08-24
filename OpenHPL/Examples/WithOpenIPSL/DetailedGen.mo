@@ -1,6 +1,6 @@
 within OpenHPL.Examples.WithOpenIPSL;
 model DetailedGen
-  extends SimpleGen(       redeclare Waterway.PenstockKP penstock(
+  extends SimpleGen( redeclare Waterway.PenstockKP penstock(
       slanted=true,
       H=428.5,
       D_i=3), data(SteadyState=false));

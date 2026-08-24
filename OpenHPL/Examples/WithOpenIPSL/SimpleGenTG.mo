@@ -4,12 +4,12 @@ model SimpleGenTG "Synergy with OpenIPSL library(generator)"
   extends OpenIPSL.Tests.BaseClasses.MachineTestBase(pwLine2(displayPF=true), pwLine1(displayPF=true));
   OpenHPL.Waterway.Reservoir reservoir(h_0=48,
     fixElevation=true,
-    z_0=500)                                   annotation (Placement(transformation(
+    z_0=500) annotation (Placement(transformation(
         origin={-80,-80},
         extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe intake(H=23,
     D_i=3,
-    useInitialFlow=false)            annotation (Placement(transformation(extent={{-66,-90},{-46,-70}})));
+    useInitialFlow=false) annotation (Placement(transformation(extent={{-66,-90},{-46,-70}})));
   OpenHPL.Waterway.Pipe discharge(L=600, H=0.5) annotation (Placement(transformation(extent={{48,-90},{68,-70}})));
   OpenHPL.Waterway.Reservoir tail(h_0=5) annotation (Placement(transformation(
         origin={84,-80},
@@ -27,7 +27,7 @@ model SimpleGenTG "Synergy with OpenIPSL library(generator)"
   OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(transformation(
         origin={-30,-80},
         extent={{-10,-10},{10,10}})));
-  ElectroMech.Turbines.Turbine         turbine(
+  ElectroMech.Turbines.Turbine turbine(
     H_n=460,
     Vdot_n=24.3,
     Pmax(displayUnit="MW") = 125000000,

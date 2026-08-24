@@ -1,7 +1,7 @@
 within OpenHPL.Examples;
 model BranchingPipes "Model of branching pipes"
   extends Modelica.Icons.Example;
-  Waterway.Reservoir reservoir(fixElevation = true, z_0 = 3)  annotation (
+  Waterway.Reservoir reservoir(fixElevation = true, z_0 = 3) annotation (
     Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
   Waterway.Pipe mainPipe(D_i = 6, H = 1, L = 100) annotation (
     Placement(transformation(extent = {{-52, -10}, {-32, 10}})));

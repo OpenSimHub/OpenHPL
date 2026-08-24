@@ -3,7 +3,7 @@ model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
   extends OpenHPL.Interfaces.TwoContacts;
-  extends Types.FrictionSpec(   final D_h = (D_i + D_o) / 2);
+  extends Types.FrictionSpec( final D_h = (D_i + D_o) / 2);
 
   // Geometrical parameters of the pipe:
   parameter SI.Length H = 0 "Height difference from the inlet to the outlet" annotation (
@@ -30,9 +30,9 @@ model Pipe "Model of a pipe"
   SI.VolumeFlowRate Vdot "Volume flow rate";
 
 protected
-    parameter SI.Diameter D_ = ( D_i + D_o)  / 2 "Average diameter";
-    
-    parameter SI.Area A_ =  D_  ^ 2 * C.pi / 4 "Average cross-sectional area";
+    parameter SI.Diameter D_ = ( D_i + D_o) / 2 "Average diameter";
+
+    parameter SI.Area A_ = D_ ^ 2 * C.pi / 4 "Average cross-sectional area";
     parameter Real delta=2*(D_i-D_o)/(D_i+D_o) "Contraction factor";
     parameter Real cf=1+2*delta^2 "Conical pipe function";
     parameter Real cos_theta = H / L "Slope ratio";
@@ -47,7 +47,7 @@ initial equation
     end if;
   end if;
 algorithm
-    assert( phi < 1.0,  "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
+    assert( phi < 1.0, "Change in pipe diameter is too large. (angle= "+String(phi)+" )",AssertionLevel.warning);
 equation
 
   Vdot = mdot / data.rho "Volumetric flow rate through the pipe";

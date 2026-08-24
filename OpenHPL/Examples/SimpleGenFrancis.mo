@@ -57,7 +57,7 @@ model SimpleGenFrancis "Model of a hydropower system with Francis turbine model"
               annotation (Placement(transformation(
         origin={30,0},
         extent={{-10,-10},{10,10}})));
-  inner OpenHPL.Data data(SteadyState = false)  annotation (Placement(transformation(
+  inner OpenHPL.Data data(SteadyState = false) annotation (Placement(transformation(
         origin={-90,90},
         extent={{-10,-10},{10,10}})));
   Waterway.Fitting fitting(

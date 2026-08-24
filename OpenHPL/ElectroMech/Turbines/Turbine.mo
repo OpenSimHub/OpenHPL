@@ -92,7 +92,7 @@ in the <em>Efficiency data</em> group:</p>
 <ul>
   <li><strong>Constant efficiency</strong> (<code>ConstEfficiency = true</code>, default):
       The hydraulic efficiency is fixed at the value given by <code>eta_h</code>
-      (default 0.9).  This is suitable for quick studies where a single
+      (default 0.9). This is suitable for quick studies where a single
       representative efficiency value is sufficient.</li>
   <li><strong>Variable efficiency table</strong> (<code>ConstEfficiency = false</code>):
       Efficiency varies with guide-vane opening according to a lookup table stored

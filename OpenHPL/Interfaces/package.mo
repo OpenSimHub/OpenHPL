@@ -50,7 +50,7 @@ input and output connectors, additionally. This model is used for turbine modell
 <pre>
 partial model TurbineContacts \"Model of turbine connectors\"
   extends TwoContacts;
-  input Modelica.Blocks.Interfaces.RealInput u_t  \"[Guide vane|nozzle] opening of the turbine\" ;
+  input Modelica.Blocks.Interfaces.RealInput u_t \"[Guide vane|nozzle] opening of the turbine\" ;
   Modelica.Blocks.Interfaces.RealOutput P_out \"Mechanical Output power\" ;
 end TurbineContacts;
 </pre>

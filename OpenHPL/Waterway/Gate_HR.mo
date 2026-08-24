@@ -38,7 +38,7 @@ equation
   mdot = i.mdot "Inlet direction for mdot";
   Vdot_free = sqrt(2*data.g)* W * T^TE * B^BE * h_i^HE "Free flow condition";
   Vdot_partial = sqrt(2*data.g)* W * T^TE * B^BE * (3*(h_i-h_o))^HE "Partially submerged";
-  Vdot_full =  sqrt(2*data.g*(h_i-h_o))* W * B "Fully submerged";
+  Vdot_full = sqrt(2*data.g*(h_i-h_o))* W * B "Fully submerged";
   Cdx = Cd * Vdot_partial/Vdot_full;
   if H_ratio <= 0.67 then
     Vdot=Cd * Vdot_free "Free flow condition";

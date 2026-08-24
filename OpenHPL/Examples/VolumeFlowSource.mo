@@ -2,8 +2,8 @@ within OpenHPL.Examples;
 model VolumeFlowSource "Example demonstrating the use of VolumeFlowSource"
   extends Modelica.Icons.Example;
   OpenHPL.Waterway.Reservoir tail1 annotation (Placement(transformation(extent={{60,30},{40,50}})));
-  inner OpenHPL.Data data(SteadyState = true)  annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  OpenHPL.Waterway.VolumeFlowSource volumeFlowConstant(fixElevation = true)  annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
+  inner OpenHPL.Data data(SteadyState = true) annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
+  OpenHPL.Waterway.VolumeFlowSource volumeFlowConstant(fixElevation = true) annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
   Waterway.Pipe pipe1(H=0, useInitialFlow=false) annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Waterway.Pipe pipe2(H=0, useInitialFlow=false) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Reservoir tail2 annotation (Placement(transformation(extent={{60,-10},{40,10}})));
