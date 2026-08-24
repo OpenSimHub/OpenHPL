@@ -1,5 +1,4 @@
 within OpenHPL.Examples;
-
 model OpenChannel "Model of a hydropower system with open channel model"
   extends Modelica.Icons.Example;
   Waterway.Reservoir reservoir(h_0 = 5, fixElevation = true, z_0 = 10) annotation(
@@ -8,7 +7,7 @@ model OpenChannel "Model of a hydropower system with open channel model"
     Placement(transformation(extent = {{-40, -10}, {-20, 10}})));
   Waterway.Reservoir tail(h_0 = 5) annotation(
     Placement(transformation(origin = {70, 0}, extent = {{-10, 10}, {10, -10}}, rotation = 180)));
-  inner Data data(SteadyState = false, Vdot_0 = 0, f_0(displayUnit = "Hz")) annotation(
+  inner Data data(SteadyState = false, Vdot_0 = 0) annotation(
     Placement(transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}})));
   Waterway.OpenChannel openChannel(H = 2, useSections = true, N = 10) annotation(
     Placement(transformation(extent = {{-10, -10}, {10, 10}})));

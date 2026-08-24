@@ -3,7 +3,7 @@ model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Surge(h_ds=h, H_ds=H, h_abs_ds=h_abs, show=data.showElevation);
   extends OpenHPL.Interfaces.TwoContacts;
-  extends Types.FrictionSpec(   final D_h = D);
+  extends Types.FrictionSpec( final D_h = D);
 
   parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank"
     annotation (Dialog(group = "Surge tank types"));
@@ -13,9 +13,8 @@ model SurgeTank "Model of the surge tank/shaft"
     annotation (Dialog(group = "Geometry"));
   parameter SI.Diameter D = 3 "Diameter of the surge shaft"
     annotation (Dialog(group = "Geometry"));
-  parameter SI.Position H_creek=H   "Position of the creek intake above the surge tank base"
+  parameter SI.Position H_creek=H "Position of the creek intake above the surge tank base"
     annotation (Dialog(group = "Geometry"));
-
 
   parameter SI.Diameter D_so = D "If Sharp orifice type: Diameter of sharp orifice" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
@@ -31,7 +30,7 @@ model SurgeTank "Model of the surge tank/shaft"
     Dialog(group = "Initialization"));
   parameter SI.Pressure p_ac = 4*data.p_a "Initial pressure of air-cushion inside the surge tank" annotation (
     Dialog(group = "Initialization",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
-  parameter SI.Temperature T_ac(displayUnit="degC")=298.15   "Initial air-cushion temperature"
+  parameter SI.Temperature T_ac(displayUnit="degC")=298.15 "Initial air-cushion temperature"
     annotation (Dialog(group = "Initialization", enable=SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion));
 
   SI.Mass m "Water mass";
@@ -162,7 +161,6 @@ connecting the conduit, surge volume, and penstock. Four different surge tank co
 <li><strong>Throttle valve surge tank</strong> - With restricted throat section
 <p align=\"center\"><img src=\"modelica://OpenHPL/Resources/Images/STThrottleValve.svg\"></p></li>
 </ol>
-
 
 <h5>Mass and Momentum Balances</h5>
 

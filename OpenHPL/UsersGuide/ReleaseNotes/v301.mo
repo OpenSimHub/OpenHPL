@@ -5,7 +5,7 @@ class v301 "Version 3.0.1 (2026-02-05)"
 <h4>What&apos;s Changed</h4>
 <p>
 This version of <code><strong>OpenHPL</strong></code> is
-<strong>backwards compatible</strong>  with
+<strong>backwards compatible</strong> with
 <a href=\"modelica://OpenHPL.UsersGuide.ReleaseNotes.300\">Version 3.0.0</a>
 which contains a series of bug fixes to help with initialisation.
 </p>

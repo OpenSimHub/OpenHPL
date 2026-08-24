@@ -1,0 +1,48 @@
+// OpenHPL library conversion script
+// Intended use: referenced by OpenHPL.package conversion annotation.
+// Scope: deterministic class-path migrations from v3.0.x to v4.0.0.
+
+convertClass("OpenHPL.Examples.WithOpenIPSL.DetailedGenFrancis", "OpenHPL.Examples.WithOpenIPSL.DetailedGen");
+convertClass("OpenHPL.Examples.WithOpenIPSL.SimpleGenFrancis", "OpenHPL.Examples.WithOpenIPSL.SimpleGen");
+convertClass("OpenHPL.Examples.WithOpenIPSL.SimpleGenFrancisTG", "OpenHPL.Examples.WithOpenIPSL.SimpleGenTG");
+
+convertClass("OpenHPL.Waterway.RunOff_zones", "OpenHPL.Waterway.RunOff");
+convertClass("OpenHPL.Waterway.RunOff_zones_input", "OpenHPL.Waterway.RunOff");
+
+// Modifier conversions for class migrations.
+// The old class name is used in convertModifiers according to Modelica conversion rules.
+convertModifiers("OpenHPL.Examples.WithOpenIPSL.DetailedGenFrancis",
+				 {"vertical=true"},
+				 {"slanted=true"});
+convertModifiers("OpenHPL.Examples.WithOpenIPSL.DetailedGenFrancis",
+				 {"vertical=false"},
+				 {"slanted=false"});
+
+convertModifiers("OpenHPL.Examples.WithOpenIPSL.SimpleGenFrancis",
+				 {"vertical=true"},
+				 {"slanted=true"});
+convertModifiers("OpenHPL.Examples.WithOpenIPSL.SimpleGenFrancis",
+				 {"vertical=false"},
+				 {"slanted=false"});
+
+convertModifiers("OpenHPL.Examples.WithOpenIPSL.SimpleGenFrancisTG",
+				 {"vertical=true"},
+				 {"slanted=true"});
+convertModifiers("OpenHPL.Examples.WithOpenIPSL.SimpleGenFrancisTG",
+				 {"vertical=false"},
+				 {"slanted=false"});
+
+convertModifiers("OpenHPL.Waterway.RunOff_zones_input",
+				 {"precC=0.6e-3/86400"},
+				 {"PERC=%precC%"});
+convertModifiers("OpenHPL.Waterway.RunOff_zones_input",
+				 {"precC"},
+				 {"PERC=%precC%"});
+
+// Messages for semantic changes that are not safely auto-convertible:
+// - Data.f_0 changed from SI.Frequency (Hz) to per-unit speed.
+// - Connector elevation propagation is now required for models extending TwoContacts.
+convertMessage("OpenHPL.Data",
+			   "OpenHPL conversion note: parameter f_0 semantics changed from Hz to per-unit. Review old assignments and convert as f_0 = f_Hz / f_grid.");
+convertMessage("OpenHPL.Interfaces.TwoContacts",
+			   "OpenHPL conversion note: connector elevation support was introduced. Custom models extending TwoContacts must provide an elevation relation, e.g., o.elevation.z = i.elevation.z - H.");

@@ -5,7 +5,7 @@ class v201 "Version 2.0.1 (2023-03-10)"
 <h4>What&apos;s Changed</h4>
 <p>
 This version of <code><strong>OpenHPL</strong></code> is
-<strong>backwards compatible</strong>  with
+<strong>backwards compatible</strong> with
 <a href=\"modelica://OpenHPL.UsersGuide.ReleaseNotes.v200\">Version 2.0.0</a>
 which contains a series of bug fixes specifically aimed to make it more compliant with
 the <a href=\"https://openmodelica.org\">OpenModelica</a> tool.

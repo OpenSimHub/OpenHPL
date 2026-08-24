@@ -32,9 +32,9 @@ model HPSimplePenstockPelton "HP system model with Pelton turbine"
   OpenHPL.ElectroMech.Generators.SynchGen unit(np=5) annotation (Placement(transformation(extent={{0,-4},{20,16}})));
 equation
   connect(unit.P_in, turbine.P_out) annotation (
-    Line(points={{10,18},{10,45},{14,45}},       color = {0, 0, 127}));
+    Line(points={{10,18},{10,45},{14,45}}, color = {0, 0, 127}));
   connect(unit.w_out, turbine.w_in) annotation (
-    Line(points={{21,12},{21,20},{-2,20},{-2,26}},   color = {0, 0, 127}));
+    Line(points={{21,12},{21,20},{-2,20},{-2,26}}, color = {0, 0, 127}));
   connect(reservoir.n, intake.p) annotation (
     Line(points={{-82,62},{-77.95,62},{-77.95,60},{-72,60}}, color = {28, 108, 200}));
   connect(intake.n, surgeTank.p) annotation (
@@ -48,7 +48,7 @@ equation
   connect(turbine.n, discharge.p) annotation (
     Line(points={{20,34},{20,34},{30,34}}, color = {28, 108, 200}));
   connect(control.y, turbine.u_t) annotation (
-    Line(points={{1,84},{2,84},{2,46}},   color = {0, 0, 127}));
+    Line(points={{1,84},{2,84},{2,46}}, color = {0, 0, 127}));
   annotation (
     experiment(StopTime = 2000, StartTime = 0, Tolerance = 0.0001, Interval = 0.4));
 end HPSimplePenstockPelton;

@@ -2,7 +2,7 @@ within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
   outer OpenHPL.Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe( slanted=true);
-  extends Types.FrictionSpec(   final D_h = (D_i + D_o) / 2);
+  extends Types.FrictionSpec( final D_h = (D_i + D_o) / 2);
   import Modelica.Constants.pi;
   // geometrical parameters of the pipe
   parameter SI.Height H = 420 "Height difference from the inlet to the outlet of the pipe" annotation (

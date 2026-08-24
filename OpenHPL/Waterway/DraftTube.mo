@@ -2,7 +2,7 @@ within OpenHPL.Waterway;
 model DraftTube "Model of a draft tube for reaction turbines"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.DraftTube;
-  extends Types.FrictionSpec(   final D_h = 0.5 * (D_i + D_o));
+  extends Types.FrictionSpec( final D_h = 0.5 * (D_i + D_o));
   import Modelica.Constants.pi;
   parameter Types.DraftTube DraftTubeType = OpenHPL.Types.DraftTube.ConicalDiffuser "Types of draft tube" annotation (
     Dialog(group = "Draft tube types"));

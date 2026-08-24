@@ -15,7 +15,7 @@ model VolumeFlowSource "Volume flow source (either fixed or variable)"
     annotation (Dialog(group="Geometry"), choices(checkBox=true));
   parameter SI.Position z_0=0 "Elevation of the outlet connection"
     annotation (Dialog(group="Geometry", enable=fixElevation));
-  Interfaces.Contact_o o(showElevation = data.showElevation)  "Outlet flow connector"
+  Interfaces.Contact_o o(showElevation = data.showElevation) "Outlet flow connector"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealInput outFlow if useInput "Conditional input for defining the outlet flow [m3/s]"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));

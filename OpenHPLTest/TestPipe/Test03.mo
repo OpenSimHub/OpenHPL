@@ -7,13 +7,13 @@ model Test03
    OpenHPL.Waterway.Pipe pipe2(H = 0, L = Ln, D_i = Dn) annotation (
     Placement(transformation(origin = {0, 30}, extent = {{-10, -10}, {10, 10}})));
    OpenHPL.Waterway.Pipe pipe3(H = 0, L = Ln, D_i = Dn) annotation ( Placement(transformation(extent = {{-10, -10}, {10, 10}})));
- OpenHPL.Waterway.Valve valve1(ValveCapacity = false, H_n = 100, Vdot_n = 1)  annotation (
+ OpenHPL.Waterway.Valve valve1(ValveCapacity = false, H_n = 100, Vdot_n = 1) annotation (
     Placement(transformation(origin = {30, 60}, extent = {{-10, -10}, {10, 10}})));
    OpenHPL.Waterway.Valve valve2(ValveCapacity = false, H_n = 100, Vdot_n = 1) annotation (
     Placement(transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}})));
    OpenHPL.Waterway.Valve valve3(ValveCapacity = false, H_n = 100, Vdot_n = 1) annotation (
     Placement(transformation(origin = {30, 0}, extent = {{-10, 10}, {10, -10}})));
-  Modelica.Blocks.Sources.Ramp ramp1(height = 1, duration = 5, offset = 0, startTime = 2)  annotation (
+  Modelica.Blocks.Sources.Ramp ramp1(height = 1, duration = 5, offset = 0, startTime = 2) annotation (
     Placement(transformation(origin = {80, 80}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
   Modelica.Blocks.Sources.Ramp ramp2(duration = 5, height = 0.5, offset = 0.5, startTime = 2) annotation (
     Placement(transformation(origin = {80, 50}, extent = {{10, -10}, {-10, 10}})));

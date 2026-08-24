@@ -1,14 +1,14 @@
 within OpenHPL.ElectroMech.Turbines;
 model EmpiricalTurbine
   parameter SI.Height H_n = 100 "Nominal net head" annotation (Dialog(group = "Nominal values"));
-  parameter SI.Power P_n(displayUnit="MW")=1000000    "Nominal power"  annotation (Dialog(group = "Nominal values"));
+  parameter SI.Power P_n(displayUnit="MW")=1000000 "Nominal power" annotation (Dialog(group = "Nominal values"));
   extends OpenHPL.ElectroMech.BaseClasses.TorqueEquation;
   extends OpenHPL.Interfaces.TurbineContacts;
   extends Interfaces.TwoContacts;
   extends OpenHPL.Icons.Turbine;
 
   SI.VolumeFlowRate Vdot "Turbine flow rate";
-  Modelica.Blocks.Sources.RealExpression turbineTorque(y=Tt) "Connection between compute hydraulic torque and  driving torque in class TorqueEquation" annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
+  Modelica.Blocks.Sources.RealExpression turbineTorque(y=Tt) "Connection between compute hydraulic torque and driving torque in class TorqueEquation" annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
   Modelica.Blocks.Sources.RealExpression turbinePower(y=Tt*speedSensor.w) annotation (Placement(transformation(extent={{-50,20},{-80,40}})));
   Modelica.Blocks.Math.Feedback lossCorrection
     annotation (Placement(transformation(extent={{-50,70},{-30,90}})));

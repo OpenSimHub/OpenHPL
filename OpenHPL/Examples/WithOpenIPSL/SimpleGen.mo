@@ -4,7 +4,7 @@ model SimpleGen "Synergy with OpenIPSL library(generator)"
   extends OpenIPSL.Tests.BaseClasses.MachineTestBase(pwLine2(displayPF=true), pwLine1(displayPF=true));
   OpenHPL.Waterway.Reservoir reservoir(h_0=48,
     fixElevation=true,
-    z_0=500)                                   annotation (Placement(transformation(
+    z_0=500) annotation (Placement(transformation(
         origin={-80,-80},
         extent={{-10,-10},{10,10}})));
   OpenHPL.Waterway.Pipe intake(H=23, D_i=3)
@@ -26,7 +26,7 @@ model SimpleGen "Synergy with OpenIPSL library(generator)"
   OpenHPL.Waterway.SurgeTank surgeTank(h_0=70.939) annotation (Placement(transformation(
         origin={-30,-80},
         extent={{-10,-10},{10,10}})));
-  ElectroMech.Turbines.Turbine         turbine(
+  ElectroMech.Turbines.Turbine turbine(
     H_n=460,
     Vdot_n=24.3,
     Pmax(displayUnit="MW") = 125000000,
@@ -48,8 +48,8 @@ model SimpleGen "Synergy with OpenIPSL library(generator)"
     ra=0.001,
     w(fixed=true),
     x1d=0.302) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  OpenHPL.Controllers.Governor governor(Pn=103,           Y_gv_ref = 0.1)
-                                       annotation (Placement(transformation(origin={0,-40},  extent = {{-10, -10}, {10, 10}})));
+  OpenHPL.Controllers.Governor governor(Pn=103, Y_gv_ref = 0.1)
+                                       annotation (Placement(transformation(origin={0,-40}, extent = {{-10, -10}, {10, 10}})));
   //(a = 7.862E-25, c = 1.108E-08, d = -5.344E-02, b = -1.010E-16)
   Modelica.Blocks.Math.Gain fpu_to_fSI(k=SysData.fn) annotation (Placement(transformation(
         origin={-60,-52},
@@ -65,7 +65,7 @@ equation
   connect(governor.Y_gv, turbine.u_t) annotation (
     Line(points={{11,-40},{24,-40},{24,-68}}, color = {0, 0, 127}));
   connect(governor.P_ref, power.y) annotation (
-    Line(points={{-12,-36},{-27.2,-36}},                   color = {0, 0, 127}));
+    Line(points={{-12,-36},{-27.2,-36}}, color = {0, 0, 127}));
   connect(generator.vf, generator.vf0) annotation (Line(points={{-42,5},{-46,5},{-46,14},{-38,14},{-38,11}}, color={0,0,127}));
   connect(generator.p, bus1.p) annotation (Line(points={{-20,0},{0,0}}, color={0,0,255}));
   connect(discharge.o, tail.o) annotation (Line(points={{68,-80},{74,-80}}, color={28,108,200}));
