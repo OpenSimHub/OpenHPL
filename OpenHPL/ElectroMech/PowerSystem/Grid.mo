@@ -5,7 +5,7 @@ model Grid "Model of a mechanical grid equivalent"
   parameter SI.Power Pgrid=1000000000 "Active power capacity of the grid" annotation (Dialog(group="Electrical"));
   parameter Boolean useLambda=false "If checked, specify Lambda, otherwise the droop Rgrid is used"
     annotation (choices(checkBox = true), Dialog(group="Electrical"));
-  parameter Types.Lambda Lambda=Pgrid/(Rgrid*data.f_0) "Network Power-Frequency Characteristic (bias factor)"
+  parameter Types.Lambda Lambda=Pgrid/(Rgrid*data.f_0*data.f_grid) "Network Power-Frequency Characteristic (bias factor)"
     annotation (Dialog(group="Electrical",enable=useLambda));
   parameter SI.PerUnit Rgrid=0.1 "Equivalent droop setting of the grid"
     annotation (Dialog(group="Electrical",enable=not useLambda));
