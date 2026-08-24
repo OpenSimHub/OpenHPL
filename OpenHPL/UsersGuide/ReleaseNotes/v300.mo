@@ -10,7 +10,7 @@ This new version of <code><strong>OpenHPL</strong></code> is a
 Modelica Standard Library version 4.0.0</a> which contains a series of improvements and bug fixes.
 </p>
 <p>
-This releases is non-backwards compatible with earlier versions of OpenHPL.
+This release is non-backwards compatible with earlier versions of OpenHPL.
 This means it contains changes to the names of classes, parameters, variables, connectors, and more.
 Users will have to manually edit their existing models that were based on older versions of OpenHPL.
 </p>

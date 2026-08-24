@@ -4,7 +4,7 @@ class v400 "Version 4.0.0 (2026-08-24)"
   annotation (Documentation(info="<html>
 <h4>What&apos;s Changed</h4>
 <p>This new version of <strong><code>OpenHPL</code></strong> is a <strong>non-backwards compatible</strong> release based on the <a href=\"https://github.com/modelica/ModelicaStandardLibrary/releases/tag/v4.0.0\">Modelica Standard Library version 4.0.0</a> which contains a series of improvements and bug fixes. </p>
-<p>This releases is non-backwards compatible with earlier versions of OpenHPL. This means it contains changes to the names of classes, parameters, variables, connectors, and more. A conversion-script is provided that takes care of some of the changes but not all. Users will have to check their existing models that were based on older versions of OpenHPL. </p>
+<p>This release is non-backwards compatible with earlier versions of OpenHPL. This means it contains changes to the names of classes, parameters, variables, connectors, and more. A conversion-script is provided that takes care of some of the changes but not all. Users will have to check their existing models that were based on older versions of OpenHPL. </p>
 <h4>💥 BREAKING CHANGES</h4>
 <ul>
 <li>refactor!: Consolidates RunOff models with flexible input by <a href=\"https://github.com/dietmarw\">@dietmarw</a> in <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/88\">#88</a></li>
@@ -33,6 +33,6 @@ class v400 "Version 4.0.0 (2026-08-24)"
 <li>fix: Improved robust handling of conical pipes by <a href=\"https://github.com/boerrebj\">@boerrebj</a> in <a href=\"https://github.com/OpenSimHub/OpenHPL/pull/94\">#94</a></li>
 </ul>
 <h5>Full Changelog</h5>
-<p><code><a href=\"https://github.com/OpenSimHub/OpenHPL/compare/v3.0.1...v4.0.0\">v3.0.1...v4.0.0</a></code></p>
+<p><code><a href=\"https://github.com/OpenSimHub/OpenHPL/compare/v3.0.1...v4.0.0\">v3.0.0...v4.0.0</a></code></p>
 </html>"));
 end v400;
