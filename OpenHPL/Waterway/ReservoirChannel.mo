@@ -43,8 +43,8 @@ equation
       o.elevation.z = 0 "Default elevation if this becomes root";
     end if;
   end if;
-  annotation (
-    Documentation(preferredView="info", info="<html>
+  annotation (preferredView="info",
+    Documentation( info="<html>
 <h4>Reservoir Channel Model</h4>
 <p>A more detailed reservoir model based on the open channel model, where the channel bed is assumed to be flat (no slope).</p>
 
