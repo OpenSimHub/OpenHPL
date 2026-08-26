@@ -17,7 +17,7 @@ OpenHPL makes it possible to model hydropower systems of different complexity an
 
 ## Current release
 
-Download [OpenHPL v3.0.1 (2026-02-05)](../../releases/tag/v3.0.1)
+Download [OpenHPL v4.0.0 (2026-08-24)](../../releases/tag/v4.0.0)
 
 ### Acknowledgements
 
