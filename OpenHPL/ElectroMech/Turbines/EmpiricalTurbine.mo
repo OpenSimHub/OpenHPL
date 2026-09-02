@@ -12,11 +12,11 @@ model EmpiricalTurbine
   Modelica.Blocks.Sources.RealExpression turbinePower(y=Tt*speedSensor.w) annotation (Placement(transformation(extent={{-50,20},{-80,40}})));
   Modelica.Blocks.Math.Feedback lossCorrection
     annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
-protected
   SI.Pressure dp "Pressure drop";
+  parameter SI.VolumeFlowRate Vdot_n=P_n/(eta0*data.rho*data.g*H_n) "Nominal discharge";
+protected
   SI.Torque Tt "Turbine torque";
   constant Real eta0=0.90 "Full load efficiency. Hard coded at the moment. Can be parametrized in the future";
-  parameter SI.VolumeFlowRate Vdot_n=P_n/(eta0*data.rho*data.g*H_n) "Nominal discharge";
   parameter SI.Torque Tt_n=P_n/(2*C.pi*nrps_n) "Nominal turbine torque";
   parameter Real NQE=4.0*H_n^(-2./3.) "Specific speed based on empirical relation";
   parameter Real kappa=max(1.351-0.857*NQE,1.05);
