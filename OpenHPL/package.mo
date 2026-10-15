@@ -16,5 +16,5 @@ consists of hydropower unit models and is modelled using Modelica.</p>
 <p>It is developed at the <a href=\"https://www.usn.no/english\">University of South-Eastern Norway (USN)</a>, Campus Porsgrunn. </p>
 <p>For more information see the <a href=\"modelica://OpenHPL.UsersGuide\">User's Guide</a>.</p>
 </html>",
-    __OpenModelica_infoHeader = "<script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML\"></script>"));
+    __OpenModelica_infoHeader = "<script defer src=\"https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js\"></script>"));
 end OpenHPL;
