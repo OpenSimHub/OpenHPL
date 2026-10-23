@@ -7,11 +7,21 @@ model Fitting "Different pipes fitting"
   parameter Types.Fitting fit_type=OpenHPL.Types.Fitting.Square "Type of pipe fitting";
   /* geometrical parameters for fitting */
   parameter SI.Diameter D_i = 5.8 "Pipe diameter of the inlet (LHS)" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
   parameter SI.Diameter D_o = 3.3 "Pipe diameter of the outlet (RHS)" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
+  parameter Boolean use_A = false "Use areas instead of diameters" annotation (
+    Dialog(group = "Geometry"), choices(checkBox=true));
+  parameter SI.Area A_i = 26.42 "Area of the inlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+  parameter SI.Area A_o = 8.55 "Area of the outlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+protected
+  parameter SI.Diameter D_i_ = if use_A then sqrt(4 * A_i / pi) else D_i;
+  parameter SI.Diameter D_o_ = if use_A then sqrt(4 * A_o / pi) else D_o;
+public
   parameter Modelica.Units.NonSI.Angle_deg theta=45 "If Tapered fitting: angle of the tapered reduction/expansion" annotation (Dialog(group="Geometry", enable=fit_type == OpenHPL.Types.Fitting.Tapered));
-  parameter SI.Length L(max = 5 * D_o) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
+  parameter SI.Length L(max = 5 * D_o_) = 1 "If Thick Orifice: length of the thick orifice, condition L/D_2<=5. If this condition is not satisfied (L is longer) then use Square Reduction followed by Square Expansion" annotation (
     Dialog(group = "Geometry", enable=fit_type == OpenHPL.Types.Fitting.ThickOrifice));
   /* variables */
   SI.Velocity v(start=Modelica.Constants.eps) "Water velocity";
@@ -26,28 +36,28 @@ equation
   if v>=0 then
     phi =Functions.Fitting.FittingPhi(
     v,
-    D_i,
-    D_o,
+    D_i_,
+    D_o_,
     L,
     theta,
     data.rho,
     data.mu,
     data.p_eps,
     fit_type);
-    A = pi * D_i^2 / 4;
+    A = if use_A then A_i else pi * D_i^2 / 4;
     dp = phi * 0.5 * data.rho * v^2;
   else
     phi =Functions.Fitting.FittingPhi(
     v,
-    D_o,
-    D_i,
+    D_o_,
+    D_i_,
     L,
     theta,
     data.rho,
     data.mu,
     data.p_eps,
     fit_type);
-    A = pi * D_o^2 / 4;
+    A = if use_A then A_o else pi * D_o^2 / 4;
     dp = - phi * 0.5 * data.rho * v^2;
   end if;
   o.p = i.p - dp "Pressure of the output connector";
@@ -56,7 +66,7 @@ equation
   o.elevation.z = i.elevation.z "Elevation propagation: no height change across fitting";
   annotation (preferredView="info",
     Documentation(info="<html>
-    <p>Various possibilities of the fittings for the pipes with different diameters
+    <p>Various possibilities of the fittings for the pipes with different diameters or cross-sectional areas
     and also the orifices in the pipe.
     Here, the pressure drop due to these constrictions is defined.</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"50%\"><tr>

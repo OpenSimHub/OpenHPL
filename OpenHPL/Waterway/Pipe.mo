@@ -16,9 +16,9 @@ model Pipe "Model of a pipe"
     Dialog(group = "Geometry", enable=not use_A));
   parameter Boolean use_A = false "Use areas instead of diameters" annotation (
     Dialog(group = "Geometry"), choices(checkBox=true));
-  parameter SI.Area A_i = 1 "Area of the inlet side" annotation (
+  parameter SI.Area A_i = 0.785 "Area of the inlet side" annotation (
     Dialog(group = "Geometry", enable=use_A));
-  parameter SI.Area A_o = A_i "Area of the outlet side" annotation (
+  parameter SI.Area A_o = 0.785 "Area of the outlet side" annotation (
     Dialog(group = "Geometry", enable=use_A));
 
 

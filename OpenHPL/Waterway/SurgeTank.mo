@@ -3,7 +3,7 @@ model SurgeTank "Model of the surge tank/shaft"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Surge(h_ds=h, H_ds=H, h_abs_ds=h_abs, show=data.showElevation);
   extends OpenHPL.Interfaces.TwoContacts;
-  extends Types.FrictionSpec( final D_h = D);
+  extends Types.FrictionSpec(final D_h = D_);
 
   parameter Types.SurgeTank SurgeTankType = OpenHPL.Types.SurgeTank.STSimple "Types of surge tank"
     annotation (Dialog(group = "Surge tank types"));
@@ -12,14 +12,22 @@ model SurgeTank "Model of the surge tank/shaft"
   parameter SI.Length L = H "Length of the surge shaft"
     annotation (Dialog(group = "Geometry"));
   parameter SI.Diameter D = 3 "Diameter of the surge shaft"
-    annotation (Dialog(group = "Geometry"));
+    annotation (Dialog(group = "Geometry", enable=not use_A));
+  parameter Boolean use_A = false "Use areas instead of diameters" annotation (
+    Dialog(group = "Geometry"), choices(checkBox=true));
+  parameter SI.Area A = 7.07 "Cross-sectional area of the surge shaft"
+    annotation (Dialog(group = "Geometry", enable=use_A));
   parameter SI.Position H_creek=H "Position of the creek intake above the surge tank base"
     annotation (Dialog(group = "Geometry"));
 
   parameter SI.Diameter D_so = D "If Sharp orifice type: Diameter of sharp orifice" annotation (
-    Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
+    Dialog(group = "Geometry", enable=not use_A and SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
+  parameter SI.Area A_so = 7.07 "Area of sharp orifice" annotation (
+    Dialog(group = "Geometry", enable=use_A and SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice));
   parameter SI.Diameter D_t = D "If Throttle value type: Diameter of throat" annotation (
-    Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
+    Dialog(group = "Geometry", enable=not use_A and SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
+  parameter SI.Area A_t = 7.07 "Area of throttle throat" annotation (
+    Dialog(group = "Geometry", enable=use_A and SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
   parameter SI.Length L_t = L "If Throttle value type: Length of throat" annotation (
     Dialog(group = "Geometry",enable=SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve));
 
@@ -39,8 +47,6 @@ model SurgeTank "Model of the surge tank/shaft"
   SI.Momentum M "Water momentum";
   SI.Force Mdot "Difference in influent and effulent momentum";
   SI.Force F "Total force acting in the surge tank";
-  SI.Area A = (C.pi*D ^ 2) / 4 "Cross sectional area of the surge tank";
-  SI.Area A_t = (C.pi*D_t ^ 2) / 4 "Cross sectional area of the throttle valve surge tank";
   SI.Length l = h / cos_theta "Length of water in the surge tank";
   Real cos_theta = H / L "Slope ratio";
   SI.Velocity v "Water velocity";
@@ -61,6 +67,9 @@ model SurgeTank "Model of the surge tank/shaft"
 
 protected
   SI.MassFlowRate mdot_creek "Creek mass flow rate (zero when creek connector is absent)";
+  parameter SI.Diameter D_ = if use_A then sqrt(4 * A / C.pi) else D;
+  parameter SI.Diameter D_so_ = if use_A then sqrt(4 * A_so / C.pi) else D_so;
+  parameter SI.Diameter D_t_ = if use_A then sqrt(4 * A_t / C.pi) else D_t;
 
 initial equation
   if SteadyState then
@@ -92,7 +101,7 @@ equation
     m = data.rho * A * l;
     M = m * v;
     p_t = data.p_a;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
+    F_f = Functions.DarcyFriction.Friction(v, D_, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
     phiSO = 0;
     F_p = (p_b - p_t) * A;
   elseif SurgeTankType == OpenHPL.Types.SurgeTank.STAirCushion then
@@ -100,7 +109,7 @@ equation
     m = data.rho * A * l + m_a;
     M = m * v;
     p_t = p_ac * ((L - h_0 / cos_theta) / (L - l)) ^ data.gamma_air;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
+    F_f = Functions.DarcyFriction.Friction(v, D_, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
     phiSO = 0;
     F_p = (p_b - p_t) * A;
   elseif SurgeTankType == OpenHPL.Types.SurgeTank.STSharpOrifice then
@@ -108,19 +117,19 @@ equation
     m = data.rho * A * l;
     M = m * v;
     p_t = data.p_a;
-    F_f = Functions.DarcyFriction.Friction(v, D, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
+    F_f = Functions.DarcyFriction.Friction(v, D_, l, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(v) * v;
     F_p = (p_b - p_t) * A;
     if v >= 0 then
-      phiSO = Functions.Fitting.FittingPhi(v, D, D_so, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v, D_, D_so_, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.SharpOrifice);
     else
-      phiSO = Functions.Fitting.FittingPhi(v, D_so, D, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.SharpOrifice);
+      phiSO = Functions.Fitting.FittingPhi(v, D_so_, D_, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.SharpOrifice);
     end if;
   elseif SurgeTankType == OpenHPL.Types.SurgeTank.STThrottleValve then
     if l <= L_t then
       v = Vdot / A_t;
       m = data.rho * A_t * l;
       M = m * v;
-      F_f = Functions.DarcyFriction.Friction(v, D_t, l, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(v) * v;
+      F_f = Functions.DarcyFriction.Friction(v, D_t_, l, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(v) * v;
       phiSO = 0;
       F_p = (p_b - p_t) * A_t;
     else
@@ -128,11 +137,11 @@ equation
       m = data.rho * (A_t * L_t + A * (l - L_t));
       M = m * v;
       if v > 0 then
-        F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D, l - L_t, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(Vdot/A_t) * Vdot/A_t;
-        phiSO = Functions.Fitting.FittingPhi(Vdot/A_t, D_t, D, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.Square);
+        F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t_, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D_, l - L_t, data.rho, data.mu, p_eps) + A_t * phiSO * 0.5 * data.rho * abs(Vdot/A_t) * Vdot/A_t;
+        phiSO = Functions.Fitting.FittingPhi(Vdot/A_t, D_t_, D_, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.Square);
       elseif v < 0 then
-        F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D, l - L_t, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(Vdot/A) * Vdot/A;
-        phiSO = Functions.Fitting.FittingPhi(Vdot/A, D, D_t, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.Square);
+        F_f = Functions.DarcyFriction.Friction(Vdot/A_t, D_t_, L_t, data.rho, data.mu, p_eps) + Functions.DarcyFriction.Friction(Vdot/A, D_, l - L_t, data.rho, data.mu, p_eps) + A * phiSO * 0.5 * data.rho * abs(Vdot/A) * Vdot/A;
+        phiSO = Functions.Fitting.FittingPhi(Vdot/A, D_, D_t_, L, 90, data.rho, data.mu, p_eps, OpenHPL.Types.Fitting.Square);
       else
         F_f = 0;
         phiSO = 0;
@@ -213,7 +222,8 @@ $$ z_\\mathrm{creek} = z_\\mathrm{o} + H_\\mathrm{creek} $$</p>
 
 <h5>Parameters and Initialization</h5>
 
-<p>Required geometry parameters: length L, height H, diameter D,
+<p>Required geometry parameters: length L, height H, shaft diameter D or area A,
+and, for restricted configurations, orifice/throat diameters D<sub>so</sub>/D<sub>t</sub> or areas A<sub>so</sub>/A<sub>t</sub>,
 roughness p<sub>ε</sub>, and atmospheric pressure p<sup>atm</sup>. Initialize with flow rate V̇<sub>0</sub>
 and water height h<sub>0</sub>. Option for steady-state initialization is available.</p>
 </html>"));

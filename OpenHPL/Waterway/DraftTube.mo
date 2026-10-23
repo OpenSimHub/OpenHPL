@@ -2,7 +2,7 @@ within OpenHPL.Waterway;
 model DraftTube "Model of a draft tube for reaction turbines"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.DraftTube;
-  extends Types.FrictionSpec( final D_h = 0.5 * (D_i + D_o));
+  extends Types.FrictionSpec(final D_h = D_);
   import Modelica.Constants.pi;
   parameter Types.DraftTube DraftTubeType = OpenHPL.Types.DraftTube.ConicalDiffuser "Types of draft tube" annotation (
     Dialog(group = "Draft tube types"));
@@ -13,9 +13,15 @@ model DraftTube "Model of a draft tube for reaction turbines"
   parameter SI.Length L = 7.017 "Centerline/slant length (conical diffuser). Inclination is derived from H and L." annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser));
   parameter SI.Diameter D_i = 4 "Diameter of the inlet side" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
   parameter SI.Diameter D_o = 4.978 "Diameter of the outlet side" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
+  parameter Boolean use_A = false "Use areas instead of diameters" annotation (
+    Dialog(group = "Geometry"), choices(checkBox=true));
+  parameter SI.Area A_i = 12.57 "Area of the inlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+  parameter SI.Area A_o = 19.46 "Area of the outlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
 
   parameter SI.Length L_m = 4 "Length of main section (Moody spreading pipe)" annotation (
     Dialog(group = "Geometry",enable=DraftTubeType == OpenHPL.Types.DraftTube.MoodySpreadingPipe));
@@ -36,10 +42,8 @@ model DraftTube "Model of a draft tube for reaction turbines"
   // parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
 
   /* variables */
-  SI.Diameter D_ = 0.5 * (D_i + D_o) "Average diameter";
-  SI.Area A_i = D_i ^ 2 * pi / 4 "Inlet cross-section area of draft tube";
-  SI.Area A_o = D_o ^ 2 * pi / 4 "Outlet cross-section area of draft tube";
-  SI.Area A_ = D_ ^ 2 * pi / 4 "Average cross-section area of conical diffuser";
+  parameter SI.Diameter D_ = if use_A then sqrt(4 * A_ / pi) else 0.5 * (D_i_ + D_o_) "Average diameter";
+  parameter SI.Area A_ = if use_A then (A_i + A_o) / 2 else D_ ^ 2 * pi / 4 "Average cross-section area of conical diffuser";
 
   SI.Mass m "Mass of water inside conical diffuser";
   SI.Mass m_m "Mass of water inside Main section Moody spreading pipes";
@@ -79,6 +83,10 @@ model DraftTube "Model of a draft tube for reaction turbines"
 
  // connectors
   extends OpenHPL.Interfaces.TwoContacts;
+protected
+  parameter SI.Diameter D_i_ = if use_A then sqrt(4 * A_i / pi) else D_i;
+  parameter SI.Diameter D_o_ = if use_A then sqrt(4 * A_o / pi) else D_o;
+public
 initial equation
   if SteadyState then
     der(M) = 0;
@@ -88,7 +96,7 @@ initial equation
     //n.T = p.T;
   end if;
 equation
-  assert(D_i > 0 and D_o > 0, "DraftTube diameters D_i and D_o must be > 0.", AssertionLevel.error);
+  assert(D_i_ > 0 and D_o_ > 0, "DraftTube areas or diameters must be > 0.", AssertionLevel.error);
 
   der(M) = Mdot + F "Momentum balance";
   if DraftTubeType == OpenHPL.Types.DraftTube.ConicalDiffuser then
@@ -98,7 +106,7 @@ equation
     M = m*v;
     m = data.rho*V "Mass of water inside the draft tube";
     m_m=0;m_b=0; // Unimportant for conical diffuser
-    V = pi*H/12*(D_i^2+D_o^2+D_i*D_o) "Volume of water inside the draft tube";
+    V = pi*H/12*(D_i_^2+D_o_^2+D_i_*D_o_) "Volume of water inside the draft tube";
     v = Vdot/A_;
     Vdot_b = 0; // Unimportant for conical diffuser
     v_m=0;v_b=0; // Unimportant for conical diffuser
@@ -111,7 +119,7 @@ equation
     F_p = p_i * A_i - p_o * A_o;
     F_f = Functions.DarcyFriction.Friction(v, D_, L, data.rho, data.mu, p_eps)+1/2*data.rho*v*abs(v)*A_i*phi_d;
     F_fm=0;F_fb=0;
-    phi_d = 0.23*(1-D_i/D_o)^2;
+    phi_d = 0.23*(1-D_i_/D_o_)^2;
     phi_d_o=0; // Unimportant for conical diffuser
     F_g = m*data.g*cos_theta;
 
@@ -131,8 +139,8 @@ equation
     F_p = p_i*A_i-2*p_o*A_o*cos_theta_moody_by_2;
     F_g = m_m*data.g+2*m_b*data.g*cos_theta_moody_by_2;
     F_f = F_fm+2*F_fb*cos_theta_moody_by_2+data.rho*v_m*abs(v_m)*A_i*phi_d;
-    F_fm = Functions.DarcyFriction.Friction(v_m, D_i, L_m, data.rho, data.mu, p_eps);
-    F_fb = Functions.DarcyFriction.Friction(v_b, D_o, L_b, data.rho, data.mu, p_eps);
+    F_fm = Functions.DarcyFriction.Friction(v_m, D_i_, L_m, data.rho, data.mu, p_eps);
+    F_fb = Functions.DarcyFriction.Friction(v_b, D_o_, L_b, data.rho, data.mu, p_eps);
 
      phi_d = 1+(v_b/v_m)^2-2*v_b/v_m*cos_theta_moody-phi_d_o*(v_b/v_m)^2;
 
@@ -159,8 +167,8 @@ equation
     <p>Two draft tube variants are modeled using <em>momentum balance</em>.</p>
 <p><strong>Parameterization:</strong></p>
 <ul>
-<li><strong>Conical diffuser:</strong> use <code>H</code>, <code>L</code>, <code>D_i</code>, and <code>D_o</code>. The inclination is derived internally from the slope ratio <code>H/L</code>.</li>
-<li><strong>Moody spreading pipe:</strong> use <code>L_m</code>, <code>L_b</code>, <code>D_i</code>, <code>D_o</code>, and <code>theta_moody</code>.</li>
+<li><strong>Conical diffuser:</strong> use <code>H</code>, <code>L</code>, and inlet/outlet diameters <code>D_i</code>/<code>D_o</code> or areas <code>A_i</code>/<code>A_o</code>. The inclination is derived internally from the slope ratio <code>H/L</code>.</li>
+<li><strong>Moody spreading pipe:</strong> use <code>L_m</code>, <code>L_b</code>, inlet/outlet diameters <code>D_i</code>/<code>D_o</code> or areas <code>A_i</code>/<code>A_o</code>, and <code>theta_moody</code>.</li>
 </ul>
 <p>They are:</p>
 <ul>
