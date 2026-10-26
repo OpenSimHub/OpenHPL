@@ -3,17 +3,24 @@ model Pipe "Model of a pipe"
   outer Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe;
   extends OpenHPL.Interfaces.TwoContacts;
-  extends Types.FrictionSpec( final D_h = (D_i + D_o) / 2);
+  extends Types.FrictionSpec(final D_h = D_);
 
   // Geometrical parameters of the pipe:
   parameter SI.Length H = 0 "Height difference from the inlet to the outlet" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Length L = 1000 "Length of the pipe" annotation (
     Dialog(group = "Geometry"));
-  parameter SI.Diameter D_i = 1.0 "Diameter of the inlet side" annotation (
-    Dialog(group = "Geometry"));
+  parameter SI.Diameter D_i = 1 "Diameter of the inlet side" annotation (
+    Dialog(group = "Geometry", enable=not use_A));
   parameter SI.Diameter D_o = D_i "Diameter of the outlet side" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
+  parameter Boolean use_A = false "Use areas instead of diameters" annotation (
+    Dialog(group = "Geometry"), choices(checkBox=true));
+  parameter SI.Area A_i = 0.785 "Area of the inlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+  parameter SI.Area A_o = A_i "Area of the outlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+
 
   // Steady state:
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
@@ -30,13 +37,15 @@ model Pipe "Model of a pipe"
   SI.VolumeFlowRate Vdot "Volume flow rate";
 
 protected
-    parameter SI.Diameter D_ = ( D_i + D_o) / 2 "Average diameter";
+    parameter SI.Diameter D_i_ = if use_A then sqrt(4 * A_i / C.pi) else D_i "Equivalent inlet diameter";
+    parameter SI.Diameter D_o_ = if use_A then sqrt(4 * A_o / C.pi) else D_o "Equivalent outlet diameter";
+    parameter SI.Diameter D_ = if use_A then sqrt(4 * A_ / C.pi) else (D_i_ + D_o_) / 2 "Average diameter";
 
-    parameter SI.Area A_ = D_ ^ 2 * C.pi / 4 "Average cross-sectional area";
-    parameter Real delta=2*(D_i-D_o)/(D_i+D_o) "Contraction factor";
+    parameter SI.Area A_ = if use_A then (A_i + A_o) / 2 else D_^2 * C.pi / 4 "Average cross-sectional area";
+    parameter Real delta=2*(D_i_-D_o_)/(D_i_+D_o_) "Contraction factor";
     parameter Real cf=1+2*delta^2 "Conical pipe function";
     parameter Real cos_theta = H / L "Slope ratio";
-    parameter Modelica.Units.NonSI.Angle_deg phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan((abs(D_i-D_o)/(2*L)))) "Cone half angle";
+    parameter Modelica.Units.NonSI.Angle_deg phi = Modelica.Units.Conversions.to_deg(Modelica.Math.atan(abs(D_i_-D_o_)/(2*L))) "Cone half angle";
 
 initial equation
   if useInitialFlow then

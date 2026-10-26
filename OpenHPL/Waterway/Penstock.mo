@@ -10,14 +10,22 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
   parameter SI.Length L = 600 "length of the pipe, m" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Diameter D_i = 3.3 "Diametr from the input side of the pipe" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
   parameter SI.Diameter D_o = D_i "Diametr from the output side of the pipe" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
+  parameter Boolean use_A = false "Use areas instead of diameters" annotation (
+    Dialog(group = "Geometry"), choices(checkBox=true));
+  parameter SI.Area A_i = 8.55 "Area of the inlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+  parameter SI.Area A_o = A_i "Area of the outlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+  parameter SI.Diameter D_i_ = if use_A then sqrt(4 * A_i / pi) else D_i;
+  parameter SI.Diameter D_o_ = if use_A then sqrt(4 * A_o / pi) else D_o;
   parameter SI.VolumeFlowRate Vdot_0 = 20 "Initial volume flow rate" annotation (
     Dialog(group = "Initialization"));
   parameter Integer N = 20 "Number of segments" annotation (
     Dialog(group = "Discretization"));
-  SI.Diameter dD = 0.5 * (D_i + D_o), D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N), D_[N + 1] = linspace(D_i, D_o, N + 1);
+  SI.Diameter dD = 0.5 * (D_i_ + D_o_), D[N] = linspace(D_i_ + dD / 2, D_o_ - dD / 2, N), D_[N + 1] = linspace(D_i_, D_o_, N + 1);
   SI.Area A[N] = D .^ 2 * pi / 4, A_[N + 1] = D_ .^ 2 * pi / 4, A_m[N - 2], A_m_end, A_m_first;
   SI.Pressure p_i, p_o, p_[N - 1], dp = data.rho * data.g * H / N, p_m[N - 2];
   SI.Length dx = L / N, Per_m[N - 2];

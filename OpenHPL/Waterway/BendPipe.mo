@@ -8,15 +8,22 @@ model BendPipe "Bend in pipes"
     Dialog(group = "Manufacturer's design"));
   /* geometrical parameters for fitting */
   parameter SI.Diameter D_i = 3 "Pipe diameter of the inlet (LHS)" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
   parameter SI.Diameter D_o = D_i "Pipe diameter of the outlet (RHS)" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
+  parameter Boolean use_A = false "Use areas instead of diameters" annotation (
+    Dialog(group = "Geometry"), choices(checkBox=true));
+  parameter SI.Area A_i = 7.07 "Area of the inlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+  parameter SI.Area A_o = A_i "Area of the outlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
   SI.Velocity v(start=Modelica.Constants.eps) "Water velocity";
-  SI.Area A = pi*D_i^2/4 "Cross section area";
+  SI.Area A "Cross section area";
   SI.Pressure dp "Pressure drop of fitting";
   SI.MassFlowRate mdot "Mass flow rate";
   extends OpenHPL.Interfaces.TwoContacts;
 equation
+  A = if use_A then (if mdot >= 0 then A_i else A_o) else pi * D_i ^ 2 / 4;
   v = mdot / data.rho / A;
   dp = K_L * 0.5 * data.rho * v^2;
    // Connections
