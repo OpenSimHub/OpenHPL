@@ -15,7 +15,7 @@ model BendPipe "Bend in pipes"
     Dialog(group = "Geometry"), choices(checkBox=true));
   parameter SI.Area A_i = 7.07 "Area of the inlet side" annotation (
     Dialog(group = "Geometry", enable=use_A));
-  parameter SI.Area A_o = 7.07 "Area of the outlet side" annotation (
+  parameter SI.Area A_o = A_i "Area of the outlet side" annotation (
     Dialog(group = "Geometry", enable=use_A));
   SI.Velocity v(start=Modelica.Constants.eps) "Water velocity";
   SI.Area A "Cross section area";

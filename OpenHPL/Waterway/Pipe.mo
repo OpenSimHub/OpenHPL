@@ -18,7 +18,7 @@ model Pipe "Model of a pipe"
     Dialog(group = "Geometry"), choices(checkBox=true));
   parameter SI.Area A_i = 0.785 "Area of the inlet side" annotation (
     Dialog(group = "Geometry", enable=use_A));
-  parameter SI.Area A_o = 0.785 "Area of the outlet side" annotation (
+  parameter SI.Area A_o = A_i "Area of the outlet side" annotation (
     Dialog(group = "Geometry", enable=use_A));
 
 

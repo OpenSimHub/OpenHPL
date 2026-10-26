@@ -17,7 +17,7 @@ model Penstock "Model of the penstock with elastic walls and compressible water.
     Dialog(group = "Geometry"), choices(checkBox=true));
   parameter SI.Area A_i = 8.55 "Area of the inlet side" annotation (
     Dialog(group = "Geometry", enable=use_A));
-  parameter SI.Area A_o = 8.55 "Area of the outlet side" annotation (
+  parameter SI.Area A_o = A_i "Area of the outlet side" annotation (
     Dialog(group = "Geometry", enable=use_A));
   parameter SI.Diameter D_i_ = if use_A then sqrt(4 * A_i / pi) else D_i;
   parameter SI.Diameter D_o_ = if use_A then sqrt(4 * A_o / pi) else D_o;

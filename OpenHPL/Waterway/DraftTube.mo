@@ -41,10 +41,12 @@ model DraftTube "Model of a draft tube for reaction turbines"
   // parameter Boolean TempUse = data.TempUse "If checked - the water temperature is not constant" annotation (Dialog(group = "Initialization"));
   // parameter SI.Temperature T_0 = data.T_0 "Initial water temperature in the pipe" annotation (Dialog(group = "Initialization", enable = TempUse));
 
-  /* variables */
+
+  protected
   parameter SI.Diameter D_ = if use_A then sqrt(4 * A_ / pi) else 0.5 * (D_i_ + D_o_) "Average diameter";
   parameter SI.Area A_ = if use_A then (A_i + A_o) / 2 else D_ ^ 2 * pi / 4 "Average cross-section area of conical diffuser";
 
+  /* variables */
   SI.Mass m "Mass of water inside conical diffuser";
   SI.Mass m_m "Mass of water inside Main section Moody spreading pipes";
   SI.Mass m_b "Mass of water inside Branch section Moody spreading pipes";
@@ -86,7 +88,6 @@ model DraftTube "Model of a draft tube for reaction turbines"
 protected
   parameter SI.Diameter D_i_ = if use_A then sqrt(4 * A_i / pi) else D_i;
   parameter SI.Diameter D_o_ = if use_A then sqrt(4 * A_o / pi) else D_o;
-public
 initial equation
   if SteadyState then
     der(M) = 0;
