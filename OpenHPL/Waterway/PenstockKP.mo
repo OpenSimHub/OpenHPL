@@ -2,7 +2,7 @@ within OpenHPL.Waterway;
 model PenstockKP "Detailed model of the pipe. Could have elastic walls and compressible water. KP scheme"
   outer OpenHPL.Data data "Using standard data set";
   extends OpenHPL.Icons.Pipe( slanted=true);
-  extends Types.FrictionSpec( final D_h = (D_i + D_o) / 2);
+  extends Types.FrictionSpec(final D_h = (D_i_ + D_o_) / 2);
   import Modelica.Constants.pi;
   // geometrical parameters of the pipe
   parameter SI.Height H = 420 "Height difference from the inlet to the outlet of the pipe" annotation (
@@ -10,9 +10,17 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
   parameter SI.Length L = 600 "length of the pipe" annotation (
     Dialog(group = "Geometry"));
   parameter SI.Diameter D_i = 3.3 "Diametr from the inlet side of the pipe" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
   parameter SI.Diameter D_o = D_i "Diametr from the outlet side of the pipe" annotation (
-    Dialog(group = "Geometry"));
+    Dialog(group = "Geometry", enable=not use_A));
+  parameter Boolean use_A = false "Use areas instead of diameters" annotation (
+    Dialog(group = "Geometry"), choices(checkBox=true));
+  parameter SI.Area A_i = 8.55 "Area of the inlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+  parameter SI.Area A_o = A_i "Area of the outlet side" annotation (
+    Dialog(group = "Geometry", enable=use_A));
+  parameter SI.Diameter D_i_ = if use_A then sqrt(4 * A_i / pi) else D_i;
+  parameter SI.Diameter D_o_ = if use_A then sqrt(4 * A_o / pi) else D_o;
   // condition of steady state
   parameter Boolean SteadyState=data.SteadyState "If true, starts in steady state" annotation (Dialog(group="Initialization"));
   // staedy state values for flow rate in all segments of the pipe
@@ -30,7 +38,7 @@ model PenstockKP "Detailed model of the pipe. Could have elastic walls and compr
     choices(checkBox = true),
     Dialog(group = "Properties"));
   // variables
-  SI.Diameter dD = (D_i - D_o) / N "step in diameter change", D[N] = linspace(D_i + dD / 2, D_o - dD / 2, N) "centered diameter vector in atm. p.", D_[N + 1] = linspace(D_i, D_o, N + 1) "boundary diameter vector in atm. p.";
+  SI.Diameter dD = (D_i_ - D_o_) / N "step in diameter change", D[N] = linspace(D_i_ + dD / 2, D_o_ - dD / 2, N) "centered diameter vector in atm. p.", D_[N + 1] = linspace(D_i_, D_o_, N + 1) "boundary diameter vector in atm. p.";
   SI.Area A_atm[N] = D .* D * pi / 4 "centered cross are vector in atm. p.", A_atm_[N + 1] = D_ .* D_ * pi / 4 "boundary cross are vector in atm. p.", A[N] "centered cross are vector", A_[N, 4] "boundary cross are vector", _A_atm[N, 4] "boundary cross are matrix in atm. p.";
   SI.Pressure p_p[N] "centered pressure", dp = data.rho * data.g * H / N "initial p. step", p_i "Inlet pressure (LHS)", p_o "Outlet Pressure (RHS)", p_[N, 4] "boundary p. matrix";
   SI.Length dx = L / N "length step", dh = H / N "height step";
@@ -167,7 +175,7 @@ c = √(A<sub>p</sub>/(A<sub>p</sub><sup>atm</sup> ρ<sup>atm</sup> β<sup>tot</
 <h5>Parameters</h5>
 <p>User specifies:</p>
 <ul>
-<li>Geometry: length <code>L</code>, height difference <code>H</code>, inlet/outlet diameters <code>D_i</code>/<code>D_o</code>,
+<li>Geometry: length <code>L</code>, height difference <code>H</code>, inlet/outlet diameters <code>D_i</code>/<code>D_o</code> or areas <code>A_i</code>/<code>A_o</code>,
 roughness <code>p_eps</code></li>
 <li>Discretization: number of cells <code>N</code></li>
 <li>Model fidelity: <code>PipeElasticity</code> checkbox to enable/disable elastic walls</li>
